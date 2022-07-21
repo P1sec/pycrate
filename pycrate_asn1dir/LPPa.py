@@ -16,36 +16,36 @@ from pycrate_asn1rt.init             import init_modules
 
 class LPPA_CommonDataTypes:
 
-    _name_  = 'LPPA-CommonDataTypes'
+    _name_  = u'LPPA-CommonDataTypes'
     _oid_   = [0, 4, 0, 0, 21, 3, 6, 1, 3]
     
     _obj_ = [
-        'maxPrivateIEs',
-        'maxProtocolExtensions',
-        'maxProtocolIEs',
-        'Criticality',
-        'LPPATransactionID',
-        'Presence',
-        'PrivateIE-ID',
-        'ProcedureCode',
-        'ProtocolIE-ID',
-        'TriggeringMessage',
+        u'maxPrivateIEs',
+        u'maxProtocolExtensions',
+        u'maxProtocolIEs',
+        u'Criticality',
+        u'LPPATransactionID',
+        u'Presence',
+        u'PrivateIE-ID',
+        u'ProcedureCode',
+        u'ProtocolIE-ID',
+        u'TriggeringMessage',
         ]
     _type_ = [
-        'Criticality',
-        'LPPATransactionID',
-        'Presence',
-        'PrivateIE-ID',
-        'ProcedureCode',
-        'ProtocolIE-ID',
-        'TriggeringMessage',
+        u'Criticality',
+        u'LPPATransactionID',
+        u'Presence',
+        u'PrivateIE-ID',
+        u'ProcedureCode',
+        u'ProtocolIE-ID',
+        u'TriggeringMessage',
         ]
     _set_ = [
         ]
     _val_ = [
-        'maxPrivateIEs',
-        'maxProtocolExtensions',
-        'maxProtocolIEs',
+        u'maxPrivateIEs',
+        u'maxProtocolExtensions',
+        u'maxProtocolIEs',
         ]
     _class_ = [
         ]
@@ -53,53 +53,53 @@ class LPPA_CommonDataTypes:
         ]
     
     #-----< maxPrivateIEs >-----#
-    maxPrivateIEs = INT(name='maxPrivateIEs', mode=MODE_VALUE)
+    maxPrivateIEs = INT(name=u'maxPrivateIEs', mode=MODE_VALUE)
     maxPrivateIEs._val = 65535
     
     #-----< maxProtocolExtensions >-----#
-    maxProtocolExtensions = INT(name='maxProtocolExtensions', mode=MODE_VALUE)
+    maxProtocolExtensions = INT(name=u'maxProtocolExtensions', mode=MODE_VALUE)
     maxProtocolExtensions._val = 65535
     
     #-----< maxProtocolIEs >-----#
-    maxProtocolIEs = INT(name='maxProtocolIEs', mode=MODE_VALUE)
+    maxProtocolIEs = INT(name=u'maxProtocolIEs', mode=MODE_VALUE)
     maxProtocolIEs._val = 65535
     
     #-----< Criticality >-----#
-    Criticality = ENUM(name='Criticality', mode=MODE_TYPE)
-    Criticality._cont = ASN1Dict([('reject', 0), ('ignore', 1), ('notify', 2)])
+    Criticality = ENUM(name=u'Criticality', mode=MODE_TYPE)
+    Criticality._cont = ASN1Dict([(u'reject', 0), (u'ignore', 1), (u'notify', 2)])
     Criticality._ext = None
     
     #-----< LPPATransactionID >-----#
-    LPPATransactionID = INT(name='LPPATransactionID', mode=MODE_TYPE)
+    LPPATransactionID = INT(name=u'LPPATransactionID', mode=MODE_TYPE)
     LPPATransactionID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=32767)], ev=None, er=[])
     
     #-----< Presence >-----#
-    Presence = ENUM(name='Presence', mode=MODE_TYPE)
-    Presence._cont = ASN1Dict([('optional', 0), ('conditional', 1), ('mandatory', 2)])
+    Presence = ENUM(name=u'Presence', mode=MODE_TYPE)
+    Presence._cont = ASN1Dict([(u'optional', 0), (u'conditional', 1), (u'mandatory', 2)])
     Presence._ext = None
     
     #-----< PrivateIE-ID >-----#
-    PrivateIE_ID = CHOICE(name='PrivateIE-ID', mode=MODE_TYPE)
-    _PrivateIE_ID_local = INT(name='local', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    PrivateIE_ID = CHOICE(name=u'PrivateIE-ID', mode=MODE_TYPE)
+    _PrivateIE_ID_local = INT(name=u'local', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _PrivateIE_ID_local._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _PrivateIE_ID_global_ = OID(name='global', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PrivateIE_ID_global_ = OID(name=u'global', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     PrivateIE_ID._cont = ASN1Dict([
-        ('local', _PrivateIE_ID_local),
-        ('global', _PrivateIE_ID_global_),
+        (u'local', _PrivateIE_ID_local),
+        (u'global', _PrivateIE_ID_global_),
         ])
     PrivateIE_ID._ext = None
     
     #-----< ProcedureCode >-----#
-    ProcedureCode = INT(name='ProcedureCode', mode=MODE_TYPE)
+    ProcedureCode = INT(name=u'ProcedureCode', mode=MODE_TYPE)
     ProcedureCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< ProtocolIE-ID >-----#
-    ProtocolIE_ID = INT(name='ProtocolIE-ID', mode=MODE_TYPE)
+    ProtocolIE_ID = INT(name=u'ProtocolIE-ID', mode=MODE_TYPE)
     ProtocolIE_ID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     
     #-----< TriggeringMessage >-----#
-    TriggeringMessage = ENUM(name='TriggeringMessage', mode=MODE_TYPE)
-    TriggeringMessage._cont = ASN1Dict([('initiating-message', 0), ('successful-outcome', 1), ('unsuccessful-outcome', 2)])
+    TriggeringMessage = ENUM(name=u'TriggeringMessage', mode=MODE_TYPE)
+    TriggeringMessage._cont = ASN1Dict([(u'initiating-message', 0), (u'successful-outcome', 1), (u'unsuccessful-outcome', 2)])
     TriggeringMessage._ext = None
     
     _all_ = [
@@ -119,130 +119,130 @@ class LPPA_CommonDataTypes:
 
 class LPPA_Constants:
 
-    _name_  = 'LPPA-Constants'
+    _name_  = u'LPPA-Constants'
     _oid_   = [0, 4, 0, 0, 21, 3, 6, 1, 4]
     
     _obj_ = [
-        'id-errorIndication',
-        'id-privateMessage',
-        'id-e-CIDMeasurementInitiation',
-        'id-e-CIDMeasurementFailureIndication',
-        'id-e-CIDMeasurementReport',
-        'id-e-CIDMeasurementTermination',
-        'id-oTDOAInformationExchange',
-        'id-uTDOAInformationExchange',
-        'id-uTDOAInformationUpdate',
-        'id-assistanceInformationControl',
-        'id-assistanceInformationFeedback',
-        'maxNrOfErrors',
-        'maxCellineNB',
-        'maxNoMeas',
-        'maxCellReport',
-        'maxnoOTDOAtypes',
-        'maxServCell',
-        'maxGERANMeas',
-        'maxUTRANMeas',
-        'maxCellineNB-ext',
-        'maxMBSFN-Allocations',
-        'maxWLANchannels',
-        'maxnoFreqHoppingBandsMinusOne',
-        'maxNrOfPosSImessage',
-        'maxnoAssistInfoFailureListItems',
-        'maxNrOfSegments',
-        'maxNrOfPosSIBs',
-        'maxNRmeas',
-        'maxResultsPerSSBIndex',
-        'id-Cause',
-        'id-CriticalityDiagnostics',
-        'id-E-SMLC-UE-Measurement-ID',
-        'id-ReportCharacteristics',
-        'id-MeasurementPeriodicity',
-        'id-MeasurementQuantities',
-        'id-eNB-UE-Measurement-ID',
-        'id-E-CID-MeasurementResult',
-        'id-OTDOACells',
-        'id-OTDOA-Information-Type-Group',
-        'id-OTDOA-Information-Type-Item',
-        'id-MeasurementQuantities-Item',
-        'id-RequestedSRSTransmissionCharacteristics',
-        'id-ULConfiguration',
-        'id-Cell-Portion-ID',
-        'id-InterRATMeasurementQuantities',
-        'id-InterRATMeasurementQuantities-Item',
-        'id-InterRATMeasurementResult',
-        'id-AddOTDOACells',
-        'id-WLANMeasurementQuantities',
-        'id-WLANMeasurementQuantities-Item',
-        'id-WLANMeasurementResult',
-        'id-Assistance-Information',
-        'id-Broadcast',
-        'id-AssistanceInformationFailureList',
-        'id-ResultsPerSSB-Index-List',
-        'id-ResultsPerSSB-Index-Item',
-        'id-NR-CGI',
+        u'id-errorIndication',
+        u'id-privateMessage',
+        u'id-e-CIDMeasurementInitiation',
+        u'id-e-CIDMeasurementFailureIndication',
+        u'id-e-CIDMeasurementReport',
+        u'id-e-CIDMeasurementTermination',
+        u'id-oTDOAInformationExchange',
+        u'id-uTDOAInformationExchange',
+        u'id-uTDOAInformationUpdate',
+        u'id-assistanceInformationControl',
+        u'id-assistanceInformationFeedback',
+        u'maxNrOfErrors',
+        u'maxCellineNB',
+        u'maxNoMeas',
+        u'maxCellReport',
+        u'maxnoOTDOAtypes',
+        u'maxServCell',
+        u'maxGERANMeas',
+        u'maxUTRANMeas',
+        u'maxCellineNB-ext',
+        u'maxMBSFN-Allocations',
+        u'maxWLANchannels',
+        u'maxnoFreqHoppingBandsMinusOne',
+        u'maxNrOfPosSImessage',
+        u'maxnoAssistInfoFailureListItems',
+        u'maxNrOfSegments',
+        u'maxNrOfPosSIBs',
+        u'maxNRmeas',
+        u'maxResultsPerSSBIndex',
+        u'id-Cause',
+        u'id-CriticalityDiagnostics',
+        u'id-E-SMLC-UE-Measurement-ID',
+        u'id-ReportCharacteristics',
+        u'id-MeasurementPeriodicity',
+        u'id-MeasurementQuantities',
+        u'id-eNB-UE-Measurement-ID',
+        u'id-E-CID-MeasurementResult',
+        u'id-OTDOACells',
+        u'id-OTDOA-Information-Type-Group',
+        u'id-OTDOA-Information-Type-Item',
+        u'id-MeasurementQuantities-Item',
+        u'id-RequestedSRSTransmissionCharacteristics',
+        u'id-ULConfiguration',
+        u'id-Cell-Portion-ID',
+        u'id-InterRATMeasurementQuantities',
+        u'id-InterRATMeasurementQuantities-Item',
+        u'id-InterRATMeasurementResult',
+        u'id-AddOTDOACells',
+        u'id-WLANMeasurementQuantities',
+        u'id-WLANMeasurementQuantities-Item',
+        u'id-WLANMeasurementResult',
+        u'id-Assistance-Information',
+        u'id-Broadcast',
+        u'id-AssistanceInformationFailureList',
+        u'id-ResultsPerSSB-Index-List',
+        u'id-ResultsPerSSB-Index-Item',
+        u'id-NR-CGI',
         ]
     _type_ = [
         ]
     _set_ = [
         ]
     _val_ = [
-        'id-errorIndication',
-        'id-privateMessage',
-        'id-e-CIDMeasurementInitiation',
-        'id-e-CIDMeasurementFailureIndication',
-        'id-e-CIDMeasurementReport',
-        'id-e-CIDMeasurementTermination',
-        'id-oTDOAInformationExchange',
-        'id-uTDOAInformationExchange',
-        'id-uTDOAInformationUpdate',
-        'id-assistanceInformationControl',
-        'id-assistanceInformationFeedback',
-        'maxNrOfErrors',
-        'maxCellineNB',
-        'maxNoMeas',
-        'maxCellReport',
-        'maxnoOTDOAtypes',
-        'maxServCell',
-        'maxGERANMeas',
-        'maxUTRANMeas',
-        'maxCellineNB-ext',
-        'maxMBSFN-Allocations',
-        'maxWLANchannels',
-        'maxnoFreqHoppingBandsMinusOne',
-        'maxNrOfPosSImessage',
-        'maxnoAssistInfoFailureListItems',
-        'maxNrOfSegments',
-        'maxNrOfPosSIBs',
-        'maxNRmeas',
-        'maxResultsPerSSBIndex',
-        'id-Cause',
-        'id-CriticalityDiagnostics',
-        'id-E-SMLC-UE-Measurement-ID',
-        'id-ReportCharacteristics',
-        'id-MeasurementPeriodicity',
-        'id-MeasurementQuantities',
-        'id-eNB-UE-Measurement-ID',
-        'id-E-CID-MeasurementResult',
-        'id-OTDOACells',
-        'id-OTDOA-Information-Type-Group',
-        'id-OTDOA-Information-Type-Item',
-        'id-MeasurementQuantities-Item',
-        'id-RequestedSRSTransmissionCharacteristics',
-        'id-ULConfiguration',
-        'id-Cell-Portion-ID',
-        'id-InterRATMeasurementQuantities',
-        'id-InterRATMeasurementQuantities-Item',
-        'id-InterRATMeasurementResult',
-        'id-AddOTDOACells',
-        'id-WLANMeasurementQuantities',
-        'id-WLANMeasurementQuantities-Item',
-        'id-WLANMeasurementResult',
-        'id-Assistance-Information',
-        'id-Broadcast',
-        'id-AssistanceInformationFailureList',
-        'id-ResultsPerSSB-Index-List',
-        'id-ResultsPerSSB-Index-Item',
-        'id-NR-CGI',
+        u'id-errorIndication',
+        u'id-privateMessage',
+        u'id-e-CIDMeasurementInitiation',
+        u'id-e-CIDMeasurementFailureIndication',
+        u'id-e-CIDMeasurementReport',
+        u'id-e-CIDMeasurementTermination',
+        u'id-oTDOAInformationExchange',
+        u'id-uTDOAInformationExchange',
+        u'id-uTDOAInformationUpdate',
+        u'id-assistanceInformationControl',
+        u'id-assistanceInformationFeedback',
+        u'maxNrOfErrors',
+        u'maxCellineNB',
+        u'maxNoMeas',
+        u'maxCellReport',
+        u'maxnoOTDOAtypes',
+        u'maxServCell',
+        u'maxGERANMeas',
+        u'maxUTRANMeas',
+        u'maxCellineNB-ext',
+        u'maxMBSFN-Allocations',
+        u'maxWLANchannels',
+        u'maxnoFreqHoppingBandsMinusOne',
+        u'maxNrOfPosSImessage',
+        u'maxnoAssistInfoFailureListItems',
+        u'maxNrOfSegments',
+        u'maxNrOfPosSIBs',
+        u'maxNRmeas',
+        u'maxResultsPerSSBIndex',
+        u'id-Cause',
+        u'id-CriticalityDiagnostics',
+        u'id-E-SMLC-UE-Measurement-ID',
+        u'id-ReportCharacteristics',
+        u'id-MeasurementPeriodicity',
+        u'id-MeasurementQuantities',
+        u'id-eNB-UE-Measurement-ID',
+        u'id-E-CID-MeasurementResult',
+        u'id-OTDOACells',
+        u'id-OTDOA-Information-Type-Group',
+        u'id-OTDOA-Information-Type-Item',
+        u'id-MeasurementQuantities-Item',
+        u'id-RequestedSRSTransmissionCharacteristics',
+        u'id-ULConfiguration',
+        u'id-Cell-Portion-ID',
+        u'id-InterRATMeasurementQuantities',
+        u'id-InterRATMeasurementQuantities-Item',
+        u'id-InterRATMeasurementResult',
+        u'id-AddOTDOACells',
+        u'id-WLANMeasurementQuantities',
+        u'id-WLANMeasurementQuantities-Item',
+        u'id-WLANMeasurementResult',
+        u'id-Assistance-Information',
+        u'id-Broadcast',
+        u'id-AssistanceInformationFailureList',
+        u'id-ResultsPerSSB-Index-List',
+        u'id-ResultsPerSSB-Index-Item',
+        u'id-NR-CGI',
         ]
     _class_ = [
         ]
@@ -250,231 +250,231 @@ class LPPA_Constants:
         ]
     
     #-----< id-errorIndication >-----#
-    id_errorIndication = INT(name='id-errorIndication', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProcedureCode')))
+    id_errorIndication = INT(name=u'id-errorIndication', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProcedureCode')))
     id_errorIndication._val = 0
     
     #-----< id-privateMessage >-----#
-    id_privateMessage = INT(name='id-privateMessage', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProcedureCode')))
+    id_privateMessage = INT(name=u'id-privateMessage', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProcedureCode')))
     id_privateMessage._val = 1
     
     #-----< id-e-CIDMeasurementInitiation >-----#
-    id_e_CIDMeasurementInitiation = INT(name='id-e-CIDMeasurementInitiation', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProcedureCode')))
+    id_e_CIDMeasurementInitiation = INT(name=u'id-e-CIDMeasurementInitiation', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProcedureCode')))
     id_e_CIDMeasurementInitiation._val = 2
     
     #-----< id-e-CIDMeasurementFailureIndication >-----#
-    id_e_CIDMeasurementFailureIndication = INT(name='id-e-CIDMeasurementFailureIndication', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProcedureCode')))
+    id_e_CIDMeasurementFailureIndication = INT(name=u'id-e-CIDMeasurementFailureIndication', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProcedureCode')))
     id_e_CIDMeasurementFailureIndication._val = 3
     
     #-----< id-e-CIDMeasurementReport >-----#
-    id_e_CIDMeasurementReport = INT(name='id-e-CIDMeasurementReport', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProcedureCode')))
+    id_e_CIDMeasurementReport = INT(name=u'id-e-CIDMeasurementReport', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProcedureCode')))
     id_e_CIDMeasurementReport._val = 4
     
     #-----< id-e-CIDMeasurementTermination >-----#
-    id_e_CIDMeasurementTermination = INT(name='id-e-CIDMeasurementTermination', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProcedureCode')))
+    id_e_CIDMeasurementTermination = INT(name=u'id-e-CIDMeasurementTermination', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProcedureCode')))
     id_e_CIDMeasurementTermination._val = 5
     
     #-----< id-oTDOAInformationExchange >-----#
-    id_oTDOAInformationExchange = INT(name='id-oTDOAInformationExchange', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProcedureCode')))
+    id_oTDOAInformationExchange = INT(name=u'id-oTDOAInformationExchange', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProcedureCode')))
     id_oTDOAInformationExchange._val = 6
     
     #-----< id-uTDOAInformationExchange >-----#
-    id_uTDOAInformationExchange = INT(name='id-uTDOAInformationExchange', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProcedureCode')))
+    id_uTDOAInformationExchange = INT(name=u'id-uTDOAInformationExchange', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProcedureCode')))
     id_uTDOAInformationExchange._val = 7
     
     #-----< id-uTDOAInformationUpdate >-----#
-    id_uTDOAInformationUpdate = INT(name='id-uTDOAInformationUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProcedureCode')))
+    id_uTDOAInformationUpdate = INT(name=u'id-uTDOAInformationUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProcedureCode')))
     id_uTDOAInformationUpdate._val = 8
     
     #-----< id-assistanceInformationControl >-----#
-    id_assistanceInformationControl = INT(name='id-assistanceInformationControl', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProcedureCode')))
+    id_assistanceInformationControl = INT(name=u'id-assistanceInformationControl', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProcedureCode')))
     id_assistanceInformationControl._val = 9
     
     #-----< id-assistanceInformationFeedback >-----#
-    id_assistanceInformationFeedback = INT(name='id-assistanceInformationFeedback', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProcedureCode')))
+    id_assistanceInformationFeedback = INT(name=u'id-assistanceInformationFeedback', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProcedureCode')))
     id_assistanceInformationFeedback._val = 10
     
     #-----< maxNrOfErrors >-----#
-    maxNrOfErrors = INT(name='maxNrOfErrors', mode=MODE_VALUE)
+    maxNrOfErrors = INT(name=u'maxNrOfErrors', mode=MODE_VALUE)
     maxNrOfErrors._val = 256
     
     #-----< maxCellineNB >-----#
-    maxCellineNB = INT(name='maxCellineNB', mode=MODE_VALUE)
+    maxCellineNB = INT(name=u'maxCellineNB', mode=MODE_VALUE)
     maxCellineNB._val = 256
     
     #-----< maxNoMeas >-----#
-    maxNoMeas = INT(name='maxNoMeas', mode=MODE_VALUE)
+    maxNoMeas = INT(name=u'maxNoMeas', mode=MODE_VALUE)
     maxNoMeas._val = 63
     
     #-----< maxCellReport >-----#
-    maxCellReport = INT(name='maxCellReport', mode=MODE_VALUE)
+    maxCellReport = INT(name=u'maxCellReport', mode=MODE_VALUE)
     maxCellReport._val = 9
     
     #-----< maxnoOTDOAtypes >-----#
-    maxnoOTDOAtypes = INT(name='maxnoOTDOAtypes', mode=MODE_VALUE)
+    maxnoOTDOAtypes = INT(name=u'maxnoOTDOAtypes', mode=MODE_VALUE)
     maxnoOTDOAtypes._val = 63
     
     #-----< maxServCell >-----#
-    maxServCell = INT(name='maxServCell', mode=MODE_VALUE)
+    maxServCell = INT(name=u'maxServCell', mode=MODE_VALUE)
     maxServCell._val = 5
     
     #-----< maxGERANMeas >-----#
-    maxGERANMeas = INT(name='maxGERANMeas', mode=MODE_VALUE)
+    maxGERANMeas = INT(name=u'maxGERANMeas', mode=MODE_VALUE)
     maxGERANMeas._val = 8
     
     #-----< maxUTRANMeas >-----#
-    maxUTRANMeas = INT(name='maxUTRANMeas', mode=MODE_VALUE)
+    maxUTRANMeas = INT(name=u'maxUTRANMeas', mode=MODE_VALUE)
     maxUTRANMeas._val = 8
     
     #-----< maxCellineNB-ext >-----#
-    maxCellineNB_ext = INT(name='maxCellineNB-ext', mode=MODE_VALUE)
+    maxCellineNB_ext = INT(name=u'maxCellineNB-ext', mode=MODE_VALUE)
     maxCellineNB_ext._val = 3840
     
     #-----< maxMBSFN-Allocations >-----#
-    maxMBSFN_Allocations = INT(name='maxMBSFN-Allocations', mode=MODE_VALUE)
+    maxMBSFN_Allocations = INT(name=u'maxMBSFN-Allocations', mode=MODE_VALUE)
     maxMBSFN_Allocations._val = 8
     
     #-----< maxWLANchannels >-----#
-    maxWLANchannels = INT(name='maxWLANchannels', mode=MODE_VALUE)
+    maxWLANchannels = INT(name=u'maxWLANchannels', mode=MODE_VALUE)
     maxWLANchannels._val = 16
     
     #-----< maxnoFreqHoppingBandsMinusOne >-----#
-    maxnoFreqHoppingBandsMinusOne = INT(name='maxnoFreqHoppingBandsMinusOne', mode=MODE_VALUE)
+    maxnoFreqHoppingBandsMinusOne = INT(name=u'maxnoFreqHoppingBandsMinusOne', mode=MODE_VALUE)
     maxnoFreqHoppingBandsMinusOne._val = 7
     
     #-----< maxNrOfPosSImessage >-----#
-    maxNrOfPosSImessage = INT(name='maxNrOfPosSImessage', mode=MODE_VALUE)
+    maxNrOfPosSImessage = INT(name=u'maxNrOfPosSImessage', mode=MODE_VALUE)
     maxNrOfPosSImessage._val = 32
     
     #-----< maxnoAssistInfoFailureListItems >-----#
-    maxnoAssistInfoFailureListItems = INT(name='maxnoAssistInfoFailureListItems', mode=MODE_VALUE)
+    maxnoAssistInfoFailureListItems = INT(name=u'maxnoAssistInfoFailureListItems', mode=MODE_VALUE)
     maxnoAssistInfoFailureListItems._val = 32
     
     #-----< maxNrOfSegments >-----#
-    maxNrOfSegments = INT(name='maxNrOfSegments', mode=MODE_VALUE)
+    maxNrOfSegments = INT(name=u'maxNrOfSegments', mode=MODE_VALUE)
     maxNrOfSegments._val = 64
     
     #-----< maxNrOfPosSIBs >-----#
-    maxNrOfPosSIBs = INT(name='maxNrOfPosSIBs', mode=MODE_VALUE)
+    maxNrOfPosSIBs = INT(name=u'maxNrOfPosSIBs', mode=MODE_VALUE)
     maxNrOfPosSIBs._val = 32
     
     #-----< maxNRmeas >-----#
-    maxNRmeas = INT(name='maxNRmeas', mode=MODE_VALUE)
+    maxNRmeas = INT(name=u'maxNRmeas', mode=MODE_VALUE)
     maxNRmeas._val = 32
     
     #-----< maxResultsPerSSBIndex >-----#
-    maxResultsPerSSBIndex = INT(name='maxResultsPerSSBIndex', mode=MODE_VALUE)
+    maxResultsPerSSBIndex = INT(name=u'maxResultsPerSSBIndex', mode=MODE_VALUE)
     maxResultsPerSSBIndex._val = 64
     
     #-----< id-Cause >-----#
-    id_Cause = INT(name='id-Cause', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_Cause = INT(name=u'id-Cause', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_Cause._val = 0
     
     #-----< id-CriticalityDiagnostics >-----#
-    id_CriticalityDiagnostics = INT(name='id-CriticalityDiagnostics', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_CriticalityDiagnostics = INT(name=u'id-CriticalityDiagnostics', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_CriticalityDiagnostics._val = 1
     
     #-----< id-E-SMLC-UE-Measurement-ID >-----#
-    id_E_SMLC_UE_Measurement_ID = INT(name='id-E-SMLC-UE-Measurement-ID', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_E_SMLC_UE_Measurement_ID = INT(name=u'id-E-SMLC-UE-Measurement-ID', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_E_SMLC_UE_Measurement_ID._val = 2
     
     #-----< id-ReportCharacteristics >-----#
-    id_ReportCharacteristics = INT(name='id-ReportCharacteristics', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_ReportCharacteristics = INT(name=u'id-ReportCharacteristics', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_ReportCharacteristics._val = 3
     
     #-----< id-MeasurementPeriodicity >-----#
-    id_MeasurementPeriodicity = INT(name='id-MeasurementPeriodicity', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_MeasurementPeriodicity = INT(name=u'id-MeasurementPeriodicity', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_MeasurementPeriodicity._val = 4
     
     #-----< id-MeasurementQuantities >-----#
-    id_MeasurementQuantities = INT(name='id-MeasurementQuantities', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_MeasurementQuantities = INT(name=u'id-MeasurementQuantities', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_MeasurementQuantities._val = 5
     
     #-----< id-eNB-UE-Measurement-ID >-----#
-    id_eNB_UE_Measurement_ID = INT(name='id-eNB-UE-Measurement-ID', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_eNB_UE_Measurement_ID = INT(name=u'id-eNB-UE-Measurement-ID', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_eNB_UE_Measurement_ID._val = 6
     
     #-----< id-E-CID-MeasurementResult >-----#
-    id_E_CID_MeasurementResult = INT(name='id-E-CID-MeasurementResult', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_E_CID_MeasurementResult = INT(name=u'id-E-CID-MeasurementResult', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_E_CID_MeasurementResult._val = 7
     
     #-----< id-OTDOACells >-----#
-    id_OTDOACells = INT(name='id-OTDOACells', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_OTDOACells = INT(name=u'id-OTDOACells', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_OTDOACells._val = 8
     
     #-----< id-OTDOA-Information-Type-Group >-----#
-    id_OTDOA_Information_Type_Group = INT(name='id-OTDOA-Information-Type-Group', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_OTDOA_Information_Type_Group = INT(name=u'id-OTDOA-Information-Type-Group', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_OTDOA_Information_Type_Group._val = 9
     
     #-----< id-OTDOA-Information-Type-Item >-----#
-    id_OTDOA_Information_Type_Item = INT(name='id-OTDOA-Information-Type-Item', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_OTDOA_Information_Type_Item = INT(name=u'id-OTDOA-Information-Type-Item', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_OTDOA_Information_Type_Item._val = 10
     
     #-----< id-MeasurementQuantities-Item >-----#
-    id_MeasurementQuantities_Item = INT(name='id-MeasurementQuantities-Item', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_MeasurementQuantities_Item = INT(name=u'id-MeasurementQuantities-Item', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_MeasurementQuantities_Item._val = 11
     
     #-----< id-RequestedSRSTransmissionCharacteristics >-----#
-    id_RequestedSRSTransmissionCharacteristics = INT(name='id-RequestedSRSTransmissionCharacteristics', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_RequestedSRSTransmissionCharacteristics = INT(name=u'id-RequestedSRSTransmissionCharacteristics', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_RequestedSRSTransmissionCharacteristics._val = 12
     
     #-----< id-ULConfiguration >-----#
-    id_ULConfiguration = INT(name='id-ULConfiguration', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_ULConfiguration = INT(name=u'id-ULConfiguration', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_ULConfiguration._val = 13
     
     #-----< id-Cell-Portion-ID >-----#
-    id_Cell_Portion_ID = INT(name='id-Cell-Portion-ID', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_Cell_Portion_ID = INT(name=u'id-Cell-Portion-ID', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_Cell_Portion_ID._val = 14
     
     #-----< id-InterRATMeasurementQuantities >-----#
-    id_InterRATMeasurementQuantities = INT(name='id-InterRATMeasurementQuantities', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_InterRATMeasurementQuantities = INT(name=u'id-InterRATMeasurementQuantities', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_InterRATMeasurementQuantities._val = 15
     
     #-----< id-InterRATMeasurementQuantities-Item >-----#
-    id_InterRATMeasurementQuantities_Item = INT(name='id-InterRATMeasurementQuantities-Item', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_InterRATMeasurementQuantities_Item = INT(name=u'id-InterRATMeasurementQuantities-Item', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_InterRATMeasurementQuantities_Item._val = 16
     
     #-----< id-InterRATMeasurementResult >-----#
-    id_InterRATMeasurementResult = INT(name='id-InterRATMeasurementResult', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_InterRATMeasurementResult = INT(name=u'id-InterRATMeasurementResult', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_InterRATMeasurementResult._val = 17
     
     #-----< id-AddOTDOACells >-----#
-    id_AddOTDOACells = INT(name='id-AddOTDOACells', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_AddOTDOACells = INT(name=u'id-AddOTDOACells', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_AddOTDOACells._val = 18
     
     #-----< id-WLANMeasurementQuantities >-----#
-    id_WLANMeasurementQuantities = INT(name='id-WLANMeasurementQuantities', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_WLANMeasurementQuantities = INT(name=u'id-WLANMeasurementQuantities', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_WLANMeasurementQuantities._val = 19
     
     #-----< id-WLANMeasurementQuantities-Item >-----#
-    id_WLANMeasurementQuantities_Item = INT(name='id-WLANMeasurementQuantities-Item', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_WLANMeasurementQuantities_Item = INT(name=u'id-WLANMeasurementQuantities-Item', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_WLANMeasurementQuantities_Item._val = 20
     
     #-----< id-WLANMeasurementResult >-----#
-    id_WLANMeasurementResult = INT(name='id-WLANMeasurementResult', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_WLANMeasurementResult = INT(name=u'id-WLANMeasurementResult', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_WLANMeasurementResult._val = 21
     
     #-----< id-Assistance-Information >-----#
-    id_Assistance_Information = INT(name='id-Assistance-Information', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_Assistance_Information = INT(name=u'id-Assistance-Information', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_Assistance_Information._val = 22
     
     #-----< id-Broadcast >-----#
-    id_Broadcast = INT(name='id-Broadcast', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_Broadcast = INT(name=u'id-Broadcast', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_Broadcast._val = 23
     
     #-----< id-AssistanceInformationFailureList >-----#
-    id_AssistanceInformationFailureList = INT(name='id-AssistanceInformationFailureList', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_AssistanceInformationFailureList = INT(name=u'id-AssistanceInformationFailureList', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_AssistanceInformationFailureList._val = 24
     
     #-----< id-ResultsPerSSB-Index-List >-----#
-    id_ResultsPerSSB_Index_List = INT(name='id-ResultsPerSSB-Index-List', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_ResultsPerSSB_Index_List = INT(name=u'id-ResultsPerSSB-Index-List', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_ResultsPerSSB_Index_List._val = 25
     
     #-----< id-ResultsPerSSB-Index-Item >-----#
-    id_ResultsPerSSB_Index_Item = INT(name='id-ResultsPerSSB-Index-Item', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_ResultsPerSSB_Index_Item = INT(name=u'id-ResultsPerSSB-Index-Item', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_ResultsPerSSB_Index_Item._val = 26
     
     #-----< id-NR-CGI >-----#
-    id_NR_CGI = INT(name='id-NR-CGI', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    id_NR_CGI = INT(name=u'id-NR-CGI', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
     id_NR_CGI._val = 27
     
     _all_ = [
@@ -539,155 +539,155 @@ class LPPA_Constants:
 
 class LPPA_Containers:
 
-    _name_  = 'LPPA-Containers'
+    _name_  = u'LPPA-Containers'
     _oid_   = [0, 4, 0, 0, 21, 3, 6, 1, 5]
     
     _obj_ = [
-        'LPPA-PROTOCOL-IES',
-        'LPPA-PROTOCOL-IES-PAIR',
-        'LPPA-PROTOCOL-EXTENSION',
-        'LPPA-PRIVATE-IES',
-        'ProtocolIE-Container',
-        'ProtocolIE-Single-Container',
-        'ProtocolIE-Field',
-        'ProtocolIE-ContainerPair',
-        'ProtocolIE-FieldPair',
-        'ProtocolIE-ContainerList',
-        'ProtocolIE-ContainerPairList',
-        'ProtocolExtensionContainer',
-        'ProtocolExtensionField',
-        'PrivateIE-Container',
-        'PrivateIE-Field',
+        u'LPPA-PROTOCOL-IES',
+        u'LPPA-PROTOCOL-IES-PAIR',
+        u'LPPA-PROTOCOL-EXTENSION',
+        u'LPPA-PRIVATE-IES',
+        u'ProtocolIE-Container',
+        u'ProtocolIE-Single-Container',
+        u'ProtocolIE-Field',
+        u'ProtocolIE-ContainerPair',
+        u'ProtocolIE-FieldPair',
+        u'ProtocolIE-ContainerList',
+        u'ProtocolIE-ContainerPairList',
+        u'ProtocolExtensionContainer',
+        u'ProtocolExtensionField',
+        u'PrivateIE-Container',
+        u'PrivateIE-Field',
         ]
     _type_ = [
-        'LPPA-PROTOCOL-IES',
-        'LPPA-PROTOCOL-IES-PAIR',
-        'LPPA-PROTOCOL-EXTENSION',
-        'LPPA-PRIVATE-IES',
-        'ProtocolIE-Container',
-        'ProtocolIE-Single-Container',
-        'ProtocolIE-Field',
-        'ProtocolIE-ContainerPair',
-        'ProtocolIE-FieldPair',
-        'ProtocolIE-ContainerList',
-        'ProtocolIE-ContainerPairList',
-        'ProtocolExtensionContainer',
-        'ProtocolExtensionField',
-        'PrivateIE-Container',
-        'PrivateIE-Field',
+        u'LPPA-PROTOCOL-IES',
+        u'LPPA-PROTOCOL-IES-PAIR',
+        u'LPPA-PROTOCOL-EXTENSION',
+        u'LPPA-PRIVATE-IES',
+        u'ProtocolIE-Container',
+        u'ProtocolIE-Single-Container',
+        u'ProtocolIE-Field',
+        u'ProtocolIE-ContainerPair',
+        u'ProtocolIE-FieldPair',
+        u'ProtocolIE-ContainerList',
+        u'ProtocolIE-ContainerPairList',
+        u'ProtocolExtensionContainer',
+        u'ProtocolExtensionField',
+        u'PrivateIE-Container',
+        u'PrivateIE-Field',
         ]
     _set_ = [
         ]
     _val_ = [
         ]
     _class_ = [
-        'LPPA-PROTOCOL-IES',
-        'LPPA-PROTOCOL-IES-PAIR',
-        'LPPA-PROTOCOL-EXTENSION',
-        'LPPA-PRIVATE-IES',
+        u'LPPA-PROTOCOL-IES',
+        u'LPPA-PROTOCOL-IES-PAIR',
+        u'LPPA-PROTOCOL-EXTENSION',
+        u'LPPA-PRIVATE-IES',
         ]
     _param_ = [
-        'ProtocolIE-Container',
-        'ProtocolIE-Single-Container',
-        'ProtocolIE-Field',
-        'ProtocolIE-ContainerPair',
-        'ProtocolIE-FieldPair',
-        'ProtocolIE-ContainerList',
-        'ProtocolIE-ContainerPairList',
-        'ProtocolExtensionContainer',
-        'ProtocolExtensionField',
-        'PrivateIE-Container',
-        'PrivateIE-Field',
+        u'ProtocolIE-Container',
+        u'ProtocolIE-Single-Container',
+        u'ProtocolIE-Field',
+        u'ProtocolIE-ContainerPair',
+        u'ProtocolIE-FieldPair',
+        u'ProtocolIE-ContainerList',
+        u'ProtocolIE-ContainerPairList',
+        u'ProtocolExtensionContainer',
+        u'ProtocolExtensionField',
+        u'PrivateIE-Container',
+        u'PrivateIE-Field',
         ]
     
     #-----< LPPA-PROTOCOL-IES >-----#
-    LPPA_PROTOCOL_IES = CLASS(name='LPPA-PROTOCOL-IES', mode=MODE_TYPE)
-    _LPPA_PROTOCOL_IES_id = INT(name='id', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
-    _LPPA_PROTOCOL_IES_criticality = ENUM(name='criticality', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'Criticality')))
-    _LPPA_PROTOCOL_IES_Value = OPEN(name='Value', mode=MODE_TYPE)
-    _LPPA_PROTOCOL_IES_presence = ENUM(name='presence', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'Presence')))
+    LPPA_PROTOCOL_IES = CLASS(name=u'LPPA-PROTOCOL-IES', mode=MODE_TYPE)
+    _LPPA_PROTOCOL_IES_id = INT(name=u'id', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
+    _LPPA_PROTOCOL_IES_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'Criticality')))
+    _LPPA_PROTOCOL_IES_Value = OPEN(name=u'Value', mode=MODE_TYPE)
+    _LPPA_PROTOCOL_IES_presence = ENUM(name=u'presence', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'Presence')))
     LPPA_PROTOCOL_IES._cont = ASN1Dict([
-        ('id', _LPPA_PROTOCOL_IES_id),
-        ('criticality', _LPPA_PROTOCOL_IES_criticality),
-        ('Value', _LPPA_PROTOCOL_IES_Value),
-        ('presence', _LPPA_PROTOCOL_IES_presence),
+        (u'id', _LPPA_PROTOCOL_IES_id),
+        (u'criticality', _LPPA_PROTOCOL_IES_criticality),
+        (u'Value', _LPPA_PROTOCOL_IES_Value),
+        (u'presence', _LPPA_PROTOCOL_IES_presence),
         ])
     
     #-----< LPPA-PROTOCOL-IES-PAIR >-----#
-    LPPA_PROTOCOL_IES_PAIR = CLASS(name='LPPA-PROTOCOL-IES-PAIR', mode=MODE_TYPE)
-    _LPPA_PROTOCOL_IES_PAIR_id = INT(name='id', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
-    _LPPA_PROTOCOL_IES_PAIR_firstCriticality = ENUM(name='firstCriticality', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'Criticality')))
-    _LPPA_PROTOCOL_IES_PAIR_FirstValue = OPEN(name='FirstValue', mode=MODE_TYPE)
-    _LPPA_PROTOCOL_IES_PAIR_secondCriticality = ENUM(name='secondCriticality', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'Criticality')))
-    _LPPA_PROTOCOL_IES_PAIR_SecondValue = OPEN(name='SecondValue', mode=MODE_TYPE)
-    _LPPA_PROTOCOL_IES_PAIR_presence = ENUM(name='presence', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'Presence')))
+    LPPA_PROTOCOL_IES_PAIR = CLASS(name=u'LPPA-PROTOCOL-IES-PAIR', mode=MODE_TYPE)
+    _LPPA_PROTOCOL_IES_PAIR_id = INT(name=u'id', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
+    _LPPA_PROTOCOL_IES_PAIR_firstCriticality = ENUM(name=u'firstCriticality', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'Criticality')))
+    _LPPA_PROTOCOL_IES_PAIR_FirstValue = OPEN(name=u'FirstValue', mode=MODE_TYPE)
+    _LPPA_PROTOCOL_IES_PAIR_secondCriticality = ENUM(name=u'secondCriticality', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'Criticality')))
+    _LPPA_PROTOCOL_IES_PAIR_SecondValue = OPEN(name=u'SecondValue', mode=MODE_TYPE)
+    _LPPA_PROTOCOL_IES_PAIR_presence = ENUM(name=u'presence', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'Presence')))
     LPPA_PROTOCOL_IES_PAIR._cont = ASN1Dict([
-        ('id', _LPPA_PROTOCOL_IES_PAIR_id),
-        ('firstCriticality', _LPPA_PROTOCOL_IES_PAIR_firstCriticality),
-        ('FirstValue', _LPPA_PROTOCOL_IES_PAIR_FirstValue),
-        ('secondCriticality', _LPPA_PROTOCOL_IES_PAIR_secondCriticality),
-        ('SecondValue', _LPPA_PROTOCOL_IES_PAIR_SecondValue),
-        ('presence', _LPPA_PROTOCOL_IES_PAIR_presence),
+        (u'id', _LPPA_PROTOCOL_IES_PAIR_id),
+        (u'firstCriticality', _LPPA_PROTOCOL_IES_PAIR_firstCriticality),
+        (u'FirstValue', _LPPA_PROTOCOL_IES_PAIR_FirstValue),
+        (u'secondCriticality', _LPPA_PROTOCOL_IES_PAIR_secondCriticality),
+        (u'SecondValue', _LPPA_PROTOCOL_IES_PAIR_SecondValue),
+        (u'presence', _LPPA_PROTOCOL_IES_PAIR_presence),
         ])
     
     #-----< LPPA-PROTOCOL-EXTENSION >-----#
-    LPPA_PROTOCOL_EXTENSION = CLASS(name='LPPA-PROTOCOL-EXTENSION', mode=MODE_TYPE)
-    _LPPA_PROTOCOL_EXTENSION_id = INT(name='id', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
-    _LPPA_PROTOCOL_EXTENSION_criticality = ENUM(name='criticality', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'Criticality')))
-    _LPPA_PROTOCOL_EXTENSION_Extension = OPEN(name='Extension', mode=MODE_TYPE)
-    _LPPA_PROTOCOL_EXTENSION_presence = ENUM(name='presence', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'Presence')))
+    LPPA_PROTOCOL_EXTENSION = CLASS(name=u'LPPA-PROTOCOL-EXTENSION', mode=MODE_TYPE)
+    _LPPA_PROTOCOL_EXTENSION_id = INT(name=u'id', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
+    _LPPA_PROTOCOL_EXTENSION_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'Criticality')))
+    _LPPA_PROTOCOL_EXTENSION_Extension = OPEN(name=u'Extension', mode=MODE_TYPE)
+    _LPPA_PROTOCOL_EXTENSION_presence = ENUM(name=u'presence', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'Presence')))
     LPPA_PROTOCOL_EXTENSION._cont = ASN1Dict([
-        ('id', _LPPA_PROTOCOL_EXTENSION_id),
-        ('criticality', _LPPA_PROTOCOL_EXTENSION_criticality),
-        ('Extension', _LPPA_PROTOCOL_EXTENSION_Extension),
-        ('presence', _LPPA_PROTOCOL_EXTENSION_presence),
+        (u'id', _LPPA_PROTOCOL_EXTENSION_id),
+        (u'criticality', _LPPA_PROTOCOL_EXTENSION_criticality),
+        (u'Extension', _LPPA_PROTOCOL_EXTENSION_Extension),
+        (u'presence', _LPPA_PROTOCOL_EXTENSION_presence),
         ])
     
     #-----< LPPA-PRIVATE-IES >-----#
-    LPPA_PRIVATE_IES = CLASS(name='LPPA-PRIVATE-IES', mode=MODE_TYPE)
-    _LPPA_PRIVATE_IES_id = CHOICE(name='id', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'PrivateIE-ID')))
-    _LPPA_PRIVATE_IES_criticality = ENUM(name='criticality', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'Criticality')))
-    _LPPA_PRIVATE_IES_Value = OPEN(name='Value', mode=MODE_TYPE)
-    _LPPA_PRIVATE_IES_presence = ENUM(name='presence', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'Presence')))
+    LPPA_PRIVATE_IES = CLASS(name=u'LPPA-PRIVATE-IES', mode=MODE_TYPE)
+    _LPPA_PRIVATE_IES_id = CHOICE(name=u'id', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'PrivateIE-ID')))
+    _LPPA_PRIVATE_IES_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'Criticality')))
+    _LPPA_PRIVATE_IES_Value = OPEN(name=u'Value', mode=MODE_TYPE)
+    _LPPA_PRIVATE_IES_presence = ENUM(name=u'presence', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'Presence')))
     LPPA_PRIVATE_IES._cont = ASN1Dict([
-        ('id', _LPPA_PRIVATE_IES_id),
-        ('criticality', _LPPA_PRIVATE_IES_criticality),
-        ('Value', _LPPA_PRIVATE_IES_Value),
-        ('presence', _LPPA_PRIVATE_IES_presence),
+        (u'id', _LPPA_PRIVATE_IES_id),
+        (u'criticality', _LPPA_PRIVATE_IES_criticality),
+        (u'Value', _LPPA_PRIVATE_IES_Value),
+        (u'presence', _LPPA_PRIVATE_IES_presence),
         ])
     
     #-----< ProtocolIE-Container >-----#
-    ProtocolIE_Container = SEQ_OF(name='ProtocolIE-Container', mode=MODE_TYPE, param=True)
+    ProtocolIE_Container = SEQ_OF(name=u'ProtocolIE-Container', mode=MODE_TYPE, param=True)
     
     #-----< ProtocolIE-Single-Container >-----#
-    ProtocolIE_Single_Container = SEQ(name='ProtocolIE-Single-Container', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Field')), param=True)
+    ProtocolIE_Single_Container = SEQ(name=u'ProtocolIE-Single-Container', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Field')), param=True)
     
     #-----< ProtocolIE-Field >-----#
-    ProtocolIE_Field = SEQ(name='ProtocolIE-Field', mode=MODE_TYPE, param=True)
+    ProtocolIE_Field = SEQ(name=u'ProtocolIE-Field', mode=MODE_TYPE, param=True)
     
     #-----< ProtocolIE-ContainerPair >-----#
-    ProtocolIE_ContainerPair = SEQ_OF(name='ProtocolIE-ContainerPair', mode=MODE_TYPE, param=True)
+    ProtocolIE_ContainerPair = SEQ_OF(name=u'ProtocolIE-ContainerPair', mode=MODE_TYPE, param=True)
     
     #-----< ProtocolIE-FieldPair >-----#
-    ProtocolIE_FieldPair = SEQ(name='ProtocolIE-FieldPair', mode=MODE_TYPE, param=True)
+    ProtocolIE_FieldPair = SEQ(name=u'ProtocolIE-FieldPair', mode=MODE_TYPE, param=True)
     
     #-----< ProtocolIE-ContainerList >-----#
-    ProtocolIE_ContainerList = SEQ_OF(name='ProtocolIE-ContainerList', mode=MODE_TYPE, param=True)
+    ProtocolIE_ContainerList = SEQ_OF(name=u'ProtocolIE-ContainerList', mode=MODE_TYPE, param=True)
     
     #-----< ProtocolIE-ContainerPairList >-----#
-    ProtocolIE_ContainerPairList = SEQ_OF(name='ProtocolIE-ContainerPairList', mode=MODE_TYPE, param=True)
+    ProtocolIE_ContainerPairList = SEQ_OF(name=u'ProtocolIE-ContainerPairList', mode=MODE_TYPE, param=True)
     
     #-----< ProtocolExtensionContainer >-----#
-    ProtocolExtensionContainer = SEQ_OF(name='ProtocolExtensionContainer', mode=MODE_TYPE, param=True)
+    ProtocolExtensionContainer = SEQ_OF(name=u'ProtocolExtensionContainer', mode=MODE_TYPE, param=True)
     
     #-----< ProtocolExtensionField >-----#
-    ProtocolExtensionField = SEQ(name='ProtocolExtensionField', mode=MODE_TYPE, param=True)
+    ProtocolExtensionField = SEQ(name=u'ProtocolExtensionField', mode=MODE_TYPE, param=True)
     
     #-----< PrivateIE-Container >-----#
-    PrivateIE_Container = SEQ_OF(name='PrivateIE-Container', mode=MODE_TYPE, param=True)
+    PrivateIE_Container = SEQ_OF(name=u'PrivateIE-Container', mode=MODE_TYPE, param=True)
     
     #-----< PrivateIE-Field >-----#
-    PrivateIE_Field = SEQ(name='PrivateIE-Field', mode=MODE_TYPE, param=True)
+    PrivateIE_Field = SEQ(name=u'PrivateIE-Field', mode=MODE_TYPE, param=True)
     
     _all_ = [
         _LPPA_PROTOCOL_IES_id,
@@ -716,2296 +716,2296 @@ class LPPA_Containers:
 
 class LPPA_IEs:
 
-    _name_  = 'LPPA-IEs'
+    _name_  = u'LPPA-IEs'
     _oid_   = [0, 4, 0, 0, 21, 3, 6, 1, 2]
     
     _obj_ = [
-        'Add-OTDOACells',
-        'Add-OTDOACells-ExtIEs',
-        'Add-OTDOACell-Information',
-        'Assistance-Information',
-        'Assistance-Information-ExtIEs',
-        'AssistanceInformationFailureList',
-        'AssistanceInformationFailureList-ExtIEs',
-        'AssistanceInformationMetaData',
-        'AssistanceInformationMetaData-ExtIEs',
-        'BCCH',
-        'BitmapsforNPRS',
-        'Broadcast',
-        'BroadcastPeriodicity',
-        'BSSID',
-        'Cause',
-        'CauseMisc',
-        'CauseProtocol',
-        'CauseRadioNetwork',
-        'Cell-Portion-ID',
-        'CPLength',
-        'CriticalityDiagnostics',
-        'CriticalityDiagnostics-ExtIEs',
-        'CriticalityDiagnostics-IE-List',
-        'CriticalityDiagnostics-IE-List-ExtIEs',
-        'DL-Bandwidth',
-        'E-CID-MeasurementResult',
-        'ECGI',
-        'ECGI-ExtIEs',
-        'EUTRANCellIdentifier',
-        'EARFCN',
-        'E-UTRANAccessPointPosition',
-        'HESSID',
-        'InterRATMeasurementQuantities',
-        'InterRATMeasurementQuantities-ItemIEs',
-        'InterRATMeasurementQuantities-Item',
-        'InterRATMeasurementQuantitiesValue-ExtIEs',
-        'InterRATMeasurementQuantitiesValue',
-        'InterRATMeasurementResult',
-        'InterRATMeasuredResultsValue',
-        'Measurement-ID',
-        'MeasurementPeriodicity',
-        'MeasurementQuantities',
-        'MeasurementQuantities-ItemIEs',
-        'MeasurementQuantities-Item',
-        'MeasurementQuantitiesValue-ExtIEs',
-        'MeasurementQuantitiesValue',
-        'MeasuredResults',
-        'MeasuredResultsValue',
-        'MBSFNsubframeConfiguration',
-        'MBSFNsubframeConfigurationValue',
-        'NarrowBandIndex',
-        'NRCellIdentity',
-        'NR-CGI',
-        'NR-CGI-ExtIEs',
-        'NPRSConfiguration',
-        'NPRSMutingConfiguration',
-        'NPRSSubframePartA',
-        'NPRSSubframePartB',
-        'NumberOfAntennaPorts',
-        'NumberOfDlFrames',
-        'NumberOfDlFrames-Extended',
-        'NumberOfFrequencyHoppingBands',
-        'NPRSSequenceInfo',
-        'NRARFCN',
-        'NRPCI',
-        'OffsetNBChanneltoEARFCN',
-        'OperationModeInfo',
-        'OTDOACells',
-        'OTDOACells-ExtIEs',
-        'OTDOACell-Information',
-        'OTDOACell-Information-Item',
-        'OTDOA-Information-Item',
-        'Outcome',
-        'PCI',
-        'PhysCellIDGERAN',
-        'PhysCellIDUTRA-FDD',
-        'PhysCellIDUTRA-TDD',
-        'PLMN-Identity',
-        'PosSIBs',
-        'PosSIBs-ExtIEs',
-        'PosSIB-Segments',
-        'PosSIB-Segments-ExtIEs',
-        'PosSIB-Type',
-        'PRS-Bandwidth',
-        'PRS-Configuration-Index',
-        'PRS-ID',
-        'PRSMutingConfiguration',
-        'PRSOccasionGroup',
-        'PRSFrequencyHoppingConfiguration',
-        'PRSFrequencyHoppingConfiguration-Item-IEs',
-        'RepetitionNumberofSIB1-NB',
-        'ReportCharacteristics',
-        'RequestedSRSTransmissionCharacteristics',
-        'ResultRSRP',
-        'ResultRSRP-Item',
-        'ResultRSRP-Item-ExtIEs',
-        'ResultRSRQ',
-        'ResultRSRQ-Item',
-        'ResultRSRQ-Item-ExtIEs',
-        'ResultGERAN',
-        'ResultGERAN-Item',
-        'ResultGERAN-Item-ExtIEs',
-        'ResultUTRAN',
-        'ResultUTRAN-Item',
-        'ResultUTRAN-Item-ExtIEs',
-        'ResultNR',
-        'ResultNR-Item',
-        'ResultNR-Item-ExtIEs',
-        'ResultsPerSSB-Index-List',
-        'ResultsPerSSB-Index-Item',
-        'ResultsPerSSB-Index-Item-ExtIEs',
-        'RSSI',
-        'SFNInitialisationTime',
-        'SRSConfigurationForAllCells',
-        'SRSConfigurationForOneCell',
-        'Subframeallocation',
-        'SS-NRRSRP',
-        'SS-NRRSRQ',
-        'SSB-Index',
-        'SSID',
-        'SystemInformation',
-        'SystemInformation-ExtIEs',
-        'TAC',
-        'TDDConfiguration',
-        'TDDConfiguration-ExtIEs',
-        'TP-ID',
-        'TP-Type',
-        'TypeOfError',
-        'ULConfiguration',
-        'UARFCN',
-        'UTRA-EcN0',
-        'UTRA-RSCP',
-        'ValueRSRP',
-        'ValueRSRQ',
-        'WLANMeasurementQuantities',
-        'WLANMeasurementQuantities-ItemIEs',
-        'WLANMeasurementQuantities-Item',
-        'WLANMeasurementQuantitiesValue-ExtIEs',
-        'WLANMeasurementQuantitiesValue',
-        'WLANMeasurementResult',
-        'WLANMeasurementResult-Item',
-        'WLANMeasurementResult-Item-ExtIEs',
-        'WLAN-RSSI',
-        'WLANBand',
-        'WLANChannelList',
-        'WLANChannel',
-        'WLANCountryCode',
-        'WLANOperatingClass',
+        u'Add-OTDOACells',
+        u'Add-OTDOACells-ExtIEs',
+        u'Add-OTDOACell-Information',
+        u'Assistance-Information',
+        u'Assistance-Information-ExtIEs',
+        u'AssistanceInformationFailureList',
+        u'AssistanceInformationFailureList-ExtIEs',
+        u'AssistanceInformationMetaData',
+        u'AssistanceInformationMetaData-ExtIEs',
+        u'BCCH',
+        u'BitmapsforNPRS',
+        u'Broadcast',
+        u'BroadcastPeriodicity',
+        u'BSSID',
+        u'Cause',
+        u'CauseMisc',
+        u'CauseProtocol',
+        u'CauseRadioNetwork',
+        u'Cell-Portion-ID',
+        u'CPLength',
+        u'CriticalityDiagnostics',
+        u'CriticalityDiagnostics-ExtIEs',
+        u'CriticalityDiagnostics-IE-List',
+        u'CriticalityDiagnostics-IE-List-ExtIEs',
+        u'DL-Bandwidth',
+        u'E-CID-MeasurementResult',
+        u'ECGI',
+        u'ECGI-ExtIEs',
+        u'EUTRANCellIdentifier',
+        u'EARFCN',
+        u'E-UTRANAccessPointPosition',
+        u'HESSID',
+        u'InterRATMeasurementQuantities',
+        u'InterRATMeasurementQuantities-ItemIEs',
+        u'InterRATMeasurementQuantities-Item',
+        u'InterRATMeasurementQuantitiesValue-ExtIEs',
+        u'InterRATMeasurementQuantitiesValue',
+        u'InterRATMeasurementResult',
+        u'InterRATMeasuredResultsValue',
+        u'Measurement-ID',
+        u'MeasurementPeriodicity',
+        u'MeasurementQuantities',
+        u'MeasurementQuantities-ItemIEs',
+        u'MeasurementQuantities-Item',
+        u'MeasurementQuantitiesValue-ExtIEs',
+        u'MeasurementQuantitiesValue',
+        u'MeasuredResults',
+        u'MeasuredResultsValue',
+        u'MBSFNsubframeConfiguration',
+        u'MBSFNsubframeConfigurationValue',
+        u'NarrowBandIndex',
+        u'NRCellIdentity',
+        u'NR-CGI',
+        u'NR-CGI-ExtIEs',
+        u'NPRSConfiguration',
+        u'NPRSMutingConfiguration',
+        u'NPRSSubframePartA',
+        u'NPRSSubframePartB',
+        u'NumberOfAntennaPorts',
+        u'NumberOfDlFrames',
+        u'NumberOfDlFrames-Extended',
+        u'NumberOfFrequencyHoppingBands',
+        u'NPRSSequenceInfo',
+        u'NRARFCN',
+        u'NRPCI',
+        u'OffsetNBChanneltoEARFCN',
+        u'OperationModeInfo',
+        u'OTDOACells',
+        u'OTDOACells-ExtIEs',
+        u'OTDOACell-Information',
+        u'OTDOACell-Information-Item',
+        u'OTDOA-Information-Item',
+        u'Outcome',
+        u'PCI',
+        u'PhysCellIDGERAN',
+        u'PhysCellIDUTRA-FDD',
+        u'PhysCellIDUTRA-TDD',
+        u'PLMN-Identity',
+        u'PosSIBs',
+        u'PosSIBs-ExtIEs',
+        u'PosSIB-Segments',
+        u'PosSIB-Segments-ExtIEs',
+        u'PosSIB-Type',
+        u'PRS-Bandwidth',
+        u'PRS-Configuration-Index',
+        u'PRS-ID',
+        u'PRSMutingConfiguration',
+        u'PRSOccasionGroup',
+        u'PRSFrequencyHoppingConfiguration',
+        u'PRSFrequencyHoppingConfiguration-Item-IEs',
+        u'RepetitionNumberofSIB1-NB',
+        u'ReportCharacteristics',
+        u'RequestedSRSTransmissionCharacteristics',
+        u'ResultRSRP',
+        u'ResultRSRP-Item',
+        u'ResultRSRP-Item-ExtIEs',
+        u'ResultRSRQ',
+        u'ResultRSRQ-Item',
+        u'ResultRSRQ-Item-ExtIEs',
+        u'ResultGERAN',
+        u'ResultGERAN-Item',
+        u'ResultGERAN-Item-ExtIEs',
+        u'ResultUTRAN',
+        u'ResultUTRAN-Item',
+        u'ResultUTRAN-Item-ExtIEs',
+        u'ResultNR',
+        u'ResultNR-Item',
+        u'ResultNR-Item-ExtIEs',
+        u'ResultsPerSSB-Index-List',
+        u'ResultsPerSSB-Index-Item',
+        u'ResultsPerSSB-Index-Item-ExtIEs',
+        u'RSSI',
+        u'SFNInitialisationTime',
+        u'SRSConfigurationForAllCells',
+        u'SRSConfigurationForOneCell',
+        u'Subframeallocation',
+        u'SS-NRRSRP',
+        u'SS-NRRSRQ',
+        u'SSB-Index',
+        u'SSID',
+        u'SystemInformation',
+        u'SystemInformation-ExtIEs',
+        u'TAC',
+        u'TDDConfiguration',
+        u'TDDConfiguration-ExtIEs',
+        u'TP-ID',
+        u'TP-Type',
+        u'TypeOfError',
+        u'ULConfiguration',
+        u'UARFCN',
+        u'UTRA-EcN0',
+        u'UTRA-RSCP',
+        u'ValueRSRP',
+        u'ValueRSRQ',
+        u'WLANMeasurementQuantities',
+        u'WLANMeasurementQuantities-ItemIEs',
+        u'WLANMeasurementQuantities-Item',
+        u'WLANMeasurementQuantitiesValue-ExtIEs',
+        u'WLANMeasurementQuantitiesValue',
+        u'WLANMeasurementResult',
+        u'WLANMeasurementResult-Item',
+        u'WLANMeasurementResult-Item-ExtIEs',
+        u'WLAN-RSSI',
+        u'WLANBand',
+        u'WLANChannelList',
+        u'WLANChannel',
+        u'WLANCountryCode',
+        u'WLANOperatingClass',
         ]
     _type_ = [
-        'Add-OTDOACells',
-        'Add-OTDOACell-Information',
-        'Assistance-Information',
-        'AssistanceInformationFailureList',
-        'AssistanceInformationMetaData',
-        'BCCH',
-        'BitmapsforNPRS',
-        'Broadcast',
-        'BroadcastPeriodicity',
-        'BSSID',
-        'Cause',
-        'CauseMisc',
-        'CauseProtocol',
-        'CauseRadioNetwork',
-        'Cell-Portion-ID',
-        'CPLength',
-        'CriticalityDiagnostics',
-        'CriticalityDiagnostics-IE-List',
-        'DL-Bandwidth',
-        'E-CID-MeasurementResult',
-        'ECGI',
-        'EUTRANCellIdentifier',
-        'EARFCN',
-        'E-UTRANAccessPointPosition',
-        'HESSID',
-        'InterRATMeasurementQuantities',
-        'InterRATMeasurementQuantities-Item',
-        'InterRATMeasurementQuantitiesValue',
-        'InterRATMeasurementResult',
-        'InterRATMeasuredResultsValue',
-        'Measurement-ID',
-        'MeasurementPeriodicity',
-        'MeasurementQuantities',
-        'MeasurementQuantities-Item',
-        'MeasurementQuantitiesValue',
-        'MeasuredResults',
-        'MeasuredResultsValue',
-        'MBSFNsubframeConfiguration',
-        'MBSFNsubframeConfigurationValue',
-        'NarrowBandIndex',
-        'NRCellIdentity',
-        'NR-CGI',
-        'NPRSConfiguration',
-        'NPRSMutingConfiguration',
-        'NPRSSubframePartA',
-        'NPRSSubframePartB',
-        'NumberOfAntennaPorts',
-        'NumberOfDlFrames',
-        'NumberOfDlFrames-Extended',
-        'NumberOfFrequencyHoppingBands',
-        'NPRSSequenceInfo',
-        'NRARFCN',
-        'NRPCI',
-        'OffsetNBChanneltoEARFCN',
-        'OperationModeInfo',
-        'OTDOACells',
-        'OTDOACell-Information',
-        'OTDOACell-Information-Item',
-        'OTDOA-Information-Item',
-        'Outcome',
-        'PCI',
-        'PhysCellIDGERAN',
-        'PhysCellIDUTRA-FDD',
-        'PhysCellIDUTRA-TDD',
-        'PLMN-Identity',
-        'PosSIBs',
-        'PosSIB-Segments',
-        'PosSIB-Type',
-        'PRS-Bandwidth',
-        'PRS-Configuration-Index',
-        'PRS-ID',
-        'PRSMutingConfiguration',
-        'PRSOccasionGroup',
-        'PRSFrequencyHoppingConfiguration',
-        'RepetitionNumberofSIB1-NB',
-        'ReportCharacteristics',
-        'RequestedSRSTransmissionCharacteristics',
-        'ResultRSRP',
-        'ResultRSRP-Item',
-        'ResultRSRQ',
-        'ResultRSRQ-Item',
-        'ResultGERAN',
-        'ResultGERAN-Item',
-        'ResultUTRAN',
-        'ResultUTRAN-Item',
-        'ResultNR',
-        'ResultNR-Item',
-        'ResultsPerSSB-Index-List',
-        'ResultsPerSSB-Index-Item',
-        'RSSI',
-        'SFNInitialisationTime',
-        'SRSConfigurationForAllCells',
-        'SRSConfigurationForOneCell',
-        'Subframeallocation',
-        'SS-NRRSRP',
-        'SS-NRRSRQ',
-        'SSB-Index',
-        'SSID',
-        'SystemInformation',
-        'TAC',
-        'TDDConfiguration',
-        'TP-ID',
-        'TP-Type',
-        'TypeOfError',
-        'ULConfiguration',
-        'UARFCN',
-        'UTRA-EcN0',
-        'UTRA-RSCP',
-        'ValueRSRP',
-        'ValueRSRQ',
-        'WLANMeasurementQuantities',
-        'WLANMeasurementQuantities-Item',
-        'WLANMeasurementQuantitiesValue',
-        'WLANMeasurementResult',
-        'WLANMeasurementResult-Item',
-        'WLAN-RSSI',
-        'WLANBand',
-        'WLANChannelList',
-        'WLANChannel',
-        'WLANCountryCode',
-        'WLANOperatingClass',
+        u'Add-OTDOACells',
+        u'Add-OTDOACell-Information',
+        u'Assistance-Information',
+        u'AssistanceInformationFailureList',
+        u'AssistanceInformationMetaData',
+        u'BCCH',
+        u'BitmapsforNPRS',
+        u'Broadcast',
+        u'BroadcastPeriodicity',
+        u'BSSID',
+        u'Cause',
+        u'CauseMisc',
+        u'CauseProtocol',
+        u'CauseRadioNetwork',
+        u'Cell-Portion-ID',
+        u'CPLength',
+        u'CriticalityDiagnostics',
+        u'CriticalityDiagnostics-IE-List',
+        u'DL-Bandwidth',
+        u'E-CID-MeasurementResult',
+        u'ECGI',
+        u'EUTRANCellIdentifier',
+        u'EARFCN',
+        u'E-UTRANAccessPointPosition',
+        u'HESSID',
+        u'InterRATMeasurementQuantities',
+        u'InterRATMeasurementQuantities-Item',
+        u'InterRATMeasurementQuantitiesValue',
+        u'InterRATMeasurementResult',
+        u'InterRATMeasuredResultsValue',
+        u'Measurement-ID',
+        u'MeasurementPeriodicity',
+        u'MeasurementQuantities',
+        u'MeasurementQuantities-Item',
+        u'MeasurementQuantitiesValue',
+        u'MeasuredResults',
+        u'MeasuredResultsValue',
+        u'MBSFNsubframeConfiguration',
+        u'MBSFNsubframeConfigurationValue',
+        u'NarrowBandIndex',
+        u'NRCellIdentity',
+        u'NR-CGI',
+        u'NPRSConfiguration',
+        u'NPRSMutingConfiguration',
+        u'NPRSSubframePartA',
+        u'NPRSSubframePartB',
+        u'NumberOfAntennaPorts',
+        u'NumberOfDlFrames',
+        u'NumberOfDlFrames-Extended',
+        u'NumberOfFrequencyHoppingBands',
+        u'NPRSSequenceInfo',
+        u'NRARFCN',
+        u'NRPCI',
+        u'OffsetNBChanneltoEARFCN',
+        u'OperationModeInfo',
+        u'OTDOACells',
+        u'OTDOACell-Information',
+        u'OTDOACell-Information-Item',
+        u'OTDOA-Information-Item',
+        u'Outcome',
+        u'PCI',
+        u'PhysCellIDGERAN',
+        u'PhysCellIDUTRA-FDD',
+        u'PhysCellIDUTRA-TDD',
+        u'PLMN-Identity',
+        u'PosSIBs',
+        u'PosSIB-Segments',
+        u'PosSIB-Type',
+        u'PRS-Bandwidth',
+        u'PRS-Configuration-Index',
+        u'PRS-ID',
+        u'PRSMutingConfiguration',
+        u'PRSOccasionGroup',
+        u'PRSFrequencyHoppingConfiguration',
+        u'RepetitionNumberofSIB1-NB',
+        u'ReportCharacteristics',
+        u'RequestedSRSTransmissionCharacteristics',
+        u'ResultRSRP',
+        u'ResultRSRP-Item',
+        u'ResultRSRQ',
+        u'ResultRSRQ-Item',
+        u'ResultGERAN',
+        u'ResultGERAN-Item',
+        u'ResultUTRAN',
+        u'ResultUTRAN-Item',
+        u'ResultNR',
+        u'ResultNR-Item',
+        u'ResultsPerSSB-Index-List',
+        u'ResultsPerSSB-Index-Item',
+        u'RSSI',
+        u'SFNInitialisationTime',
+        u'SRSConfigurationForAllCells',
+        u'SRSConfigurationForOneCell',
+        u'Subframeallocation',
+        u'SS-NRRSRP',
+        u'SS-NRRSRQ',
+        u'SSB-Index',
+        u'SSID',
+        u'SystemInformation',
+        u'TAC',
+        u'TDDConfiguration',
+        u'TP-ID',
+        u'TP-Type',
+        u'TypeOfError',
+        u'ULConfiguration',
+        u'UARFCN',
+        u'UTRA-EcN0',
+        u'UTRA-RSCP',
+        u'ValueRSRP',
+        u'ValueRSRQ',
+        u'WLANMeasurementQuantities',
+        u'WLANMeasurementQuantities-Item',
+        u'WLANMeasurementQuantitiesValue',
+        u'WLANMeasurementResult',
+        u'WLANMeasurementResult-Item',
+        u'WLAN-RSSI',
+        u'WLANBand',
+        u'WLANChannelList',
+        u'WLANChannel',
+        u'WLANCountryCode',
+        u'WLANOperatingClass',
         ]
     _set_ = [
-        'Add-OTDOACells-ExtIEs',
-        'Assistance-Information-ExtIEs',
-        'AssistanceInformationFailureList-ExtIEs',
-        'AssistanceInformationMetaData-ExtIEs',
-        'CriticalityDiagnostics-ExtIEs',
-        'CriticalityDiagnostics-IE-List-ExtIEs',
-        'ECGI-ExtIEs',
-        'InterRATMeasurementQuantities-ItemIEs',
-        'InterRATMeasurementQuantitiesValue-ExtIEs',
-        'MeasurementQuantities-ItemIEs',
-        'MeasurementQuantitiesValue-ExtIEs',
-        'NR-CGI-ExtIEs',
-        'OTDOACells-ExtIEs',
-        'PosSIBs-ExtIEs',
-        'PosSIB-Segments-ExtIEs',
-        'PRSFrequencyHoppingConfiguration-Item-IEs',
-        'ResultRSRP-Item-ExtIEs',
-        'ResultRSRQ-Item-ExtIEs',
-        'ResultGERAN-Item-ExtIEs',
-        'ResultUTRAN-Item-ExtIEs',
-        'ResultNR-Item-ExtIEs',
-        'ResultsPerSSB-Index-Item-ExtIEs',
-        'SystemInformation-ExtIEs',
-        'TDDConfiguration-ExtIEs',
-        'WLANMeasurementQuantities-ItemIEs',
-        'WLANMeasurementQuantitiesValue-ExtIEs',
-        'WLANMeasurementResult-Item-ExtIEs',
+        u'Add-OTDOACells-ExtIEs',
+        u'Assistance-Information-ExtIEs',
+        u'AssistanceInformationFailureList-ExtIEs',
+        u'AssistanceInformationMetaData-ExtIEs',
+        u'CriticalityDiagnostics-ExtIEs',
+        u'CriticalityDiagnostics-IE-List-ExtIEs',
+        u'ECGI-ExtIEs',
+        u'InterRATMeasurementQuantities-ItemIEs',
+        u'InterRATMeasurementQuantitiesValue-ExtIEs',
+        u'MeasurementQuantities-ItemIEs',
+        u'MeasurementQuantitiesValue-ExtIEs',
+        u'NR-CGI-ExtIEs',
+        u'OTDOACells-ExtIEs',
+        u'PosSIBs-ExtIEs',
+        u'PosSIB-Segments-ExtIEs',
+        u'PRSFrequencyHoppingConfiguration-Item-IEs',
+        u'ResultRSRP-Item-ExtIEs',
+        u'ResultRSRQ-Item-ExtIEs',
+        u'ResultGERAN-Item-ExtIEs',
+        u'ResultUTRAN-Item-ExtIEs',
+        u'ResultNR-Item-ExtIEs',
+        u'ResultsPerSSB-Index-Item-ExtIEs',
+        u'SystemInformation-ExtIEs',
+        u'TDDConfiguration-ExtIEs',
+        u'WLANMeasurementQuantities-ItemIEs',
+        u'WLANMeasurementQuantitiesValue-ExtIEs',
+        u'WLANMeasurementResult-Item-ExtIEs',
         ]
     _val_ = [
         ]
     _class_ = [
-        'Add-OTDOACells-ExtIEs',
-        'Assistance-Information-ExtIEs',
-        'AssistanceInformationFailureList-ExtIEs',
-        'AssistanceInformationMetaData-ExtIEs',
-        'CriticalityDiagnostics-ExtIEs',
-        'CriticalityDiagnostics-IE-List-ExtIEs',
-        'ECGI-ExtIEs',
-        'InterRATMeasurementQuantities-ItemIEs',
-        'InterRATMeasurementQuantitiesValue-ExtIEs',
-        'MeasurementQuantities-ItemIEs',
-        'MeasurementQuantitiesValue-ExtIEs',
-        'NR-CGI-ExtIEs',
-        'OTDOACells-ExtIEs',
-        'PosSIBs-ExtIEs',
-        'PosSIB-Segments-ExtIEs',
-        'PRSFrequencyHoppingConfiguration-Item-IEs',
-        'ResultRSRP-Item-ExtIEs',
-        'ResultRSRQ-Item-ExtIEs',
-        'ResultGERAN-Item-ExtIEs',
-        'ResultUTRAN-Item-ExtIEs',
-        'ResultNR-Item-ExtIEs',
-        'ResultsPerSSB-Index-Item-ExtIEs',
-        'SystemInformation-ExtIEs',
-        'TDDConfiguration-ExtIEs',
-        'WLANMeasurementQuantities-ItemIEs',
-        'WLANMeasurementQuantitiesValue-ExtIEs',
-        'WLANMeasurementResult-Item-ExtIEs',
+        u'Add-OTDOACells-ExtIEs',
+        u'Assistance-Information-ExtIEs',
+        u'AssistanceInformationFailureList-ExtIEs',
+        u'AssistanceInformationMetaData-ExtIEs',
+        u'CriticalityDiagnostics-ExtIEs',
+        u'CriticalityDiagnostics-IE-List-ExtIEs',
+        u'ECGI-ExtIEs',
+        u'InterRATMeasurementQuantities-ItemIEs',
+        u'InterRATMeasurementQuantitiesValue-ExtIEs',
+        u'MeasurementQuantities-ItemIEs',
+        u'MeasurementQuantitiesValue-ExtIEs',
+        u'NR-CGI-ExtIEs',
+        u'OTDOACells-ExtIEs',
+        u'PosSIBs-ExtIEs',
+        u'PosSIB-Segments-ExtIEs',
+        u'PRSFrequencyHoppingConfiguration-Item-IEs',
+        u'ResultRSRP-Item-ExtIEs',
+        u'ResultRSRQ-Item-ExtIEs',
+        u'ResultGERAN-Item-ExtIEs',
+        u'ResultUTRAN-Item-ExtIEs',
+        u'ResultNR-Item-ExtIEs',
+        u'ResultsPerSSB-Index-Item-ExtIEs',
+        u'SystemInformation-ExtIEs',
+        u'TDDConfiguration-ExtIEs',
+        u'WLANMeasurementQuantities-ItemIEs',
+        u'WLANMeasurementQuantitiesValue-ExtIEs',
+        u'WLANMeasurementResult-Item-ExtIEs',
         ]
     _param_ = [
         ]
     
     #-----< Add-OTDOACells >-----#
-    Add_OTDOACells = SEQ_OF(name='Add-OTDOACells', mode=MODE_TYPE)
+    Add_OTDOACells = SEQ_OF(name=u'Add-OTDOACells', mode=MODE_TYPE)
     _Add_OTDOACells__item_ = SEQ(name='_item_', mode=MODE_TYPE)
-    __Add_OTDOACells__item__add_OTDOACellInfo = SEQ_OF(name='add-OTDOACellInfo', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'Add-OTDOACell-Information')))
-    __Add_OTDOACells__item__iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    __Add_OTDOACells__item__add_OTDOACellInfo = SEQ_OF(name=u'add-OTDOACellInfo', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'Add-OTDOACell-Information')))
+    __Add_OTDOACells__item__iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
     ___Add_OTDOACells__item__iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionField')))
-    ____Add_OTDOACells__item__iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['id']))
+    ____Add_OTDOACells__item__iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'id']))
     _____Add_OTDOACells__item__iE_Extensions__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     _____Add_OTDOACells__item__iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____Add_OTDOACells__item__iE_Extensions__item__id._const_tab = _____Add_OTDOACells__item__iE_Extensions__item__id_tab
     ____Add_OTDOACells__item__iE_Extensions__item__id._const_tab_at = None
-    ____Add_OTDOACells__item__iE_Extensions__item__id._const_tab_id = 'id'
-    ____Add_OTDOACells__item__iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['criticality']))
+    ____Add_OTDOACells__item__iE_Extensions__item__id._const_tab_id = u'id'
+    ____Add_OTDOACells__item__iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'criticality']))
     _____Add_OTDOACells__item__iE_Extensions__item__criticality_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     _____Add_OTDOACells__item__iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____Add_OTDOACells__item__iE_Extensions__item__criticality._const_tab = _____Add_OTDOACells__item__iE_Extensions__item__criticality_tab
-    ____Add_OTDOACells__item__iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ____Add_OTDOACells__item__iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ____Add_OTDOACells__item__iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['Extension']))
+    ____Add_OTDOACells__item__iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ____Add_OTDOACells__item__iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ____Add_OTDOACells__item__iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'Extension']))
     _____Add_OTDOACells__item__iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     _____Add_OTDOACells__item__iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____Add_OTDOACells__item__iE_Extensions__item__extensionValue._const_tab = _____Add_OTDOACells__item__iE_Extensions__item__extensionValue_tab
-    ____Add_OTDOACells__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ____Add_OTDOACells__item__iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ____Add_OTDOACells__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ____Add_OTDOACells__item__iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___Add_OTDOACells__item__iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ____Add_OTDOACells__item__iE_Extensions__item__id),
-        ('criticality', ____Add_OTDOACells__item__iE_Extensions__item__criticality),
-        ('extensionValue', ____Add_OTDOACells__item__iE_Extensions__item__extensionValue),
+        (u'id', ____Add_OTDOACells__item__iE_Extensions__item__id),
+        (u'criticality', ____Add_OTDOACells__item__iE_Extensions__item__criticality),
+        (u'extensionValue', ____Add_OTDOACells__item__iE_Extensions__item__extensionValue),
         ])
     ___Add_OTDOACells__item__iE_Extensions__item_._ext = None
     __Add_OTDOACells__item__iE_Extensions._cont = ___Add_OTDOACells__item__iE_Extensions__item_
     __Add_OTDOACells__item__iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     _Add_OTDOACells__item_._cont = ASN1Dict([
-        ('add-OTDOACellInfo', __Add_OTDOACells__item__add_OTDOACellInfo),
-        ('iE-Extensions', __Add_OTDOACells__item__iE_Extensions),
+        (u'add-OTDOACellInfo', __Add_OTDOACells__item__add_OTDOACellInfo),
+        (u'iE-Extensions', __Add_OTDOACells__item__iE_Extensions),
         ])
     _Add_OTDOACells__item_._ext = []
     Add_OTDOACells._cont = _Add_OTDOACells__item_
     Add_OTDOACells._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=3840)], ev=None, er=[])
     
     #-----< Add-OTDOACells-ExtIEs >-----#
-    Add_OTDOACells_ExtIEs = CLASS(name='Add-OTDOACells-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    Add_OTDOACells_ExtIEs = CLASS(name=u'Add-OTDOACells-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     Add_OTDOACells_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< Add-OTDOACell-Information >-----#
-    Add_OTDOACell_Information = SEQ_OF(name='Add-OTDOACell-Information', mode=MODE_TYPE)
+    Add_OTDOACell_Information = SEQ_OF(name=u'Add-OTDOACell-Information', mode=MODE_TYPE)
     _Add_OTDOACell_Information__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'OTDOACell-Information-Item')))
     Add_OTDOACell_Information._cont = _Add_OTDOACell_Information__item_
     Add_OTDOACell_Information._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=63)], ev=None, er=[])
     
     #-----< Assistance-Information >-----#
-    Assistance_Information = SEQ(name='Assistance-Information', mode=MODE_TYPE)
-    _Assistance_Information_systemInformation = SEQ_OF(name='systemInformation', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'SystemInformation')))
-    _Assistance_Information_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    Assistance_Information = SEQ(name=u'Assistance-Information', mode=MODE_TYPE)
+    _Assistance_Information_systemInformation = SEQ_OF(name=u'systemInformation', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'SystemInformation')))
+    _Assistance_Information_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
     __Assistance_Information_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionField')))
-    ___Assistance_Information_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['id']))
+    ___Assistance_Information_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'id']))
     ____Assistance_Information_iE_Extensions__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____Assistance_Information_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___Assistance_Information_iE_Extensions__item__id._const_tab = ____Assistance_Information_iE_Extensions__item__id_tab
     ___Assistance_Information_iE_Extensions__item__id._const_tab_at = None
-    ___Assistance_Information_iE_Extensions__item__id._const_tab_id = 'id'
-    ___Assistance_Information_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['criticality']))
+    ___Assistance_Information_iE_Extensions__item__id._const_tab_id = u'id'
+    ___Assistance_Information_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'criticality']))
     ____Assistance_Information_iE_Extensions__item__criticality_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____Assistance_Information_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___Assistance_Information_iE_Extensions__item__criticality._const_tab = ____Assistance_Information_iE_Extensions__item__criticality_tab
-    ___Assistance_Information_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___Assistance_Information_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___Assistance_Information_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['Extension']))
+    ___Assistance_Information_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___Assistance_Information_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___Assistance_Information_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'Extension']))
     ____Assistance_Information_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____Assistance_Information_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___Assistance_Information_iE_Extensions__item__extensionValue._const_tab = ____Assistance_Information_iE_Extensions__item__extensionValue_tab
-    ___Assistance_Information_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___Assistance_Information_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___Assistance_Information_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___Assistance_Information_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __Assistance_Information_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___Assistance_Information_iE_Extensions__item__id),
-        ('criticality', ___Assistance_Information_iE_Extensions__item__criticality),
-        ('extensionValue', ___Assistance_Information_iE_Extensions__item__extensionValue),
+        (u'id', ___Assistance_Information_iE_Extensions__item__id),
+        (u'criticality', ___Assistance_Information_iE_Extensions__item__criticality),
+        (u'extensionValue', ___Assistance_Information_iE_Extensions__item__extensionValue),
         ])
     __Assistance_Information_iE_Extensions__item_._ext = None
     _Assistance_Information_iE_Extensions._cont = __Assistance_Information_iE_Extensions__item_
     _Assistance_Information_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     Assistance_Information._cont = ASN1Dict([
-        ('systemInformation', _Assistance_Information_systemInformation),
-        ('iE-Extensions', _Assistance_Information_iE_Extensions),
+        (u'systemInformation', _Assistance_Information_systemInformation),
+        (u'iE-Extensions', _Assistance_Information_iE_Extensions),
         ])
     Assistance_Information._ext = []
     
     #-----< Assistance-Information-ExtIEs >-----#
-    Assistance_Information_ExtIEs = CLASS(name='Assistance-Information-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    Assistance_Information_ExtIEs = CLASS(name=u'Assistance-Information-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     Assistance_Information_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< AssistanceInformationFailureList >-----#
-    AssistanceInformationFailureList = SEQ_OF(name='AssistanceInformationFailureList', mode=MODE_TYPE)
+    AssistanceInformationFailureList = SEQ_OF(name=u'AssistanceInformationFailureList', mode=MODE_TYPE)
     _AssistanceInformationFailureList__item_ = SEQ(name='_item_', mode=MODE_TYPE)
-    __AssistanceInformationFailureList__item__posSIB_Type = ENUM(name='posSIB-Type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PosSIB-Type')))
-    __AssistanceInformationFailureList__item__outcome = ENUM(name='outcome', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'Outcome')))
-    __AssistanceInformationFailureList__item__iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    __AssistanceInformationFailureList__item__posSIB_Type = ENUM(name=u'posSIB-Type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PosSIB-Type')))
+    __AssistanceInformationFailureList__item__outcome = ENUM(name=u'outcome', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'Outcome')))
+    __AssistanceInformationFailureList__item__iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
     ___AssistanceInformationFailureList__item__iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionField')))
-    ____AssistanceInformationFailureList__item__iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['id']))
+    ____AssistanceInformationFailureList__item__iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'id']))
     _____AssistanceInformationFailureList__item__iE_Extensions__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     _____AssistanceInformationFailureList__item__iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____AssistanceInformationFailureList__item__iE_Extensions__item__id._const_tab = _____AssistanceInformationFailureList__item__iE_Extensions__item__id_tab
     ____AssistanceInformationFailureList__item__iE_Extensions__item__id._const_tab_at = None
-    ____AssistanceInformationFailureList__item__iE_Extensions__item__id._const_tab_id = 'id'
-    ____AssistanceInformationFailureList__item__iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['criticality']))
+    ____AssistanceInformationFailureList__item__iE_Extensions__item__id._const_tab_id = u'id'
+    ____AssistanceInformationFailureList__item__iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'criticality']))
     _____AssistanceInformationFailureList__item__iE_Extensions__item__criticality_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     _____AssistanceInformationFailureList__item__iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____AssistanceInformationFailureList__item__iE_Extensions__item__criticality._const_tab = _____AssistanceInformationFailureList__item__iE_Extensions__item__criticality_tab
-    ____AssistanceInformationFailureList__item__iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ____AssistanceInformationFailureList__item__iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ____AssistanceInformationFailureList__item__iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['Extension']))
+    ____AssistanceInformationFailureList__item__iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ____AssistanceInformationFailureList__item__iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ____AssistanceInformationFailureList__item__iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'Extension']))
     _____AssistanceInformationFailureList__item__iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     _____AssistanceInformationFailureList__item__iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____AssistanceInformationFailureList__item__iE_Extensions__item__extensionValue._const_tab = _____AssistanceInformationFailureList__item__iE_Extensions__item__extensionValue_tab
-    ____AssistanceInformationFailureList__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ____AssistanceInformationFailureList__item__iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ____AssistanceInformationFailureList__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ____AssistanceInformationFailureList__item__iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___AssistanceInformationFailureList__item__iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ____AssistanceInformationFailureList__item__iE_Extensions__item__id),
-        ('criticality', ____AssistanceInformationFailureList__item__iE_Extensions__item__criticality),
-        ('extensionValue', ____AssistanceInformationFailureList__item__iE_Extensions__item__extensionValue),
+        (u'id', ____AssistanceInformationFailureList__item__iE_Extensions__item__id),
+        (u'criticality', ____AssistanceInformationFailureList__item__iE_Extensions__item__criticality),
+        (u'extensionValue', ____AssistanceInformationFailureList__item__iE_Extensions__item__extensionValue),
         ])
     ___AssistanceInformationFailureList__item__iE_Extensions__item_._ext = None
     __AssistanceInformationFailureList__item__iE_Extensions._cont = ___AssistanceInformationFailureList__item__iE_Extensions__item_
     __AssistanceInformationFailureList__item__iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     _AssistanceInformationFailureList__item_._cont = ASN1Dict([
-        ('posSIB-Type', __AssistanceInformationFailureList__item__posSIB_Type),
-        ('outcome', __AssistanceInformationFailureList__item__outcome),
-        ('iE-Extensions', __AssistanceInformationFailureList__item__iE_Extensions),
+        (u'posSIB-Type', __AssistanceInformationFailureList__item__posSIB_Type),
+        (u'outcome', __AssistanceInformationFailureList__item__outcome),
+        (u'iE-Extensions', __AssistanceInformationFailureList__item__iE_Extensions),
         ])
     _AssistanceInformationFailureList__item_._ext = []
     AssistanceInformationFailureList._cont = _AssistanceInformationFailureList__item_
     AssistanceInformationFailureList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
     
     #-----< AssistanceInformationFailureList-ExtIEs >-----#
-    AssistanceInformationFailureList_ExtIEs = CLASS(name='AssistanceInformationFailureList-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    AssistanceInformationFailureList_ExtIEs = CLASS(name=u'AssistanceInformationFailureList-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     AssistanceInformationFailureList_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< AssistanceInformationMetaData >-----#
-    AssistanceInformationMetaData = SEQ(name='AssistanceInformationMetaData', mode=MODE_TYPE)
-    _AssistanceInformationMetaData_encrypted = ENUM(name='encrypted', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _AssistanceInformationMetaData_encrypted._cont = ASN1Dict([('true', 0)])
+    AssistanceInformationMetaData = SEQ(name=u'AssistanceInformationMetaData', mode=MODE_TYPE)
+    _AssistanceInformationMetaData_encrypted = ENUM(name=u'encrypted', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _AssistanceInformationMetaData_encrypted._cont = ASN1Dict([(u'true', 0)])
     _AssistanceInformationMetaData_encrypted._ext = []
-    _AssistanceInformationMetaData_gNSSID = ENUM(name='gNSSID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _AssistanceInformationMetaData_gNSSID._cont = ASN1Dict([('gps', 0), ('sbas', 1), ('gzss', 2), ('galileo', 3), ('glonass', 4), ('bds', 5), ('navic', 6)])
-    _AssistanceInformationMetaData_gNSSID._ext = ['navic']
-    _AssistanceInformationMetaData_sBASID = ENUM(name='sBASID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _AssistanceInformationMetaData_sBASID._cont = ASN1Dict([('waas', 0), ('egnos', 1), ('msas', 2), ('gagan', 3)])
+    _AssistanceInformationMetaData_gNSSID = ENUM(name=u'gNSSID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _AssistanceInformationMetaData_gNSSID._cont = ASN1Dict([(u'gps', 0), (u'sbas', 1), (u'gzss', 2), (u'galileo', 3), (u'glonass', 4), (u'bds', 5), (u'navic', 6)])
+    _AssistanceInformationMetaData_gNSSID._ext = [u'navic']
+    _AssistanceInformationMetaData_sBASID = ENUM(name=u'sBASID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _AssistanceInformationMetaData_sBASID._cont = ASN1Dict([(u'waas', 0), (u'egnos', 1), (u'msas', 2), (u'gagan', 3)])
     _AssistanceInformationMetaData_sBASID._ext = []
-    _AssistanceInformationMetaData_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _AssistanceInformationMetaData_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
     __AssistanceInformationMetaData_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionField')))
-    ___AssistanceInformationMetaData_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['id']))
+    ___AssistanceInformationMetaData_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'id']))
     ____AssistanceInformationMetaData_iE_Extensions__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____AssistanceInformationMetaData_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___AssistanceInformationMetaData_iE_Extensions__item__id._const_tab = ____AssistanceInformationMetaData_iE_Extensions__item__id_tab
     ___AssistanceInformationMetaData_iE_Extensions__item__id._const_tab_at = None
-    ___AssistanceInformationMetaData_iE_Extensions__item__id._const_tab_id = 'id'
-    ___AssistanceInformationMetaData_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['criticality']))
+    ___AssistanceInformationMetaData_iE_Extensions__item__id._const_tab_id = u'id'
+    ___AssistanceInformationMetaData_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'criticality']))
     ____AssistanceInformationMetaData_iE_Extensions__item__criticality_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____AssistanceInformationMetaData_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___AssistanceInformationMetaData_iE_Extensions__item__criticality._const_tab = ____AssistanceInformationMetaData_iE_Extensions__item__criticality_tab
-    ___AssistanceInformationMetaData_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___AssistanceInformationMetaData_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___AssistanceInformationMetaData_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['Extension']))
+    ___AssistanceInformationMetaData_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___AssistanceInformationMetaData_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___AssistanceInformationMetaData_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'Extension']))
     ____AssistanceInformationMetaData_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____AssistanceInformationMetaData_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___AssistanceInformationMetaData_iE_Extensions__item__extensionValue._const_tab = ____AssistanceInformationMetaData_iE_Extensions__item__extensionValue_tab
-    ___AssistanceInformationMetaData_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___AssistanceInformationMetaData_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___AssistanceInformationMetaData_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___AssistanceInformationMetaData_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __AssistanceInformationMetaData_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___AssistanceInformationMetaData_iE_Extensions__item__id),
-        ('criticality', ___AssistanceInformationMetaData_iE_Extensions__item__criticality),
-        ('extensionValue', ___AssistanceInformationMetaData_iE_Extensions__item__extensionValue),
+        (u'id', ___AssistanceInformationMetaData_iE_Extensions__item__id),
+        (u'criticality', ___AssistanceInformationMetaData_iE_Extensions__item__criticality),
+        (u'extensionValue', ___AssistanceInformationMetaData_iE_Extensions__item__extensionValue),
         ])
     __AssistanceInformationMetaData_iE_Extensions__item_._ext = None
     _AssistanceInformationMetaData_iE_Extensions._cont = __AssistanceInformationMetaData_iE_Extensions__item_
     _AssistanceInformationMetaData_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     AssistanceInformationMetaData._cont = ASN1Dict([
-        ('encrypted', _AssistanceInformationMetaData_encrypted),
-        ('gNSSID', _AssistanceInformationMetaData_gNSSID),
-        ('sBASID', _AssistanceInformationMetaData_sBASID),
-        ('iE-Extensions', _AssistanceInformationMetaData_iE_Extensions),
+        (u'encrypted', _AssistanceInformationMetaData_encrypted),
+        (u'gNSSID', _AssistanceInformationMetaData_gNSSID),
+        (u'sBASID', _AssistanceInformationMetaData_sBASID),
+        (u'iE-Extensions', _AssistanceInformationMetaData_iE_Extensions),
         ])
     AssistanceInformationMetaData._ext = []
     
     #-----< AssistanceInformationMetaData-ExtIEs >-----#
-    AssistanceInformationMetaData_ExtIEs = CLASS(name='AssistanceInformationMetaData-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    AssistanceInformationMetaData_ExtIEs = CLASS(name=u'AssistanceInformationMetaData-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     AssistanceInformationMetaData_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< BCCH >-----#
-    BCCH = INT(name='BCCH', mode=MODE_TYPE)
+    BCCH = INT(name=u'BCCH', mode=MODE_TYPE)
     BCCH._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1023)], ev=[], er=[])
     
     #-----< BitmapsforNPRS >-----#
-    BitmapsforNPRS = CHOICE(name='BitmapsforNPRS', mode=MODE_TYPE)
-    _BitmapsforNPRS_ten = BIT_STR(name='ten', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    BitmapsforNPRS = CHOICE(name=u'BitmapsforNPRS', mode=MODE_TYPE)
+    _BitmapsforNPRS_ten = BIT_STR(name=u'ten', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _BitmapsforNPRS_ten._const_sz = ASN1Set(rv=[10], rr=[], ev=None, er=[])
-    _BitmapsforNPRS_forty = BIT_STR(name='forty', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _BitmapsforNPRS_forty = BIT_STR(name=u'forty', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _BitmapsforNPRS_forty._const_sz = ASN1Set(rv=[40], rr=[], ev=None, er=[])
-    _BitmapsforNPRS_ten_tdd = BIT_STR(name='ten-tdd', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _BitmapsforNPRS_ten_tdd = BIT_STR(name=u'ten-tdd', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _BitmapsforNPRS_ten_tdd._const_sz = ASN1Set(rv=[8], rr=[], ev=None, er=[])
-    _BitmapsforNPRS_forty_tdd = BIT_STR(name='forty-tdd', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _BitmapsforNPRS_forty_tdd = BIT_STR(name=u'forty-tdd', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _BitmapsforNPRS_forty_tdd._const_sz = ASN1Set(rv=[32], rr=[], ev=None, er=[])
     BitmapsforNPRS._cont = ASN1Dict([
-        ('ten', _BitmapsforNPRS_ten),
-        ('forty', _BitmapsforNPRS_forty),
-        ('ten-tdd', _BitmapsforNPRS_ten_tdd),
-        ('forty-tdd', _BitmapsforNPRS_forty_tdd),
+        (u'ten', _BitmapsforNPRS_ten),
+        (u'forty', _BitmapsforNPRS_forty),
+        (u'ten-tdd', _BitmapsforNPRS_ten_tdd),
+        (u'forty-tdd', _BitmapsforNPRS_forty_tdd),
         ])
-    BitmapsforNPRS._ext = ['ten-tdd', 'forty-tdd']
+    BitmapsforNPRS._ext = [u'ten-tdd', u'forty-tdd']
     
     #-----< Broadcast >-----#
-    Broadcast = ENUM(name='Broadcast', mode=MODE_TYPE)
-    Broadcast._cont = ASN1Dict([('start', 0), ('stop', 1)])
+    Broadcast = ENUM(name=u'Broadcast', mode=MODE_TYPE)
+    Broadcast._cont = ASN1Dict([(u'start', 0), (u'stop', 1)])
     Broadcast._ext = []
     
     #-----< BroadcastPeriodicity >-----#
-    BroadcastPeriodicity = ENUM(name='BroadcastPeriodicity', mode=MODE_TYPE)
-    BroadcastPeriodicity._cont = ASN1Dict([('ms80', 0), ('ms160', 1), ('ms320', 2), ('ms640', 3), ('ms1280', 4), ('ms2560', 5), ('ms5120', 6)])
+    BroadcastPeriodicity = ENUM(name=u'BroadcastPeriodicity', mode=MODE_TYPE)
+    BroadcastPeriodicity._cont = ASN1Dict([(u'ms80', 0), (u'ms160', 1), (u'ms320', 2), (u'ms640', 3), (u'ms1280', 4), (u'ms2560', 5), (u'ms5120', 6)])
     BroadcastPeriodicity._ext = []
     
     #-----< BSSID >-----#
-    BSSID = OCT_STR(name='BSSID', mode=MODE_TYPE)
+    BSSID = OCT_STR(name=u'BSSID', mode=MODE_TYPE)
     BSSID._const_sz = ASN1Set(rv=[6], rr=[], ev=None, er=[])
     
     #-----< Cause >-----#
-    Cause = CHOICE(name='Cause', mode=MODE_TYPE)
-    _Cause_radioNetwork = ENUM(name='radioNetwork', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'CauseRadioNetwork')))
-    _Cause_protocol = ENUM(name='protocol', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'CauseProtocol')))
-    _Cause_misc = ENUM(name='misc', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'CauseMisc')))
+    Cause = CHOICE(name=u'Cause', mode=MODE_TYPE)
+    _Cause_radioNetwork = ENUM(name=u'radioNetwork', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'CauseRadioNetwork')))
+    _Cause_protocol = ENUM(name=u'protocol', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'CauseProtocol')))
+    _Cause_misc = ENUM(name=u'misc', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'CauseMisc')))
     Cause._cont = ASN1Dict([
-        ('radioNetwork', _Cause_radioNetwork),
-        ('protocol', _Cause_protocol),
-        ('misc', _Cause_misc),
+        (u'radioNetwork', _Cause_radioNetwork),
+        (u'protocol', _Cause_protocol),
+        (u'misc', _Cause_misc),
         ])
     Cause._ext = []
     
     #-----< CauseMisc >-----#
-    CauseMisc = ENUM(name='CauseMisc', mode=MODE_TYPE)
-    CauseMisc._cont = ASN1Dict([('unspecified', 0)])
+    CauseMisc = ENUM(name=u'CauseMisc', mode=MODE_TYPE)
+    CauseMisc._cont = ASN1Dict([(u'unspecified', 0)])
     CauseMisc._ext = []
     
     #-----< CauseProtocol >-----#
-    CauseProtocol = ENUM(name='CauseProtocol', mode=MODE_TYPE)
-    CauseProtocol._cont = ASN1Dict([('transfer-syntax-error', 0), ('abstract-syntax-error-reject', 1), ('abstract-syntax-error-ignore-and-notify', 2), ('message-not-compatible-with-receiver-state', 3), ('semantic-error', 4), ('unspecified', 5), ('abstract-syntax-error-falsely-constructed-message', 6)])
+    CauseProtocol = ENUM(name=u'CauseProtocol', mode=MODE_TYPE)
+    CauseProtocol._cont = ASN1Dict([(u'transfer-syntax-error', 0), (u'abstract-syntax-error-reject', 1), (u'abstract-syntax-error-ignore-and-notify', 2), (u'message-not-compatible-with-receiver-state', 3), (u'semantic-error', 4), (u'unspecified', 5), (u'abstract-syntax-error-falsely-constructed-message', 6)])
     CauseProtocol._ext = []
     
     #-----< CauseRadioNetwork >-----#
-    CauseRadioNetwork = ENUM(name='CauseRadioNetwork', mode=MODE_TYPE)
-    CauseRadioNetwork._cont = ASN1Dict([('unspecified', 0), ('requested-item-not-supported', 1), ('requested-item-temporarily-not-available', 2)])
+    CauseRadioNetwork = ENUM(name=u'CauseRadioNetwork', mode=MODE_TYPE)
+    CauseRadioNetwork._cont = ASN1Dict([(u'unspecified', 0), (u'requested-item-not-supported', 1), (u'requested-item-temporarily-not-available', 2)])
     CauseRadioNetwork._ext = []
     
     #-----< Cell-Portion-ID >-----#
-    Cell_Portion_ID = INT(name='Cell-Portion-ID', mode=MODE_TYPE)
+    Cell_Portion_ID = INT(name=u'Cell-Portion-ID', mode=MODE_TYPE)
     Cell_Portion_ID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=[], er=[ASN1RangeInt(lb=256, ub=4095)])
     
     #-----< CPLength >-----#
-    CPLength = ENUM(name='CPLength', mode=MODE_TYPE)
-    CPLength._cont = ASN1Dict([('normal', 0), ('extended', 1)])
+    CPLength = ENUM(name=u'CPLength', mode=MODE_TYPE)
+    CPLength._cont = ASN1Dict([(u'normal', 0), (u'extended', 1)])
     CPLength._ext = []
     
     #-----< CriticalityDiagnostics >-----#
-    CriticalityDiagnostics = SEQ(name='CriticalityDiagnostics', mode=MODE_TYPE)
-    _CriticalityDiagnostics_procedureCode = INT(name='procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProcedureCode')), opt=True)
-    _CriticalityDiagnostics_triggeringMessage = ENUM(name='triggeringMessage', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-CommonDataTypes', 'TriggeringMessage')), opt=True)
-    _CriticalityDiagnostics_procedureCriticality = ENUM(name='procedureCriticality', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-CommonDataTypes', 'Criticality')), opt=True)
-    _CriticalityDiagnostics_lppatransactionID = INT(name='lppatransactionID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-CommonDataTypes', 'LPPATransactionID')), opt=True)
-    _CriticalityDiagnostics_iEsCriticalityDiagnostics = SEQ_OF(name='iEsCriticalityDiagnostics', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics-IE-List')), opt=True)
-    _CriticalityDiagnostics_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    CriticalityDiagnostics = SEQ(name=u'CriticalityDiagnostics', mode=MODE_TYPE)
+    _CriticalityDiagnostics_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProcedureCode')), opt=True)
+    _CriticalityDiagnostics_triggeringMessage = ENUM(name=u'triggeringMessage', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-CommonDataTypes', 'TriggeringMessage')), opt=True)
+    _CriticalityDiagnostics_procedureCriticality = ENUM(name=u'procedureCriticality', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-CommonDataTypes', 'Criticality')), opt=True)
+    _CriticalityDiagnostics_lppatransactionID = INT(name=u'lppatransactionID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-CommonDataTypes', 'LPPATransactionID')), opt=True)
+    _CriticalityDiagnostics_iEsCriticalityDiagnostics = SEQ_OF(name=u'iEsCriticalityDiagnostics', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics-IE-List')), opt=True)
+    _CriticalityDiagnostics_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
     __CriticalityDiagnostics_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionField')))
-    ___CriticalityDiagnostics_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['id']))
+    ___CriticalityDiagnostics_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'id']))
     ____CriticalityDiagnostics_iE_Extensions__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____CriticalityDiagnostics_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__id_tab
     ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab_at = None
-    ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab_id = 'id'
-    ___CriticalityDiagnostics_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['criticality']))
+    ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab_id = u'id'
+    ___CriticalityDiagnostics_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'criticality']))
     ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab
-    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['Extension']))
+    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'Extension']))
     ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab
-    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __CriticalityDiagnostics_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___CriticalityDiagnostics_iE_Extensions__item__id),
-        ('criticality', ___CriticalityDiagnostics_iE_Extensions__item__criticality),
-        ('extensionValue', ___CriticalityDiagnostics_iE_Extensions__item__extensionValue),
+        (u'id', ___CriticalityDiagnostics_iE_Extensions__item__id),
+        (u'criticality', ___CriticalityDiagnostics_iE_Extensions__item__criticality),
+        (u'extensionValue', ___CriticalityDiagnostics_iE_Extensions__item__extensionValue),
         ])
     __CriticalityDiagnostics_iE_Extensions__item_._ext = None
     _CriticalityDiagnostics_iE_Extensions._cont = __CriticalityDiagnostics_iE_Extensions__item_
     _CriticalityDiagnostics_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     CriticalityDiagnostics._cont = ASN1Dict([
-        ('procedureCode', _CriticalityDiagnostics_procedureCode),
-        ('triggeringMessage', _CriticalityDiagnostics_triggeringMessage),
-        ('procedureCriticality', _CriticalityDiagnostics_procedureCriticality),
-        ('lppatransactionID', _CriticalityDiagnostics_lppatransactionID),
-        ('iEsCriticalityDiagnostics', _CriticalityDiagnostics_iEsCriticalityDiagnostics),
-        ('iE-Extensions', _CriticalityDiagnostics_iE_Extensions),
+        (u'procedureCode', _CriticalityDiagnostics_procedureCode),
+        (u'triggeringMessage', _CriticalityDiagnostics_triggeringMessage),
+        (u'procedureCriticality', _CriticalityDiagnostics_procedureCriticality),
+        (u'lppatransactionID', _CriticalityDiagnostics_lppatransactionID),
+        (u'iEsCriticalityDiagnostics', _CriticalityDiagnostics_iEsCriticalityDiagnostics),
+        (u'iE-Extensions', _CriticalityDiagnostics_iE_Extensions),
         ])
     CriticalityDiagnostics._ext = []
     
     #-----< CriticalityDiagnostics-ExtIEs >-----#
-    CriticalityDiagnostics_ExtIEs = CLASS(name='CriticalityDiagnostics-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    CriticalityDiagnostics_ExtIEs = CLASS(name=u'CriticalityDiagnostics-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     CriticalityDiagnostics_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< CriticalityDiagnostics-IE-List >-----#
-    CriticalityDiagnostics_IE_List = SEQ_OF(name='CriticalityDiagnostics-IE-List', mode=MODE_TYPE)
+    CriticalityDiagnostics_IE_List = SEQ_OF(name=u'CriticalityDiagnostics-IE-List', mode=MODE_TYPE)
     _CriticalityDiagnostics_IE_List__item_ = SEQ(name='_item_', mode=MODE_TYPE)
-    __CriticalityDiagnostics_IE_List__item__iECriticality = ENUM(name='iECriticality', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-CommonDataTypes', 'Criticality')))
-    __CriticalityDiagnostics_IE_List__item__iE_ID = INT(name='iE-ID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
-    __CriticalityDiagnostics_IE_List__item__typeOfError = ENUM(name='typeOfError', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'TypeOfError')))
-    __CriticalityDiagnostics_IE_List__item__iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    __CriticalityDiagnostics_IE_List__item__iECriticality = ENUM(name=u'iECriticality', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-CommonDataTypes', 'Criticality')))
+    __CriticalityDiagnostics_IE_List__item__iE_ID = INT(name=u'iE-ID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProtocolIE-ID')))
+    __CriticalityDiagnostics_IE_List__item__typeOfError = ENUM(name=u'typeOfError', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'TypeOfError')))
+    __CriticalityDiagnostics_IE_List__item__iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
     ___CriticalityDiagnostics_IE_List__item__iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionField')))
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['id']))
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'id']))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id_tab
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id._const_tab_at = None
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id._const_tab_id = 'id'
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['criticality']))
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id._const_tab_id = u'id'
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'criticality']))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['Extension']))
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'Extension']))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___CriticalityDiagnostics_IE_List__item__iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id),
-        ('criticality', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality),
-        ('extensionValue', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue),
+        (u'id', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id),
+        (u'criticality', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality),
+        (u'extensionValue', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue),
         ])
     ___CriticalityDiagnostics_IE_List__item__iE_Extensions__item_._ext = None
     __CriticalityDiagnostics_IE_List__item__iE_Extensions._cont = ___CriticalityDiagnostics_IE_List__item__iE_Extensions__item_
     __CriticalityDiagnostics_IE_List__item__iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     _CriticalityDiagnostics_IE_List__item_._cont = ASN1Dict([
-        ('iECriticality', __CriticalityDiagnostics_IE_List__item__iECriticality),
-        ('iE-ID', __CriticalityDiagnostics_IE_List__item__iE_ID),
-        ('typeOfError', __CriticalityDiagnostics_IE_List__item__typeOfError),
-        ('iE-Extensions', __CriticalityDiagnostics_IE_List__item__iE_Extensions),
+        (u'iECriticality', __CriticalityDiagnostics_IE_List__item__iECriticality),
+        (u'iE-ID', __CriticalityDiagnostics_IE_List__item__iE_ID),
+        (u'typeOfError', __CriticalityDiagnostics_IE_List__item__typeOfError),
+        (u'iE-Extensions', __CriticalityDiagnostics_IE_List__item__iE_Extensions),
         ])
     _CriticalityDiagnostics_IE_List__item_._ext = []
     CriticalityDiagnostics_IE_List._cont = _CriticalityDiagnostics_IE_List__item_
     CriticalityDiagnostics_IE_List._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=256)], ev=None, er=[])
     
     #-----< CriticalityDiagnostics-IE-List-ExtIEs >-----#
-    CriticalityDiagnostics_IE_List_ExtIEs = CLASS(name='CriticalityDiagnostics-IE-List-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    CriticalityDiagnostics_IE_List_ExtIEs = CLASS(name=u'CriticalityDiagnostics-IE-List-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     CriticalityDiagnostics_IE_List_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< DL-Bandwidth >-----#
-    DL_Bandwidth = ENUM(name='DL-Bandwidth', mode=MODE_TYPE)
-    DL_Bandwidth._cont = ASN1Dict([('bw6', 0), ('bw15', 1), ('bw25', 2), ('bw50', 3), ('bw75', 4), ('bw100', 5)])
+    DL_Bandwidth = ENUM(name=u'DL-Bandwidth', mode=MODE_TYPE)
+    DL_Bandwidth._cont = ASN1Dict([(u'bw6', 0), (u'bw15', 1), (u'bw25', 2), (u'bw50', 3), (u'bw75', 4), (u'bw100', 5)])
     DL_Bandwidth._ext = []
     
     #-----< E-CID-MeasurementResult >-----#
-    E_CID_MeasurementResult = SEQ(name='E-CID-MeasurementResult', mode=MODE_TYPE)
-    _E_CID_MeasurementResult_servingCell_ID = SEQ(name='servingCell-ID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'ECGI')))
-    _E_CID_MeasurementResult_servingCellTAC = OCT_STR(name='servingCellTAC', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'TAC')))
-    _E_CID_MeasurementResult_e_UTRANAccessPointPosition = SEQ(name='e-UTRANAccessPointPosition', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'E-UTRANAccessPointPosition')), opt=True)
-    _E_CID_MeasurementResult_measuredResults = SEQ_OF(name='measuredResults', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'MeasuredResults')), opt=True)
+    E_CID_MeasurementResult = SEQ(name=u'E-CID-MeasurementResult', mode=MODE_TYPE)
+    _E_CID_MeasurementResult_servingCell_ID = SEQ(name=u'servingCell-ID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'ECGI')))
+    _E_CID_MeasurementResult_servingCellTAC = OCT_STR(name=u'servingCellTAC', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'TAC')))
+    _E_CID_MeasurementResult_e_UTRANAccessPointPosition = SEQ(name=u'e-UTRANAccessPointPosition', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'E-UTRANAccessPointPosition')), opt=True)
+    _E_CID_MeasurementResult_measuredResults = SEQ_OF(name=u'measuredResults', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'MeasuredResults')), opt=True)
     E_CID_MeasurementResult._cont = ASN1Dict([
-        ('servingCell-ID', _E_CID_MeasurementResult_servingCell_ID),
-        ('servingCellTAC', _E_CID_MeasurementResult_servingCellTAC),
-        ('e-UTRANAccessPointPosition', _E_CID_MeasurementResult_e_UTRANAccessPointPosition),
-        ('measuredResults', _E_CID_MeasurementResult_measuredResults),
+        (u'servingCell-ID', _E_CID_MeasurementResult_servingCell_ID),
+        (u'servingCellTAC', _E_CID_MeasurementResult_servingCellTAC),
+        (u'e-UTRANAccessPointPosition', _E_CID_MeasurementResult_e_UTRANAccessPointPosition),
+        (u'measuredResults', _E_CID_MeasurementResult_measuredResults),
         ])
     E_CID_MeasurementResult._ext = []
     
     #-----< ECGI >-----#
-    ECGI = SEQ(name='ECGI', mode=MODE_TYPE)
-    _ECGI_pLMN_Identity = OCT_STR(name='pLMN-Identity', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PLMN-Identity')))
-    _ECGI_eUTRANcellIdentifier = BIT_STR(name='eUTRANcellIdentifier', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'EUTRANCellIdentifier')))
-    _ECGI_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    ECGI = SEQ(name=u'ECGI', mode=MODE_TYPE)
+    _ECGI_pLMN_Identity = OCT_STR(name=u'pLMN-Identity', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PLMN-Identity')))
+    _ECGI_eUTRANcellIdentifier = BIT_STR(name=u'eUTRANcellIdentifier', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'EUTRANCellIdentifier')))
+    _ECGI_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
     __ECGI_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionField')))
-    ___ECGI_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['id']))
+    ___ECGI_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'id']))
     ____ECGI_iE_Extensions__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____ECGI_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ECGI_iE_Extensions__item__id._const_tab = ____ECGI_iE_Extensions__item__id_tab
     ___ECGI_iE_Extensions__item__id._const_tab_at = None
-    ___ECGI_iE_Extensions__item__id._const_tab_id = 'id'
-    ___ECGI_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['criticality']))
+    ___ECGI_iE_Extensions__item__id._const_tab_id = u'id'
+    ___ECGI_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'criticality']))
     ____ECGI_iE_Extensions__item__criticality_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____ECGI_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ECGI_iE_Extensions__item__criticality._const_tab = ____ECGI_iE_Extensions__item__criticality_tab
-    ___ECGI_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___ECGI_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___ECGI_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['Extension']))
+    ___ECGI_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___ECGI_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___ECGI_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'Extension']))
     ____ECGI_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____ECGI_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ECGI_iE_Extensions__item__extensionValue._const_tab = ____ECGI_iE_Extensions__item__extensionValue_tab
-    ___ECGI_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___ECGI_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___ECGI_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___ECGI_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __ECGI_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___ECGI_iE_Extensions__item__id),
-        ('criticality', ___ECGI_iE_Extensions__item__criticality),
-        ('extensionValue', ___ECGI_iE_Extensions__item__extensionValue),
+        (u'id', ___ECGI_iE_Extensions__item__id),
+        (u'criticality', ___ECGI_iE_Extensions__item__criticality),
+        (u'extensionValue', ___ECGI_iE_Extensions__item__extensionValue),
         ])
     __ECGI_iE_Extensions__item_._ext = None
     _ECGI_iE_Extensions._cont = __ECGI_iE_Extensions__item_
     _ECGI_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     ECGI._cont = ASN1Dict([
-        ('pLMN-Identity', _ECGI_pLMN_Identity),
-        ('eUTRANcellIdentifier', _ECGI_eUTRANcellIdentifier),
-        ('iE-Extensions', _ECGI_iE_Extensions),
+        (u'pLMN-Identity', _ECGI_pLMN_Identity),
+        (u'eUTRANcellIdentifier', _ECGI_eUTRANcellIdentifier),
+        (u'iE-Extensions', _ECGI_iE_Extensions),
         ])
     ECGI._ext = []
     
     #-----< ECGI-ExtIEs >-----#
-    ECGI_ExtIEs = CLASS(name='ECGI-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    ECGI_ExtIEs = CLASS(name=u'ECGI-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ECGI_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< EUTRANCellIdentifier >-----#
-    EUTRANCellIdentifier = BIT_STR(name='EUTRANCellIdentifier', mode=MODE_TYPE)
+    EUTRANCellIdentifier = BIT_STR(name=u'EUTRANCellIdentifier', mode=MODE_TYPE)
     EUTRANCellIdentifier._const_sz = ASN1Set(rv=[28], rr=[], ev=None, er=[])
     
     #-----< EARFCN >-----#
-    EARFCN = INT(name='EARFCN', mode=MODE_TYPE)
+    EARFCN = INT(name=u'EARFCN', mode=MODE_TYPE)
     EARFCN._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=[], er=[ASN1RangeInt(lb=65536, ub=262143)])
     
     #-----< E-UTRANAccessPointPosition >-----#
-    E_UTRANAccessPointPosition = SEQ(name='E-UTRANAccessPointPosition', mode=MODE_TYPE)
-    _E_UTRANAccessPointPosition_latitudeSign = ENUM(name='latitudeSign', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _E_UTRANAccessPointPosition_latitudeSign._cont = ASN1Dict([('north', 0), ('south', 1)])
+    E_UTRANAccessPointPosition = SEQ(name=u'E-UTRANAccessPointPosition', mode=MODE_TYPE)
+    _E_UTRANAccessPointPosition_latitudeSign = ENUM(name=u'latitudeSign', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _E_UTRANAccessPointPosition_latitudeSign._cont = ASN1Dict([(u'north', 0), (u'south', 1)])
     _E_UTRANAccessPointPosition_latitudeSign._ext = None
-    _E_UTRANAccessPointPosition_latitude = INT(name='latitude', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _E_UTRANAccessPointPosition_latitude = INT(name=u'latitude', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _E_UTRANAccessPointPosition_latitude._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=8388607)], ev=None, er=[])
-    _E_UTRANAccessPointPosition_longitude = INT(name='longitude', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _E_UTRANAccessPointPosition_longitude = INT(name=u'longitude', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _E_UTRANAccessPointPosition_longitude._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-8388608, ub=8388607)], ev=None, er=[])
-    _E_UTRANAccessPointPosition_directionOfAltitude = ENUM(name='directionOfAltitude', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _E_UTRANAccessPointPosition_directionOfAltitude._cont = ASN1Dict([('height', 0), ('depth', 1)])
+    _E_UTRANAccessPointPosition_directionOfAltitude = ENUM(name=u'directionOfAltitude', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _E_UTRANAccessPointPosition_directionOfAltitude._cont = ASN1Dict([(u'height', 0), (u'depth', 1)])
     _E_UTRANAccessPointPosition_directionOfAltitude._ext = None
-    _E_UTRANAccessPointPosition_altitude = INT(name='altitude', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _E_UTRANAccessPointPosition_altitude = INT(name=u'altitude', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _E_UTRANAccessPointPosition_altitude._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=32767)], ev=None, er=[])
-    _E_UTRANAccessPointPosition_uncertaintySemi_major = INT(name='uncertaintySemi-major', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _E_UTRANAccessPointPosition_uncertaintySemi_major = INT(name=u'uncertaintySemi-major', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _E_UTRANAccessPointPosition_uncertaintySemi_major._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=127)], ev=None, er=[])
-    _E_UTRANAccessPointPosition_uncertaintySemi_minor = INT(name='uncertaintySemi-minor', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _E_UTRANAccessPointPosition_uncertaintySemi_minor = INT(name=u'uncertaintySemi-minor', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _E_UTRANAccessPointPosition_uncertaintySemi_minor._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=127)], ev=None, er=[])
-    _E_UTRANAccessPointPosition_orientationOfMajorAxis = INT(name='orientationOfMajorAxis', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _E_UTRANAccessPointPosition_orientationOfMajorAxis = INT(name=u'orientationOfMajorAxis', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _E_UTRANAccessPointPosition_orientationOfMajorAxis._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=179)], ev=None, er=[])
-    _E_UTRANAccessPointPosition_uncertaintyAltitude = INT(name='uncertaintyAltitude', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _E_UTRANAccessPointPosition_uncertaintyAltitude = INT(name=u'uncertaintyAltitude', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _E_UTRANAccessPointPosition_uncertaintyAltitude._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=127)], ev=None, er=[])
-    _E_UTRANAccessPointPosition_confidence = INT(name='confidence', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _E_UTRANAccessPointPosition_confidence = INT(name=u'confidence', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _E_UTRANAccessPointPosition_confidence._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=100)], ev=None, er=[])
     E_UTRANAccessPointPosition._cont = ASN1Dict([
-        ('latitudeSign', _E_UTRANAccessPointPosition_latitudeSign),
-        ('latitude', _E_UTRANAccessPointPosition_latitude),
-        ('longitude', _E_UTRANAccessPointPosition_longitude),
-        ('directionOfAltitude', _E_UTRANAccessPointPosition_directionOfAltitude),
-        ('altitude', _E_UTRANAccessPointPosition_altitude),
-        ('uncertaintySemi-major', _E_UTRANAccessPointPosition_uncertaintySemi_major),
-        ('uncertaintySemi-minor', _E_UTRANAccessPointPosition_uncertaintySemi_minor),
-        ('orientationOfMajorAxis', _E_UTRANAccessPointPosition_orientationOfMajorAxis),
-        ('uncertaintyAltitude', _E_UTRANAccessPointPosition_uncertaintyAltitude),
-        ('confidence', _E_UTRANAccessPointPosition_confidence),
+        (u'latitudeSign', _E_UTRANAccessPointPosition_latitudeSign),
+        (u'latitude', _E_UTRANAccessPointPosition_latitude),
+        (u'longitude', _E_UTRANAccessPointPosition_longitude),
+        (u'directionOfAltitude', _E_UTRANAccessPointPosition_directionOfAltitude),
+        (u'altitude', _E_UTRANAccessPointPosition_altitude),
+        (u'uncertaintySemi-major', _E_UTRANAccessPointPosition_uncertaintySemi_major),
+        (u'uncertaintySemi-minor', _E_UTRANAccessPointPosition_uncertaintySemi_minor),
+        (u'orientationOfMajorAxis', _E_UTRANAccessPointPosition_orientationOfMajorAxis),
+        (u'uncertaintyAltitude', _E_UTRANAccessPointPosition_uncertaintyAltitude),
+        (u'confidence', _E_UTRANAccessPointPosition_confidence),
         ])
     E_UTRANAccessPointPosition._ext = []
     
     #-----< HESSID >-----#
-    HESSID = OCT_STR(name='HESSID', mode=MODE_TYPE)
+    HESSID = OCT_STR(name=u'HESSID', mode=MODE_TYPE)
     HESSID._const_sz = ASN1Set(rv=[6], rr=[], ev=None, er=[])
     
     #-----< InterRATMeasurementQuantities >-----#
-    InterRATMeasurementQuantities = SEQ_OF(name='InterRATMeasurementQuantities', mode=MODE_TYPE)
+    InterRATMeasurementQuantities = SEQ_OF(name=u'InterRATMeasurementQuantities', mode=MODE_TYPE)
     _InterRATMeasurementQuantities__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Single-Container')))
-    __InterRATMeasurementQuantities__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['id']))
+    __InterRATMeasurementQuantities__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'id']))
     ___InterRATMeasurementQuantities__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    ____InterRATMeasurementQuantities__item__id_tab_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'InterRATMeasurementQuantities-Item')))
-    ___InterRATMeasurementQuantities__item__id_tab._val = ASN1Set(rv=[dict([('id', 16), ('criticality', 'reject'), ('Value', ____InterRATMeasurementQuantities__item__id_tab_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    ____InterRATMeasurementQuantities__item__id_tab_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'InterRATMeasurementQuantities-Item')))
+    ___InterRATMeasurementQuantities__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 16), (u'criticality', u'reject'), (u'Value', ____InterRATMeasurementQuantities__item__id_tab_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     __InterRATMeasurementQuantities__item__id._const_tab = ___InterRATMeasurementQuantities__item__id_tab
     __InterRATMeasurementQuantities__item__id._const_tab_at = None
-    __InterRATMeasurementQuantities__item__id._const_tab_id = 'id'
-    __InterRATMeasurementQuantities__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['criticality']))
+    __InterRATMeasurementQuantities__item__id._const_tab_id = u'id'
+    __InterRATMeasurementQuantities__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'criticality']))
     __InterRATMeasurementQuantities__item__criticality._const_tab = ___InterRATMeasurementQuantities__item__id_tab
-    __InterRATMeasurementQuantities__item__criticality._const_tab_at = ('..', 'id')
-    __InterRATMeasurementQuantities__item__criticality._const_tab_id = 'criticality'
-    __InterRATMeasurementQuantities__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['Value']))
+    __InterRATMeasurementQuantities__item__criticality._const_tab_at = ('..', u'id')
+    __InterRATMeasurementQuantities__item__criticality._const_tab_id = u'criticality'
+    __InterRATMeasurementQuantities__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'Value']))
     __InterRATMeasurementQuantities__item__value._const_tab = ___InterRATMeasurementQuantities__item__id_tab
-    __InterRATMeasurementQuantities__item__value._const_tab_at = ('..', 'id')
-    __InterRATMeasurementQuantities__item__value._const_tab_id = 'Value'
+    __InterRATMeasurementQuantities__item__value._const_tab_at = ('..', u'id')
+    __InterRATMeasurementQuantities__item__value._const_tab_id = u'Value'
     _InterRATMeasurementQuantities__item_._cont = ASN1Dict([
-        ('id', __InterRATMeasurementQuantities__item__id),
-        ('criticality', __InterRATMeasurementQuantities__item__criticality),
-        ('value', __InterRATMeasurementQuantities__item__value),
+        (u'id', __InterRATMeasurementQuantities__item__id),
+        (u'criticality', __InterRATMeasurementQuantities__item__criticality),
+        (u'value', __InterRATMeasurementQuantities__item__value),
         ])
     _InterRATMeasurementQuantities__item_._ext = None
     InterRATMeasurementQuantities._cont = _InterRATMeasurementQuantities__item_
     InterRATMeasurementQuantities._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=63)], ev=None, er=[])
     
     #-----< InterRATMeasurementQuantities-ItemIEs >-----#
-    InterRATMeasurementQuantities_ItemIEs = CLASS(name='InterRATMeasurementQuantities-ItemIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _InterRATMeasurementQuantities_ItemIEs_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'InterRATMeasurementQuantities-Item')))
-    InterRATMeasurementQuantities_ItemIEs._val = ASN1Set(rv=[dict([('id', 16), ('criticality', 'reject'), ('Value', _InterRATMeasurementQuantities_ItemIEs_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    InterRATMeasurementQuantities_ItemIEs = CLASS(name=u'InterRATMeasurementQuantities-ItemIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
+    _InterRATMeasurementQuantities_ItemIEs_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'InterRATMeasurementQuantities-Item')))
+    InterRATMeasurementQuantities_ItemIEs._val = ASN1Set(rv=[dict([(u'id', 16), (u'criticality', u'reject'), (u'Value', _InterRATMeasurementQuantities_ItemIEs_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     
     #-----< InterRATMeasurementQuantities-Item >-----#
-    InterRATMeasurementQuantities_Item = SEQ(name='InterRATMeasurementQuantities-Item', mode=MODE_TYPE)
-    _InterRATMeasurementQuantities_Item_interRATMeasurementQuantitiesValue = ENUM(name='interRATMeasurementQuantitiesValue', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'InterRATMeasurementQuantitiesValue')))
-    _InterRATMeasurementQuantities_Item_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    InterRATMeasurementQuantities_Item = SEQ(name=u'InterRATMeasurementQuantities-Item', mode=MODE_TYPE)
+    _InterRATMeasurementQuantities_Item_interRATMeasurementQuantitiesValue = ENUM(name=u'interRATMeasurementQuantitiesValue', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'InterRATMeasurementQuantitiesValue')))
+    _InterRATMeasurementQuantities_Item_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
     __InterRATMeasurementQuantities_Item_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionField')))
-    ___InterRATMeasurementQuantities_Item_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['id']))
+    ___InterRATMeasurementQuantities_Item_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'id']))
     ____InterRATMeasurementQuantities_Item_iE_Extensions__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____InterRATMeasurementQuantities_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___InterRATMeasurementQuantities_Item_iE_Extensions__item__id._const_tab = ____InterRATMeasurementQuantities_Item_iE_Extensions__item__id_tab
     ___InterRATMeasurementQuantities_Item_iE_Extensions__item__id._const_tab_at = None
-    ___InterRATMeasurementQuantities_Item_iE_Extensions__item__id._const_tab_id = 'id'
-    ___InterRATMeasurementQuantities_Item_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['criticality']))
+    ___InterRATMeasurementQuantities_Item_iE_Extensions__item__id._const_tab_id = u'id'
+    ___InterRATMeasurementQuantities_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'criticality']))
     ____InterRATMeasurementQuantities_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____InterRATMeasurementQuantities_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___InterRATMeasurementQuantities_Item_iE_Extensions__item__criticality._const_tab = ____InterRATMeasurementQuantities_Item_iE_Extensions__item__criticality_tab
-    ___InterRATMeasurementQuantities_Item_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___InterRATMeasurementQuantities_Item_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___InterRATMeasurementQuantities_Item_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['Extension']))
+    ___InterRATMeasurementQuantities_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___InterRATMeasurementQuantities_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___InterRATMeasurementQuantities_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'Extension']))
     ____InterRATMeasurementQuantities_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____InterRATMeasurementQuantities_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___InterRATMeasurementQuantities_Item_iE_Extensions__item__extensionValue._const_tab = ____InterRATMeasurementQuantities_Item_iE_Extensions__item__extensionValue_tab
-    ___InterRATMeasurementQuantities_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___InterRATMeasurementQuantities_Item_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___InterRATMeasurementQuantities_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___InterRATMeasurementQuantities_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __InterRATMeasurementQuantities_Item_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___InterRATMeasurementQuantities_Item_iE_Extensions__item__id),
-        ('criticality', ___InterRATMeasurementQuantities_Item_iE_Extensions__item__criticality),
-        ('extensionValue', ___InterRATMeasurementQuantities_Item_iE_Extensions__item__extensionValue),
+        (u'id', ___InterRATMeasurementQuantities_Item_iE_Extensions__item__id),
+        (u'criticality', ___InterRATMeasurementQuantities_Item_iE_Extensions__item__criticality),
+        (u'extensionValue', ___InterRATMeasurementQuantities_Item_iE_Extensions__item__extensionValue),
         ])
     __InterRATMeasurementQuantities_Item_iE_Extensions__item_._ext = None
     _InterRATMeasurementQuantities_Item_iE_Extensions._cont = __InterRATMeasurementQuantities_Item_iE_Extensions__item_
     _InterRATMeasurementQuantities_Item_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     InterRATMeasurementQuantities_Item._cont = ASN1Dict([
-        ('interRATMeasurementQuantitiesValue', _InterRATMeasurementQuantities_Item_interRATMeasurementQuantitiesValue),
-        ('iE-Extensions', _InterRATMeasurementQuantities_Item_iE_Extensions),
+        (u'interRATMeasurementQuantitiesValue', _InterRATMeasurementQuantities_Item_interRATMeasurementQuantitiesValue),
+        (u'iE-Extensions', _InterRATMeasurementQuantities_Item_iE_Extensions),
         ])
     InterRATMeasurementQuantities_Item._ext = []
     
     #-----< InterRATMeasurementQuantitiesValue-ExtIEs >-----#
-    InterRATMeasurementQuantitiesValue_ExtIEs = CLASS(name='InterRATMeasurementQuantitiesValue-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    InterRATMeasurementQuantitiesValue_ExtIEs = CLASS(name=u'InterRATMeasurementQuantitiesValue-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     InterRATMeasurementQuantitiesValue_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< InterRATMeasurementQuantitiesValue >-----#
-    InterRATMeasurementQuantitiesValue = ENUM(name='InterRATMeasurementQuantitiesValue', mode=MODE_TYPE)
-    InterRATMeasurementQuantitiesValue._cont = ASN1Dict([('geran', 0), ('utran', 1), ('nr', 2)])
-    InterRATMeasurementQuantitiesValue._ext = ['nr']
+    InterRATMeasurementQuantitiesValue = ENUM(name=u'InterRATMeasurementQuantitiesValue', mode=MODE_TYPE)
+    InterRATMeasurementQuantitiesValue._cont = ASN1Dict([(u'geran', 0), (u'utran', 1), (u'nr', 2)])
+    InterRATMeasurementQuantitiesValue._ext = [u'nr']
     
     #-----< InterRATMeasurementResult >-----#
-    InterRATMeasurementResult = SEQ_OF(name='InterRATMeasurementResult', mode=MODE_TYPE)
+    InterRATMeasurementResult = SEQ_OF(name=u'InterRATMeasurementResult', mode=MODE_TYPE)
     _InterRATMeasurementResult__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'InterRATMeasuredResultsValue')))
     InterRATMeasurementResult._cont = _InterRATMeasurementResult__item_
     InterRATMeasurementResult._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=63)], ev=None, er=[])
     
     #-----< InterRATMeasuredResultsValue >-----#
-    InterRATMeasuredResultsValue = CHOICE(name='InterRATMeasuredResultsValue', mode=MODE_TYPE)
-    _InterRATMeasuredResultsValue_resultGERAN = SEQ_OF(name='resultGERAN', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'ResultGERAN')))
-    _InterRATMeasuredResultsValue_resultUTRAN = SEQ_OF(name='resultUTRAN', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'ResultUTRAN')))
-    _InterRATMeasuredResultsValue_resultNR = SEQ_OF(name='resultNR', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'ResultNR')))
+    InterRATMeasuredResultsValue = CHOICE(name=u'InterRATMeasuredResultsValue', mode=MODE_TYPE)
+    _InterRATMeasuredResultsValue_resultGERAN = SEQ_OF(name=u'resultGERAN', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'ResultGERAN')))
+    _InterRATMeasuredResultsValue_resultUTRAN = SEQ_OF(name=u'resultUTRAN', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'ResultUTRAN')))
+    _InterRATMeasuredResultsValue_resultNR = SEQ_OF(name=u'resultNR', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'ResultNR')))
     InterRATMeasuredResultsValue._cont = ASN1Dict([
-        ('resultGERAN', _InterRATMeasuredResultsValue_resultGERAN),
-        ('resultUTRAN', _InterRATMeasuredResultsValue_resultUTRAN),
-        ('resultNR', _InterRATMeasuredResultsValue_resultNR),
+        (u'resultGERAN', _InterRATMeasuredResultsValue_resultGERAN),
+        (u'resultUTRAN', _InterRATMeasuredResultsValue_resultUTRAN),
+        (u'resultNR', _InterRATMeasuredResultsValue_resultNR),
         ])
-    InterRATMeasuredResultsValue._ext = ['resultNR']
+    InterRATMeasuredResultsValue._ext = [u'resultNR']
     
     #-----< Measurement-ID >-----#
-    Measurement_ID = INT(name='Measurement-ID', mode=MODE_TYPE)
+    Measurement_ID = INT(name=u'Measurement-ID', mode=MODE_TYPE)
     Measurement_ID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=15)], ev=[], er=[])
     
     #-----< MeasurementPeriodicity >-----#
-    MeasurementPeriodicity = ENUM(name='MeasurementPeriodicity', mode=MODE_TYPE)
-    MeasurementPeriodicity._cont = ASN1Dict([('ms120', 0), ('ms240', 1), ('ms480', 2), ('ms640', 3), ('ms1024', 4), ('ms2048', 5), ('ms5120', 6), ('ms10240', 7), ('min1', 8), ('min6', 9), ('min12', 10), ('min30', 11), ('min60', 12)])
+    MeasurementPeriodicity = ENUM(name=u'MeasurementPeriodicity', mode=MODE_TYPE)
+    MeasurementPeriodicity._cont = ASN1Dict([(u'ms120', 0), (u'ms240', 1), (u'ms480', 2), (u'ms640', 3), (u'ms1024', 4), (u'ms2048', 5), (u'ms5120', 6), (u'ms10240', 7), (u'min1', 8), (u'min6', 9), (u'min12', 10), (u'min30', 11), (u'min60', 12)])
     MeasurementPeriodicity._ext = []
     
     #-----< MeasurementQuantities >-----#
-    MeasurementQuantities = SEQ_OF(name='MeasurementQuantities', mode=MODE_TYPE)
+    MeasurementQuantities = SEQ_OF(name=u'MeasurementQuantities', mode=MODE_TYPE)
     _MeasurementQuantities__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Single-Container')))
-    __MeasurementQuantities__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['id']))
+    __MeasurementQuantities__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'id']))
     ___MeasurementQuantities__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    ____MeasurementQuantities__item__id_tab_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'MeasurementQuantities-Item')))
-    ___MeasurementQuantities__item__id_tab._val = ASN1Set(rv=[dict([('id', 11), ('criticality', 'reject'), ('Value', ____MeasurementQuantities__item__id_tab_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    ____MeasurementQuantities__item__id_tab_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'MeasurementQuantities-Item')))
+    ___MeasurementQuantities__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 11), (u'criticality', u'reject'), (u'Value', ____MeasurementQuantities__item__id_tab_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     __MeasurementQuantities__item__id._const_tab = ___MeasurementQuantities__item__id_tab
     __MeasurementQuantities__item__id._const_tab_at = None
-    __MeasurementQuantities__item__id._const_tab_id = 'id'
-    __MeasurementQuantities__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['criticality']))
+    __MeasurementQuantities__item__id._const_tab_id = u'id'
+    __MeasurementQuantities__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'criticality']))
     __MeasurementQuantities__item__criticality._const_tab = ___MeasurementQuantities__item__id_tab
-    __MeasurementQuantities__item__criticality._const_tab_at = ('..', 'id')
-    __MeasurementQuantities__item__criticality._const_tab_id = 'criticality'
-    __MeasurementQuantities__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['Value']))
+    __MeasurementQuantities__item__criticality._const_tab_at = ('..', u'id')
+    __MeasurementQuantities__item__criticality._const_tab_id = u'criticality'
+    __MeasurementQuantities__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'Value']))
     __MeasurementQuantities__item__value._const_tab = ___MeasurementQuantities__item__id_tab
-    __MeasurementQuantities__item__value._const_tab_at = ('..', 'id')
-    __MeasurementQuantities__item__value._const_tab_id = 'Value'
+    __MeasurementQuantities__item__value._const_tab_at = ('..', u'id')
+    __MeasurementQuantities__item__value._const_tab_id = u'Value'
     _MeasurementQuantities__item_._cont = ASN1Dict([
-        ('id', __MeasurementQuantities__item__id),
-        ('criticality', __MeasurementQuantities__item__criticality),
-        ('value', __MeasurementQuantities__item__value),
+        (u'id', __MeasurementQuantities__item__id),
+        (u'criticality', __MeasurementQuantities__item__criticality),
+        (u'value', __MeasurementQuantities__item__value),
         ])
     _MeasurementQuantities__item_._ext = None
     MeasurementQuantities._cont = _MeasurementQuantities__item_
     MeasurementQuantities._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=63)], ev=None, er=[])
     
     #-----< MeasurementQuantities-ItemIEs >-----#
-    MeasurementQuantities_ItemIEs = CLASS(name='MeasurementQuantities-ItemIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _MeasurementQuantities_ItemIEs_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'MeasurementQuantities-Item')))
-    MeasurementQuantities_ItemIEs._val = ASN1Set(rv=[dict([('id', 11), ('criticality', 'reject'), ('Value', _MeasurementQuantities_ItemIEs_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    MeasurementQuantities_ItemIEs = CLASS(name=u'MeasurementQuantities-ItemIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
+    _MeasurementQuantities_ItemIEs_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'MeasurementQuantities-Item')))
+    MeasurementQuantities_ItemIEs._val = ASN1Set(rv=[dict([(u'id', 11), (u'criticality', u'reject'), (u'Value', _MeasurementQuantities_ItemIEs_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     
     #-----< MeasurementQuantities-Item >-----#
-    MeasurementQuantities_Item = SEQ(name='MeasurementQuantities-Item', mode=MODE_TYPE)
-    _MeasurementQuantities_Item_measurementQuantitiesValue = ENUM(name='measurementQuantitiesValue', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'MeasurementQuantitiesValue')))
-    _MeasurementQuantities_Item_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    MeasurementQuantities_Item = SEQ(name=u'MeasurementQuantities-Item', mode=MODE_TYPE)
+    _MeasurementQuantities_Item_measurementQuantitiesValue = ENUM(name=u'measurementQuantitiesValue', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'MeasurementQuantitiesValue')))
+    _MeasurementQuantities_Item_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
     __MeasurementQuantities_Item_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionField')))
-    ___MeasurementQuantities_Item_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['id']))
+    ___MeasurementQuantities_Item_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'id']))
     ____MeasurementQuantities_Item_iE_Extensions__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____MeasurementQuantities_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___MeasurementQuantities_Item_iE_Extensions__item__id._const_tab = ____MeasurementQuantities_Item_iE_Extensions__item__id_tab
     ___MeasurementQuantities_Item_iE_Extensions__item__id._const_tab_at = None
-    ___MeasurementQuantities_Item_iE_Extensions__item__id._const_tab_id = 'id'
-    ___MeasurementQuantities_Item_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['criticality']))
+    ___MeasurementQuantities_Item_iE_Extensions__item__id._const_tab_id = u'id'
+    ___MeasurementQuantities_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'criticality']))
     ____MeasurementQuantities_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____MeasurementQuantities_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___MeasurementQuantities_Item_iE_Extensions__item__criticality._const_tab = ____MeasurementQuantities_Item_iE_Extensions__item__criticality_tab
-    ___MeasurementQuantities_Item_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___MeasurementQuantities_Item_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___MeasurementQuantities_Item_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['Extension']))
+    ___MeasurementQuantities_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___MeasurementQuantities_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___MeasurementQuantities_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'Extension']))
     ____MeasurementQuantities_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____MeasurementQuantities_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___MeasurementQuantities_Item_iE_Extensions__item__extensionValue._const_tab = ____MeasurementQuantities_Item_iE_Extensions__item__extensionValue_tab
-    ___MeasurementQuantities_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___MeasurementQuantities_Item_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___MeasurementQuantities_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___MeasurementQuantities_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __MeasurementQuantities_Item_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___MeasurementQuantities_Item_iE_Extensions__item__id),
-        ('criticality', ___MeasurementQuantities_Item_iE_Extensions__item__criticality),
-        ('extensionValue', ___MeasurementQuantities_Item_iE_Extensions__item__extensionValue),
+        (u'id', ___MeasurementQuantities_Item_iE_Extensions__item__id),
+        (u'criticality', ___MeasurementQuantities_Item_iE_Extensions__item__criticality),
+        (u'extensionValue', ___MeasurementQuantities_Item_iE_Extensions__item__extensionValue),
         ])
     __MeasurementQuantities_Item_iE_Extensions__item_._ext = None
     _MeasurementQuantities_Item_iE_Extensions._cont = __MeasurementQuantities_Item_iE_Extensions__item_
     _MeasurementQuantities_Item_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     MeasurementQuantities_Item._cont = ASN1Dict([
-        ('measurementQuantitiesValue', _MeasurementQuantities_Item_measurementQuantitiesValue),
-        ('iE-Extensions', _MeasurementQuantities_Item_iE_Extensions),
+        (u'measurementQuantitiesValue', _MeasurementQuantities_Item_measurementQuantitiesValue),
+        (u'iE-Extensions', _MeasurementQuantities_Item_iE_Extensions),
         ])
     MeasurementQuantities_Item._ext = []
     
     #-----< MeasurementQuantitiesValue-ExtIEs >-----#
-    MeasurementQuantitiesValue_ExtIEs = CLASS(name='MeasurementQuantitiesValue-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    MeasurementQuantitiesValue_ExtIEs = CLASS(name=u'MeasurementQuantitiesValue-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     MeasurementQuantitiesValue_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< MeasurementQuantitiesValue >-----#
-    MeasurementQuantitiesValue = ENUM(name='MeasurementQuantitiesValue', mode=MODE_TYPE)
-    MeasurementQuantitiesValue._cont = ASN1Dict([('cell-ID', 0), ('angleOfArrival', 1), ('timingAdvanceType1', 2), ('timingAdvanceType2', 3), ('rSRP', 4), ('rSRQ', 5)])
+    MeasurementQuantitiesValue = ENUM(name=u'MeasurementQuantitiesValue', mode=MODE_TYPE)
+    MeasurementQuantitiesValue._cont = ASN1Dict([(u'cell-ID', 0), (u'angleOfArrival', 1), (u'timingAdvanceType1', 2), (u'timingAdvanceType2', 3), (u'rSRP', 4), (u'rSRQ', 5)])
     MeasurementQuantitiesValue._ext = []
     
     #-----< MeasuredResults >-----#
-    MeasuredResults = SEQ_OF(name='MeasuredResults', mode=MODE_TYPE)
+    MeasuredResults = SEQ_OF(name=u'MeasuredResults', mode=MODE_TYPE)
     _MeasuredResults__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'MeasuredResultsValue')))
     MeasuredResults._cont = _MeasuredResults__item_
     MeasuredResults._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=63)], ev=None, er=[])
     
     #-----< MeasuredResultsValue >-----#
-    MeasuredResultsValue = CHOICE(name='MeasuredResultsValue', mode=MODE_TYPE)
-    _MeasuredResultsValue_valueAngleOfArrival = INT(name='valueAngleOfArrival', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    MeasuredResultsValue = CHOICE(name=u'MeasuredResultsValue', mode=MODE_TYPE)
+    _MeasuredResultsValue_valueAngleOfArrival = INT(name=u'valueAngleOfArrival', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _MeasuredResultsValue_valueAngleOfArrival._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=719)], ev=None, er=[])
-    _MeasuredResultsValue_valueTimingAdvanceType1 = INT(name='valueTimingAdvanceType1', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _MeasuredResultsValue_valueTimingAdvanceType1 = INT(name=u'valueTimingAdvanceType1', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _MeasuredResultsValue_valueTimingAdvanceType1._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=7690)], ev=None, er=[])
-    _MeasuredResultsValue_valueTimingAdvanceType2 = INT(name='valueTimingAdvanceType2', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _MeasuredResultsValue_valueTimingAdvanceType2 = INT(name=u'valueTimingAdvanceType2', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _MeasuredResultsValue_valueTimingAdvanceType2._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=7690)], ev=None, er=[])
-    _MeasuredResultsValue_resultRSRP = SEQ_OF(name='resultRSRP', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'ResultRSRP')))
-    _MeasuredResultsValue_resultRSRQ = SEQ_OF(name='resultRSRQ', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'ResultRSRQ')))
+    _MeasuredResultsValue_resultRSRP = SEQ_OF(name=u'resultRSRP', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'ResultRSRP')))
+    _MeasuredResultsValue_resultRSRQ = SEQ_OF(name=u'resultRSRQ', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'ResultRSRQ')))
     MeasuredResultsValue._cont = ASN1Dict([
-        ('valueAngleOfArrival', _MeasuredResultsValue_valueAngleOfArrival),
-        ('valueTimingAdvanceType1', _MeasuredResultsValue_valueTimingAdvanceType1),
-        ('valueTimingAdvanceType2', _MeasuredResultsValue_valueTimingAdvanceType2),
-        ('resultRSRP', _MeasuredResultsValue_resultRSRP),
-        ('resultRSRQ', _MeasuredResultsValue_resultRSRQ),
+        (u'valueAngleOfArrival', _MeasuredResultsValue_valueAngleOfArrival),
+        (u'valueTimingAdvanceType1', _MeasuredResultsValue_valueTimingAdvanceType1),
+        (u'valueTimingAdvanceType2', _MeasuredResultsValue_valueTimingAdvanceType2),
+        (u'resultRSRP', _MeasuredResultsValue_resultRSRP),
+        (u'resultRSRQ', _MeasuredResultsValue_resultRSRQ),
         ])
     MeasuredResultsValue._ext = []
     
     #-----< MBSFNsubframeConfiguration >-----#
-    MBSFNsubframeConfiguration = SEQ_OF(name='MBSFNsubframeConfiguration', mode=MODE_TYPE)
+    MBSFNsubframeConfiguration = SEQ_OF(name=u'MBSFNsubframeConfiguration', mode=MODE_TYPE)
     _MBSFNsubframeConfiguration__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'MBSFNsubframeConfigurationValue')))
     MBSFNsubframeConfiguration._cont = _MBSFNsubframeConfiguration__item_
     MBSFNsubframeConfiguration._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
     
     #-----< MBSFNsubframeConfigurationValue >-----#
-    MBSFNsubframeConfigurationValue = SEQ(name='MBSFNsubframeConfigurationValue', mode=MODE_TYPE)
-    _MBSFNsubframeConfigurationValue_radioframeAllocationPeriod = ENUM(name='radioframeAllocationPeriod', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _MBSFNsubframeConfigurationValue_radioframeAllocationPeriod._cont = ASN1Dict([('n1', 0), ('n2', 1), ('n4', 2), ('n8', 3), ('n16', 4), ('n32', 5)])
+    MBSFNsubframeConfigurationValue = SEQ(name=u'MBSFNsubframeConfigurationValue', mode=MODE_TYPE)
+    _MBSFNsubframeConfigurationValue_radioframeAllocationPeriod = ENUM(name=u'radioframeAllocationPeriod', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _MBSFNsubframeConfigurationValue_radioframeAllocationPeriod._cont = ASN1Dict([(u'n1', 0), (u'n2', 1), (u'n4', 2), (u'n8', 3), (u'n16', 4), (u'n32', 5)])
     _MBSFNsubframeConfigurationValue_radioframeAllocationPeriod._ext = None
-    _MBSFNsubframeConfigurationValue_radioframeAllocationOffset = INT(name='radioframeAllocationOffset', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _MBSFNsubframeConfigurationValue_radioframeAllocationOffset = INT(name=u'radioframeAllocationOffset', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _MBSFNsubframeConfigurationValue_radioframeAllocationOffset._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=7)], ev=None, er=[])
-    _MBSFNsubframeConfigurationValue_subframeAllocation = CHOICE(name='subframeAllocation', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'Subframeallocation')))
+    _MBSFNsubframeConfigurationValue_subframeAllocation = CHOICE(name=u'subframeAllocation', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'Subframeallocation')))
     MBSFNsubframeConfigurationValue._cont = ASN1Dict([
-        ('radioframeAllocationPeriod', _MBSFNsubframeConfigurationValue_radioframeAllocationPeriod),
-        ('radioframeAllocationOffset', _MBSFNsubframeConfigurationValue_radioframeAllocationOffset),
-        ('subframeAllocation', _MBSFNsubframeConfigurationValue_subframeAllocation),
+        (u'radioframeAllocationPeriod', _MBSFNsubframeConfigurationValue_radioframeAllocationPeriod),
+        (u'radioframeAllocationOffset', _MBSFNsubframeConfigurationValue_radioframeAllocationOffset),
+        (u'subframeAllocation', _MBSFNsubframeConfigurationValue_subframeAllocation),
         ])
     MBSFNsubframeConfigurationValue._ext = None
     
     #-----< NarrowBandIndex >-----#
-    NarrowBandIndex = INT(name='NarrowBandIndex', mode=MODE_TYPE)
+    NarrowBandIndex = INT(name=u'NarrowBandIndex', mode=MODE_TYPE)
     NarrowBandIndex._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=[], er=[])
     
     #-----< NRCellIdentity >-----#
-    NRCellIdentity = BIT_STR(name='NRCellIdentity', mode=MODE_TYPE)
+    NRCellIdentity = BIT_STR(name=u'NRCellIdentity', mode=MODE_TYPE)
     NRCellIdentity._const_sz = ASN1Set(rv=[36], rr=[], ev=None, er=[])
     
     #-----< NR-CGI >-----#
-    NR_CGI = SEQ(name='NR-CGI', mode=MODE_TYPE)
-    _NR_CGI_pLMN_Identity = OCT_STR(name='pLMN-Identity', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PLMN-Identity')))
-    _NR_CGI_nRCellIdentity = BIT_STR(name='nRCellIdentity', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NRCellIdentity')))
-    _NR_CGI_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    NR_CGI = SEQ(name=u'NR-CGI', mode=MODE_TYPE)
+    _NR_CGI_pLMN_Identity = OCT_STR(name=u'pLMN-Identity', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PLMN-Identity')))
+    _NR_CGI_nRCellIdentity = BIT_STR(name=u'nRCellIdentity', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NRCellIdentity')))
+    _NR_CGI_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
     __NR_CGI_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionField')))
-    ___NR_CGI_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['id']))
+    ___NR_CGI_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'id']))
     ____NR_CGI_iE_Extensions__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____NR_CGI_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___NR_CGI_iE_Extensions__item__id._const_tab = ____NR_CGI_iE_Extensions__item__id_tab
     ___NR_CGI_iE_Extensions__item__id._const_tab_at = None
-    ___NR_CGI_iE_Extensions__item__id._const_tab_id = 'id'
-    ___NR_CGI_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['criticality']))
+    ___NR_CGI_iE_Extensions__item__id._const_tab_id = u'id'
+    ___NR_CGI_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'criticality']))
     ____NR_CGI_iE_Extensions__item__criticality_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____NR_CGI_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___NR_CGI_iE_Extensions__item__criticality._const_tab = ____NR_CGI_iE_Extensions__item__criticality_tab
-    ___NR_CGI_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___NR_CGI_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___NR_CGI_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['Extension']))
+    ___NR_CGI_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___NR_CGI_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___NR_CGI_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'Extension']))
     ____NR_CGI_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____NR_CGI_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___NR_CGI_iE_Extensions__item__extensionValue._const_tab = ____NR_CGI_iE_Extensions__item__extensionValue_tab
-    ___NR_CGI_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___NR_CGI_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___NR_CGI_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___NR_CGI_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __NR_CGI_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___NR_CGI_iE_Extensions__item__id),
-        ('criticality', ___NR_CGI_iE_Extensions__item__criticality),
-        ('extensionValue', ___NR_CGI_iE_Extensions__item__extensionValue),
+        (u'id', ___NR_CGI_iE_Extensions__item__id),
+        (u'criticality', ___NR_CGI_iE_Extensions__item__criticality),
+        (u'extensionValue', ___NR_CGI_iE_Extensions__item__extensionValue),
         ])
     __NR_CGI_iE_Extensions__item_._ext = None
     _NR_CGI_iE_Extensions._cont = __NR_CGI_iE_Extensions__item_
     _NR_CGI_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     NR_CGI._cont = ASN1Dict([
-        ('pLMN-Identity', _NR_CGI_pLMN_Identity),
-        ('nRCellIdentity', _NR_CGI_nRCellIdentity),
-        ('iE-Extensions', _NR_CGI_iE_Extensions),
+        (u'pLMN-Identity', _NR_CGI_pLMN_Identity),
+        (u'nRCellIdentity', _NR_CGI_nRCellIdentity),
+        (u'iE-Extensions', _NR_CGI_iE_Extensions),
         ])
     NR_CGI._ext = []
     
     #-----< NR-CGI-ExtIEs >-----#
-    NR_CGI_ExtIEs = CLASS(name='NR-CGI-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    NR_CGI_ExtIEs = CLASS(name=u'NR-CGI-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     NR_CGI_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< NPRSConfiguration >-----#
-    NPRSConfiguration = SEQ(name='NPRSConfiguration', mode=MODE_TYPE)
-    _NPRSConfiguration_nPRSSubframePartA = SEQ(name='nPRSSubframePartA', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NPRSSubframePartA')), opt=True)
-    _NPRSConfiguration_nPRSSubframePartB = SEQ(name='nPRSSubframePartB', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NPRSSubframePartB')), opt=True)
+    NPRSConfiguration = SEQ(name=u'NPRSConfiguration', mode=MODE_TYPE)
+    _NPRSConfiguration_nPRSSubframePartA = SEQ(name=u'nPRSSubframePartA', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NPRSSubframePartA')), opt=True)
+    _NPRSConfiguration_nPRSSubframePartB = SEQ(name=u'nPRSSubframePartB', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NPRSSubframePartB')), opt=True)
     NPRSConfiguration._cont = ASN1Dict([
-        ('nPRSSubframePartA', _NPRSConfiguration_nPRSSubframePartA),
-        ('nPRSSubframePartB', _NPRSConfiguration_nPRSSubframePartB),
+        (u'nPRSSubframePartA', _NPRSConfiguration_nPRSSubframePartA),
+        (u'nPRSSubframePartB', _NPRSConfiguration_nPRSSubframePartB),
         ])
     NPRSConfiguration._ext = []
     
     #-----< NPRSMutingConfiguration >-----#
-    NPRSMutingConfiguration = CHOICE(name='NPRSMutingConfiguration', mode=MODE_TYPE)
-    _NPRSMutingConfiguration_two = BIT_STR(name='two', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    NPRSMutingConfiguration = CHOICE(name=u'NPRSMutingConfiguration', mode=MODE_TYPE)
+    _NPRSMutingConfiguration_two = BIT_STR(name=u'two', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _NPRSMutingConfiguration_two._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
-    _NPRSMutingConfiguration_four = BIT_STR(name='four', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NPRSMutingConfiguration_four = BIT_STR(name=u'four', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _NPRSMutingConfiguration_four._const_sz = ASN1Set(rv=[4], rr=[], ev=None, er=[])
-    _NPRSMutingConfiguration_eight = BIT_STR(name='eight', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NPRSMutingConfiguration_eight = BIT_STR(name=u'eight', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _NPRSMutingConfiguration_eight._const_sz = ASN1Set(rv=[8], rr=[], ev=None, er=[])
-    _NPRSMutingConfiguration_sixteen = BIT_STR(name='sixteen', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NPRSMutingConfiguration_sixteen = BIT_STR(name=u'sixteen', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _NPRSMutingConfiguration_sixteen._const_sz = ASN1Set(rv=[16], rr=[], ev=None, er=[])
     NPRSMutingConfiguration._cont = ASN1Dict([
-        ('two', _NPRSMutingConfiguration_two),
-        ('four', _NPRSMutingConfiguration_four),
-        ('eight', _NPRSMutingConfiguration_eight),
-        ('sixteen', _NPRSMutingConfiguration_sixteen),
+        (u'two', _NPRSMutingConfiguration_two),
+        (u'four', _NPRSMutingConfiguration_four),
+        (u'eight', _NPRSMutingConfiguration_eight),
+        (u'sixteen', _NPRSMutingConfiguration_sixteen),
         ])
     NPRSMutingConfiguration._ext = []
     
     #-----< NPRSSubframePartA >-----#
-    NPRSSubframePartA = SEQ(name='NPRSSubframePartA', mode=MODE_TYPE)
-    _NPRSSubframePartA_bitmapsforNPRS = CHOICE(name='bitmapsforNPRS', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'BitmapsforNPRS')))
-    _NPRSSubframePartA_nPRSMutingConfiguration = CHOICE(name='nPRSMutingConfiguration', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NPRSMutingConfiguration')), opt=True)
+    NPRSSubframePartA = SEQ(name=u'NPRSSubframePartA', mode=MODE_TYPE)
+    _NPRSSubframePartA_bitmapsforNPRS = CHOICE(name=u'bitmapsforNPRS', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'BitmapsforNPRS')))
+    _NPRSSubframePartA_nPRSMutingConfiguration = CHOICE(name=u'nPRSMutingConfiguration', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NPRSMutingConfiguration')), opt=True)
     NPRSSubframePartA._cont = ASN1Dict([
-        ('bitmapsforNPRS', _NPRSSubframePartA_bitmapsforNPRS),
-        ('nPRSMutingConfiguration', _NPRSSubframePartA_nPRSMutingConfiguration),
+        (u'bitmapsforNPRS', _NPRSSubframePartA_bitmapsforNPRS),
+        (u'nPRSMutingConfiguration', _NPRSSubframePartA_nPRSMutingConfiguration),
         ])
     NPRSSubframePartA._ext = []
     
     #-----< NPRSSubframePartB >-----#
-    NPRSSubframePartB = SEQ(name='NPRSSubframePartB', mode=MODE_TYPE)
-    _NPRSSubframePartB_numberofNPRSOneOccasion = ENUM(name='numberofNPRSOneOccasion', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _NPRSSubframePartB_numberofNPRSOneOccasion._cont = ASN1Dict([('sf10', 0), ('sf20', 1), ('sf40', 2), ('sf80', 3), ('sf160', 4), ('sf320', 5), ('sf640', 6), ('sf1280', 7), ('sf2560', 8)])
-    _NPRSSubframePartB_numberofNPRSOneOccasion._ext = ['sf2560']
-    _NPRSSubframePartB_periodicityofNPRS = ENUM(name='periodicityofNPRS', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _NPRSSubframePartB_periodicityofNPRS._cont = ASN1Dict([('sf160', 0), ('sf320', 1), ('sf640', 2), ('sf1280', 3), ('sf2560', 4)])
-    _NPRSSubframePartB_periodicityofNPRS._ext = ['sf2560']
-    _NPRSSubframePartB_startingsubframeoffset = ENUM(name='startingsubframeoffset', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _NPRSSubframePartB_startingsubframeoffset._cont = ASN1Dict([('zero', 0), ('one-Eighth', 1), ('two-Eighths', 2), ('three-Eighths', 3), ('four-Eighths', 4), ('five-Eighths', 5), ('six-Eighths', 6), ('seven-Eighths', 7)])
+    NPRSSubframePartB = SEQ(name=u'NPRSSubframePartB', mode=MODE_TYPE)
+    _NPRSSubframePartB_numberofNPRSOneOccasion = ENUM(name=u'numberofNPRSOneOccasion', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NPRSSubframePartB_numberofNPRSOneOccasion._cont = ASN1Dict([(u'sf10', 0), (u'sf20', 1), (u'sf40', 2), (u'sf80', 3), (u'sf160', 4), (u'sf320', 5), (u'sf640', 6), (u'sf1280', 7), (u'sf2560', 8)])
+    _NPRSSubframePartB_numberofNPRSOneOccasion._ext = [u'sf2560']
+    _NPRSSubframePartB_periodicityofNPRS = ENUM(name=u'periodicityofNPRS', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NPRSSubframePartB_periodicityofNPRS._cont = ASN1Dict([(u'sf160', 0), (u'sf320', 1), (u'sf640', 2), (u'sf1280', 3), (u'sf2560', 4)])
+    _NPRSSubframePartB_periodicityofNPRS._ext = [u'sf2560']
+    _NPRSSubframePartB_startingsubframeoffset = ENUM(name=u'startingsubframeoffset', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _NPRSSubframePartB_startingsubframeoffset._cont = ASN1Dict([(u'zero', 0), (u'one-Eighth', 1), (u'two-Eighths', 2), (u'three-Eighths', 3), (u'four-Eighths', 4), (u'five-Eighths', 5), (u'six-Eighths', 6), (u'seven-Eighths', 7)])
     _NPRSSubframePartB_startingsubframeoffset._ext = []
-    _NPRSSubframePartB_nPRSMutingConfiguration = CHOICE(name='nPRSMutingConfiguration', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NPRSMutingConfiguration')), opt=True)
-    _NPRSSubframePartB_sIB1_NB_Subframe_TDD = ENUM(name='sIB1-NB-Subframe-TDD', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _NPRSSubframePartB_sIB1_NB_Subframe_TDD._cont = ASN1Dict([('sf0', 0), ('sf4', 1), ('sf0and5', 2)])
+    _NPRSSubframePartB_nPRSMutingConfiguration = CHOICE(name=u'nPRSMutingConfiguration', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NPRSMutingConfiguration')), opt=True)
+    _NPRSSubframePartB_sIB1_NB_Subframe_TDD = ENUM(name=u'sIB1-NB-Subframe-TDD', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _NPRSSubframePartB_sIB1_NB_Subframe_TDD._cont = ASN1Dict([(u'sf0', 0), (u'sf4', 1), (u'sf0and5', 2)])
     _NPRSSubframePartB_sIB1_NB_Subframe_TDD._ext = []
     NPRSSubframePartB._cont = ASN1Dict([
-        ('numberofNPRSOneOccasion', _NPRSSubframePartB_numberofNPRSOneOccasion),
-        ('periodicityofNPRS', _NPRSSubframePartB_periodicityofNPRS),
-        ('startingsubframeoffset', _NPRSSubframePartB_startingsubframeoffset),
-        ('nPRSMutingConfiguration', _NPRSSubframePartB_nPRSMutingConfiguration),
-        ('sIB1-NB-Subframe-TDD', _NPRSSubframePartB_sIB1_NB_Subframe_TDD),
+        (u'numberofNPRSOneOccasion', _NPRSSubframePartB_numberofNPRSOneOccasion),
+        (u'periodicityofNPRS', _NPRSSubframePartB_periodicityofNPRS),
+        (u'startingsubframeoffset', _NPRSSubframePartB_startingsubframeoffset),
+        (u'nPRSMutingConfiguration', _NPRSSubframePartB_nPRSMutingConfiguration),
+        (u'sIB1-NB-Subframe-TDD', _NPRSSubframePartB_sIB1_NB_Subframe_TDD),
         ])
-    NPRSSubframePartB._ext = ['sIB1-NB-Subframe-TDD']
+    NPRSSubframePartB._ext = [u'sIB1-NB-Subframe-TDD']
     
     #-----< NumberOfAntennaPorts >-----#
-    NumberOfAntennaPorts = ENUM(name='NumberOfAntennaPorts', mode=MODE_TYPE)
-    NumberOfAntennaPorts._cont = ASN1Dict([('n1-or-n2', 0), ('n4', 1)])
+    NumberOfAntennaPorts = ENUM(name=u'NumberOfAntennaPorts', mode=MODE_TYPE)
+    NumberOfAntennaPorts._cont = ASN1Dict([(u'n1-or-n2', 0), (u'n4', 1)])
     NumberOfAntennaPorts._ext = []
     
     #-----< NumberOfDlFrames >-----#
-    NumberOfDlFrames = ENUM(name='NumberOfDlFrames', mode=MODE_TYPE)
-    NumberOfDlFrames._cont = ASN1Dict([('sf1', 0), ('sf2', 1), ('sf4', 2), ('sf6', 3)])
+    NumberOfDlFrames = ENUM(name=u'NumberOfDlFrames', mode=MODE_TYPE)
+    NumberOfDlFrames._cont = ASN1Dict([(u'sf1', 0), (u'sf2', 1), (u'sf4', 2), (u'sf6', 3)])
     NumberOfDlFrames._ext = []
     
     #-----< NumberOfDlFrames-Extended >-----#
-    NumberOfDlFrames_Extended = INT(name='NumberOfDlFrames-Extended', mode=MODE_TYPE)
+    NumberOfDlFrames_Extended = INT(name=u'NumberOfDlFrames-Extended', mode=MODE_TYPE)
     NumberOfDlFrames_Extended._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=160)], ev=[], er=[])
     
     #-----< NumberOfFrequencyHoppingBands >-----#
-    NumberOfFrequencyHoppingBands = ENUM(name='NumberOfFrequencyHoppingBands', mode=MODE_TYPE)
-    NumberOfFrequencyHoppingBands._cont = ASN1Dict([('twobands', 0), ('fourbands', 1)])
+    NumberOfFrequencyHoppingBands = ENUM(name=u'NumberOfFrequencyHoppingBands', mode=MODE_TYPE)
+    NumberOfFrequencyHoppingBands._cont = ASN1Dict([(u'twobands', 0), (u'fourbands', 1)])
     NumberOfFrequencyHoppingBands._ext = []
     
     #-----< NPRSSequenceInfo >-----#
-    NPRSSequenceInfo = INT(name='NPRSSequenceInfo', mode=MODE_TYPE)
+    NPRSSequenceInfo = INT(name=u'NPRSSequenceInfo', mode=MODE_TYPE)
     NPRSSequenceInfo._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=174)], ev=[], er=[])
     
     #-----< NRARFCN >-----#
-    NRARFCN = INT(name='NRARFCN', mode=MODE_TYPE)
+    NRARFCN = INT(name=u'NRARFCN', mode=MODE_TYPE)
     NRARFCN._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=3279165)], ev=None, er=[])
     
     #-----< NRPCI >-----#
-    NRPCI = INT(name='NRPCI', mode=MODE_TYPE)
+    NRPCI = INT(name=u'NRPCI', mode=MODE_TYPE)
     NRPCI._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1007)], ev=None, er=[])
     
     #-----< OffsetNBChanneltoEARFCN >-----#
-    OffsetNBChanneltoEARFCN = ENUM(name='OffsetNBChanneltoEARFCN', mode=MODE_TYPE)
-    OffsetNBChanneltoEARFCN._cont = ASN1Dict([('minusTen', 0), ('minusNine', 1), ('minusEight', 2), ('minusSeven', 3), ('minusSix', 4), ('minusFive', 5), ('minusFour', 6), ('minusThree', 7), ('minusTwo', 8), ('minusOne', 9), ('minusZeroDotFive', 10), ('zero', 11), ('one', 12), ('two', 13), ('three', 14), ('four', 15), ('five', 16), ('six', 17), ('seven', 18), ('eight', 19), ('nine', 20)])
+    OffsetNBChanneltoEARFCN = ENUM(name=u'OffsetNBChanneltoEARFCN', mode=MODE_TYPE)
+    OffsetNBChanneltoEARFCN._cont = ASN1Dict([(u'minusTen', 0), (u'minusNine', 1), (u'minusEight', 2), (u'minusSeven', 3), (u'minusSix', 4), (u'minusFive', 5), (u'minusFour', 6), (u'minusThree', 7), (u'minusTwo', 8), (u'minusOne', 9), (u'minusZeroDotFive', 10), (u'zero', 11), (u'one', 12), (u'two', 13), (u'three', 14), (u'four', 15), (u'five', 16), (u'six', 17), (u'seven', 18), (u'eight', 19), (u'nine', 20)])
     OffsetNBChanneltoEARFCN._ext = []
     
     #-----< OperationModeInfo >-----#
-    OperationModeInfo = ENUM(name='OperationModeInfo', mode=MODE_TYPE)
-    OperationModeInfo._cont = ASN1Dict([('inband', 0), ('guardband', 1), ('standalone', 2)])
+    OperationModeInfo = ENUM(name=u'OperationModeInfo', mode=MODE_TYPE)
+    OperationModeInfo._cont = ASN1Dict([(u'inband', 0), (u'guardband', 1), (u'standalone', 2)])
     OperationModeInfo._ext = []
     
     #-----< OTDOACells >-----#
-    OTDOACells = SEQ_OF(name='OTDOACells', mode=MODE_TYPE)
+    OTDOACells = SEQ_OF(name=u'OTDOACells', mode=MODE_TYPE)
     _OTDOACells__item_ = SEQ(name='_item_', mode=MODE_TYPE)
-    __OTDOACells__item__oTDOACellInfo = SEQ_OF(name='oTDOACellInfo', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'OTDOACell-Information')))
-    __OTDOACells__item__iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    __OTDOACells__item__oTDOACellInfo = SEQ_OF(name=u'oTDOACellInfo', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'OTDOACell-Information')))
+    __OTDOACells__item__iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
     ___OTDOACells__item__iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionField')))
-    ____OTDOACells__item__iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['id']))
+    ____OTDOACells__item__iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'id']))
     _____OTDOACells__item__iE_Extensions__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     _____OTDOACells__item__iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____OTDOACells__item__iE_Extensions__item__id._const_tab = _____OTDOACells__item__iE_Extensions__item__id_tab
     ____OTDOACells__item__iE_Extensions__item__id._const_tab_at = None
-    ____OTDOACells__item__iE_Extensions__item__id._const_tab_id = 'id'
-    ____OTDOACells__item__iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['criticality']))
+    ____OTDOACells__item__iE_Extensions__item__id._const_tab_id = u'id'
+    ____OTDOACells__item__iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'criticality']))
     _____OTDOACells__item__iE_Extensions__item__criticality_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     _____OTDOACells__item__iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____OTDOACells__item__iE_Extensions__item__criticality._const_tab = _____OTDOACells__item__iE_Extensions__item__criticality_tab
-    ____OTDOACells__item__iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ____OTDOACells__item__iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ____OTDOACells__item__iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['Extension']))
+    ____OTDOACells__item__iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ____OTDOACells__item__iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ____OTDOACells__item__iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'Extension']))
     _____OTDOACells__item__iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     _____OTDOACells__item__iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____OTDOACells__item__iE_Extensions__item__extensionValue._const_tab = _____OTDOACells__item__iE_Extensions__item__extensionValue_tab
-    ____OTDOACells__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ____OTDOACells__item__iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ____OTDOACells__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ____OTDOACells__item__iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___OTDOACells__item__iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ____OTDOACells__item__iE_Extensions__item__id),
-        ('criticality', ____OTDOACells__item__iE_Extensions__item__criticality),
-        ('extensionValue', ____OTDOACells__item__iE_Extensions__item__extensionValue),
+        (u'id', ____OTDOACells__item__iE_Extensions__item__id),
+        (u'criticality', ____OTDOACells__item__iE_Extensions__item__criticality),
+        (u'extensionValue', ____OTDOACells__item__iE_Extensions__item__extensionValue),
         ])
     ___OTDOACells__item__iE_Extensions__item_._ext = None
     __OTDOACells__item__iE_Extensions._cont = ___OTDOACells__item__iE_Extensions__item_
     __OTDOACells__item__iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     _OTDOACells__item_._cont = ASN1Dict([
-        ('oTDOACellInfo', __OTDOACells__item__oTDOACellInfo),
-        ('iE-Extensions', __OTDOACells__item__iE_Extensions),
+        (u'oTDOACellInfo', __OTDOACells__item__oTDOACellInfo),
+        (u'iE-Extensions', __OTDOACells__item__iE_Extensions),
         ])
     _OTDOACells__item_._ext = []
     OTDOACells._cont = _OTDOACells__item_
     OTDOACells._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=256)], ev=None, er=[])
     
     #-----< OTDOACells-ExtIEs >-----#
-    OTDOACells_ExtIEs = CLASS(name='OTDOACells-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    OTDOACells_ExtIEs = CLASS(name=u'OTDOACells-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     OTDOACells_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< OTDOACell-Information >-----#
-    OTDOACell_Information = SEQ_OF(name='OTDOACell-Information', mode=MODE_TYPE)
+    OTDOACell_Information = SEQ_OF(name=u'OTDOACell-Information', mode=MODE_TYPE)
     _OTDOACell_Information__item_ = CHOICE(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'OTDOACell-Information-Item')))
     OTDOACell_Information._cont = _OTDOACell_Information__item_
     OTDOACell_Information._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=63)], ev=None, er=[])
     
     #-----< OTDOACell-Information-Item >-----#
-    OTDOACell_Information_Item = CHOICE(name='OTDOACell-Information-Item', mode=MODE_TYPE)
-    _OTDOACell_Information_Item_pCI = INT(name='pCI', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PCI')))
-    _OTDOACell_Information_Item_cellId = SEQ(name='cellId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'ECGI')))
-    _OTDOACell_Information_Item_tAC = OCT_STR(name='tAC', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'TAC')))
-    _OTDOACell_Information_Item_eARFCN = INT(name='eARFCN', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'EARFCN')))
-    _OTDOACell_Information_Item_pRS_Bandwidth = ENUM(name='pRS-Bandwidth', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PRS-Bandwidth')))
-    _OTDOACell_Information_Item_pRS_ConfigurationIndex = INT(name='pRS-ConfigurationIndex', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PRS-Configuration-Index')))
-    _OTDOACell_Information_Item_cPLength = ENUM(name='cPLength', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'CPLength')))
-    _OTDOACell_Information_Item_numberOfDlFrames = ENUM(name='numberOfDlFrames', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NumberOfDlFrames')))
-    _OTDOACell_Information_Item_numberOfAntennaPorts = ENUM(name='numberOfAntennaPorts', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NumberOfAntennaPorts')))
-    _OTDOACell_Information_Item_sFNInitialisationTime = BIT_STR(name='sFNInitialisationTime', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'SFNInitialisationTime')))
-    _OTDOACell_Information_Item_e_UTRANAccessPointPosition = SEQ(name='e-UTRANAccessPointPosition', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'E-UTRANAccessPointPosition')))
-    _OTDOACell_Information_Item_pRSMutingConfiguration = CHOICE(name='pRSMutingConfiguration', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PRSMutingConfiguration')))
-    _OTDOACell_Information_Item_prsid = INT(name='prsid', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PRS-ID')))
-    _OTDOACell_Information_Item_tpid = INT(name='tpid', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'TP-ID')))
-    _OTDOACell_Information_Item_tpType = ENUM(name='tpType', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'TP-Type')))
-    _OTDOACell_Information_Item_numberOfDlFrames_Extended = INT(name='numberOfDlFrames-Extended', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NumberOfDlFrames-Extended')))
-    _OTDOACell_Information_Item_crsCPlength = ENUM(name='crsCPlength', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'CPLength')))
-    _OTDOACell_Information_Item_mBSFNsubframeConfiguration = SEQ_OF(name='mBSFNsubframeConfiguration', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'MBSFNsubframeConfiguration')))
-    _OTDOACell_Information_Item_nPRSConfiguration = SEQ(name='nPRSConfiguration', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NPRSConfiguration')))
-    _OTDOACell_Information_Item_offsetNBChanneltoEARFCN = ENUM(name='offsetNBChanneltoEARFCN', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'OffsetNBChanneltoEARFCN')))
-    _OTDOACell_Information_Item_operationModeInfo = ENUM(name='operationModeInfo', mode=MODE_TYPE, tag=(20, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'OperationModeInfo')))
-    _OTDOACell_Information_Item_nPRS_ID = INT(name='nPRS-ID', mode=MODE_TYPE, tag=(21, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    OTDOACell_Information_Item = CHOICE(name=u'OTDOACell-Information-Item', mode=MODE_TYPE)
+    _OTDOACell_Information_Item_pCI = INT(name=u'pCI', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PCI')))
+    _OTDOACell_Information_Item_cellId = SEQ(name=u'cellId', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'ECGI')))
+    _OTDOACell_Information_Item_tAC = OCT_STR(name=u'tAC', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'TAC')))
+    _OTDOACell_Information_Item_eARFCN = INT(name=u'eARFCN', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'EARFCN')))
+    _OTDOACell_Information_Item_pRS_Bandwidth = ENUM(name=u'pRS-Bandwidth', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PRS-Bandwidth')))
+    _OTDOACell_Information_Item_pRS_ConfigurationIndex = INT(name=u'pRS-ConfigurationIndex', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PRS-Configuration-Index')))
+    _OTDOACell_Information_Item_cPLength = ENUM(name=u'cPLength', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'CPLength')))
+    _OTDOACell_Information_Item_numberOfDlFrames = ENUM(name=u'numberOfDlFrames', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NumberOfDlFrames')))
+    _OTDOACell_Information_Item_numberOfAntennaPorts = ENUM(name=u'numberOfAntennaPorts', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NumberOfAntennaPorts')))
+    _OTDOACell_Information_Item_sFNInitialisationTime = BIT_STR(name=u'sFNInitialisationTime', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'SFNInitialisationTime')))
+    _OTDOACell_Information_Item_e_UTRANAccessPointPosition = SEQ(name=u'e-UTRANAccessPointPosition', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'E-UTRANAccessPointPosition')))
+    _OTDOACell_Information_Item_pRSMutingConfiguration = CHOICE(name=u'pRSMutingConfiguration', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PRSMutingConfiguration')))
+    _OTDOACell_Information_Item_prsid = INT(name=u'prsid', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PRS-ID')))
+    _OTDOACell_Information_Item_tpid = INT(name=u'tpid', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'TP-ID')))
+    _OTDOACell_Information_Item_tpType = ENUM(name=u'tpType', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'TP-Type')))
+    _OTDOACell_Information_Item_numberOfDlFrames_Extended = INT(name=u'numberOfDlFrames-Extended', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NumberOfDlFrames-Extended')))
+    _OTDOACell_Information_Item_crsCPlength = ENUM(name=u'crsCPlength', mode=MODE_TYPE, tag=(16, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'CPLength')))
+    _OTDOACell_Information_Item_mBSFNsubframeConfiguration = SEQ_OF(name=u'mBSFNsubframeConfiguration', mode=MODE_TYPE, tag=(17, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'MBSFNsubframeConfiguration')))
+    _OTDOACell_Information_Item_nPRSConfiguration = SEQ(name=u'nPRSConfiguration', mode=MODE_TYPE, tag=(18, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NPRSConfiguration')))
+    _OTDOACell_Information_Item_offsetNBChanneltoEARFCN = ENUM(name=u'offsetNBChanneltoEARFCN', mode=MODE_TYPE, tag=(19, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'OffsetNBChanneltoEARFCN')))
+    _OTDOACell_Information_Item_operationModeInfo = ENUM(name=u'operationModeInfo', mode=MODE_TYPE, tag=(20, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'OperationModeInfo')))
+    _OTDOACell_Information_Item_nPRS_ID = INT(name=u'nPRS-ID', mode=MODE_TYPE, tag=(21, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _OTDOACell_Information_Item_nPRS_ID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4095)], ev=[], er=[])
-    _OTDOACell_Information_Item_dL_Bandwidth = ENUM(name='dL-Bandwidth', mode=MODE_TYPE, tag=(22, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'DL-Bandwidth')))
-    _OTDOACell_Information_Item_pRSOccasionGroup = ENUM(name='pRSOccasionGroup', mode=MODE_TYPE, tag=(23, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PRSOccasionGroup')))
-    _OTDOACell_Information_Item_pRSFreqHoppingConfig = SEQ(name='pRSFreqHoppingConfig', mode=MODE_TYPE, tag=(24, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PRSFrequencyHoppingConfiguration')))
-    _OTDOACell_Information_Item_repetitionNumberofSIB1_NB = ENUM(name='repetitionNumberofSIB1-NB', mode=MODE_TYPE, tag=(25, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'RepetitionNumberofSIB1-NB')))
-    _OTDOACell_Information_Item_nPRSSequenceInfo = INT(name='nPRSSequenceInfo', mode=MODE_TYPE, tag=(26, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NPRSSequenceInfo')))
-    _OTDOACell_Information_Item_nPRSType2 = SEQ(name='nPRSType2', mode=MODE_TYPE, tag=(27, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NPRSConfiguration')))
-    _OTDOACell_Information_Item_tddConfiguration = SEQ(name='tddConfiguration', mode=MODE_TYPE, tag=(28, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'TDDConfiguration')))
+    _OTDOACell_Information_Item_dL_Bandwidth = ENUM(name=u'dL-Bandwidth', mode=MODE_TYPE, tag=(22, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'DL-Bandwidth')))
+    _OTDOACell_Information_Item_pRSOccasionGroup = ENUM(name=u'pRSOccasionGroup', mode=MODE_TYPE, tag=(23, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PRSOccasionGroup')))
+    _OTDOACell_Information_Item_pRSFreqHoppingConfig = SEQ(name=u'pRSFreqHoppingConfig', mode=MODE_TYPE, tag=(24, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PRSFrequencyHoppingConfiguration')))
+    _OTDOACell_Information_Item_repetitionNumberofSIB1_NB = ENUM(name=u'repetitionNumberofSIB1-NB', mode=MODE_TYPE, tag=(25, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'RepetitionNumberofSIB1-NB')))
+    _OTDOACell_Information_Item_nPRSSequenceInfo = INT(name=u'nPRSSequenceInfo', mode=MODE_TYPE, tag=(26, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NPRSSequenceInfo')))
+    _OTDOACell_Information_Item_nPRSType2 = SEQ(name=u'nPRSType2', mode=MODE_TYPE, tag=(27, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NPRSConfiguration')))
+    _OTDOACell_Information_Item_tddConfiguration = SEQ(name=u'tddConfiguration', mode=MODE_TYPE, tag=(28, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'TDDConfiguration')))
     OTDOACell_Information_Item._cont = ASN1Dict([
-        ('pCI', _OTDOACell_Information_Item_pCI),
-        ('cellId', _OTDOACell_Information_Item_cellId),
-        ('tAC', _OTDOACell_Information_Item_tAC),
-        ('eARFCN', _OTDOACell_Information_Item_eARFCN),
-        ('pRS-Bandwidth', _OTDOACell_Information_Item_pRS_Bandwidth),
-        ('pRS-ConfigurationIndex', _OTDOACell_Information_Item_pRS_ConfigurationIndex),
-        ('cPLength', _OTDOACell_Information_Item_cPLength),
-        ('numberOfDlFrames', _OTDOACell_Information_Item_numberOfDlFrames),
-        ('numberOfAntennaPorts', _OTDOACell_Information_Item_numberOfAntennaPorts),
-        ('sFNInitialisationTime', _OTDOACell_Information_Item_sFNInitialisationTime),
-        ('e-UTRANAccessPointPosition', _OTDOACell_Information_Item_e_UTRANAccessPointPosition),
-        ('pRSMutingConfiguration', _OTDOACell_Information_Item_pRSMutingConfiguration),
-        ('prsid', _OTDOACell_Information_Item_prsid),
-        ('tpid', _OTDOACell_Information_Item_tpid),
-        ('tpType', _OTDOACell_Information_Item_tpType),
-        ('numberOfDlFrames-Extended', _OTDOACell_Information_Item_numberOfDlFrames_Extended),
-        ('crsCPlength', _OTDOACell_Information_Item_crsCPlength),
-        ('mBSFNsubframeConfiguration', _OTDOACell_Information_Item_mBSFNsubframeConfiguration),
-        ('nPRSConfiguration', _OTDOACell_Information_Item_nPRSConfiguration),
-        ('offsetNBChanneltoEARFCN', _OTDOACell_Information_Item_offsetNBChanneltoEARFCN),
-        ('operationModeInfo', _OTDOACell_Information_Item_operationModeInfo),
-        ('nPRS-ID', _OTDOACell_Information_Item_nPRS_ID),
-        ('dL-Bandwidth', _OTDOACell_Information_Item_dL_Bandwidth),
-        ('pRSOccasionGroup', _OTDOACell_Information_Item_pRSOccasionGroup),
-        ('pRSFreqHoppingConfig', _OTDOACell_Information_Item_pRSFreqHoppingConfig),
-        ('repetitionNumberofSIB1-NB', _OTDOACell_Information_Item_repetitionNumberofSIB1_NB),
-        ('nPRSSequenceInfo', _OTDOACell_Information_Item_nPRSSequenceInfo),
-        ('nPRSType2', _OTDOACell_Information_Item_nPRSType2),
-        ('tddConfiguration', _OTDOACell_Information_Item_tddConfiguration),
+        (u'pCI', _OTDOACell_Information_Item_pCI),
+        (u'cellId', _OTDOACell_Information_Item_cellId),
+        (u'tAC', _OTDOACell_Information_Item_tAC),
+        (u'eARFCN', _OTDOACell_Information_Item_eARFCN),
+        (u'pRS-Bandwidth', _OTDOACell_Information_Item_pRS_Bandwidth),
+        (u'pRS-ConfigurationIndex', _OTDOACell_Information_Item_pRS_ConfigurationIndex),
+        (u'cPLength', _OTDOACell_Information_Item_cPLength),
+        (u'numberOfDlFrames', _OTDOACell_Information_Item_numberOfDlFrames),
+        (u'numberOfAntennaPorts', _OTDOACell_Information_Item_numberOfAntennaPorts),
+        (u'sFNInitialisationTime', _OTDOACell_Information_Item_sFNInitialisationTime),
+        (u'e-UTRANAccessPointPosition', _OTDOACell_Information_Item_e_UTRANAccessPointPosition),
+        (u'pRSMutingConfiguration', _OTDOACell_Information_Item_pRSMutingConfiguration),
+        (u'prsid', _OTDOACell_Information_Item_prsid),
+        (u'tpid', _OTDOACell_Information_Item_tpid),
+        (u'tpType', _OTDOACell_Information_Item_tpType),
+        (u'numberOfDlFrames-Extended', _OTDOACell_Information_Item_numberOfDlFrames_Extended),
+        (u'crsCPlength', _OTDOACell_Information_Item_crsCPlength),
+        (u'mBSFNsubframeConfiguration', _OTDOACell_Information_Item_mBSFNsubframeConfiguration),
+        (u'nPRSConfiguration', _OTDOACell_Information_Item_nPRSConfiguration),
+        (u'offsetNBChanneltoEARFCN', _OTDOACell_Information_Item_offsetNBChanneltoEARFCN),
+        (u'operationModeInfo', _OTDOACell_Information_Item_operationModeInfo),
+        (u'nPRS-ID', _OTDOACell_Information_Item_nPRS_ID),
+        (u'dL-Bandwidth', _OTDOACell_Information_Item_dL_Bandwidth),
+        (u'pRSOccasionGroup', _OTDOACell_Information_Item_pRSOccasionGroup),
+        (u'pRSFreqHoppingConfig', _OTDOACell_Information_Item_pRSFreqHoppingConfig),
+        (u'repetitionNumberofSIB1-NB', _OTDOACell_Information_Item_repetitionNumberofSIB1_NB),
+        (u'nPRSSequenceInfo', _OTDOACell_Information_Item_nPRSSequenceInfo),
+        (u'nPRSType2', _OTDOACell_Information_Item_nPRSType2),
+        (u'tddConfiguration', _OTDOACell_Information_Item_tddConfiguration),
         ])
-    OTDOACell_Information_Item._ext = ['pRSMutingConfiguration', 'prsid', 'tpid', 'tpType', 'numberOfDlFrames-Extended', 'crsCPlength', 'mBSFNsubframeConfiguration', 'nPRSConfiguration', 'offsetNBChanneltoEARFCN', 'operationModeInfo', 'nPRS-ID', 'dL-Bandwidth', 'pRSOccasionGroup', 'pRSFreqHoppingConfig', 'repetitionNumberofSIB1-NB', 'nPRSSequenceInfo', 'nPRSType2', 'tddConfiguration']
+    OTDOACell_Information_Item._ext = [u'pRSMutingConfiguration', u'prsid', u'tpid', u'tpType', u'numberOfDlFrames-Extended', u'crsCPlength', u'mBSFNsubframeConfiguration', u'nPRSConfiguration', u'offsetNBChanneltoEARFCN', u'operationModeInfo', u'nPRS-ID', u'dL-Bandwidth', u'pRSOccasionGroup', u'pRSFreqHoppingConfig', u'repetitionNumberofSIB1-NB', u'nPRSSequenceInfo', u'nPRSType2', u'tddConfiguration']
     
     #-----< OTDOA-Information-Item >-----#
-    OTDOA_Information_Item = ENUM(name='OTDOA-Information-Item', mode=MODE_TYPE)
-    OTDOA_Information_Item._cont = ASN1Dict([('pci', 0), ('cellid', 1), ('tac', 2), ('earfcn', 3), ('prsBandwidth', 4), ('prsConfigIndex', 5), ('cpLength', 6), ('noDlFrames', 7), ('noAntennaPorts', 8), ('sFNInitTime', 9), ('e-UTRANAccessPointPosition', 10), ('prsmutingconfiguration', 11), ('prsid', 12), ('tpid', 13), ('tpType', 14), ('crsCPlength', 15), ('mBSFNsubframeConfiguration', 16), ('nPRSConfiguration', 17), ('offsetNBChannelNumbertoEARFCN', 18), ('operationModeInfo', 19), ('nPRS-ID', 20), ('dlBandwidth', 21), ('multipleprsConfigurationsperCell', 22), ('prsOccasionGroup', 23), ('prsFrequencyHoppingConfiguration', 24), ('repetitionNumberofSIB1-NB', 25), ('nPRSSequenceInfo', 26), ('nPRSType2', 27), ('tddConfig', 28)])
-    OTDOA_Information_Item._ext = ['e-UTRANAccessPointPosition', 'prsmutingconfiguration', 'prsid', 'tpid', 'tpType', 'crsCPlength', 'mBSFNsubframeConfiguration', 'nPRSConfiguration', 'offsetNBChannelNumbertoEARFCN', 'operationModeInfo', 'nPRS-ID', 'dlBandwidth', 'multipleprsConfigurationsperCell', 'prsOccasionGroup', 'prsFrequencyHoppingConfiguration', 'repetitionNumberofSIB1-NB', 'nPRSSequenceInfo', 'nPRSType2', 'tddConfig']
+    OTDOA_Information_Item = ENUM(name=u'OTDOA-Information-Item', mode=MODE_TYPE)
+    OTDOA_Information_Item._cont = ASN1Dict([(u'pci', 0), (u'cellid', 1), (u'tac', 2), (u'earfcn', 3), (u'prsBandwidth', 4), (u'prsConfigIndex', 5), (u'cpLength', 6), (u'noDlFrames', 7), (u'noAntennaPorts', 8), (u'sFNInitTime', 9), (u'e-UTRANAccessPointPosition', 10), (u'prsmutingconfiguration', 11), (u'prsid', 12), (u'tpid', 13), (u'tpType', 14), (u'crsCPlength', 15), (u'mBSFNsubframeConfiguration', 16), (u'nPRSConfiguration', 17), (u'offsetNBChannelNumbertoEARFCN', 18), (u'operationModeInfo', 19), (u'nPRS-ID', 20), (u'dlBandwidth', 21), (u'multipleprsConfigurationsperCell', 22), (u'prsOccasionGroup', 23), (u'prsFrequencyHoppingConfiguration', 24), (u'repetitionNumberofSIB1-NB', 25), (u'nPRSSequenceInfo', 26), (u'nPRSType2', 27), (u'tddConfig', 28)])
+    OTDOA_Information_Item._ext = [u'e-UTRANAccessPointPosition', u'prsmutingconfiguration', u'prsid', u'tpid', u'tpType', u'crsCPlength', u'mBSFNsubframeConfiguration', u'nPRSConfiguration', u'offsetNBChannelNumbertoEARFCN', u'operationModeInfo', u'nPRS-ID', u'dlBandwidth', u'multipleprsConfigurationsperCell', u'prsOccasionGroup', u'prsFrequencyHoppingConfiguration', u'repetitionNumberofSIB1-NB', u'nPRSSequenceInfo', u'nPRSType2', u'tddConfig']
     
     #-----< Outcome >-----#
-    Outcome = ENUM(name='Outcome', mode=MODE_TYPE)
-    Outcome._cont = ASN1Dict([('failed', 0)])
+    Outcome = ENUM(name=u'Outcome', mode=MODE_TYPE)
+    Outcome._cont = ASN1Dict([(u'failed', 0)])
     Outcome._ext = []
     
     #-----< PCI >-----#
-    PCI = INT(name='PCI', mode=MODE_TYPE)
+    PCI = INT(name=u'PCI', mode=MODE_TYPE)
     PCI._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=503)], ev=[], er=[])
     
     #-----< PhysCellIDGERAN >-----#
-    PhysCellIDGERAN = INT(name='PhysCellIDGERAN', mode=MODE_TYPE)
+    PhysCellIDGERAN = INT(name=u'PhysCellIDGERAN', mode=MODE_TYPE)
     PhysCellIDGERAN._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=63)], ev=[], er=[])
     
     #-----< PhysCellIDUTRA-FDD >-----#
-    PhysCellIDUTRA_FDD = INT(name='PhysCellIDUTRA-FDD', mode=MODE_TYPE)
+    PhysCellIDUTRA_FDD = INT(name=u'PhysCellIDUTRA-FDD', mode=MODE_TYPE)
     PhysCellIDUTRA_FDD._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=511)], ev=[], er=[])
     
     #-----< PhysCellIDUTRA-TDD >-----#
-    PhysCellIDUTRA_TDD = INT(name='PhysCellIDUTRA-TDD', mode=MODE_TYPE)
+    PhysCellIDUTRA_TDD = INT(name=u'PhysCellIDUTRA-TDD', mode=MODE_TYPE)
     PhysCellIDUTRA_TDD._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=127)], ev=[], er=[])
     
     #-----< PLMN-Identity >-----#
-    PLMN_Identity = OCT_STR(name='PLMN-Identity', mode=MODE_TYPE)
+    PLMN_Identity = OCT_STR(name=u'PLMN-Identity', mode=MODE_TYPE)
     PLMN_Identity._const_sz = ASN1Set(rv=[3], rr=[], ev=None, er=[])
     
     #-----< PosSIBs >-----#
-    PosSIBs = SEQ_OF(name='PosSIBs', mode=MODE_TYPE)
+    PosSIBs = SEQ_OF(name=u'PosSIBs', mode=MODE_TYPE)
     _PosSIBs__item_ = SEQ(name='_item_', mode=MODE_TYPE)
-    __PosSIBs__item__posSIB_Type = ENUM(name='posSIB-Type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PosSIB-Type')))
-    __PosSIBs__item__posSIB_Segments = SEQ_OF(name='posSIB-Segments', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PosSIB-Segments')))
-    __PosSIBs__item__assistanceInformationMetaData = SEQ(name='assistanceInformationMetaData', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'AssistanceInformationMetaData')), opt=True)
-    __PosSIBs__item__broadcastPriority = INT(name='broadcastPriority', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    __PosSIBs__item__posSIB_Type = ENUM(name=u'posSIB-Type', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PosSIB-Type')))
+    __PosSIBs__item__posSIB_Segments = SEQ_OF(name=u'posSIB-Segments', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PosSIB-Segments')))
+    __PosSIBs__item__assistanceInformationMetaData = SEQ(name=u'assistanceInformationMetaData', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'AssistanceInformationMetaData')), opt=True)
+    __PosSIBs__item__broadcastPriority = INT(name=u'broadcastPriority', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     __PosSIBs__item__broadcastPriority._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=[], er=[])
-    __PosSIBs__item__iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    __PosSIBs__item__iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
     ___PosSIBs__item__iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionField')))
-    ____PosSIBs__item__iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['id']))
+    ____PosSIBs__item__iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'id']))
     _____PosSIBs__item__iE_Extensions__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     _____PosSIBs__item__iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____PosSIBs__item__iE_Extensions__item__id._const_tab = _____PosSIBs__item__iE_Extensions__item__id_tab
     ____PosSIBs__item__iE_Extensions__item__id._const_tab_at = None
-    ____PosSIBs__item__iE_Extensions__item__id._const_tab_id = 'id'
-    ____PosSIBs__item__iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['criticality']))
+    ____PosSIBs__item__iE_Extensions__item__id._const_tab_id = u'id'
+    ____PosSIBs__item__iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'criticality']))
     _____PosSIBs__item__iE_Extensions__item__criticality_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     _____PosSIBs__item__iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____PosSIBs__item__iE_Extensions__item__criticality._const_tab = _____PosSIBs__item__iE_Extensions__item__criticality_tab
-    ____PosSIBs__item__iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ____PosSIBs__item__iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ____PosSIBs__item__iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['Extension']))
+    ____PosSIBs__item__iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ____PosSIBs__item__iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ____PosSIBs__item__iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'Extension']))
     _____PosSIBs__item__iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     _____PosSIBs__item__iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____PosSIBs__item__iE_Extensions__item__extensionValue._const_tab = _____PosSIBs__item__iE_Extensions__item__extensionValue_tab
-    ____PosSIBs__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ____PosSIBs__item__iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ____PosSIBs__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ____PosSIBs__item__iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___PosSIBs__item__iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ____PosSIBs__item__iE_Extensions__item__id),
-        ('criticality', ____PosSIBs__item__iE_Extensions__item__criticality),
-        ('extensionValue', ____PosSIBs__item__iE_Extensions__item__extensionValue),
+        (u'id', ____PosSIBs__item__iE_Extensions__item__id),
+        (u'criticality', ____PosSIBs__item__iE_Extensions__item__criticality),
+        (u'extensionValue', ____PosSIBs__item__iE_Extensions__item__extensionValue),
         ])
     ___PosSIBs__item__iE_Extensions__item_._ext = None
     __PosSIBs__item__iE_Extensions._cont = ___PosSIBs__item__iE_Extensions__item_
     __PosSIBs__item__iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     _PosSIBs__item_._cont = ASN1Dict([
-        ('posSIB-Type', __PosSIBs__item__posSIB_Type),
-        ('posSIB-Segments', __PosSIBs__item__posSIB_Segments),
-        ('assistanceInformationMetaData', __PosSIBs__item__assistanceInformationMetaData),
-        ('broadcastPriority', __PosSIBs__item__broadcastPriority),
-        ('iE-Extensions', __PosSIBs__item__iE_Extensions),
+        (u'posSIB-Type', __PosSIBs__item__posSIB_Type),
+        (u'posSIB-Segments', __PosSIBs__item__posSIB_Segments),
+        (u'assistanceInformationMetaData', __PosSIBs__item__assistanceInformationMetaData),
+        (u'broadcastPriority', __PosSIBs__item__broadcastPriority),
+        (u'iE-Extensions', __PosSIBs__item__iE_Extensions),
         ])
     _PosSIBs__item_._ext = []
     PosSIBs._cont = _PosSIBs__item_
     PosSIBs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
     
     #-----< PosSIBs-ExtIEs >-----#
-    PosSIBs_ExtIEs = CLASS(name='PosSIBs-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    PosSIBs_ExtIEs = CLASS(name=u'PosSIBs-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     PosSIBs_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< PosSIB-Segments >-----#
-    PosSIB_Segments = SEQ_OF(name='PosSIB-Segments', mode=MODE_TYPE)
+    PosSIB_Segments = SEQ_OF(name=u'PosSIB-Segments', mode=MODE_TYPE)
     _PosSIB_Segments__item_ = SEQ(name='_item_', mode=MODE_TYPE)
-    __PosSIB_Segments__item__assistanceDataSIBelement = OCT_STR(name='assistanceDataSIBelement', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    __PosSIB_Segments__item__iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    __PosSIB_Segments__item__assistanceDataSIBelement = OCT_STR(name=u'assistanceDataSIBelement', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    __PosSIB_Segments__item__iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
     ___PosSIB_Segments__item__iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionField')))
-    ____PosSIB_Segments__item__iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['id']))
+    ____PosSIB_Segments__item__iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'id']))
     _____PosSIB_Segments__item__iE_Extensions__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     _____PosSIB_Segments__item__iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____PosSIB_Segments__item__iE_Extensions__item__id._const_tab = _____PosSIB_Segments__item__iE_Extensions__item__id_tab
     ____PosSIB_Segments__item__iE_Extensions__item__id._const_tab_at = None
-    ____PosSIB_Segments__item__iE_Extensions__item__id._const_tab_id = 'id'
-    ____PosSIB_Segments__item__iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['criticality']))
+    ____PosSIB_Segments__item__iE_Extensions__item__id._const_tab_id = u'id'
+    ____PosSIB_Segments__item__iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'criticality']))
     _____PosSIB_Segments__item__iE_Extensions__item__criticality_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     _____PosSIB_Segments__item__iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____PosSIB_Segments__item__iE_Extensions__item__criticality._const_tab = _____PosSIB_Segments__item__iE_Extensions__item__criticality_tab
-    ____PosSIB_Segments__item__iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ____PosSIB_Segments__item__iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ____PosSIB_Segments__item__iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['Extension']))
+    ____PosSIB_Segments__item__iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ____PosSIB_Segments__item__iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ____PosSIB_Segments__item__iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'Extension']))
     _____PosSIB_Segments__item__iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     _____PosSIB_Segments__item__iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____PosSIB_Segments__item__iE_Extensions__item__extensionValue._const_tab = _____PosSIB_Segments__item__iE_Extensions__item__extensionValue_tab
-    ____PosSIB_Segments__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ____PosSIB_Segments__item__iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ____PosSIB_Segments__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ____PosSIB_Segments__item__iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___PosSIB_Segments__item__iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ____PosSIB_Segments__item__iE_Extensions__item__id),
-        ('criticality', ____PosSIB_Segments__item__iE_Extensions__item__criticality),
-        ('extensionValue', ____PosSIB_Segments__item__iE_Extensions__item__extensionValue),
+        (u'id', ____PosSIB_Segments__item__iE_Extensions__item__id),
+        (u'criticality', ____PosSIB_Segments__item__iE_Extensions__item__criticality),
+        (u'extensionValue', ____PosSIB_Segments__item__iE_Extensions__item__extensionValue),
         ])
     ___PosSIB_Segments__item__iE_Extensions__item_._ext = None
     __PosSIB_Segments__item__iE_Extensions._cont = ___PosSIB_Segments__item__iE_Extensions__item_
     __PosSIB_Segments__item__iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     _PosSIB_Segments__item_._cont = ASN1Dict([
-        ('assistanceDataSIBelement', __PosSIB_Segments__item__assistanceDataSIBelement),
-        ('iE-Extensions', __PosSIB_Segments__item__iE_Extensions),
+        (u'assistanceDataSIBelement', __PosSIB_Segments__item__assistanceDataSIBelement),
+        (u'iE-Extensions', __PosSIB_Segments__item__iE_Extensions),
         ])
     _PosSIB_Segments__item_._ext = []
     PosSIB_Segments._cont = _PosSIB_Segments__item_
     PosSIB_Segments._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
     
     #-----< PosSIB-Segments-ExtIEs >-----#
-    PosSIB_Segments_ExtIEs = CLASS(name='PosSIB-Segments-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    PosSIB_Segments_ExtIEs = CLASS(name=u'PosSIB-Segments-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     PosSIB_Segments_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< PosSIB-Type >-----#
-    PosSIB_Type = ENUM(name='PosSIB-Type', mode=MODE_TYPE)
-    PosSIB_Type._cont = ASN1Dict([('posSibType1-1', 0), ('posSibType1-2', 1), ('posSibType1-3', 2), ('posSibType1-4', 3), ('posSibType1-5', 4), ('posSibType1-6', 5), ('posSibType1-7', 6), ('posSibType2-1', 7), ('posSibType2-2', 8), ('posSibType2-3', 9), ('posSibType2-4', 10), ('posSibType2-5', 11), ('posSibType2-6', 12), ('posSibType2-7', 13), ('posSibType2-8', 14), ('posSibType2-9', 15), ('posSibType2-10', 16), ('posSibType2-11', 17), ('posSibType2-12', 18), ('posSibType2-13', 19), ('posSibType2-14', 20), ('posSibType2-15', 21), ('posSibType2-16', 22), ('posSibType2-17', 23), ('posSibType2-18', 24), ('posSibType2-19', 25), ('posSibType3-1', 26), ('posSibType4-1', 27), ('posSibType5-1', 28), ('posSibType2-24', 29), ('posSibType2-25', 30)])
-    PosSIB_Type._ext = ['posSibType4-1', 'posSibType5-1', 'posSibType2-24', 'posSibType2-25']
+    PosSIB_Type = ENUM(name=u'PosSIB-Type', mode=MODE_TYPE)
+    PosSIB_Type._cont = ASN1Dict([(u'posSibType1-1', 0), (u'posSibType1-2', 1), (u'posSibType1-3', 2), (u'posSibType1-4', 3), (u'posSibType1-5', 4), (u'posSibType1-6', 5), (u'posSibType1-7', 6), (u'posSibType2-1', 7), (u'posSibType2-2', 8), (u'posSibType2-3', 9), (u'posSibType2-4', 10), (u'posSibType2-5', 11), (u'posSibType2-6', 12), (u'posSibType2-7', 13), (u'posSibType2-8', 14), (u'posSibType2-9', 15), (u'posSibType2-10', 16), (u'posSibType2-11', 17), (u'posSibType2-12', 18), (u'posSibType2-13', 19), (u'posSibType2-14', 20), (u'posSibType2-15', 21), (u'posSibType2-16', 22), (u'posSibType2-17', 23), (u'posSibType2-18', 24), (u'posSibType2-19', 25), (u'posSibType3-1', 26), (u'posSibType4-1', 27), (u'posSibType5-1', 28), (u'posSibType2-24', 29), (u'posSibType2-25', 30)])
+    PosSIB_Type._ext = [u'posSibType4-1', u'posSibType5-1', u'posSibType2-24', u'posSibType2-25']
     
     #-----< PRS-Bandwidth >-----#
-    PRS_Bandwidth = ENUM(name='PRS-Bandwidth', mode=MODE_TYPE)
-    PRS_Bandwidth._cont = ASN1Dict([('bw6', 0), ('bw15', 1), ('bw25', 2), ('bw50', 3), ('bw75', 4), ('bw100', 5)])
+    PRS_Bandwidth = ENUM(name=u'PRS-Bandwidth', mode=MODE_TYPE)
+    PRS_Bandwidth._cont = ASN1Dict([(u'bw6', 0), (u'bw15', 1), (u'bw25', 2), (u'bw50', 3), (u'bw75', 4), (u'bw100', 5)])
     PRS_Bandwidth._ext = []
     
     #-----< PRS-Configuration-Index >-----#
-    PRS_Configuration_Index = INT(name='PRS-Configuration-Index', mode=MODE_TYPE)
+    PRS_Configuration_Index = INT(name=u'PRS-Configuration-Index', mode=MODE_TYPE)
     PRS_Configuration_Index._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4095)], ev=[], er=[])
     
     #-----< PRS-ID >-----#
-    PRS_ID = INT(name='PRS-ID', mode=MODE_TYPE)
+    PRS_ID = INT(name=u'PRS-ID', mode=MODE_TYPE)
     PRS_ID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4095)], ev=[], er=[])
     
     #-----< PRSMutingConfiguration >-----#
-    PRSMutingConfiguration = CHOICE(name='PRSMutingConfiguration', mode=MODE_TYPE)
-    _PRSMutingConfiguration_two = BIT_STR(name='two', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    PRSMutingConfiguration = CHOICE(name=u'PRSMutingConfiguration', mode=MODE_TYPE)
+    _PRSMutingConfiguration_two = BIT_STR(name=u'two', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _PRSMutingConfiguration_two._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
-    _PRSMutingConfiguration_four = BIT_STR(name='four', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PRSMutingConfiguration_four = BIT_STR(name=u'four', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _PRSMutingConfiguration_four._const_sz = ASN1Set(rv=[4], rr=[], ev=None, er=[])
-    _PRSMutingConfiguration_eight = BIT_STR(name='eight', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PRSMutingConfiguration_eight = BIT_STR(name=u'eight', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _PRSMutingConfiguration_eight._const_sz = ASN1Set(rv=[8], rr=[], ev=None, er=[])
-    _PRSMutingConfiguration_sixteen = BIT_STR(name='sixteen', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PRSMutingConfiguration_sixteen = BIT_STR(name=u'sixteen', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _PRSMutingConfiguration_sixteen._const_sz = ASN1Set(rv=[16], rr=[], ev=None, er=[])
-    _PRSMutingConfiguration_thirty_two = BIT_STR(name='thirty-two', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PRSMutingConfiguration_thirty_two = BIT_STR(name=u'thirty-two', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _PRSMutingConfiguration_thirty_two._const_sz = ASN1Set(rv=[32], rr=[], ev=None, er=[])
-    _PRSMutingConfiguration_sixty_four = BIT_STR(name='sixty-four', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PRSMutingConfiguration_sixty_four = BIT_STR(name=u'sixty-four', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _PRSMutingConfiguration_sixty_four._const_sz = ASN1Set(rv=[64], rr=[], ev=None, er=[])
-    _PRSMutingConfiguration_one_hundred_and_twenty_eight = BIT_STR(name='one-hundred-and-twenty-eight', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PRSMutingConfiguration_one_hundred_and_twenty_eight = BIT_STR(name=u'one-hundred-and-twenty-eight', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _PRSMutingConfiguration_one_hundred_and_twenty_eight._const_sz = ASN1Set(rv=[128], rr=[], ev=None, er=[])
-    _PRSMutingConfiguration_two_hundred_and_fifty_six = BIT_STR(name='two-hundred-and-fifty-six', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PRSMutingConfiguration_two_hundred_and_fifty_six = BIT_STR(name=u'two-hundred-and-fifty-six', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _PRSMutingConfiguration_two_hundred_and_fifty_six._const_sz = ASN1Set(rv=[256], rr=[], ev=None, er=[])
-    _PRSMutingConfiguration_five_hundred_and_twelve = BIT_STR(name='five-hundred-and-twelve', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PRSMutingConfiguration_five_hundred_and_twelve = BIT_STR(name=u'five-hundred-and-twelve', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _PRSMutingConfiguration_five_hundred_and_twelve._const_sz = ASN1Set(rv=[512], rr=[], ev=None, er=[])
-    _PRSMutingConfiguration_one_thousand_and_twenty_four = BIT_STR(name='one-thousand-and-twenty-four', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PRSMutingConfiguration_one_thousand_and_twenty_four = BIT_STR(name=u'one-thousand-and-twenty-four', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _PRSMutingConfiguration_one_thousand_and_twenty_four._const_sz = ASN1Set(rv=[1024], rr=[], ev=None, er=[])
     PRSMutingConfiguration._cont = ASN1Dict([
-        ('two', _PRSMutingConfiguration_two),
-        ('four', _PRSMutingConfiguration_four),
-        ('eight', _PRSMutingConfiguration_eight),
-        ('sixteen', _PRSMutingConfiguration_sixteen),
-        ('thirty-two', _PRSMutingConfiguration_thirty_two),
-        ('sixty-four', _PRSMutingConfiguration_sixty_four),
-        ('one-hundred-and-twenty-eight', _PRSMutingConfiguration_one_hundred_and_twenty_eight),
-        ('two-hundred-and-fifty-six', _PRSMutingConfiguration_two_hundred_and_fifty_six),
-        ('five-hundred-and-twelve', _PRSMutingConfiguration_five_hundred_and_twelve),
-        ('one-thousand-and-twenty-four', _PRSMutingConfiguration_one_thousand_and_twenty_four),
+        (u'two', _PRSMutingConfiguration_two),
+        (u'four', _PRSMutingConfiguration_four),
+        (u'eight', _PRSMutingConfiguration_eight),
+        (u'sixteen', _PRSMutingConfiguration_sixteen),
+        (u'thirty-two', _PRSMutingConfiguration_thirty_two),
+        (u'sixty-four', _PRSMutingConfiguration_sixty_four),
+        (u'one-hundred-and-twenty-eight', _PRSMutingConfiguration_one_hundred_and_twenty_eight),
+        (u'two-hundred-and-fifty-six', _PRSMutingConfiguration_two_hundred_and_fifty_six),
+        (u'five-hundred-and-twelve', _PRSMutingConfiguration_five_hundred_and_twelve),
+        (u'one-thousand-and-twenty-four', _PRSMutingConfiguration_one_thousand_and_twenty_four),
         ])
-    PRSMutingConfiguration._ext = ['thirty-two', 'sixty-four', 'one-hundred-and-twenty-eight', 'two-hundred-and-fifty-six', 'five-hundred-and-twelve', 'one-thousand-and-twenty-four']
+    PRSMutingConfiguration._ext = [u'thirty-two', u'sixty-four', u'one-hundred-and-twenty-eight', u'two-hundred-and-fifty-six', u'five-hundred-and-twelve', u'one-thousand-and-twenty-four']
     
     #-----< PRSOccasionGroup >-----#
-    PRSOccasionGroup = ENUM(name='PRSOccasionGroup', mode=MODE_TYPE)
-    PRSOccasionGroup._cont = ASN1Dict([('og2', 0), ('og4', 1), ('og8', 2), ('og16', 3), ('og32', 4), ('og64', 5), ('og128', 6)])
+    PRSOccasionGroup = ENUM(name=u'PRSOccasionGroup', mode=MODE_TYPE)
+    PRSOccasionGroup._cont = ASN1Dict([(u'og2', 0), (u'og4', 1), (u'og8', 2), (u'og16', 3), (u'og32', 4), (u'og64', 5), (u'og128', 6)])
     PRSOccasionGroup._ext = []
     
     #-----< PRSFrequencyHoppingConfiguration >-----#
-    PRSFrequencyHoppingConfiguration = SEQ(name='PRSFrequencyHoppingConfiguration', mode=MODE_TYPE)
-    _PRSFrequencyHoppingConfiguration_noOfFreqHoppingBands = ENUM(name='noOfFreqHoppingBands', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NumberOfFrequencyHoppingBands')))
-    _PRSFrequencyHoppingConfiguration_bandPositions = SEQ_OF(name='bandPositions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    PRSFrequencyHoppingConfiguration = SEQ(name=u'PRSFrequencyHoppingConfiguration', mode=MODE_TYPE)
+    _PRSFrequencyHoppingConfiguration_noOfFreqHoppingBands = ENUM(name=u'noOfFreqHoppingBands', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NumberOfFrequencyHoppingBands')))
+    _PRSFrequencyHoppingConfiguration_bandPositions = SEQ_OF(name=u'bandPositions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     __PRSFrequencyHoppingConfiguration_bandPositions__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'NarrowBandIndex')))
     _PRSFrequencyHoppingConfiguration_bandPositions._cont = __PRSFrequencyHoppingConfiguration_bandPositions__item_
     _PRSFrequencyHoppingConfiguration_bandPositions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=7)], ev=None, er=[])
-    _PRSFrequencyHoppingConfiguration_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _PRSFrequencyHoppingConfiguration_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
     __PRSFrequencyHoppingConfiguration_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionField')))
-    ___PRSFrequencyHoppingConfiguration_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['id']))
+    ___PRSFrequencyHoppingConfiguration_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'id']))
     ____PRSFrequencyHoppingConfiguration_iE_Extensions__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____PRSFrequencyHoppingConfiguration_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___PRSFrequencyHoppingConfiguration_iE_Extensions__item__id._const_tab = ____PRSFrequencyHoppingConfiguration_iE_Extensions__item__id_tab
     ___PRSFrequencyHoppingConfiguration_iE_Extensions__item__id._const_tab_at = None
-    ___PRSFrequencyHoppingConfiguration_iE_Extensions__item__id._const_tab_id = 'id'
-    ___PRSFrequencyHoppingConfiguration_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['criticality']))
+    ___PRSFrequencyHoppingConfiguration_iE_Extensions__item__id._const_tab_id = u'id'
+    ___PRSFrequencyHoppingConfiguration_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'criticality']))
     ____PRSFrequencyHoppingConfiguration_iE_Extensions__item__criticality_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____PRSFrequencyHoppingConfiguration_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___PRSFrequencyHoppingConfiguration_iE_Extensions__item__criticality._const_tab = ____PRSFrequencyHoppingConfiguration_iE_Extensions__item__criticality_tab
-    ___PRSFrequencyHoppingConfiguration_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___PRSFrequencyHoppingConfiguration_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___PRSFrequencyHoppingConfiguration_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['Extension']))
+    ___PRSFrequencyHoppingConfiguration_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___PRSFrequencyHoppingConfiguration_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___PRSFrequencyHoppingConfiguration_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'Extension']))
     ____PRSFrequencyHoppingConfiguration_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____PRSFrequencyHoppingConfiguration_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___PRSFrequencyHoppingConfiguration_iE_Extensions__item__extensionValue._const_tab = ____PRSFrequencyHoppingConfiguration_iE_Extensions__item__extensionValue_tab
-    ___PRSFrequencyHoppingConfiguration_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___PRSFrequencyHoppingConfiguration_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___PRSFrequencyHoppingConfiguration_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___PRSFrequencyHoppingConfiguration_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __PRSFrequencyHoppingConfiguration_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___PRSFrequencyHoppingConfiguration_iE_Extensions__item__id),
-        ('criticality', ___PRSFrequencyHoppingConfiguration_iE_Extensions__item__criticality),
-        ('extensionValue', ___PRSFrequencyHoppingConfiguration_iE_Extensions__item__extensionValue),
+        (u'id', ___PRSFrequencyHoppingConfiguration_iE_Extensions__item__id),
+        (u'criticality', ___PRSFrequencyHoppingConfiguration_iE_Extensions__item__criticality),
+        (u'extensionValue', ___PRSFrequencyHoppingConfiguration_iE_Extensions__item__extensionValue),
         ])
     __PRSFrequencyHoppingConfiguration_iE_Extensions__item_._ext = None
     _PRSFrequencyHoppingConfiguration_iE_Extensions._cont = __PRSFrequencyHoppingConfiguration_iE_Extensions__item_
     _PRSFrequencyHoppingConfiguration_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     PRSFrequencyHoppingConfiguration._cont = ASN1Dict([
-        ('noOfFreqHoppingBands', _PRSFrequencyHoppingConfiguration_noOfFreqHoppingBands),
-        ('bandPositions', _PRSFrequencyHoppingConfiguration_bandPositions),
-        ('iE-Extensions', _PRSFrequencyHoppingConfiguration_iE_Extensions),
+        (u'noOfFreqHoppingBands', _PRSFrequencyHoppingConfiguration_noOfFreqHoppingBands),
+        (u'bandPositions', _PRSFrequencyHoppingConfiguration_bandPositions),
+        (u'iE-Extensions', _PRSFrequencyHoppingConfiguration_iE_Extensions),
         ])
     PRSFrequencyHoppingConfiguration._ext = []
     
     #-----< PRSFrequencyHoppingConfiguration-Item-IEs >-----#
-    PRSFrequencyHoppingConfiguration_Item_IEs = CLASS(name='PRSFrequencyHoppingConfiguration-Item-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    PRSFrequencyHoppingConfiguration_Item_IEs = CLASS(name=u'PRSFrequencyHoppingConfiguration-Item-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     PRSFrequencyHoppingConfiguration_Item_IEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< RepetitionNumberofSIB1-NB >-----#
-    RepetitionNumberofSIB1_NB = ENUM(name='RepetitionNumberofSIB1-NB', mode=MODE_TYPE)
-    RepetitionNumberofSIB1_NB._cont = ASN1Dict([('r4', 0), ('r8', 1), ('r16', 2)])
+    RepetitionNumberofSIB1_NB = ENUM(name=u'RepetitionNumberofSIB1-NB', mode=MODE_TYPE)
+    RepetitionNumberofSIB1_NB._cont = ASN1Dict([(u'r4', 0), (u'r8', 1), (u'r16', 2)])
     RepetitionNumberofSIB1_NB._ext = []
     
     #-----< ReportCharacteristics >-----#
-    ReportCharacteristics = ENUM(name='ReportCharacteristics', mode=MODE_TYPE)
-    ReportCharacteristics._cont = ASN1Dict([('onDemand', 0), ('periodic', 1)])
+    ReportCharacteristics = ENUM(name=u'ReportCharacteristics', mode=MODE_TYPE)
+    ReportCharacteristics._cont = ASN1Dict([(u'onDemand', 0), (u'periodic', 1)])
     ReportCharacteristics._ext = []
     
     #-----< RequestedSRSTransmissionCharacteristics >-----#
-    RequestedSRSTransmissionCharacteristics = SEQ(name='RequestedSRSTransmissionCharacteristics', mode=MODE_TYPE)
-    _RequestedSRSTransmissionCharacteristics_numberOfTransmissions = INT(name='numberOfTransmissions', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    RequestedSRSTransmissionCharacteristics = SEQ(name=u'RequestedSRSTransmissionCharacteristics', mode=MODE_TYPE)
+    _RequestedSRSTransmissionCharacteristics_numberOfTransmissions = INT(name=u'numberOfTransmissions', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _RequestedSRSTransmissionCharacteristics_numberOfTransmissions._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=500)], ev=[], er=[])
-    _RequestedSRSTransmissionCharacteristics_bandwidth = INT(name='bandwidth', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _RequestedSRSTransmissionCharacteristics_bandwidth = INT(name=u'bandwidth', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _RequestedSRSTransmissionCharacteristics_bandwidth._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=100)], ev=[], er=[])
     RequestedSRSTransmissionCharacteristics._cont = ASN1Dict([
-        ('numberOfTransmissions', _RequestedSRSTransmissionCharacteristics_numberOfTransmissions),
-        ('bandwidth', _RequestedSRSTransmissionCharacteristics_bandwidth),
+        (u'numberOfTransmissions', _RequestedSRSTransmissionCharacteristics_numberOfTransmissions),
+        (u'bandwidth', _RequestedSRSTransmissionCharacteristics_bandwidth),
         ])
     RequestedSRSTransmissionCharacteristics._ext = []
     
     #-----< ResultRSRP >-----#
-    ResultRSRP = SEQ_OF(name='ResultRSRP', mode=MODE_TYPE)
+    ResultRSRP = SEQ_OF(name=u'ResultRSRP', mode=MODE_TYPE)
     _ResultRSRP__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'ResultRSRP-Item')))
     ResultRSRP._cont = _ResultRSRP__item_
     ResultRSRP._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=9)], ev=None, er=[])
     
     #-----< ResultRSRP-Item >-----#
-    ResultRSRP_Item = SEQ(name='ResultRSRP-Item', mode=MODE_TYPE)
-    _ResultRSRP_Item_pCI = INT(name='pCI', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PCI')))
-    _ResultRSRP_Item_eARFCN = INT(name='eARFCN', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'EARFCN')))
-    _ResultRSRP_Item_eCGI = SEQ(name='eCGI', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'ECGI')), opt=True)
-    _ResultRSRP_Item_valueRSRP = INT(name='valueRSRP', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'ValueRSRP')))
-    _ResultRSRP_Item_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    ResultRSRP_Item = SEQ(name=u'ResultRSRP-Item', mode=MODE_TYPE)
+    _ResultRSRP_Item_pCI = INT(name=u'pCI', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PCI')))
+    _ResultRSRP_Item_eARFCN = INT(name=u'eARFCN', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'EARFCN')))
+    _ResultRSRP_Item_eCGI = SEQ(name=u'eCGI', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'ECGI')), opt=True)
+    _ResultRSRP_Item_valueRSRP = INT(name=u'valueRSRP', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'ValueRSRP')))
+    _ResultRSRP_Item_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
     __ResultRSRP_Item_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionField')))
-    ___ResultRSRP_Item_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['id']))
+    ___ResultRSRP_Item_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'id']))
     ____ResultRSRP_Item_iE_Extensions__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____ResultRSRP_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ResultRSRP_Item_iE_Extensions__item__id._const_tab = ____ResultRSRP_Item_iE_Extensions__item__id_tab
     ___ResultRSRP_Item_iE_Extensions__item__id._const_tab_at = None
-    ___ResultRSRP_Item_iE_Extensions__item__id._const_tab_id = 'id'
-    ___ResultRSRP_Item_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['criticality']))
+    ___ResultRSRP_Item_iE_Extensions__item__id._const_tab_id = u'id'
+    ___ResultRSRP_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'criticality']))
     ____ResultRSRP_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____ResultRSRP_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ResultRSRP_Item_iE_Extensions__item__criticality._const_tab = ____ResultRSRP_Item_iE_Extensions__item__criticality_tab
-    ___ResultRSRP_Item_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___ResultRSRP_Item_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___ResultRSRP_Item_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['Extension']))
+    ___ResultRSRP_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___ResultRSRP_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___ResultRSRP_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'Extension']))
     ____ResultRSRP_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____ResultRSRP_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ResultRSRP_Item_iE_Extensions__item__extensionValue._const_tab = ____ResultRSRP_Item_iE_Extensions__item__extensionValue_tab
-    ___ResultRSRP_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___ResultRSRP_Item_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___ResultRSRP_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___ResultRSRP_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __ResultRSRP_Item_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___ResultRSRP_Item_iE_Extensions__item__id),
-        ('criticality', ___ResultRSRP_Item_iE_Extensions__item__criticality),
-        ('extensionValue', ___ResultRSRP_Item_iE_Extensions__item__extensionValue),
+        (u'id', ___ResultRSRP_Item_iE_Extensions__item__id),
+        (u'criticality', ___ResultRSRP_Item_iE_Extensions__item__criticality),
+        (u'extensionValue', ___ResultRSRP_Item_iE_Extensions__item__extensionValue),
         ])
     __ResultRSRP_Item_iE_Extensions__item_._ext = None
     _ResultRSRP_Item_iE_Extensions._cont = __ResultRSRP_Item_iE_Extensions__item_
     _ResultRSRP_Item_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     ResultRSRP_Item._cont = ASN1Dict([
-        ('pCI', _ResultRSRP_Item_pCI),
-        ('eARFCN', _ResultRSRP_Item_eARFCN),
-        ('eCGI', _ResultRSRP_Item_eCGI),
-        ('valueRSRP', _ResultRSRP_Item_valueRSRP),
-        ('iE-Extensions', _ResultRSRP_Item_iE_Extensions),
+        (u'pCI', _ResultRSRP_Item_pCI),
+        (u'eARFCN', _ResultRSRP_Item_eARFCN),
+        (u'eCGI', _ResultRSRP_Item_eCGI),
+        (u'valueRSRP', _ResultRSRP_Item_valueRSRP),
+        (u'iE-Extensions', _ResultRSRP_Item_iE_Extensions),
         ])
     ResultRSRP_Item._ext = []
     
     #-----< ResultRSRP-Item-ExtIEs >-----#
-    ResultRSRP_Item_ExtIEs = CLASS(name='ResultRSRP-Item-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    ResultRSRP_Item_ExtIEs = CLASS(name=u'ResultRSRP-Item-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ResultRSRP_Item_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< ResultRSRQ >-----#
-    ResultRSRQ = SEQ_OF(name='ResultRSRQ', mode=MODE_TYPE)
+    ResultRSRQ = SEQ_OF(name=u'ResultRSRQ', mode=MODE_TYPE)
     _ResultRSRQ__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'ResultRSRQ-Item')))
     ResultRSRQ._cont = _ResultRSRQ__item_
     ResultRSRQ._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=9)], ev=None, er=[])
     
     #-----< ResultRSRQ-Item >-----#
-    ResultRSRQ_Item = SEQ(name='ResultRSRQ-Item', mode=MODE_TYPE)
-    _ResultRSRQ_Item_pCI = INT(name='pCI', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PCI')))
-    _ResultRSRQ_Item_eARFCN = INT(name='eARFCN', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'EARFCN')))
-    _ResultRSRQ_Item_eCGI = SEQ(name='eCGI', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'ECGI')), opt=True)
-    _ResultRSRQ_Item_valueRSRQ = INT(name='valueRSRQ', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'ValueRSRQ')))
-    _ResultRSRQ_Item_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    ResultRSRQ_Item = SEQ(name=u'ResultRSRQ-Item', mode=MODE_TYPE)
+    _ResultRSRQ_Item_pCI = INT(name=u'pCI', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PCI')))
+    _ResultRSRQ_Item_eARFCN = INT(name=u'eARFCN', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'EARFCN')))
+    _ResultRSRQ_Item_eCGI = SEQ(name=u'eCGI', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'ECGI')), opt=True)
+    _ResultRSRQ_Item_valueRSRQ = INT(name=u'valueRSRQ', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'ValueRSRQ')))
+    _ResultRSRQ_Item_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
     __ResultRSRQ_Item_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionField')))
-    ___ResultRSRQ_Item_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['id']))
+    ___ResultRSRQ_Item_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'id']))
     ____ResultRSRQ_Item_iE_Extensions__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____ResultRSRQ_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ResultRSRQ_Item_iE_Extensions__item__id._const_tab = ____ResultRSRQ_Item_iE_Extensions__item__id_tab
     ___ResultRSRQ_Item_iE_Extensions__item__id._const_tab_at = None
-    ___ResultRSRQ_Item_iE_Extensions__item__id._const_tab_id = 'id'
-    ___ResultRSRQ_Item_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['criticality']))
+    ___ResultRSRQ_Item_iE_Extensions__item__id._const_tab_id = u'id'
+    ___ResultRSRQ_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'criticality']))
     ____ResultRSRQ_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____ResultRSRQ_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ResultRSRQ_Item_iE_Extensions__item__criticality._const_tab = ____ResultRSRQ_Item_iE_Extensions__item__criticality_tab
-    ___ResultRSRQ_Item_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___ResultRSRQ_Item_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___ResultRSRQ_Item_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['Extension']))
+    ___ResultRSRQ_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___ResultRSRQ_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___ResultRSRQ_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'Extension']))
     ____ResultRSRQ_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____ResultRSRQ_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ResultRSRQ_Item_iE_Extensions__item__extensionValue._const_tab = ____ResultRSRQ_Item_iE_Extensions__item__extensionValue_tab
-    ___ResultRSRQ_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___ResultRSRQ_Item_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___ResultRSRQ_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___ResultRSRQ_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __ResultRSRQ_Item_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___ResultRSRQ_Item_iE_Extensions__item__id),
-        ('criticality', ___ResultRSRQ_Item_iE_Extensions__item__criticality),
-        ('extensionValue', ___ResultRSRQ_Item_iE_Extensions__item__extensionValue),
+        (u'id', ___ResultRSRQ_Item_iE_Extensions__item__id),
+        (u'criticality', ___ResultRSRQ_Item_iE_Extensions__item__criticality),
+        (u'extensionValue', ___ResultRSRQ_Item_iE_Extensions__item__extensionValue),
         ])
     __ResultRSRQ_Item_iE_Extensions__item_._ext = None
     _ResultRSRQ_Item_iE_Extensions._cont = __ResultRSRQ_Item_iE_Extensions__item_
     _ResultRSRQ_Item_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     ResultRSRQ_Item._cont = ASN1Dict([
-        ('pCI', _ResultRSRQ_Item_pCI),
-        ('eARFCN', _ResultRSRQ_Item_eARFCN),
-        ('eCGI', _ResultRSRQ_Item_eCGI),
-        ('valueRSRQ', _ResultRSRQ_Item_valueRSRQ),
-        ('iE-Extensions', _ResultRSRQ_Item_iE_Extensions),
+        (u'pCI', _ResultRSRQ_Item_pCI),
+        (u'eARFCN', _ResultRSRQ_Item_eARFCN),
+        (u'eCGI', _ResultRSRQ_Item_eCGI),
+        (u'valueRSRQ', _ResultRSRQ_Item_valueRSRQ),
+        (u'iE-Extensions', _ResultRSRQ_Item_iE_Extensions),
         ])
     ResultRSRQ_Item._ext = []
     
     #-----< ResultRSRQ-Item-ExtIEs >-----#
-    ResultRSRQ_Item_ExtIEs = CLASS(name='ResultRSRQ-Item-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    ResultRSRQ_Item_ExtIEs = CLASS(name=u'ResultRSRQ-Item-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ResultRSRQ_Item_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< ResultGERAN >-----#
-    ResultGERAN = SEQ_OF(name='ResultGERAN', mode=MODE_TYPE)
+    ResultGERAN = SEQ_OF(name=u'ResultGERAN', mode=MODE_TYPE)
     _ResultGERAN__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'ResultGERAN-Item')))
     ResultGERAN._cont = _ResultGERAN__item_
     ResultGERAN._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
     
     #-----< ResultGERAN-Item >-----#
-    ResultGERAN_Item = SEQ(name='ResultGERAN-Item', mode=MODE_TYPE)
-    _ResultGERAN_Item_bCCH = INT(name='bCCH', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'BCCH')))
-    _ResultGERAN_Item_physCellIDGERAN = INT(name='physCellIDGERAN', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PhysCellIDGERAN')))
-    _ResultGERAN_Item_rSSI = INT(name='rSSI', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'RSSI')))
-    _ResultGERAN_Item_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    ResultGERAN_Item = SEQ(name=u'ResultGERAN-Item', mode=MODE_TYPE)
+    _ResultGERAN_Item_bCCH = INT(name=u'bCCH', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'BCCH')))
+    _ResultGERAN_Item_physCellIDGERAN = INT(name=u'physCellIDGERAN', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PhysCellIDGERAN')))
+    _ResultGERAN_Item_rSSI = INT(name=u'rSSI', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'RSSI')))
+    _ResultGERAN_Item_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
     __ResultGERAN_Item_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionField')))
-    ___ResultGERAN_Item_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['id']))
+    ___ResultGERAN_Item_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'id']))
     ____ResultGERAN_Item_iE_Extensions__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____ResultGERAN_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ResultGERAN_Item_iE_Extensions__item__id._const_tab = ____ResultGERAN_Item_iE_Extensions__item__id_tab
     ___ResultGERAN_Item_iE_Extensions__item__id._const_tab_at = None
-    ___ResultGERAN_Item_iE_Extensions__item__id._const_tab_id = 'id'
-    ___ResultGERAN_Item_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['criticality']))
+    ___ResultGERAN_Item_iE_Extensions__item__id._const_tab_id = u'id'
+    ___ResultGERAN_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'criticality']))
     ____ResultGERAN_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____ResultGERAN_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ResultGERAN_Item_iE_Extensions__item__criticality._const_tab = ____ResultGERAN_Item_iE_Extensions__item__criticality_tab
-    ___ResultGERAN_Item_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___ResultGERAN_Item_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___ResultGERAN_Item_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['Extension']))
+    ___ResultGERAN_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___ResultGERAN_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___ResultGERAN_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'Extension']))
     ____ResultGERAN_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____ResultGERAN_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ResultGERAN_Item_iE_Extensions__item__extensionValue._const_tab = ____ResultGERAN_Item_iE_Extensions__item__extensionValue_tab
-    ___ResultGERAN_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___ResultGERAN_Item_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___ResultGERAN_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___ResultGERAN_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __ResultGERAN_Item_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___ResultGERAN_Item_iE_Extensions__item__id),
-        ('criticality', ___ResultGERAN_Item_iE_Extensions__item__criticality),
-        ('extensionValue', ___ResultGERAN_Item_iE_Extensions__item__extensionValue),
+        (u'id', ___ResultGERAN_Item_iE_Extensions__item__id),
+        (u'criticality', ___ResultGERAN_Item_iE_Extensions__item__criticality),
+        (u'extensionValue', ___ResultGERAN_Item_iE_Extensions__item__extensionValue),
         ])
     __ResultGERAN_Item_iE_Extensions__item_._ext = None
     _ResultGERAN_Item_iE_Extensions._cont = __ResultGERAN_Item_iE_Extensions__item_
     _ResultGERAN_Item_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     ResultGERAN_Item._cont = ASN1Dict([
-        ('bCCH', _ResultGERAN_Item_bCCH),
-        ('physCellIDGERAN', _ResultGERAN_Item_physCellIDGERAN),
-        ('rSSI', _ResultGERAN_Item_rSSI),
-        ('iE-Extensions', _ResultGERAN_Item_iE_Extensions),
+        (u'bCCH', _ResultGERAN_Item_bCCH),
+        (u'physCellIDGERAN', _ResultGERAN_Item_physCellIDGERAN),
+        (u'rSSI', _ResultGERAN_Item_rSSI),
+        (u'iE-Extensions', _ResultGERAN_Item_iE_Extensions),
         ])
     ResultGERAN_Item._ext = []
     
     #-----< ResultGERAN-Item-ExtIEs >-----#
-    ResultGERAN_Item_ExtIEs = CLASS(name='ResultGERAN-Item-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    ResultGERAN_Item_ExtIEs = CLASS(name=u'ResultGERAN-Item-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ResultGERAN_Item_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< ResultUTRAN >-----#
-    ResultUTRAN = SEQ_OF(name='ResultUTRAN', mode=MODE_TYPE)
+    ResultUTRAN = SEQ_OF(name=u'ResultUTRAN', mode=MODE_TYPE)
     _ResultUTRAN__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'ResultUTRAN-Item')))
     ResultUTRAN._cont = _ResultUTRAN__item_
     ResultUTRAN._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=8)], ev=None, er=[])
     
     #-----< ResultUTRAN-Item >-----#
-    ResultUTRAN_Item = SEQ(name='ResultUTRAN-Item', mode=MODE_TYPE)
-    _ResultUTRAN_Item_uARFCN = INT(name='uARFCN', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'UARFCN')))
-    _ResultUTRAN_Item_physCellIDUTRAN = CHOICE(name='physCellIDUTRAN', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
-    __ResultUTRAN_Item_physCellIDUTRAN_physCellIDUTRA_FDD = INT(name='physCellIDUTRA-FDD', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PhysCellIDUTRA-FDD')))
-    __ResultUTRAN_Item_physCellIDUTRAN_physCellIDUTRA_TDD = INT(name='physCellIDUTRA-TDD', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PhysCellIDUTRA-TDD')))
+    ResultUTRAN_Item = SEQ(name=u'ResultUTRAN-Item', mode=MODE_TYPE)
+    _ResultUTRAN_Item_uARFCN = INT(name=u'uARFCN', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'UARFCN')))
+    _ResultUTRAN_Item_physCellIDUTRAN = CHOICE(name=u'physCellIDUTRAN', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_EXPLICIT))
+    __ResultUTRAN_Item_physCellIDUTRAN_physCellIDUTRA_FDD = INT(name=u'physCellIDUTRA-FDD', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PhysCellIDUTRA-FDD')))
+    __ResultUTRAN_Item_physCellIDUTRAN_physCellIDUTRA_TDD = INT(name=u'physCellIDUTRA-TDD', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PhysCellIDUTRA-TDD')))
     _ResultUTRAN_Item_physCellIDUTRAN._cont = ASN1Dict([
-        ('physCellIDUTRA-FDD', __ResultUTRAN_Item_physCellIDUTRAN_physCellIDUTRA_FDD),
-        ('physCellIDUTRA-TDD', __ResultUTRAN_Item_physCellIDUTRAN_physCellIDUTRA_TDD),
+        (u'physCellIDUTRA-FDD', __ResultUTRAN_Item_physCellIDUTRAN_physCellIDUTRA_FDD),
+        (u'physCellIDUTRA-TDD', __ResultUTRAN_Item_physCellIDUTRAN_physCellIDUTRA_TDD),
         ])
     _ResultUTRAN_Item_physCellIDUTRAN._ext = None
-    _ResultUTRAN_Item_uTRA_RSCP = INT(name='uTRA-RSCP', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'UTRA-RSCP')), opt=True)
-    _ResultUTRAN_Item_uTRA_EcN0 = INT(name='uTRA-EcN0', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'UTRA-EcN0')), opt=True)
-    _ResultUTRAN_Item_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _ResultUTRAN_Item_uTRA_RSCP = INT(name=u'uTRA-RSCP', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'UTRA-RSCP')), opt=True)
+    _ResultUTRAN_Item_uTRA_EcN0 = INT(name=u'uTRA-EcN0', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'UTRA-EcN0')), opt=True)
+    _ResultUTRAN_Item_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
     __ResultUTRAN_Item_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionField')))
-    ___ResultUTRAN_Item_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['id']))
+    ___ResultUTRAN_Item_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'id']))
     ____ResultUTRAN_Item_iE_Extensions__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____ResultUTRAN_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ResultUTRAN_Item_iE_Extensions__item__id._const_tab = ____ResultUTRAN_Item_iE_Extensions__item__id_tab
     ___ResultUTRAN_Item_iE_Extensions__item__id._const_tab_at = None
-    ___ResultUTRAN_Item_iE_Extensions__item__id._const_tab_id = 'id'
-    ___ResultUTRAN_Item_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['criticality']))
+    ___ResultUTRAN_Item_iE_Extensions__item__id._const_tab_id = u'id'
+    ___ResultUTRAN_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'criticality']))
     ____ResultUTRAN_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____ResultUTRAN_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ResultUTRAN_Item_iE_Extensions__item__criticality._const_tab = ____ResultUTRAN_Item_iE_Extensions__item__criticality_tab
-    ___ResultUTRAN_Item_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___ResultUTRAN_Item_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___ResultUTRAN_Item_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['Extension']))
+    ___ResultUTRAN_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___ResultUTRAN_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___ResultUTRAN_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'Extension']))
     ____ResultUTRAN_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____ResultUTRAN_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ResultUTRAN_Item_iE_Extensions__item__extensionValue._const_tab = ____ResultUTRAN_Item_iE_Extensions__item__extensionValue_tab
-    ___ResultUTRAN_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___ResultUTRAN_Item_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___ResultUTRAN_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___ResultUTRAN_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __ResultUTRAN_Item_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___ResultUTRAN_Item_iE_Extensions__item__id),
-        ('criticality', ___ResultUTRAN_Item_iE_Extensions__item__criticality),
-        ('extensionValue', ___ResultUTRAN_Item_iE_Extensions__item__extensionValue),
+        (u'id', ___ResultUTRAN_Item_iE_Extensions__item__id),
+        (u'criticality', ___ResultUTRAN_Item_iE_Extensions__item__criticality),
+        (u'extensionValue', ___ResultUTRAN_Item_iE_Extensions__item__extensionValue),
         ])
     __ResultUTRAN_Item_iE_Extensions__item_._ext = None
     _ResultUTRAN_Item_iE_Extensions._cont = __ResultUTRAN_Item_iE_Extensions__item_
     _ResultUTRAN_Item_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     ResultUTRAN_Item._cont = ASN1Dict([
-        ('uARFCN', _ResultUTRAN_Item_uARFCN),
-        ('physCellIDUTRAN', _ResultUTRAN_Item_physCellIDUTRAN),
-        ('uTRA-RSCP', _ResultUTRAN_Item_uTRA_RSCP),
-        ('uTRA-EcN0', _ResultUTRAN_Item_uTRA_EcN0),
-        ('iE-Extensions', _ResultUTRAN_Item_iE_Extensions),
+        (u'uARFCN', _ResultUTRAN_Item_uARFCN),
+        (u'physCellIDUTRAN', _ResultUTRAN_Item_physCellIDUTRAN),
+        (u'uTRA-RSCP', _ResultUTRAN_Item_uTRA_RSCP),
+        (u'uTRA-EcN0', _ResultUTRAN_Item_uTRA_EcN0),
+        (u'iE-Extensions', _ResultUTRAN_Item_iE_Extensions),
         ])
     ResultUTRAN_Item._ext = []
     
     #-----< ResultUTRAN-Item-ExtIEs >-----#
-    ResultUTRAN_Item_ExtIEs = CLASS(name='ResultUTRAN-Item-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    ResultUTRAN_Item_ExtIEs = CLASS(name=u'ResultUTRAN-Item-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ResultUTRAN_Item_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< ResultNR >-----#
-    ResultNR = SEQ_OF(name='ResultNR', mode=MODE_TYPE)
+    ResultNR = SEQ_OF(name=u'ResultNR', mode=MODE_TYPE)
     _ResultNR__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'ResultNR-Item')))
     ResultNR._cont = _ResultNR__item_
     ResultNR._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
     
     #-----< ResultNR-Item >-----#
-    ResultNR_Item = SEQ(name='ResultNR-Item', mode=MODE_TYPE)
-    _ResultNR_Item_nRARFCN = INT(name='nRARFCN', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NRARFCN')))
-    _ResultNR_Item_nRPCI = INT(name='nRPCI', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NRPCI')))
-    _ResultNR_Item_sS_NRRSRP = INT(name='sS-NRRSRP', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'SS-NRRSRP')), opt=True)
-    _ResultNR_Item_sS_NRRSRQ = INT(name='sS-NRRSRQ', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'SS-NRRSRQ')), opt=True)
-    _ResultNR_Item_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    ResultNR_Item = SEQ(name=u'ResultNR-Item', mode=MODE_TYPE)
+    _ResultNR_Item_nRARFCN = INT(name=u'nRARFCN', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NRARFCN')))
+    _ResultNR_Item_nRPCI = INT(name=u'nRPCI', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'NRPCI')))
+    _ResultNR_Item_sS_NRRSRP = INT(name=u'sS-NRRSRP', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'SS-NRRSRP')), opt=True)
+    _ResultNR_Item_sS_NRRSRQ = INT(name=u'sS-NRRSRQ', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'SS-NRRSRQ')), opt=True)
+    _ResultNR_Item_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
     __ResultNR_Item_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionField')))
-    ___ResultNR_Item_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['id']))
+    ___ResultNR_Item_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'id']))
     ____ResultNR_Item_iE_Extensions__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
-    _____ResultNR_Item_iE_Extensions__item__id_tab_val_Extension_0 = SEQ_OF(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'ResultsPerSSB-Index-List')))
-    _____ResultNR_Item_iE_Extensions__item__id_tab_val_Extension_1 = SEQ(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'NR-CGI')))
-    ____ResultNR_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[dict([('id', 25), ('criticality', 'ignore'), ('Extension', _____ResultNR_Item_iE_Extensions__item__id_tab_val_Extension_0), ('presence', 'optional')]), dict([('id', 27), ('criticality', 'ignore'), ('Extension', _____ResultNR_Item_iE_Extensions__item__id_tab_val_Extension_1), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____ResultNR_Item_iE_Extensions__item__id_tab_val_Extension_0 = SEQ_OF(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'ResultsPerSSB-Index-List')))
+    _____ResultNR_Item_iE_Extensions__item__id_tab_val_Extension_1 = SEQ(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'NR-CGI')))
+    ____ResultNR_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'ignore'), (u'Extension', _____ResultNR_Item_iE_Extensions__item__id_tab_val_Extension_0), (u'presence', u'optional')]), dict([(u'id', 27), (u'criticality', u'ignore'), (u'Extension', _____ResultNR_Item_iE_Extensions__item__id_tab_val_Extension_1), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___ResultNR_Item_iE_Extensions__item__id._const_tab = ____ResultNR_Item_iE_Extensions__item__id_tab
     ___ResultNR_Item_iE_Extensions__item__id._const_tab_at = None
-    ___ResultNR_Item_iE_Extensions__item__id._const_tab_id = 'id'
-    ___ResultNR_Item_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['criticality']))
+    ___ResultNR_Item_iE_Extensions__item__id._const_tab_id = u'id'
+    ___ResultNR_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'criticality']))
     ___ResultNR_Item_iE_Extensions__item__criticality._const_tab = ____ResultNR_Item_iE_Extensions__item__id_tab
-    ___ResultNR_Item_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___ResultNR_Item_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___ResultNR_Item_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['Extension']))
+    ___ResultNR_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___ResultNR_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___ResultNR_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'Extension']))
     ___ResultNR_Item_iE_Extensions__item__extensionValue._const_tab = ____ResultNR_Item_iE_Extensions__item__id_tab
-    ___ResultNR_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___ResultNR_Item_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___ResultNR_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___ResultNR_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __ResultNR_Item_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___ResultNR_Item_iE_Extensions__item__id),
-        ('criticality', ___ResultNR_Item_iE_Extensions__item__criticality),
-        ('extensionValue', ___ResultNR_Item_iE_Extensions__item__extensionValue),
+        (u'id', ___ResultNR_Item_iE_Extensions__item__id),
+        (u'criticality', ___ResultNR_Item_iE_Extensions__item__criticality),
+        (u'extensionValue', ___ResultNR_Item_iE_Extensions__item__extensionValue),
         ])
     __ResultNR_Item_iE_Extensions__item_._ext = None
     _ResultNR_Item_iE_Extensions._cont = __ResultNR_Item_iE_Extensions__item_
     _ResultNR_Item_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     ResultNR_Item._cont = ASN1Dict([
-        ('nRARFCN', _ResultNR_Item_nRARFCN),
-        ('nRPCI', _ResultNR_Item_nRPCI),
-        ('sS-NRRSRP', _ResultNR_Item_sS_NRRSRP),
-        ('sS-NRRSRQ', _ResultNR_Item_sS_NRRSRQ),
-        ('iE-Extensions', _ResultNR_Item_iE_Extensions),
+        (u'nRARFCN', _ResultNR_Item_nRARFCN),
+        (u'nRPCI', _ResultNR_Item_nRPCI),
+        (u'sS-NRRSRP', _ResultNR_Item_sS_NRRSRP),
+        (u'sS-NRRSRQ', _ResultNR_Item_sS_NRRSRQ),
+        (u'iE-Extensions', _ResultNR_Item_iE_Extensions),
         ])
     ResultNR_Item._ext = []
     
     #-----< ResultNR-Item-ExtIEs >-----#
-    ResultNR_Item_ExtIEs = CLASS(name='ResultNR-Item-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
-    _ResultNR_Item_ExtIEs_val_Extension_0 = SEQ_OF(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'ResultsPerSSB-Index-List')))
-    _ResultNR_Item_ExtIEs_val_Extension_1 = SEQ(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'NR-CGI')))
-    ResultNR_Item_ExtIEs._val = ASN1Set(rv=[dict([('id', 25), ('criticality', 'ignore'), ('Extension', _ResultNR_Item_ExtIEs_val_Extension_0), ('presence', 'optional')]), dict([('id', 27), ('criticality', 'ignore'), ('Extension', _ResultNR_Item_ExtIEs_val_Extension_1), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    ResultNR_Item_ExtIEs = CLASS(name=u'ResultNR-Item-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    _ResultNR_Item_ExtIEs_val_Extension_0 = SEQ_OF(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'ResultsPerSSB-Index-List')))
+    _ResultNR_Item_ExtIEs_val_Extension_1 = SEQ(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'NR-CGI')))
+    ResultNR_Item_ExtIEs._val = ASN1Set(rv=[dict([(u'id', 25), (u'criticality', u'ignore'), (u'Extension', _ResultNR_Item_ExtIEs_val_Extension_0), (u'presence', u'optional')]), dict([(u'id', 27), (u'criticality', u'ignore'), (u'Extension', _ResultNR_Item_ExtIEs_val_Extension_1), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< ResultsPerSSB-Index-List >-----#
-    ResultsPerSSB_Index_List = SEQ_OF(name='ResultsPerSSB-Index-List', mode=MODE_TYPE)
+    ResultsPerSSB_Index_List = SEQ_OF(name=u'ResultsPerSSB-Index-List', mode=MODE_TYPE)
     _ResultsPerSSB_Index_List__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'ResultsPerSSB-Index-Item')))
     ResultsPerSSB_Index_List._cont = _ResultsPerSSB_Index_List__item_
     ResultsPerSSB_Index_List._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=64)], ev=None, er=[])
     
     #-----< ResultsPerSSB-Index-Item >-----#
-    ResultsPerSSB_Index_Item = SEQ(name='ResultsPerSSB-Index-Item', mode=MODE_TYPE)
-    _ResultsPerSSB_Index_Item_sSB_Index = INT(name='sSB-Index', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'SSB-Index')))
-    _ResultsPerSSB_Index_Item_sS_NRRSRPBeamValue = INT(name='sS-NRRSRPBeamValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'SS-NRRSRP')), opt=True)
-    _ResultsPerSSB_Index_Item_sS_NRRSRQBeamValue = INT(name='sS-NRRSRQBeamValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'SS-NRRSRQ')), opt=True)
-    _ResultsPerSSB_Index_Item_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    ResultsPerSSB_Index_Item = SEQ(name=u'ResultsPerSSB-Index-Item', mode=MODE_TYPE)
+    _ResultsPerSSB_Index_Item_sSB_Index = INT(name=u'sSB-Index', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'SSB-Index')))
+    _ResultsPerSSB_Index_Item_sS_NRRSRPBeamValue = INT(name=u'sS-NRRSRPBeamValue', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'SS-NRRSRP')), opt=True)
+    _ResultsPerSSB_Index_Item_sS_NRRSRQBeamValue = INT(name=u'sS-NRRSRQBeamValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'SS-NRRSRQ')), opt=True)
+    _ResultsPerSSB_Index_Item_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
     __ResultsPerSSB_Index_Item_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionField')))
-    ___ResultsPerSSB_Index_Item_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['id']))
+    ___ResultsPerSSB_Index_Item_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'id']))
     ____ResultsPerSSB_Index_Item_iE_Extensions__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____ResultsPerSSB_Index_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ResultsPerSSB_Index_Item_iE_Extensions__item__id._const_tab = ____ResultsPerSSB_Index_Item_iE_Extensions__item__id_tab
     ___ResultsPerSSB_Index_Item_iE_Extensions__item__id._const_tab_at = None
-    ___ResultsPerSSB_Index_Item_iE_Extensions__item__id._const_tab_id = 'id'
-    ___ResultsPerSSB_Index_Item_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['criticality']))
+    ___ResultsPerSSB_Index_Item_iE_Extensions__item__id._const_tab_id = u'id'
+    ___ResultsPerSSB_Index_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'criticality']))
     ____ResultsPerSSB_Index_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____ResultsPerSSB_Index_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ResultsPerSSB_Index_Item_iE_Extensions__item__criticality._const_tab = ____ResultsPerSSB_Index_Item_iE_Extensions__item__criticality_tab
-    ___ResultsPerSSB_Index_Item_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___ResultsPerSSB_Index_Item_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___ResultsPerSSB_Index_Item_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['Extension']))
+    ___ResultsPerSSB_Index_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___ResultsPerSSB_Index_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___ResultsPerSSB_Index_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'Extension']))
     ____ResultsPerSSB_Index_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____ResultsPerSSB_Index_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ResultsPerSSB_Index_Item_iE_Extensions__item__extensionValue._const_tab = ____ResultsPerSSB_Index_Item_iE_Extensions__item__extensionValue_tab
-    ___ResultsPerSSB_Index_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___ResultsPerSSB_Index_Item_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___ResultsPerSSB_Index_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___ResultsPerSSB_Index_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __ResultsPerSSB_Index_Item_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___ResultsPerSSB_Index_Item_iE_Extensions__item__id),
-        ('criticality', ___ResultsPerSSB_Index_Item_iE_Extensions__item__criticality),
-        ('extensionValue', ___ResultsPerSSB_Index_Item_iE_Extensions__item__extensionValue),
+        (u'id', ___ResultsPerSSB_Index_Item_iE_Extensions__item__id),
+        (u'criticality', ___ResultsPerSSB_Index_Item_iE_Extensions__item__criticality),
+        (u'extensionValue', ___ResultsPerSSB_Index_Item_iE_Extensions__item__extensionValue),
         ])
     __ResultsPerSSB_Index_Item_iE_Extensions__item_._ext = None
     _ResultsPerSSB_Index_Item_iE_Extensions._cont = __ResultsPerSSB_Index_Item_iE_Extensions__item_
     _ResultsPerSSB_Index_Item_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     ResultsPerSSB_Index_Item._cont = ASN1Dict([
-        ('sSB-Index', _ResultsPerSSB_Index_Item_sSB_Index),
-        ('sS-NRRSRPBeamValue', _ResultsPerSSB_Index_Item_sS_NRRSRPBeamValue),
-        ('sS-NRRSRQBeamValue', _ResultsPerSSB_Index_Item_sS_NRRSRQBeamValue),
-        ('iE-Extensions', _ResultsPerSSB_Index_Item_iE_Extensions),
+        (u'sSB-Index', _ResultsPerSSB_Index_Item_sSB_Index),
+        (u'sS-NRRSRPBeamValue', _ResultsPerSSB_Index_Item_sS_NRRSRPBeamValue),
+        (u'sS-NRRSRQBeamValue', _ResultsPerSSB_Index_Item_sS_NRRSRQBeamValue),
+        (u'iE-Extensions', _ResultsPerSSB_Index_Item_iE_Extensions),
         ])
     ResultsPerSSB_Index_Item._ext = []
     
     #-----< ResultsPerSSB-Index-Item-ExtIEs >-----#
-    ResultsPerSSB_Index_Item_ExtIEs = CLASS(name='ResultsPerSSB-Index-Item-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    ResultsPerSSB_Index_Item_ExtIEs = CLASS(name=u'ResultsPerSSB-Index-Item-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ResultsPerSSB_Index_Item_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< RSSI >-----#
-    RSSI = INT(name='RSSI', mode=MODE_TYPE)
+    RSSI = INT(name=u'RSSI', mode=MODE_TYPE)
     RSSI._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=63)], ev=[], er=[])
     
     #-----< SFNInitialisationTime >-----#
-    SFNInitialisationTime = BIT_STR(name='SFNInitialisationTime', mode=MODE_TYPE)
+    SFNInitialisationTime = BIT_STR(name=u'SFNInitialisationTime', mode=MODE_TYPE)
     SFNInitialisationTime._const_sz = ASN1Set(rv=[64], rr=[], ev=None, er=[])
     
     #-----< SRSConfigurationForAllCells >-----#
-    SRSConfigurationForAllCells = SEQ_OF(name='SRSConfigurationForAllCells', mode=MODE_TYPE)
+    SRSConfigurationForAllCells = SEQ_OF(name=u'SRSConfigurationForAllCells', mode=MODE_TYPE)
     _SRSConfigurationForAllCells__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'SRSConfigurationForOneCell')))
     SRSConfigurationForAllCells._cont = _SRSConfigurationForAllCells__item_
     SRSConfigurationForAllCells._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=5)], ev=None, er=[])
     
     #-----< SRSConfigurationForOneCell >-----#
-    SRSConfigurationForOneCell = SEQ(name='SRSConfigurationForOneCell', mode=MODE_TYPE)
-    _SRSConfigurationForOneCell_pci = INT(name='pci', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PCI')))
-    _SRSConfigurationForOneCell_ul_earfcn = INT(name='ul-earfcn', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'EARFCN')))
-    _SRSConfigurationForOneCell_ul_bandwidth = ENUM(name='ul-bandwidth', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _SRSConfigurationForOneCell_ul_bandwidth._cont = ASN1Dict([('n6', 0), ('n15', 1), ('n25', 2), ('n50', 3), ('n75', 4), ('n100', 5)])
+    SRSConfigurationForOneCell = SEQ(name=u'SRSConfigurationForOneCell', mode=MODE_TYPE)
+    _SRSConfigurationForOneCell_pci = INT(name=u'pci', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PCI')))
+    _SRSConfigurationForOneCell_ul_earfcn = INT(name=u'ul-earfcn', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'EARFCN')))
+    _SRSConfigurationForOneCell_ul_bandwidth = ENUM(name=u'ul-bandwidth', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SRSConfigurationForOneCell_ul_bandwidth._cont = ASN1Dict([(u'n6', 0), (u'n15', 1), (u'n25', 2), (u'n50', 3), (u'n75', 4), (u'n100', 5)])
     _SRSConfigurationForOneCell_ul_bandwidth._ext = None
-    _SRSConfigurationForOneCell_ul_cyclicPrefixLength = ENUM(name='ul-cyclicPrefixLength', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'CPLength')))
-    _SRSConfigurationForOneCell_srs_BandwidthConfig = ENUM(name='srs-BandwidthConfig', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _SRSConfigurationForOneCell_srs_BandwidthConfig._cont = ASN1Dict([('bw0', 0), ('bw1', 1), ('bw2', 2), ('bw3', 3), ('bw4', 4), ('bw5', 5), ('bw6', 6), ('bw7', 7)])
+    _SRSConfigurationForOneCell_ul_cyclicPrefixLength = ENUM(name=u'ul-cyclicPrefixLength', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'CPLength')))
+    _SRSConfigurationForOneCell_srs_BandwidthConfig = ENUM(name=u'srs-BandwidthConfig', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SRSConfigurationForOneCell_srs_BandwidthConfig._cont = ASN1Dict([(u'bw0', 0), (u'bw1', 1), (u'bw2', 2), (u'bw3', 3), (u'bw4', 4), (u'bw5', 5), (u'bw6', 6), (u'bw7', 7)])
     _SRSConfigurationForOneCell_srs_BandwidthConfig._ext = None
-    _SRSConfigurationForOneCell_srs_Bandwidth = ENUM(name='srs-Bandwidth', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _SRSConfigurationForOneCell_srs_Bandwidth._cont = ASN1Dict([('bw0', 0), ('bw1', 1), ('bw2', 2), ('bw3', 3)])
+    _SRSConfigurationForOneCell_srs_Bandwidth = ENUM(name=u'srs-Bandwidth', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SRSConfigurationForOneCell_srs_Bandwidth._cont = ASN1Dict([(u'bw0', 0), (u'bw1', 1), (u'bw2', 2), (u'bw3', 3)])
     _SRSConfigurationForOneCell_srs_Bandwidth._ext = None
-    _SRSConfigurationForOneCell_srs_AntennaPort = ENUM(name='srs-AntennaPort', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _SRSConfigurationForOneCell_srs_AntennaPort._cont = ASN1Dict([('an1', 0), ('an2', 1), ('an4', 2)])
+    _SRSConfigurationForOneCell_srs_AntennaPort = ENUM(name=u'srs-AntennaPort', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SRSConfigurationForOneCell_srs_AntennaPort._cont = ASN1Dict([(u'an1', 0), (u'an2', 1), (u'an4', 2)])
     _SRSConfigurationForOneCell_srs_AntennaPort._ext = []
-    _SRSConfigurationForOneCell_srs_HoppingBandwidth = ENUM(name='srs-HoppingBandwidth', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _SRSConfigurationForOneCell_srs_HoppingBandwidth._cont = ASN1Dict([('hbw0', 0), ('hbw1', 1), ('hbw2', 2), ('hbw3', 3)])
+    _SRSConfigurationForOneCell_srs_HoppingBandwidth = ENUM(name=u'srs-HoppingBandwidth', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SRSConfigurationForOneCell_srs_HoppingBandwidth._cont = ASN1Dict([(u'hbw0', 0), (u'hbw1', 1), (u'hbw2', 2), (u'hbw3', 3)])
     _SRSConfigurationForOneCell_srs_HoppingBandwidth._ext = None
-    _SRSConfigurationForOneCell_srs_cyclicShift = ENUM(name='srs-cyclicShift', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _SRSConfigurationForOneCell_srs_cyclicShift._cont = ASN1Dict([('cs0', 0), ('cs1', 1), ('cs2', 2), ('cs3', 3), ('cs4', 4), ('cs5', 5), ('cs6', 6), ('cs7', 7)])
+    _SRSConfigurationForOneCell_srs_cyclicShift = ENUM(name=u'srs-cyclicShift', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SRSConfigurationForOneCell_srs_cyclicShift._cont = ASN1Dict([(u'cs0', 0), (u'cs1', 1), (u'cs2', 2), (u'cs3', 3), (u'cs4', 4), (u'cs5', 5), (u'cs6', 6), (u'cs7', 7)])
     _SRSConfigurationForOneCell_srs_cyclicShift._ext = None
-    _SRSConfigurationForOneCell_srs_ConfigIndex = INT(name='srs-ConfigIndex', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SRSConfigurationForOneCell_srs_ConfigIndex = INT(name=u'srs-ConfigIndex', mode=MODE_TYPE, tag=(9, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _SRSConfigurationForOneCell_srs_ConfigIndex._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1023)], ev=None, er=[])
-    _SRSConfigurationForOneCell_maxUpPts = ENUM(name='maxUpPts', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
-    _SRSConfigurationForOneCell_maxUpPts._cont = ASN1Dict([('true', 0)])
+    _SRSConfigurationForOneCell_maxUpPts = ENUM(name=u'maxUpPts', mode=MODE_TYPE, tag=(10, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SRSConfigurationForOneCell_maxUpPts._cont = ASN1Dict([(u'true', 0)])
     _SRSConfigurationForOneCell_maxUpPts._ext = None
-    _SRSConfigurationForOneCell_transmissionComb = INT(name='transmissionComb', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SRSConfigurationForOneCell_transmissionComb = INT(name=u'transmissionComb', mode=MODE_TYPE, tag=(11, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _SRSConfigurationForOneCell_transmissionComb._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=1)], ev=None, er=[])
-    _SRSConfigurationForOneCell_freqDomainPosition = INT(name='freqDomainPosition', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SRSConfigurationForOneCell_freqDomainPosition = INT(name=u'freqDomainPosition', mode=MODE_TYPE, tag=(12, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _SRSConfigurationForOneCell_freqDomainPosition._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=23)], ev=None, er=[])
-    _SRSConfigurationForOneCell_groupHoppingEnabled = BOOL(name='groupHoppingEnabled', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _SRSConfigurationForOneCell_deltaSS = INT(name='deltaSS', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _SRSConfigurationForOneCell_groupHoppingEnabled = BOOL(name=u'groupHoppingEnabled', mode=MODE_TYPE, tag=(13, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _SRSConfigurationForOneCell_deltaSS = INT(name=u'deltaSS', mode=MODE_TYPE, tag=(14, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _SRSConfigurationForOneCell_deltaSS._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=29)], ev=None, er=[])
-    _SRSConfigurationForOneCell_sfnInitialisationTime = BIT_STR(name='sfnInitialisationTime', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'SFNInitialisationTime')))
+    _SRSConfigurationForOneCell_sfnInitialisationTime = BIT_STR(name=u'sfnInitialisationTime', mode=MODE_TYPE, tag=(15, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'SFNInitialisationTime')))
     SRSConfigurationForOneCell._cont = ASN1Dict([
-        ('pci', _SRSConfigurationForOneCell_pci),
-        ('ul-earfcn', _SRSConfigurationForOneCell_ul_earfcn),
-        ('ul-bandwidth', _SRSConfigurationForOneCell_ul_bandwidth),
-        ('ul-cyclicPrefixLength', _SRSConfigurationForOneCell_ul_cyclicPrefixLength),
-        ('srs-BandwidthConfig', _SRSConfigurationForOneCell_srs_BandwidthConfig),
-        ('srs-Bandwidth', _SRSConfigurationForOneCell_srs_Bandwidth),
-        ('srs-AntennaPort', _SRSConfigurationForOneCell_srs_AntennaPort),
-        ('srs-HoppingBandwidth', _SRSConfigurationForOneCell_srs_HoppingBandwidth),
-        ('srs-cyclicShift', _SRSConfigurationForOneCell_srs_cyclicShift),
-        ('srs-ConfigIndex', _SRSConfigurationForOneCell_srs_ConfigIndex),
-        ('maxUpPts', _SRSConfigurationForOneCell_maxUpPts),
-        ('transmissionComb', _SRSConfigurationForOneCell_transmissionComb),
-        ('freqDomainPosition', _SRSConfigurationForOneCell_freqDomainPosition),
-        ('groupHoppingEnabled', _SRSConfigurationForOneCell_groupHoppingEnabled),
-        ('deltaSS', _SRSConfigurationForOneCell_deltaSS),
-        ('sfnInitialisationTime', _SRSConfigurationForOneCell_sfnInitialisationTime),
+        (u'pci', _SRSConfigurationForOneCell_pci),
+        (u'ul-earfcn', _SRSConfigurationForOneCell_ul_earfcn),
+        (u'ul-bandwidth', _SRSConfigurationForOneCell_ul_bandwidth),
+        (u'ul-cyclicPrefixLength', _SRSConfigurationForOneCell_ul_cyclicPrefixLength),
+        (u'srs-BandwidthConfig', _SRSConfigurationForOneCell_srs_BandwidthConfig),
+        (u'srs-Bandwidth', _SRSConfigurationForOneCell_srs_Bandwidth),
+        (u'srs-AntennaPort', _SRSConfigurationForOneCell_srs_AntennaPort),
+        (u'srs-HoppingBandwidth', _SRSConfigurationForOneCell_srs_HoppingBandwidth),
+        (u'srs-cyclicShift', _SRSConfigurationForOneCell_srs_cyclicShift),
+        (u'srs-ConfigIndex', _SRSConfigurationForOneCell_srs_ConfigIndex),
+        (u'maxUpPts', _SRSConfigurationForOneCell_maxUpPts),
+        (u'transmissionComb', _SRSConfigurationForOneCell_transmissionComb),
+        (u'freqDomainPosition', _SRSConfigurationForOneCell_freqDomainPosition),
+        (u'groupHoppingEnabled', _SRSConfigurationForOneCell_groupHoppingEnabled),
+        (u'deltaSS', _SRSConfigurationForOneCell_deltaSS),
+        (u'sfnInitialisationTime', _SRSConfigurationForOneCell_sfnInitialisationTime),
         ])
     SRSConfigurationForOneCell._ext = []
     
     #-----< Subframeallocation >-----#
-    Subframeallocation = CHOICE(name='Subframeallocation', mode=MODE_TYPE)
-    _Subframeallocation_oneFrame = BIT_STR(name='oneFrame', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    Subframeallocation = CHOICE(name=u'Subframeallocation', mode=MODE_TYPE)
+    _Subframeallocation_oneFrame = BIT_STR(name=u'oneFrame', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _Subframeallocation_oneFrame._const_sz = ASN1Set(rv=[6], rr=[], ev=None, er=[])
-    _Subframeallocation_fourFrames = BIT_STR(name='fourFrames', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _Subframeallocation_fourFrames = BIT_STR(name=u'fourFrames', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _Subframeallocation_fourFrames._const_sz = ASN1Set(rv=[24], rr=[], ev=None, er=[])
     Subframeallocation._cont = ASN1Dict([
-        ('oneFrame', _Subframeallocation_oneFrame),
-        ('fourFrames', _Subframeallocation_fourFrames),
+        (u'oneFrame', _Subframeallocation_oneFrame),
+        (u'fourFrames', _Subframeallocation_fourFrames),
         ])
     Subframeallocation._ext = None
     
     #-----< SS-NRRSRP >-----#
-    SS_NRRSRP = INT(name='SS-NRRSRP', mode=MODE_TYPE)
+    SS_NRRSRP = INT(name=u'SS-NRRSRP', mode=MODE_TYPE)
     SS_NRRSRP._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=127)], ev=None, er=[])
     
     #-----< SS-NRRSRQ >-----#
-    SS_NRRSRQ = INT(name='SS-NRRSRQ', mode=MODE_TYPE)
+    SS_NRRSRQ = INT(name=u'SS-NRRSRQ', mode=MODE_TYPE)
     SS_NRRSRQ._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=127)], ev=None, er=[])
     
     #-----< SSB-Index >-----#
-    SSB_Index = INT(name='SSB-Index', mode=MODE_TYPE)
+    SSB_Index = INT(name=u'SSB-Index', mode=MODE_TYPE)
     SSB_Index._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=63)], ev=None, er=[])
     
     #-----< SSID >-----#
-    SSID = OCT_STR(name='SSID', mode=MODE_TYPE)
+    SSID = OCT_STR(name=u'SSID', mode=MODE_TYPE)
     SSID._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
     
     #-----< SystemInformation >-----#
-    SystemInformation = SEQ_OF(name='SystemInformation', mode=MODE_TYPE)
+    SystemInformation = SEQ_OF(name=u'SystemInformation', mode=MODE_TYPE)
     _SystemInformation__item_ = SEQ(name='_item_', mode=MODE_TYPE)
-    __SystemInformation__item__broadcastPeriodicity = ENUM(name='broadcastPeriodicity', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'BroadcastPeriodicity')))
-    __SystemInformation__item__posSIBs = SEQ_OF(name='posSIBs', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PosSIBs')))
-    __SystemInformation__item__iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    __SystemInformation__item__broadcastPeriodicity = ENUM(name=u'broadcastPeriodicity', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'BroadcastPeriodicity')))
+    __SystemInformation__item__posSIBs = SEQ_OF(name=u'posSIBs', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PosSIBs')))
+    __SystemInformation__item__iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
     ___SystemInformation__item__iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionField')))
-    ____SystemInformation__item__iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['id']))
+    ____SystemInformation__item__iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'id']))
     _____SystemInformation__item__iE_Extensions__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     _____SystemInformation__item__iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____SystemInformation__item__iE_Extensions__item__id._const_tab = _____SystemInformation__item__iE_Extensions__item__id_tab
     ____SystemInformation__item__iE_Extensions__item__id._const_tab_at = None
-    ____SystemInformation__item__iE_Extensions__item__id._const_tab_id = 'id'
-    ____SystemInformation__item__iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['criticality']))
+    ____SystemInformation__item__iE_Extensions__item__id._const_tab_id = u'id'
+    ____SystemInformation__item__iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'criticality']))
     _____SystemInformation__item__iE_Extensions__item__criticality_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     _____SystemInformation__item__iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____SystemInformation__item__iE_Extensions__item__criticality._const_tab = _____SystemInformation__item__iE_Extensions__item__criticality_tab
-    ____SystemInformation__item__iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ____SystemInformation__item__iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ____SystemInformation__item__iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['Extension']))
+    ____SystemInformation__item__iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ____SystemInformation__item__iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ____SystemInformation__item__iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'Extension']))
     _____SystemInformation__item__iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     _____SystemInformation__item__iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____SystemInformation__item__iE_Extensions__item__extensionValue._const_tab = _____SystemInformation__item__iE_Extensions__item__extensionValue_tab
-    ____SystemInformation__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ____SystemInformation__item__iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ____SystemInformation__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ____SystemInformation__item__iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___SystemInformation__item__iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ____SystemInformation__item__iE_Extensions__item__id),
-        ('criticality', ____SystemInformation__item__iE_Extensions__item__criticality),
-        ('extensionValue', ____SystemInformation__item__iE_Extensions__item__extensionValue),
+        (u'id', ____SystemInformation__item__iE_Extensions__item__id),
+        (u'criticality', ____SystemInformation__item__iE_Extensions__item__criticality),
+        (u'extensionValue', ____SystemInformation__item__iE_Extensions__item__extensionValue),
         ])
     ___SystemInformation__item__iE_Extensions__item_._ext = None
     __SystemInformation__item__iE_Extensions._cont = ___SystemInformation__item__iE_Extensions__item_
     __SystemInformation__item__iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     _SystemInformation__item_._cont = ASN1Dict([
-        ('broadcastPeriodicity', __SystemInformation__item__broadcastPeriodicity),
-        ('posSIBs', __SystemInformation__item__posSIBs),
-        ('iE-Extensions', __SystemInformation__item__iE_Extensions),
+        (u'broadcastPeriodicity', __SystemInformation__item__broadcastPeriodicity),
+        (u'posSIBs', __SystemInformation__item__posSIBs),
+        (u'iE-Extensions', __SystemInformation__item__iE_Extensions),
         ])
     _SystemInformation__item_._ext = []
     SystemInformation._cont = _SystemInformation__item_
     SystemInformation._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=32)], ev=None, er=[])
     
     #-----< SystemInformation-ExtIEs >-----#
-    SystemInformation_ExtIEs = CLASS(name='SystemInformation-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    SystemInformation_ExtIEs = CLASS(name=u'SystemInformation-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     SystemInformation_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< TAC >-----#
-    TAC = OCT_STR(name='TAC', mode=MODE_TYPE)
+    TAC = OCT_STR(name=u'TAC', mode=MODE_TYPE)
     TAC._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
     
     #-----< TDDConfiguration >-----#
-    TDDConfiguration = SEQ(name='TDDConfiguration', mode=MODE_TYPE)
-    _TDDConfiguration_subframeAssignment = ENUM(name='subframeAssignment', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
-    _TDDConfiguration_subframeAssignment._cont = ASN1Dict([('sa0', 0), ('sa1', 1), ('sa2', 2), ('sa3', 3), ('sa4', 4), ('sa5', 5), ('sa6', 6)])
+    TDDConfiguration = SEQ(name=u'TDDConfiguration', mode=MODE_TYPE)
+    _TDDConfiguration_subframeAssignment = ENUM(name=u'subframeAssignment', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _TDDConfiguration_subframeAssignment._cont = ASN1Dict([(u'sa0', 0), (u'sa1', 1), (u'sa2', 2), (u'sa3', 3), (u'sa4', 4), (u'sa5', 5), (u'sa6', 6)])
     _TDDConfiguration_subframeAssignment._ext = []
-    _TDDConfiguration_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _TDDConfiguration_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
     __TDDConfiguration_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionField')))
-    ___TDDConfiguration_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['id']))
+    ___TDDConfiguration_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'id']))
     ____TDDConfiguration_iE_Extensions__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____TDDConfiguration_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___TDDConfiguration_iE_Extensions__item__id._const_tab = ____TDDConfiguration_iE_Extensions__item__id_tab
     ___TDDConfiguration_iE_Extensions__item__id._const_tab_at = None
-    ___TDDConfiguration_iE_Extensions__item__id._const_tab_id = 'id'
-    ___TDDConfiguration_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['criticality']))
+    ___TDDConfiguration_iE_Extensions__item__id._const_tab_id = u'id'
+    ___TDDConfiguration_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'criticality']))
     ____TDDConfiguration_iE_Extensions__item__criticality_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____TDDConfiguration_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___TDDConfiguration_iE_Extensions__item__criticality._const_tab = ____TDDConfiguration_iE_Extensions__item__criticality_tab
-    ___TDDConfiguration_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___TDDConfiguration_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___TDDConfiguration_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['Extension']))
+    ___TDDConfiguration_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___TDDConfiguration_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___TDDConfiguration_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'Extension']))
     ____TDDConfiguration_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____TDDConfiguration_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___TDDConfiguration_iE_Extensions__item__extensionValue._const_tab = ____TDDConfiguration_iE_Extensions__item__extensionValue_tab
-    ___TDDConfiguration_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___TDDConfiguration_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___TDDConfiguration_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___TDDConfiguration_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __TDDConfiguration_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___TDDConfiguration_iE_Extensions__item__id),
-        ('criticality', ___TDDConfiguration_iE_Extensions__item__criticality),
-        ('extensionValue', ___TDDConfiguration_iE_Extensions__item__extensionValue),
+        (u'id', ___TDDConfiguration_iE_Extensions__item__id),
+        (u'criticality', ___TDDConfiguration_iE_Extensions__item__criticality),
+        (u'extensionValue', ___TDDConfiguration_iE_Extensions__item__extensionValue),
         ])
     __TDDConfiguration_iE_Extensions__item_._ext = None
     _TDDConfiguration_iE_Extensions._cont = __TDDConfiguration_iE_Extensions__item_
     _TDDConfiguration_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     TDDConfiguration._cont = ASN1Dict([
-        ('subframeAssignment', _TDDConfiguration_subframeAssignment),
-        ('iE-Extensions', _TDDConfiguration_iE_Extensions),
+        (u'subframeAssignment', _TDDConfiguration_subframeAssignment),
+        (u'iE-Extensions', _TDDConfiguration_iE_Extensions),
         ])
     TDDConfiguration._ext = []
     
     #-----< TDDConfiguration-ExtIEs >-----#
-    TDDConfiguration_ExtIEs = CLASS(name='TDDConfiguration-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    TDDConfiguration_ExtIEs = CLASS(name=u'TDDConfiguration-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     TDDConfiguration_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< TP-ID >-----#
-    TP_ID = INT(name='TP-ID', mode=MODE_TYPE)
+    TP_ID = INT(name=u'TP-ID', mode=MODE_TYPE)
     TP_ID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=4095)], ev=[], er=[])
     
     #-----< TP-Type >-----#
-    TP_Type = ENUM(name='TP-Type', mode=MODE_TYPE)
-    TP_Type._cont = ASN1Dict([('prs-only-tp', 0)])
+    TP_Type = ENUM(name=u'TP-Type', mode=MODE_TYPE)
+    TP_Type._cont = ASN1Dict([(u'prs-only-tp', 0)])
     TP_Type._ext = []
     
     #-----< TypeOfError >-----#
-    TypeOfError = ENUM(name='TypeOfError', mode=MODE_TYPE)
-    TypeOfError._cont = ASN1Dict([('not-understood', 0), ('missing', 1)])
+    TypeOfError = ENUM(name=u'TypeOfError', mode=MODE_TYPE)
+    TypeOfError._cont = ASN1Dict([(u'not-understood', 0), (u'missing', 1)])
     TypeOfError._ext = []
     
     #-----< ULConfiguration >-----#
-    ULConfiguration = SEQ(name='ULConfiguration', mode=MODE_TYPE)
-    _ULConfiguration_pci = INT(name='pci', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PCI')))
-    _ULConfiguration_ul_earfcn = INT(name='ul-earfcn', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'EARFCN')))
-    _ULConfiguration_timingAdvanceType1 = INT(name='timingAdvanceType1', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    ULConfiguration = SEQ(name=u'ULConfiguration', mode=MODE_TYPE)
+    _ULConfiguration_pci = INT(name=u'pci', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'PCI')))
+    _ULConfiguration_ul_earfcn = INT(name=u'ul-earfcn', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'EARFCN')))
+    _ULConfiguration_timingAdvanceType1 = INT(name=u'timingAdvanceType1', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _ULConfiguration_timingAdvanceType1._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=7690)], ev=None, er=[])
-    _ULConfiguration_timingAdvanceType2 = INT(name='timingAdvanceType2', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
+    _ULConfiguration_timingAdvanceType2 = INT(name=u'timingAdvanceType2', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), opt=True)
     _ULConfiguration_timingAdvanceType2._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=7690)], ev=None, er=[])
-    _ULConfiguration_numberOfTransmissions = INT(name='numberOfTransmissions', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _ULConfiguration_numberOfTransmissions = INT(name=u'numberOfTransmissions', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _ULConfiguration_numberOfTransmissions._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=500)], ev=[], er=[])
-    _ULConfiguration_srsConfiguration = SEQ_OF(name='srsConfiguration', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'SRSConfigurationForAllCells')))
+    _ULConfiguration_srsConfiguration = SEQ_OF(name=u'srsConfiguration', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'SRSConfigurationForAllCells')))
     ULConfiguration._cont = ASN1Dict([
-        ('pci', _ULConfiguration_pci),
-        ('ul-earfcn', _ULConfiguration_ul_earfcn),
-        ('timingAdvanceType1', _ULConfiguration_timingAdvanceType1),
-        ('timingAdvanceType2', _ULConfiguration_timingAdvanceType2),
-        ('numberOfTransmissions', _ULConfiguration_numberOfTransmissions),
-        ('srsConfiguration', _ULConfiguration_srsConfiguration),
+        (u'pci', _ULConfiguration_pci),
+        (u'ul-earfcn', _ULConfiguration_ul_earfcn),
+        (u'timingAdvanceType1', _ULConfiguration_timingAdvanceType1),
+        (u'timingAdvanceType2', _ULConfiguration_timingAdvanceType2),
+        (u'numberOfTransmissions', _ULConfiguration_numberOfTransmissions),
+        (u'srsConfiguration', _ULConfiguration_srsConfiguration),
         ])
     ULConfiguration._ext = []
     
     #-----< UARFCN >-----#
-    UARFCN = INT(name='UARFCN', mode=MODE_TYPE)
+    UARFCN = INT(name=u'UARFCN', mode=MODE_TYPE)
     UARFCN._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=16383)], ev=[], er=[])
     
     #-----< UTRA-EcN0 >-----#
-    UTRA_EcN0 = INT(name='UTRA-EcN0', mode=MODE_TYPE)
+    UTRA_EcN0 = INT(name=u'UTRA-EcN0', mode=MODE_TYPE)
     UTRA_EcN0._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=49)], ev=[], er=[])
     
     #-----< UTRA-RSCP >-----#
-    UTRA_RSCP = INT(name='UTRA-RSCP', mode=MODE_TYPE)
+    UTRA_RSCP = INT(name=u'UTRA-RSCP', mode=MODE_TYPE)
     UTRA_RSCP._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=-5, ub=91)], ev=[], er=[])
     
     #-----< ValueRSRP >-----#
-    ValueRSRP = INT(name='ValueRSRP', mode=MODE_TYPE)
+    ValueRSRP = INT(name=u'ValueRSRP', mode=MODE_TYPE)
     ValueRSRP._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=97)], ev=[], er=[])
     
     #-----< ValueRSRQ >-----#
-    ValueRSRQ = INT(name='ValueRSRQ', mode=MODE_TYPE)
+    ValueRSRQ = INT(name=u'ValueRSRQ', mode=MODE_TYPE)
     ValueRSRQ._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=34)], ev=[], er=[])
     
     #-----< WLANMeasurementQuantities >-----#
-    WLANMeasurementQuantities = SEQ_OF(name='WLANMeasurementQuantities', mode=MODE_TYPE)
+    WLANMeasurementQuantities = SEQ_OF(name=u'WLANMeasurementQuantities', mode=MODE_TYPE)
     _WLANMeasurementQuantities__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Single-Container')))
-    __WLANMeasurementQuantities__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['id']))
+    __WLANMeasurementQuantities__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'id']))
     ___WLANMeasurementQuantities__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    ____WLANMeasurementQuantities__item__id_tab_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'WLANMeasurementQuantities-Item')))
-    ___WLANMeasurementQuantities__item__id_tab._val = ASN1Set(rv=[dict([('id', 20), ('criticality', 'reject'), ('Value', ____WLANMeasurementQuantities__item__id_tab_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    ____WLANMeasurementQuantities__item__id_tab_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'WLANMeasurementQuantities-Item')))
+    ___WLANMeasurementQuantities__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 20), (u'criticality', u'reject'), (u'Value', ____WLANMeasurementQuantities__item__id_tab_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     __WLANMeasurementQuantities__item__id._const_tab = ___WLANMeasurementQuantities__item__id_tab
     __WLANMeasurementQuantities__item__id._const_tab_at = None
-    __WLANMeasurementQuantities__item__id._const_tab_id = 'id'
-    __WLANMeasurementQuantities__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['criticality']))
+    __WLANMeasurementQuantities__item__id._const_tab_id = u'id'
+    __WLANMeasurementQuantities__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'criticality']))
     __WLANMeasurementQuantities__item__criticality._const_tab = ___WLANMeasurementQuantities__item__id_tab
-    __WLANMeasurementQuantities__item__criticality._const_tab_at = ('..', 'id')
-    __WLANMeasurementQuantities__item__criticality._const_tab_id = 'criticality'
-    __WLANMeasurementQuantities__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['Value']))
+    __WLANMeasurementQuantities__item__criticality._const_tab_at = ('..', u'id')
+    __WLANMeasurementQuantities__item__criticality._const_tab_id = u'criticality'
+    __WLANMeasurementQuantities__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'Value']))
     __WLANMeasurementQuantities__item__value._const_tab = ___WLANMeasurementQuantities__item__id_tab
-    __WLANMeasurementQuantities__item__value._const_tab_at = ('..', 'id')
-    __WLANMeasurementQuantities__item__value._const_tab_id = 'Value'
+    __WLANMeasurementQuantities__item__value._const_tab_at = ('..', u'id')
+    __WLANMeasurementQuantities__item__value._const_tab_id = u'Value'
     _WLANMeasurementQuantities__item_._cont = ASN1Dict([
-        ('id', __WLANMeasurementQuantities__item__id),
-        ('criticality', __WLANMeasurementQuantities__item__criticality),
-        ('value', __WLANMeasurementQuantities__item__value),
+        (u'id', __WLANMeasurementQuantities__item__id),
+        (u'criticality', __WLANMeasurementQuantities__item__criticality),
+        (u'value', __WLANMeasurementQuantities__item__value),
         ])
     _WLANMeasurementQuantities__item_._ext = None
     WLANMeasurementQuantities._cont = _WLANMeasurementQuantities__item_
     WLANMeasurementQuantities._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=63)], ev=None, er=[])
     
     #-----< WLANMeasurementQuantities-ItemIEs >-----#
-    WLANMeasurementQuantities_ItemIEs = CLASS(name='WLANMeasurementQuantities-ItemIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _WLANMeasurementQuantities_ItemIEs_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'WLANMeasurementQuantities-Item')))
-    WLANMeasurementQuantities_ItemIEs._val = ASN1Set(rv=[dict([('id', 20), ('criticality', 'reject'), ('Value', _WLANMeasurementQuantities_ItemIEs_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    WLANMeasurementQuantities_ItemIEs = CLASS(name=u'WLANMeasurementQuantities-ItemIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
+    _WLANMeasurementQuantities_ItemIEs_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'WLANMeasurementQuantities-Item')))
+    WLANMeasurementQuantities_ItemIEs._val = ASN1Set(rv=[dict([(u'id', 20), (u'criticality', u'reject'), (u'Value', _WLANMeasurementQuantities_ItemIEs_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     
     #-----< WLANMeasurementQuantities-Item >-----#
-    WLANMeasurementQuantities_Item = SEQ(name='WLANMeasurementQuantities-Item', mode=MODE_TYPE)
-    _WLANMeasurementQuantities_Item_wLANMeasurementQuantitiesValue = ENUM(name='wLANMeasurementQuantitiesValue', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'WLANMeasurementQuantitiesValue')))
-    _WLANMeasurementQuantities_Item_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    WLANMeasurementQuantities_Item = SEQ(name=u'WLANMeasurementQuantities-Item', mode=MODE_TYPE)
+    _WLANMeasurementQuantities_Item_wLANMeasurementQuantitiesValue = ENUM(name=u'wLANMeasurementQuantitiesValue', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'WLANMeasurementQuantitiesValue')))
+    _WLANMeasurementQuantities_Item_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
     __WLANMeasurementQuantities_Item_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionField')))
-    ___WLANMeasurementQuantities_Item_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['id']))
+    ___WLANMeasurementQuantities_Item_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'id']))
     ____WLANMeasurementQuantities_Item_iE_Extensions__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____WLANMeasurementQuantities_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___WLANMeasurementQuantities_Item_iE_Extensions__item__id._const_tab = ____WLANMeasurementQuantities_Item_iE_Extensions__item__id_tab
     ___WLANMeasurementQuantities_Item_iE_Extensions__item__id._const_tab_at = None
-    ___WLANMeasurementQuantities_Item_iE_Extensions__item__id._const_tab_id = 'id'
-    ___WLANMeasurementQuantities_Item_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['criticality']))
+    ___WLANMeasurementQuantities_Item_iE_Extensions__item__id._const_tab_id = u'id'
+    ___WLANMeasurementQuantities_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'criticality']))
     ____WLANMeasurementQuantities_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____WLANMeasurementQuantities_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___WLANMeasurementQuantities_Item_iE_Extensions__item__criticality._const_tab = ____WLANMeasurementQuantities_Item_iE_Extensions__item__criticality_tab
-    ___WLANMeasurementQuantities_Item_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___WLANMeasurementQuantities_Item_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___WLANMeasurementQuantities_Item_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['Extension']))
+    ___WLANMeasurementQuantities_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___WLANMeasurementQuantities_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___WLANMeasurementQuantities_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'Extension']))
     ____WLANMeasurementQuantities_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____WLANMeasurementQuantities_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___WLANMeasurementQuantities_Item_iE_Extensions__item__extensionValue._const_tab = ____WLANMeasurementQuantities_Item_iE_Extensions__item__extensionValue_tab
-    ___WLANMeasurementQuantities_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___WLANMeasurementQuantities_Item_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___WLANMeasurementQuantities_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___WLANMeasurementQuantities_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __WLANMeasurementQuantities_Item_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___WLANMeasurementQuantities_Item_iE_Extensions__item__id),
-        ('criticality', ___WLANMeasurementQuantities_Item_iE_Extensions__item__criticality),
-        ('extensionValue', ___WLANMeasurementQuantities_Item_iE_Extensions__item__extensionValue),
+        (u'id', ___WLANMeasurementQuantities_Item_iE_Extensions__item__id),
+        (u'criticality', ___WLANMeasurementQuantities_Item_iE_Extensions__item__criticality),
+        (u'extensionValue', ___WLANMeasurementQuantities_Item_iE_Extensions__item__extensionValue),
         ])
     __WLANMeasurementQuantities_Item_iE_Extensions__item_._ext = None
     _WLANMeasurementQuantities_Item_iE_Extensions._cont = __WLANMeasurementQuantities_Item_iE_Extensions__item_
     _WLANMeasurementQuantities_Item_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     WLANMeasurementQuantities_Item._cont = ASN1Dict([
-        ('wLANMeasurementQuantitiesValue', _WLANMeasurementQuantities_Item_wLANMeasurementQuantitiesValue),
-        ('iE-Extensions', _WLANMeasurementQuantities_Item_iE_Extensions),
+        (u'wLANMeasurementQuantitiesValue', _WLANMeasurementQuantities_Item_wLANMeasurementQuantitiesValue),
+        (u'iE-Extensions', _WLANMeasurementQuantities_Item_iE_Extensions),
         ])
     WLANMeasurementQuantities_Item._ext = []
     
     #-----< WLANMeasurementQuantitiesValue-ExtIEs >-----#
-    WLANMeasurementQuantitiesValue_ExtIEs = CLASS(name='WLANMeasurementQuantitiesValue-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    WLANMeasurementQuantitiesValue_ExtIEs = CLASS(name=u'WLANMeasurementQuantitiesValue-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     WLANMeasurementQuantitiesValue_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< WLANMeasurementQuantitiesValue >-----#
-    WLANMeasurementQuantitiesValue = ENUM(name='WLANMeasurementQuantitiesValue', mode=MODE_TYPE)
-    WLANMeasurementQuantitiesValue._cont = ASN1Dict([('wlan', 0)])
+    WLANMeasurementQuantitiesValue = ENUM(name=u'WLANMeasurementQuantitiesValue', mode=MODE_TYPE)
+    WLANMeasurementQuantitiesValue._cont = ASN1Dict([(u'wlan', 0)])
     WLANMeasurementQuantitiesValue._ext = []
     
     #-----< WLANMeasurementResult >-----#
-    WLANMeasurementResult = SEQ_OF(name='WLANMeasurementResult', mode=MODE_TYPE)
+    WLANMeasurementResult = SEQ_OF(name=u'WLANMeasurementResult', mode=MODE_TYPE)
     _WLANMeasurementResult__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'WLANMeasurementResult-Item')))
     WLANMeasurementResult._cont = _WLANMeasurementResult__item_
     WLANMeasurementResult._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=63)], ev=None, er=[])
     
     #-----< WLANMeasurementResult-Item >-----#
-    WLANMeasurementResult_Item = SEQ(name='WLANMeasurementResult-Item', mode=MODE_TYPE)
-    _WLANMeasurementResult_Item_wLAN_RSSI = INT(name='wLAN-RSSI', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'WLAN-RSSI')))
-    _WLANMeasurementResult_Item_sSID = OCT_STR(name='sSID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'SSID')), opt=True)
-    _WLANMeasurementResult_Item_bSSID = OCT_STR(name='bSSID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'BSSID')), opt=True)
-    _WLANMeasurementResult_Item_hESSID = OCT_STR(name='hESSID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'HESSID')), opt=True)
-    _WLANMeasurementResult_Item_operatingClass = INT(name='operatingClass', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'WLANOperatingClass')), opt=True)
-    _WLANMeasurementResult_Item_countryCode = ENUM(name='countryCode', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'WLANCountryCode')), opt=True)
-    _WLANMeasurementResult_Item_wLANChannelList = SEQ_OF(name='wLANChannelList', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'WLANChannelList')), opt=True)
-    _WLANMeasurementResult_Item_wLANBand = ENUM(name='wLANBand', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'WLANBand')), opt=True)
-    _WLANMeasurementResult_Item_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    WLANMeasurementResult_Item = SEQ(name=u'WLANMeasurementResult-Item', mode=MODE_TYPE)
+    _WLANMeasurementResult_Item_wLAN_RSSI = INT(name=u'wLAN-RSSI', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'WLAN-RSSI')))
+    _WLANMeasurementResult_Item_sSID = OCT_STR(name=u'sSID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'SSID')), opt=True)
+    _WLANMeasurementResult_Item_bSSID = OCT_STR(name=u'bSSID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'BSSID')), opt=True)
+    _WLANMeasurementResult_Item_hESSID = OCT_STR(name=u'hESSID', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'HESSID')), opt=True)
+    _WLANMeasurementResult_Item_operatingClass = INT(name=u'operatingClass', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'WLANOperatingClass')), opt=True)
+    _WLANMeasurementResult_Item_countryCode = ENUM(name=u'countryCode', mode=MODE_TYPE, tag=(5, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'WLANCountryCode')), opt=True)
+    _WLANMeasurementResult_Item_wLANChannelList = SEQ_OF(name=u'wLANChannelList', mode=MODE_TYPE, tag=(6, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'WLANChannelList')), opt=True)
+    _WLANMeasurementResult_Item_wLANBand = ENUM(name=u'wLANBand', mode=MODE_TYPE, tag=(7, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'WLANBand')), opt=True)
+    _WLANMeasurementResult_Item_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(8, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
     __WLANMeasurementResult_Item_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionField')))
-    ___WLANMeasurementResult_Item_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['id']))
+    ___WLANMeasurementResult_Item_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'id']))
     ____WLANMeasurementResult_Item_iE_Extensions__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____WLANMeasurementResult_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___WLANMeasurementResult_Item_iE_Extensions__item__id._const_tab = ____WLANMeasurementResult_Item_iE_Extensions__item__id_tab
     ___WLANMeasurementResult_Item_iE_Extensions__item__id._const_tab_at = None
-    ___WLANMeasurementResult_Item_iE_Extensions__item__id._const_tab_id = 'id'
-    ___WLANMeasurementResult_Item_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['criticality']))
+    ___WLANMeasurementResult_Item_iE_Extensions__item__id._const_tab_id = u'id'
+    ___WLANMeasurementResult_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'criticality']))
     ____WLANMeasurementResult_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____WLANMeasurementResult_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___WLANMeasurementResult_Item_iE_Extensions__item__criticality._const_tab = ____WLANMeasurementResult_Item_iE_Extensions__item__criticality_tab
-    ___WLANMeasurementResult_Item_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___WLANMeasurementResult_Item_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___WLANMeasurementResult_Item_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['Extension']))
+    ___WLANMeasurementResult_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___WLANMeasurementResult_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___WLANMeasurementResult_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'Extension']))
     ____WLANMeasurementResult_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____WLANMeasurementResult_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___WLANMeasurementResult_Item_iE_Extensions__item__extensionValue._const_tab = ____WLANMeasurementResult_Item_iE_Extensions__item__extensionValue_tab
-    ___WLANMeasurementResult_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___WLANMeasurementResult_Item_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___WLANMeasurementResult_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___WLANMeasurementResult_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __WLANMeasurementResult_Item_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___WLANMeasurementResult_Item_iE_Extensions__item__id),
-        ('criticality', ___WLANMeasurementResult_Item_iE_Extensions__item__criticality),
-        ('extensionValue', ___WLANMeasurementResult_Item_iE_Extensions__item__extensionValue),
+        (u'id', ___WLANMeasurementResult_Item_iE_Extensions__item__id),
+        (u'criticality', ___WLANMeasurementResult_Item_iE_Extensions__item__criticality),
+        (u'extensionValue', ___WLANMeasurementResult_Item_iE_Extensions__item__extensionValue),
         ])
     __WLANMeasurementResult_Item_iE_Extensions__item_._ext = None
     _WLANMeasurementResult_Item_iE_Extensions._cont = __WLANMeasurementResult_Item_iE_Extensions__item_
     _WLANMeasurementResult_Item_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     WLANMeasurementResult_Item._cont = ASN1Dict([
-        ('wLAN-RSSI', _WLANMeasurementResult_Item_wLAN_RSSI),
-        ('sSID', _WLANMeasurementResult_Item_sSID),
-        ('bSSID', _WLANMeasurementResult_Item_bSSID),
-        ('hESSID', _WLANMeasurementResult_Item_hESSID),
-        ('operatingClass', _WLANMeasurementResult_Item_operatingClass),
-        ('countryCode', _WLANMeasurementResult_Item_countryCode),
-        ('wLANChannelList', _WLANMeasurementResult_Item_wLANChannelList),
-        ('wLANBand', _WLANMeasurementResult_Item_wLANBand),
-        ('iE-Extensions', _WLANMeasurementResult_Item_iE_Extensions),
+        (u'wLAN-RSSI', _WLANMeasurementResult_Item_wLAN_RSSI),
+        (u'sSID', _WLANMeasurementResult_Item_sSID),
+        (u'bSSID', _WLANMeasurementResult_Item_bSSID),
+        (u'hESSID', _WLANMeasurementResult_Item_hESSID),
+        (u'operatingClass', _WLANMeasurementResult_Item_operatingClass),
+        (u'countryCode', _WLANMeasurementResult_Item_countryCode),
+        (u'wLANChannelList', _WLANMeasurementResult_Item_wLANChannelList),
+        (u'wLANBand', _WLANMeasurementResult_Item_wLANBand),
+        (u'iE-Extensions', _WLANMeasurementResult_Item_iE_Extensions),
         ])
     WLANMeasurementResult_Item._ext = []
     
     #-----< WLANMeasurementResult-Item-ExtIEs >-----#
-    WLANMeasurementResult_Item_ExtIEs = CLASS(name='WLANMeasurementResult-Item-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    WLANMeasurementResult_Item_ExtIEs = CLASS(name=u'WLANMeasurementResult-Item-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     WLANMeasurementResult_Item_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< WLAN-RSSI >-----#
-    WLAN_RSSI = INT(name='WLAN-RSSI', mode=MODE_TYPE)
+    WLAN_RSSI = INT(name=u'WLAN-RSSI', mode=MODE_TYPE)
     WLAN_RSSI._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=141)], ev=[], er=[])
     
     #-----< WLANBand >-----#
-    WLANBand = ENUM(name='WLANBand', mode=MODE_TYPE)
-    WLANBand._cont = ASN1Dict([('band2dot4', 0), ('band5', 1)])
+    WLANBand = ENUM(name=u'WLANBand', mode=MODE_TYPE)
+    WLANBand._cont = ASN1Dict([(u'band2dot4', 0), (u'band5', 1)])
     WLANBand._ext = []
     
     #-----< WLANChannelList >-----#
-    WLANChannelList = SEQ_OF(name='WLANChannelList', mode=MODE_TYPE)
+    WLANChannelList = SEQ_OF(name=u'WLANChannelList', mode=MODE_TYPE)
     _WLANChannelList__item_ = INT(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'WLANChannel')))
     WLANChannelList._cont = _WLANChannelList__item_
     WLANChannelList._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=16)], ev=None, er=[])
     
     #-----< WLANChannel >-----#
-    WLANChannel = INT(name='WLANChannel', mode=MODE_TYPE)
+    WLANChannel = INT(name=u'WLANChannel', mode=MODE_TYPE)
     WLANChannel._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< WLANCountryCode >-----#
-    WLANCountryCode = ENUM(name='WLANCountryCode', mode=MODE_TYPE)
-    WLANCountryCode._cont = ASN1Dict([('unitedStates', 0), ('europe', 1), ('japan', 2), ('global', 3)])
+    WLANCountryCode = ENUM(name=u'WLANCountryCode', mode=MODE_TYPE)
+    WLANCountryCode._cont = ASN1Dict([(u'unitedStates', 0), (u'europe', 1), (u'japan', 2), (u'global', 3)])
     WLANCountryCode._ext = []
     
     #-----< WLANOperatingClass >-----#
-    WLANOperatingClass = INT(name='WLANOperatingClass', mode=MODE_TYPE)
+    WLANOperatingClass = INT(name=u'WLANOperatingClass', mode=MODE_TYPE)
     WLANOperatingClass._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     _all_ = [
@@ -3573,873 +3573,873 @@ class LPPA_IEs:
 
 class LPPA_PDU_Contents:
 
-    _name_  = 'LPPA-PDU-Contents'
+    _name_  = u'LPPA-PDU-Contents'
     _oid_   = [0, 4, 0, 0, 21, 3, 6, 1, 1]
     
     _obj_ = [
-        'E-CIDMeasurementInitiationRequest',
-        'E-CIDMeasurementInitiationRequest-IEs',
-        'E-CIDMeasurementInitiationResponse',
-        'E-CIDMeasurementInitiationResponse-IEs',
-        'E-CIDMeasurementInitiationFailure',
-        'E-CIDMeasurementInitiationFailure-IEs',
-        'E-CIDMeasurementFailureIndication',
-        'E-CIDMeasurementFailureIndication-IEs',
-        'E-CIDMeasurementReport',
-        'E-CIDMeasurementReport-IEs',
-        'E-CIDMeasurementTerminationCommand',
-        'E-CIDMeasurementTerminationCommand-IEs',
-        'OTDOAInformationRequest',
-        'OTDOAInformationRequest-IEs',
-        'OTDOA-Information-Type',
-        'OTDOA-Information-TypeIEs',
-        'OTDOA-Information-Type-Item',
-        'OTDOA-Information-Type-ItemExtIEs',
-        'OTDOAInformationResponse',
-        'OTDOAInformationResponse-IEs',
-        'OTDOAInformationFailure',
-        'OTDOAInformationFailure-IEs',
-        'UTDOAInformationRequest',
-        'UTDOAInformationRequest-IEs',
-        'UTDOAInformationResponse',
-        'UTDOAInformationResponse-IEs',
-        'UTDOAInformationFailure',
-        'UTDOAInformationFailure-IEs',
-        'UTDOAInformationUpdate',
-        'UTDOAInformationUpdate-IEs',
-        'AssistanceInformationControl',
-        'AssistanceInformationControl-IEs',
-        'AssistanceInformationFeedback',
-        'AssistanceInformationFeedback-IEs',
-        'ErrorIndication',
-        'ErrorIndication-IEs',
-        'PrivateMessage',
-        'PrivateMessage-IEs',
+        u'E-CIDMeasurementInitiationRequest',
+        u'E-CIDMeasurementInitiationRequest-IEs',
+        u'E-CIDMeasurementInitiationResponse',
+        u'E-CIDMeasurementInitiationResponse-IEs',
+        u'E-CIDMeasurementInitiationFailure',
+        u'E-CIDMeasurementInitiationFailure-IEs',
+        u'E-CIDMeasurementFailureIndication',
+        u'E-CIDMeasurementFailureIndication-IEs',
+        u'E-CIDMeasurementReport',
+        u'E-CIDMeasurementReport-IEs',
+        u'E-CIDMeasurementTerminationCommand',
+        u'E-CIDMeasurementTerminationCommand-IEs',
+        u'OTDOAInformationRequest',
+        u'OTDOAInformationRequest-IEs',
+        u'OTDOA-Information-Type',
+        u'OTDOA-Information-TypeIEs',
+        u'OTDOA-Information-Type-Item',
+        u'OTDOA-Information-Type-ItemExtIEs',
+        u'OTDOAInformationResponse',
+        u'OTDOAInformationResponse-IEs',
+        u'OTDOAInformationFailure',
+        u'OTDOAInformationFailure-IEs',
+        u'UTDOAInformationRequest',
+        u'UTDOAInformationRequest-IEs',
+        u'UTDOAInformationResponse',
+        u'UTDOAInformationResponse-IEs',
+        u'UTDOAInformationFailure',
+        u'UTDOAInformationFailure-IEs',
+        u'UTDOAInformationUpdate',
+        u'UTDOAInformationUpdate-IEs',
+        u'AssistanceInformationControl',
+        u'AssistanceInformationControl-IEs',
+        u'AssistanceInformationFeedback',
+        u'AssistanceInformationFeedback-IEs',
+        u'ErrorIndication',
+        u'ErrorIndication-IEs',
+        u'PrivateMessage',
+        u'PrivateMessage-IEs',
         ]
     _type_ = [
-        'E-CIDMeasurementInitiationRequest',
-        'E-CIDMeasurementInitiationResponse',
-        'E-CIDMeasurementInitiationFailure',
-        'E-CIDMeasurementFailureIndication',
-        'E-CIDMeasurementReport',
-        'E-CIDMeasurementTerminationCommand',
-        'OTDOAInformationRequest',
-        'OTDOA-Information-Type',
-        'OTDOA-Information-Type-Item',
-        'OTDOAInformationResponse',
-        'OTDOAInformationFailure',
-        'UTDOAInformationRequest',
-        'UTDOAInformationResponse',
-        'UTDOAInformationFailure',
-        'UTDOAInformationUpdate',
-        'AssistanceInformationControl',
-        'AssistanceInformationFeedback',
-        'ErrorIndication',
-        'PrivateMessage',
+        u'E-CIDMeasurementInitiationRequest',
+        u'E-CIDMeasurementInitiationResponse',
+        u'E-CIDMeasurementInitiationFailure',
+        u'E-CIDMeasurementFailureIndication',
+        u'E-CIDMeasurementReport',
+        u'E-CIDMeasurementTerminationCommand',
+        u'OTDOAInformationRequest',
+        u'OTDOA-Information-Type',
+        u'OTDOA-Information-Type-Item',
+        u'OTDOAInformationResponse',
+        u'OTDOAInformationFailure',
+        u'UTDOAInformationRequest',
+        u'UTDOAInformationResponse',
+        u'UTDOAInformationFailure',
+        u'UTDOAInformationUpdate',
+        u'AssistanceInformationControl',
+        u'AssistanceInformationFeedback',
+        u'ErrorIndication',
+        u'PrivateMessage',
         ]
     _set_ = [
-        'E-CIDMeasurementInitiationRequest-IEs',
-        'E-CIDMeasurementInitiationResponse-IEs',
-        'E-CIDMeasurementInitiationFailure-IEs',
-        'E-CIDMeasurementFailureIndication-IEs',
-        'E-CIDMeasurementReport-IEs',
-        'E-CIDMeasurementTerminationCommand-IEs',
-        'OTDOAInformationRequest-IEs',
-        'OTDOA-Information-TypeIEs',
-        'OTDOA-Information-Type-ItemExtIEs',
-        'OTDOAInformationResponse-IEs',
-        'OTDOAInformationFailure-IEs',
-        'UTDOAInformationRequest-IEs',
-        'UTDOAInformationResponse-IEs',
-        'UTDOAInformationFailure-IEs',
-        'UTDOAInformationUpdate-IEs',
-        'AssistanceInformationControl-IEs',
-        'AssistanceInformationFeedback-IEs',
-        'ErrorIndication-IEs',
-        'PrivateMessage-IEs',
+        u'E-CIDMeasurementInitiationRequest-IEs',
+        u'E-CIDMeasurementInitiationResponse-IEs',
+        u'E-CIDMeasurementInitiationFailure-IEs',
+        u'E-CIDMeasurementFailureIndication-IEs',
+        u'E-CIDMeasurementReport-IEs',
+        u'E-CIDMeasurementTerminationCommand-IEs',
+        u'OTDOAInformationRequest-IEs',
+        u'OTDOA-Information-TypeIEs',
+        u'OTDOA-Information-Type-ItemExtIEs',
+        u'OTDOAInformationResponse-IEs',
+        u'OTDOAInformationFailure-IEs',
+        u'UTDOAInformationRequest-IEs',
+        u'UTDOAInformationResponse-IEs',
+        u'UTDOAInformationFailure-IEs',
+        u'UTDOAInformationUpdate-IEs',
+        u'AssistanceInformationControl-IEs',
+        u'AssistanceInformationFeedback-IEs',
+        u'ErrorIndication-IEs',
+        u'PrivateMessage-IEs',
         ]
     _val_ = [
         ]
     _class_ = [
-        'E-CIDMeasurementInitiationRequest-IEs',
-        'E-CIDMeasurementInitiationResponse-IEs',
-        'E-CIDMeasurementInitiationFailure-IEs',
-        'E-CIDMeasurementFailureIndication-IEs',
-        'E-CIDMeasurementReport-IEs',
-        'E-CIDMeasurementTerminationCommand-IEs',
-        'OTDOAInformationRequest-IEs',
-        'OTDOA-Information-TypeIEs',
-        'OTDOA-Information-Type-ItemExtIEs',
-        'OTDOAInformationResponse-IEs',
-        'OTDOAInformationFailure-IEs',
-        'UTDOAInformationRequest-IEs',
-        'UTDOAInformationResponse-IEs',
-        'UTDOAInformationFailure-IEs',
-        'UTDOAInformationUpdate-IEs',
-        'AssistanceInformationControl-IEs',
-        'AssistanceInformationFeedback-IEs',
-        'ErrorIndication-IEs',
-        'PrivateMessage-IEs',
+        u'E-CIDMeasurementInitiationRequest-IEs',
+        u'E-CIDMeasurementInitiationResponse-IEs',
+        u'E-CIDMeasurementInitiationFailure-IEs',
+        u'E-CIDMeasurementFailureIndication-IEs',
+        u'E-CIDMeasurementReport-IEs',
+        u'E-CIDMeasurementTerminationCommand-IEs',
+        u'OTDOAInformationRequest-IEs',
+        u'OTDOA-Information-TypeIEs',
+        u'OTDOA-Information-Type-ItemExtIEs',
+        u'OTDOAInformationResponse-IEs',
+        u'OTDOAInformationFailure-IEs',
+        u'UTDOAInformationRequest-IEs',
+        u'UTDOAInformationResponse-IEs',
+        u'UTDOAInformationFailure-IEs',
+        u'UTDOAInformationUpdate-IEs',
+        u'AssistanceInformationControl-IEs',
+        u'AssistanceInformationFeedback-IEs',
+        u'ErrorIndication-IEs',
+        u'PrivateMessage-IEs',
         ]
     _param_ = [
         ]
     
     #-----< E-CIDMeasurementInitiationRequest >-----#
-    E_CIDMeasurementInitiationRequest = SEQ(name='E-CIDMeasurementInitiationRequest', mode=MODE_TYPE)
-    _E_CIDMeasurementInitiationRequest_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
+    E_CIDMeasurementInitiationRequest = SEQ(name=u'E-CIDMeasurementInitiationRequest', mode=MODE_TYPE)
+    _E_CIDMeasurementInitiationRequest_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
     __E_CIDMeasurementInitiationRequest_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Field')))
-    ___E_CIDMeasurementInitiationRequest_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['id']))
+    ___E_CIDMeasurementInitiationRequest_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'id']))
     ____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
-    _____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab_val_Value_1 = ENUM(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'ReportCharacteristics')))
-    _____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab_val_Value_2 = ENUM(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'MeasurementPeriodicity')))
-    _____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab_val_Value_3 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'MeasurementQuantities')))
-    _____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab_val_Value_4 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'InterRATMeasurementQuantities')))
-    _____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab_val_Value_5 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'WLANMeasurementQuantities')))
-    ____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 2), ('criticality', 'reject'), ('Value', _____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 3), ('criticality', 'reject'), ('Value', _____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')]), dict([('id', 4), ('criticality', 'reject'), ('Value', _____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab_val_Value_2), ('presence', 'conditional')]), dict([('id', 5), ('criticality', 'reject'), ('Value', _____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab_val_Value_3), ('presence', 'mandatory')]), dict([('id', 15), ('criticality', 'ignore'), ('Value', _____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab_val_Value_4), ('presence', 'optional')]), dict([('id', 19), ('criticality', 'ignore'), ('Value', _____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab_val_Value_5), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
+    _____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab_val_Value_1 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'ReportCharacteristics')))
+    _____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab_val_Value_2 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'MeasurementPeriodicity')))
+    _____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab_val_Value_3 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'MeasurementQuantities')))
+    _____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab_val_Value_4 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'InterRATMeasurementQuantities')))
+    _____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab_val_Value_5 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'WLANMeasurementQuantities')))
+    ____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 2), (u'criticality', u'reject'), (u'Value', _____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 3), (u'criticality', u'reject'), (u'Value', _____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 4), (u'criticality', u'reject'), (u'Value', _____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'conditional')]), dict([(u'id', 5), (u'criticality', u'reject'), (u'Value', _____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'mandatory')]), dict([(u'id', 15), (u'criticality', u'ignore'), (u'Value', _____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab_val_Value_4), (u'presence', u'optional')]), dict([(u'id', 19), (u'criticality', u'ignore'), (u'Value', _____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab_val_Value_5), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___E_CIDMeasurementInitiationRequest_protocolIEs__item__id._const_tab = ____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab
     ___E_CIDMeasurementInitiationRequest_protocolIEs__item__id._const_tab_at = None
-    ___E_CIDMeasurementInitiationRequest_protocolIEs__item__id._const_tab_id = 'id'
-    ___E_CIDMeasurementInitiationRequest_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['criticality']))
+    ___E_CIDMeasurementInitiationRequest_protocolIEs__item__id._const_tab_id = u'id'
+    ___E_CIDMeasurementInitiationRequest_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'criticality']))
     ___E_CIDMeasurementInitiationRequest_protocolIEs__item__criticality._const_tab = ____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab
-    ___E_CIDMeasurementInitiationRequest_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___E_CIDMeasurementInitiationRequest_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___E_CIDMeasurementInitiationRequest_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['Value']))
+    ___E_CIDMeasurementInitiationRequest_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___E_CIDMeasurementInitiationRequest_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___E_CIDMeasurementInitiationRequest_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'Value']))
     ___E_CIDMeasurementInitiationRequest_protocolIEs__item__value._const_tab = ____E_CIDMeasurementInitiationRequest_protocolIEs__item__id_tab
-    ___E_CIDMeasurementInitiationRequest_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___E_CIDMeasurementInitiationRequest_protocolIEs__item__value._const_tab_id = 'Value'
+    ___E_CIDMeasurementInitiationRequest_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___E_CIDMeasurementInitiationRequest_protocolIEs__item__value._const_tab_id = u'Value'
     __E_CIDMeasurementInitiationRequest_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___E_CIDMeasurementInitiationRequest_protocolIEs__item__id),
-        ('criticality', ___E_CIDMeasurementInitiationRequest_protocolIEs__item__criticality),
-        ('value', ___E_CIDMeasurementInitiationRequest_protocolIEs__item__value),
+        (u'id', ___E_CIDMeasurementInitiationRequest_protocolIEs__item__id),
+        (u'criticality', ___E_CIDMeasurementInitiationRequest_protocolIEs__item__criticality),
+        (u'value', ___E_CIDMeasurementInitiationRequest_protocolIEs__item__value),
         ])
     __E_CIDMeasurementInitiationRequest_protocolIEs__item_._ext = None
     _E_CIDMeasurementInitiationRequest_protocolIEs._cont = __E_CIDMeasurementInitiationRequest_protocolIEs__item_
     _E_CIDMeasurementInitiationRequest_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     E_CIDMeasurementInitiationRequest._cont = ASN1Dict([
-        ('protocolIEs', _E_CIDMeasurementInitiationRequest_protocolIEs),
+        (u'protocolIEs', _E_CIDMeasurementInitiationRequest_protocolIEs),
         ])
     E_CIDMeasurementInitiationRequest._ext = []
     
     #-----< E-CIDMeasurementInitiationRequest-IEs >-----#
-    E_CIDMeasurementInitiationRequest_IEs = CLASS(name='E-CIDMeasurementInitiationRequest-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _E_CIDMeasurementInitiationRequest_IEs_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
-    _E_CIDMeasurementInitiationRequest_IEs_val_Value_1 = ENUM(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'ReportCharacteristics')))
-    _E_CIDMeasurementInitiationRequest_IEs_val_Value_2 = ENUM(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'MeasurementPeriodicity')))
-    _E_CIDMeasurementInitiationRequest_IEs_val_Value_3 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'MeasurementQuantities')))
-    _E_CIDMeasurementInitiationRequest_IEs_val_Value_4 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'InterRATMeasurementQuantities')))
-    _E_CIDMeasurementInitiationRequest_IEs_val_Value_5 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'WLANMeasurementQuantities')))
-    E_CIDMeasurementInitiationRequest_IEs._val = ASN1Set(rv=[dict([('id', 2), ('criticality', 'reject'), ('Value', _E_CIDMeasurementInitiationRequest_IEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 3), ('criticality', 'reject'), ('Value', _E_CIDMeasurementInitiationRequest_IEs_val_Value_1), ('presence', 'mandatory')]), dict([('id', 4), ('criticality', 'reject'), ('Value', _E_CIDMeasurementInitiationRequest_IEs_val_Value_2), ('presence', 'conditional')]), dict([('id', 5), ('criticality', 'reject'), ('Value', _E_CIDMeasurementInitiationRequest_IEs_val_Value_3), ('presence', 'mandatory')]), dict([('id', 15), ('criticality', 'ignore'), ('Value', _E_CIDMeasurementInitiationRequest_IEs_val_Value_4), ('presence', 'optional')]), dict([('id', 19), ('criticality', 'ignore'), ('Value', _E_CIDMeasurementInitiationRequest_IEs_val_Value_5), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    E_CIDMeasurementInitiationRequest_IEs = CLASS(name=u'E-CIDMeasurementInitiationRequest-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
+    _E_CIDMeasurementInitiationRequest_IEs_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
+    _E_CIDMeasurementInitiationRequest_IEs_val_Value_1 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'ReportCharacteristics')))
+    _E_CIDMeasurementInitiationRequest_IEs_val_Value_2 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'MeasurementPeriodicity')))
+    _E_CIDMeasurementInitiationRequest_IEs_val_Value_3 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'MeasurementQuantities')))
+    _E_CIDMeasurementInitiationRequest_IEs_val_Value_4 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'InterRATMeasurementQuantities')))
+    _E_CIDMeasurementInitiationRequest_IEs_val_Value_5 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'WLANMeasurementQuantities')))
+    E_CIDMeasurementInitiationRequest_IEs._val = ASN1Set(rv=[dict([(u'id', 2), (u'criticality', u'reject'), (u'Value', _E_CIDMeasurementInitiationRequest_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 3), (u'criticality', u'reject'), (u'Value', _E_CIDMeasurementInitiationRequest_IEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 4), (u'criticality', u'reject'), (u'Value', _E_CIDMeasurementInitiationRequest_IEs_val_Value_2), (u'presence', u'conditional')]), dict([(u'id', 5), (u'criticality', u'reject'), (u'Value', _E_CIDMeasurementInitiationRequest_IEs_val_Value_3), (u'presence', u'mandatory')]), dict([(u'id', 15), (u'criticality', u'ignore'), (u'Value', _E_CIDMeasurementInitiationRequest_IEs_val_Value_4), (u'presence', u'optional')]), dict([(u'id', 19), (u'criticality', u'ignore'), (u'Value', _E_CIDMeasurementInitiationRequest_IEs_val_Value_5), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< E-CIDMeasurementInitiationResponse >-----#
-    E_CIDMeasurementInitiationResponse = SEQ(name='E-CIDMeasurementInitiationResponse', mode=MODE_TYPE)
-    _E_CIDMeasurementInitiationResponse_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
+    E_CIDMeasurementInitiationResponse = SEQ(name=u'E-CIDMeasurementInitiationResponse', mode=MODE_TYPE)
+    _E_CIDMeasurementInitiationResponse_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
     __E_CIDMeasurementInitiationResponse_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Field')))
-    ___E_CIDMeasurementInitiationResponse_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['id']))
+    ___E_CIDMeasurementInitiationResponse_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'id']))
     ____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
-    _____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab_val_Value_1 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
-    _____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'E-CID-MeasurementResult')))
-    _____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab_val_Value_3 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
-    _____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab_val_Value_4 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Cell-Portion-ID')))
-    _____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab_val_Value_5 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'InterRATMeasurementResult')))
-    _____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab_val_Value_6 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'WLANMeasurementResult')))
-    ____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 2), ('criticality', 'reject'), ('Value', _____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 6), ('criticality', 'reject'), ('Value', _____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')]), dict([('id', 7), ('criticality', 'ignore'), ('Value', _____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab_val_Value_2), ('presence', 'optional')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab_val_Value_3), ('presence', 'optional')]), dict([('id', 14), ('criticality', 'ignore'), ('Value', _____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab_val_Value_4), ('presence', 'optional')]), dict([('id', 17), ('criticality', 'ignore'), ('Value', _____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab_val_Value_5), ('presence', 'optional')]), dict([('id', 21), ('criticality', 'ignore'), ('Value', _____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab_val_Value_6), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
+    _____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab_val_Value_1 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
+    _____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'E-CID-MeasurementResult')))
+    _____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab_val_Value_3 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
+    _____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab_val_Value_4 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Cell-Portion-ID')))
+    _____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab_val_Value_5 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'InterRATMeasurementResult')))
+    _____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab_val_Value_6 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'WLANMeasurementResult')))
+    ____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 2), (u'criticality', u'reject'), (u'Value', _____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 6), (u'criticality', u'reject'), (u'Value', _____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 14), (u'criticality', u'ignore'), (u'Value', _____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab_val_Value_4), (u'presence', u'optional')]), dict([(u'id', 17), (u'criticality', u'ignore'), (u'Value', _____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab_val_Value_5), (u'presence', u'optional')]), dict([(u'id', 21), (u'criticality', u'ignore'), (u'Value', _____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab_val_Value_6), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___E_CIDMeasurementInitiationResponse_protocolIEs__item__id._const_tab = ____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab
     ___E_CIDMeasurementInitiationResponse_protocolIEs__item__id._const_tab_at = None
-    ___E_CIDMeasurementInitiationResponse_protocolIEs__item__id._const_tab_id = 'id'
-    ___E_CIDMeasurementInitiationResponse_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['criticality']))
+    ___E_CIDMeasurementInitiationResponse_protocolIEs__item__id._const_tab_id = u'id'
+    ___E_CIDMeasurementInitiationResponse_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'criticality']))
     ___E_CIDMeasurementInitiationResponse_protocolIEs__item__criticality._const_tab = ____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab
-    ___E_CIDMeasurementInitiationResponse_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___E_CIDMeasurementInitiationResponse_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___E_CIDMeasurementInitiationResponse_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['Value']))
+    ___E_CIDMeasurementInitiationResponse_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___E_CIDMeasurementInitiationResponse_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___E_CIDMeasurementInitiationResponse_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'Value']))
     ___E_CIDMeasurementInitiationResponse_protocolIEs__item__value._const_tab = ____E_CIDMeasurementInitiationResponse_protocolIEs__item__id_tab
-    ___E_CIDMeasurementInitiationResponse_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___E_CIDMeasurementInitiationResponse_protocolIEs__item__value._const_tab_id = 'Value'
+    ___E_CIDMeasurementInitiationResponse_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___E_CIDMeasurementInitiationResponse_protocolIEs__item__value._const_tab_id = u'Value'
     __E_CIDMeasurementInitiationResponse_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___E_CIDMeasurementInitiationResponse_protocolIEs__item__id),
-        ('criticality', ___E_CIDMeasurementInitiationResponse_protocolIEs__item__criticality),
-        ('value', ___E_CIDMeasurementInitiationResponse_protocolIEs__item__value),
+        (u'id', ___E_CIDMeasurementInitiationResponse_protocolIEs__item__id),
+        (u'criticality', ___E_CIDMeasurementInitiationResponse_protocolIEs__item__criticality),
+        (u'value', ___E_CIDMeasurementInitiationResponse_protocolIEs__item__value),
         ])
     __E_CIDMeasurementInitiationResponse_protocolIEs__item_._ext = None
     _E_CIDMeasurementInitiationResponse_protocolIEs._cont = __E_CIDMeasurementInitiationResponse_protocolIEs__item_
     _E_CIDMeasurementInitiationResponse_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     E_CIDMeasurementInitiationResponse._cont = ASN1Dict([
-        ('protocolIEs', _E_CIDMeasurementInitiationResponse_protocolIEs),
+        (u'protocolIEs', _E_CIDMeasurementInitiationResponse_protocolIEs),
         ])
     E_CIDMeasurementInitiationResponse._ext = []
     
     #-----< E-CIDMeasurementInitiationResponse-IEs >-----#
-    E_CIDMeasurementInitiationResponse_IEs = CLASS(name='E-CIDMeasurementInitiationResponse-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _E_CIDMeasurementInitiationResponse_IEs_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
-    _E_CIDMeasurementInitiationResponse_IEs_val_Value_1 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
-    _E_CIDMeasurementInitiationResponse_IEs_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'E-CID-MeasurementResult')))
-    _E_CIDMeasurementInitiationResponse_IEs_val_Value_3 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
-    _E_CIDMeasurementInitiationResponse_IEs_val_Value_4 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Cell-Portion-ID')))
-    _E_CIDMeasurementInitiationResponse_IEs_val_Value_5 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'InterRATMeasurementResult')))
-    _E_CIDMeasurementInitiationResponse_IEs_val_Value_6 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'WLANMeasurementResult')))
-    E_CIDMeasurementInitiationResponse_IEs._val = ASN1Set(rv=[dict([('id', 2), ('criticality', 'reject'), ('Value', _E_CIDMeasurementInitiationResponse_IEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 6), ('criticality', 'reject'), ('Value', _E_CIDMeasurementInitiationResponse_IEs_val_Value_1), ('presence', 'mandatory')]), dict([('id', 7), ('criticality', 'ignore'), ('Value', _E_CIDMeasurementInitiationResponse_IEs_val_Value_2), ('presence', 'optional')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _E_CIDMeasurementInitiationResponse_IEs_val_Value_3), ('presence', 'optional')]), dict([('id', 14), ('criticality', 'ignore'), ('Value', _E_CIDMeasurementInitiationResponse_IEs_val_Value_4), ('presence', 'optional')]), dict([('id', 17), ('criticality', 'ignore'), ('Value', _E_CIDMeasurementInitiationResponse_IEs_val_Value_5), ('presence', 'optional')]), dict([('id', 21), ('criticality', 'ignore'), ('Value', _E_CIDMeasurementInitiationResponse_IEs_val_Value_6), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    E_CIDMeasurementInitiationResponse_IEs = CLASS(name=u'E-CIDMeasurementInitiationResponse-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
+    _E_CIDMeasurementInitiationResponse_IEs_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
+    _E_CIDMeasurementInitiationResponse_IEs_val_Value_1 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
+    _E_CIDMeasurementInitiationResponse_IEs_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'E-CID-MeasurementResult')))
+    _E_CIDMeasurementInitiationResponse_IEs_val_Value_3 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
+    _E_CIDMeasurementInitiationResponse_IEs_val_Value_4 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Cell-Portion-ID')))
+    _E_CIDMeasurementInitiationResponse_IEs_val_Value_5 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'InterRATMeasurementResult')))
+    _E_CIDMeasurementInitiationResponse_IEs_val_Value_6 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'WLANMeasurementResult')))
+    E_CIDMeasurementInitiationResponse_IEs._val = ASN1Set(rv=[dict([(u'id', 2), (u'criticality', u'reject'), (u'Value', _E_CIDMeasurementInitiationResponse_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 6), (u'criticality', u'reject'), (u'Value', _E_CIDMeasurementInitiationResponse_IEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _E_CIDMeasurementInitiationResponse_IEs_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _E_CIDMeasurementInitiationResponse_IEs_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 14), (u'criticality', u'ignore'), (u'Value', _E_CIDMeasurementInitiationResponse_IEs_val_Value_4), (u'presence', u'optional')]), dict([(u'id', 17), (u'criticality', u'ignore'), (u'Value', _E_CIDMeasurementInitiationResponse_IEs_val_Value_5), (u'presence', u'optional')]), dict([(u'id', 21), (u'criticality', u'ignore'), (u'Value', _E_CIDMeasurementInitiationResponse_IEs_val_Value_6), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< E-CIDMeasurementInitiationFailure >-----#
-    E_CIDMeasurementInitiationFailure = SEQ(name='E-CIDMeasurementInitiationFailure', mode=MODE_TYPE)
-    _E_CIDMeasurementInitiationFailure_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
+    E_CIDMeasurementInitiationFailure = SEQ(name=u'E-CIDMeasurementInitiationFailure', mode=MODE_TYPE)
+    _E_CIDMeasurementInitiationFailure_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
     __E_CIDMeasurementInitiationFailure_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Field')))
-    ___E_CIDMeasurementInitiationFailure_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['id']))
+    ___E_CIDMeasurementInitiationFailure_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'id']))
     ____E_CIDMeasurementInitiationFailure_protocolIEs__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _____E_CIDMeasurementInitiationFailure_protocolIEs__item__id_tab_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
-    _____E_CIDMeasurementInitiationFailure_protocolIEs__item__id_tab_val_Value_1 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Cause')))
-    _____E_CIDMeasurementInitiationFailure_protocolIEs__item__id_tab_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
-    ____E_CIDMeasurementInitiationFailure_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 2), ('criticality', 'reject'), ('Value', _____E_CIDMeasurementInitiationFailure_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 0), ('criticality', 'ignore'), ('Value', _____E_CIDMeasurementInitiationFailure_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _____E_CIDMeasurementInitiationFailure_protocolIEs__item__id_tab_val_Value_2), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____E_CIDMeasurementInitiationFailure_protocolIEs__item__id_tab_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
+    _____E_CIDMeasurementInitiationFailure_protocolIEs__item__id_tab_val_Value_1 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Cause')))
+    _____E_CIDMeasurementInitiationFailure_protocolIEs__item__id_tab_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
+    ____E_CIDMeasurementInitiationFailure_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 2), (u'criticality', u'reject'), (u'Value', _____E_CIDMeasurementInitiationFailure_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 0), (u'criticality', u'ignore'), (u'Value', _____E_CIDMeasurementInitiationFailure_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _____E_CIDMeasurementInitiationFailure_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___E_CIDMeasurementInitiationFailure_protocolIEs__item__id._const_tab = ____E_CIDMeasurementInitiationFailure_protocolIEs__item__id_tab
     ___E_CIDMeasurementInitiationFailure_protocolIEs__item__id._const_tab_at = None
-    ___E_CIDMeasurementInitiationFailure_protocolIEs__item__id._const_tab_id = 'id'
-    ___E_CIDMeasurementInitiationFailure_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['criticality']))
+    ___E_CIDMeasurementInitiationFailure_protocolIEs__item__id._const_tab_id = u'id'
+    ___E_CIDMeasurementInitiationFailure_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'criticality']))
     ___E_CIDMeasurementInitiationFailure_protocolIEs__item__criticality._const_tab = ____E_CIDMeasurementInitiationFailure_protocolIEs__item__id_tab
-    ___E_CIDMeasurementInitiationFailure_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___E_CIDMeasurementInitiationFailure_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___E_CIDMeasurementInitiationFailure_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['Value']))
+    ___E_CIDMeasurementInitiationFailure_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___E_CIDMeasurementInitiationFailure_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___E_CIDMeasurementInitiationFailure_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'Value']))
     ___E_CIDMeasurementInitiationFailure_protocolIEs__item__value._const_tab = ____E_CIDMeasurementInitiationFailure_protocolIEs__item__id_tab
-    ___E_CIDMeasurementInitiationFailure_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___E_CIDMeasurementInitiationFailure_protocolIEs__item__value._const_tab_id = 'Value'
+    ___E_CIDMeasurementInitiationFailure_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___E_CIDMeasurementInitiationFailure_protocolIEs__item__value._const_tab_id = u'Value'
     __E_CIDMeasurementInitiationFailure_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___E_CIDMeasurementInitiationFailure_protocolIEs__item__id),
-        ('criticality', ___E_CIDMeasurementInitiationFailure_protocolIEs__item__criticality),
-        ('value', ___E_CIDMeasurementInitiationFailure_protocolIEs__item__value),
+        (u'id', ___E_CIDMeasurementInitiationFailure_protocolIEs__item__id),
+        (u'criticality', ___E_CIDMeasurementInitiationFailure_protocolIEs__item__criticality),
+        (u'value', ___E_CIDMeasurementInitiationFailure_protocolIEs__item__value),
         ])
     __E_CIDMeasurementInitiationFailure_protocolIEs__item_._ext = None
     _E_CIDMeasurementInitiationFailure_protocolIEs._cont = __E_CIDMeasurementInitiationFailure_protocolIEs__item_
     _E_CIDMeasurementInitiationFailure_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     E_CIDMeasurementInitiationFailure._cont = ASN1Dict([
-        ('protocolIEs', _E_CIDMeasurementInitiationFailure_protocolIEs),
+        (u'protocolIEs', _E_CIDMeasurementInitiationFailure_protocolIEs),
         ])
     E_CIDMeasurementInitiationFailure._ext = []
     
     #-----< E-CIDMeasurementInitiationFailure-IEs >-----#
-    E_CIDMeasurementInitiationFailure_IEs = CLASS(name='E-CIDMeasurementInitiationFailure-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _E_CIDMeasurementInitiationFailure_IEs_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
-    _E_CIDMeasurementInitiationFailure_IEs_val_Value_1 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Cause')))
-    _E_CIDMeasurementInitiationFailure_IEs_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
-    E_CIDMeasurementInitiationFailure_IEs._val = ASN1Set(rv=[dict([('id', 2), ('criticality', 'reject'), ('Value', _E_CIDMeasurementInitiationFailure_IEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 0), ('criticality', 'ignore'), ('Value', _E_CIDMeasurementInitiationFailure_IEs_val_Value_1), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _E_CIDMeasurementInitiationFailure_IEs_val_Value_2), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    E_CIDMeasurementInitiationFailure_IEs = CLASS(name=u'E-CIDMeasurementInitiationFailure-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
+    _E_CIDMeasurementInitiationFailure_IEs_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
+    _E_CIDMeasurementInitiationFailure_IEs_val_Value_1 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Cause')))
+    _E_CIDMeasurementInitiationFailure_IEs_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
+    E_CIDMeasurementInitiationFailure_IEs._val = ASN1Set(rv=[dict([(u'id', 2), (u'criticality', u'reject'), (u'Value', _E_CIDMeasurementInitiationFailure_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 0), (u'criticality', u'ignore'), (u'Value', _E_CIDMeasurementInitiationFailure_IEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _E_CIDMeasurementInitiationFailure_IEs_val_Value_2), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< E-CIDMeasurementFailureIndication >-----#
-    E_CIDMeasurementFailureIndication = SEQ(name='E-CIDMeasurementFailureIndication', mode=MODE_TYPE)
-    _E_CIDMeasurementFailureIndication_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
+    E_CIDMeasurementFailureIndication = SEQ(name=u'E-CIDMeasurementFailureIndication', mode=MODE_TYPE)
+    _E_CIDMeasurementFailureIndication_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
     __E_CIDMeasurementFailureIndication_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Field')))
-    ___E_CIDMeasurementFailureIndication_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['id']))
+    ___E_CIDMeasurementFailureIndication_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'id']))
     ____E_CIDMeasurementFailureIndication_protocolIEs__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _____E_CIDMeasurementFailureIndication_protocolIEs__item__id_tab_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
-    _____E_CIDMeasurementFailureIndication_protocolIEs__item__id_tab_val_Value_1 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
-    _____E_CIDMeasurementFailureIndication_protocolIEs__item__id_tab_val_Value_2 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Cause')))
-    ____E_CIDMeasurementFailureIndication_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 2), ('criticality', 'reject'), ('Value', _____E_CIDMeasurementFailureIndication_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 6), ('criticality', 'reject'), ('Value', _____E_CIDMeasurementFailureIndication_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')]), dict([('id', 0), ('criticality', 'ignore'), ('Value', _____E_CIDMeasurementFailureIndication_protocolIEs__item__id_tab_val_Value_2), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    _____E_CIDMeasurementFailureIndication_protocolIEs__item__id_tab_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
+    _____E_CIDMeasurementFailureIndication_protocolIEs__item__id_tab_val_Value_1 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
+    _____E_CIDMeasurementFailureIndication_protocolIEs__item__id_tab_val_Value_2 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Cause')))
+    ____E_CIDMeasurementFailureIndication_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 2), (u'criticality', u'reject'), (u'Value', _____E_CIDMeasurementFailureIndication_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 6), (u'criticality', u'reject'), (u'Value', _____E_CIDMeasurementFailureIndication_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 0), (u'criticality', u'ignore'), (u'Value', _____E_CIDMeasurementFailureIndication_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     ___E_CIDMeasurementFailureIndication_protocolIEs__item__id._const_tab = ____E_CIDMeasurementFailureIndication_protocolIEs__item__id_tab
     ___E_CIDMeasurementFailureIndication_protocolIEs__item__id._const_tab_at = None
-    ___E_CIDMeasurementFailureIndication_protocolIEs__item__id._const_tab_id = 'id'
-    ___E_CIDMeasurementFailureIndication_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['criticality']))
+    ___E_CIDMeasurementFailureIndication_protocolIEs__item__id._const_tab_id = u'id'
+    ___E_CIDMeasurementFailureIndication_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'criticality']))
     ___E_CIDMeasurementFailureIndication_protocolIEs__item__criticality._const_tab = ____E_CIDMeasurementFailureIndication_protocolIEs__item__id_tab
-    ___E_CIDMeasurementFailureIndication_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___E_CIDMeasurementFailureIndication_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___E_CIDMeasurementFailureIndication_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['Value']))
+    ___E_CIDMeasurementFailureIndication_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___E_CIDMeasurementFailureIndication_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___E_CIDMeasurementFailureIndication_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'Value']))
     ___E_CIDMeasurementFailureIndication_protocolIEs__item__value._const_tab = ____E_CIDMeasurementFailureIndication_protocolIEs__item__id_tab
-    ___E_CIDMeasurementFailureIndication_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___E_CIDMeasurementFailureIndication_protocolIEs__item__value._const_tab_id = 'Value'
+    ___E_CIDMeasurementFailureIndication_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___E_CIDMeasurementFailureIndication_protocolIEs__item__value._const_tab_id = u'Value'
     __E_CIDMeasurementFailureIndication_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___E_CIDMeasurementFailureIndication_protocolIEs__item__id),
-        ('criticality', ___E_CIDMeasurementFailureIndication_protocolIEs__item__criticality),
-        ('value', ___E_CIDMeasurementFailureIndication_protocolIEs__item__value),
+        (u'id', ___E_CIDMeasurementFailureIndication_protocolIEs__item__id),
+        (u'criticality', ___E_CIDMeasurementFailureIndication_protocolIEs__item__criticality),
+        (u'value', ___E_CIDMeasurementFailureIndication_protocolIEs__item__value),
         ])
     __E_CIDMeasurementFailureIndication_protocolIEs__item_._ext = None
     _E_CIDMeasurementFailureIndication_protocolIEs._cont = __E_CIDMeasurementFailureIndication_protocolIEs__item_
     _E_CIDMeasurementFailureIndication_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     E_CIDMeasurementFailureIndication._cont = ASN1Dict([
-        ('protocolIEs', _E_CIDMeasurementFailureIndication_protocolIEs),
+        (u'protocolIEs', _E_CIDMeasurementFailureIndication_protocolIEs),
         ])
     E_CIDMeasurementFailureIndication._ext = []
     
     #-----< E-CIDMeasurementFailureIndication-IEs >-----#
-    E_CIDMeasurementFailureIndication_IEs = CLASS(name='E-CIDMeasurementFailureIndication-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _E_CIDMeasurementFailureIndication_IEs_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
-    _E_CIDMeasurementFailureIndication_IEs_val_Value_1 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
-    _E_CIDMeasurementFailureIndication_IEs_val_Value_2 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Cause')))
-    E_CIDMeasurementFailureIndication_IEs._val = ASN1Set(rv=[dict([('id', 2), ('criticality', 'reject'), ('Value', _E_CIDMeasurementFailureIndication_IEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 6), ('criticality', 'reject'), ('Value', _E_CIDMeasurementFailureIndication_IEs_val_Value_1), ('presence', 'mandatory')]), dict([('id', 0), ('criticality', 'ignore'), ('Value', _E_CIDMeasurementFailureIndication_IEs_val_Value_2), ('presence', 'mandatory')])], rr=[], ev=[], er=[])
+    E_CIDMeasurementFailureIndication_IEs = CLASS(name=u'E-CIDMeasurementFailureIndication-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
+    _E_CIDMeasurementFailureIndication_IEs_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
+    _E_CIDMeasurementFailureIndication_IEs_val_Value_1 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
+    _E_CIDMeasurementFailureIndication_IEs_val_Value_2 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Cause')))
+    E_CIDMeasurementFailureIndication_IEs._val = ASN1Set(rv=[dict([(u'id', 2), (u'criticality', u'reject'), (u'Value', _E_CIDMeasurementFailureIndication_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 6), (u'criticality', u'reject'), (u'Value', _E_CIDMeasurementFailureIndication_IEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 0), (u'criticality', u'ignore'), (u'Value', _E_CIDMeasurementFailureIndication_IEs_val_Value_2), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< E-CIDMeasurementReport >-----#
-    E_CIDMeasurementReport = SEQ(name='E-CIDMeasurementReport', mode=MODE_TYPE)
-    _E_CIDMeasurementReport_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
+    E_CIDMeasurementReport = SEQ(name=u'E-CIDMeasurementReport', mode=MODE_TYPE)
+    _E_CIDMeasurementReport_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
     __E_CIDMeasurementReport_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Field')))
-    ___E_CIDMeasurementReport_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['id']))
+    ___E_CIDMeasurementReport_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'id']))
     ____E_CIDMeasurementReport_protocolIEs__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _____E_CIDMeasurementReport_protocolIEs__item__id_tab_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
-    _____E_CIDMeasurementReport_protocolIEs__item__id_tab_val_Value_1 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
-    _____E_CIDMeasurementReport_protocolIEs__item__id_tab_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'E-CID-MeasurementResult')))
-    _____E_CIDMeasurementReport_protocolIEs__item__id_tab_val_Value_3 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Cell-Portion-ID')))
-    ____E_CIDMeasurementReport_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 2), ('criticality', 'reject'), ('Value', _____E_CIDMeasurementReport_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 6), ('criticality', 'reject'), ('Value', _____E_CIDMeasurementReport_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')]), dict([('id', 7), ('criticality', 'ignore'), ('Value', _____E_CIDMeasurementReport_protocolIEs__item__id_tab_val_Value_2), ('presence', 'mandatory')]), dict([('id', 14), ('criticality', 'ignore'), ('Value', _____E_CIDMeasurementReport_protocolIEs__item__id_tab_val_Value_3), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____E_CIDMeasurementReport_protocolIEs__item__id_tab_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
+    _____E_CIDMeasurementReport_protocolIEs__item__id_tab_val_Value_1 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
+    _____E_CIDMeasurementReport_protocolIEs__item__id_tab_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'E-CID-MeasurementResult')))
+    _____E_CIDMeasurementReport_protocolIEs__item__id_tab_val_Value_3 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Cell-Portion-ID')))
+    ____E_CIDMeasurementReport_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 2), (u'criticality', u'reject'), (u'Value', _____E_CIDMeasurementReport_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 6), (u'criticality', u'reject'), (u'Value', _____E_CIDMeasurementReport_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _____E_CIDMeasurementReport_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 14), (u'criticality', u'ignore'), (u'Value', _____E_CIDMeasurementReport_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___E_CIDMeasurementReport_protocolIEs__item__id._const_tab = ____E_CIDMeasurementReport_protocolIEs__item__id_tab
     ___E_CIDMeasurementReport_protocolIEs__item__id._const_tab_at = None
-    ___E_CIDMeasurementReport_protocolIEs__item__id._const_tab_id = 'id'
-    ___E_CIDMeasurementReport_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['criticality']))
+    ___E_CIDMeasurementReport_protocolIEs__item__id._const_tab_id = u'id'
+    ___E_CIDMeasurementReport_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'criticality']))
     ___E_CIDMeasurementReport_protocolIEs__item__criticality._const_tab = ____E_CIDMeasurementReport_protocolIEs__item__id_tab
-    ___E_CIDMeasurementReport_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___E_CIDMeasurementReport_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___E_CIDMeasurementReport_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['Value']))
+    ___E_CIDMeasurementReport_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___E_CIDMeasurementReport_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___E_CIDMeasurementReport_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'Value']))
     ___E_CIDMeasurementReport_protocolIEs__item__value._const_tab = ____E_CIDMeasurementReport_protocolIEs__item__id_tab
-    ___E_CIDMeasurementReport_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___E_CIDMeasurementReport_protocolIEs__item__value._const_tab_id = 'Value'
+    ___E_CIDMeasurementReport_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___E_CIDMeasurementReport_protocolIEs__item__value._const_tab_id = u'Value'
     __E_CIDMeasurementReport_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___E_CIDMeasurementReport_protocolIEs__item__id),
-        ('criticality', ___E_CIDMeasurementReport_protocolIEs__item__criticality),
-        ('value', ___E_CIDMeasurementReport_protocolIEs__item__value),
+        (u'id', ___E_CIDMeasurementReport_protocolIEs__item__id),
+        (u'criticality', ___E_CIDMeasurementReport_protocolIEs__item__criticality),
+        (u'value', ___E_CIDMeasurementReport_protocolIEs__item__value),
         ])
     __E_CIDMeasurementReport_protocolIEs__item_._ext = None
     _E_CIDMeasurementReport_protocolIEs._cont = __E_CIDMeasurementReport_protocolIEs__item_
     _E_CIDMeasurementReport_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     E_CIDMeasurementReport._cont = ASN1Dict([
-        ('protocolIEs', _E_CIDMeasurementReport_protocolIEs),
+        (u'protocolIEs', _E_CIDMeasurementReport_protocolIEs),
         ])
     E_CIDMeasurementReport._ext = []
     
     #-----< E-CIDMeasurementReport-IEs >-----#
-    E_CIDMeasurementReport_IEs = CLASS(name='E-CIDMeasurementReport-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _E_CIDMeasurementReport_IEs_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
-    _E_CIDMeasurementReport_IEs_val_Value_1 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
-    _E_CIDMeasurementReport_IEs_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'E-CID-MeasurementResult')))
-    _E_CIDMeasurementReport_IEs_val_Value_3 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Cell-Portion-ID')))
-    E_CIDMeasurementReport_IEs._val = ASN1Set(rv=[dict([('id', 2), ('criticality', 'reject'), ('Value', _E_CIDMeasurementReport_IEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 6), ('criticality', 'reject'), ('Value', _E_CIDMeasurementReport_IEs_val_Value_1), ('presence', 'mandatory')]), dict([('id', 7), ('criticality', 'ignore'), ('Value', _E_CIDMeasurementReport_IEs_val_Value_2), ('presence', 'mandatory')]), dict([('id', 14), ('criticality', 'ignore'), ('Value', _E_CIDMeasurementReport_IEs_val_Value_3), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    E_CIDMeasurementReport_IEs = CLASS(name=u'E-CIDMeasurementReport-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
+    _E_CIDMeasurementReport_IEs_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
+    _E_CIDMeasurementReport_IEs_val_Value_1 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
+    _E_CIDMeasurementReport_IEs_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'E-CID-MeasurementResult')))
+    _E_CIDMeasurementReport_IEs_val_Value_3 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Cell-Portion-ID')))
+    E_CIDMeasurementReport_IEs._val = ASN1Set(rv=[dict([(u'id', 2), (u'criticality', u'reject'), (u'Value', _E_CIDMeasurementReport_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 6), (u'criticality', u'reject'), (u'Value', _E_CIDMeasurementReport_IEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _E_CIDMeasurementReport_IEs_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 14), (u'criticality', u'ignore'), (u'Value', _E_CIDMeasurementReport_IEs_val_Value_3), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< E-CIDMeasurementTerminationCommand >-----#
-    E_CIDMeasurementTerminationCommand = SEQ(name='E-CIDMeasurementTerminationCommand', mode=MODE_TYPE)
-    _E_CIDMeasurementTerminationCommand_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
+    E_CIDMeasurementTerminationCommand = SEQ(name=u'E-CIDMeasurementTerminationCommand', mode=MODE_TYPE)
+    _E_CIDMeasurementTerminationCommand_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
     __E_CIDMeasurementTerminationCommand_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Field')))
-    ___E_CIDMeasurementTerminationCommand_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['id']))
+    ___E_CIDMeasurementTerminationCommand_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'id']))
     ____E_CIDMeasurementTerminationCommand_protocolIEs__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _____E_CIDMeasurementTerminationCommand_protocolIEs__item__id_tab_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
-    _____E_CIDMeasurementTerminationCommand_protocolIEs__item__id_tab_val_Value_1 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
-    ____E_CIDMeasurementTerminationCommand_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 2), ('criticality', 'reject'), ('Value', _____E_CIDMeasurementTerminationCommand_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 6), ('criticality', 'reject'), ('Value', _____E_CIDMeasurementTerminationCommand_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    _____E_CIDMeasurementTerminationCommand_protocolIEs__item__id_tab_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
+    _____E_CIDMeasurementTerminationCommand_protocolIEs__item__id_tab_val_Value_1 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
+    ____E_CIDMeasurementTerminationCommand_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 2), (u'criticality', u'reject'), (u'Value', _____E_CIDMeasurementTerminationCommand_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 6), (u'criticality', u'reject'), (u'Value', _____E_CIDMeasurementTerminationCommand_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     ___E_CIDMeasurementTerminationCommand_protocolIEs__item__id._const_tab = ____E_CIDMeasurementTerminationCommand_protocolIEs__item__id_tab
     ___E_CIDMeasurementTerminationCommand_protocolIEs__item__id._const_tab_at = None
-    ___E_CIDMeasurementTerminationCommand_protocolIEs__item__id._const_tab_id = 'id'
-    ___E_CIDMeasurementTerminationCommand_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['criticality']))
+    ___E_CIDMeasurementTerminationCommand_protocolIEs__item__id._const_tab_id = u'id'
+    ___E_CIDMeasurementTerminationCommand_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'criticality']))
     ___E_CIDMeasurementTerminationCommand_protocolIEs__item__criticality._const_tab = ____E_CIDMeasurementTerminationCommand_protocolIEs__item__id_tab
-    ___E_CIDMeasurementTerminationCommand_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___E_CIDMeasurementTerminationCommand_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___E_CIDMeasurementTerminationCommand_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['Value']))
+    ___E_CIDMeasurementTerminationCommand_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___E_CIDMeasurementTerminationCommand_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___E_CIDMeasurementTerminationCommand_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'Value']))
     ___E_CIDMeasurementTerminationCommand_protocolIEs__item__value._const_tab = ____E_CIDMeasurementTerminationCommand_protocolIEs__item__id_tab
-    ___E_CIDMeasurementTerminationCommand_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___E_CIDMeasurementTerminationCommand_protocolIEs__item__value._const_tab_id = 'Value'
+    ___E_CIDMeasurementTerminationCommand_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___E_CIDMeasurementTerminationCommand_protocolIEs__item__value._const_tab_id = u'Value'
     __E_CIDMeasurementTerminationCommand_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___E_CIDMeasurementTerminationCommand_protocolIEs__item__id),
-        ('criticality', ___E_CIDMeasurementTerminationCommand_protocolIEs__item__criticality),
-        ('value', ___E_CIDMeasurementTerminationCommand_protocolIEs__item__value),
+        (u'id', ___E_CIDMeasurementTerminationCommand_protocolIEs__item__id),
+        (u'criticality', ___E_CIDMeasurementTerminationCommand_protocolIEs__item__criticality),
+        (u'value', ___E_CIDMeasurementTerminationCommand_protocolIEs__item__value),
         ])
     __E_CIDMeasurementTerminationCommand_protocolIEs__item_._ext = None
     _E_CIDMeasurementTerminationCommand_protocolIEs._cont = __E_CIDMeasurementTerminationCommand_protocolIEs__item_
     _E_CIDMeasurementTerminationCommand_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     E_CIDMeasurementTerminationCommand._cont = ASN1Dict([
-        ('protocolIEs', _E_CIDMeasurementTerminationCommand_protocolIEs),
+        (u'protocolIEs', _E_CIDMeasurementTerminationCommand_protocolIEs),
         ])
     E_CIDMeasurementTerminationCommand._ext = []
     
     #-----< E-CIDMeasurementTerminationCommand-IEs >-----#
-    E_CIDMeasurementTerminationCommand_IEs = CLASS(name='E-CIDMeasurementTerminationCommand-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _E_CIDMeasurementTerminationCommand_IEs_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
-    _E_CIDMeasurementTerminationCommand_IEs_val_Value_1 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
-    E_CIDMeasurementTerminationCommand_IEs._val = ASN1Set(rv=[dict([('id', 2), ('criticality', 'reject'), ('Value', _E_CIDMeasurementTerminationCommand_IEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 6), ('criticality', 'reject'), ('Value', _E_CIDMeasurementTerminationCommand_IEs_val_Value_1), ('presence', 'mandatory')])], rr=[], ev=[], er=[])
+    E_CIDMeasurementTerminationCommand_IEs = CLASS(name=u'E-CIDMeasurementTerminationCommand-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
+    _E_CIDMeasurementTerminationCommand_IEs_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
+    _E_CIDMeasurementTerminationCommand_IEs_val_Value_1 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Measurement-ID')))
+    E_CIDMeasurementTerminationCommand_IEs._val = ASN1Set(rv=[dict([(u'id', 2), (u'criticality', u'reject'), (u'Value', _E_CIDMeasurementTerminationCommand_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 6), (u'criticality', u'reject'), (u'Value', _E_CIDMeasurementTerminationCommand_IEs_val_Value_1), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< OTDOAInformationRequest >-----#
-    OTDOAInformationRequest = SEQ(name='OTDOAInformationRequest', mode=MODE_TYPE)
-    _OTDOAInformationRequest_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
+    OTDOAInformationRequest = SEQ(name=u'OTDOAInformationRequest', mode=MODE_TYPE)
+    _OTDOAInformationRequest_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
     __OTDOAInformationRequest_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Field')))
-    ___OTDOAInformationRequest_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['id']))
+    ___OTDOAInformationRequest_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'id']))
     ____OTDOAInformationRequest_protocolIEs__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _____OTDOAInformationRequest_protocolIEs__item__id_tab_val_Value_0 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOA-Information-Type')))
-    ____OTDOAInformationRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 9), ('criticality', 'reject'), ('Value', _____OTDOAInformationRequest_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    _____OTDOAInformationRequest_protocolIEs__item__id_tab_val_Value_0 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOA-Information-Type')))
+    ____OTDOAInformationRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 9), (u'criticality', u'reject'), (u'Value', _____OTDOAInformationRequest_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     ___OTDOAInformationRequest_protocolIEs__item__id._const_tab = ____OTDOAInformationRequest_protocolIEs__item__id_tab
     ___OTDOAInformationRequest_protocolIEs__item__id._const_tab_at = None
-    ___OTDOAInformationRequest_protocolIEs__item__id._const_tab_id = 'id'
-    ___OTDOAInformationRequest_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['criticality']))
+    ___OTDOAInformationRequest_protocolIEs__item__id._const_tab_id = u'id'
+    ___OTDOAInformationRequest_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'criticality']))
     ___OTDOAInformationRequest_protocolIEs__item__criticality._const_tab = ____OTDOAInformationRequest_protocolIEs__item__id_tab
-    ___OTDOAInformationRequest_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___OTDOAInformationRequest_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___OTDOAInformationRequest_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['Value']))
+    ___OTDOAInformationRequest_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___OTDOAInformationRequest_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___OTDOAInformationRequest_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'Value']))
     ___OTDOAInformationRequest_protocolIEs__item__value._const_tab = ____OTDOAInformationRequest_protocolIEs__item__id_tab
-    ___OTDOAInformationRequest_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___OTDOAInformationRequest_protocolIEs__item__value._const_tab_id = 'Value'
+    ___OTDOAInformationRequest_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___OTDOAInformationRequest_protocolIEs__item__value._const_tab_id = u'Value'
     __OTDOAInformationRequest_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___OTDOAInformationRequest_protocolIEs__item__id),
-        ('criticality', ___OTDOAInformationRequest_protocolIEs__item__criticality),
-        ('value', ___OTDOAInformationRequest_protocolIEs__item__value),
+        (u'id', ___OTDOAInformationRequest_protocolIEs__item__id),
+        (u'criticality', ___OTDOAInformationRequest_protocolIEs__item__criticality),
+        (u'value', ___OTDOAInformationRequest_protocolIEs__item__value),
         ])
     __OTDOAInformationRequest_protocolIEs__item_._ext = None
     _OTDOAInformationRequest_protocolIEs._cont = __OTDOAInformationRequest_protocolIEs__item_
     _OTDOAInformationRequest_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     OTDOAInformationRequest._cont = ASN1Dict([
-        ('protocolIEs', _OTDOAInformationRequest_protocolIEs),
+        (u'protocolIEs', _OTDOAInformationRequest_protocolIEs),
         ])
     OTDOAInformationRequest._ext = []
     
     #-----< OTDOAInformationRequest-IEs >-----#
-    OTDOAInformationRequest_IEs = CLASS(name='OTDOAInformationRequest-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _OTDOAInformationRequest_IEs_val_Value_0 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOA-Information-Type')))
-    OTDOAInformationRequest_IEs._val = ASN1Set(rv=[dict([('id', 9), ('criticality', 'reject'), ('Value', _OTDOAInformationRequest_IEs_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=[], er=[])
+    OTDOAInformationRequest_IEs = CLASS(name=u'OTDOAInformationRequest-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
+    _OTDOAInformationRequest_IEs_val_Value_0 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOA-Information-Type')))
+    OTDOAInformationRequest_IEs._val = ASN1Set(rv=[dict([(u'id', 9), (u'criticality', u'reject'), (u'Value', _OTDOAInformationRequest_IEs_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< OTDOA-Information-Type >-----#
-    OTDOA_Information_Type = SEQ_OF(name='OTDOA-Information-Type', mode=MODE_TYPE)
+    OTDOA_Information_Type = SEQ_OF(name=u'OTDOA-Information-Type', mode=MODE_TYPE)
     _OTDOA_Information_Type__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Single-Container')))
-    __OTDOA_Information_Type__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['id']))
+    __OTDOA_Information_Type__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'id']))
     ___OTDOA_Information_Type__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    ____OTDOA_Information_Type__item__id_tab_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOA-Information-Type-Item')))
-    ___OTDOA_Information_Type__item__id_tab._val = ASN1Set(rv=[dict([('id', 10), ('criticality', 'reject'), ('Value', ____OTDOA_Information_Type__item__id_tab_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    ____OTDOA_Information_Type__item__id_tab_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOA-Information-Type-Item')))
+    ___OTDOA_Information_Type__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 10), (u'criticality', u'reject'), (u'Value', ____OTDOA_Information_Type__item__id_tab_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     __OTDOA_Information_Type__item__id._const_tab = ___OTDOA_Information_Type__item__id_tab
     __OTDOA_Information_Type__item__id._const_tab_at = None
-    __OTDOA_Information_Type__item__id._const_tab_id = 'id'
-    __OTDOA_Information_Type__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['criticality']))
+    __OTDOA_Information_Type__item__id._const_tab_id = u'id'
+    __OTDOA_Information_Type__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'criticality']))
     __OTDOA_Information_Type__item__criticality._const_tab = ___OTDOA_Information_Type__item__id_tab
-    __OTDOA_Information_Type__item__criticality._const_tab_at = ('..', 'id')
-    __OTDOA_Information_Type__item__criticality._const_tab_id = 'criticality'
-    __OTDOA_Information_Type__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['Value']))
+    __OTDOA_Information_Type__item__criticality._const_tab_at = ('..', u'id')
+    __OTDOA_Information_Type__item__criticality._const_tab_id = u'criticality'
+    __OTDOA_Information_Type__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'Value']))
     __OTDOA_Information_Type__item__value._const_tab = ___OTDOA_Information_Type__item__id_tab
-    __OTDOA_Information_Type__item__value._const_tab_at = ('..', 'id')
-    __OTDOA_Information_Type__item__value._const_tab_id = 'Value'
+    __OTDOA_Information_Type__item__value._const_tab_at = ('..', u'id')
+    __OTDOA_Information_Type__item__value._const_tab_id = u'Value'
     _OTDOA_Information_Type__item_._cont = ASN1Dict([
-        ('id', __OTDOA_Information_Type__item__id),
-        ('criticality', __OTDOA_Information_Type__item__criticality),
-        ('value', __OTDOA_Information_Type__item__value),
+        (u'id', __OTDOA_Information_Type__item__id),
+        (u'criticality', __OTDOA_Information_Type__item__criticality),
+        (u'value', __OTDOA_Information_Type__item__value),
         ])
     _OTDOA_Information_Type__item_._ext = None
     OTDOA_Information_Type._cont = _OTDOA_Information_Type__item_
     OTDOA_Information_Type._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=63)], ev=None, er=[])
     
     #-----< OTDOA-Information-TypeIEs >-----#
-    OTDOA_Information_TypeIEs = CLASS(name='OTDOA-Information-TypeIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _OTDOA_Information_TypeIEs_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOA-Information-Type-Item')))
-    OTDOA_Information_TypeIEs._val = ASN1Set(rv=[dict([('id', 10), ('criticality', 'reject'), ('Value', _OTDOA_Information_TypeIEs_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=[], er=[])
+    OTDOA_Information_TypeIEs = CLASS(name=u'OTDOA-Information-TypeIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
+    _OTDOA_Information_TypeIEs_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOA-Information-Type-Item')))
+    OTDOA_Information_TypeIEs._val = ASN1Set(rv=[dict([(u'id', 10), (u'criticality', u'reject'), (u'Value', _OTDOA_Information_TypeIEs_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< OTDOA-Information-Type-Item >-----#
-    OTDOA_Information_Type_Item = SEQ(name='OTDOA-Information-Type-Item', mode=MODE_TYPE)
-    _OTDOA_Information_Type_Item_oTDOA_Information_Type_Item = ENUM(name='oTDOA-Information-Type-Item', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'OTDOA-Information-Item')))
-    _OTDOA_Information_Type_Item_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
+    OTDOA_Information_Type_Item = SEQ(name=u'OTDOA-Information-Type-Item', mode=MODE_TYPE)
+    _OTDOA_Information_Type_Item_oTDOA_Information_Type_Item = ENUM(name=u'oTDOA-Information-Type-Item', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-IEs', 'OTDOA-Information-Item')))
+    _OTDOA_Information_Type_Item_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionContainer')), opt=True)
     __OTDOA_Information_Type_Item_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolExtensionField')))
-    ___OTDOA_Information_Type_Item_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['id']))
+    ___OTDOA_Information_Type_Item_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'id']))
     ____OTDOA_Information_Type_Item_iE_Extensions__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____OTDOA_Information_Type_Item_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___OTDOA_Information_Type_Item_iE_Extensions__item__id._const_tab = ____OTDOA_Information_Type_Item_iE_Extensions__item__id_tab
     ___OTDOA_Information_Type_Item_iE_Extensions__item__id._const_tab_at = None
-    ___OTDOA_Information_Type_Item_iE_Extensions__item__id._const_tab_id = 'id'
-    ___OTDOA_Information_Type_Item_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['criticality']))
+    ___OTDOA_Information_Type_Item_iE_Extensions__item__id._const_tab_id = u'id'
+    ___OTDOA_Information_Type_Item_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'criticality']))
     ____OTDOA_Information_Type_Item_iE_Extensions__item__criticality_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____OTDOA_Information_Type_Item_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___OTDOA_Information_Type_Item_iE_Extensions__item__criticality._const_tab = ____OTDOA_Information_Type_Item_iE_Extensions__item__criticality_tab
-    ___OTDOA_Information_Type_Item_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___OTDOA_Information_Type_Item_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___OTDOA_Information_Type_Item_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), ['Extension']))
+    ___OTDOA_Information_Type_Item_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___OTDOA_Information_Type_Item_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___OTDOA_Information_Type_Item_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION'), [u'Extension']))
     ____OTDOA_Information_Type_Item_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_LPPA-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     ____OTDOA_Information_Type_Item_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___OTDOA_Information_Type_Item_iE_Extensions__item__extensionValue._const_tab = ____OTDOA_Information_Type_Item_iE_Extensions__item__extensionValue_tab
-    ___OTDOA_Information_Type_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___OTDOA_Information_Type_Item_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___OTDOA_Information_Type_Item_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___OTDOA_Information_Type_Item_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __OTDOA_Information_Type_Item_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___OTDOA_Information_Type_Item_iE_Extensions__item__id),
-        ('criticality', ___OTDOA_Information_Type_Item_iE_Extensions__item__criticality),
-        ('extensionValue', ___OTDOA_Information_Type_Item_iE_Extensions__item__extensionValue),
+        (u'id', ___OTDOA_Information_Type_Item_iE_Extensions__item__id),
+        (u'criticality', ___OTDOA_Information_Type_Item_iE_Extensions__item__criticality),
+        (u'extensionValue', ___OTDOA_Information_Type_Item_iE_Extensions__item__extensionValue),
         ])
     __OTDOA_Information_Type_Item_iE_Extensions__item_._ext = None
     _OTDOA_Information_Type_Item_iE_Extensions._cont = __OTDOA_Information_Type_Item_iE_Extensions__item_
     _OTDOA_Information_Type_Item_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     OTDOA_Information_Type_Item._cont = ASN1Dict([
-        ('oTDOA-Information-Type-Item', _OTDOA_Information_Type_Item_oTDOA_Information_Type_Item),
-        ('iE-Extensions', _OTDOA_Information_Type_Item_iE_Extensions),
+        (u'oTDOA-Information-Type-Item', _OTDOA_Information_Type_Item_oTDOA_Information_Type_Item),
+        (u'iE-Extensions', _OTDOA_Information_Type_Item_iE_Extensions),
         ])
     OTDOA_Information_Type_Item._ext = []
     
     #-----< OTDOA-Information-Type-ItemExtIEs >-----#
-    OTDOA_Information_Type_ItemExtIEs = CLASS(name='OTDOA-Information-Type-ItemExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
+    OTDOA_Information_Type_ItemExtIEs = CLASS(name=u'OTDOA-Information-Type-ItemExtIEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-EXTENSION')))
     OTDOA_Information_Type_ItemExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< OTDOAInformationResponse >-----#
-    OTDOAInformationResponse = SEQ(name='OTDOAInformationResponse', mode=MODE_TYPE)
-    _OTDOAInformationResponse_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
+    OTDOAInformationResponse = SEQ(name=u'OTDOAInformationResponse', mode=MODE_TYPE)
+    _OTDOAInformationResponse_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
     __OTDOAInformationResponse_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Field')))
-    ___OTDOAInformationResponse_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['id']))
+    ___OTDOAInformationResponse_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'id']))
     ____OTDOAInformationResponse_protocolIEs__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _____OTDOAInformationResponse_protocolIEs__item__id_tab_val_Value_0 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'OTDOACells')))
-    _____OTDOAInformationResponse_protocolIEs__item__id_tab_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
-    _____OTDOAInformationResponse_protocolIEs__item__id_tab_val_Value_2 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Add-OTDOACells')))
-    ____OTDOAInformationResponse_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 8), ('criticality', 'ignore'), ('Value', _____OTDOAInformationResponse_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _____OTDOAInformationResponse_protocolIEs__item__id_tab_val_Value_1), ('presence', 'optional')]), dict([('id', 18), ('criticality', 'ignore'), ('Value', _____OTDOAInformationResponse_protocolIEs__item__id_tab_val_Value_2), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____OTDOAInformationResponse_protocolIEs__item__id_tab_val_Value_0 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'OTDOACells')))
+    _____OTDOAInformationResponse_protocolIEs__item__id_tab_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
+    _____OTDOAInformationResponse_protocolIEs__item__id_tab_val_Value_2 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Add-OTDOACells')))
+    ____OTDOAInformationResponse_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 8), (u'criticality', u'ignore'), (u'Value', _____OTDOAInformationResponse_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _____OTDOAInformationResponse_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'optional')]), dict([(u'id', 18), (u'criticality', u'ignore'), (u'Value', _____OTDOAInformationResponse_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___OTDOAInformationResponse_protocolIEs__item__id._const_tab = ____OTDOAInformationResponse_protocolIEs__item__id_tab
     ___OTDOAInformationResponse_protocolIEs__item__id._const_tab_at = None
-    ___OTDOAInformationResponse_protocolIEs__item__id._const_tab_id = 'id'
-    ___OTDOAInformationResponse_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['criticality']))
+    ___OTDOAInformationResponse_protocolIEs__item__id._const_tab_id = u'id'
+    ___OTDOAInformationResponse_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'criticality']))
     ___OTDOAInformationResponse_protocolIEs__item__criticality._const_tab = ____OTDOAInformationResponse_protocolIEs__item__id_tab
-    ___OTDOAInformationResponse_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___OTDOAInformationResponse_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___OTDOAInformationResponse_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['Value']))
+    ___OTDOAInformationResponse_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___OTDOAInformationResponse_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___OTDOAInformationResponse_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'Value']))
     ___OTDOAInformationResponse_protocolIEs__item__value._const_tab = ____OTDOAInformationResponse_protocolIEs__item__id_tab
-    ___OTDOAInformationResponse_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___OTDOAInformationResponse_protocolIEs__item__value._const_tab_id = 'Value'
+    ___OTDOAInformationResponse_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___OTDOAInformationResponse_protocolIEs__item__value._const_tab_id = u'Value'
     __OTDOAInformationResponse_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___OTDOAInformationResponse_protocolIEs__item__id),
-        ('criticality', ___OTDOAInformationResponse_protocolIEs__item__criticality),
-        ('value', ___OTDOAInformationResponse_protocolIEs__item__value),
+        (u'id', ___OTDOAInformationResponse_protocolIEs__item__id),
+        (u'criticality', ___OTDOAInformationResponse_protocolIEs__item__criticality),
+        (u'value', ___OTDOAInformationResponse_protocolIEs__item__value),
         ])
     __OTDOAInformationResponse_protocolIEs__item_._ext = None
     _OTDOAInformationResponse_protocolIEs._cont = __OTDOAInformationResponse_protocolIEs__item_
     _OTDOAInformationResponse_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     OTDOAInformationResponse._cont = ASN1Dict([
-        ('protocolIEs', _OTDOAInformationResponse_protocolIEs),
+        (u'protocolIEs', _OTDOAInformationResponse_protocolIEs),
         ])
     OTDOAInformationResponse._ext = []
     
     #-----< OTDOAInformationResponse-IEs >-----#
-    OTDOAInformationResponse_IEs = CLASS(name='OTDOAInformationResponse-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _OTDOAInformationResponse_IEs_val_Value_0 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'OTDOACells')))
-    _OTDOAInformationResponse_IEs_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
-    _OTDOAInformationResponse_IEs_val_Value_2 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Add-OTDOACells')))
-    OTDOAInformationResponse_IEs._val = ASN1Set(rv=[dict([('id', 8), ('criticality', 'ignore'), ('Value', _OTDOAInformationResponse_IEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _OTDOAInformationResponse_IEs_val_Value_1), ('presence', 'optional')]), dict([('id', 18), ('criticality', 'ignore'), ('Value', _OTDOAInformationResponse_IEs_val_Value_2), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    OTDOAInformationResponse_IEs = CLASS(name=u'OTDOAInformationResponse-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
+    _OTDOAInformationResponse_IEs_val_Value_0 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'OTDOACells')))
+    _OTDOAInformationResponse_IEs_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
+    _OTDOAInformationResponse_IEs_val_Value_2 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Add-OTDOACells')))
+    OTDOAInformationResponse_IEs._val = ASN1Set(rv=[dict([(u'id', 8), (u'criticality', u'ignore'), (u'Value', _OTDOAInformationResponse_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _OTDOAInformationResponse_IEs_val_Value_1), (u'presence', u'optional')]), dict([(u'id', 18), (u'criticality', u'ignore'), (u'Value', _OTDOAInformationResponse_IEs_val_Value_2), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< OTDOAInformationFailure >-----#
-    OTDOAInformationFailure = SEQ(name='OTDOAInformationFailure', mode=MODE_TYPE)
-    _OTDOAInformationFailure_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
+    OTDOAInformationFailure = SEQ(name=u'OTDOAInformationFailure', mode=MODE_TYPE)
+    _OTDOAInformationFailure_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
     __OTDOAInformationFailure_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Field')))
-    ___OTDOAInformationFailure_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['id']))
+    ___OTDOAInformationFailure_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'id']))
     ____OTDOAInformationFailure_protocolIEs__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _____OTDOAInformationFailure_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Cause')))
-    _____OTDOAInformationFailure_protocolIEs__item__id_tab_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
-    ____OTDOAInformationFailure_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'ignore'), ('Value', _____OTDOAInformationFailure_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _____OTDOAInformationFailure_protocolIEs__item__id_tab_val_Value_1), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____OTDOAInformationFailure_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Cause')))
+    _____OTDOAInformationFailure_protocolIEs__item__id_tab_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
+    ____OTDOAInformationFailure_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'ignore'), (u'Value', _____OTDOAInformationFailure_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _____OTDOAInformationFailure_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___OTDOAInformationFailure_protocolIEs__item__id._const_tab = ____OTDOAInformationFailure_protocolIEs__item__id_tab
     ___OTDOAInformationFailure_protocolIEs__item__id._const_tab_at = None
-    ___OTDOAInformationFailure_protocolIEs__item__id._const_tab_id = 'id'
-    ___OTDOAInformationFailure_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['criticality']))
+    ___OTDOAInformationFailure_protocolIEs__item__id._const_tab_id = u'id'
+    ___OTDOAInformationFailure_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'criticality']))
     ___OTDOAInformationFailure_protocolIEs__item__criticality._const_tab = ____OTDOAInformationFailure_protocolIEs__item__id_tab
-    ___OTDOAInformationFailure_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___OTDOAInformationFailure_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___OTDOAInformationFailure_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['Value']))
+    ___OTDOAInformationFailure_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___OTDOAInformationFailure_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___OTDOAInformationFailure_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'Value']))
     ___OTDOAInformationFailure_protocolIEs__item__value._const_tab = ____OTDOAInformationFailure_protocolIEs__item__id_tab
-    ___OTDOAInformationFailure_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___OTDOAInformationFailure_protocolIEs__item__value._const_tab_id = 'Value'
+    ___OTDOAInformationFailure_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___OTDOAInformationFailure_protocolIEs__item__value._const_tab_id = u'Value'
     __OTDOAInformationFailure_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___OTDOAInformationFailure_protocolIEs__item__id),
-        ('criticality', ___OTDOAInformationFailure_protocolIEs__item__criticality),
-        ('value', ___OTDOAInformationFailure_protocolIEs__item__value),
+        (u'id', ___OTDOAInformationFailure_protocolIEs__item__id),
+        (u'criticality', ___OTDOAInformationFailure_protocolIEs__item__criticality),
+        (u'value', ___OTDOAInformationFailure_protocolIEs__item__value),
         ])
     __OTDOAInformationFailure_protocolIEs__item_._ext = None
     _OTDOAInformationFailure_protocolIEs._cont = __OTDOAInformationFailure_protocolIEs__item_
     _OTDOAInformationFailure_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     OTDOAInformationFailure._cont = ASN1Dict([
-        ('protocolIEs', _OTDOAInformationFailure_protocolIEs),
+        (u'protocolIEs', _OTDOAInformationFailure_protocolIEs),
         ])
     OTDOAInformationFailure._ext = []
     
     #-----< OTDOAInformationFailure-IEs >-----#
-    OTDOAInformationFailure_IEs = CLASS(name='OTDOAInformationFailure-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _OTDOAInformationFailure_IEs_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Cause')))
-    _OTDOAInformationFailure_IEs_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
-    OTDOAInformationFailure_IEs._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'ignore'), ('Value', _OTDOAInformationFailure_IEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _OTDOAInformationFailure_IEs_val_Value_1), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    OTDOAInformationFailure_IEs = CLASS(name=u'OTDOAInformationFailure-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
+    _OTDOAInformationFailure_IEs_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Cause')))
+    _OTDOAInformationFailure_IEs_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
+    OTDOAInformationFailure_IEs._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'ignore'), (u'Value', _OTDOAInformationFailure_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _OTDOAInformationFailure_IEs_val_Value_1), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< UTDOAInformationRequest >-----#
-    UTDOAInformationRequest = SEQ(name='UTDOAInformationRequest', mode=MODE_TYPE)
-    _UTDOAInformationRequest_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
+    UTDOAInformationRequest = SEQ(name=u'UTDOAInformationRequest', mode=MODE_TYPE)
+    _UTDOAInformationRequest_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
     __UTDOAInformationRequest_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Field')))
-    ___UTDOAInformationRequest_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['id']))
+    ___UTDOAInformationRequest_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'id']))
     ____UTDOAInformationRequest_protocolIEs__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _____UTDOAInformationRequest_protocolIEs__item__id_tab_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'RequestedSRSTransmissionCharacteristics')))
-    ____UTDOAInformationRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 12), ('criticality', 'ignore'), ('Value', _____UTDOAInformationRequest_protocolIEs__item__id_tab_val_Value_0), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____UTDOAInformationRequest_protocolIEs__item__id_tab_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'RequestedSRSTransmissionCharacteristics')))
+    ____UTDOAInformationRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 12), (u'criticality', u'ignore'), (u'Value', _____UTDOAInformationRequest_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___UTDOAInformationRequest_protocolIEs__item__id._const_tab = ____UTDOAInformationRequest_protocolIEs__item__id_tab
     ___UTDOAInformationRequest_protocolIEs__item__id._const_tab_at = None
-    ___UTDOAInformationRequest_protocolIEs__item__id._const_tab_id = 'id'
-    ___UTDOAInformationRequest_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['criticality']))
+    ___UTDOAInformationRequest_protocolIEs__item__id._const_tab_id = u'id'
+    ___UTDOAInformationRequest_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'criticality']))
     ___UTDOAInformationRequest_protocolIEs__item__criticality._const_tab = ____UTDOAInformationRequest_protocolIEs__item__id_tab
-    ___UTDOAInformationRequest_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___UTDOAInformationRequest_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___UTDOAInformationRequest_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['Value']))
+    ___UTDOAInformationRequest_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___UTDOAInformationRequest_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___UTDOAInformationRequest_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'Value']))
     ___UTDOAInformationRequest_protocolIEs__item__value._const_tab = ____UTDOAInformationRequest_protocolIEs__item__id_tab
-    ___UTDOAInformationRequest_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___UTDOAInformationRequest_protocolIEs__item__value._const_tab_id = 'Value'
+    ___UTDOAInformationRequest_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___UTDOAInformationRequest_protocolIEs__item__value._const_tab_id = u'Value'
     __UTDOAInformationRequest_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___UTDOAInformationRequest_protocolIEs__item__id),
-        ('criticality', ___UTDOAInformationRequest_protocolIEs__item__criticality),
-        ('value', ___UTDOAInformationRequest_protocolIEs__item__value),
+        (u'id', ___UTDOAInformationRequest_protocolIEs__item__id),
+        (u'criticality', ___UTDOAInformationRequest_protocolIEs__item__criticality),
+        (u'value', ___UTDOAInformationRequest_protocolIEs__item__value),
         ])
     __UTDOAInformationRequest_protocolIEs__item_._ext = None
     _UTDOAInformationRequest_protocolIEs._cont = __UTDOAInformationRequest_protocolIEs__item_
     _UTDOAInformationRequest_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     UTDOAInformationRequest._cont = ASN1Dict([
-        ('protocolIEs', _UTDOAInformationRequest_protocolIEs),
+        (u'protocolIEs', _UTDOAInformationRequest_protocolIEs),
         ])
     UTDOAInformationRequest._ext = []
     
     #-----< UTDOAInformationRequest-IEs >-----#
-    UTDOAInformationRequest_IEs = CLASS(name='UTDOAInformationRequest-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _UTDOAInformationRequest_IEs_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'RequestedSRSTransmissionCharacteristics')))
-    UTDOAInformationRequest_IEs._val = ASN1Set(rv=[dict([('id', 12), ('criticality', 'ignore'), ('Value', _UTDOAInformationRequest_IEs_val_Value_0), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    UTDOAInformationRequest_IEs = CLASS(name=u'UTDOAInformationRequest-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
+    _UTDOAInformationRequest_IEs_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'RequestedSRSTransmissionCharacteristics')))
+    UTDOAInformationRequest_IEs._val = ASN1Set(rv=[dict([(u'id', 12), (u'criticality', u'ignore'), (u'Value', _UTDOAInformationRequest_IEs_val_Value_0), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< UTDOAInformationResponse >-----#
-    UTDOAInformationResponse = SEQ(name='UTDOAInformationResponse', mode=MODE_TYPE)
-    _UTDOAInformationResponse_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
+    UTDOAInformationResponse = SEQ(name=u'UTDOAInformationResponse', mode=MODE_TYPE)
+    _UTDOAInformationResponse_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
     __UTDOAInformationResponse_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Field')))
-    ___UTDOAInformationResponse_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['id']))
+    ___UTDOAInformationResponse_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'id']))
     ____UTDOAInformationResponse_protocolIEs__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _____UTDOAInformationResponse_protocolIEs__item__id_tab_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'ULConfiguration')))
-    _____UTDOAInformationResponse_protocolIEs__item__id_tab_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
-    ____UTDOAInformationResponse_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 13), ('criticality', 'reject'), ('Value', _____UTDOAInformationResponse_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _____UTDOAInformationResponse_protocolIEs__item__id_tab_val_Value_1), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____UTDOAInformationResponse_protocolIEs__item__id_tab_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'ULConfiguration')))
+    _____UTDOAInformationResponse_protocolIEs__item__id_tab_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
+    ____UTDOAInformationResponse_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 13), (u'criticality', u'reject'), (u'Value', _____UTDOAInformationResponse_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _____UTDOAInformationResponse_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___UTDOAInformationResponse_protocolIEs__item__id._const_tab = ____UTDOAInformationResponse_protocolIEs__item__id_tab
     ___UTDOAInformationResponse_protocolIEs__item__id._const_tab_at = None
-    ___UTDOAInformationResponse_protocolIEs__item__id._const_tab_id = 'id'
-    ___UTDOAInformationResponse_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['criticality']))
+    ___UTDOAInformationResponse_protocolIEs__item__id._const_tab_id = u'id'
+    ___UTDOAInformationResponse_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'criticality']))
     ___UTDOAInformationResponse_protocolIEs__item__criticality._const_tab = ____UTDOAInformationResponse_protocolIEs__item__id_tab
-    ___UTDOAInformationResponse_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___UTDOAInformationResponse_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___UTDOAInformationResponse_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['Value']))
+    ___UTDOAInformationResponse_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___UTDOAInformationResponse_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___UTDOAInformationResponse_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'Value']))
     ___UTDOAInformationResponse_protocolIEs__item__value._const_tab = ____UTDOAInformationResponse_protocolIEs__item__id_tab
-    ___UTDOAInformationResponse_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___UTDOAInformationResponse_protocolIEs__item__value._const_tab_id = 'Value'
+    ___UTDOAInformationResponse_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___UTDOAInformationResponse_protocolIEs__item__value._const_tab_id = u'Value'
     __UTDOAInformationResponse_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___UTDOAInformationResponse_protocolIEs__item__id),
-        ('criticality', ___UTDOAInformationResponse_protocolIEs__item__criticality),
-        ('value', ___UTDOAInformationResponse_protocolIEs__item__value),
+        (u'id', ___UTDOAInformationResponse_protocolIEs__item__id),
+        (u'criticality', ___UTDOAInformationResponse_protocolIEs__item__criticality),
+        (u'value', ___UTDOAInformationResponse_protocolIEs__item__value),
         ])
     __UTDOAInformationResponse_protocolIEs__item_._ext = None
     _UTDOAInformationResponse_protocolIEs._cont = __UTDOAInformationResponse_protocolIEs__item_
     _UTDOAInformationResponse_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     UTDOAInformationResponse._cont = ASN1Dict([
-        ('protocolIEs', _UTDOAInformationResponse_protocolIEs),
+        (u'protocolIEs', _UTDOAInformationResponse_protocolIEs),
         ])
     UTDOAInformationResponse._ext = []
     
     #-----< UTDOAInformationResponse-IEs >-----#
-    UTDOAInformationResponse_IEs = CLASS(name='UTDOAInformationResponse-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _UTDOAInformationResponse_IEs_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'ULConfiguration')))
-    _UTDOAInformationResponse_IEs_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
-    UTDOAInformationResponse_IEs._val = ASN1Set(rv=[dict([('id', 13), ('criticality', 'reject'), ('Value', _UTDOAInformationResponse_IEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _UTDOAInformationResponse_IEs_val_Value_1), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    UTDOAInformationResponse_IEs = CLASS(name=u'UTDOAInformationResponse-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
+    _UTDOAInformationResponse_IEs_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'ULConfiguration')))
+    _UTDOAInformationResponse_IEs_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
+    UTDOAInformationResponse_IEs._val = ASN1Set(rv=[dict([(u'id', 13), (u'criticality', u'reject'), (u'Value', _UTDOAInformationResponse_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _UTDOAInformationResponse_IEs_val_Value_1), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< UTDOAInformationFailure >-----#
-    UTDOAInformationFailure = SEQ(name='UTDOAInformationFailure', mode=MODE_TYPE)
-    _UTDOAInformationFailure_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
+    UTDOAInformationFailure = SEQ(name=u'UTDOAInformationFailure', mode=MODE_TYPE)
+    _UTDOAInformationFailure_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
     __UTDOAInformationFailure_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Field')))
-    ___UTDOAInformationFailure_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['id']))
+    ___UTDOAInformationFailure_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'id']))
     ____UTDOAInformationFailure_protocolIEs__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _____UTDOAInformationFailure_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Cause')))
-    _____UTDOAInformationFailure_protocolIEs__item__id_tab_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
-    ____UTDOAInformationFailure_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'ignore'), ('Value', _____UTDOAInformationFailure_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _____UTDOAInformationFailure_protocolIEs__item__id_tab_val_Value_1), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____UTDOAInformationFailure_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Cause')))
+    _____UTDOAInformationFailure_protocolIEs__item__id_tab_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
+    ____UTDOAInformationFailure_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'ignore'), (u'Value', _____UTDOAInformationFailure_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _____UTDOAInformationFailure_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___UTDOAInformationFailure_protocolIEs__item__id._const_tab = ____UTDOAInformationFailure_protocolIEs__item__id_tab
     ___UTDOAInformationFailure_protocolIEs__item__id._const_tab_at = None
-    ___UTDOAInformationFailure_protocolIEs__item__id._const_tab_id = 'id'
-    ___UTDOAInformationFailure_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['criticality']))
+    ___UTDOAInformationFailure_protocolIEs__item__id._const_tab_id = u'id'
+    ___UTDOAInformationFailure_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'criticality']))
     ___UTDOAInformationFailure_protocolIEs__item__criticality._const_tab = ____UTDOAInformationFailure_protocolIEs__item__id_tab
-    ___UTDOAInformationFailure_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___UTDOAInformationFailure_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___UTDOAInformationFailure_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['Value']))
+    ___UTDOAInformationFailure_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___UTDOAInformationFailure_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___UTDOAInformationFailure_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'Value']))
     ___UTDOAInformationFailure_protocolIEs__item__value._const_tab = ____UTDOAInformationFailure_protocolIEs__item__id_tab
-    ___UTDOAInformationFailure_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___UTDOAInformationFailure_protocolIEs__item__value._const_tab_id = 'Value'
+    ___UTDOAInformationFailure_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___UTDOAInformationFailure_protocolIEs__item__value._const_tab_id = u'Value'
     __UTDOAInformationFailure_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___UTDOAInformationFailure_protocolIEs__item__id),
-        ('criticality', ___UTDOAInformationFailure_protocolIEs__item__criticality),
-        ('value', ___UTDOAInformationFailure_protocolIEs__item__value),
+        (u'id', ___UTDOAInformationFailure_protocolIEs__item__id),
+        (u'criticality', ___UTDOAInformationFailure_protocolIEs__item__criticality),
+        (u'value', ___UTDOAInformationFailure_protocolIEs__item__value),
         ])
     __UTDOAInformationFailure_protocolIEs__item_._ext = None
     _UTDOAInformationFailure_protocolIEs._cont = __UTDOAInformationFailure_protocolIEs__item_
     _UTDOAInformationFailure_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     UTDOAInformationFailure._cont = ASN1Dict([
-        ('protocolIEs', _UTDOAInformationFailure_protocolIEs),
+        (u'protocolIEs', _UTDOAInformationFailure_protocolIEs),
         ])
     UTDOAInformationFailure._ext = []
     
     #-----< UTDOAInformationFailure-IEs >-----#
-    UTDOAInformationFailure_IEs = CLASS(name='UTDOAInformationFailure-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _UTDOAInformationFailure_IEs_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Cause')))
-    _UTDOAInformationFailure_IEs_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
-    UTDOAInformationFailure_IEs._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'ignore'), ('Value', _UTDOAInformationFailure_IEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _UTDOAInformationFailure_IEs_val_Value_1), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    UTDOAInformationFailure_IEs = CLASS(name=u'UTDOAInformationFailure-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
+    _UTDOAInformationFailure_IEs_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Cause')))
+    _UTDOAInformationFailure_IEs_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
+    UTDOAInformationFailure_IEs._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'ignore'), (u'Value', _UTDOAInformationFailure_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _UTDOAInformationFailure_IEs_val_Value_1), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< UTDOAInformationUpdate >-----#
-    UTDOAInformationUpdate = SEQ(name='UTDOAInformationUpdate', mode=MODE_TYPE)
-    _UTDOAInformationUpdate_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
+    UTDOAInformationUpdate = SEQ(name=u'UTDOAInformationUpdate', mode=MODE_TYPE)
+    _UTDOAInformationUpdate_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
     __UTDOAInformationUpdate_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Field')))
-    ___UTDOAInformationUpdate_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['id']))
+    ___UTDOAInformationUpdate_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'id']))
     ____UTDOAInformationUpdate_protocolIEs__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _____UTDOAInformationUpdate_protocolIEs__item__id_tab_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'ULConfiguration')))
-    ____UTDOAInformationUpdate_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 13), ('criticality', 'ignore'), ('Value', _____UTDOAInformationUpdate_protocolIEs__item__id_tab_val_Value_0), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____UTDOAInformationUpdate_protocolIEs__item__id_tab_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'ULConfiguration')))
+    ____UTDOAInformationUpdate_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 13), (u'criticality', u'ignore'), (u'Value', _____UTDOAInformationUpdate_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___UTDOAInformationUpdate_protocolIEs__item__id._const_tab = ____UTDOAInformationUpdate_protocolIEs__item__id_tab
     ___UTDOAInformationUpdate_protocolIEs__item__id._const_tab_at = None
-    ___UTDOAInformationUpdate_protocolIEs__item__id._const_tab_id = 'id'
-    ___UTDOAInformationUpdate_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['criticality']))
+    ___UTDOAInformationUpdate_protocolIEs__item__id._const_tab_id = u'id'
+    ___UTDOAInformationUpdate_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'criticality']))
     ___UTDOAInformationUpdate_protocolIEs__item__criticality._const_tab = ____UTDOAInformationUpdate_protocolIEs__item__id_tab
-    ___UTDOAInformationUpdate_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___UTDOAInformationUpdate_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___UTDOAInformationUpdate_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['Value']))
+    ___UTDOAInformationUpdate_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___UTDOAInformationUpdate_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___UTDOAInformationUpdate_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'Value']))
     ___UTDOAInformationUpdate_protocolIEs__item__value._const_tab = ____UTDOAInformationUpdate_protocolIEs__item__id_tab
-    ___UTDOAInformationUpdate_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___UTDOAInformationUpdate_protocolIEs__item__value._const_tab_id = 'Value'
+    ___UTDOAInformationUpdate_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___UTDOAInformationUpdate_protocolIEs__item__value._const_tab_id = u'Value'
     __UTDOAInformationUpdate_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___UTDOAInformationUpdate_protocolIEs__item__id),
-        ('criticality', ___UTDOAInformationUpdate_protocolIEs__item__criticality),
-        ('value', ___UTDOAInformationUpdate_protocolIEs__item__value),
+        (u'id', ___UTDOAInformationUpdate_protocolIEs__item__id),
+        (u'criticality', ___UTDOAInformationUpdate_protocolIEs__item__criticality),
+        (u'value', ___UTDOAInformationUpdate_protocolIEs__item__value),
         ])
     __UTDOAInformationUpdate_protocolIEs__item_._ext = None
     _UTDOAInformationUpdate_protocolIEs._cont = __UTDOAInformationUpdate_protocolIEs__item_
     _UTDOAInformationUpdate_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     UTDOAInformationUpdate._cont = ASN1Dict([
-        ('protocolIEs', _UTDOAInformationUpdate_protocolIEs),
+        (u'protocolIEs', _UTDOAInformationUpdate_protocolIEs),
         ])
     UTDOAInformationUpdate._ext = []
     
     #-----< UTDOAInformationUpdate-IEs >-----#
-    UTDOAInformationUpdate_IEs = CLASS(name='UTDOAInformationUpdate-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _UTDOAInformationUpdate_IEs_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'ULConfiguration')))
-    UTDOAInformationUpdate_IEs._val = ASN1Set(rv=[dict([('id', 13), ('criticality', 'ignore'), ('Value', _UTDOAInformationUpdate_IEs_val_Value_0), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    UTDOAInformationUpdate_IEs = CLASS(name=u'UTDOAInformationUpdate-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
+    _UTDOAInformationUpdate_IEs_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'ULConfiguration')))
+    UTDOAInformationUpdate_IEs._val = ASN1Set(rv=[dict([(u'id', 13), (u'criticality', u'ignore'), (u'Value', _UTDOAInformationUpdate_IEs_val_Value_0), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< AssistanceInformationControl >-----#
-    AssistanceInformationControl = SEQ(name='AssistanceInformationControl', mode=MODE_TYPE)
-    _AssistanceInformationControl_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
+    AssistanceInformationControl = SEQ(name=u'AssistanceInformationControl', mode=MODE_TYPE)
+    _AssistanceInformationControl_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
     __AssistanceInformationControl_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Field')))
-    ___AssistanceInformationControl_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['id']))
+    ___AssistanceInformationControl_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'id']))
     ____AssistanceInformationControl_protocolIEs__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _____AssistanceInformationControl_protocolIEs__item__id_tab_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Assistance-Information')))
-    _____AssistanceInformationControl_protocolIEs__item__id_tab_val_Value_1 = ENUM(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Broadcast')))
-    ____AssistanceInformationControl_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 22), ('criticality', 'reject'), ('Value', _____AssistanceInformationControl_protocolIEs__item__id_tab_val_Value_0), ('presence', 'optional')]), dict([('id', 23), ('criticality', 'reject'), ('Value', _____AssistanceInformationControl_protocolIEs__item__id_tab_val_Value_1), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____AssistanceInformationControl_protocolIEs__item__id_tab_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Assistance-Information')))
+    _____AssistanceInformationControl_protocolIEs__item__id_tab_val_Value_1 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Broadcast')))
+    ____AssistanceInformationControl_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 22), (u'criticality', u'reject'), (u'Value', _____AssistanceInformationControl_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'optional')]), dict([(u'id', 23), (u'criticality', u'reject'), (u'Value', _____AssistanceInformationControl_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___AssistanceInformationControl_protocolIEs__item__id._const_tab = ____AssistanceInformationControl_protocolIEs__item__id_tab
     ___AssistanceInformationControl_protocolIEs__item__id._const_tab_at = None
-    ___AssistanceInformationControl_protocolIEs__item__id._const_tab_id = 'id'
-    ___AssistanceInformationControl_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['criticality']))
+    ___AssistanceInformationControl_protocolIEs__item__id._const_tab_id = u'id'
+    ___AssistanceInformationControl_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'criticality']))
     ___AssistanceInformationControl_protocolIEs__item__criticality._const_tab = ____AssistanceInformationControl_protocolIEs__item__id_tab
-    ___AssistanceInformationControl_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___AssistanceInformationControl_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___AssistanceInformationControl_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['Value']))
+    ___AssistanceInformationControl_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___AssistanceInformationControl_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___AssistanceInformationControl_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'Value']))
     ___AssistanceInformationControl_protocolIEs__item__value._const_tab = ____AssistanceInformationControl_protocolIEs__item__id_tab
-    ___AssistanceInformationControl_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___AssistanceInformationControl_protocolIEs__item__value._const_tab_id = 'Value'
+    ___AssistanceInformationControl_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___AssistanceInformationControl_protocolIEs__item__value._const_tab_id = u'Value'
     __AssistanceInformationControl_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___AssistanceInformationControl_protocolIEs__item__id),
-        ('criticality', ___AssistanceInformationControl_protocolIEs__item__criticality),
-        ('value', ___AssistanceInformationControl_protocolIEs__item__value),
+        (u'id', ___AssistanceInformationControl_protocolIEs__item__id),
+        (u'criticality', ___AssistanceInformationControl_protocolIEs__item__criticality),
+        (u'value', ___AssistanceInformationControl_protocolIEs__item__value),
         ])
     __AssistanceInformationControl_protocolIEs__item_._ext = None
     _AssistanceInformationControl_protocolIEs._cont = __AssistanceInformationControl_protocolIEs__item_
     _AssistanceInformationControl_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     AssistanceInformationControl._cont = ASN1Dict([
-        ('protocolIEs', _AssistanceInformationControl_protocolIEs),
+        (u'protocolIEs', _AssistanceInformationControl_protocolIEs),
         ])
     AssistanceInformationControl._ext = []
     
     #-----< AssistanceInformationControl-IEs >-----#
-    AssistanceInformationControl_IEs = CLASS(name='AssistanceInformationControl-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _AssistanceInformationControl_IEs_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Assistance-Information')))
-    _AssistanceInformationControl_IEs_val_Value_1 = ENUM(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Broadcast')))
-    AssistanceInformationControl_IEs._val = ASN1Set(rv=[dict([('id', 22), ('criticality', 'reject'), ('Value', _AssistanceInformationControl_IEs_val_Value_0), ('presence', 'optional')]), dict([('id', 23), ('criticality', 'reject'), ('Value', _AssistanceInformationControl_IEs_val_Value_1), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    AssistanceInformationControl_IEs = CLASS(name=u'AssistanceInformationControl-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
+    _AssistanceInformationControl_IEs_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Assistance-Information')))
+    _AssistanceInformationControl_IEs_val_Value_1 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Broadcast')))
+    AssistanceInformationControl_IEs._val = ASN1Set(rv=[dict([(u'id', 22), (u'criticality', u'reject'), (u'Value', _AssistanceInformationControl_IEs_val_Value_0), (u'presence', u'optional')]), dict([(u'id', 23), (u'criticality', u'reject'), (u'Value', _AssistanceInformationControl_IEs_val_Value_1), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< AssistanceInformationFeedback >-----#
-    AssistanceInformationFeedback = SEQ(name='AssistanceInformationFeedback', mode=MODE_TYPE)
-    _AssistanceInformationFeedback_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
+    AssistanceInformationFeedback = SEQ(name=u'AssistanceInformationFeedback', mode=MODE_TYPE)
+    _AssistanceInformationFeedback_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
     __AssistanceInformationFeedback_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Field')))
-    ___AssistanceInformationFeedback_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['id']))
+    ___AssistanceInformationFeedback_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'id']))
     ____AssistanceInformationFeedback_protocolIEs__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _____AssistanceInformationFeedback_protocolIEs__item__id_tab_val_Value_0 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'AssistanceInformationFailureList')))
-    _____AssistanceInformationFeedback_protocolIEs__item__id_tab_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
-    ____AssistanceInformationFeedback_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 24), ('criticality', 'reject'), ('Value', _____AssistanceInformationFeedback_protocolIEs__item__id_tab_val_Value_0), ('presence', 'optional')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _____AssistanceInformationFeedback_protocolIEs__item__id_tab_val_Value_1), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____AssistanceInformationFeedback_protocolIEs__item__id_tab_val_Value_0 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'AssistanceInformationFailureList')))
+    _____AssistanceInformationFeedback_protocolIEs__item__id_tab_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
+    ____AssistanceInformationFeedback_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 24), (u'criticality', u'reject'), (u'Value', _____AssistanceInformationFeedback_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'optional')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _____AssistanceInformationFeedback_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___AssistanceInformationFeedback_protocolIEs__item__id._const_tab = ____AssistanceInformationFeedback_protocolIEs__item__id_tab
     ___AssistanceInformationFeedback_protocolIEs__item__id._const_tab_at = None
-    ___AssistanceInformationFeedback_protocolIEs__item__id._const_tab_id = 'id'
-    ___AssistanceInformationFeedback_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['criticality']))
+    ___AssistanceInformationFeedback_protocolIEs__item__id._const_tab_id = u'id'
+    ___AssistanceInformationFeedback_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'criticality']))
     ___AssistanceInformationFeedback_protocolIEs__item__criticality._const_tab = ____AssistanceInformationFeedback_protocolIEs__item__id_tab
-    ___AssistanceInformationFeedback_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___AssistanceInformationFeedback_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___AssistanceInformationFeedback_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['Value']))
+    ___AssistanceInformationFeedback_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___AssistanceInformationFeedback_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___AssistanceInformationFeedback_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'Value']))
     ___AssistanceInformationFeedback_protocolIEs__item__value._const_tab = ____AssistanceInformationFeedback_protocolIEs__item__id_tab
-    ___AssistanceInformationFeedback_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___AssistanceInformationFeedback_protocolIEs__item__value._const_tab_id = 'Value'
+    ___AssistanceInformationFeedback_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___AssistanceInformationFeedback_protocolIEs__item__value._const_tab_id = u'Value'
     __AssistanceInformationFeedback_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___AssistanceInformationFeedback_protocolIEs__item__id),
-        ('criticality', ___AssistanceInformationFeedback_protocolIEs__item__criticality),
-        ('value', ___AssistanceInformationFeedback_protocolIEs__item__value),
+        (u'id', ___AssistanceInformationFeedback_protocolIEs__item__id),
+        (u'criticality', ___AssistanceInformationFeedback_protocolIEs__item__criticality),
+        (u'value', ___AssistanceInformationFeedback_protocolIEs__item__value),
         ])
     __AssistanceInformationFeedback_protocolIEs__item_._ext = None
     _AssistanceInformationFeedback_protocolIEs._cont = __AssistanceInformationFeedback_protocolIEs__item_
     _AssistanceInformationFeedback_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     AssistanceInformationFeedback._cont = ASN1Dict([
-        ('protocolIEs', _AssistanceInformationFeedback_protocolIEs),
+        (u'protocolIEs', _AssistanceInformationFeedback_protocolIEs),
         ])
     AssistanceInformationFeedback._ext = []
     
     #-----< AssistanceInformationFeedback-IEs >-----#
-    AssistanceInformationFeedback_IEs = CLASS(name='AssistanceInformationFeedback-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _AssistanceInformationFeedback_IEs_val_Value_0 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'AssistanceInformationFailureList')))
-    _AssistanceInformationFeedback_IEs_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
-    AssistanceInformationFeedback_IEs._val = ASN1Set(rv=[dict([('id', 24), ('criticality', 'reject'), ('Value', _AssistanceInformationFeedback_IEs_val_Value_0), ('presence', 'optional')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _AssistanceInformationFeedback_IEs_val_Value_1), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    AssistanceInformationFeedback_IEs = CLASS(name=u'AssistanceInformationFeedback-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
+    _AssistanceInformationFeedback_IEs_val_Value_0 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'AssistanceInformationFailureList')))
+    _AssistanceInformationFeedback_IEs_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
+    AssistanceInformationFeedback_IEs._val = ASN1Set(rv=[dict([(u'id', 24), (u'criticality', u'reject'), (u'Value', _AssistanceInformationFeedback_IEs_val_Value_0), (u'presence', u'optional')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _AssistanceInformationFeedback_IEs_val_Value_1), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< ErrorIndication >-----#
-    ErrorIndication = SEQ(name='ErrorIndication', mode=MODE_TYPE)
-    _ErrorIndication_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
+    ErrorIndication = SEQ(name=u'ErrorIndication', mode=MODE_TYPE)
+    _ErrorIndication_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Container')))
     __ErrorIndication_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'ProtocolIE-Field')))
-    ___ErrorIndication_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['id']))
+    ___ErrorIndication_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'id']))
     ____ErrorIndication_protocolIEs__item__id_tab = CLASS(name='_tab_LPPA-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _____ErrorIndication_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Cause')))
-    _____ErrorIndication_protocolIEs__item__id_tab_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
-    ____ErrorIndication_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'ignore'), ('Value', _____ErrorIndication_protocolIEs__item__id_tab_val_Value_0), ('presence', 'optional')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _____ErrorIndication_protocolIEs__item__id_tab_val_Value_1), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____ErrorIndication_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Cause')))
+    _____ErrorIndication_protocolIEs__item__id_tab_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
+    ____ErrorIndication_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'ignore'), (u'Value', _____ErrorIndication_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'optional')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _____ErrorIndication_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___ErrorIndication_protocolIEs__item__id._const_tab = ____ErrorIndication_protocolIEs__item__id_tab
     ___ErrorIndication_protocolIEs__item__id._const_tab_at = None
-    ___ErrorIndication_protocolIEs__item__id._const_tab_id = 'id'
-    ___ErrorIndication_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['criticality']))
+    ___ErrorIndication_protocolIEs__item__id._const_tab_id = u'id'
+    ___ErrorIndication_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'criticality']))
     ___ErrorIndication_protocolIEs__item__criticality._const_tab = ____ErrorIndication_protocolIEs__item__id_tab
-    ___ErrorIndication_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___ErrorIndication_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___ErrorIndication_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), ['Value']))
+    ___ErrorIndication_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___ErrorIndication_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___ErrorIndication_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PROTOCOL-IES'), [u'Value']))
     ___ErrorIndication_protocolIEs__item__value._const_tab = ____ErrorIndication_protocolIEs__item__id_tab
-    ___ErrorIndication_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___ErrorIndication_protocolIEs__item__value._const_tab_id = 'Value'
+    ___ErrorIndication_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___ErrorIndication_protocolIEs__item__value._const_tab_id = u'Value'
     __ErrorIndication_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___ErrorIndication_protocolIEs__item__id),
-        ('criticality', ___ErrorIndication_protocolIEs__item__criticality),
-        ('value', ___ErrorIndication_protocolIEs__item__value),
+        (u'id', ___ErrorIndication_protocolIEs__item__id),
+        (u'criticality', ___ErrorIndication_protocolIEs__item__criticality),
+        (u'value', ___ErrorIndication_protocolIEs__item__value),
         ])
     __ErrorIndication_protocolIEs__item_._ext = None
     _ErrorIndication_protocolIEs._cont = __ErrorIndication_protocolIEs__item_
     _ErrorIndication_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     ErrorIndication._cont = ASN1Dict([
-        ('protocolIEs', _ErrorIndication_protocolIEs),
+        (u'protocolIEs', _ErrorIndication_protocolIEs),
         ])
     ErrorIndication._ext = []
     
     #-----< ErrorIndication-IEs >-----#
-    ErrorIndication_IEs = CLASS(name='ErrorIndication-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
-    _ErrorIndication_IEs_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Cause')))
-    _ErrorIndication_IEs_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
-    ErrorIndication_IEs._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'ignore'), ('Value', _ErrorIndication_IEs_val_Value_0), ('presence', 'optional')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _ErrorIndication_IEs_val_Value_1), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    ErrorIndication_IEs = CLASS(name=u'ErrorIndication-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PROTOCOL-IES')))
+    _ErrorIndication_IEs_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'Cause')))
+    _ErrorIndication_IEs_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-IEs', 'CriticalityDiagnostics')))
+    ErrorIndication_IEs._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'ignore'), (u'Value', _ErrorIndication_IEs_val_Value_0), (u'presence', u'optional')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _ErrorIndication_IEs_val_Value_1), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< PrivateMessage >-----#
-    PrivateMessage = SEQ(name='PrivateMessage', mode=MODE_TYPE)
-    _PrivateMessage_privateIEs = SEQ_OF(name='privateIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'PrivateIE-Container')))
+    PrivateMessage = SEQ(name=u'PrivateMessage', mode=MODE_TYPE)
+    _PrivateMessage_privateIEs = SEQ_OF(name=u'privateIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-Containers', 'PrivateIE-Container')))
     __PrivateMessage_privateIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-Containers', 'PrivateIE-Field')))
-    ___PrivateMessage_privateIEs__item__id = CHOICE(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PRIVATE-IES'), ['id']))
+    ___PrivateMessage_privateIEs__item__id = CHOICE(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PRIVATE-IES'), [u'id']))
     ____PrivateMessage_privateIEs__item__id_tab = CLASS(name='_tab_LPPA-PRIVATE-IES', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PRIVATE-IES')))
     ____PrivateMessage_privateIEs__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___PrivateMessage_privateIEs__item__id._const_tab = ____PrivateMessage_privateIEs__item__id_tab
     ___PrivateMessage_privateIEs__item__id._const_tab_at = None
-    ___PrivateMessage_privateIEs__item__id._const_tab_id = 'id'
-    ___PrivateMessage_privateIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PRIVATE-IES'), ['criticality']))
+    ___PrivateMessage_privateIEs__item__id._const_tab_id = u'id'
+    ___PrivateMessage_privateIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PRIVATE-IES'), [u'criticality']))
     ____PrivateMessage_privateIEs__item__criticality_tab = CLASS(name='_tab_LPPA-PRIVATE-IES', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PRIVATE-IES')))
     ____PrivateMessage_privateIEs__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___PrivateMessage_privateIEs__item__criticality._const_tab = ____PrivateMessage_privateIEs__item__criticality_tab
-    ___PrivateMessage_privateIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___PrivateMessage_privateIEs__item__criticality._const_tab_id = 'criticality'
-    ___PrivateMessage_privateIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PRIVATE-IES'), ['Value']))
+    ___PrivateMessage_privateIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___PrivateMessage_privateIEs__item__criticality._const_tab_id = u'criticality'
+    ___PrivateMessage_privateIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-Containers', 'LPPA-PRIVATE-IES'), [u'Value']))
     ____PrivateMessage_privateIEs__item__value_tab = CLASS(name='_tab_LPPA-PRIVATE-IES', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PRIVATE-IES')))
     ____PrivateMessage_privateIEs__item__value_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___PrivateMessage_privateIEs__item__value._const_tab = ____PrivateMessage_privateIEs__item__value_tab
-    ___PrivateMessage_privateIEs__item__value._const_tab_at = ('..', 'id')
-    ___PrivateMessage_privateIEs__item__value._const_tab_id = 'Value'
+    ___PrivateMessage_privateIEs__item__value._const_tab_at = ('..', u'id')
+    ___PrivateMessage_privateIEs__item__value._const_tab_id = u'Value'
     __PrivateMessage_privateIEs__item_._cont = ASN1Dict([
-        ('id', ___PrivateMessage_privateIEs__item__id),
-        ('criticality', ___PrivateMessage_privateIEs__item__criticality),
-        ('value', ___PrivateMessage_privateIEs__item__value),
+        (u'id', ___PrivateMessage_privateIEs__item__id),
+        (u'criticality', ___PrivateMessage_privateIEs__item__criticality),
+        (u'value', ___PrivateMessage_privateIEs__item__value),
         ])
     __PrivateMessage_privateIEs__item_._ext = None
     _PrivateMessage_privateIEs._cont = __PrivateMessage_privateIEs__item_
     _PrivateMessage_privateIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     PrivateMessage._cont = ASN1Dict([
-        ('privateIEs', _PrivateMessage_privateIEs),
+        (u'privateIEs', _PrivateMessage_privateIEs),
         ])
     PrivateMessage._ext = []
     
     #-----< PrivateMessage-IEs >-----#
-    PrivateMessage_IEs = CLASS(name='PrivateMessage-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PRIVATE-IES')))
+    PrivateMessage_IEs = CLASS(name=u'PrivateMessage-IEs', mode=MODE_SET, typeref=ASN1RefType(('LPPA-Containers', 'LPPA-PRIVATE-IES')))
     PrivateMessage_IEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     _all_ = [
@@ -4691,334 +4691,334 @@ class LPPA_PDU_Contents:
 
 class LPPA_PDU_Descriptions:
 
-    _name_  = 'LPPA-PDU-Descriptions'
+    _name_  = u'LPPA-PDU-Descriptions'
     _oid_   = [0, 4, 0, 0, 21, 3, 6, 1, 0]
     
     _obj_ = [
-        'LPPA-ELEMENTARY-PROCEDURE',
-        'LPPA-PDU',
-        'InitiatingMessage',
-        'SuccessfulOutcome',
-        'UnsuccessfulOutcome',
-        'LPPA-ELEMENTARY-PROCEDURES',
-        'LPPA-ELEMENTARY-PROCEDURES-CLASS-1',
-        'LPPA-ELEMENTARY-PROCEDURES-CLASS-2',
-        'e-CIDMeasurementInitiation',
-        'e-CIDMeasurementFailureIndication',
-        'e-CIDMeasurementReport',
-        'e-CIDMeasurementTermination',
-        'oTDOAInformationExchange',
-        'uTDOAInformationExchange',
-        'uTDOAInformationUpdate',
-        'assistanceInformationControl',
-        'assistanceInformationFeedback',
-        'errorIndication',
-        'privateMessage',
+        u'LPPA-ELEMENTARY-PROCEDURE',
+        u'LPPA-PDU',
+        u'InitiatingMessage',
+        u'SuccessfulOutcome',
+        u'UnsuccessfulOutcome',
+        u'LPPA-ELEMENTARY-PROCEDURES',
+        u'LPPA-ELEMENTARY-PROCEDURES-CLASS-1',
+        u'LPPA-ELEMENTARY-PROCEDURES-CLASS-2',
+        u'e-CIDMeasurementInitiation',
+        u'e-CIDMeasurementFailureIndication',
+        u'e-CIDMeasurementReport',
+        u'e-CIDMeasurementTermination',
+        u'oTDOAInformationExchange',
+        u'uTDOAInformationExchange',
+        u'uTDOAInformationUpdate',
+        u'assistanceInformationControl',
+        u'assistanceInformationFeedback',
+        u'errorIndication',
+        u'privateMessage',
         ]
     _type_ = [
-        'LPPA-ELEMENTARY-PROCEDURE',
-        'LPPA-PDU',
-        'InitiatingMessage',
-        'SuccessfulOutcome',
-        'UnsuccessfulOutcome',
+        u'LPPA-ELEMENTARY-PROCEDURE',
+        u'LPPA-PDU',
+        u'InitiatingMessage',
+        u'SuccessfulOutcome',
+        u'UnsuccessfulOutcome',
         ]
     _set_ = [
-        'LPPA-ELEMENTARY-PROCEDURES',
-        'LPPA-ELEMENTARY-PROCEDURES-CLASS-1',
-        'LPPA-ELEMENTARY-PROCEDURES-CLASS-2',
+        u'LPPA-ELEMENTARY-PROCEDURES',
+        u'LPPA-ELEMENTARY-PROCEDURES-CLASS-1',
+        u'LPPA-ELEMENTARY-PROCEDURES-CLASS-2',
         ]
     _val_ = [
-        'e-CIDMeasurementInitiation',
-        'e-CIDMeasurementFailureIndication',
-        'e-CIDMeasurementReport',
-        'e-CIDMeasurementTermination',
-        'oTDOAInformationExchange',
-        'uTDOAInformationExchange',
-        'uTDOAInformationUpdate',
-        'assistanceInformationControl',
-        'assistanceInformationFeedback',
-        'errorIndication',
-        'privateMessage',
+        u'e-CIDMeasurementInitiation',
+        u'e-CIDMeasurementFailureIndication',
+        u'e-CIDMeasurementReport',
+        u'e-CIDMeasurementTermination',
+        u'oTDOAInformationExchange',
+        u'uTDOAInformationExchange',
+        u'uTDOAInformationUpdate',
+        u'assistanceInformationControl',
+        u'assistanceInformationFeedback',
+        u'errorIndication',
+        u'privateMessage',
         ]
     _class_ = [
-        'LPPA-ELEMENTARY-PROCEDURE',
-        'LPPA-ELEMENTARY-PROCEDURES',
-        'LPPA-ELEMENTARY-PROCEDURES-CLASS-1',
-        'LPPA-ELEMENTARY-PROCEDURES-CLASS-2',
-        'e-CIDMeasurementInitiation',
-        'e-CIDMeasurementFailureIndication',
-        'e-CIDMeasurementReport',
-        'e-CIDMeasurementTermination',
-        'oTDOAInformationExchange',
-        'uTDOAInformationExchange',
-        'uTDOAInformationUpdate',
-        'assistanceInformationControl',
-        'assistanceInformationFeedback',
-        'errorIndication',
-        'privateMessage',
+        u'LPPA-ELEMENTARY-PROCEDURE',
+        u'LPPA-ELEMENTARY-PROCEDURES',
+        u'LPPA-ELEMENTARY-PROCEDURES-CLASS-1',
+        u'LPPA-ELEMENTARY-PROCEDURES-CLASS-2',
+        u'e-CIDMeasurementInitiation',
+        u'e-CIDMeasurementFailureIndication',
+        u'e-CIDMeasurementReport',
+        u'e-CIDMeasurementTermination',
+        u'oTDOAInformationExchange',
+        u'uTDOAInformationExchange',
+        u'uTDOAInformationUpdate',
+        u'assistanceInformationControl',
+        u'assistanceInformationFeedback',
+        u'errorIndication',
+        u'privateMessage',
         ]
     _param_ = [
         ]
     
     #-----< LPPA-ELEMENTARY-PROCEDURE >-----#
-    LPPA_ELEMENTARY_PROCEDURE = CLASS(name='LPPA-ELEMENTARY-PROCEDURE', mode=MODE_TYPE)
-    _LPPA_ELEMENTARY_PROCEDURE_InitiatingMessage = OPEN(name='InitiatingMessage', mode=MODE_TYPE)
-    _LPPA_ELEMENTARY_PROCEDURE_SuccessfulOutcome = OPEN(name='SuccessfulOutcome', mode=MODE_TYPE, opt=True)
-    _LPPA_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome = OPEN(name='UnsuccessfulOutcome', mode=MODE_TYPE, opt=True)
-    _LPPA_ELEMENTARY_PROCEDURE_procedureCode = INT(name='procedureCode', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProcedureCode')), uniq=True)
-    _LPPA_ELEMENTARY_PROCEDURE_criticality = ENUM(name='criticality', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'Criticality')), default='ignore')
+    LPPA_ELEMENTARY_PROCEDURE = CLASS(name=u'LPPA-ELEMENTARY-PROCEDURE', mode=MODE_TYPE)
+    _LPPA_ELEMENTARY_PROCEDURE_InitiatingMessage = OPEN(name=u'InitiatingMessage', mode=MODE_TYPE)
+    _LPPA_ELEMENTARY_PROCEDURE_SuccessfulOutcome = OPEN(name=u'SuccessfulOutcome', mode=MODE_TYPE, opt=True)
+    _LPPA_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome = OPEN(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, opt=True)
+    _LPPA_ELEMENTARY_PROCEDURE_procedureCode = INT(name=u'procedureCode', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'ProcedureCode')), uniq=True)
+    _LPPA_ELEMENTARY_PROCEDURE_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-CommonDataTypes', 'Criticality')), default=u'ignore')
     LPPA_ELEMENTARY_PROCEDURE._cont = ASN1Dict([
-        ('InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURE_InitiatingMessage),
-        ('SuccessfulOutcome', _LPPA_ELEMENTARY_PROCEDURE_SuccessfulOutcome),
-        ('UnsuccessfulOutcome', _LPPA_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome),
-        ('procedureCode', _LPPA_ELEMENTARY_PROCEDURE_procedureCode),
-        ('criticality', _LPPA_ELEMENTARY_PROCEDURE_criticality),
+        (u'InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURE_InitiatingMessage),
+        (u'SuccessfulOutcome', _LPPA_ELEMENTARY_PROCEDURE_SuccessfulOutcome),
+        (u'UnsuccessfulOutcome', _LPPA_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome),
+        (u'procedureCode', _LPPA_ELEMENTARY_PROCEDURE_procedureCode),
+        (u'criticality', _LPPA_ELEMENTARY_PROCEDURE_criticality),
         ])
     
     #-----< LPPA-PDU >-----#
-    LPPA_PDU = CHOICE(name='LPPA-PDU', mode=MODE_TYPE)
-    _LPPA_PDU_initiatingMessage = SEQ(name='initiatingMessage', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'InitiatingMessage')))
-    _LPPA_PDU_successfulOutcome = SEQ(name='successfulOutcome', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'SuccessfulOutcome')))
-    _LPPA_PDU_unsuccessfulOutcome = SEQ(name='unsuccessfulOutcome', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'UnsuccessfulOutcome')))
+    LPPA_PDU = CHOICE(name=u'LPPA-PDU', mode=MODE_TYPE)
+    _LPPA_PDU_initiatingMessage = SEQ(name=u'initiatingMessage', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'InitiatingMessage')))
+    _LPPA_PDU_successfulOutcome = SEQ(name=u'successfulOutcome', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'SuccessfulOutcome')))
+    _LPPA_PDU_unsuccessfulOutcome = SEQ(name=u'unsuccessfulOutcome', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'UnsuccessfulOutcome')))
     LPPA_PDU._cont = ASN1Dict([
-        ('initiatingMessage', _LPPA_PDU_initiatingMessage),
-        ('successfulOutcome', _LPPA_PDU_successfulOutcome),
-        ('unsuccessfulOutcome', _LPPA_PDU_unsuccessfulOutcome),
+        (u'initiatingMessage', _LPPA_PDU_initiatingMessage),
+        (u'successfulOutcome', _LPPA_PDU_successfulOutcome),
+        (u'unsuccessfulOutcome', _LPPA_PDU_unsuccessfulOutcome),
         ])
     LPPA_PDU._ext = []
     
     #-----< InitiatingMessage >-----#
-    InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE)
-    _InitiatingMessage_procedureCode = INT(name='procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE'), ['procedureCode']))
+    InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE)
+    _InitiatingMessage_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE'), [u'procedureCode']))
     __InitiatingMessage_procedureCode_tab = CLASS(name='_tab_LPPA-ELEMENTARY-PROCEDURE', mode=MODE_SET, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationResponse')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationFailure')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationResponse')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationFailure')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementFailureIndication')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementReport')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementTerminationCommand')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'ErrorIndication')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'PrivateMessage')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_7 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationResponse')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_7 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationFailure')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationUpdate')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'AssistanceInformationControl')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'AssistanceInformationFeedback')))
-    __InitiatingMessage_procedureCode_tab._val = ASN1Set(rv=[dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0), ('SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0), ('UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_0), ('procedureCode', 2), ('criticality', 'reject')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1), ('SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1), ('UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_1), ('procedureCode', 6), ('criticality', 'reject')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2), ('procedureCode', 3), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3), ('procedureCode', 4), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4), ('procedureCode', 5), ('criticality', 'reject')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5), ('procedureCode', 0), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6), ('procedureCode', 1), ('criticality', 'ignore')])], rr=[], ev=[dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_7), ('SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_7), ('UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_7), ('procedureCode', 7), ('criticality', 'reject')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_8), ('procedureCode', 8), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_9), ('procedureCode', 9), ('criticality', 'reject')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_10), ('procedureCode', 10), ('criticality', 'reject')])], er=[])
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationResponse')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationFailure')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationResponse')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationFailure')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementFailureIndication')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementReport')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementTerminationCommand')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'ErrorIndication')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'PrivateMessage')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationResponse')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_7 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationFailure')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationUpdate')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'AssistanceInformationControl')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'AssistanceInformationFeedback')))
+    __InitiatingMessage_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_0), (u'procedureCode', 2), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_1), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2), (u'procedureCode', 3), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3), (u'procedureCode', 4), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5), (u'procedureCode', 0), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6), (u'procedureCode', 1), (u'criticality', u'ignore')])], rr=[], ev=[dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_7), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_7), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_7), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_8), (u'procedureCode', 8), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_9), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_10), (u'procedureCode', 10), (u'criticality', u'reject')])], er=[])
     _InitiatingMessage_procedureCode._const_tab = __InitiatingMessage_procedureCode_tab
     _InitiatingMessage_procedureCode._const_tab_at = None
-    _InitiatingMessage_procedureCode._const_tab_id = 'procedureCode'
-    _InitiatingMessage_criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE'), ['criticality']))
+    _InitiatingMessage_procedureCode._const_tab_id = u'procedureCode'
+    _InitiatingMessage_criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE'), [u'criticality']))
     _InitiatingMessage_criticality._const_tab = __InitiatingMessage_procedureCode_tab
-    _InitiatingMessage_criticality._const_tab_at = ('..', 'procedureCode')
-    _InitiatingMessage_criticality._const_tab_id = 'criticality'
-    _InitiatingMessage_lppatransactionID = INT(name='lppatransactionID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-CommonDataTypes', 'LPPATransactionID')))
-    _InitiatingMessage_value = OPEN(name='value', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE'), ['InitiatingMessage']))
+    _InitiatingMessage_criticality._const_tab_at = ('..', u'procedureCode')
+    _InitiatingMessage_criticality._const_tab_id = u'criticality'
+    _InitiatingMessage_lppatransactionID = INT(name=u'lppatransactionID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-CommonDataTypes', 'LPPATransactionID')))
+    _InitiatingMessage_value = OPEN(name=u'value', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE'), [u'InitiatingMessage']))
     _InitiatingMessage_value._const_tab = __InitiatingMessage_procedureCode_tab
-    _InitiatingMessage_value._const_tab_at = ('..', 'procedureCode')
-    _InitiatingMessage_value._const_tab_id = 'InitiatingMessage'
+    _InitiatingMessage_value._const_tab_at = ('..', u'procedureCode')
+    _InitiatingMessage_value._const_tab_id = u'InitiatingMessage'
     InitiatingMessage._cont = ASN1Dict([
-        ('procedureCode', _InitiatingMessage_procedureCode),
-        ('criticality', _InitiatingMessage_criticality),
-        ('lppatransactionID', _InitiatingMessage_lppatransactionID),
-        ('value', _InitiatingMessage_value),
+        (u'procedureCode', _InitiatingMessage_procedureCode),
+        (u'criticality', _InitiatingMessage_criticality),
+        (u'lppatransactionID', _InitiatingMessage_lppatransactionID),
+        (u'value', _InitiatingMessage_value),
         ])
     InitiatingMessage._ext = None
     
     #-----< SuccessfulOutcome >-----#
-    SuccessfulOutcome = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE)
-    _SuccessfulOutcome_procedureCode = INT(name='procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE'), ['procedureCode']))
+    SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE)
+    _SuccessfulOutcome_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE'), [u'procedureCode']))
     __SuccessfulOutcome_procedureCode_tab = CLASS(name='_tab_LPPA-ELEMENTARY-PROCEDURE', mode=MODE_SET, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationResponse')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationFailure')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationResponse')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationFailure')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementFailureIndication')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementReport')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementTerminationCommand')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'ErrorIndication')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'PrivateMessage')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationResponse')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationFailure')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationUpdate')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'AssistanceInformationControl')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'AssistanceInformationFeedback')))
-    __SuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), ('SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0), ('UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0), ('procedureCode', 2), ('criticality', 'reject')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), ('SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1), ('UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1), ('procedureCode', 6), ('criticality', 'reject')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), ('procedureCode', 3), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), ('procedureCode', 4), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), ('procedureCode', 5), ('criticality', 'reject')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), ('procedureCode', 0), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6), ('procedureCode', 1), ('criticality', 'ignore')])], rr=[], ev=[dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7), ('SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7), ('UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7), ('procedureCode', 7), ('criticality', 'reject')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8), ('procedureCode', 8), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9), ('procedureCode', 9), ('criticality', 'reject')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10), ('procedureCode', 10), ('criticality', 'reject')])], er=[])
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationResponse')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationFailure')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationResponse')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationFailure')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementFailureIndication')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementReport')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementTerminationCommand')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'ErrorIndication')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'PrivateMessage')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationResponse')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationFailure')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationUpdate')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'AssistanceInformationControl')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'AssistanceInformationFeedback')))
+    __SuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0), (u'procedureCode', 2), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), (u'procedureCode', 3), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), (u'procedureCode', 4), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), (u'procedureCode', 0), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6), (u'procedureCode', 1), (u'criticality', u'ignore')])], rr=[], ev=[dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8), (u'procedureCode', 8), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10), (u'procedureCode', 10), (u'criticality', u'reject')])], er=[])
     _SuccessfulOutcome_procedureCode._const_tab = __SuccessfulOutcome_procedureCode_tab
     _SuccessfulOutcome_procedureCode._const_tab_at = None
-    _SuccessfulOutcome_procedureCode._const_tab_id = 'procedureCode'
-    _SuccessfulOutcome_criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE'), ['criticality']))
+    _SuccessfulOutcome_procedureCode._const_tab_id = u'procedureCode'
+    _SuccessfulOutcome_criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE'), [u'criticality']))
     _SuccessfulOutcome_criticality._const_tab = __SuccessfulOutcome_procedureCode_tab
-    _SuccessfulOutcome_criticality._const_tab_at = ('..', 'procedureCode')
-    _SuccessfulOutcome_criticality._const_tab_id = 'criticality'
-    _SuccessfulOutcome_lppatransactionID = INT(name='lppatransactionID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-CommonDataTypes', 'LPPATransactionID')))
-    _SuccessfulOutcome_value = OPEN(name='value', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE'), ['SuccessfulOutcome']))
+    _SuccessfulOutcome_criticality._const_tab_at = ('..', u'procedureCode')
+    _SuccessfulOutcome_criticality._const_tab_id = u'criticality'
+    _SuccessfulOutcome_lppatransactionID = INT(name=u'lppatransactionID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-CommonDataTypes', 'LPPATransactionID')))
+    _SuccessfulOutcome_value = OPEN(name=u'value', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE'), [u'SuccessfulOutcome']))
     _SuccessfulOutcome_value._const_tab = __SuccessfulOutcome_procedureCode_tab
-    _SuccessfulOutcome_value._const_tab_at = ('..', 'procedureCode')
-    _SuccessfulOutcome_value._const_tab_id = 'SuccessfulOutcome'
+    _SuccessfulOutcome_value._const_tab_at = ('..', u'procedureCode')
+    _SuccessfulOutcome_value._const_tab_id = u'SuccessfulOutcome'
     SuccessfulOutcome._cont = ASN1Dict([
-        ('procedureCode', _SuccessfulOutcome_procedureCode),
-        ('criticality', _SuccessfulOutcome_criticality),
-        ('lppatransactionID', _SuccessfulOutcome_lppatransactionID),
-        ('value', _SuccessfulOutcome_value),
+        (u'procedureCode', _SuccessfulOutcome_procedureCode),
+        (u'criticality', _SuccessfulOutcome_criticality),
+        (u'lppatransactionID', _SuccessfulOutcome_lppatransactionID),
+        (u'value', _SuccessfulOutcome_value),
         ])
     SuccessfulOutcome._ext = None
     
     #-----< UnsuccessfulOutcome >-----#
-    UnsuccessfulOutcome = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE)
-    _UnsuccessfulOutcome_procedureCode = INT(name='procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE'), ['procedureCode']))
+    UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE)
+    _UnsuccessfulOutcome_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE'), [u'procedureCode']))
     __UnsuccessfulOutcome_procedureCode_tab = CLASS(name='_tab_LPPA-ELEMENTARY-PROCEDURE', mode=MODE_SET, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationResponse')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationFailure')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationResponse')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationFailure')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementFailureIndication')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementReport')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementTerminationCommand')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'ErrorIndication')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'PrivateMessage')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationResponse')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationFailure')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationUpdate')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'AssistanceInformationControl')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'AssistanceInformationFeedback')))
-    __UnsuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), ('SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0), ('UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0), ('procedureCode', 2), ('criticality', 'reject')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), ('SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1), ('UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1), ('procedureCode', 6), ('criticality', 'reject')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), ('procedureCode', 3), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), ('procedureCode', 4), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), ('procedureCode', 5), ('criticality', 'reject')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), ('procedureCode', 0), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6), ('procedureCode', 1), ('criticality', 'ignore')])], rr=[], ev=[dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7), ('SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7), ('UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7), ('procedureCode', 7), ('criticality', 'reject')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8), ('procedureCode', 8), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9), ('procedureCode', 9), ('criticality', 'reject')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10), ('procedureCode', 10), ('criticality', 'reject')])], er=[])
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationResponse')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationFailure')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationResponse')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationFailure')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementFailureIndication')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementReport')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementTerminationCommand')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'ErrorIndication')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'PrivateMessage')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationResponse')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationFailure')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationUpdate')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'AssistanceInformationControl')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'AssistanceInformationFeedback')))
+    __UnsuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0), (u'procedureCode', 2), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_1), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), (u'procedureCode', 3), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), (u'procedureCode', 4), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), (u'procedureCode', 0), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6), (u'procedureCode', 1), (u'criticality', u'ignore')])], rr=[], ev=[dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_7), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_7), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_8), (u'procedureCode', 8), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_9), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_10), (u'procedureCode', 10), (u'criticality', u'reject')])], er=[])
     _UnsuccessfulOutcome_procedureCode._const_tab = __UnsuccessfulOutcome_procedureCode_tab
     _UnsuccessfulOutcome_procedureCode._const_tab_at = None
-    _UnsuccessfulOutcome_procedureCode._const_tab_id = 'procedureCode'
-    _UnsuccessfulOutcome_criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE'), ['criticality']))
+    _UnsuccessfulOutcome_procedureCode._const_tab_id = u'procedureCode'
+    _UnsuccessfulOutcome_criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE'), [u'criticality']))
     _UnsuccessfulOutcome_criticality._const_tab = __UnsuccessfulOutcome_procedureCode_tab
-    _UnsuccessfulOutcome_criticality._const_tab_at = ('..', 'procedureCode')
-    _UnsuccessfulOutcome_criticality._const_tab_id = 'criticality'
-    _UnsuccessfulOutcome_lppatransactionID = INT(name='lppatransactionID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-CommonDataTypes', 'LPPATransactionID')))
-    _UnsuccessfulOutcome_value = OPEN(name='value', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE'), ['UnsuccessfulOutcome']))
+    _UnsuccessfulOutcome_criticality._const_tab_at = ('..', u'procedureCode')
+    _UnsuccessfulOutcome_criticality._const_tab_id = u'criticality'
+    _UnsuccessfulOutcome_lppatransactionID = INT(name=u'lppatransactionID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('LPPA-CommonDataTypes', 'LPPATransactionID')))
+    _UnsuccessfulOutcome_value = OPEN(name=u'value', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE'), [u'UnsuccessfulOutcome']))
     _UnsuccessfulOutcome_value._const_tab = __UnsuccessfulOutcome_procedureCode_tab
-    _UnsuccessfulOutcome_value._const_tab_at = ('..', 'procedureCode')
-    _UnsuccessfulOutcome_value._const_tab_id = 'UnsuccessfulOutcome'
+    _UnsuccessfulOutcome_value._const_tab_at = ('..', u'procedureCode')
+    _UnsuccessfulOutcome_value._const_tab_id = u'UnsuccessfulOutcome'
     UnsuccessfulOutcome._cont = ASN1Dict([
-        ('procedureCode', _UnsuccessfulOutcome_procedureCode),
-        ('criticality', _UnsuccessfulOutcome_criticality),
-        ('lppatransactionID', _UnsuccessfulOutcome_lppatransactionID),
-        ('value', _UnsuccessfulOutcome_value),
+        (u'procedureCode', _UnsuccessfulOutcome_procedureCode),
+        (u'criticality', _UnsuccessfulOutcome_criticality),
+        (u'lppatransactionID', _UnsuccessfulOutcome_lppatransactionID),
+        (u'value', _UnsuccessfulOutcome_value),
         ])
     UnsuccessfulOutcome._ext = None
     
     #-----< LPPA-ELEMENTARY-PROCEDURES >-----#
-    LPPA_ELEMENTARY_PROCEDURES = CLASS(name='LPPA-ELEMENTARY-PROCEDURES', mode=MODE_SET, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
-    _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationRequest')))
-    _LPPA_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationResponse')))
-    _LPPA_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_0 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationFailure')))
-    _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationRequest')))
-    _LPPA_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationResponse')))
-    _LPPA_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_1 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationFailure')))
-    _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementFailureIndication')))
-    _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementReport')))
-    _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementTerminationCommand')))
-    _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'ErrorIndication')))
-    _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'PrivateMessage')))
-    _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_7 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationRequest')))
-    _LPPA_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_7 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationResponse')))
-    _LPPA_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_7 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationFailure')))
-    _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_8 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationUpdate')))
-    _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_9 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'AssistanceInformationControl')))
-    _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_10 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'AssistanceInformationFeedback')))
-    LPPA_ELEMENTARY_PROCEDURES._val = ASN1Set(rv=[dict([('InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0), ('SuccessfulOutcome', _LPPA_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0), ('UnsuccessfulOutcome', _LPPA_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_0), ('procedureCode', 2), ('criticality', 'reject')]), dict([('InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1), ('SuccessfulOutcome', _LPPA_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1), ('UnsuccessfulOutcome', _LPPA_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_1), ('procedureCode', 6), ('criticality', 'reject')]), dict([('InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2), ('procedureCode', 3), ('criticality', 'ignore')]), dict([('InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3), ('procedureCode', 4), ('criticality', 'ignore')]), dict([('InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4), ('procedureCode', 5), ('criticality', 'reject')]), dict([('InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5), ('procedureCode', 0), ('criticality', 'ignore')]), dict([('InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6), ('procedureCode', 1), ('criticality', 'ignore')])], rr=[], ev=[dict([('InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_7), ('SuccessfulOutcome', _LPPA_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_7), ('UnsuccessfulOutcome', _LPPA_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_7), ('procedureCode', 7), ('criticality', 'reject')]), dict([('InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_8), ('procedureCode', 8), ('criticality', 'ignore')]), dict([('InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_9), ('procedureCode', 9), ('criticality', 'reject')]), dict([('InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_10), ('procedureCode', 10), ('criticality', 'reject')])], er=[])
+    LPPA_ELEMENTARY_PROCEDURES = CLASS(name=u'LPPA-ELEMENTARY-PROCEDURES', mode=MODE_SET, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
+    _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationRequest')))
+    _LPPA_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationResponse')))
+    _LPPA_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationFailure')))
+    _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationRequest')))
+    _LPPA_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationResponse')))
+    _LPPA_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationFailure')))
+    _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementFailureIndication')))
+    _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementReport')))
+    _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementTerminationCommand')))
+    _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'ErrorIndication')))
+    _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'PrivateMessage')))
+    _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationRequest')))
+    _LPPA_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_7 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationResponse')))
+    _LPPA_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_7 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationFailure')))
+    _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_8 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationUpdate')))
+    _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_9 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'AssistanceInformationControl')))
+    _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_10 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'AssistanceInformationFeedback')))
+    LPPA_ELEMENTARY_PROCEDURES._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0), (u'SuccessfulOutcome', _LPPA_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', _LPPA_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_0), (u'procedureCode', 2), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1), (u'SuccessfulOutcome', _LPPA_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', _LPPA_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_1), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2), (u'procedureCode', 3), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3), (u'procedureCode', 4), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5), (u'procedureCode', 0), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6), (u'procedureCode', 1), (u'criticality', u'ignore')])], rr=[], ev=[dict([(u'InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_7), (u'SuccessfulOutcome', _LPPA_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_7), (u'UnsuccessfulOutcome', _LPPA_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_7), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_8), (u'procedureCode', 8), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_9), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_val_InitiatingMessage_10), (u'procedureCode', 10), (u'criticality', u'reject')])], er=[])
     
     #-----< LPPA-ELEMENTARY-PROCEDURES-CLASS-1 >-----#
-    LPPA_ELEMENTARY_PROCEDURES_CLASS_1 = CLASS(name='LPPA-ELEMENTARY-PROCEDURES-CLASS-1', mode=MODE_SET, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
-    _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationRequest')))
-    _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationResponse')))
-    _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_0 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationFailure')))
-    _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationRequest')))
-    _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationResponse')))
-    _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_1 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationFailure')))
-    _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationRequest')))
-    _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationResponse')))
-    _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_2 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationFailure')))
-    LPPA_ELEMENTARY_PROCEDURES_CLASS_1._val = ASN1Set(rv=[dict([('InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0), ('SuccessfulOutcome', _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0), ('UnsuccessfulOutcome', _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_0), ('procedureCode', 2), ('criticality', 'reject')]), dict([('InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1), ('SuccessfulOutcome', _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1), ('UnsuccessfulOutcome', _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_1), ('procedureCode', 6), ('criticality', 'reject')])], rr=[], ev=[dict([('InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2), ('SuccessfulOutcome', _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2), ('UnsuccessfulOutcome', _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_2), ('procedureCode', 7), ('criticality', 'reject')])], er=[])
+    LPPA_ELEMENTARY_PROCEDURES_CLASS_1 = CLASS(name=u'LPPA-ELEMENTARY-PROCEDURES-CLASS-1', mode=MODE_SET, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
+    _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationRequest')))
+    _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationResponse')))
+    _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationFailure')))
+    _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationRequest')))
+    _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationResponse')))
+    _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_1 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationFailure')))
+    _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationRequest')))
+    _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationResponse')))
+    _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_2 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationFailure')))
+    LPPA_ELEMENTARY_PROCEDURES_CLASS_1._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0), (u'SuccessfulOutcome', _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_0), (u'procedureCode', 2), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1), (u'SuccessfulOutcome', _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1), (u'UnsuccessfulOutcome', _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_1), (u'procedureCode', 6), (u'criticality', u'reject')])], rr=[], ev=[dict([(u'InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2), (u'SuccessfulOutcome', _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', _LPPA_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_2), (u'procedureCode', 7), (u'criticality', u'reject')])], er=[])
     
     #-----< LPPA-ELEMENTARY-PROCEDURES-CLASS-2 >-----#
-    LPPA_ELEMENTARY_PROCEDURES_CLASS_2 = CLASS(name='LPPA-ELEMENTARY-PROCEDURES-CLASS-2', mode=MODE_SET, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
-    _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementFailureIndication')))
-    _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementReport')))
-    _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementTerminationCommand')))
-    _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'ErrorIndication')))
-    _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_4 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'PrivateMessage')))
-    _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_5 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationUpdate')))
-    _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_6 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'AssistanceInformationControl')))
-    _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_7 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'AssistanceInformationFeedback')))
-    LPPA_ELEMENTARY_PROCEDURES_CLASS_2._val = ASN1Set(rv=[dict([('InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0), ('procedureCode', 3), ('criticality', 'ignore')]), dict([('InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1), ('procedureCode', 4), ('criticality', 'ignore')]), dict([('InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2), ('procedureCode', 5), ('criticality', 'reject')]), dict([('InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3), ('procedureCode', 0), ('criticality', 'ignore')]), dict([('InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_4), ('procedureCode', 1), ('criticality', 'ignore')])], rr=[], ev=[dict([('InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_5), ('procedureCode', 8), ('criticality', 'ignore')]), dict([('InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_6), ('procedureCode', 9), ('criticality', 'reject')]), dict([('InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_7), ('procedureCode', 10), ('criticality', 'reject')])], er=[])
+    LPPA_ELEMENTARY_PROCEDURES_CLASS_2 = CLASS(name=u'LPPA-ELEMENTARY-PROCEDURES-CLASS-2', mode=MODE_SET, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
+    _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementFailureIndication')))
+    _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementReport')))
+    _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementTerminationCommand')))
+    _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'ErrorIndication')))
+    _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'PrivateMessage')))
+    _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationUpdate')))
+    _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'AssistanceInformationControl')))
+    _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'AssistanceInformationFeedback')))
+    LPPA_ELEMENTARY_PROCEDURES_CLASS_2._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0), (u'procedureCode', 3), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1), (u'procedureCode', 4), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_2), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_3), (u'procedureCode', 0), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_4), (u'procedureCode', 1), (u'criticality', u'ignore')])], rr=[], ev=[dict([(u'InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_5), (u'procedureCode', 8), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_6), (u'procedureCode', 9), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _LPPA_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_7), (u'procedureCode', 10), (u'criticality', u'reject')])], er=[])
     
     #-----< e-CIDMeasurementInitiation >-----#
-    e_CIDMeasurementInitiation = CLASS(name='e-CIDMeasurementInitiation', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
-    _e_CIDMeasurementInitiation_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationRequest')))
-    _e_CIDMeasurementInitiation_val_SuccessfulOutcome = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationResponse')))
-    _e_CIDMeasurementInitiation_val_UnsuccessfulOutcome = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationFailure')))
-    e_CIDMeasurementInitiation._val = dict([('InitiatingMessage', _e_CIDMeasurementInitiation_val_InitiatingMessage), ('SuccessfulOutcome', _e_CIDMeasurementInitiation_val_SuccessfulOutcome), ('UnsuccessfulOutcome', _e_CIDMeasurementInitiation_val_UnsuccessfulOutcome), ('procedureCode', 2), ('criticality', 'reject')])
+    e_CIDMeasurementInitiation = CLASS(name=u'e-CIDMeasurementInitiation', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
+    _e_CIDMeasurementInitiation_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationRequest')))
+    _e_CIDMeasurementInitiation_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationResponse')))
+    _e_CIDMeasurementInitiation_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementInitiationFailure')))
+    e_CIDMeasurementInitiation._val = dict([(u'InitiatingMessage', _e_CIDMeasurementInitiation_val_InitiatingMessage), (u'SuccessfulOutcome', _e_CIDMeasurementInitiation_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _e_CIDMeasurementInitiation_val_UnsuccessfulOutcome), (u'procedureCode', 2), (u'criticality', u'reject')])
     
     #-----< e-CIDMeasurementFailureIndication >-----#
-    e_CIDMeasurementFailureIndication = CLASS(name='e-CIDMeasurementFailureIndication', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
-    _e_CIDMeasurementFailureIndication_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementFailureIndication')))
-    e_CIDMeasurementFailureIndication._val = dict([('InitiatingMessage', _e_CIDMeasurementFailureIndication_val_InitiatingMessage), ('procedureCode', 3), ('criticality', 'ignore')])
+    e_CIDMeasurementFailureIndication = CLASS(name=u'e-CIDMeasurementFailureIndication', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
+    _e_CIDMeasurementFailureIndication_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementFailureIndication')))
+    e_CIDMeasurementFailureIndication._val = dict([(u'InitiatingMessage', _e_CIDMeasurementFailureIndication_val_InitiatingMessage), (u'procedureCode', 3), (u'criticality', u'ignore')])
     
     #-----< e-CIDMeasurementReport >-----#
-    e_CIDMeasurementReport = CLASS(name='e-CIDMeasurementReport', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
-    _e_CIDMeasurementReport_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementReport')))
-    e_CIDMeasurementReport._val = dict([('InitiatingMessage', _e_CIDMeasurementReport_val_InitiatingMessage), ('procedureCode', 4), ('criticality', 'ignore')])
+    e_CIDMeasurementReport = CLASS(name=u'e-CIDMeasurementReport', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
+    _e_CIDMeasurementReport_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementReport')))
+    e_CIDMeasurementReport._val = dict([(u'InitiatingMessage', _e_CIDMeasurementReport_val_InitiatingMessage), (u'procedureCode', 4), (u'criticality', u'ignore')])
     
     #-----< e-CIDMeasurementTermination >-----#
-    e_CIDMeasurementTermination = CLASS(name='e-CIDMeasurementTermination', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
-    _e_CIDMeasurementTermination_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementTerminationCommand')))
-    e_CIDMeasurementTermination._val = dict([('InitiatingMessage', _e_CIDMeasurementTermination_val_InitiatingMessage), ('procedureCode', 5), ('criticality', 'reject')])
+    e_CIDMeasurementTermination = CLASS(name=u'e-CIDMeasurementTermination', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
+    _e_CIDMeasurementTermination_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'E-CIDMeasurementTerminationCommand')))
+    e_CIDMeasurementTermination._val = dict([(u'InitiatingMessage', _e_CIDMeasurementTermination_val_InitiatingMessage), (u'procedureCode', 5), (u'criticality', u'reject')])
     
     #-----< oTDOAInformationExchange >-----#
-    oTDOAInformationExchange = CLASS(name='oTDOAInformationExchange', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
-    _oTDOAInformationExchange_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationRequest')))
-    _oTDOAInformationExchange_val_SuccessfulOutcome = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationResponse')))
-    _oTDOAInformationExchange_val_UnsuccessfulOutcome = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationFailure')))
-    oTDOAInformationExchange._val = dict([('InitiatingMessage', _oTDOAInformationExchange_val_InitiatingMessage), ('SuccessfulOutcome', _oTDOAInformationExchange_val_SuccessfulOutcome), ('UnsuccessfulOutcome', _oTDOAInformationExchange_val_UnsuccessfulOutcome), ('procedureCode', 6), ('criticality', 'reject')])
+    oTDOAInformationExchange = CLASS(name=u'oTDOAInformationExchange', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
+    _oTDOAInformationExchange_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationRequest')))
+    _oTDOAInformationExchange_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationResponse')))
+    _oTDOAInformationExchange_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'OTDOAInformationFailure')))
+    oTDOAInformationExchange._val = dict([(u'InitiatingMessage', _oTDOAInformationExchange_val_InitiatingMessage), (u'SuccessfulOutcome', _oTDOAInformationExchange_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _oTDOAInformationExchange_val_UnsuccessfulOutcome), (u'procedureCode', 6), (u'criticality', u'reject')])
     
     #-----< uTDOAInformationExchange >-----#
-    uTDOAInformationExchange = CLASS(name='uTDOAInformationExchange', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
-    _uTDOAInformationExchange_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationRequest')))
-    _uTDOAInformationExchange_val_SuccessfulOutcome = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationResponse')))
-    _uTDOAInformationExchange_val_UnsuccessfulOutcome = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationFailure')))
-    uTDOAInformationExchange._val = dict([('InitiatingMessage', _uTDOAInformationExchange_val_InitiatingMessage), ('SuccessfulOutcome', _uTDOAInformationExchange_val_SuccessfulOutcome), ('UnsuccessfulOutcome', _uTDOAInformationExchange_val_UnsuccessfulOutcome), ('procedureCode', 7), ('criticality', 'reject')])
+    uTDOAInformationExchange = CLASS(name=u'uTDOAInformationExchange', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
+    _uTDOAInformationExchange_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationRequest')))
+    _uTDOAInformationExchange_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationResponse')))
+    _uTDOAInformationExchange_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationFailure')))
+    uTDOAInformationExchange._val = dict([(u'InitiatingMessage', _uTDOAInformationExchange_val_InitiatingMessage), (u'SuccessfulOutcome', _uTDOAInformationExchange_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _uTDOAInformationExchange_val_UnsuccessfulOutcome), (u'procedureCode', 7), (u'criticality', u'reject')])
     
     #-----< uTDOAInformationUpdate >-----#
-    uTDOAInformationUpdate = CLASS(name='uTDOAInformationUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
-    _uTDOAInformationUpdate_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationUpdate')))
-    uTDOAInformationUpdate._val = dict([('InitiatingMessage', _uTDOAInformationUpdate_val_InitiatingMessage), ('procedureCode', 8), ('criticality', 'ignore')])
+    uTDOAInformationUpdate = CLASS(name=u'uTDOAInformationUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
+    _uTDOAInformationUpdate_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'UTDOAInformationUpdate')))
+    uTDOAInformationUpdate._val = dict([(u'InitiatingMessage', _uTDOAInformationUpdate_val_InitiatingMessage), (u'procedureCode', 8), (u'criticality', u'ignore')])
     
     #-----< assistanceInformationControl >-----#
-    assistanceInformationControl = CLASS(name='assistanceInformationControl', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
-    _assistanceInformationControl_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'AssistanceInformationControl')))
-    assistanceInformationControl._val = dict([('InitiatingMessage', _assistanceInformationControl_val_InitiatingMessage), ('procedureCode', 9), ('criticality', 'reject')])
+    assistanceInformationControl = CLASS(name=u'assistanceInformationControl', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
+    _assistanceInformationControl_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'AssistanceInformationControl')))
+    assistanceInformationControl._val = dict([(u'InitiatingMessage', _assistanceInformationControl_val_InitiatingMessage), (u'procedureCode', 9), (u'criticality', u'reject')])
     
     #-----< assistanceInformationFeedback >-----#
-    assistanceInformationFeedback = CLASS(name='assistanceInformationFeedback', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
-    _assistanceInformationFeedback_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'AssistanceInformationFeedback')))
-    assistanceInformationFeedback._val = dict([('InitiatingMessage', _assistanceInformationFeedback_val_InitiatingMessage), ('procedureCode', 10), ('criticality', 'reject')])
+    assistanceInformationFeedback = CLASS(name=u'assistanceInformationFeedback', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
+    _assistanceInformationFeedback_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'AssistanceInformationFeedback')))
+    assistanceInformationFeedback._val = dict([(u'InitiatingMessage', _assistanceInformationFeedback_val_InitiatingMessage), (u'procedureCode', 10), (u'criticality', u'reject')])
     
     #-----< errorIndication >-----#
-    errorIndication = CLASS(name='errorIndication', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
-    _errorIndication_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'ErrorIndication')))
-    errorIndication._val = dict([('InitiatingMessage', _errorIndication_val_InitiatingMessage), ('procedureCode', 0), ('criticality', 'ignore')])
+    errorIndication = CLASS(name=u'errorIndication', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
+    _errorIndication_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'ErrorIndication')))
+    errorIndication._val = dict([(u'InitiatingMessage', _errorIndication_val_InitiatingMessage), (u'procedureCode', 0), (u'criticality', u'ignore')])
     
     #-----< privateMessage >-----#
-    privateMessage = CLASS(name='privateMessage', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
-    _privateMessage_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'PrivateMessage')))
-    privateMessage._val = dict([('InitiatingMessage', _privateMessage_val_InitiatingMessage), ('procedureCode', 1), ('criticality', 'ignore')])
+    privateMessage = CLASS(name=u'privateMessage', mode=MODE_VALUE, typeref=ASN1RefType(('LPPA-PDU-Descriptions', 'LPPA-ELEMENTARY-PROCEDURE')))
+    _privateMessage_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('LPPA-PDU-Contents', 'PrivateMessage')))
+    privateMessage._val = dict([(u'InitiatingMessage', _privateMessage_val_InitiatingMessage), (u'procedureCode', 1), (u'criticality', u'ignore')])
     
     _all_ = [
         _LPPA_ELEMENTARY_PROCEDURE_InitiatingMessage,

@@ -16,34 +16,34 @@ from pycrate_asn1rt.init             import init_modules
 
 class M3AP_CommonDataTypes:
 
-    _name_  = 'M3AP-CommonDataTypes'
+    _name_  = u'M3AP-CommonDataTypes'
     _oid_   = [0, 4, 0, 0, 21, 3, 5, 1, 3]
     
     _obj_ = [
-        'maxPrivateIEs',
-        'maxProtocolExtensions',
-        'maxProtocolIEs',
-        'Criticality',
-        'Presence',
-        'PrivateIE-ID',
-        'ProcedureCode',
-        'ProtocolIE-ID',
-        'TriggeringMessage',
+        u'maxPrivateIEs',
+        u'maxProtocolExtensions',
+        u'maxProtocolIEs',
+        u'Criticality',
+        u'Presence',
+        u'PrivateIE-ID',
+        u'ProcedureCode',
+        u'ProtocolIE-ID',
+        u'TriggeringMessage',
         ]
     _type_ = [
-        'Criticality',
-        'Presence',
-        'PrivateIE-ID',
-        'ProcedureCode',
-        'ProtocolIE-ID',
-        'TriggeringMessage',
+        u'Criticality',
+        u'Presence',
+        u'PrivateIE-ID',
+        u'ProcedureCode',
+        u'ProtocolIE-ID',
+        u'TriggeringMessage',
         ]
     _set_ = [
         ]
     _val_ = [
-        'maxPrivateIEs',
-        'maxProtocolExtensions',
-        'maxProtocolIEs',
+        u'maxPrivateIEs',
+        u'maxProtocolExtensions',
+        u'maxProtocolIEs',
         ]
     _class_ = [
         ]
@@ -51,49 +51,49 @@ class M3AP_CommonDataTypes:
         ]
     
     #-----< maxPrivateIEs >-----#
-    maxPrivateIEs = INT(name='maxPrivateIEs', mode=MODE_VALUE)
+    maxPrivateIEs = INT(name=u'maxPrivateIEs', mode=MODE_VALUE)
     maxPrivateIEs._val = 65535
     
     #-----< maxProtocolExtensions >-----#
-    maxProtocolExtensions = INT(name='maxProtocolExtensions', mode=MODE_VALUE)
+    maxProtocolExtensions = INT(name=u'maxProtocolExtensions', mode=MODE_VALUE)
     maxProtocolExtensions._val = 65535
     
     #-----< maxProtocolIEs >-----#
-    maxProtocolIEs = INT(name='maxProtocolIEs', mode=MODE_VALUE)
+    maxProtocolIEs = INT(name=u'maxProtocolIEs', mode=MODE_VALUE)
     maxProtocolIEs._val = 65535
     
     #-----< Criticality >-----#
-    Criticality = ENUM(name='Criticality', mode=MODE_TYPE)
-    Criticality._cont = ASN1Dict([('reject', 0), ('ignore', 1), ('notify', 2)])
+    Criticality = ENUM(name=u'Criticality', mode=MODE_TYPE)
+    Criticality._cont = ASN1Dict([(u'reject', 0), (u'ignore', 1), (u'notify', 2)])
     Criticality._ext = None
     
     #-----< Presence >-----#
-    Presence = ENUM(name='Presence', mode=MODE_TYPE)
-    Presence._cont = ASN1Dict([('optional', 0), ('conditional', 1), ('mandatory', 2)])
+    Presence = ENUM(name=u'Presence', mode=MODE_TYPE)
+    Presence._cont = ASN1Dict([(u'optional', 0), (u'conditional', 1), (u'mandatory', 2)])
     Presence._ext = None
     
     #-----< PrivateIE-ID >-----#
-    PrivateIE_ID = CHOICE(name='PrivateIE-ID', mode=MODE_TYPE)
-    _PrivateIE_ID_local = INT(name='local', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    PrivateIE_ID = CHOICE(name=u'PrivateIE-ID', mode=MODE_TYPE)
+    _PrivateIE_ID_local = INT(name=u'local', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _PrivateIE_ID_local._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
-    _PrivateIE_ID_global_ = OID(name='global', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    _PrivateIE_ID_global_ = OID(name=u'global', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     PrivateIE_ID._cont = ASN1Dict([
-        ('local', _PrivateIE_ID_local),
-        ('global', _PrivateIE_ID_global_),
+        (u'local', _PrivateIE_ID_local),
+        (u'global', _PrivateIE_ID_global_),
         ])
     PrivateIE_ID._ext = None
     
     #-----< ProcedureCode >-----#
-    ProcedureCode = INT(name='ProcedureCode', mode=MODE_TYPE)
+    ProcedureCode = INT(name=u'ProcedureCode', mode=MODE_TYPE)
     ProcedureCode._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< ProtocolIE-ID >-----#
-    ProtocolIE_ID = INT(name='ProtocolIE-ID', mode=MODE_TYPE)
+    ProtocolIE_ID = INT(name=u'ProtocolIE-ID', mode=MODE_TYPE)
     ProtocolIE_ID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     
     #-----< TriggeringMessage >-----#
-    TriggeringMessage = ENUM(name='TriggeringMessage', mode=MODE_TYPE)
-    TriggeringMessage._cont = ASN1Dict([('initiating-message', 0), ('successful-outcome', 1), ('unsuccessful-outcome', 2)])
+    TriggeringMessage = ENUM(name=u'TriggeringMessage', mode=MODE_TYPE)
+    TriggeringMessage._cont = ASN1Dict([(u'initiating-message', 0), (u'successful-outcome', 1), (u'unsuccessful-outcome', 2)])
     TriggeringMessage._ext = None
     
     _all_ = [
@@ -112,92 +112,92 @@ class M3AP_CommonDataTypes:
 
 class M3AP_Constants:
 
-    _name_  = 'M3AP-Constants'
+    _name_  = u'M3AP-Constants'
     _oid_   = [0, 4, 0, 0, 21, 3, 5, 1, 4]
     
     _obj_ = [
-        'id-mBMSsessionStart',
-        'id-mBMSsessionStop',
-        'id-errorIndication',
-        'id-privateMessage',
-        'id-Reset',
-        'id-mBMSsessionUpdate',
-        'id-mCEConfigurationUpdate',
-        'id-m3Setup',
-        'maxnoofMBMSServiceAreaIdentitiesPerMCE',
-        'maxnooferrors',
-        'maxNrOfIndividualM3ConnectionsToReset',
-        'maxnoofCellsforMBMS',
-        'id-MME-MBMS-M3AP-ID',
-        'id-MCE-MBMS-M3AP-ID',
-        'id-TMGI',
-        'id-MBMS-Session-ID',
-        'id-MBMS-E-RAB-QoS-Parameters',
-        'id-MBMS-Session-Duration',
-        'id-MBMS-Service-Area',
-        'id-TNL-Information',
-        'id-CriticalityDiagnostics',
-        'id-Cause',
-        'id-MBMS-Service-Area-List',
-        'id-MBMS-Service-Area-List-Item',
-        'id-TimeToWait',
-        'id-ResetType',
-        'id-MBMS-Service-associatedLogicalM3-ConnectionItem',
-        'id-MBMS-Service-associatedLogicalM3-ConnectionListResAck',
-        'id-MinimumTimeToMBMSDataTransfer',
-        'id-AllocationAndRetentionPriority',
-        'id-Global-MCE-ID',
-        'id-MCEname',
-        'id-MBMSServiceAreaList',
-        'id-Time-ofMBMS-DataTransfer',
-        'id-Time-ofMBMS-DataStop',
-        'id-Reestablishment',
-        'id-Alternative-TNL-Information',
-        'id-MBMS-Cell-List',
+        u'id-mBMSsessionStart',
+        u'id-mBMSsessionStop',
+        u'id-errorIndication',
+        u'id-privateMessage',
+        u'id-Reset',
+        u'id-mBMSsessionUpdate',
+        u'id-mCEConfigurationUpdate',
+        u'id-m3Setup',
+        u'maxnoofMBMSServiceAreaIdentitiesPerMCE',
+        u'maxnooferrors',
+        u'maxNrOfIndividualM3ConnectionsToReset',
+        u'maxnoofCellsforMBMS',
+        u'id-MME-MBMS-M3AP-ID',
+        u'id-MCE-MBMS-M3AP-ID',
+        u'id-TMGI',
+        u'id-MBMS-Session-ID',
+        u'id-MBMS-E-RAB-QoS-Parameters',
+        u'id-MBMS-Session-Duration',
+        u'id-MBMS-Service-Area',
+        u'id-TNL-Information',
+        u'id-CriticalityDiagnostics',
+        u'id-Cause',
+        u'id-MBMS-Service-Area-List',
+        u'id-MBMS-Service-Area-List-Item',
+        u'id-TimeToWait',
+        u'id-ResetType',
+        u'id-MBMS-Service-associatedLogicalM3-ConnectionItem',
+        u'id-MBMS-Service-associatedLogicalM3-ConnectionListResAck',
+        u'id-MinimumTimeToMBMSDataTransfer',
+        u'id-AllocationAndRetentionPriority',
+        u'id-Global-MCE-ID',
+        u'id-MCEname',
+        u'id-MBMSServiceAreaList',
+        u'id-Time-ofMBMS-DataTransfer',
+        u'id-Time-ofMBMS-DataStop',
+        u'id-Reestablishment',
+        u'id-Alternative-TNL-Information',
+        u'id-MBMS-Cell-List',
         ]
     _type_ = [
         ]
     _set_ = [
         ]
     _val_ = [
-        'id-mBMSsessionStart',
-        'id-mBMSsessionStop',
-        'id-errorIndication',
-        'id-privateMessage',
-        'id-Reset',
-        'id-mBMSsessionUpdate',
-        'id-mCEConfigurationUpdate',
-        'id-m3Setup',
-        'maxnoofMBMSServiceAreaIdentitiesPerMCE',
-        'maxnooferrors',
-        'maxNrOfIndividualM3ConnectionsToReset',
-        'maxnoofCellsforMBMS',
-        'id-MME-MBMS-M3AP-ID',
-        'id-MCE-MBMS-M3AP-ID',
-        'id-TMGI',
-        'id-MBMS-Session-ID',
-        'id-MBMS-E-RAB-QoS-Parameters',
-        'id-MBMS-Session-Duration',
-        'id-MBMS-Service-Area',
-        'id-TNL-Information',
-        'id-CriticalityDiagnostics',
-        'id-Cause',
-        'id-MBMS-Service-Area-List',
-        'id-MBMS-Service-Area-List-Item',
-        'id-TimeToWait',
-        'id-ResetType',
-        'id-MBMS-Service-associatedLogicalM3-ConnectionItem',
-        'id-MBMS-Service-associatedLogicalM3-ConnectionListResAck',
-        'id-MinimumTimeToMBMSDataTransfer',
-        'id-AllocationAndRetentionPriority',
-        'id-Global-MCE-ID',
-        'id-MCEname',
-        'id-MBMSServiceAreaList',
-        'id-Time-ofMBMS-DataTransfer',
-        'id-Time-ofMBMS-DataStop',
-        'id-Reestablishment',
-        'id-Alternative-TNL-Information',
-        'id-MBMS-Cell-List',
+        u'id-mBMSsessionStart',
+        u'id-mBMSsessionStop',
+        u'id-errorIndication',
+        u'id-privateMessage',
+        u'id-Reset',
+        u'id-mBMSsessionUpdate',
+        u'id-mCEConfigurationUpdate',
+        u'id-m3Setup',
+        u'maxnoofMBMSServiceAreaIdentitiesPerMCE',
+        u'maxnooferrors',
+        u'maxNrOfIndividualM3ConnectionsToReset',
+        u'maxnoofCellsforMBMS',
+        u'id-MME-MBMS-M3AP-ID',
+        u'id-MCE-MBMS-M3AP-ID',
+        u'id-TMGI',
+        u'id-MBMS-Session-ID',
+        u'id-MBMS-E-RAB-QoS-Parameters',
+        u'id-MBMS-Session-Duration',
+        u'id-MBMS-Service-Area',
+        u'id-TNL-Information',
+        u'id-CriticalityDiagnostics',
+        u'id-Cause',
+        u'id-MBMS-Service-Area-List',
+        u'id-MBMS-Service-Area-List-Item',
+        u'id-TimeToWait',
+        u'id-ResetType',
+        u'id-MBMS-Service-associatedLogicalM3-ConnectionItem',
+        u'id-MBMS-Service-associatedLogicalM3-ConnectionListResAck',
+        u'id-MinimumTimeToMBMSDataTransfer',
+        u'id-AllocationAndRetentionPriority',
+        u'id-Global-MCE-ID',
+        u'id-MCEname',
+        u'id-MBMSServiceAreaList',
+        u'id-Time-ofMBMS-DataTransfer',
+        u'id-Time-ofMBMS-DataStop',
+        u'id-Reestablishment',
+        u'id-Alternative-TNL-Information',
+        u'id-MBMS-Cell-List',
         ]
     _class_ = [
         ]
@@ -205,155 +205,155 @@ class M3AP_Constants:
         ]
     
     #-----< id-mBMSsessionStart >-----#
-    id_mBMSsessionStart = INT(name='id-mBMSsessionStart', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProcedureCode')))
+    id_mBMSsessionStart = INT(name=u'id-mBMSsessionStart', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProcedureCode')))
     id_mBMSsessionStart._val = 0
     
     #-----< id-mBMSsessionStop >-----#
-    id_mBMSsessionStop = INT(name='id-mBMSsessionStop', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProcedureCode')))
+    id_mBMSsessionStop = INT(name=u'id-mBMSsessionStop', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProcedureCode')))
     id_mBMSsessionStop._val = 1
     
     #-----< id-errorIndication >-----#
-    id_errorIndication = INT(name='id-errorIndication', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProcedureCode')))
+    id_errorIndication = INT(name=u'id-errorIndication', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProcedureCode')))
     id_errorIndication._val = 2
     
     #-----< id-privateMessage >-----#
-    id_privateMessage = INT(name='id-privateMessage', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProcedureCode')))
+    id_privateMessage = INT(name=u'id-privateMessage', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProcedureCode')))
     id_privateMessage._val = 3
     
     #-----< id-Reset >-----#
-    id_Reset = INT(name='id-Reset', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProcedureCode')))
+    id_Reset = INT(name=u'id-Reset', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProcedureCode')))
     id_Reset._val = 4
     
     #-----< id-mBMSsessionUpdate >-----#
-    id_mBMSsessionUpdate = INT(name='id-mBMSsessionUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProcedureCode')))
+    id_mBMSsessionUpdate = INT(name=u'id-mBMSsessionUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProcedureCode')))
     id_mBMSsessionUpdate._val = 5
     
     #-----< id-mCEConfigurationUpdate >-----#
-    id_mCEConfigurationUpdate = INT(name='id-mCEConfigurationUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProcedureCode')))
+    id_mCEConfigurationUpdate = INT(name=u'id-mCEConfigurationUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProcedureCode')))
     id_mCEConfigurationUpdate._val = 6
     
     #-----< id-m3Setup >-----#
-    id_m3Setup = INT(name='id-m3Setup', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProcedureCode')))
+    id_m3Setup = INT(name=u'id-m3Setup', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProcedureCode')))
     id_m3Setup._val = 7
     
     #-----< maxnoofMBMSServiceAreaIdentitiesPerMCE >-----#
-    maxnoofMBMSServiceAreaIdentitiesPerMCE = INT(name='maxnoofMBMSServiceAreaIdentitiesPerMCE', mode=MODE_VALUE)
+    maxnoofMBMSServiceAreaIdentitiesPerMCE = INT(name=u'maxnoofMBMSServiceAreaIdentitiesPerMCE', mode=MODE_VALUE)
     maxnoofMBMSServiceAreaIdentitiesPerMCE._val = 65536
     
     #-----< maxnooferrors >-----#
-    maxnooferrors = INT(name='maxnooferrors', mode=MODE_VALUE)
+    maxnooferrors = INT(name=u'maxnooferrors', mode=MODE_VALUE)
     maxnooferrors._val = 256
     
     #-----< maxNrOfIndividualM3ConnectionsToReset >-----#
-    maxNrOfIndividualM3ConnectionsToReset = INT(name='maxNrOfIndividualM3ConnectionsToReset', mode=MODE_VALUE)
+    maxNrOfIndividualM3ConnectionsToReset = INT(name=u'maxNrOfIndividualM3ConnectionsToReset', mode=MODE_VALUE)
     maxNrOfIndividualM3ConnectionsToReset._val = 256
     
     #-----< maxnoofCellsforMBMS >-----#
-    maxnoofCellsforMBMS = INT(name='maxnoofCellsforMBMS', mode=MODE_VALUE)
+    maxnoofCellsforMBMS = INT(name=u'maxnoofCellsforMBMS', mode=MODE_VALUE)
     maxnoofCellsforMBMS._val = 4096
     
     #-----< id-MME-MBMS-M3AP-ID >-----#
-    id_MME_MBMS_M3AP_ID = INT(name='id-MME-MBMS-M3AP-ID', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_MME_MBMS_M3AP_ID = INT(name=u'id-MME-MBMS-M3AP-ID', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_MME_MBMS_M3AP_ID._val = 0
     
     #-----< id-MCE-MBMS-M3AP-ID >-----#
-    id_MCE_MBMS_M3AP_ID = INT(name='id-MCE-MBMS-M3AP-ID', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_MCE_MBMS_M3AP_ID = INT(name=u'id-MCE-MBMS-M3AP-ID', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_MCE_MBMS_M3AP_ID._val = 1
     
     #-----< id-TMGI >-----#
-    id_TMGI = INT(name='id-TMGI', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_TMGI = INT(name=u'id-TMGI', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_TMGI._val = 2
     
     #-----< id-MBMS-Session-ID >-----#
-    id_MBMS_Session_ID = INT(name='id-MBMS-Session-ID', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_MBMS_Session_ID = INT(name=u'id-MBMS-Session-ID', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_MBMS_Session_ID._val = 3
     
     #-----< id-MBMS-E-RAB-QoS-Parameters >-----#
-    id_MBMS_E_RAB_QoS_Parameters = INT(name='id-MBMS-E-RAB-QoS-Parameters', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_MBMS_E_RAB_QoS_Parameters = INT(name=u'id-MBMS-E-RAB-QoS-Parameters', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_MBMS_E_RAB_QoS_Parameters._val = 4
     
     #-----< id-MBMS-Session-Duration >-----#
-    id_MBMS_Session_Duration = INT(name='id-MBMS-Session-Duration', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_MBMS_Session_Duration = INT(name=u'id-MBMS-Session-Duration', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_MBMS_Session_Duration._val = 5
     
     #-----< id-MBMS-Service-Area >-----#
-    id_MBMS_Service_Area = INT(name='id-MBMS-Service-Area', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_MBMS_Service_Area = INT(name=u'id-MBMS-Service-Area', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_MBMS_Service_Area._val = 6
     
     #-----< id-TNL-Information >-----#
-    id_TNL_Information = INT(name='id-TNL-Information', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_TNL_Information = INT(name=u'id-TNL-Information', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_TNL_Information._val = 7
     
     #-----< id-CriticalityDiagnostics >-----#
-    id_CriticalityDiagnostics = INT(name='id-CriticalityDiagnostics', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_CriticalityDiagnostics = INT(name=u'id-CriticalityDiagnostics', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_CriticalityDiagnostics._val = 8
     
     #-----< id-Cause >-----#
-    id_Cause = INT(name='id-Cause', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_Cause = INT(name=u'id-Cause', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_Cause._val = 9
     
     #-----< id-MBMS-Service-Area-List >-----#
-    id_MBMS_Service_Area_List = INT(name='id-MBMS-Service-Area-List', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_MBMS_Service_Area_List = INT(name=u'id-MBMS-Service-Area-List', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_MBMS_Service_Area_List._val = 10
     
     #-----< id-MBMS-Service-Area-List-Item >-----#
-    id_MBMS_Service_Area_List_Item = INT(name='id-MBMS-Service-Area-List-Item', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_MBMS_Service_Area_List_Item = INT(name=u'id-MBMS-Service-Area-List-Item', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_MBMS_Service_Area_List_Item._val = 11
     
     #-----< id-TimeToWait >-----#
-    id_TimeToWait = INT(name='id-TimeToWait', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_TimeToWait = INT(name=u'id-TimeToWait', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_TimeToWait._val = 12
     
     #-----< id-ResetType >-----#
-    id_ResetType = INT(name='id-ResetType', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_ResetType = INT(name=u'id-ResetType', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_ResetType._val = 13
     
     #-----< id-MBMS-Service-associatedLogicalM3-ConnectionItem >-----#
-    id_MBMS_Service_associatedLogicalM3_ConnectionItem = INT(name='id-MBMS-Service-associatedLogicalM3-ConnectionItem', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_MBMS_Service_associatedLogicalM3_ConnectionItem = INT(name=u'id-MBMS-Service-associatedLogicalM3-ConnectionItem', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_MBMS_Service_associatedLogicalM3_ConnectionItem._val = 14
     
     #-----< id-MBMS-Service-associatedLogicalM3-ConnectionListResAck >-----#
-    id_MBMS_Service_associatedLogicalM3_ConnectionListResAck = INT(name='id-MBMS-Service-associatedLogicalM3-ConnectionListResAck', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_MBMS_Service_associatedLogicalM3_ConnectionListResAck = INT(name=u'id-MBMS-Service-associatedLogicalM3-ConnectionListResAck', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_MBMS_Service_associatedLogicalM3_ConnectionListResAck._val = 15
     
     #-----< id-MinimumTimeToMBMSDataTransfer >-----#
-    id_MinimumTimeToMBMSDataTransfer = INT(name='id-MinimumTimeToMBMSDataTransfer', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_MinimumTimeToMBMSDataTransfer = INT(name=u'id-MinimumTimeToMBMSDataTransfer', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_MinimumTimeToMBMSDataTransfer._val = 16
     
     #-----< id-AllocationAndRetentionPriority >-----#
-    id_AllocationAndRetentionPriority = INT(name='id-AllocationAndRetentionPriority', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_AllocationAndRetentionPriority = INT(name=u'id-AllocationAndRetentionPriority', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_AllocationAndRetentionPriority._val = 17
     
     #-----< id-Global-MCE-ID >-----#
-    id_Global_MCE_ID = INT(name='id-Global-MCE-ID', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_Global_MCE_ID = INT(name=u'id-Global-MCE-ID', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_Global_MCE_ID._val = 18
     
     #-----< id-MCEname >-----#
-    id_MCEname = INT(name='id-MCEname', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_MCEname = INT(name=u'id-MCEname', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_MCEname._val = 19
     
     #-----< id-MBMSServiceAreaList >-----#
-    id_MBMSServiceAreaList = INT(name='id-MBMSServiceAreaList', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_MBMSServiceAreaList = INT(name=u'id-MBMSServiceAreaList', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_MBMSServiceAreaList._val = 20
     
     #-----< id-Time-ofMBMS-DataTransfer >-----#
-    id_Time_ofMBMS_DataTransfer = INT(name='id-Time-ofMBMS-DataTransfer', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_Time_ofMBMS_DataTransfer = INT(name=u'id-Time-ofMBMS-DataTransfer', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_Time_ofMBMS_DataTransfer._val = 21
     
     #-----< id-Time-ofMBMS-DataStop >-----#
-    id_Time_ofMBMS_DataStop = INT(name='id-Time-ofMBMS-DataStop', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_Time_ofMBMS_DataStop = INT(name=u'id-Time-ofMBMS-DataStop', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_Time_ofMBMS_DataStop._val = 22
     
     #-----< id-Reestablishment >-----#
-    id_Reestablishment = INT(name='id-Reestablishment', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_Reestablishment = INT(name=u'id-Reestablishment', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_Reestablishment._val = 23
     
     #-----< id-Alternative-TNL-Information >-----#
-    id_Alternative_TNL_Information = INT(name='id-Alternative-TNL-Information', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_Alternative_TNL_Information = INT(name=u'id-Alternative-TNL-Information', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_Alternative_TNL_Information._val = 24
     
     #-----< id-MBMS-Cell-List >-----#
-    id_MBMS_Cell_List = INT(name='id-MBMS-Cell-List', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
+    id_MBMS_Cell_List = INT(name=u'id-MBMS-Cell-List', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
     id_MBMS_Cell_List._val = 25
     
     _all_ = [
@@ -399,155 +399,155 @@ class M3AP_Constants:
 
 class M3AP_Containers:
 
-    _name_  = 'M3AP-Containers'
+    _name_  = u'M3AP-Containers'
     _oid_   = [0, 4, 0, 0, 21, 3, 5, 1, 5]
     
     _obj_ = [
-        'M3AP-PROTOCOL-IES',
-        'M3AP-PROTOCOL-IES-PAIR',
-        'M3AP-PROTOCOL-EXTENSION',
-        'M3AP-PRIVATE-IES',
-        'ProtocolIE-Container',
-        'ProtocolIE-Single-Container',
-        'ProtocolIE-Field',
-        'ProtocolIE-ContainerPair',
-        'ProtocolIE-FieldPair',
-        'ProtocolIE-ContainerList',
-        'ProtocolIE-ContainerPairList',
-        'ProtocolExtensionContainer',
-        'ProtocolExtensionField',
-        'PrivateIE-Container',
-        'PrivateIE-Field',
+        u'M3AP-PROTOCOL-IES',
+        u'M3AP-PROTOCOL-IES-PAIR',
+        u'M3AP-PROTOCOL-EXTENSION',
+        u'M3AP-PRIVATE-IES',
+        u'ProtocolIE-Container',
+        u'ProtocolIE-Single-Container',
+        u'ProtocolIE-Field',
+        u'ProtocolIE-ContainerPair',
+        u'ProtocolIE-FieldPair',
+        u'ProtocolIE-ContainerList',
+        u'ProtocolIE-ContainerPairList',
+        u'ProtocolExtensionContainer',
+        u'ProtocolExtensionField',
+        u'PrivateIE-Container',
+        u'PrivateIE-Field',
         ]
     _type_ = [
-        'M3AP-PROTOCOL-IES',
-        'M3AP-PROTOCOL-IES-PAIR',
-        'M3AP-PROTOCOL-EXTENSION',
-        'M3AP-PRIVATE-IES',
-        'ProtocolIE-Container',
-        'ProtocolIE-Single-Container',
-        'ProtocolIE-Field',
-        'ProtocolIE-ContainerPair',
-        'ProtocolIE-FieldPair',
-        'ProtocolIE-ContainerList',
-        'ProtocolIE-ContainerPairList',
-        'ProtocolExtensionContainer',
-        'ProtocolExtensionField',
-        'PrivateIE-Container',
-        'PrivateIE-Field',
+        u'M3AP-PROTOCOL-IES',
+        u'M3AP-PROTOCOL-IES-PAIR',
+        u'M3AP-PROTOCOL-EXTENSION',
+        u'M3AP-PRIVATE-IES',
+        u'ProtocolIE-Container',
+        u'ProtocolIE-Single-Container',
+        u'ProtocolIE-Field',
+        u'ProtocolIE-ContainerPair',
+        u'ProtocolIE-FieldPair',
+        u'ProtocolIE-ContainerList',
+        u'ProtocolIE-ContainerPairList',
+        u'ProtocolExtensionContainer',
+        u'ProtocolExtensionField',
+        u'PrivateIE-Container',
+        u'PrivateIE-Field',
         ]
     _set_ = [
         ]
     _val_ = [
         ]
     _class_ = [
-        'M3AP-PROTOCOL-IES',
-        'M3AP-PROTOCOL-IES-PAIR',
-        'M3AP-PROTOCOL-EXTENSION',
-        'M3AP-PRIVATE-IES',
+        u'M3AP-PROTOCOL-IES',
+        u'M3AP-PROTOCOL-IES-PAIR',
+        u'M3AP-PROTOCOL-EXTENSION',
+        u'M3AP-PRIVATE-IES',
         ]
     _param_ = [
-        'ProtocolIE-Container',
-        'ProtocolIE-Single-Container',
-        'ProtocolIE-Field',
-        'ProtocolIE-ContainerPair',
-        'ProtocolIE-FieldPair',
-        'ProtocolIE-ContainerList',
-        'ProtocolIE-ContainerPairList',
-        'ProtocolExtensionContainer',
-        'ProtocolExtensionField',
-        'PrivateIE-Container',
-        'PrivateIE-Field',
+        u'ProtocolIE-Container',
+        u'ProtocolIE-Single-Container',
+        u'ProtocolIE-Field',
+        u'ProtocolIE-ContainerPair',
+        u'ProtocolIE-FieldPair',
+        u'ProtocolIE-ContainerList',
+        u'ProtocolIE-ContainerPairList',
+        u'ProtocolExtensionContainer',
+        u'ProtocolExtensionField',
+        u'PrivateIE-Container',
+        u'PrivateIE-Field',
         ]
     
     #-----< M3AP-PROTOCOL-IES >-----#
-    M3AP_PROTOCOL_IES = CLASS(name='M3AP-PROTOCOL-IES', mode=MODE_TYPE)
-    _M3AP_PROTOCOL_IES_id = INT(name='id', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
-    _M3AP_PROTOCOL_IES_criticality = ENUM(name='criticality', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'Criticality')))
-    _M3AP_PROTOCOL_IES_Value = OPEN(name='Value', mode=MODE_TYPE)
-    _M3AP_PROTOCOL_IES_presence = ENUM(name='presence', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'Presence')))
+    M3AP_PROTOCOL_IES = CLASS(name=u'M3AP-PROTOCOL-IES', mode=MODE_TYPE)
+    _M3AP_PROTOCOL_IES_id = INT(name=u'id', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
+    _M3AP_PROTOCOL_IES_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'Criticality')))
+    _M3AP_PROTOCOL_IES_Value = OPEN(name=u'Value', mode=MODE_TYPE)
+    _M3AP_PROTOCOL_IES_presence = ENUM(name=u'presence', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'Presence')))
     M3AP_PROTOCOL_IES._cont = ASN1Dict([
-        ('id', _M3AP_PROTOCOL_IES_id),
-        ('criticality', _M3AP_PROTOCOL_IES_criticality),
-        ('Value', _M3AP_PROTOCOL_IES_Value),
-        ('presence', _M3AP_PROTOCOL_IES_presence),
+        (u'id', _M3AP_PROTOCOL_IES_id),
+        (u'criticality', _M3AP_PROTOCOL_IES_criticality),
+        (u'Value', _M3AP_PROTOCOL_IES_Value),
+        (u'presence', _M3AP_PROTOCOL_IES_presence),
         ])
     
     #-----< M3AP-PROTOCOL-IES-PAIR >-----#
-    M3AP_PROTOCOL_IES_PAIR = CLASS(name='M3AP-PROTOCOL-IES-PAIR', mode=MODE_TYPE)
-    _M3AP_PROTOCOL_IES_PAIR_id = INT(name='id', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
-    _M3AP_PROTOCOL_IES_PAIR_firstCriticality = ENUM(name='firstCriticality', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'Criticality')))
-    _M3AP_PROTOCOL_IES_PAIR_FirstValue = OPEN(name='FirstValue', mode=MODE_TYPE)
-    _M3AP_PROTOCOL_IES_PAIR_secondCriticality = ENUM(name='secondCriticality', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'Criticality')))
-    _M3AP_PROTOCOL_IES_PAIR_SecondValue = OPEN(name='SecondValue', mode=MODE_TYPE)
-    _M3AP_PROTOCOL_IES_PAIR_presence = ENUM(name='presence', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'Presence')))
+    M3AP_PROTOCOL_IES_PAIR = CLASS(name=u'M3AP-PROTOCOL-IES-PAIR', mode=MODE_TYPE)
+    _M3AP_PROTOCOL_IES_PAIR_id = INT(name=u'id', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
+    _M3AP_PROTOCOL_IES_PAIR_firstCriticality = ENUM(name=u'firstCriticality', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'Criticality')))
+    _M3AP_PROTOCOL_IES_PAIR_FirstValue = OPEN(name=u'FirstValue', mode=MODE_TYPE)
+    _M3AP_PROTOCOL_IES_PAIR_secondCriticality = ENUM(name=u'secondCriticality', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'Criticality')))
+    _M3AP_PROTOCOL_IES_PAIR_SecondValue = OPEN(name=u'SecondValue', mode=MODE_TYPE)
+    _M3AP_PROTOCOL_IES_PAIR_presence = ENUM(name=u'presence', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'Presence')))
     M3AP_PROTOCOL_IES_PAIR._cont = ASN1Dict([
-        ('id', _M3AP_PROTOCOL_IES_PAIR_id),
-        ('firstCriticality', _M3AP_PROTOCOL_IES_PAIR_firstCriticality),
-        ('FirstValue', _M3AP_PROTOCOL_IES_PAIR_FirstValue),
-        ('secondCriticality', _M3AP_PROTOCOL_IES_PAIR_secondCriticality),
-        ('SecondValue', _M3AP_PROTOCOL_IES_PAIR_SecondValue),
-        ('presence', _M3AP_PROTOCOL_IES_PAIR_presence),
+        (u'id', _M3AP_PROTOCOL_IES_PAIR_id),
+        (u'firstCriticality', _M3AP_PROTOCOL_IES_PAIR_firstCriticality),
+        (u'FirstValue', _M3AP_PROTOCOL_IES_PAIR_FirstValue),
+        (u'secondCriticality', _M3AP_PROTOCOL_IES_PAIR_secondCriticality),
+        (u'SecondValue', _M3AP_PROTOCOL_IES_PAIR_SecondValue),
+        (u'presence', _M3AP_PROTOCOL_IES_PAIR_presence),
         ])
     
     #-----< M3AP-PROTOCOL-EXTENSION >-----#
-    M3AP_PROTOCOL_EXTENSION = CLASS(name='M3AP-PROTOCOL-EXTENSION', mode=MODE_TYPE)
-    _M3AP_PROTOCOL_EXTENSION_id = INT(name='id', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
-    _M3AP_PROTOCOL_EXTENSION_criticality = ENUM(name='criticality', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'Criticality')))
-    _M3AP_PROTOCOL_EXTENSION_Extension = OPEN(name='Extension', mode=MODE_TYPE)
-    _M3AP_PROTOCOL_EXTENSION_presence = ENUM(name='presence', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'Presence')))
+    M3AP_PROTOCOL_EXTENSION = CLASS(name=u'M3AP-PROTOCOL-EXTENSION', mode=MODE_TYPE)
+    _M3AP_PROTOCOL_EXTENSION_id = INT(name=u'id', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')), uniq=True)
+    _M3AP_PROTOCOL_EXTENSION_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'Criticality')))
+    _M3AP_PROTOCOL_EXTENSION_Extension = OPEN(name=u'Extension', mode=MODE_TYPE)
+    _M3AP_PROTOCOL_EXTENSION_presence = ENUM(name=u'presence', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'Presence')))
     M3AP_PROTOCOL_EXTENSION._cont = ASN1Dict([
-        ('id', _M3AP_PROTOCOL_EXTENSION_id),
-        ('criticality', _M3AP_PROTOCOL_EXTENSION_criticality),
-        ('Extension', _M3AP_PROTOCOL_EXTENSION_Extension),
-        ('presence', _M3AP_PROTOCOL_EXTENSION_presence),
+        (u'id', _M3AP_PROTOCOL_EXTENSION_id),
+        (u'criticality', _M3AP_PROTOCOL_EXTENSION_criticality),
+        (u'Extension', _M3AP_PROTOCOL_EXTENSION_Extension),
+        (u'presence', _M3AP_PROTOCOL_EXTENSION_presence),
         ])
     
     #-----< M3AP-PRIVATE-IES >-----#
-    M3AP_PRIVATE_IES = CLASS(name='M3AP-PRIVATE-IES', mode=MODE_TYPE)
-    _M3AP_PRIVATE_IES_id = CHOICE(name='id', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'PrivateIE-ID')))
-    _M3AP_PRIVATE_IES_criticality = ENUM(name='criticality', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'Criticality')))
-    _M3AP_PRIVATE_IES_Value = OPEN(name='Value', mode=MODE_TYPE)
-    _M3AP_PRIVATE_IES_presence = ENUM(name='presence', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'Presence')))
+    M3AP_PRIVATE_IES = CLASS(name=u'M3AP-PRIVATE-IES', mode=MODE_TYPE)
+    _M3AP_PRIVATE_IES_id = CHOICE(name=u'id', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'PrivateIE-ID')))
+    _M3AP_PRIVATE_IES_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'Criticality')))
+    _M3AP_PRIVATE_IES_Value = OPEN(name=u'Value', mode=MODE_TYPE)
+    _M3AP_PRIVATE_IES_presence = ENUM(name=u'presence', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'Presence')))
     M3AP_PRIVATE_IES._cont = ASN1Dict([
-        ('id', _M3AP_PRIVATE_IES_id),
-        ('criticality', _M3AP_PRIVATE_IES_criticality),
-        ('Value', _M3AP_PRIVATE_IES_Value),
-        ('presence', _M3AP_PRIVATE_IES_presence),
+        (u'id', _M3AP_PRIVATE_IES_id),
+        (u'criticality', _M3AP_PRIVATE_IES_criticality),
+        (u'Value', _M3AP_PRIVATE_IES_Value),
+        (u'presence', _M3AP_PRIVATE_IES_presence),
         ])
     
     #-----< ProtocolIE-Container >-----#
-    ProtocolIE_Container = SEQ_OF(name='ProtocolIE-Container', mode=MODE_TYPE, param=True)
+    ProtocolIE_Container = SEQ_OF(name=u'ProtocolIE-Container', mode=MODE_TYPE, param=True)
     
     #-----< ProtocolIE-Single-Container >-----#
-    ProtocolIE_Single_Container = SEQ(name='ProtocolIE-Single-Container', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Field')), param=True)
+    ProtocolIE_Single_Container = SEQ(name=u'ProtocolIE-Single-Container', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Field')), param=True)
     
     #-----< ProtocolIE-Field >-----#
-    ProtocolIE_Field = SEQ(name='ProtocolIE-Field', mode=MODE_TYPE, param=True)
+    ProtocolIE_Field = SEQ(name=u'ProtocolIE-Field', mode=MODE_TYPE, param=True)
     
     #-----< ProtocolIE-ContainerPair >-----#
-    ProtocolIE_ContainerPair = SEQ_OF(name='ProtocolIE-ContainerPair', mode=MODE_TYPE, param=True)
+    ProtocolIE_ContainerPair = SEQ_OF(name=u'ProtocolIE-ContainerPair', mode=MODE_TYPE, param=True)
     
     #-----< ProtocolIE-FieldPair >-----#
-    ProtocolIE_FieldPair = SEQ(name='ProtocolIE-FieldPair', mode=MODE_TYPE, param=True)
+    ProtocolIE_FieldPair = SEQ(name=u'ProtocolIE-FieldPair', mode=MODE_TYPE, param=True)
     
     #-----< ProtocolIE-ContainerList >-----#
-    ProtocolIE_ContainerList = SEQ_OF(name='ProtocolIE-ContainerList', mode=MODE_TYPE, param=True)
+    ProtocolIE_ContainerList = SEQ_OF(name=u'ProtocolIE-ContainerList', mode=MODE_TYPE, param=True)
     
     #-----< ProtocolIE-ContainerPairList >-----#
-    ProtocolIE_ContainerPairList = SEQ_OF(name='ProtocolIE-ContainerPairList', mode=MODE_TYPE, param=True)
+    ProtocolIE_ContainerPairList = SEQ_OF(name=u'ProtocolIE-ContainerPairList', mode=MODE_TYPE, param=True)
     
     #-----< ProtocolExtensionContainer >-----#
-    ProtocolExtensionContainer = SEQ_OF(name='ProtocolExtensionContainer', mode=MODE_TYPE, param=True)
+    ProtocolExtensionContainer = SEQ_OF(name=u'ProtocolExtensionContainer', mode=MODE_TYPE, param=True)
     
     #-----< ProtocolExtensionField >-----#
-    ProtocolExtensionField = SEQ(name='ProtocolExtensionField', mode=MODE_TYPE, param=True)
+    ProtocolExtensionField = SEQ(name=u'ProtocolExtensionField', mode=MODE_TYPE, param=True)
     
     #-----< PrivateIE-Container >-----#
-    PrivateIE_Container = SEQ_OF(name='PrivateIE-Container', mode=MODE_TYPE, param=True)
+    PrivateIE_Container = SEQ_OF(name=u'PrivateIE-Container', mode=MODE_TYPE, param=True)
     
     #-----< PrivateIE-Field >-----#
-    PrivateIE_Field = SEQ(name='PrivateIE-Field', mode=MODE_TYPE, param=True)
+    PrivateIE_Field = SEQ(name=u'PrivateIE-Field', mode=MODE_TYPE, param=True)
     
     _all_ = [
         _M3AP_PROTOCOL_IES_id,
@@ -576,718 +576,718 @@ class M3AP_Containers:
 
 class M3AP_IEs:
 
-    _name_  = 'M3AP-IEs'
+    _name_  = u'M3AP-IEs'
     _oid_   = [0, 4, 0, 0, 21, 3, 5, 1, 2]
     
     _obj_ = [
-        'Absolute-Time-ofMBMS-Data',
-        'AllocationAndRetentionPriority',
-        'AllocationAndRetentionPriority-ExtIEs',
-        'BitRate',
-        'Cause',
-        'CauseMisc',
-        'CauseNAS',
-        'CauseProtocol',
-        'CauseRadioNetwork',
-        'CauseTransport',
-        'CriticalityDiagnostics',
-        'CriticalityDiagnostics-ExtIEs',
-        'CriticalityDiagnostics-IE-List',
-        'CriticalityDiagnostics-IE-List-ExtIEs',
-        'ECGI',
-        'ECGI-ExtIEs',
-        'EUTRANCellIdentifier',
-        'ExtendedMCE-ID',
-        'Global-MCE-ID',
-        'GlobalMCE-ID-ExtIEs',
-        'GBR-QosInformation',
-        'GBR-QosInformation-ExtIEs',
-        'GTP-TEID',
-        'IPAddress',
-        'MBMS-Cell-List',
-        'MBMS-E-RAB-QoS-Parameters',
-        'MBMS-E-RAB-QoS-Parameters-ExtIEs',
-        'MBMS-Service-associatedLogicalM3-ConnectionItem',
-        'MBMS-Service-associatedLogicalM3-ConnectionItemExtIEs',
-        'MBMSServiceArea1',
-        'MBMS-Service-Area',
-        'MBMS-Session-Duration',
-        'MBMS-Session-ID',
-        'MCE-MBMS-M3AP-ID',
-        'MCE-ID',
-        'MCEname',
-        'MinimumTimeToMBMSDataTransfer',
-        'MME-MBMS-M3AP-ID',
-        'Pre-emptionCapability',
-        'Pre-emptionVulnerability',
-        'PriorityLevel',
-        'PLMN-Identity',
-        'QCI',
-        'Reestablishment',
-        'TimeToWait',
-        'TMGI',
-        'TMGI-ExtIEs',
-        'TNL-Information',
-        'TNL-Information-ExtIEs',
-        'TypeOfError',
+        u'Absolute-Time-ofMBMS-Data',
+        u'AllocationAndRetentionPriority',
+        u'AllocationAndRetentionPriority-ExtIEs',
+        u'BitRate',
+        u'Cause',
+        u'CauseMisc',
+        u'CauseNAS',
+        u'CauseProtocol',
+        u'CauseRadioNetwork',
+        u'CauseTransport',
+        u'CriticalityDiagnostics',
+        u'CriticalityDiagnostics-ExtIEs',
+        u'CriticalityDiagnostics-IE-List',
+        u'CriticalityDiagnostics-IE-List-ExtIEs',
+        u'ECGI',
+        u'ECGI-ExtIEs',
+        u'EUTRANCellIdentifier',
+        u'ExtendedMCE-ID',
+        u'Global-MCE-ID',
+        u'GlobalMCE-ID-ExtIEs',
+        u'GBR-QosInformation',
+        u'GBR-QosInformation-ExtIEs',
+        u'GTP-TEID',
+        u'IPAddress',
+        u'MBMS-Cell-List',
+        u'MBMS-E-RAB-QoS-Parameters',
+        u'MBMS-E-RAB-QoS-Parameters-ExtIEs',
+        u'MBMS-Service-associatedLogicalM3-ConnectionItem',
+        u'MBMS-Service-associatedLogicalM3-ConnectionItemExtIEs',
+        u'MBMSServiceArea1',
+        u'MBMS-Service-Area',
+        u'MBMS-Session-Duration',
+        u'MBMS-Session-ID',
+        u'MCE-MBMS-M3AP-ID',
+        u'MCE-ID',
+        u'MCEname',
+        u'MinimumTimeToMBMSDataTransfer',
+        u'MME-MBMS-M3AP-ID',
+        u'Pre-emptionCapability',
+        u'Pre-emptionVulnerability',
+        u'PriorityLevel',
+        u'PLMN-Identity',
+        u'QCI',
+        u'Reestablishment',
+        u'TimeToWait',
+        u'TMGI',
+        u'TMGI-ExtIEs',
+        u'TNL-Information',
+        u'TNL-Information-ExtIEs',
+        u'TypeOfError',
         ]
     _type_ = [
-        'Absolute-Time-ofMBMS-Data',
-        'AllocationAndRetentionPriority',
-        'BitRate',
-        'Cause',
-        'CauseMisc',
-        'CauseNAS',
-        'CauseProtocol',
-        'CauseRadioNetwork',
-        'CauseTransport',
-        'CriticalityDiagnostics',
-        'CriticalityDiagnostics-IE-List',
-        'ECGI',
-        'EUTRANCellIdentifier',
-        'ExtendedMCE-ID',
-        'Global-MCE-ID',
-        'GBR-QosInformation',
-        'GTP-TEID',
-        'IPAddress',
-        'MBMS-Cell-List',
-        'MBMS-E-RAB-QoS-Parameters',
-        'MBMS-Service-associatedLogicalM3-ConnectionItem',
-        'MBMSServiceArea1',
-        'MBMS-Service-Area',
-        'MBMS-Session-Duration',
-        'MBMS-Session-ID',
-        'MCE-MBMS-M3AP-ID',
-        'MCE-ID',
-        'MCEname',
-        'MinimumTimeToMBMSDataTransfer',
-        'MME-MBMS-M3AP-ID',
-        'Pre-emptionCapability',
-        'Pre-emptionVulnerability',
-        'PriorityLevel',
-        'PLMN-Identity',
-        'QCI',
-        'Reestablishment',
-        'TimeToWait',
-        'TMGI',
-        'TNL-Information',
-        'TypeOfError',
+        u'Absolute-Time-ofMBMS-Data',
+        u'AllocationAndRetentionPriority',
+        u'BitRate',
+        u'Cause',
+        u'CauseMisc',
+        u'CauseNAS',
+        u'CauseProtocol',
+        u'CauseRadioNetwork',
+        u'CauseTransport',
+        u'CriticalityDiagnostics',
+        u'CriticalityDiagnostics-IE-List',
+        u'ECGI',
+        u'EUTRANCellIdentifier',
+        u'ExtendedMCE-ID',
+        u'Global-MCE-ID',
+        u'GBR-QosInformation',
+        u'GTP-TEID',
+        u'IPAddress',
+        u'MBMS-Cell-List',
+        u'MBMS-E-RAB-QoS-Parameters',
+        u'MBMS-Service-associatedLogicalM3-ConnectionItem',
+        u'MBMSServiceArea1',
+        u'MBMS-Service-Area',
+        u'MBMS-Session-Duration',
+        u'MBMS-Session-ID',
+        u'MCE-MBMS-M3AP-ID',
+        u'MCE-ID',
+        u'MCEname',
+        u'MinimumTimeToMBMSDataTransfer',
+        u'MME-MBMS-M3AP-ID',
+        u'Pre-emptionCapability',
+        u'Pre-emptionVulnerability',
+        u'PriorityLevel',
+        u'PLMN-Identity',
+        u'QCI',
+        u'Reestablishment',
+        u'TimeToWait',
+        u'TMGI',
+        u'TNL-Information',
+        u'TypeOfError',
         ]
     _set_ = [
-        'AllocationAndRetentionPriority-ExtIEs',
-        'CriticalityDiagnostics-ExtIEs',
-        'CriticalityDiagnostics-IE-List-ExtIEs',
-        'ECGI-ExtIEs',
-        'GlobalMCE-ID-ExtIEs',
-        'GBR-QosInformation-ExtIEs',
-        'MBMS-E-RAB-QoS-Parameters-ExtIEs',
-        'MBMS-Service-associatedLogicalM3-ConnectionItemExtIEs',
-        'TMGI-ExtIEs',
-        'TNL-Information-ExtIEs',
+        u'AllocationAndRetentionPriority-ExtIEs',
+        u'CriticalityDiagnostics-ExtIEs',
+        u'CriticalityDiagnostics-IE-List-ExtIEs',
+        u'ECGI-ExtIEs',
+        u'GlobalMCE-ID-ExtIEs',
+        u'GBR-QosInformation-ExtIEs',
+        u'MBMS-E-RAB-QoS-Parameters-ExtIEs',
+        u'MBMS-Service-associatedLogicalM3-ConnectionItemExtIEs',
+        u'TMGI-ExtIEs',
+        u'TNL-Information-ExtIEs',
         ]
     _val_ = [
         ]
     _class_ = [
-        'AllocationAndRetentionPriority-ExtIEs',
-        'CriticalityDiagnostics-ExtIEs',
-        'CriticalityDiagnostics-IE-List-ExtIEs',
-        'ECGI-ExtIEs',
-        'GlobalMCE-ID-ExtIEs',
-        'GBR-QosInformation-ExtIEs',
-        'MBMS-E-RAB-QoS-Parameters-ExtIEs',
-        'MBMS-Service-associatedLogicalM3-ConnectionItemExtIEs',
-        'TMGI-ExtIEs',
-        'TNL-Information-ExtIEs',
+        u'AllocationAndRetentionPriority-ExtIEs',
+        u'CriticalityDiagnostics-ExtIEs',
+        u'CriticalityDiagnostics-IE-List-ExtIEs',
+        u'ECGI-ExtIEs',
+        u'GlobalMCE-ID-ExtIEs',
+        u'GBR-QosInformation-ExtIEs',
+        u'MBMS-E-RAB-QoS-Parameters-ExtIEs',
+        u'MBMS-Service-associatedLogicalM3-ConnectionItemExtIEs',
+        u'TMGI-ExtIEs',
+        u'TNL-Information-ExtIEs',
         ]
     _param_ = [
         ]
     
     #-----< Absolute-Time-ofMBMS-Data >-----#
-    Absolute_Time_ofMBMS_Data = BIT_STR(name='Absolute-Time-ofMBMS-Data', mode=MODE_TYPE)
+    Absolute_Time_ofMBMS_Data = BIT_STR(name=u'Absolute-Time-ofMBMS-Data', mode=MODE_TYPE)
     Absolute_Time_ofMBMS_Data._const_sz = ASN1Set(rv=[64], rr=[], ev=None, er=[])
     
     #-----< AllocationAndRetentionPriority >-----#
-    AllocationAndRetentionPriority = SEQ(name='AllocationAndRetentionPriority', mode=MODE_TYPE)
-    _AllocationAndRetentionPriority_priorityLevel = INT(name='priorityLevel', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'PriorityLevel')))
-    _AllocationAndRetentionPriority_pre_emptionCapability = ENUM(name='pre-emptionCapability', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'Pre-emptionCapability')))
-    _AllocationAndRetentionPriority_pre_emptionVulnerability = ENUM(name='pre-emptionVulnerability', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'Pre-emptionVulnerability')))
-    _AllocationAndRetentionPriority_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    AllocationAndRetentionPriority = SEQ(name=u'AllocationAndRetentionPriority', mode=MODE_TYPE)
+    _AllocationAndRetentionPriority_priorityLevel = INT(name=u'priorityLevel', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'PriorityLevel')))
+    _AllocationAndRetentionPriority_pre_emptionCapability = ENUM(name=u'pre-emptionCapability', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'Pre-emptionCapability')))
+    _AllocationAndRetentionPriority_pre_emptionVulnerability = ENUM(name=u'pre-emptionVulnerability', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'Pre-emptionVulnerability')))
+    _AllocationAndRetentionPriority_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __AllocationAndRetentionPriority_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionField')))
-    ___AllocationAndRetentionPriority_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['id']))
+    ___AllocationAndRetentionPriority_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'id']))
     ____AllocationAndRetentionPriority_iE_Extensions__item__id_tab = CLASS(name='_tab_M3AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     ____AllocationAndRetentionPriority_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___AllocationAndRetentionPriority_iE_Extensions__item__id._const_tab = ____AllocationAndRetentionPriority_iE_Extensions__item__id_tab
     ___AllocationAndRetentionPriority_iE_Extensions__item__id._const_tab_at = None
-    ___AllocationAndRetentionPriority_iE_Extensions__item__id._const_tab_id = 'id'
-    ___AllocationAndRetentionPriority_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___AllocationAndRetentionPriority_iE_Extensions__item__id._const_tab_id = u'id'
+    ___AllocationAndRetentionPriority_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____AllocationAndRetentionPriority_iE_Extensions__item__criticality_tab = CLASS(name='_tab_M3AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     ____AllocationAndRetentionPriority_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___AllocationAndRetentionPriority_iE_Extensions__item__criticality._const_tab = ____AllocationAndRetentionPriority_iE_Extensions__item__criticality_tab
-    ___AllocationAndRetentionPriority_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___AllocationAndRetentionPriority_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___AllocationAndRetentionPriority_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___AllocationAndRetentionPriority_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___AllocationAndRetentionPriority_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___AllocationAndRetentionPriority_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____AllocationAndRetentionPriority_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_M3AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     ____AllocationAndRetentionPriority_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___AllocationAndRetentionPriority_iE_Extensions__item__extensionValue._const_tab = ____AllocationAndRetentionPriority_iE_Extensions__item__extensionValue_tab
-    ___AllocationAndRetentionPriority_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___AllocationAndRetentionPriority_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___AllocationAndRetentionPriority_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___AllocationAndRetentionPriority_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __AllocationAndRetentionPriority_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___AllocationAndRetentionPriority_iE_Extensions__item__id),
-        ('criticality', ___AllocationAndRetentionPriority_iE_Extensions__item__criticality),
-        ('extensionValue', ___AllocationAndRetentionPriority_iE_Extensions__item__extensionValue),
+        (u'id', ___AllocationAndRetentionPriority_iE_Extensions__item__id),
+        (u'criticality', ___AllocationAndRetentionPriority_iE_Extensions__item__criticality),
+        (u'extensionValue', ___AllocationAndRetentionPriority_iE_Extensions__item__extensionValue),
         ])
     __AllocationAndRetentionPriority_iE_Extensions__item_._ext = None
     _AllocationAndRetentionPriority_iE_Extensions._cont = __AllocationAndRetentionPriority_iE_Extensions__item_
     _AllocationAndRetentionPriority_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     AllocationAndRetentionPriority._cont = ASN1Dict([
-        ('priorityLevel', _AllocationAndRetentionPriority_priorityLevel),
-        ('pre-emptionCapability', _AllocationAndRetentionPriority_pre_emptionCapability),
-        ('pre-emptionVulnerability', _AllocationAndRetentionPriority_pre_emptionVulnerability),
-        ('iE-Extensions', _AllocationAndRetentionPriority_iE_Extensions),
+        (u'priorityLevel', _AllocationAndRetentionPriority_priorityLevel),
+        (u'pre-emptionCapability', _AllocationAndRetentionPriority_pre_emptionCapability),
+        (u'pre-emptionVulnerability', _AllocationAndRetentionPriority_pre_emptionVulnerability),
+        (u'iE-Extensions', _AllocationAndRetentionPriority_iE_Extensions),
         ])
     AllocationAndRetentionPriority._ext = None
     
     #-----< AllocationAndRetentionPriority-ExtIEs >-----#
-    AllocationAndRetentionPriority_ExtIEs = CLASS(name='AllocationAndRetentionPriority-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
+    AllocationAndRetentionPriority_ExtIEs = CLASS(name=u'AllocationAndRetentionPriority-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     AllocationAndRetentionPriority_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< BitRate >-----#
-    BitRate = INT(name='BitRate', mode=MODE_TYPE)
+    BitRate = INT(name=u'BitRate', mode=MODE_TYPE)
     BitRate._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=10000000000)], ev=None, er=[])
     
     #-----< Cause >-----#
-    Cause = CHOICE(name='Cause', mode=MODE_TYPE)
-    _Cause_radioNetwork = ENUM(name='radioNetwork', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'CauseRadioNetwork')))
-    _Cause_transport = ENUM(name='transport', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'CauseTransport')))
-    _Cause_nAS = ENUM(name='nAS', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'CauseNAS')))
-    _Cause_protocol = ENUM(name='protocol', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'CauseProtocol')))
-    _Cause_misc = ENUM(name='misc', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'CauseMisc')))
+    Cause = CHOICE(name=u'Cause', mode=MODE_TYPE)
+    _Cause_radioNetwork = ENUM(name=u'radioNetwork', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'CauseRadioNetwork')))
+    _Cause_transport = ENUM(name=u'transport', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'CauseTransport')))
+    _Cause_nAS = ENUM(name=u'nAS', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'CauseNAS')))
+    _Cause_protocol = ENUM(name=u'protocol', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'CauseProtocol')))
+    _Cause_misc = ENUM(name=u'misc', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'CauseMisc')))
     Cause._cont = ASN1Dict([
-        ('radioNetwork', _Cause_radioNetwork),
-        ('transport', _Cause_transport),
-        ('nAS', _Cause_nAS),
-        ('protocol', _Cause_protocol),
-        ('misc', _Cause_misc),
+        (u'radioNetwork', _Cause_radioNetwork),
+        (u'transport', _Cause_transport),
+        (u'nAS', _Cause_nAS),
+        (u'protocol', _Cause_protocol),
+        (u'misc', _Cause_misc),
         ])
     Cause._ext = []
     
     #-----< CauseMisc >-----#
-    CauseMisc = ENUM(name='CauseMisc', mode=MODE_TYPE)
-    CauseMisc._cont = ASN1Dict([('control-processing-overload', 0), ('not-enough-user-plane-processing-resources', 1), ('hardware-failure', 2), ('om-intervention', 3), ('unspecified', 4)])
+    CauseMisc = ENUM(name=u'CauseMisc', mode=MODE_TYPE)
+    CauseMisc._cont = ASN1Dict([(u'control-processing-overload', 0), (u'not-enough-user-plane-processing-resources', 1), (u'hardware-failure', 2), (u'om-intervention', 3), (u'unspecified', 4)])
     CauseMisc._ext = []
     
     #-----< CauseNAS >-----#
-    CauseNAS = ENUM(name='CauseNAS', mode=MODE_TYPE)
-    CauseNAS._cont = ASN1Dict([('unspecified', 0)])
+    CauseNAS = ENUM(name=u'CauseNAS', mode=MODE_TYPE)
+    CauseNAS._cont = ASN1Dict([(u'unspecified', 0)])
     CauseNAS._ext = []
     
     #-----< CauseProtocol >-----#
-    CauseProtocol = ENUM(name='CauseProtocol', mode=MODE_TYPE)
-    CauseProtocol._cont = ASN1Dict([('transfer-syntax-error', 0), ('abstract-syntax-error-reject', 1), ('abstract-syntax-error-ignore-and-notify', 2), ('message-not-compatible-with-receiver-state', 3), ('semantic-error', 4), ('abstract-syntax-error-falsely-constructed-message', 5), ('unspecified', 6)])
+    CauseProtocol = ENUM(name=u'CauseProtocol', mode=MODE_TYPE)
+    CauseProtocol._cont = ASN1Dict([(u'transfer-syntax-error', 0), (u'abstract-syntax-error-reject', 1), (u'abstract-syntax-error-ignore-and-notify', 2), (u'message-not-compatible-with-receiver-state', 3), (u'semantic-error', 4), (u'abstract-syntax-error-falsely-constructed-message', 5), (u'unspecified', 6)])
     CauseProtocol._ext = []
     
     #-----< CauseRadioNetwork >-----#
-    CauseRadioNetwork = ENUM(name='CauseRadioNetwork', mode=MODE_TYPE)
-    CauseRadioNetwork._cont = ASN1Dict([('unknown-or-already-allocated-MME-MBMS-M3AP-ID', 0), ('unknown-or-already-allocated-MCE-MBMS-M3AP-ID', 1), ('unknown-or-inconsistent-pair-of-MBMS-M3AP-IDs', 2), ('radio-resources-not-available', 3), ('invalid-QoS-combination', 4), ('interaction-with-other-procedure', 5), ('not-supported-QCI-value', 6), ('unspecified', 7), ('uninvolved-MCE', 8)])
-    CauseRadioNetwork._ext = ['uninvolved-MCE']
+    CauseRadioNetwork = ENUM(name=u'CauseRadioNetwork', mode=MODE_TYPE)
+    CauseRadioNetwork._cont = ASN1Dict([(u'unknown-or-already-allocated-MME-MBMS-M3AP-ID', 0), (u'unknown-or-already-allocated-MCE-MBMS-M3AP-ID', 1), (u'unknown-or-inconsistent-pair-of-MBMS-M3AP-IDs', 2), (u'radio-resources-not-available', 3), (u'invalid-QoS-combination', 4), (u'interaction-with-other-procedure', 5), (u'not-supported-QCI-value', 6), (u'unspecified', 7), (u'uninvolved-MCE', 8)])
+    CauseRadioNetwork._ext = [u'uninvolved-MCE']
     
     #-----< CauseTransport >-----#
-    CauseTransport = ENUM(name='CauseTransport', mode=MODE_TYPE)
-    CauseTransport._cont = ASN1Dict([('transport-resource-unavailable', 0), ('unspecified', 1)])
+    CauseTransport = ENUM(name=u'CauseTransport', mode=MODE_TYPE)
+    CauseTransport._cont = ASN1Dict([(u'transport-resource-unavailable', 0), (u'unspecified', 1)])
     CauseTransport._ext = []
     
     #-----< CriticalityDiagnostics >-----#
-    CriticalityDiagnostics = SEQ(name='CriticalityDiagnostics', mode=MODE_TYPE)
-    _CriticalityDiagnostics_procedureCode = INT(name='procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProcedureCode')), opt=True)
-    _CriticalityDiagnostics_triggeringMessage = ENUM(name='triggeringMessage', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-CommonDataTypes', 'TriggeringMessage')), opt=True)
-    _CriticalityDiagnostics_procedureCriticality = ENUM(name='procedureCriticality', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-CommonDataTypes', 'Criticality')), opt=True)
-    _CriticalityDiagnostics_iEsCriticalityDiagnostics = SEQ_OF(name='iEsCriticalityDiagnostics', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics-IE-List')), opt=True)
-    _CriticalityDiagnostics_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    CriticalityDiagnostics = SEQ(name=u'CriticalityDiagnostics', mode=MODE_TYPE)
+    _CriticalityDiagnostics_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProcedureCode')), opt=True)
+    _CriticalityDiagnostics_triggeringMessage = ENUM(name=u'triggeringMessage', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-CommonDataTypes', 'TriggeringMessage')), opt=True)
+    _CriticalityDiagnostics_procedureCriticality = ENUM(name=u'procedureCriticality', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-CommonDataTypes', 'Criticality')), opt=True)
+    _CriticalityDiagnostics_iEsCriticalityDiagnostics = SEQ_OF(name=u'iEsCriticalityDiagnostics', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics-IE-List')), opt=True)
+    _CriticalityDiagnostics_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(4, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __CriticalityDiagnostics_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionField')))
-    ___CriticalityDiagnostics_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['id']))
+    ___CriticalityDiagnostics_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'id']))
     ____CriticalityDiagnostics_iE_Extensions__item__id_tab = CLASS(name='_tab_M3AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     ____CriticalityDiagnostics_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__id_tab
     ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab_at = None
-    ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab_id = 'id'
-    ___CriticalityDiagnostics_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___CriticalityDiagnostics_iE_Extensions__item__id._const_tab_id = u'id'
+    ___CriticalityDiagnostics_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab = CLASS(name='_tab_M3AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__criticality_tab
-    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___CriticalityDiagnostics_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_M3AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab = ____CriticalityDiagnostics_iE_Extensions__item__extensionValue_tab
-    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___CriticalityDiagnostics_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __CriticalityDiagnostics_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___CriticalityDiagnostics_iE_Extensions__item__id),
-        ('criticality', ___CriticalityDiagnostics_iE_Extensions__item__criticality),
-        ('extensionValue', ___CriticalityDiagnostics_iE_Extensions__item__extensionValue),
+        (u'id', ___CriticalityDiagnostics_iE_Extensions__item__id),
+        (u'criticality', ___CriticalityDiagnostics_iE_Extensions__item__criticality),
+        (u'extensionValue', ___CriticalityDiagnostics_iE_Extensions__item__extensionValue),
         ])
     __CriticalityDiagnostics_iE_Extensions__item_._ext = None
     _CriticalityDiagnostics_iE_Extensions._cont = __CriticalityDiagnostics_iE_Extensions__item_
     _CriticalityDiagnostics_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     CriticalityDiagnostics._cont = ASN1Dict([
-        ('procedureCode', _CriticalityDiagnostics_procedureCode),
-        ('triggeringMessage', _CriticalityDiagnostics_triggeringMessage),
-        ('procedureCriticality', _CriticalityDiagnostics_procedureCriticality),
-        ('iEsCriticalityDiagnostics', _CriticalityDiagnostics_iEsCriticalityDiagnostics),
-        ('iE-Extensions', _CriticalityDiagnostics_iE_Extensions),
+        (u'procedureCode', _CriticalityDiagnostics_procedureCode),
+        (u'triggeringMessage', _CriticalityDiagnostics_triggeringMessage),
+        (u'procedureCriticality', _CriticalityDiagnostics_procedureCriticality),
+        (u'iEsCriticalityDiagnostics', _CriticalityDiagnostics_iEsCriticalityDiagnostics),
+        (u'iE-Extensions', _CriticalityDiagnostics_iE_Extensions),
         ])
     CriticalityDiagnostics._ext = []
     
     #-----< CriticalityDiagnostics-ExtIEs >-----#
-    CriticalityDiagnostics_ExtIEs = CLASS(name='CriticalityDiagnostics-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
+    CriticalityDiagnostics_ExtIEs = CLASS(name=u'CriticalityDiagnostics-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     CriticalityDiagnostics_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< CriticalityDiagnostics-IE-List >-----#
-    CriticalityDiagnostics_IE_List = SEQ_OF(name='CriticalityDiagnostics-IE-List', mode=MODE_TYPE)
+    CriticalityDiagnostics_IE_List = SEQ_OF(name=u'CriticalityDiagnostics-IE-List', mode=MODE_TYPE)
     _CriticalityDiagnostics_IE_List__item_ = SEQ(name='_item_', mode=MODE_TYPE)
-    __CriticalityDiagnostics_IE_List__item__iECriticality = ENUM(name='iECriticality', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-CommonDataTypes', 'Criticality')))
-    __CriticalityDiagnostics_IE_List__item__iE_ID = INT(name='iE-ID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
-    __CriticalityDiagnostics_IE_List__item__typeOfError = ENUM(name='typeOfError', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'TypeOfError')))
-    __CriticalityDiagnostics_IE_List__item__iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    __CriticalityDiagnostics_IE_List__item__iECriticality = ENUM(name=u'iECriticality', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-CommonDataTypes', 'Criticality')))
+    __CriticalityDiagnostics_IE_List__item__iE_ID = INT(name=u'iE-ID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProtocolIE-ID')))
+    __CriticalityDiagnostics_IE_List__item__typeOfError = ENUM(name=u'typeOfError', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'TypeOfError')))
+    __CriticalityDiagnostics_IE_List__item__iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionContainer')), opt=True)
     ___CriticalityDiagnostics_IE_List__item__iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionField')))
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['id']))
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'id']))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id_tab = CLASS(name='_tab_M3AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id_tab
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id._const_tab_at = None
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id._const_tab_id = 'id'
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['criticality']))
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id._const_tab_id = u'id'
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'criticality']))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab = CLASS(name='_tab_M3AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality_tab
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['Extension']))
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'Extension']))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_M3AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab = _____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue_tab
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     ___CriticalityDiagnostics_IE_List__item__iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id),
-        ('criticality', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality),
-        ('extensionValue', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue),
+        (u'id', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__id),
+        (u'criticality', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__criticality),
+        (u'extensionValue', ____CriticalityDiagnostics_IE_List__item__iE_Extensions__item__extensionValue),
         ])
     ___CriticalityDiagnostics_IE_List__item__iE_Extensions__item_._ext = None
     __CriticalityDiagnostics_IE_List__item__iE_Extensions._cont = ___CriticalityDiagnostics_IE_List__item__iE_Extensions__item_
     __CriticalityDiagnostics_IE_List__item__iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     _CriticalityDiagnostics_IE_List__item_._cont = ASN1Dict([
-        ('iECriticality', __CriticalityDiagnostics_IE_List__item__iECriticality),
-        ('iE-ID', __CriticalityDiagnostics_IE_List__item__iE_ID),
-        ('typeOfError', __CriticalityDiagnostics_IE_List__item__typeOfError),
-        ('iE-Extensions', __CriticalityDiagnostics_IE_List__item__iE_Extensions),
+        (u'iECriticality', __CriticalityDiagnostics_IE_List__item__iECriticality),
+        (u'iE-ID', __CriticalityDiagnostics_IE_List__item__iE_ID),
+        (u'typeOfError', __CriticalityDiagnostics_IE_List__item__typeOfError),
+        (u'iE-Extensions', __CriticalityDiagnostics_IE_List__item__iE_Extensions),
         ])
     _CriticalityDiagnostics_IE_List__item_._ext = []
     CriticalityDiagnostics_IE_List._cont = _CriticalityDiagnostics_IE_List__item_
     CriticalityDiagnostics_IE_List._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=256)], ev=None, er=[])
     
     #-----< CriticalityDiagnostics-IE-List-ExtIEs >-----#
-    CriticalityDiagnostics_IE_List_ExtIEs = CLASS(name='CriticalityDiagnostics-IE-List-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
+    CriticalityDiagnostics_IE_List_ExtIEs = CLASS(name=u'CriticalityDiagnostics-IE-List-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     CriticalityDiagnostics_IE_List_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< ECGI >-----#
-    ECGI = SEQ(name='ECGI', mode=MODE_TYPE)
-    _ECGI_pLMN_Identity = OCT_STR(name='pLMN-Identity', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'PLMN-Identity')))
-    _ECGI_eUTRANcellIdentifier = BIT_STR(name='eUTRANcellIdentifier', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'EUTRANCellIdentifier')))
-    _ECGI_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    ECGI = SEQ(name=u'ECGI', mode=MODE_TYPE)
+    _ECGI_pLMN_Identity = OCT_STR(name=u'pLMN-Identity', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'PLMN-Identity')))
+    _ECGI_eUTRANcellIdentifier = BIT_STR(name=u'eUTRANcellIdentifier', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'EUTRANCellIdentifier')))
+    _ECGI_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __ECGI_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionField')))
-    ___ECGI_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['id']))
+    ___ECGI_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'id']))
     ____ECGI_iE_Extensions__item__id_tab = CLASS(name='_tab_M3AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     ____ECGI_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ECGI_iE_Extensions__item__id._const_tab = ____ECGI_iE_Extensions__item__id_tab
     ___ECGI_iE_Extensions__item__id._const_tab_at = None
-    ___ECGI_iE_Extensions__item__id._const_tab_id = 'id'
-    ___ECGI_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___ECGI_iE_Extensions__item__id._const_tab_id = u'id'
+    ___ECGI_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____ECGI_iE_Extensions__item__criticality_tab = CLASS(name='_tab_M3AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     ____ECGI_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ECGI_iE_Extensions__item__criticality._const_tab = ____ECGI_iE_Extensions__item__criticality_tab
-    ___ECGI_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___ECGI_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___ECGI_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___ECGI_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___ECGI_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___ECGI_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____ECGI_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_M3AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     ____ECGI_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___ECGI_iE_Extensions__item__extensionValue._const_tab = ____ECGI_iE_Extensions__item__extensionValue_tab
-    ___ECGI_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___ECGI_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___ECGI_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___ECGI_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __ECGI_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___ECGI_iE_Extensions__item__id),
-        ('criticality', ___ECGI_iE_Extensions__item__criticality),
-        ('extensionValue', ___ECGI_iE_Extensions__item__extensionValue),
+        (u'id', ___ECGI_iE_Extensions__item__id),
+        (u'criticality', ___ECGI_iE_Extensions__item__criticality),
+        (u'extensionValue', ___ECGI_iE_Extensions__item__extensionValue),
         ])
     __ECGI_iE_Extensions__item_._ext = None
     _ECGI_iE_Extensions._cont = __ECGI_iE_Extensions__item_
     _ECGI_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     ECGI._cont = ASN1Dict([
-        ('pLMN-Identity', _ECGI_pLMN_Identity),
-        ('eUTRANcellIdentifier', _ECGI_eUTRANcellIdentifier),
-        ('iE-Extensions', _ECGI_iE_Extensions),
+        (u'pLMN-Identity', _ECGI_pLMN_Identity),
+        (u'eUTRANcellIdentifier', _ECGI_eUTRANcellIdentifier),
+        (u'iE-Extensions', _ECGI_iE_Extensions),
         ])
     ECGI._ext = []
     
     #-----< ECGI-ExtIEs >-----#
-    ECGI_ExtIEs = CLASS(name='ECGI-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
+    ECGI_ExtIEs = CLASS(name=u'ECGI-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     ECGI_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< EUTRANCellIdentifier >-----#
-    EUTRANCellIdentifier = BIT_STR(name='EUTRANCellIdentifier', mode=MODE_TYPE)
+    EUTRANCellIdentifier = BIT_STR(name=u'EUTRANCellIdentifier', mode=MODE_TYPE)
     EUTRANCellIdentifier._const_sz = ASN1Set(rv=[28], rr=[], ev=None, er=[])
     
     #-----< ExtendedMCE-ID >-----#
-    ExtendedMCE_ID = OCT_STR(name='ExtendedMCE-ID', mode=MODE_TYPE)
+    ExtendedMCE_ID = OCT_STR(name=u'ExtendedMCE-ID', mode=MODE_TYPE)
     ExtendedMCE_ID._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
     
     #-----< Global-MCE-ID >-----#
-    Global_MCE_ID = SEQ(name='Global-MCE-ID', mode=MODE_TYPE)
-    _Global_MCE_ID_pLMN_Identity = OCT_STR(name='pLMN-Identity', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'PLMN-Identity')))
-    _Global_MCE_ID_mCE_ID = OCT_STR(name='mCE-ID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'MCE-ID')))
-    _Global_MCE_ID_extendedMCE_ID = OCT_STR(name='extendedMCE-ID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'ExtendedMCE-ID')), opt=True)
-    _Global_MCE_ID_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    Global_MCE_ID = SEQ(name=u'Global-MCE-ID', mode=MODE_TYPE)
+    _Global_MCE_ID_pLMN_Identity = OCT_STR(name=u'pLMN-Identity', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'PLMN-Identity')))
+    _Global_MCE_ID_mCE_ID = OCT_STR(name=u'mCE-ID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'MCE-ID')))
+    _Global_MCE_ID_extendedMCE_ID = OCT_STR(name=u'extendedMCE-ID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'ExtendedMCE-ID')), opt=True)
+    _Global_MCE_ID_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __Global_MCE_ID_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionField')))
-    ___Global_MCE_ID_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['id']))
+    ___Global_MCE_ID_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'id']))
     ____Global_MCE_ID_iE_Extensions__item__id_tab = CLASS(name='_tab_M3AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     ____Global_MCE_ID_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___Global_MCE_ID_iE_Extensions__item__id._const_tab = ____Global_MCE_ID_iE_Extensions__item__id_tab
     ___Global_MCE_ID_iE_Extensions__item__id._const_tab_at = None
-    ___Global_MCE_ID_iE_Extensions__item__id._const_tab_id = 'id'
-    ___Global_MCE_ID_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___Global_MCE_ID_iE_Extensions__item__id._const_tab_id = u'id'
+    ___Global_MCE_ID_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____Global_MCE_ID_iE_Extensions__item__criticality_tab = CLASS(name='_tab_M3AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     ____Global_MCE_ID_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___Global_MCE_ID_iE_Extensions__item__criticality._const_tab = ____Global_MCE_ID_iE_Extensions__item__criticality_tab
-    ___Global_MCE_ID_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___Global_MCE_ID_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___Global_MCE_ID_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___Global_MCE_ID_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___Global_MCE_ID_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___Global_MCE_ID_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____Global_MCE_ID_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_M3AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     ____Global_MCE_ID_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___Global_MCE_ID_iE_Extensions__item__extensionValue._const_tab = ____Global_MCE_ID_iE_Extensions__item__extensionValue_tab
-    ___Global_MCE_ID_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___Global_MCE_ID_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___Global_MCE_ID_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___Global_MCE_ID_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __Global_MCE_ID_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___Global_MCE_ID_iE_Extensions__item__id),
-        ('criticality', ___Global_MCE_ID_iE_Extensions__item__criticality),
-        ('extensionValue', ___Global_MCE_ID_iE_Extensions__item__extensionValue),
+        (u'id', ___Global_MCE_ID_iE_Extensions__item__id),
+        (u'criticality', ___Global_MCE_ID_iE_Extensions__item__criticality),
+        (u'extensionValue', ___Global_MCE_ID_iE_Extensions__item__extensionValue),
         ])
     __Global_MCE_ID_iE_Extensions__item_._ext = None
     _Global_MCE_ID_iE_Extensions._cont = __Global_MCE_ID_iE_Extensions__item_
     _Global_MCE_ID_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     Global_MCE_ID._cont = ASN1Dict([
-        ('pLMN-Identity', _Global_MCE_ID_pLMN_Identity),
-        ('mCE-ID', _Global_MCE_ID_mCE_ID),
-        ('extendedMCE-ID', _Global_MCE_ID_extendedMCE_ID),
-        ('iE-Extensions', _Global_MCE_ID_iE_Extensions),
+        (u'pLMN-Identity', _Global_MCE_ID_pLMN_Identity),
+        (u'mCE-ID', _Global_MCE_ID_mCE_ID),
+        (u'extendedMCE-ID', _Global_MCE_ID_extendedMCE_ID),
+        (u'iE-Extensions', _Global_MCE_ID_iE_Extensions),
         ])
     Global_MCE_ID._ext = []
     
     #-----< GlobalMCE-ID-ExtIEs >-----#
-    GlobalMCE_ID_ExtIEs = CLASS(name='GlobalMCE-ID-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
+    GlobalMCE_ID_ExtIEs = CLASS(name=u'GlobalMCE-ID-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     GlobalMCE_ID_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< GBR-QosInformation >-----#
-    GBR_QosInformation = SEQ(name='GBR-QosInformation', mode=MODE_TYPE)
-    _GBR_QosInformation_mBMS_E_RAB_MaximumBitrateDL = INT(name='mBMS-E-RAB-MaximumBitrateDL', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'BitRate')))
-    _GBR_QosInformation_mBMS_E_RAB_GuaranteedBitrateDL = INT(name='mBMS-E-RAB-GuaranteedBitrateDL', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'BitRate')))
-    _GBR_QosInformation_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    GBR_QosInformation = SEQ(name=u'GBR-QosInformation', mode=MODE_TYPE)
+    _GBR_QosInformation_mBMS_E_RAB_MaximumBitrateDL = INT(name=u'mBMS-E-RAB-MaximumBitrateDL', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'BitRate')))
+    _GBR_QosInformation_mBMS_E_RAB_GuaranteedBitrateDL = INT(name=u'mBMS-E-RAB-GuaranteedBitrateDL', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'BitRate')))
+    _GBR_QosInformation_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __GBR_QosInformation_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionField')))
-    ___GBR_QosInformation_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['id']))
+    ___GBR_QosInformation_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'id']))
     ____GBR_QosInformation_iE_Extensions__item__id_tab = CLASS(name='_tab_M3AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     ____GBR_QosInformation_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___GBR_QosInformation_iE_Extensions__item__id._const_tab = ____GBR_QosInformation_iE_Extensions__item__id_tab
     ___GBR_QosInformation_iE_Extensions__item__id._const_tab_at = None
-    ___GBR_QosInformation_iE_Extensions__item__id._const_tab_id = 'id'
-    ___GBR_QosInformation_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___GBR_QosInformation_iE_Extensions__item__id._const_tab_id = u'id'
+    ___GBR_QosInformation_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____GBR_QosInformation_iE_Extensions__item__criticality_tab = CLASS(name='_tab_M3AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     ____GBR_QosInformation_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___GBR_QosInformation_iE_Extensions__item__criticality._const_tab = ____GBR_QosInformation_iE_Extensions__item__criticality_tab
-    ___GBR_QosInformation_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___GBR_QosInformation_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___GBR_QosInformation_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___GBR_QosInformation_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___GBR_QosInformation_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___GBR_QosInformation_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____GBR_QosInformation_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_M3AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     ____GBR_QosInformation_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___GBR_QosInformation_iE_Extensions__item__extensionValue._const_tab = ____GBR_QosInformation_iE_Extensions__item__extensionValue_tab
-    ___GBR_QosInformation_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___GBR_QosInformation_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___GBR_QosInformation_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___GBR_QosInformation_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __GBR_QosInformation_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___GBR_QosInformation_iE_Extensions__item__id),
-        ('criticality', ___GBR_QosInformation_iE_Extensions__item__criticality),
-        ('extensionValue', ___GBR_QosInformation_iE_Extensions__item__extensionValue),
+        (u'id', ___GBR_QosInformation_iE_Extensions__item__id),
+        (u'criticality', ___GBR_QosInformation_iE_Extensions__item__criticality),
+        (u'extensionValue', ___GBR_QosInformation_iE_Extensions__item__extensionValue),
         ])
     __GBR_QosInformation_iE_Extensions__item_._ext = None
     _GBR_QosInformation_iE_Extensions._cont = __GBR_QosInformation_iE_Extensions__item_
     _GBR_QosInformation_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     GBR_QosInformation._cont = ASN1Dict([
-        ('mBMS-E-RAB-MaximumBitrateDL', _GBR_QosInformation_mBMS_E_RAB_MaximumBitrateDL),
-        ('mBMS-E-RAB-GuaranteedBitrateDL', _GBR_QosInformation_mBMS_E_RAB_GuaranteedBitrateDL),
-        ('iE-Extensions', _GBR_QosInformation_iE_Extensions),
+        (u'mBMS-E-RAB-MaximumBitrateDL', _GBR_QosInformation_mBMS_E_RAB_MaximumBitrateDL),
+        (u'mBMS-E-RAB-GuaranteedBitrateDL', _GBR_QosInformation_mBMS_E_RAB_GuaranteedBitrateDL),
+        (u'iE-Extensions', _GBR_QosInformation_iE_Extensions),
         ])
     GBR_QosInformation._ext = []
     
     #-----< GBR-QosInformation-ExtIEs >-----#
-    GBR_QosInformation_ExtIEs = CLASS(name='GBR-QosInformation-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
+    GBR_QosInformation_ExtIEs = CLASS(name=u'GBR-QosInformation-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     GBR_QosInformation_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< GTP-TEID >-----#
-    GTP_TEID = OCT_STR(name='GTP-TEID', mode=MODE_TYPE)
+    GTP_TEID = OCT_STR(name=u'GTP-TEID', mode=MODE_TYPE)
     GTP_TEID._const_sz = ASN1Set(rv=[4], rr=[], ev=None, er=[])
     
     #-----< IPAddress >-----#
-    IPAddress = OCT_STR(name='IPAddress', mode=MODE_TYPE)
+    IPAddress = OCT_STR(name=u'IPAddress', mode=MODE_TYPE)
     IPAddress._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=4, ub=16)], ev=[], er=[])
     
     #-----< MBMS-Cell-List >-----#
-    MBMS_Cell_List = SEQ_OF(name='MBMS-Cell-List', mode=MODE_TYPE)
+    MBMS_Cell_List = SEQ_OF(name=u'MBMS-Cell-List', mode=MODE_TYPE)
     _MBMS_Cell_List__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'ECGI')))
     MBMS_Cell_List._cont = _MBMS_Cell_List__item_
     MBMS_Cell_List._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=4096)], ev=None, er=[])
     
     #-----< MBMS-E-RAB-QoS-Parameters >-----#
-    MBMS_E_RAB_QoS_Parameters = SEQ(name='MBMS-E-RAB-QoS-Parameters', mode=MODE_TYPE)
-    _MBMS_E_RAB_QoS_Parameters_qCI = INT(name='qCI', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'QCI')))
-    _MBMS_E_RAB_QoS_Parameters_gbrQosInformation = SEQ(name='gbrQosInformation', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'GBR-QosInformation')), opt=True)
-    _MBMS_E_RAB_QoS_Parameters_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    MBMS_E_RAB_QoS_Parameters = SEQ(name=u'MBMS-E-RAB-QoS-Parameters', mode=MODE_TYPE)
+    _MBMS_E_RAB_QoS_Parameters_qCI = INT(name=u'qCI', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'QCI')))
+    _MBMS_E_RAB_QoS_Parameters_gbrQosInformation = SEQ(name=u'gbrQosInformation', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'GBR-QosInformation')), opt=True)
+    _MBMS_E_RAB_QoS_Parameters_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __MBMS_E_RAB_QoS_Parameters_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionField')))
-    ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['id']))
+    ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'id']))
     ____MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__id_tab = CLASS(name='_tab_M3AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
-    _____MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__id_tab_val_Extension_0 = SEQ(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'AllocationAndRetentionPriority')))
-    ____MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__id_tab._val = ASN1Set(rv=[dict([('id', 17), ('criticality', 'ignore'), ('Extension', _____MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__id_tab_val_Extension_0), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    _____MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__id_tab_val_Extension_0 = SEQ(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'AllocationAndRetentionPriority')))
+    ____MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 17), (u'criticality', u'ignore'), (u'Extension', _____MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__id_tab_val_Extension_0), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__id._const_tab = ____MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__id_tab
     ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__id._const_tab_at = None
-    ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__id._const_tab_id = 'id'
-    ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__id._const_tab_id = u'id'
+    ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'criticality']))
     ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__criticality._const_tab = ____MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__id_tab
-    ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'Extension']))
     ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__extensionValue._const_tab = ____MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__id_tab
-    ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __MBMS_E_RAB_QoS_Parameters_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__id),
-        ('criticality', ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__criticality),
-        ('extensionValue', ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__extensionValue),
+        (u'id', ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__id),
+        (u'criticality', ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__criticality),
+        (u'extensionValue', ___MBMS_E_RAB_QoS_Parameters_iE_Extensions__item__extensionValue),
         ])
     __MBMS_E_RAB_QoS_Parameters_iE_Extensions__item_._ext = None
     _MBMS_E_RAB_QoS_Parameters_iE_Extensions._cont = __MBMS_E_RAB_QoS_Parameters_iE_Extensions__item_
     _MBMS_E_RAB_QoS_Parameters_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     MBMS_E_RAB_QoS_Parameters._cont = ASN1Dict([
-        ('qCI', _MBMS_E_RAB_QoS_Parameters_qCI),
-        ('gbrQosInformation', _MBMS_E_RAB_QoS_Parameters_gbrQosInformation),
-        ('iE-Extensions', _MBMS_E_RAB_QoS_Parameters_iE_Extensions),
+        (u'qCI', _MBMS_E_RAB_QoS_Parameters_qCI),
+        (u'gbrQosInformation', _MBMS_E_RAB_QoS_Parameters_gbrQosInformation),
+        (u'iE-Extensions', _MBMS_E_RAB_QoS_Parameters_iE_Extensions),
         ])
     MBMS_E_RAB_QoS_Parameters._ext = []
     
     #-----< MBMS-E-RAB-QoS-Parameters-ExtIEs >-----#
-    MBMS_E_RAB_QoS_Parameters_ExtIEs = CLASS(name='MBMS-E-RAB-QoS-Parameters-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
-    _MBMS_E_RAB_QoS_Parameters_ExtIEs_val_Extension_0 = SEQ(name='Extension', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'AllocationAndRetentionPriority')))
-    MBMS_E_RAB_QoS_Parameters_ExtIEs._val = ASN1Set(rv=[dict([('id', 17), ('criticality', 'ignore'), ('Extension', _MBMS_E_RAB_QoS_Parameters_ExtIEs_val_Extension_0), ('presence', 'mandatory')])], rr=[], ev=[], er=[])
+    MBMS_E_RAB_QoS_Parameters_ExtIEs = CLASS(name=u'MBMS-E-RAB-QoS-Parameters-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
+    _MBMS_E_RAB_QoS_Parameters_ExtIEs_val_Extension_0 = SEQ(name=u'Extension', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'AllocationAndRetentionPriority')))
+    MBMS_E_RAB_QoS_Parameters_ExtIEs._val = ASN1Set(rv=[dict([(u'id', 17), (u'criticality', u'ignore'), (u'Extension', _MBMS_E_RAB_QoS_Parameters_ExtIEs_val_Extension_0), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< MBMS-Service-associatedLogicalM3-ConnectionItem >-----#
-    MBMS_Service_associatedLogicalM3_ConnectionItem = SEQ(name='MBMS-Service-associatedLogicalM3-ConnectionItem', mode=MODE_TYPE)
-    _MBMS_Service_associatedLogicalM3_ConnectionItem_mME_MBMS_M3AP_ID = INT(name='mME-MBMS-M3AP-ID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')), opt=True)
-    _MBMS_Service_associatedLogicalM3_ConnectionItem_mCE_MBMS_M3AP_ID = INT(name='mCE-MBMS-M3AP-ID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')), opt=True)
-    _MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    MBMS_Service_associatedLogicalM3_ConnectionItem = SEQ(name=u'MBMS-Service-associatedLogicalM3-ConnectionItem', mode=MODE_TYPE)
+    _MBMS_Service_associatedLogicalM3_ConnectionItem_mME_MBMS_M3AP_ID = INT(name=u'mME-MBMS-M3AP-ID', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')), opt=True)
+    _MBMS_Service_associatedLogicalM3_ConnectionItem_mCE_MBMS_M3AP_ID = INT(name=u'mCE-MBMS-M3AP-ID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')), opt=True)
+    _MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionField')))
-    ___MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['id']))
+    ___MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'id']))
     ____MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__id_tab = CLASS(name='_tab_M3AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     ____MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__id._const_tab = ____MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__id_tab
     ___MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__id._const_tab_at = None
-    ___MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__id._const_tab_id = 'id'
-    ___MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__id._const_tab_id = u'id'
+    ___MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__criticality_tab = CLASS(name='_tab_M3AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     ____MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__criticality._const_tab = ____MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__criticality_tab
-    ___MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_M3AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     ____MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__extensionValue._const_tab = ____MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__extensionValue_tab
-    ___MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__id),
-        ('criticality', ___MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__criticality),
-        ('extensionValue', ___MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__extensionValue),
+        (u'id', ___MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__id),
+        (u'criticality', ___MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__criticality),
+        (u'extensionValue', ___MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item__extensionValue),
         ])
     __MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item_._ext = None
     _MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions._cont = __MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions__item_
     _MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     MBMS_Service_associatedLogicalM3_ConnectionItem._cont = ASN1Dict([
-        ('mME-MBMS-M3AP-ID', _MBMS_Service_associatedLogicalM3_ConnectionItem_mME_MBMS_M3AP_ID),
-        ('mCE-MBMS-M3AP-ID', _MBMS_Service_associatedLogicalM3_ConnectionItem_mCE_MBMS_M3AP_ID),
-        ('iE-Extensions', _MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions),
+        (u'mME-MBMS-M3AP-ID', _MBMS_Service_associatedLogicalM3_ConnectionItem_mME_MBMS_M3AP_ID),
+        (u'mCE-MBMS-M3AP-ID', _MBMS_Service_associatedLogicalM3_ConnectionItem_mCE_MBMS_M3AP_ID),
+        (u'iE-Extensions', _MBMS_Service_associatedLogicalM3_ConnectionItem_iE_Extensions),
         ])
     MBMS_Service_associatedLogicalM3_ConnectionItem._ext = []
     
     #-----< MBMS-Service-associatedLogicalM3-ConnectionItemExtIEs >-----#
-    MBMS_Service_associatedLogicalM3_ConnectionItemExtIEs = CLASS(name='MBMS-Service-associatedLogicalM3-ConnectionItemExtIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
+    MBMS_Service_associatedLogicalM3_ConnectionItemExtIEs = CLASS(name=u'MBMS-Service-associatedLogicalM3-ConnectionItemExtIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     MBMS_Service_associatedLogicalM3_ConnectionItemExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< MBMSServiceArea1 >-----#
-    MBMSServiceArea1 = OCT_STR(name='MBMSServiceArea1', mode=MODE_TYPE)
+    MBMSServiceArea1 = OCT_STR(name=u'MBMSServiceArea1', mode=MODE_TYPE)
     MBMSServiceArea1._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
     
     #-----< MBMS-Service-Area >-----#
-    MBMS_Service_Area = OCT_STR(name='MBMS-Service-Area', mode=MODE_TYPE)
+    MBMS_Service_Area = OCT_STR(name=u'MBMS-Service-Area', mode=MODE_TYPE)
     
     #-----< MBMS-Session-Duration >-----#
-    MBMS_Session_Duration = OCT_STR(name='MBMS-Session-Duration', mode=MODE_TYPE)
+    MBMS_Session_Duration = OCT_STR(name=u'MBMS-Session-Duration', mode=MODE_TYPE)
     MBMS_Session_Duration._const_sz = ASN1Set(rv=[3], rr=[], ev=None, er=[])
     
     #-----< MBMS-Session-ID >-----#
-    MBMS_Session_ID = OCT_STR(name='MBMS-Session-ID', mode=MODE_TYPE)
+    MBMS_Session_ID = OCT_STR(name=u'MBMS-Session-ID', mode=MODE_TYPE)
     MBMS_Session_ID._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
     
     #-----< MCE-MBMS-M3AP-ID >-----#
-    MCE_MBMS_M3AP_ID = INT(name='MCE-MBMS-M3AP-ID', mode=MODE_TYPE)
+    MCE_MBMS_M3AP_ID = INT(name=u'MCE-MBMS-M3AP-ID', mode=MODE_TYPE)
     MCE_MBMS_M3AP_ID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     
     #-----< MCE-ID >-----#
-    MCE_ID = OCT_STR(name='MCE-ID', mode=MODE_TYPE)
+    MCE_ID = OCT_STR(name=u'MCE-ID', mode=MODE_TYPE)
     MCE_ID._const_sz = ASN1Set(rv=[2], rr=[], ev=None, er=[])
     
     #-----< MCEname >-----#
-    MCEname = STR_PRINT(name='MCEname', mode=MODE_TYPE)
+    MCEname = STR_PRINT(name=u'MCEname', mode=MODE_TYPE)
     MCEname._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=150)], ev=[], er=[])
     
     #-----< MinimumTimeToMBMSDataTransfer >-----#
-    MinimumTimeToMBMSDataTransfer = OCT_STR(name='MinimumTimeToMBMSDataTransfer', mode=MODE_TYPE)
+    MinimumTimeToMBMSDataTransfer = OCT_STR(name=u'MinimumTimeToMBMSDataTransfer', mode=MODE_TYPE)
     MinimumTimeToMBMSDataTransfer._const_sz = ASN1Set(rv=[1], rr=[], ev=None, er=[])
     
     #-----< MME-MBMS-M3AP-ID >-----#
-    MME_MBMS_M3AP_ID = INT(name='MME-MBMS-M3AP-ID', mode=MODE_TYPE)
+    MME_MBMS_M3AP_ID = INT(name=u'MME-MBMS-M3AP-ID', mode=MODE_TYPE)
     MME_MBMS_M3AP_ID._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     
     #-----< Pre-emptionCapability >-----#
-    Pre_emptionCapability = ENUM(name='Pre-emptionCapability', mode=MODE_TYPE)
-    Pre_emptionCapability._cont = ASN1Dict([('shall-not-trigger-pre-emption', 0), ('may-trigger-pre-emption', 1)])
+    Pre_emptionCapability = ENUM(name=u'Pre-emptionCapability', mode=MODE_TYPE)
+    Pre_emptionCapability._cont = ASN1Dict([(u'shall-not-trigger-pre-emption', 0), (u'may-trigger-pre-emption', 1)])
     Pre_emptionCapability._ext = None
     
     #-----< Pre-emptionVulnerability >-----#
-    Pre_emptionVulnerability = ENUM(name='Pre-emptionVulnerability', mode=MODE_TYPE)
-    Pre_emptionVulnerability._cont = ASN1Dict([('not-pre-emptable', 0), ('pre-emptable', 1)])
+    Pre_emptionVulnerability = ENUM(name=u'Pre-emptionVulnerability', mode=MODE_TYPE)
+    Pre_emptionVulnerability._cont = ASN1Dict([(u'not-pre-emptable', 0), (u'pre-emptable', 1)])
     Pre_emptionVulnerability._ext = None
     
     #-----< PriorityLevel >-----#
-    PriorityLevel = INT(name='PriorityLevel', mode=MODE_TYPE)
-    PriorityLevel._cont = ASN1Dict([('spare', 0), ('highest', 1), ('lowest', 14), ('no-priority', 15)])
+    PriorityLevel = INT(name=u'PriorityLevel', mode=MODE_TYPE)
+    PriorityLevel._cont = ASN1Dict([(u'spare', 0), (u'highest', 1), (u'lowest', 14), (u'no-priority', 15)])
     PriorityLevel._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=15)], ev=None, er=[])
     
     #-----< PLMN-Identity >-----#
-    PLMN_Identity = OCT_STR(name='PLMN-Identity', mode=MODE_TYPE)
+    PLMN_Identity = OCT_STR(name=u'PLMN-Identity', mode=MODE_TYPE)
     PLMN_Identity._const_sz = ASN1Set(rv=[3], rr=[], ev=None, er=[])
     
     #-----< QCI >-----#
-    QCI = INT(name='QCI', mode=MODE_TYPE)
+    QCI = INT(name=u'QCI', mode=MODE_TYPE)
     QCI._const_val = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=255)], ev=None, er=[])
     
     #-----< Reestablishment >-----#
-    Reestablishment = ENUM(name='Reestablishment', mode=MODE_TYPE)
-    Reestablishment._cont = ASN1Dict([('true', 0)])
+    Reestablishment = ENUM(name=u'Reestablishment', mode=MODE_TYPE)
+    Reestablishment._cont = ASN1Dict([(u'true', 0)])
     Reestablishment._ext = []
     
     #-----< TimeToWait >-----#
-    TimeToWait = ENUM(name='TimeToWait', mode=MODE_TYPE)
-    TimeToWait._cont = ASN1Dict([('v1s', 0), ('v2s', 1), ('v5s', 2), ('v10s', 3), ('v20s', 4), ('v60s', 5)])
+    TimeToWait = ENUM(name=u'TimeToWait', mode=MODE_TYPE)
+    TimeToWait._cont = ASN1Dict([(u'v1s', 0), (u'v2s', 1), (u'v5s', 2), (u'v10s', 3), (u'v20s', 4), (u'v60s', 5)])
     TimeToWait._ext = []
     
     #-----< TMGI >-----#
-    TMGI = SEQ(name='TMGI', mode=MODE_TYPE)
-    _TMGI_pLMNidentity = OCT_STR(name='pLMNidentity', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'PLMN-Identity')))
-    _TMGI_serviceID = OCT_STR(name='serviceID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
+    TMGI = SEQ(name=u'TMGI', mode=MODE_TYPE)
+    _TMGI_pLMNidentity = OCT_STR(name=u'pLMNidentity', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'PLMN-Identity')))
+    _TMGI_serviceID = OCT_STR(name=u'serviceID', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT))
     _TMGI_serviceID._const_sz = ASN1Set(rv=[3], rr=[], ev=None, er=[])
-    _TMGI_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    _TMGI_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __TMGI_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionField')))
-    ___TMGI_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['id']))
+    ___TMGI_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'id']))
     ____TMGI_iE_Extensions__item__id_tab = CLASS(name='_tab_M3AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     ____TMGI_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___TMGI_iE_Extensions__item__id._const_tab = ____TMGI_iE_Extensions__item__id_tab
     ___TMGI_iE_Extensions__item__id._const_tab_at = None
-    ___TMGI_iE_Extensions__item__id._const_tab_id = 'id'
-    ___TMGI_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___TMGI_iE_Extensions__item__id._const_tab_id = u'id'
+    ___TMGI_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____TMGI_iE_Extensions__item__criticality_tab = CLASS(name='_tab_M3AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     ____TMGI_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___TMGI_iE_Extensions__item__criticality._const_tab = ____TMGI_iE_Extensions__item__criticality_tab
-    ___TMGI_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___TMGI_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___TMGI_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___TMGI_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___TMGI_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___TMGI_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____TMGI_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_M3AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     ____TMGI_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___TMGI_iE_Extensions__item__extensionValue._const_tab = ____TMGI_iE_Extensions__item__extensionValue_tab
-    ___TMGI_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___TMGI_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___TMGI_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___TMGI_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __TMGI_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___TMGI_iE_Extensions__item__id),
-        ('criticality', ___TMGI_iE_Extensions__item__criticality),
-        ('extensionValue', ___TMGI_iE_Extensions__item__extensionValue),
+        (u'id', ___TMGI_iE_Extensions__item__id),
+        (u'criticality', ___TMGI_iE_Extensions__item__criticality),
+        (u'extensionValue', ___TMGI_iE_Extensions__item__extensionValue),
         ])
     __TMGI_iE_Extensions__item_._ext = None
     _TMGI_iE_Extensions._cont = __TMGI_iE_Extensions__item_
     _TMGI_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     TMGI._cont = ASN1Dict([
-        ('pLMNidentity', _TMGI_pLMNidentity),
-        ('serviceID', _TMGI_serviceID),
-        ('iE-Extensions', _TMGI_iE_Extensions),
+        (u'pLMNidentity', _TMGI_pLMNidentity),
+        (u'serviceID', _TMGI_serviceID),
+        (u'iE-Extensions', _TMGI_iE_Extensions),
         ])
     TMGI._ext = None
     
     #-----< TMGI-ExtIEs >-----#
-    TMGI_ExtIEs = CLASS(name='TMGI-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
+    TMGI_ExtIEs = CLASS(name=u'TMGI-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     TMGI_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< TNL-Information >-----#
-    TNL_Information = SEQ(name='TNL-Information', mode=MODE_TYPE)
-    _TNL_Information_iPMCAddress = OCT_STR(name='iPMCAddress', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'IPAddress')))
-    _TNL_Information_iPSourceAddress = OCT_STR(name='iPSourceAddress', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'IPAddress')))
-    _TNL_Information_gTP_DLTEID = OCT_STR(name='gTP-DLTEID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'GTP-TEID')))
-    _TNL_Information_iE_Extensions = SEQ_OF(name='iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionContainer')), opt=True)
+    TNL_Information = SEQ(name=u'TNL-Information', mode=MODE_TYPE)
+    _TNL_Information_iPMCAddress = OCT_STR(name=u'iPMCAddress', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'IPAddress')))
+    _TNL_Information_iPSourceAddress = OCT_STR(name=u'iPSourceAddress', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'IPAddress')))
+    _TNL_Information_gTP_DLTEID = OCT_STR(name=u'gTP-DLTEID', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-IEs', 'GTP-TEID')))
+    _TNL_Information_iE_Extensions = SEQ_OF(name=u'iE-Extensions', mode=MODE_TYPE, tag=(3, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionContainer')), opt=True)
     __TNL_Information_iE_Extensions__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolExtensionField')))
-    ___TNL_Information_iE_Extensions__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['id']))
+    ___TNL_Information_iE_Extensions__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'id']))
     ____TNL_Information_iE_Extensions__item__id_tab = CLASS(name='_tab_M3AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     ____TNL_Information_iE_Extensions__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___TNL_Information_iE_Extensions__item__id._const_tab = ____TNL_Information_iE_Extensions__item__id_tab
     ___TNL_Information_iE_Extensions__item__id._const_tab_at = None
-    ___TNL_Information_iE_Extensions__item__id._const_tab_id = 'id'
-    ___TNL_Information_iE_Extensions__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['criticality']))
+    ___TNL_Information_iE_Extensions__item__id._const_tab_id = u'id'
+    ___TNL_Information_iE_Extensions__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'criticality']))
     ____TNL_Information_iE_Extensions__item__criticality_tab = CLASS(name='_tab_M3AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     ____TNL_Information_iE_Extensions__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___TNL_Information_iE_Extensions__item__criticality._const_tab = ____TNL_Information_iE_Extensions__item__criticality_tab
-    ___TNL_Information_iE_Extensions__item__criticality._const_tab_at = ('..', 'id')
-    ___TNL_Information_iE_Extensions__item__criticality._const_tab_id = 'criticality'
-    ___TNL_Information_iE_Extensions__item__extensionValue = OPEN(name='extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), ['Extension']))
+    ___TNL_Information_iE_Extensions__item__criticality._const_tab_at = ('..', u'id')
+    ___TNL_Information_iE_Extensions__item__criticality._const_tab_id = u'criticality'
+    ___TNL_Information_iE_Extensions__item__extensionValue = OPEN(name=u'extensionValue', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION'), [u'Extension']))
     ____TNL_Information_iE_Extensions__item__extensionValue_tab = CLASS(name='_tab_M3AP-PROTOCOL-EXTENSION', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     ____TNL_Information_iE_Extensions__item__extensionValue_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___TNL_Information_iE_Extensions__item__extensionValue._const_tab = ____TNL_Information_iE_Extensions__item__extensionValue_tab
-    ___TNL_Information_iE_Extensions__item__extensionValue._const_tab_at = ('..', 'id')
-    ___TNL_Information_iE_Extensions__item__extensionValue._const_tab_id = 'Extension'
+    ___TNL_Information_iE_Extensions__item__extensionValue._const_tab_at = ('..', u'id')
+    ___TNL_Information_iE_Extensions__item__extensionValue._const_tab_id = u'Extension'
     __TNL_Information_iE_Extensions__item_._cont = ASN1Dict([
-        ('id', ___TNL_Information_iE_Extensions__item__id),
-        ('criticality', ___TNL_Information_iE_Extensions__item__criticality),
-        ('extensionValue', ___TNL_Information_iE_Extensions__item__extensionValue),
+        (u'id', ___TNL_Information_iE_Extensions__item__id),
+        (u'criticality', ___TNL_Information_iE_Extensions__item__criticality),
+        (u'extensionValue', ___TNL_Information_iE_Extensions__item__extensionValue),
         ])
     __TNL_Information_iE_Extensions__item_._ext = None
     _TNL_Information_iE_Extensions._cont = __TNL_Information_iE_Extensions__item_
     _TNL_Information_iE_Extensions._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     TNL_Information._cont = ASN1Dict([
-        ('iPMCAddress', _TNL_Information_iPMCAddress),
-        ('iPSourceAddress', _TNL_Information_iPSourceAddress),
-        ('gTP-DLTEID', _TNL_Information_gTP_DLTEID),
-        ('iE-Extensions', _TNL_Information_iE_Extensions),
+        (u'iPMCAddress', _TNL_Information_iPMCAddress),
+        (u'iPSourceAddress', _TNL_Information_iPSourceAddress),
+        (u'gTP-DLTEID', _TNL_Information_gTP_DLTEID),
+        (u'iE-Extensions', _TNL_Information_iE_Extensions),
         ])
     TNL_Information._ext = []
     
     #-----< TNL-Information-ExtIEs >-----#
-    TNL_Information_ExtIEs = CLASS(name='TNL-Information-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
+    TNL_Information_ExtIEs = CLASS(name=u'TNL-Information-ExtIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-EXTENSION')))
     TNL_Information_ExtIEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< TypeOfError >-----#
-    TypeOfError = ENUM(name='TypeOfError', mode=MODE_TYPE)
-    TypeOfError._cont = ASN1Dict([('not-understood', 0), ('missing', 1)])
+    TypeOfError = ENUM(name=u'TypeOfError', mode=MODE_TYPE)
+    TypeOfError._cont = ASN1Dict([(u'not-understood', 0), (u'missing', 1)])
     TypeOfError._ext = []
     
     _all_ = [
@@ -1458,974 +1458,974 @@ class M3AP_IEs:
 
 class M3AP_PDU_Contents:
 
-    _name_  = 'M3AP-PDU-Contents'
+    _name_  = u'M3AP-PDU-Contents'
     _oid_   = [0, 4, 0, 0, 21, 3, 5, 1, 1]
     
     _obj_ = [
-        'MBMSSessionStartRequest',
-        'MBMSSessionStartRequest-IEs',
-        'MBMSSessionStartResponse',
-        'MBMSSessionStartResponse-IEs',
-        'MBMSSessionStartFailure',
-        'MBMSSessionStartFailure-IEs',
-        'MBMSSessionStopRequest',
-        'MBMSSessionStopRequest-IEs',
-        'MBMSSessionStopResponse',
-        'MBMSSessionStopResponse-IEs',
-        'MBMSSessionUpdateRequest',
-        'MBMSSessionUpdateRequest-IEs',
-        'MBMSSessionUpdateResponse',
-        'MBMSSessionUpdateResponse-IEs',
-        'MBMSSessionUpdateFailure',
-        'MBMSSessionUpdateFailure-IEs',
-        'ErrorIndication',
-        'ErrorIndication-IEs',
-        'Reset',
-        'ResetIEs',
-        'ResetType',
-        'ResetAll',
-        'MBMS-Service-associatedLogicalM3-ConnectionListRes',
-        'MBMS-Service-associatedLogicalM3-ConnectionItemRes',
-        'ResetAcknowledge',
-        'ResetAcknowledgeIEs',
-        'MBMS-Service-associatedLogicalM3-ConnectionListResAck',
-        'MBMS-Service-associatedLogicalM3-ConnectionItemResAck',
-        'PrivateMessage',
-        'PrivateMessage-IEs',
-        'M3SetupRequest',
-        'M3SetupRequestIEs',
-        'MBMSServiceAreaListItem',
-        'M3SetupResponse',
-        'M3SetupResponseIEs',
-        'M3SetupFailure',
-        'M3SetupFailureIEs',
-        'MCEConfigurationUpdate',
-        'MCEConfigurationUpdateIEs',
-        'MCEConfigurationUpdateAcknowledge',
-        'MCEConfigurationUpdateAcknowledgeIEs',
-        'MCEConfigurationUpdateFailure',
-        'MCEConfigurationUpdateFailureIEs',
+        u'MBMSSessionStartRequest',
+        u'MBMSSessionStartRequest-IEs',
+        u'MBMSSessionStartResponse',
+        u'MBMSSessionStartResponse-IEs',
+        u'MBMSSessionStartFailure',
+        u'MBMSSessionStartFailure-IEs',
+        u'MBMSSessionStopRequest',
+        u'MBMSSessionStopRequest-IEs',
+        u'MBMSSessionStopResponse',
+        u'MBMSSessionStopResponse-IEs',
+        u'MBMSSessionUpdateRequest',
+        u'MBMSSessionUpdateRequest-IEs',
+        u'MBMSSessionUpdateResponse',
+        u'MBMSSessionUpdateResponse-IEs',
+        u'MBMSSessionUpdateFailure',
+        u'MBMSSessionUpdateFailure-IEs',
+        u'ErrorIndication',
+        u'ErrorIndication-IEs',
+        u'Reset',
+        u'ResetIEs',
+        u'ResetType',
+        u'ResetAll',
+        u'MBMS-Service-associatedLogicalM3-ConnectionListRes',
+        u'MBMS-Service-associatedLogicalM3-ConnectionItemRes',
+        u'ResetAcknowledge',
+        u'ResetAcknowledgeIEs',
+        u'MBMS-Service-associatedLogicalM3-ConnectionListResAck',
+        u'MBMS-Service-associatedLogicalM3-ConnectionItemResAck',
+        u'PrivateMessage',
+        u'PrivateMessage-IEs',
+        u'M3SetupRequest',
+        u'M3SetupRequestIEs',
+        u'MBMSServiceAreaListItem',
+        u'M3SetupResponse',
+        u'M3SetupResponseIEs',
+        u'M3SetupFailure',
+        u'M3SetupFailureIEs',
+        u'MCEConfigurationUpdate',
+        u'MCEConfigurationUpdateIEs',
+        u'MCEConfigurationUpdateAcknowledge',
+        u'MCEConfigurationUpdateAcknowledgeIEs',
+        u'MCEConfigurationUpdateFailure',
+        u'MCEConfigurationUpdateFailureIEs',
         ]
     _type_ = [
-        'MBMSSessionStartRequest',
-        'MBMSSessionStartResponse',
-        'MBMSSessionStartFailure',
-        'MBMSSessionStopRequest',
-        'MBMSSessionStopResponse',
-        'MBMSSessionUpdateRequest',
-        'MBMSSessionUpdateResponse',
-        'MBMSSessionUpdateFailure',
-        'ErrorIndication',
-        'Reset',
-        'ResetType',
-        'ResetAll',
-        'MBMS-Service-associatedLogicalM3-ConnectionListRes',
-        'ResetAcknowledge',
-        'MBMS-Service-associatedLogicalM3-ConnectionListResAck',
-        'PrivateMessage',
-        'M3SetupRequest',
-        'MBMSServiceAreaListItem',
-        'M3SetupResponse',
-        'M3SetupFailure',
-        'MCEConfigurationUpdate',
-        'MCEConfigurationUpdateAcknowledge',
-        'MCEConfigurationUpdateFailure',
+        u'MBMSSessionStartRequest',
+        u'MBMSSessionStartResponse',
+        u'MBMSSessionStartFailure',
+        u'MBMSSessionStopRequest',
+        u'MBMSSessionStopResponse',
+        u'MBMSSessionUpdateRequest',
+        u'MBMSSessionUpdateResponse',
+        u'MBMSSessionUpdateFailure',
+        u'ErrorIndication',
+        u'Reset',
+        u'ResetType',
+        u'ResetAll',
+        u'MBMS-Service-associatedLogicalM3-ConnectionListRes',
+        u'ResetAcknowledge',
+        u'MBMS-Service-associatedLogicalM3-ConnectionListResAck',
+        u'PrivateMessage',
+        u'M3SetupRequest',
+        u'MBMSServiceAreaListItem',
+        u'M3SetupResponse',
+        u'M3SetupFailure',
+        u'MCEConfigurationUpdate',
+        u'MCEConfigurationUpdateAcknowledge',
+        u'MCEConfigurationUpdateFailure',
         ]
     _set_ = [
-        'MBMSSessionStartRequest-IEs',
-        'MBMSSessionStartResponse-IEs',
-        'MBMSSessionStartFailure-IEs',
-        'MBMSSessionStopRequest-IEs',
-        'MBMSSessionStopResponse-IEs',
-        'MBMSSessionUpdateRequest-IEs',
-        'MBMSSessionUpdateResponse-IEs',
-        'MBMSSessionUpdateFailure-IEs',
-        'ErrorIndication-IEs',
-        'ResetIEs',
-        'MBMS-Service-associatedLogicalM3-ConnectionItemRes',
-        'ResetAcknowledgeIEs',
-        'MBMS-Service-associatedLogicalM3-ConnectionItemResAck',
-        'PrivateMessage-IEs',
-        'M3SetupRequestIEs',
-        'M3SetupResponseIEs',
-        'M3SetupFailureIEs',
-        'MCEConfigurationUpdateIEs',
-        'MCEConfigurationUpdateAcknowledgeIEs',
-        'MCEConfigurationUpdateFailureIEs',
+        u'MBMSSessionStartRequest-IEs',
+        u'MBMSSessionStartResponse-IEs',
+        u'MBMSSessionStartFailure-IEs',
+        u'MBMSSessionStopRequest-IEs',
+        u'MBMSSessionStopResponse-IEs',
+        u'MBMSSessionUpdateRequest-IEs',
+        u'MBMSSessionUpdateResponse-IEs',
+        u'MBMSSessionUpdateFailure-IEs',
+        u'ErrorIndication-IEs',
+        u'ResetIEs',
+        u'MBMS-Service-associatedLogicalM3-ConnectionItemRes',
+        u'ResetAcknowledgeIEs',
+        u'MBMS-Service-associatedLogicalM3-ConnectionItemResAck',
+        u'PrivateMessage-IEs',
+        u'M3SetupRequestIEs',
+        u'M3SetupResponseIEs',
+        u'M3SetupFailureIEs',
+        u'MCEConfigurationUpdateIEs',
+        u'MCEConfigurationUpdateAcknowledgeIEs',
+        u'MCEConfigurationUpdateFailureIEs',
         ]
     _val_ = [
         ]
     _class_ = [
-        'MBMSSessionStartRequest-IEs',
-        'MBMSSessionStartResponse-IEs',
-        'MBMSSessionStartFailure-IEs',
-        'MBMSSessionStopRequest-IEs',
-        'MBMSSessionStopResponse-IEs',
-        'MBMSSessionUpdateRequest-IEs',
-        'MBMSSessionUpdateResponse-IEs',
-        'MBMSSessionUpdateFailure-IEs',
-        'ErrorIndication-IEs',
-        'ResetIEs',
-        'MBMS-Service-associatedLogicalM3-ConnectionItemRes',
-        'ResetAcknowledgeIEs',
-        'MBMS-Service-associatedLogicalM3-ConnectionItemResAck',
-        'PrivateMessage-IEs',
-        'M3SetupRequestIEs',
-        'M3SetupResponseIEs',
-        'M3SetupFailureIEs',
-        'MCEConfigurationUpdateIEs',
-        'MCEConfigurationUpdateAcknowledgeIEs',
-        'MCEConfigurationUpdateFailureIEs',
+        u'MBMSSessionStartRequest-IEs',
+        u'MBMSSessionStartResponse-IEs',
+        u'MBMSSessionStartFailure-IEs',
+        u'MBMSSessionStopRequest-IEs',
+        u'MBMSSessionStopResponse-IEs',
+        u'MBMSSessionUpdateRequest-IEs',
+        u'MBMSSessionUpdateResponse-IEs',
+        u'MBMSSessionUpdateFailure-IEs',
+        u'ErrorIndication-IEs',
+        u'ResetIEs',
+        u'MBMS-Service-associatedLogicalM3-ConnectionItemRes',
+        u'ResetAcknowledgeIEs',
+        u'MBMS-Service-associatedLogicalM3-ConnectionItemResAck',
+        u'PrivateMessage-IEs',
+        u'M3SetupRequestIEs',
+        u'M3SetupResponseIEs',
+        u'M3SetupFailureIEs',
+        u'MCEConfigurationUpdateIEs',
+        u'MCEConfigurationUpdateAcknowledgeIEs',
+        u'MCEConfigurationUpdateFailureIEs',
         ]
     _param_ = [
         ]
     
     #-----< MBMSSessionStartRequest >-----#
-    MBMSSessionStartRequest = SEQ(name='MBMSSessionStartRequest', mode=MODE_TYPE)
-    _MBMSSessionStartRequest_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
+    MBMSSessionStartRequest = SEQ(name=u'MBMSSessionStartRequest', mode=MODE_TYPE)
+    _MBMSSessionStartRequest_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
     __MBMSSessionStartRequest_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Field')))
-    ___MBMSSessionStartRequest_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['id']))
+    ___MBMSSessionStartRequest_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'id']))
     ____MBMSSessionStartRequest_protocolIEs__item__id_tab = CLASS(name='_tab_M3AP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
-    _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'TMGI')))
-    _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_2 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Session-ID')))
-    _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_3 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-E-RAB-QoS-Parameters')))
-    _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_4 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Session-Duration')))
-    _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_5 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Service-Area')))
-    _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_6 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MinimumTimeToMBMSDataTransfer')))
-    _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_7 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'TNL-Information')))
-    _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_8 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Absolute-Time-ofMBMS-Data')))
-    _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_9 = ENUM(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Reestablishment')))
-    _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_10 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'TNL-Information')))
-    _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_11 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Cell-List')))
-    ____MBMSSessionStartRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'reject'), ('Value', _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 2), ('criticality', 'reject'), ('Value', _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')]), dict([('id', 3), ('criticality', 'ignore'), ('Value', _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_2), ('presence', 'optional')]), dict([('id', 4), ('criticality', 'reject'), ('Value', _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_3), ('presence', 'mandatory')]), dict([('id', 5), ('criticality', 'reject'), ('Value', _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_4), ('presence', 'mandatory')]), dict([('id', 6), ('criticality', 'reject'), ('Value', _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_5), ('presence', 'mandatory')]), dict([('id', 16), ('criticality', 'reject'), ('Value', _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_6), ('presence', 'mandatory')]), dict([('id', 7), ('criticality', 'reject'), ('Value', _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_7), ('presence', 'mandatory')]), dict([('id', 21), ('criticality', 'ignore'), ('Value', _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_8), ('presence', 'optional')]), dict([('id', 23), ('criticality', 'ignore'), ('Value', _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_9), ('presence', 'optional')]), dict([('id', 24), ('criticality', 'ignore'), ('Value', _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_10), ('presence', 'optional')]), dict([('id', 25), ('criticality', 'reject'), ('Value', _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_11), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
+    _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'TMGI')))
+    _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_2 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Session-ID')))
+    _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_3 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-E-RAB-QoS-Parameters')))
+    _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_4 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Session-Duration')))
+    _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_5 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Service-Area')))
+    _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_6 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MinimumTimeToMBMSDataTransfer')))
+    _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_7 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'TNL-Information')))
+    _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_8 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Absolute-Time-ofMBMS-Data')))
+    _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_9 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Reestablishment')))
+    _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_10 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'TNL-Information')))
+    _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_11 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Cell-List')))
+    ____MBMSSessionStartRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'reject'), (u'Value', _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 2), (u'criticality', u'reject'), (u'Value', _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 3), (u'criticality', u'ignore'), (u'Value', _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 4), (u'criticality', u'reject'), (u'Value', _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'mandatory')]), dict([(u'id', 5), (u'criticality', u'reject'), (u'Value', _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_4), (u'presence', u'mandatory')]), dict([(u'id', 6), (u'criticality', u'reject'), (u'Value', _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_5), (u'presence', u'mandatory')]), dict([(u'id', 16), (u'criticality', u'reject'), (u'Value', _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_6), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'reject'), (u'Value', _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_7), (u'presence', u'mandatory')]), dict([(u'id', 21), (u'criticality', u'ignore'), (u'Value', _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_8), (u'presence', u'optional')]), dict([(u'id', 23), (u'criticality', u'ignore'), (u'Value', _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_9), (u'presence', u'optional')]), dict([(u'id', 24), (u'criticality', u'ignore'), (u'Value', _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_10), (u'presence', u'optional')]), dict([(u'id', 25), (u'criticality', u'reject'), (u'Value', _____MBMSSessionStartRequest_protocolIEs__item__id_tab_val_Value_11), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___MBMSSessionStartRequest_protocolIEs__item__id._const_tab = ____MBMSSessionStartRequest_protocolIEs__item__id_tab
     ___MBMSSessionStartRequest_protocolIEs__item__id._const_tab_at = None
-    ___MBMSSessionStartRequest_protocolIEs__item__id._const_tab_id = 'id'
-    ___MBMSSessionStartRequest_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['criticality']))
+    ___MBMSSessionStartRequest_protocolIEs__item__id._const_tab_id = u'id'
+    ___MBMSSessionStartRequest_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'criticality']))
     ___MBMSSessionStartRequest_protocolIEs__item__criticality._const_tab = ____MBMSSessionStartRequest_protocolIEs__item__id_tab
-    ___MBMSSessionStartRequest_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___MBMSSessionStartRequest_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___MBMSSessionStartRequest_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['Value']))
+    ___MBMSSessionStartRequest_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___MBMSSessionStartRequest_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___MBMSSessionStartRequest_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'Value']))
     ___MBMSSessionStartRequest_protocolIEs__item__value._const_tab = ____MBMSSessionStartRequest_protocolIEs__item__id_tab
-    ___MBMSSessionStartRequest_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___MBMSSessionStartRequest_protocolIEs__item__value._const_tab_id = 'Value'
+    ___MBMSSessionStartRequest_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___MBMSSessionStartRequest_protocolIEs__item__value._const_tab_id = u'Value'
     __MBMSSessionStartRequest_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___MBMSSessionStartRequest_protocolIEs__item__id),
-        ('criticality', ___MBMSSessionStartRequest_protocolIEs__item__criticality),
-        ('value', ___MBMSSessionStartRequest_protocolIEs__item__value),
+        (u'id', ___MBMSSessionStartRequest_protocolIEs__item__id),
+        (u'criticality', ___MBMSSessionStartRequest_protocolIEs__item__criticality),
+        (u'value', ___MBMSSessionStartRequest_protocolIEs__item__value),
         ])
     __MBMSSessionStartRequest_protocolIEs__item_._ext = None
     _MBMSSessionStartRequest_protocolIEs._cont = __MBMSSessionStartRequest_protocolIEs__item_
     _MBMSSessionStartRequest_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     MBMSSessionStartRequest._cont = ASN1Dict([
-        ('protocolIEs', _MBMSSessionStartRequest_protocolIEs),
+        (u'protocolIEs', _MBMSSessionStartRequest_protocolIEs),
         ])
     MBMSSessionStartRequest._ext = []
     
     #-----< MBMSSessionStartRequest-IEs >-----#
-    MBMSSessionStartRequest_IEs = CLASS(name='MBMSSessionStartRequest-IEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _MBMSSessionStartRequest_IEs_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
-    _MBMSSessionStartRequest_IEs_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'TMGI')))
-    _MBMSSessionStartRequest_IEs_val_Value_2 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Session-ID')))
-    _MBMSSessionStartRequest_IEs_val_Value_3 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-E-RAB-QoS-Parameters')))
-    _MBMSSessionStartRequest_IEs_val_Value_4 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Session-Duration')))
-    _MBMSSessionStartRequest_IEs_val_Value_5 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Service-Area')))
-    _MBMSSessionStartRequest_IEs_val_Value_6 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MinimumTimeToMBMSDataTransfer')))
-    _MBMSSessionStartRequest_IEs_val_Value_7 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'TNL-Information')))
-    _MBMSSessionStartRequest_IEs_val_Value_8 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Absolute-Time-ofMBMS-Data')))
-    _MBMSSessionStartRequest_IEs_val_Value_9 = ENUM(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Reestablishment')))
-    _MBMSSessionStartRequest_IEs_val_Value_10 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'TNL-Information')))
-    _MBMSSessionStartRequest_IEs_val_Value_11 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Cell-List')))
-    MBMSSessionStartRequest_IEs._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'reject'), ('Value', _MBMSSessionStartRequest_IEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 2), ('criticality', 'reject'), ('Value', _MBMSSessionStartRequest_IEs_val_Value_1), ('presence', 'mandatory')]), dict([('id', 3), ('criticality', 'ignore'), ('Value', _MBMSSessionStartRequest_IEs_val_Value_2), ('presence', 'optional')]), dict([('id', 4), ('criticality', 'reject'), ('Value', _MBMSSessionStartRequest_IEs_val_Value_3), ('presence', 'mandatory')]), dict([('id', 5), ('criticality', 'reject'), ('Value', _MBMSSessionStartRequest_IEs_val_Value_4), ('presence', 'mandatory')]), dict([('id', 6), ('criticality', 'reject'), ('Value', _MBMSSessionStartRequest_IEs_val_Value_5), ('presence', 'mandatory')]), dict([('id', 16), ('criticality', 'reject'), ('Value', _MBMSSessionStartRequest_IEs_val_Value_6), ('presence', 'mandatory')]), dict([('id', 7), ('criticality', 'reject'), ('Value', _MBMSSessionStartRequest_IEs_val_Value_7), ('presence', 'mandatory')]), dict([('id', 21), ('criticality', 'ignore'), ('Value', _MBMSSessionStartRequest_IEs_val_Value_8), ('presence', 'optional')]), dict([('id', 23), ('criticality', 'ignore'), ('Value', _MBMSSessionStartRequest_IEs_val_Value_9), ('presence', 'optional')]), dict([('id', 24), ('criticality', 'ignore'), ('Value', _MBMSSessionStartRequest_IEs_val_Value_10), ('presence', 'optional')]), dict([('id', 25), ('criticality', 'reject'), ('Value', _MBMSSessionStartRequest_IEs_val_Value_11), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    MBMSSessionStartRequest_IEs = CLASS(name=u'MBMSSessionStartRequest-IEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
+    _MBMSSessionStartRequest_IEs_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
+    _MBMSSessionStartRequest_IEs_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'TMGI')))
+    _MBMSSessionStartRequest_IEs_val_Value_2 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Session-ID')))
+    _MBMSSessionStartRequest_IEs_val_Value_3 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-E-RAB-QoS-Parameters')))
+    _MBMSSessionStartRequest_IEs_val_Value_4 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Session-Duration')))
+    _MBMSSessionStartRequest_IEs_val_Value_5 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Service-Area')))
+    _MBMSSessionStartRequest_IEs_val_Value_6 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MinimumTimeToMBMSDataTransfer')))
+    _MBMSSessionStartRequest_IEs_val_Value_7 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'TNL-Information')))
+    _MBMSSessionStartRequest_IEs_val_Value_8 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Absolute-Time-ofMBMS-Data')))
+    _MBMSSessionStartRequest_IEs_val_Value_9 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Reestablishment')))
+    _MBMSSessionStartRequest_IEs_val_Value_10 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'TNL-Information')))
+    _MBMSSessionStartRequest_IEs_val_Value_11 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Cell-List')))
+    MBMSSessionStartRequest_IEs._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'reject'), (u'Value', _MBMSSessionStartRequest_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 2), (u'criticality', u'reject'), (u'Value', _MBMSSessionStartRequest_IEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 3), (u'criticality', u'ignore'), (u'Value', _MBMSSessionStartRequest_IEs_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 4), (u'criticality', u'reject'), (u'Value', _MBMSSessionStartRequest_IEs_val_Value_3), (u'presence', u'mandatory')]), dict([(u'id', 5), (u'criticality', u'reject'), (u'Value', _MBMSSessionStartRequest_IEs_val_Value_4), (u'presence', u'mandatory')]), dict([(u'id', 6), (u'criticality', u'reject'), (u'Value', _MBMSSessionStartRequest_IEs_val_Value_5), (u'presence', u'mandatory')]), dict([(u'id', 16), (u'criticality', u'reject'), (u'Value', _MBMSSessionStartRequest_IEs_val_Value_6), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'reject'), (u'Value', _MBMSSessionStartRequest_IEs_val_Value_7), (u'presence', u'mandatory')]), dict([(u'id', 21), (u'criticality', u'ignore'), (u'Value', _MBMSSessionStartRequest_IEs_val_Value_8), (u'presence', u'optional')]), dict([(u'id', 23), (u'criticality', u'ignore'), (u'Value', _MBMSSessionStartRequest_IEs_val_Value_9), (u'presence', u'optional')]), dict([(u'id', 24), (u'criticality', u'ignore'), (u'Value', _MBMSSessionStartRequest_IEs_val_Value_10), (u'presence', u'optional')]), dict([(u'id', 25), (u'criticality', u'reject'), (u'Value', _MBMSSessionStartRequest_IEs_val_Value_11), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< MBMSSessionStartResponse >-----#
-    MBMSSessionStartResponse = SEQ(name='MBMSSessionStartResponse', mode=MODE_TYPE)
-    _MBMSSessionStartResponse_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
+    MBMSSessionStartResponse = SEQ(name=u'MBMSSessionStartResponse', mode=MODE_TYPE)
+    _MBMSSessionStartResponse_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
     __MBMSSessionStartResponse_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Field')))
-    ___MBMSSessionStartResponse_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['id']))
+    ___MBMSSessionStartResponse_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'id']))
     ____MBMSSessionStartResponse_protocolIEs__item__id_tab = CLASS(name='_tab_M3AP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _____MBMSSessionStartResponse_protocolIEs__item__id_tab_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
-    _____MBMSSessionStartResponse_protocolIEs__item__id_tab_val_Value_1 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')))
-    _____MBMSSessionStartResponse_protocolIEs__item__id_tab_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
-    ____MBMSSessionStartResponse_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'ignore'), ('Value', _____MBMSSessionStartResponse_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _____MBMSSessionStartResponse_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')]), dict([('id', 8), ('criticality', 'ignore'), ('Value', _____MBMSSessionStartResponse_protocolIEs__item__id_tab_val_Value_2), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____MBMSSessionStartResponse_protocolIEs__item__id_tab_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
+    _____MBMSSessionStartResponse_protocolIEs__item__id_tab_val_Value_1 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')))
+    _____MBMSSessionStartResponse_protocolIEs__item__id_tab_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
+    ____MBMSSessionStartResponse_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'ignore'), (u'Value', _____MBMSSessionStartResponse_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _____MBMSSessionStartResponse_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 8), (u'criticality', u'ignore'), (u'Value', _____MBMSSessionStartResponse_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___MBMSSessionStartResponse_protocolIEs__item__id._const_tab = ____MBMSSessionStartResponse_protocolIEs__item__id_tab
     ___MBMSSessionStartResponse_protocolIEs__item__id._const_tab_at = None
-    ___MBMSSessionStartResponse_protocolIEs__item__id._const_tab_id = 'id'
-    ___MBMSSessionStartResponse_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['criticality']))
+    ___MBMSSessionStartResponse_protocolIEs__item__id._const_tab_id = u'id'
+    ___MBMSSessionStartResponse_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'criticality']))
     ___MBMSSessionStartResponse_protocolIEs__item__criticality._const_tab = ____MBMSSessionStartResponse_protocolIEs__item__id_tab
-    ___MBMSSessionStartResponse_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___MBMSSessionStartResponse_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___MBMSSessionStartResponse_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['Value']))
+    ___MBMSSessionStartResponse_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___MBMSSessionStartResponse_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___MBMSSessionStartResponse_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'Value']))
     ___MBMSSessionStartResponse_protocolIEs__item__value._const_tab = ____MBMSSessionStartResponse_protocolIEs__item__id_tab
-    ___MBMSSessionStartResponse_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___MBMSSessionStartResponse_protocolIEs__item__value._const_tab_id = 'Value'
+    ___MBMSSessionStartResponse_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___MBMSSessionStartResponse_protocolIEs__item__value._const_tab_id = u'Value'
     __MBMSSessionStartResponse_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___MBMSSessionStartResponse_protocolIEs__item__id),
-        ('criticality', ___MBMSSessionStartResponse_protocolIEs__item__criticality),
-        ('value', ___MBMSSessionStartResponse_protocolIEs__item__value),
+        (u'id', ___MBMSSessionStartResponse_protocolIEs__item__id),
+        (u'criticality', ___MBMSSessionStartResponse_protocolIEs__item__criticality),
+        (u'value', ___MBMSSessionStartResponse_protocolIEs__item__value),
         ])
     __MBMSSessionStartResponse_protocolIEs__item_._ext = None
     _MBMSSessionStartResponse_protocolIEs._cont = __MBMSSessionStartResponse_protocolIEs__item_
     _MBMSSessionStartResponse_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     MBMSSessionStartResponse._cont = ASN1Dict([
-        ('protocolIEs', _MBMSSessionStartResponse_protocolIEs),
+        (u'protocolIEs', _MBMSSessionStartResponse_protocolIEs),
         ])
     MBMSSessionStartResponse._ext = []
     
     #-----< MBMSSessionStartResponse-IEs >-----#
-    MBMSSessionStartResponse_IEs = CLASS(name='MBMSSessionStartResponse-IEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _MBMSSessionStartResponse_IEs_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
-    _MBMSSessionStartResponse_IEs_val_Value_1 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')))
-    _MBMSSessionStartResponse_IEs_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
-    MBMSSessionStartResponse_IEs._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'ignore'), ('Value', _MBMSSessionStartResponse_IEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _MBMSSessionStartResponse_IEs_val_Value_1), ('presence', 'mandatory')]), dict([('id', 8), ('criticality', 'ignore'), ('Value', _MBMSSessionStartResponse_IEs_val_Value_2), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    MBMSSessionStartResponse_IEs = CLASS(name=u'MBMSSessionStartResponse-IEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
+    _MBMSSessionStartResponse_IEs_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
+    _MBMSSessionStartResponse_IEs_val_Value_1 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')))
+    _MBMSSessionStartResponse_IEs_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
+    MBMSSessionStartResponse_IEs._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'ignore'), (u'Value', _MBMSSessionStartResponse_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _MBMSSessionStartResponse_IEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 8), (u'criticality', u'ignore'), (u'Value', _MBMSSessionStartResponse_IEs_val_Value_2), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< MBMSSessionStartFailure >-----#
-    MBMSSessionStartFailure = SEQ(name='MBMSSessionStartFailure', mode=MODE_TYPE)
-    _MBMSSessionStartFailure_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
+    MBMSSessionStartFailure = SEQ(name=u'MBMSSessionStartFailure', mode=MODE_TYPE)
+    _MBMSSessionStartFailure_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
     __MBMSSessionStartFailure_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Field')))
-    ___MBMSSessionStartFailure_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['id']))
+    ___MBMSSessionStartFailure_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'id']))
     ____MBMSSessionStartFailure_protocolIEs__item__id_tab = CLASS(name='_tab_M3AP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _____MBMSSessionStartFailure_protocolIEs__item__id_tab_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
-    _____MBMSSessionStartFailure_protocolIEs__item__id_tab_val_Value_1 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Cause')))
-    _____MBMSSessionStartFailure_protocolIEs__item__id_tab_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
-    ____MBMSSessionStartFailure_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'ignore'), ('Value', _____MBMSSessionStartFailure_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 9), ('criticality', 'ignore'), ('Value', _____MBMSSessionStartFailure_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')]), dict([('id', 8), ('criticality', 'ignore'), ('Value', _____MBMSSessionStartFailure_protocolIEs__item__id_tab_val_Value_2), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____MBMSSessionStartFailure_protocolIEs__item__id_tab_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
+    _____MBMSSessionStartFailure_protocolIEs__item__id_tab_val_Value_1 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Cause')))
+    _____MBMSSessionStartFailure_protocolIEs__item__id_tab_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
+    ____MBMSSessionStartFailure_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'ignore'), (u'Value', _____MBMSSessionStartFailure_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 9), (u'criticality', u'ignore'), (u'Value', _____MBMSSessionStartFailure_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 8), (u'criticality', u'ignore'), (u'Value', _____MBMSSessionStartFailure_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___MBMSSessionStartFailure_protocolIEs__item__id._const_tab = ____MBMSSessionStartFailure_protocolIEs__item__id_tab
     ___MBMSSessionStartFailure_protocolIEs__item__id._const_tab_at = None
-    ___MBMSSessionStartFailure_protocolIEs__item__id._const_tab_id = 'id'
-    ___MBMSSessionStartFailure_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['criticality']))
+    ___MBMSSessionStartFailure_protocolIEs__item__id._const_tab_id = u'id'
+    ___MBMSSessionStartFailure_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'criticality']))
     ___MBMSSessionStartFailure_protocolIEs__item__criticality._const_tab = ____MBMSSessionStartFailure_protocolIEs__item__id_tab
-    ___MBMSSessionStartFailure_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___MBMSSessionStartFailure_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___MBMSSessionStartFailure_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['Value']))
+    ___MBMSSessionStartFailure_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___MBMSSessionStartFailure_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___MBMSSessionStartFailure_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'Value']))
     ___MBMSSessionStartFailure_protocolIEs__item__value._const_tab = ____MBMSSessionStartFailure_protocolIEs__item__id_tab
-    ___MBMSSessionStartFailure_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___MBMSSessionStartFailure_protocolIEs__item__value._const_tab_id = 'Value'
+    ___MBMSSessionStartFailure_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___MBMSSessionStartFailure_protocolIEs__item__value._const_tab_id = u'Value'
     __MBMSSessionStartFailure_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___MBMSSessionStartFailure_protocolIEs__item__id),
-        ('criticality', ___MBMSSessionStartFailure_protocolIEs__item__criticality),
-        ('value', ___MBMSSessionStartFailure_protocolIEs__item__value),
+        (u'id', ___MBMSSessionStartFailure_protocolIEs__item__id),
+        (u'criticality', ___MBMSSessionStartFailure_protocolIEs__item__criticality),
+        (u'value', ___MBMSSessionStartFailure_protocolIEs__item__value),
         ])
     __MBMSSessionStartFailure_protocolIEs__item_._ext = None
     _MBMSSessionStartFailure_protocolIEs._cont = __MBMSSessionStartFailure_protocolIEs__item_
     _MBMSSessionStartFailure_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     MBMSSessionStartFailure._cont = ASN1Dict([
-        ('protocolIEs', _MBMSSessionStartFailure_protocolIEs),
+        (u'protocolIEs', _MBMSSessionStartFailure_protocolIEs),
         ])
     MBMSSessionStartFailure._ext = []
     
     #-----< MBMSSessionStartFailure-IEs >-----#
-    MBMSSessionStartFailure_IEs = CLASS(name='MBMSSessionStartFailure-IEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _MBMSSessionStartFailure_IEs_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
-    _MBMSSessionStartFailure_IEs_val_Value_1 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Cause')))
-    _MBMSSessionStartFailure_IEs_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
-    MBMSSessionStartFailure_IEs._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'ignore'), ('Value', _MBMSSessionStartFailure_IEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 9), ('criticality', 'ignore'), ('Value', _MBMSSessionStartFailure_IEs_val_Value_1), ('presence', 'mandatory')]), dict([('id', 8), ('criticality', 'ignore'), ('Value', _MBMSSessionStartFailure_IEs_val_Value_2), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    MBMSSessionStartFailure_IEs = CLASS(name=u'MBMSSessionStartFailure-IEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
+    _MBMSSessionStartFailure_IEs_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
+    _MBMSSessionStartFailure_IEs_val_Value_1 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Cause')))
+    _MBMSSessionStartFailure_IEs_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
+    MBMSSessionStartFailure_IEs._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'ignore'), (u'Value', _MBMSSessionStartFailure_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 9), (u'criticality', u'ignore'), (u'Value', _MBMSSessionStartFailure_IEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 8), (u'criticality', u'ignore'), (u'Value', _MBMSSessionStartFailure_IEs_val_Value_2), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< MBMSSessionStopRequest >-----#
-    MBMSSessionStopRequest = SEQ(name='MBMSSessionStopRequest', mode=MODE_TYPE)
-    _MBMSSessionStopRequest_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
+    MBMSSessionStopRequest = SEQ(name=u'MBMSSessionStopRequest', mode=MODE_TYPE)
+    _MBMSSessionStopRequest_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
     __MBMSSessionStopRequest_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Field')))
-    ___MBMSSessionStopRequest_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['id']))
+    ___MBMSSessionStopRequest_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'id']))
     ____MBMSSessionStopRequest_protocolIEs__item__id_tab = CLASS(name='_tab_M3AP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _____MBMSSessionStopRequest_protocolIEs__item__id_tab_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
-    _____MBMSSessionStopRequest_protocolIEs__item__id_tab_val_Value_1 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')))
-    _____MBMSSessionStopRequest_protocolIEs__item__id_tab_val_Value_2 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Absolute-Time-ofMBMS-Data')))
-    ____MBMSSessionStopRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'reject'), ('Value', _____MBMSSessionStopRequest_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'reject'), ('Value', _____MBMSSessionStopRequest_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')]), dict([('id', 22), ('criticality', 'ignore'), ('Value', _____MBMSSessionStopRequest_protocolIEs__item__id_tab_val_Value_2), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____MBMSSessionStopRequest_protocolIEs__item__id_tab_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
+    _____MBMSSessionStopRequest_protocolIEs__item__id_tab_val_Value_1 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')))
+    _____MBMSSessionStopRequest_protocolIEs__item__id_tab_val_Value_2 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Absolute-Time-ofMBMS-Data')))
+    ____MBMSSessionStopRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'reject'), (u'Value', _____MBMSSessionStopRequest_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'reject'), (u'Value', _____MBMSSessionStopRequest_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 22), (u'criticality', u'ignore'), (u'Value', _____MBMSSessionStopRequest_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___MBMSSessionStopRequest_protocolIEs__item__id._const_tab = ____MBMSSessionStopRequest_protocolIEs__item__id_tab
     ___MBMSSessionStopRequest_protocolIEs__item__id._const_tab_at = None
-    ___MBMSSessionStopRequest_protocolIEs__item__id._const_tab_id = 'id'
-    ___MBMSSessionStopRequest_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['criticality']))
+    ___MBMSSessionStopRequest_protocolIEs__item__id._const_tab_id = u'id'
+    ___MBMSSessionStopRequest_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'criticality']))
     ___MBMSSessionStopRequest_protocolIEs__item__criticality._const_tab = ____MBMSSessionStopRequest_protocolIEs__item__id_tab
-    ___MBMSSessionStopRequest_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___MBMSSessionStopRequest_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___MBMSSessionStopRequest_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['Value']))
+    ___MBMSSessionStopRequest_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___MBMSSessionStopRequest_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___MBMSSessionStopRequest_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'Value']))
     ___MBMSSessionStopRequest_protocolIEs__item__value._const_tab = ____MBMSSessionStopRequest_protocolIEs__item__id_tab
-    ___MBMSSessionStopRequest_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___MBMSSessionStopRequest_protocolIEs__item__value._const_tab_id = 'Value'
+    ___MBMSSessionStopRequest_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___MBMSSessionStopRequest_protocolIEs__item__value._const_tab_id = u'Value'
     __MBMSSessionStopRequest_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___MBMSSessionStopRequest_protocolIEs__item__id),
-        ('criticality', ___MBMSSessionStopRequest_protocolIEs__item__criticality),
-        ('value', ___MBMSSessionStopRequest_protocolIEs__item__value),
+        (u'id', ___MBMSSessionStopRequest_protocolIEs__item__id),
+        (u'criticality', ___MBMSSessionStopRequest_protocolIEs__item__criticality),
+        (u'value', ___MBMSSessionStopRequest_protocolIEs__item__value),
         ])
     __MBMSSessionStopRequest_protocolIEs__item_._ext = None
     _MBMSSessionStopRequest_protocolIEs._cont = __MBMSSessionStopRequest_protocolIEs__item_
     _MBMSSessionStopRequest_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     MBMSSessionStopRequest._cont = ASN1Dict([
-        ('protocolIEs', _MBMSSessionStopRequest_protocolIEs),
+        (u'protocolIEs', _MBMSSessionStopRequest_protocolIEs),
         ])
     MBMSSessionStopRequest._ext = []
     
     #-----< MBMSSessionStopRequest-IEs >-----#
-    MBMSSessionStopRequest_IEs = CLASS(name='MBMSSessionStopRequest-IEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _MBMSSessionStopRequest_IEs_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
-    _MBMSSessionStopRequest_IEs_val_Value_1 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')))
-    _MBMSSessionStopRequest_IEs_val_Value_2 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Absolute-Time-ofMBMS-Data')))
-    MBMSSessionStopRequest_IEs._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'reject'), ('Value', _MBMSSessionStopRequest_IEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'reject'), ('Value', _MBMSSessionStopRequest_IEs_val_Value_1), ('presence', 'mandatory')]), dict([('id', 22), ('criticality', 'ignore'), ('Value', _MBMSSessionStopRequest_IEs_val_Value_2), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    MBMSSessionStopRequest_IEs = CLASS(name=u'MBMSSessionStopRequest-IEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
+    _MBMSSessionStopRequest_IEs_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
+    _MBMSSessionStopRequest_IEs_val_Value_1 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')))
+    _MBMSSessionStopRequest_IEs_val_Value_2 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Absolute-Time-ofMBMS-Data')))
+    MBMSSessionStopRequest_IEs._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'reject'), (u'Value', _MBMSSessionStopRequest_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'reject'), (u'Value', _MBMSSessionStopRequest_IEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 22), (u'criticality', u'ignore'), (u'Value', _MBMSSessionStopRequest_IEs_val_Value_2), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< MBMSSessionStopResponse >-----#
-    MBMSSessionStopResponse = SEQ(name='MBMSSessionStopResponse', mode=MODE_TYPE)
-    _MBMSSessionStopResponse_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
+    MBMSSessionStopResponse = SEQ(name=u'MBMSSessionStopResponse', mode=MODE_TYPE)
+    _MBMSSessionStopResponse_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
     __MBMSSessionStopResponse_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Field')))
-    ___MBMSSessionStopResponse_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['id']))
+    ___MBMSSessionStopResponse_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'id']))
     ____MBMSSessionStopResponse_protocolIEs__item__id_tab = CLASS(name='_tab_M3AP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _____MBMSSessionStopResponse_protocolIEs__item__id_tab_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
-    _____MBMSSessionStopResponse_protocolIEs__item__id_tab_val_Value_1 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')))
-    _____MBMSSessionStopResponse_protocolIEs__item__id_tab_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
-    ____MBMSSessionStopResponse_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'ignore'), ('Value', _____MBMSSessionStopResponse_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _____MBMSSessionStopResponse_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')]), dict([('id', 8), ('criticality', 'ignore'), ('Value', _____MBMSSessionStopResponse_protocolIEs__item__id_tab_val_Value_2), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____MBMSSessionStopResponse_protocolIEs__item__id_tab_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
+    _____MBMSSessionStopResponse_protocolIEs__item__id_tab_val_Value_1 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')))
+    _____MBMSSessionStopResponse_protocolIEs__item__id_tab_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
+    ____MBMSSessionStopResponse_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'ignore'), (u'Value', _____MBMSSessionStopResponse_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _____MBMSSessionStopResponse_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 8), (u'criticality', u'ignore'), (u'Value', _____MBMSSessionStopResponse_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___MBMSSessionStopResponse_protocolIEs__item__id._const_tab = ____MBMSSessionStopResponse_protocolIEs__item__id_tab
     ___MBMSSessionStopResponse_protocolIEs__item__id._const_tab_at = None
-    ___MBMSSessionStopResponse_protocolIEs__item__id._const_tab_id = 'id'
-    ___MBMSSessionStopResponse_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['criticality']))
+    ___MBMSSessionStopResponse_protocolIEs__item__id._const_tab_id = u'id'
+    ___MBMSSessionStopResponse_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'criticality']))
     ___MBMSSessionStopResponse_protocolIEs__item__criticality._const_tab = ____MBMSSessionStopResponse_protocolIEs__item__id_tab
-    ___MBMSSessionStopResponse_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___MBMSSessionStopResponse_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___MBMSSessionStopResponse_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['Value']))
+    ___MBMSSessionStopResponse_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___MBMSSessionStopResponse_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___MBMSSessionStopResponse_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'Value']))
     ___MBMSSessionStopResponse_protocolIEs__item__value._const_tab = ____MBMSSessionStopResponse_protocolIEs__item__id_tab
-    ___MBMSSessionStopResponse_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___MBMSSessionStopResponse_protocolIEs__item__value._const_tab_id = 'Value'
+    ___MBMSSessionStopResponse_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___MBMSSessionStopResponse_protocolIEs__item__value._const_tab_id = u'Value'
     __MBMSSessionStopResponse_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___MBMSSessionStopResponse_protocolIEs__item__id),
-        ('criticality', ___MBMSSessionStopResponse_protocolIEs__item__criticality),
-        ('value', ___MBMSSessionStopResponse_protocolIEs__item__value),
+        (u'id', ___MBMSSessionStopResponse_protocolIEs__item__id),
+        (u'criticality', ___MBMSSessionStopResponse_protocolIEs__item__criticality),
+        (u'value', ___MBMSSessionStopResponse_protocolIEs__item__value),
         ])
     __MBMSSessionStopResponse_protocolIEs__item_._ext = None
     _MBMSSessionStopResponse_protocolIEs._cont = __MBMSSessionStopResponse_protocolIEs__item_
     _MBMSSessionStopResponse_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     MBMSSessionStopResponse._cont = ASN1Dict([
-        ('protocolIEs', _MBMSSessionStopResponse_protocolIEs),
+        (u'protocolIEs', _MBMSSessionStopResponse_protocolIEs),
         ])
     MBMSSessionStopResponse._ext = []
     
     #-----< MBMSSessionStopResponse-IEs >-----#
-    MBMSSessionStopResponse_IEs = CLASS(name='MBMSSessionStopResponse-IEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _MBMSSessionStopResponse_IEs_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
-    _MBMSSessionStopResponse_IEs_val_Value_1 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')))
-    _MBMSSessionStopResponse_IEs_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
-    MBMSSessionStopResponse_IEs._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'ignore'), ('Value', _MBMSSessionStopResponse_IEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _MBMSSessionStopResponse_IEs_val_Value_1), ('presence', 'mandatory')]), dict([('id', 8), ('criticality', 'ignore'), ('Value', _MBMSSessionStopResponse_IEs_val_Value_2), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    MBMSSessionStopResponse_IEs = CLASS(name=u'MBMSSessionStopResponse-IEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
+    _MBMSSessionStopResponse_IEs_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
+    _MBMSSessionStopResponse_IEs_val_Value_1 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')))
+    _MBMSSessionStopResponse_IEs_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
+    MBMSSessionStopResponse_IEs._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'ignore'), (u'Value', _MBMSSessionStopResponse_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _MBMSSessionStopResponse_IEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 8), (u'criticality', u'ignore'), (u'Value', _MBMSSessionStopResponse_IEs_val_Value_2), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< MBMSSessionUpdateRequest >-----#
-    MBMSSessionUpdateRequest = SEQ(name='MBMSSessionUpdateRequest', mode=MODE_TYPE)
-    _MBMSSessionUpdateRequest_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
+    MBMSSessionUpdateRequest = SEQ(name=u'MBMSSessionUpdateRequest', mode=MODE_TYPE)
+    _MBMSSessionUpdateRequest_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
     __MBMSSessionUpdateRequest_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Field')))
-    ___MBMSSessionUpdateRequest_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['id']))
+    ___MBMSSessionUpdateRequest_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'id']))
     ____MBMSSessionUpdateRequest_protocolIEs__item__id_tab = CLASS(name='_tab_M3AP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
-    _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_1 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')))
-    _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'TMGI')))
-    _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_3 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Session-ID')))
-    _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_4 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-E-RAB-QoS-Parameters')))
-    _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_5 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Session-Duration')))
-    _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_6 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Service-Area')))
-    _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_7 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MinimumTimeToMBMSDataTransfer')))
-    _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_8 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'TNL-Information')))
-    _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_9 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Absolute-Time-ofMBMS-Data')))
-    _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_10 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Cell-List')))
-    ____MBMSSessionUpdateRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'reject'), ('Value', _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'reject'), ('Value', _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')]), dict([('id', 2), ('criticality', 'reject'), ('Value', _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_2), ('presence', 'mandatory')]), dict([('id', 3), ('criticality', 'ignore'), ('Value', _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_3), ('presence', 'optional')]), dict([('id', 4), ('criticality', 'reject'), ('Value', _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_4), ('presence', 'mandatory')]), dict([('id', 5), ('criticality', 'reject'), ('Value', _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_5), ('presence', 'mandatory')]), dict([('id', 6), ('criticality', 'ignore'), ('Value', _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_6), ('presence', 'optional')]), dict([('id', 16), ('criticality', 'reject'), ('Value', _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_7), ('presence', 'mandatory')]), dict([('id', 7), ('criticality', 'ignore'), ('Value', _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_8), ('presence', 'optional')]), dict([('id', 21), ('criticality', 'ignore'), ('Value', _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_9), ('presence', 'optional')]), dict([('id', 25), ('criticality', 'reject'), ('Value', _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_10), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
+    _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_1 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')))
+    _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'TMGI')))
+    _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_3 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Session-ID')))
+    _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_4 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-E-RAB-QoS-Parameters')))
+    _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_5 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Session-Duration')))
+    _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_6 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Service-Area')))
+    _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_7 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MinimumTimeToMBMSDataTransfer')))
+    _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_8 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'TNL-Information')))
+    _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_9 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Absolute-Time-ofMBMS-Data')))
+    _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_10 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Cell-List')))
+    ____MBMSSessionUpdateRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'reject'), (u'Value', _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'reject'), (u'Value', _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 2), (u'criticality', u'reject'), (u'Value', _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 3), (u'criticality', u'ignore'), (u'Value', _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 4), (u'criticality', u'reject'), (u'Value', _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_4), (u'presence', u'mandatory')]), dict([(u'id', 5), (u'criticality', u'reject'), (u'Value', _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_5), (u'presence', u'mandatory')]), dict([(u'id', 6), (u'criticality', u'ignore'), (u'Value', _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_6), (u'presence', u'optional')]), dict([(u'id', 16), (u'criticality', u'reject'), (u'Value', _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_7), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_8), (u'presence', u'optional')]), dict([(u'id', 21), (u'criticality', u'ignore'), (u'Value', _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_9), (u'presence', u'optional')]), dict([(u'id', 25), (u'criticality', u'reject'), (u'Value', _____MBMSSessionUpdateRequest_protocolIEs__item__id_tab_val_Value_10), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___MBMSSessionUpdateRequest_protocolIEs__item__id._const_tab = ____MBMSSessionUpdateRequest_protocolIEs__item__id_tab
     ___MBMSSessionUpdateRequest_protocolIEs__item__id._const_tab_at = None
-    ___MBMSSessionUpdateRequest_protocolIEs__item__id._const_tab_id = 'id'
-    ___MBMSSessionUpdateRequest_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['criticality']))
+    ___MBMSSessionUpdateRequest_protocolIEs__item__id._const_tab_id = u'id'
+    ___MBMSSessionUpdateRequest_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'criticality']))
     ___MBMSSessionUpdateRequest_protocolIEs__item__criticality._const_tab = ____MBMSSessionUpdateRequest_protocolIEs__item__id_tab
-    ___MBMSSessionUpdateRequest_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___MBMSSessionUpdateRequest_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___MBMSSessionUpdateRequest_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['Value']))
+    ___MBMSSessionUpdateRequest_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___MBMSSessionUpdateRequest_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___MBMSSessionUpdateRequest_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'Value']))
     ___MBMSSessionUpdateRequest_protocolIEs__item__value._const_tab = ____MBMSSessionUpdateRequest_protocolIEs__item__id_tab
-    ___MBMSSessionUpdateRequest_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___MBMSSessionUpdateRequest_protocolIEs__item__value._const_tab_id = 'Value'
+    ___MBMSSessionUpdateRequest_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___MBMSSessionUpdateRequest_protocolIEs__item__value._const_tab_id = u'Value'
     __MBMSSessionUpdateRequest_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___MBMSSessionUpdateRequest_protocolIEs__item__id),
-        ('criticality', ___MBMSSessionUpdateRequest_protocolIEs__item__criticality),
-        ('value', ___MBMSSessionUpdateRequest_protocolIEs__item__value),
+        (u'id', ___MBMSSessionUpdateRequest_protocolIEs__item__id),
+        (u'criticality', ___MBMSSessionUpdateRequest_protocolIEs__item__criticality),
+        (u'value', ___MBMSSessionUpdateRequest_protocolIEs__item__value),
         ])
     __MBMSSessionUpdateRequest_protocolIEs__item_._ext = None
     _MBMSSessionUpdateRequest_protocolIEs._cont = __MBMSSessionUpdateRequest_protocolIEs__item_
     _MBMSSessionUpdateRequest_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     MBMSSessionUpdateRequest._cont = ASN1Dict([
-        ('protocolIEs', _MBMSSessionUpdateRequest_protocolIEs),
+        (u'protocolIEs', _MBMSSessionUpdateRequest_protocolIEs),
         ])
     MBMSSessionUpdateRequest._ext = []
     
     #-----< MBMSSessionUpdateRequest-IEs >-----#
-    MBMSSessionUpdateRequest_IEs = CLASS(name='MBMSSessionUpdateRequest-IEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _MBMSSessionUpdateRequest_IEs_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
-    _MBMSSessionUpdateRequest_IEs_val_Value_1 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')))
-    _MBMSSessionUpdateRequest_IEs_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'TMGI')))
-    _MBMSSessionUpdateRequest_IEs_val_Value_3 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Session-ID')))
-    _MBMSSessionUpdateRequest_IEs_val_Value_4 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-E-RAB-QoS-Parameters')))
-    _MBMSSessionUpdateRequest_IEs_val_Value_5 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Session-Duration')))
-    _MBMSSessionUpdateRequest_IEs_val_Value_6 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Service-Area')))
-    _MBMSSessionUpdateRequest_IEs_val_Value_7 = OCT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MinimumTimeToMBMSDataTransfer')))
-    _MBMSSessionUpdateRequest_IEs_val_Value_8 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'TNL-Information')))
-    _MBMSSessionUpdateRequest_IEs_val_Value_9 = BIT_STR(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Absolute-Time-ofMBMS-Data')))
-    _MBMSSessionUpdateRequest_IEs_val_Value_10 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Cell-List')))
-    MBMSSessionUpdateRequest_IEs._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'reject'), ('Value', _MBMSSessionUpdateRequest_IEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'reject'), ('Value', _MBMSSessionUpdateRequest_IEs_val_Value_1), ('presence', 'mandatory')]), dict([('id', 2), ('criticality', 'reject'), ('Value', _MBMSSessionUpdateRequest_IEs_val_Value_2), ('presence', 'mandatory')]), dict([('id', 3), ('criticality', 'ignore'), ('Value', _MBMSSessionUpdateRequest_IEs_val_Value_3), ('presence', 'optional')]), dict([('id', 4), ('criticality', 'reject'), ('Value', _MBMSSessionUpdateRequest_IEs_val_Value_4), ('presence', 'mandatory')]), dict([('id', 5), ('criticality', 'reject'), ('Value', _MBMSSessionUpdateRequest_IEs_val_Value_5), ('presence', 'mandatory')]), dict([('id', 6), ('criticality', 'ignore'), ('Value', _MBMSSessionUpdateRequest_IEs_val_Value_6), ('presence', 'optional')]), dict([('id', 16), ('criticality', 'reject'), ('Value', _MBMSSessionUpdateRequest_IEs_val_Value_7), ('presence', 'mandatory')]), dict([('id', 7), ('criticality', 'ignore'), ('Value', _MBMSSessionUpdateRequest_IEs_val_Value_8), ('presence', 'optional')]), dict([('id', 21), ('criticality', 'ignore'), ('Value', _MBMSSessionUpdateRequest_IEs_val_Value_9), ('presence', 'optional')]), dict([('id', 25), ('criticality', 'reject'), ('Value', _MBMSSessionUpdateRequest_IEs_val_Value_10), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    MBMSSessionUpdateRequest_IEs = CLASS(name=u'MBMSSessionUpdateRequest-IEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
+    _MBMSSessionUpdateRequest_IEs_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
+    _MBMSSessionUpdateRequest_IEs_val_Value_1 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')))
+    _MBMSSessionUpdateRequest_IEs_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'TMGI')))
+    _MBMSSessionUpdateRequest_IEs_val_Value_3 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Session-ID')))
+    _MBMSSessionUpdateRequest_IEs_val_Value_4 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-E-RAB-QoS-Parameters')))
+    _MBMSSessionUpdateRequest_IEs_val_Value_5 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Session-Duration')))
+    _MBMSSessionUpdateRequest_IEs_val_Value_6 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Service-Area')))
+    _MBMSSessionUpdateRequest_IEs_val_Value_7 = OCT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MinimumTimeToMBMSDataTransfer')))
+    _MBMSSessionUpdateRequest_IEs_val_Value_8 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'TNL-Information')))
+    _MBMSSessionUpdateRequest_IEs_val_Value_9 = BIT_STR(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Absolute-Time-ofMBMS-Data')))
+    _MBMSSessionUpdateRequest_IEs_val_Value_10 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Cell-List')))
+    MBMSSessionUpdateRequest_IEs._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'reject'), (u'Value', _MBMSSessionUpdateRequest_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'reject'), (u'Value', _MBMSSessionUpdateRequest_IEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 2), (u'criticality', u'reject'), (u'Value', _MBMSSessionUpdateRequest_IEs_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 3), (u'criticality', u'ignore'), (u'Value', _MBMSSessionUpdateRequest_IEs_val_Value_3), (u'presence', u'optional')]), dict([(u'id', 4), (u'criticality', u'reject'), (u'Value', _MBMSSessionUpdateRequest_IEs_val_Value_4), (u'presence', u'mandatory')]), dict([(u'id', 5), (u'criticality', u'reject'), (u'Value', _MBMSSessionUpdateRequest_IEs_val_Value_5), (u'presence', u'mandatory')]), dict([(u'id', 6), (u'criticality', u'ignore'), (u'Value', _MBMSSessionUpdateRequest_IEs_val_Value_6), (u'presence', u'optional')]), dict([(u'id', 16), (u'criticality', u'reject'), (u'Value', _MBMSSessionUpdateRequest_IEs_val_Value_7), (u'presence', u'mandatory')]), dict([(u'id', 7), (u'criticality', u'ignore'), (u'Value', _MBMSSessionUpdateRequest_IEs_val_Value_8), (u'presence', u'optional')]), dict([(u'id', 21), (u'criticality', u'ignore'), (u'Value', _MBMSSessionUpdateRequest_IEs_val_Value_9), (u'presence', u'optional')]), dict([(u'id', 25), (u'criticality', u'reject'), (u'Value', _MBMSSessionUpdateRequest_IEs_val_Value_10), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< MBMSSessionUpdateResponse >-----#
-    MBMSSessionUpdateResponse = SEQ(name='MBMSSessionUpdateResponse', mode=MODE_TYPE)
-    _MBMSSessionUpdateResponse_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
+    MBMSSessionUpdateResponse = SEQ(name=u'MBMSSessionUpdateResponse', mode=MODE_TYPE)
+    _MBMSSessionUpdateResponse_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
     __MBMSSessionUpdateResponse_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Field')))
-    ___MBMSSessionUpdateResponse_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['id']))
+    ___MBMSSessionUpdateResponse_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'id']))
     ____MBMSSessionUpdateResponse_protocolIEs__item__id_tab = CLASS(name='_tab_M3AP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _____MBMSSessionUpdateResponse_protocolIEs__item__id_tab_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
-    _____MBMSSessionUpdateResponse_protocolIEs__item__id_tab_val_Value_1 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')))
-    _____MBMSSessionUpdateResponse_protocolIEs__item__id_tab_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
-    ____MBMSSessionUpdateResponse_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'ignore'), ('Value', _____MBMSSessionUpdateResponse_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _____MBMSSessionUpdateResponse_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')]), dict([('id', 8), ('criticality', 'ignore'), ('Value', _____MBMSSessionUpdateResponse_protocolIEs__item__id_tab_val_Value_2), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____MBMSSessionUpdateResponse_protocolIEs__item__id_tab_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
+    _____MBMSSessionUpdateResponse_protocolIEs__item__id_tab_val_Value_1 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')))
+    _____MBMSSessionUpdateResponse_protocolIEs__item__id_tab_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
+    ____MBMSSessionUpdateResponse_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'ignore'), (u'Value', _____MBMSSessionUpdateResponse_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _____MBMSSessionUpdateResponse_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 8), (u'criticality', u'ignore'), (u'Value', _____MBMSSessionUpdateResponse_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___MBMSSessionUpdateResponse_protocolIEs__item__id._const_tab = ____MBMSSessionUpdateResponse_protocolIEs__item__id_tab
     ___MBMSSessionUpdateResponse_protocolIEs__item__id._const_tab_at = None
-    ___MBMSSessionUpdateResponse_protocolIEs__item__id._const_tab_id = 'id'
-    ___MBMSSessionUpdateResponse_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['criticality']))
+    ___MBMSSessionUpdateResponse_protocolIEs__item__id._const_tab_id = u'id'
+    ___MBMSSessionUpdateResponse_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'criticality']))
     ___MBMSSessionUpdateResponse_protocolIEs__item__criticality._const_tab = ____MBMSSessionUpdateResponse_protocolIEs__item__id_tab
-    ___MBMSSessionUpdateResponse_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___MBMSSessionUpdateResponse_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___MBMSSessionUpdateResponse_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['Value']))
+    ___MBMSSessionUpdateResponse_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___MBMSSessionUpdateResponse_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___MBMSSessionUpdateResponse_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'Value']))
     ___MBMSSessionUpdateResponse_protocolIEs__item__value._const_tab = ____MBMSSessionUpdateResponse_protocolIEs__item__id_tab
-    ___MBMSSessionUpdateResponse_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___MBMSSessionUpdateResponse_protocolIEs__item__value._const_tab_id = 'Value'
+    ___MBMSSessionUpdateResponse_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___MBMSSessionUpdateResponse_protocolIEs__item__value._const_tab_id = u'Value'
     __MBMSSessionUpdateResponse_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___MBMSSessionUpdateResponse_protocolIEs__item__id),
-        ('criticality', ___MBMSSessionUpdateResponse_protocolIEs__item__criticality),
-        ('value', ___MBMSSessionUpdateResponse_protocolIEs__item__value),
+        (u'id', ___MBMSSessionUpdateResponse_protocolIEs__item__id),
+        (u'criticality', ___MBMSSessionUpdateResponse_protocolIEs__item__criticality),
+        (u'value', ___MBMSSessionUpdateResponse_protocolIEs__item__value),
         ])
     __MBMSSessionUpdateResponse_protocolIEs__item_._ext = None
     _MBMSSessionUpdateResponse_protocolIEs._cont = __MBMSSessionUpdateResponse_protocolIEs__item_
     _MBMSSessionUpdateResponse_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     MBMSSessionUpdateResponse._cont = ASN1Dict([
-        ('protocolIEs', _MBMSSessionUpdateResponse_protocolIEs),
+        (u'protocolIEs', _MBMSSessionUpdateResponse_protocolIEs),
         ])
     MBMSSessionUpdateResponse._ext = []
     
     #-----< MBMSSessionUpdateResponse-IEs >-----#
-    MBMSSessionUpdateResponse_IEs = CLASS(name='MBMSSessionUpdateResponse-IEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _MBMSSessionUpdateResponse_IEs_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
-    _MBMSSessionUpdateResponse_IEs_val_Value_1 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')))
-    _MBMSSessionUpdateResponse_IEs_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
-    MBMSSessionUpdateResponse_IEs._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'ignore'), ('Value', _MBMSSessionUpdateResponse_IEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _MBMSSessionUpdateResponse_IEs_val_Value_1), ('presence', 'mandatory')]), dict([('id', 8), ('criticality', 'ignore'), ('Value', _MBMSSessionUpdateResponse_IEs_val_Value_2), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    MBMSSessionUpdateResponse_IEs = CLASS(name=u'MBMSSessionUpdateResponse-IEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
+    _MBMSSessionUpdateResponse_IEs_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
+    _MBMSSessionUpdateResponse_IEs_val_Value_1 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')))
+    _MBMSSessionUpdateResponse_IEs_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
+    MBMSSessionUpdateResponse_IEs._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'ignore'), (u'Value', _MBMSSessionUpdateResponse_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _MBMSSessionUpdateResponse_IEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 8), (u'criticality', u'ignore'), (u'Value', _MBMSSessionUpdateResponse_IEs_val_Value_2), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< MBMSSessionUpdateFailure >-----#
-    MBMSSessionUpdateFailure = SEQ(name='MBMSSessionUpdateFailure', mode=MODE_TYPE)
-    _MBMSSessionUpdateFailure_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
+    MBMSSessionUpdateFailure = SEQ(name=u'MBMSSessionUpdateFailure', mode=MODE_TYPE)
+    _MBMSSessionUpdateFailure_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
     __MBMSSessionUpdateFailure_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Field')))
-    ___MBMSSessionUpdateFailure_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['id']))
+    ___MBMSSessionUpdateFailure_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'id']))
     ____MBMSSessionUpdateFailure_protocolIEs__item__id_tab = CLASS(name='_tab_M3AP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _____MBMSSessionUpdateFailure_protocolIEs__item__id_tab_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
-    _____MBMSSessionUpdateFailure_protocolIEs__item__id_tab_val_Value_1 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')))
-    _____MBMSSessionUpdateFailure_protocolIEs__item__id_tab_val_Value_2 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Cause')))
-    _____MBMSSessionUpdateFailure_protocolIEs__item__id_tab_val_Value_3 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
-    ____MBMSSessionUpdateFailure_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'ignore'), ('Value', _____MBMSSessionUpdateFailure_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _____MBMSSessionUpdateFailure_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')]), dict([('id', 9), ('criticality', 'ignore'), ('Value', _____MBMSSessionUpdateFailure_protocolIEs__item__id_tab_val_Value_2), ('presence', 'mandatory')]), dict([('id', 8), ('criticality', 'ignore'), ('Value', _____MBMSSessionUpdateFailure_protocolIEs__item__id_tab_val_Value_3), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____MBMSSessionUpdateFailure_protocolIEs__item__id_tab_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
+    _____MBMSSessionUpdateFailure_protocolIEs__item__id_tab_val_Value_1 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')))
+    _____MBMSSessionUpdateFailure_protocolIEs__item__id_tab_val_Value_2 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Cause')))
+    _____MBMSSessionUpdateFailure_protocolIEs__item__id_tab_val_Value_3 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
+    ____MBMSSessionUpdateFailure_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'ignore'), (u'Value', _____MBMSSessionUpdateFailure_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _____MBMSSessionUpdateFailure_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 9), (u'criticality', u'ignore'), (u'Value', _____MBMSSessionUpdateFailure_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 8), (u'criticality', u'ignore'), (u'Value', _____MBMSSessionUpdateFailure_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___MBMSSessionUpdateFailure_protocolIEs__item__id._const_tab = ____MBMSSessionUpdateFailure_protocolIEs__item__id_tab
     ___MBMSSessionUpdateFailure_protocolIEs__item__id._const_tab_at = None
-    ___MBMSSessionUpdateFailure_protocolIEs__item__id._const_tab_id = 'id'
-    ___MBMSSessionUpdateFailure_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['criticality']))
+    ___MBMSSessionUpdateFailure_protocolIEs__item__id._const_tab_id = u'id'
+    ___MBMSSessionUpdateFailure_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'criticality']))
     ___MBMSSessionUpdateFailure_protocolIEs__item__criticality._const_tab = ____MBMSSessionUpdateFailure_protocolIEs__item__id_tab
-    ___MBMSSessionUpdateFailure_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___MBMSSessionUpdateFailure_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___MBMSSessionUpdateFailure_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['Value']))
+    ___MBMSSessionUpdateFailure_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___MBMSSessionUpdateFailure_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___MBMSSessionUpdateFailure_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'Value']))
     ___MBMSSessionUpdateFailure_protocolIEs__item__value._const_tab = ____MBMSSessionUpdateFailure_protocolIEs__item__id_tab
-    ___MBMSSessionUpdateFailure_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___MBMSSessionUpdateFailure_protocolIEs__item__value._const_tab_id = 'Value'
+    ___MBMSSessionUpdateFailure_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___MBMSSessionUpdateFailure_protocolIEs__item__value._const_tab_id = u'Value'
     __MBMSSessionUpdateFailure_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___MBMSSessionUpdateFailure_protocolIEs__item__id),
-        ('criticality', ___MBMSSessionUpdateFailure_protocolIEs__item__criticality),
-        ('value', ___MBMSSessionUpdateFailure_protocolIEs__item__value),
+        (u'id', ___MBMSSessionUpdateFailure_protocolIEs__item__id),
+        (u'criticality', ___MBMSSessionUpdateFailure_protocolIEs__item__criticality),
+        (u'value', ___MBMSSessionUpdateFailure_protocolIEs__item__value),
         ])
     __MBMSSessionUpdateFailure_protocolIEs__item_._ext = None
     _MBMSSessionUpdateFailure_protocolIEs._cont = __MBMSSessionUpdateFailure_protocolIEs__item_
     _MBMSSessionUpdateFailure_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     MBMSSessionUpdateFailure._cont = ASN1Dict([
-        ('protocolIEs', _MBMSSessionUpdateFailure_protocolIEs),
+        (u'protocolIEs', _MBMSSessionUpdateFailure_protocolIEs),
         ])
     MBMSSessionUpdateFailure._ext = []
     
     #-----< MBMSSessionUpdateFailure-IEs >-----#
-    MBMSSessionUpdateFailure_IEs = CLASS(name='MBMSSessionUpdateFailure-IEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _MBMSSessionUpdateFailure_IEs_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
-    _MBMSSessionUpdateFailure_IEs_val_Value_1 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')))
-    _MBMSSessionUpdateFailure_IEs_val_Value_2 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Cause')))
-    _MBMSSessionUpdateFailure_IEs_val_Value_3 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
-    MBMSSessionUpdateFailure_IEs._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'ignore'), ('Value', _MBMSSessionUpdateFailure_IEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _MBMSSessionUpdateFailure_IEs_val_Value_1), ('presence', 'mandatory')]), dict([('id', 9), ('criticality', 'ignore'), ('Value', _MBMSSessionUpdateFailure_IEs_val_Value_2), ('presence', 'mandatory')]), dict([('id', 8), ('criticality', 'ignore'), ('Value', _MBMSSessionUpdateFailure_IEs_val_Value_3), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    MBMSSessionUpdateFailure_IEs = CLASS(name=u'MBMSSessionUpdateFailure-IEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
+    _MBMSSessionUpdateFailure_IEs_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
+    _MBMSSessionUpdateFailure_IEs_val_Value_1 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')))
+    _MBMSSessionUpdateFailure_IEs_val_Value_2 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Cause')))
+    _MBMSSessionUpdateFailure_IEs_val_Value_3 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
+    MBMSSessionUpdateFailure_IEs._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'ignore'), (u'Value', _MBMSSessionUpdateFailure_IEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _MBMSSessionUpdateFailure_IEs_val_Value_1), (u'presence', u'mandatory')]), dict([(u'id', 9), (u'criticality', u'ignore'), (u'Value', _MBMSSessionUpdateFailure_IEs_val_Value_2), (u'presence', u'mandatory')]), dict([(u'id', 8), (u'criticality', u'ignore'), (u'Value', _MBMSSessionUpdateFailure_IEs_val_Value_3), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< ErrorIndication >-----#
-    ErrorIndication = SEQ(name='ErrorIndication', mode=MODE_TYPE)
-    _ErrorIndication_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
+    ErrorIndication = SEQ(name=u'ErrorIndication', mode=MODE_TYPE)
+    _ErrorIndication_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
     __ErrorIndication_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Field')))
-    ___ErrorIndication_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['id']))
+    ___ErrorIndication_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'id']))
     ____ErrorIndication_protocolIEs__item__id_tab = CLASS(name='_tab_M3AP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _____ErrorIndication_protocolIEs__item__id_tab_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
-    _____ErrorIndication_protocolIEs__item__id_tab_val_Value_1 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')))
-    _____ErrorIndication_protocolIEs__item__id_tab_val_Value_2 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Cause')))
-    _____ErrorIndication_protocolIEs__item__id_tab_val_Value_3 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
-    ____ErrorIndication_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'ignore'), ('Value', _____ErrorIndication_protocolIEs__item__id_tab_val_Value_0), ('presence', 'optional')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _____ErrorIndication_protocolIEs__item__id_tab_val_Value_1), ('presence', 'optional')]), dict([('id', 9), ('criticality', 'ignore'), ('Value', _____ErrorIndication_protocolIEs__item__id_tab_val_Value_2), ('presence', 'optional')]), dict([('id', 8), ('criticality', 'ignore'), ('Value', _____ErrorIndication_protocolIEs__item__id_tab_val_Value_3), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____ErrorIndication_protocolIEs__item__id_tab_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
+    _____ErrorIndication_protocolIEs__item__id_tab_val_Value_1 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')))
+    _____ErrorIndication_protocolIEs__item__id_tab_val_Value_2 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Cause')))
+    _____ErrorIndication_protocolIEs__item__id_tab_val_Value_3 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
+    ____ErrorIndication_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'ignore'), (u'Value', _____ErrorIndication_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'optional')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _____ErrorIndication_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'optional')]), dict([(u'id', 9), (u'criticality', u'ignore'), (u'Value', _____ErrorIndication_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 8), (u'criticality', u'ignore'), (u'Value', _____ErrorIndication_protocolIEs__item__id_tab_val_Value_3), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___ErrorIndication_protocolIEs__item__id._const_tab = ____ErrorIndication_protocolIEs__item__id_tab
     ___ErrorIndication_protocolIEs__item__id._const_tab_at = None
-    ___ErrorIndication_protocolIEs__item__id._const_tab_id = 'id'
-    ___ErrorIndication_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['criticality']))
+    ___ErrorIndication_protocolIEs__item__id._const_tab_id = u'id'
+    ___ErrorIndication_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'criticality']))
     ___ErrorIndication_protocolIEs__item__criticality._const_tab = ____ErrorIndication_protocolIEs__item__id_tab
-    ___ErrorIndication_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___ErrorIndication_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___ErrorIndication_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['Value']))
+    ___ErrorIndication_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___ErrorIndication_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___ErrorIndication_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'Value']))
     ___ErrorIndication_protocolIEs__item__value._const_tab = ____ErrorIndication_protocolIEs__item__id_tab
-    ___ErrorIndication_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___ErrorIndication_protocolIEs__item__value._const_tab_id = 'Value'
+    ___ErrorIndication_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___ErrorIndication_protocolIEs__item__value._const_tab_id = u'Value'
     __ErrorIndication_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___ErrorIndication_protocolIEs__item__id),
-        ('criticality', ___ErrorIndication_protocolIEs__item__criticality),
-        ('value', ___ErrorIndication_protocolIEs__item__value),
+        (u'id', ___ErrorIndication_protocolIEs__item__id),
+        (u'criticality', ___ErrorIndication_protocolIEs__item__criticality),
+        (u'value', ___ErrorIndication_protocolIEs__item__value),
         ])
     __ErrorIndication_protocolIEs__item_._ext = None
     _ErrorIndication_protocolIEs._cont = __ErrorIndication_protocolIEs__item_
     _ErrorIndication_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     ErrorIndication._cont = ASN1Dict([
-        ('protocolIEs', _ErrorIndication_protocolIEs),
+        (u'protocolIEs', _ErrorIndication_protocolIEs),
         ])
     ErrorIndication._ext = []
     
     #-----< ErrorIndication-IEs >-----#
-    ErrorIndication_IEs = CLASS(name='ErrorIndication-IEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _ErrorIndication_IEs_val_Value_0 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
-    _ErrorIndication_IEs_val_Value_1 = INT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')))
-    _ErrorIndication_IEs_val_Value_2 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Cause')))
-    _ErrorIndication_IEs_val_Value_3 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
-    ErrorIndication_IEs._val = ASN1Set(rv=[dict([('id', 0), ('criticality', 'ignore'), ('Value', _ErrorIndication_IEs_val_Value_0), ('presence', 'optional')]), dict([('id', 1), ('criticality', 'ignore'), ('Value', _ErrorIndication_IEs_val_Value_1), ('presence', 'optional')]), dict([('id', 9), ('criticality', 'ignore'), ('Value', _ErrorIndication_IEs_val_Value_2), ('presence', 'optional')]), dict([('id', 8), ('criticality', 'ignore'), ('Value', _ErrorIndication_IEs_val_Value_3), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    ErrorIndication_IEs = CLASS(name=u'ErrorIndication-IEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
+    _ErrorIndication_IEs_val_Value_0 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MME-MBMS-M3AP-ID')))
+    _ErrorIndication_IEs_val_Value_1 = INT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCE-MBMS-M3AP-ID')))
+    _ErrorIndication_IEs_val_Value_2 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Cause')))
+    _ErrorIndication_IEs_val_Value_3 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
+    ErrorIndication_IEs._val = ASN1Set(rv=[dict([(u'id', 0), (u'criticality', u'ignore'), (u'Value', _ErrorIndication_IEs_val_Value_0), (u'presence', u'optional')]), dict([(u'id', 1), (u'criticality', u'ignore'), (u'Value', _ErrorIndication_IEs_val_Value_1), (u'presence', u'optional')]), dict([(u'id', 9), (u'criticality', u'ignore'), (u'Value', _ErrorIndication_IEs_val_Value_2), (u'presence', u'optional')]), dict([(u'id', 8), (u'criticality', u'ignore'), (u'Value', _ErrorIndication_IEs_val_Value_3), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< Reset >-----#
-    Reset = SEQ(name='Reset', mode=MODE_TYPE)
-    _Reset_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
+    Reset = SEQ(name=u'Reset', mode=MODE_TYPE)
+    _Reset_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
     __Reset_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Field')))
-    ___Reset_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['id']))
+    ___Reset_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'id']))
     ____Reset_protocolIEs__item__id_tab = CLASS(name='_tab_M3AP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _____Reset_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Cause')))
-    _____Reset_protocolIEs__item__id_tab_val_Value_1 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'ResetType')))
-    ____Reset_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 9), ('criticality', 'ignore'), ('Value', _____Reset_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 13), ('criticality', 'reject'), ('Value', _____Reset_protocolIEs__item__id_tab_val_Value_1), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    _____Reset_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Cause')))
+    _____Reset_protocolIEs__item__id_tab_val_Value_1 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'ResetType')))
+    ____Reset_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 9), (u'criticality', u'ignore'), (u'Value', _____Reset_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 13), (u'criticality', u'reject'), (u'Value', _____Reset_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     ___Reset_protocolIEs__item__id._const_tab = ____Reset_protocolIEs__item__id_tab
     ___Reset_protocolIEs__item__id._const_tab_at = None
-    ___Reset_protocolIEs__item__id._const_tab_id = 'id'
-    ___Reset_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['criticality']))
+    ___Reset_protocolIEs__item__id._const_tab_id = u'id'
+    ___Reset_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'criticality']))
     ___Reset_protocolIEs__item__criticality._const_tab = ____Reset_protocolIEs__item__id_tab
-    ___Reset_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___Reset_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___Reset_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['Value']))
+    ___Reset_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___Reset_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___Reset_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'Value']))
     ___Reset_protocolIEs__item__value._const_tab = ____Reset_protocolIEs__item__id_tab
-    ___Reset_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___Reset_protocolIEs__item__value._const_tab_id = 'Value'
+    ___Reset_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___Reset_protocolIEs__item__value._const_tab_id = u'Value'
     __Reset_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___Reset_protocolIEs__item__id),
-        ('criticality', ___Reset_protocolIEs__item__criticality),
-        ('value', ___Reset_protocolIEs__item__value),
+        (u'id', ___Reset_protocolIEs__item__id),
+        (u'criticality', ___Reset_protocolIEs__item__criticality),
+        (u'value', ___Reset_protocolIEs__item__value),
         ])
     __Reset_protocolIEs__item_._ext = None
     _Reset_protocolIEs._cont = __Reset_protocolIEs__item_
     _Reset_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     Reset._cont = ASN1Dict([
-        ('protocolIEs', _Reset_protocolIEs),
+        (u'protocolIEs', _Reset_protocolIEs),
         ])
     Reset._ext = []
     
     #-----< ResetIEs >-----#
-    ResetIEs = CLASS(name='ResetIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _ResetIEs_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Cause')))
-    _ResetIEs_val_Value_1 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'ResetType')))
-    ResetIEs._val = ASN1Set(rv=[dict([('id', 9), ('criticality', 'ignore'), ('Value', _ResetIEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 13), ('criticality', 'reject'), ('Value', _ResetIEs_val_Value_1), ('presence', 'mandatory')])], rr=[], ev=[], er=[])
+    ResetIEs = CLASS(name=u'ResetIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
+    _ResetIEs_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Cause')))
+    _ResetIEs_val_Value_1 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'ResetType')))
+    ResetIEs._val = ASN1Set(rv=[dict([(u'id', 9), (u'criticality', u'ignore'), (u'Value', _ResetIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 13), (u'criticality', u'reject'), (u'Value', _ResetIEs_val_Value_1), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< ResetType >-----#
-    ResetType = CHOICE(name='ResetType', mode=MODE_TYPE)
-    _ResetType_m3_Interface = ENUM(name='m3-Interface', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-PDU-Contents', 'ResetAll')))
-    _ResetType_partOfM3_Interface = SEQ_OF(name='partOfM3-Interface', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMS-Service-associatedLogicalM3-ConnectionListRes')))
+    ResetType = CHOICE(name=u'ResetType', mode=MODE_TYPE)
+    _ResetType_m3_Interface = ENUM(name=u'm3-Interface', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-PDU-Contents', 'ResetAll')))
+    _ResetType_partOfM3_Interface = SEQ_OF(name=u'partOfM3-Interface', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMS-Service-associatedLogicalM3-ConnectionListRes')))
     ResetType._cont = ASN1Dict([
-        ('m3-Interface', _ResetType_m3_Interface),
-        ('partOfM3-Interface', _ResetType_partOfM3_Interface),
+        (u'm3-Interface', _ResetType_m3_Interface),
+        (u'partOfM3-Interface', _ResetType_partOfM3_Interface),
         ])
     ResetType._ext = []
     
     #-----< ResetAll >-----#
-    ResetAll = ENUM(name='ResetAll', mode=MODE_TYPE)
-    ResetAll._cont = ASN1Dict([('reset-all', 0)])
+    ResetAll = ENUM(name=u'ResetAll', mode=MODE_TYPE)
+    ResetAll._cont = ASN1Dict([(u'reset-all', 0)])
     ResetAll._ext = []
     
     #-----< MBMS-Service-associatedLogicalM3-ConnectionListRes >-----#
-    MBMS_Service_associatedLogicalM3_ConnectionListRes = SEQ_OF(name='MBMS-Service-associatedLogicalM3-ConnectionListRes', mode=MODE_TYPE)
+    MBMS_Service_associatedLogicalM3_ConnectionListRes = SEQ_OF(name=u'MBMS-Service-associatedLogicalM3-ConnectionListRes', mode=MODE_TYPE)
     _MBMS_Service_associatedLogicalM3_ConnectionListRes__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Single-Container')))
-    __MBMS_Service_associatedLogicalM3_ConnectionListRes__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['id']))
+    __MBMS_Service_associatedLogicalM3_ConnectionListRes__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'id']))
     ___MBMS_Service_associatedLogicalM3_ConnectionListRes__item__id_tab = CLASS(name='_tab_M3AP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    ____MBMS_Service_associatedLogicalM3_ConnectionListRes__item__id_tab_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Service-associatedLogicalM3-ConnectionItem')))
-    ___MBMS_Service_associatedLogicalM3_ConnectionListRes__item__id_tab._val = ASN1Set(rv=[dict([('id', 14), ('criticality', 'reject'), ('Value', ____MBMS_Service_associatedLogicalM3_ConnectionListRes__item__id_tab_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    ____MBMS_Service_associatedLogicalM3_ConnectionListRes__item__id_tab_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Service-associatedLogicalM3-ConnectionItem')))
+    ___MBMS_Service_associatedLogicalM3_ConnectionListRes__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 14), (u'criticality', u'reject'), (u'Value', ____MBMS_Service_associatedLogicalM3_ConnectionListRes__item__id_tab_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     __MBMS_Service_associatedLogicalM3_ConnectionListRes__item__id._const_tab = ___MBMS_Service_associatedLogicalM3_ConnectionListRes__item__id_tab
     __MBMS_Service_associatedLogicalM3_ConnectionListRes__item__id._const_tab_at = None
-    __MBMS_Service_associatedLogicalM3_ConnectionListRes__item__id._const_tab_id = 'id'
-    __MBMS_Service_associatedLogicalM3_ConnectionListRes__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['criticality']))
+    __MBMS_Service_associatedLogicalM3_ConnectionListRes__item__id._const_tab_id = u'id'
+    __MBMS_Service_associatedLogicalM3_ConnectionListRes__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'criticality']))
     __MBMS_Service_associatedLogicalM3_ConnectionListRes__item__criticality._const_tab = ___MBMS_Service_associatedLogicalM3_ConnectionListRes__item__id_tab
-    __MBMS_Service_associatedLogicalM3_ConnectionListRes__item__criticality._const_tab_at = ('..', 'id')
-    __MBMS_Service_associatedLogicalM3_ConnectionListRes__item__criticality._const_tab_id = 'criticality'
-    __MBMS_Service_associatedLogicalM3_ConnectionListRes__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['Value']))
+    __MBMS_Service_associatedLogicalM3_ConnectionListRes__item__criticality._const_tab_at = ('..', u'id')
+    __MBMS_Service_associatedLogicalM3_ConnectionListRes__item__criticality._const_tab_id = u'criticality'
+    __MBMS_Service_associatedLogicalM3_ConnectionListRes__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'Value']))
     __MBMS_Service_associatedLogicalM3_ConnectionListRes__item__value._const_tab = ___MBMS_Service_associatedLogicalM3_ConnectionListRes__item__id_tab
-    __MBMS_Service_associatedLogicalM3_ConnectionListRes__item__value._const_tab_at = ('..', 'id')
-    __MBMS_Service_associatedLogicalM3_ConnectionListRes__item__value._const_tab_id = 'Value'
+    __MBMS_Service_associatedLogicalM3_ConnectionListRes__item__value._const_tab_at = ('..', u'id')
+    __MBMS_Service_associatedLogicalM3_ConnectionListRes__item__value._const_tab_id = u'Value'
     _MBMS_Service_associatedLogicalM3_ConnectionListRes__item_._cont = ASN1Dict([
-        ('id', __MBMS_Service_associatedLogicalM3_ConnectionListRes__item__id),
-        ('criticality', __MBMS_Service_associatedLogicalM3_ConnectionListRes__item__criticality),
-        ('value', __MBMS_Service_associatedLogicalM3_ConnectionListRes__item__value),
+        (u'id', __MBMS_Service_associatedLogicalM3_ConnectionListRes__item__id),
+        (u'criticality', __MBMS_Service_associatedLogicalM3_ConnectionListRes__item__criticality),
+        (u'value', __MBMS_Service_associatedLogicalM3_ConnectionListRes__item__value),
         ])
     _MBMS_Service_associatedLogicalM3_ConnectionListRes__item_._ext = None
     MBMS_Service_associatedLogicalM3_ConnectionListRes._cont = _MBMS_Service_associatedLogicalM3_ConnectionListRes__item_
     MBMS_Service_associatedLogicalM3_ConnectionListRes._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=256)], ev=None, er=[])
     
     #-----< MBMS-Service-associatedLogicalM3-ConnectionItemRes >-----#
-    MBMS_Service_associatedLogicalM3_ConnectionItemRes = CLASS(name='MBMS-Service-associatedLogicalM3-ConnectionItemRes', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _MBMS_Service_associatedLogicalM3_ConnectionItemRes_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Service-associatedLogicalM3-ConnectionItem')))
-    MBMS_Service_associatedLogicalM3_ConnectionItemRes._val = ASN1Set(rv=[dict([('id', 14), ('criticality', 'reject'), ('Value', _MBMS_Service_associatedLogicalM3_ConnectionItemRes_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=[], er=[])
+    MBMS_Service_associatedLogicalM3_ConnectionItemRes = CLASS(name=u'MBMS-Service-associatedLogicalM3-ConnectionItemRes', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
+    _MBMS_Service_associatedLogicalM3_ConnectionItemRes_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Service-associatedLogicalM3-ConnectionItem')))
+    MBMS_Service_associatedLogicalM3_ConnectionItemRes._val = ASN1Set(rv=[dict([(u'id', 14), (u'criticality', u'reject'), (u'Value', _MBMS_Service_associatedLogicalM3_ConnectionItemRes_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< ResetAcknowledge >-----#
-    ResetAcknowledge = SEQ(name='ResetAcknowledge', mode=MODE_TYPE)
-    _ResetAcknowledge_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
+    ResetAcknowledge = SEQ(name=u'ResetAcknowledge', mode=MODE_TYPE)
+    _ResetAcknowledge_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
     __ResetAcknowledge_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Field')))
-    ___ResetAcknowledge_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['id']))
+    ___ResetAcknowledge_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'id']))
     ____ResetAcknowledge_protocolIEs__item__id_tab = CLASS(name='_tab_M3AP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _____ResetAcknowledge_protocolIEs__item__id_tab_val_Value_0 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMS-Service-associatedLogicalM3-ConnectionListResAck')))
-    _____ResetAcknowledge_protocolIEs__item__id_tab_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
-    ____ResetAcknowledge_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 15), ('criticality', 'ignore'), ('Value', _____ResetAcknowledge_protocolIEs__item__id_tab_val_Value_0), ('presence', 'optional')]), dict([('id', 8), ('criticality', 'ignore'), ('Value', _____ResetAcknowledge_protocolIEs__item__id_tab_val_Value_1), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____ResetAcknowledge_protocolIEs__item__id_tab_val_Value_0 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMS-Service-associatedLogicalM3-ConnectionListResAck')))
+    _____ResetAcknowledge_protocolIEs__item__id_tab_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
+    ____ResetAcknowledge_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 15), (u'criticality', u'ignore'), (u'Value', _____ResetAcknowledge_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'optional')]), dict([(u'id', 8), (u'criticality', u'ignore'), (u'Value', _____ResetAcknowledge_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___ResetAcknowledge_protocolIEs__item__id._const_tab = ____ResetAcknowledge_protocolIEs__item__id_tab
     ___ResetAcknowledge_protocolIEs__item__id._const_tab_at = None
-    ___ResetAcknowledge_protocolIEs__item__id._const_tab_id = 'id'
-    ___ResetAcknowledge_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['criticality']))
+    ___ResetAcknowledge_protocolIEs__item__id._const_tab_id = u'id'
+    ___ResetAcknowledge_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'criticality']))
     ___ResetAcknowledge_protocolIEs__item__criticality._const_tab = ____ResetAcknowledge_protocolIEs__item__id_tab
-    ___ResetAcknowledge_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___ResetAcknowledge_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___ResetAcknowledge_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['Value']))
+    ___ResetAcknowledge_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___ResetAcknowledge_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___ResetAcknowledge_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'Value']))
     ___ResetAcknowledge_protocolIEs__item__value._const_tab = ____ResetAcknowledge_protocolIEs__item__id_tab
-    ___ResetAcknowledge_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___ResetAcknowledge_protocolIEs__item__value._const_tab_id = 'Value'
+    ___ResetAcknowledge_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___ResetAcknowledge_protocolIEs__item__value._const_tab_id = u'Value'
     __ResetAcknowledge_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___ResetAcknowledge_protocolIEs__item__id),
-        ('criticality', ___ResetAcknowledge_protocolIEs__item__criticality),
-        ('value', ___ResetAcknowledge_protocolIEs__item__value),
+        (u'id', ___ResetAcknowledge_protocolIEs__item__id),
+        (u'criticality', ___ResetAcknowledge_protocolIEs__item__criticality),
+        (u'value', ___ResetAcknowledge_protocolIEs__item__value),
         ])
     __ResetAcknowledge_protocolIEs__item_._ext = None
     _ResetAcknowledge_protocolIEs._cont = __ResetAcknowledge_protocolIEs__item_
     _ResetAcknowledge_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     ResetAcknowledge._cont = ASN1Dict([
-        ('protocolIEs', _ResetAcknowledge_protocolIEs),
+        (u'protocolIEs', _ResetAcknowledge_protocolIEs),
         ])
     ResetAcknowledge._ext = []
     
     #-----< ResetAcknowledgeIEs >-----#
-    ResetAcknowledgeIEs = CLASS(name='ResetAcknowledgeIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _ResetAcknowledgeIEs_val_Value_0 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMS-Service-associatedLogicalM3-ConnectionListResAck')))
-    _ResetAcknowledgeIEs_val_Value_1 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
-    ResetAcknowledgeIEs._val = ASN1Set(rv=[dict([('id', 15), ('criticality', 'ignore'), ('Value', _ResetAcknowledgeIEs_val_Value_0), ('presence', 'optional')]), dict([('id', 8), ('criticality', 'ignore'), ('Value', _ResetAcknowledgeIEs_val_Value_1), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    ResetAcknowledgeIEs = CLASS(name=u'ResetAcknowledgeIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
+    _ResetAcknowledgeIEs_val_Value_0 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMS-Service-associatedLogicalM3-ConnectionListResAck')))
+    _ResetAcknowledgeIEs_val_Value_1 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
+    ResetAcknowledgeIEs._val = ASN1Set(rv=[dict([(u'id', 15), (u'criticality', u'ignore'), (u'Value', _ResetAcknowledgeIEs_val_Value_0), (u'presence', u'optional')]), dict([(u'id', 8), (u'criticality', u'ignore'), (u'Value', _ResetAcknowledgeIEs_val_Value_1), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< MBMS-Service-associatedLogicalM3-ConnectionListResAck >-----#
-    MBMS_Service_associatedLogicalM3_ConnectionListResAck = SEQ_OF(name='MBMS-Service-associatedLogicalM3-ConnectionListResAck', mode=MODE_TYPE)
+    MBMS_Service_associatedLogicalM3_ConnectionListResAck = SEQ_OF(name=u'MBMS-Service-associatedLogicalM3-ConnectionListResAck', mode=MODE_TYPE)
     _MBMS_Service_associatedLogicalM3_ConnectionListResAck__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Single-Container')))
-    __MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['id']))
+    __MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'id']))
     ___MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__id_tab = CLASS(name='_tab_M3AP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    ____MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__id_tab_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Service-associatedLogicalM3-ConnectionItem')))
-    ___MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__id_tab._val = ASN1Set(rv=[dict([('id', 14), ('criticality', 'ignore'), ('Value', ____MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__id_tab_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    ____MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__id_tab_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Service-associatedLogicalM3-ConnectionItem')))
+    ___MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 14), (u'criticality', u'ignore'), (u'Value', ____MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__id_tab_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     __MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__id._const_tab = ___MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__id_tab
     __MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__id._const_tab_at = None
-    __MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__id._const_tab_id = 'id'
-    __MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['criticality']))
+    __MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__id._const_tab_id = u'id'
+    __MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'criticality']))
     __MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__criticality._const_tab = ___MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__id_tab
-    __MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__criticality._const_tab_at = ('..', 'id')
-    __MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__criticality._const_tab_id = 'criticality'
-    __MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['Value']))
+    __MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__criticality._const_tab_at = ('..', u'id')
+    __MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__criticality._const_tab_id = u'criticality'
+    __MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'Value']))
     __MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__value._const_tab = ___MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__id_tab
-    __MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__value._const_tab_at = ('..', 'id')
-    __MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__value._const_tab_id = 'Value'
+    __MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__value._const_tab_at = ('..', u'id')
+    __MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__value._const_tab_id = u'Value'
     _MBMS_Service_associatedLogicalM3_ConnectionListResAck__item_._cont = ASN1Dict([
-        ('id', __MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__id),
-        ('criticality', __MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__criticality),
-        ('value', __MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__value),
+        (u'id', __MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__id),
+        (u'criticality', __MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__criticality),
+        (u'value', __MBMS_Service_associatedLogicalM3_ConnectionListResAck__item__value),
         ])
     _MBMS_Service_associatedLogicalM3_ConnectionListResAck__item_._ext = None
     MBMS_Service_associatedLogicalM3_ConnectionListResAck._cont = _MBMS_Service_associatedLogicalM3_ConnectionListResAck__item_
     MBMS_Service_associatedLogicalM3_ConnectionListResAck._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=256)], ev=None, er=[])
     
     #-----< MBMS-Service-associatedLogicalM3-ConnectionItemResAck >-----#
-    MBMS_Service_associatedLogicalM3_ConnectionItemResAck = CLASS(name='MBMS-Service-associatedLogicalM3-ConnectionItemResAck', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _MBMS_Service_associatedLogicalM3_ConnectionItemResAck_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Service-associatedLogicalM3-ConnectionItem')))
-    MBMS_Service_associatedLogicalM3_ConnectionItemResAck._val = ASN1Set(rv=[dict([('id', 14), ('criticality', 'ignore'), ('Value', _MBMS_Service_associatedLogicalM3_ConnectionItemResAck_val_Value_0), ('presence', 'mandatory')])], rr=[], ev=[], er=[])
+    MBMS_Service_associatedLogicalM3_ConnectionItemResAck = CLASS(name=u'MBMS-Service-associatedLogicalM3-ConnectionItemResAck', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
+    _MBMS_Service_associatedLogicalM3_ConnectionItemResAck_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMS-Service-associatedLogicalM3-ConnectionItem')))
+    MBMS_Service_associatedLogicalM3_ConnectionItemResAck._val = ASN1Set(rv=[dict([(u'id', 14), (u'criticality', u'ignore'), (u'Value', _MBMS_Service_associatedLogicalM3_ConnectionItemResAck_val_Value_0), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< PrivateMessage >-----#
-    PrivateMessage = SEQ(name='PrivateMessage', mode=MODE_TYPE)
-    _PrivateMessage_privateIEs = SEQ_OF(name='privateIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'PrivateIE-Container')))
+    PrivateMessage = SEQ(name=u'PrivateMessage', mode=MODE_TYPE)
+    _PrivateMessage_privateIEs = SEQ_OF(name=u'privateIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'PrivateIE-Container')))
     __PrivateMessage_privateIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'PrivateIE-Field')))
-    ___PrivateMessage_privateIEs__item__id = CHOICE(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PRIVATE-IES'), ['id']))
+    ___PrivateMessage_privateIEs__item__id = CHOICE(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PRIVATE-IES'), [u'id']))
     ____PrivateMessage_privateIEs__item__id_tab = CLASS(name='_tab_M3AP-PRIVATE-IES', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PRIVATE-IES')))
     ____PrivateMessage_privateIEs__item__id_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___PrivateMessage_privateIEs__item__id._const_tab = ____PrivateMessage_privateIEs__item__id_tab
     ___PrivateMessage_privateIEs__item__id._const_tab_at = None
-    ___PrivateMessage_privateIEs__item__id._const_tab_id = 'id'
-    ___PrivateMessage_privateIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PRIVATE-IES'), ['criticality']))
+    ___PrivateMessage_privateIEs__item__id._const_tab_id = u'id'
+    ___PrivateMessage_privateIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PRIVATE-IES'), [u'criticality']))
     ____PrivateMessage_privateIEs__item__criticality_tab = CLASS(name='_tab_M3AP-PRIVATE-IES', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PRIVATE-IES')))
     ____PrivateMessage_privateIEs__item__criticality_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___PrivateMessage_privateIEs__item__criticality._const_tab = ____PrivateMessage_privateIEs__item__criticality_tab
-    ___PrivateMessage_privateIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___PrivateMessage_privateIEs__item__criticality._const_tab_id = 'criticality'
-    ___PrivateMessage_privateIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PRIVATE-IES'), ['Value']))
+    ___PrivateMessage_privateIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___PrivateMessage_privateIEs__item__criticality._const_tab_id = u'criticality'
+    ___PrivateMessage_privateIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PRIVATE-IES'), [u'Value']))
     ____PrivateMessage_privateIEs__item__value_tab = CLASS(name='_tab_M3AP-PRIVATE-IES', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PRIVATE-IES')))
     ____PrivateMessage_privateIEs__item__value_tab._val = ASN1Set(rv=[], rr=[], ev=None, er=[])
     ___PrivateMessage_privateIEs__item__value._const_tab = ____PrivateMessage_privateIEs__item__value_tab
-    ___PrivateMessage_privateIEs__item__value._const_tab_at = ('..', 'id')
-    ___PrivateMessage_privateIEs__item__value._const_tab_id = 'Value'
+    ___PrivateMessage_privateIEs__item__value._const_tab_at = ('..', u'id')
+    ___PrivateMessage_privateIEs__item__value._const_tab_id = u'Value'
     __PrivateMessage_privateIEs__item_._cont = ASN1Dict([
-        ('id', ___PrivateMessage_privateIEs__item__id),
-        ('criticality', ___PrivateMessage_privateIEs__item__criticality),
-        ('value', ___PrivateMessage_privateIEs__item__value),
+        (u'id', ___PrivateMessage_privateIEs__item__id),
+        (u'criticality', ___PrivateMessage_privateIEs__item__criticality),
+        (u'value', ___PrivateMessage_privateIEs__item__value),
         ])
     __PrivateMessage_privateIEs__item_._ext = None
     _PrivateMessage_privateIEs._cont = __PrivateMessage_privateIEs__item_
     _PrivateMessage_privateIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65535)], ev=None, er=[])
     PrivateMessage._cont = ASN1Dict([
-        ('privateIEs', _PrivateMessage_privateIEs),
+        (u'privateIEs', _PrivateMessage_privateIEs),
         ])
     PrivateMessage._ext = []
     
     #-----< PrivateMessage-IEs >-----#
-    PrivateMessage_IEs = CLASS(name='PrivateMessage-IEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PRIVATE-IES')))
+    PrivateMessage_IEs = CLASS(name=u'PrivateMessage-IEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PRIVATE-IES')))
     PrivateMessage_IEs._val = ASN1Set(rv=[], rr=[], ev=[], er=[])
     
     #-----< M3SetupRequest >-----#
-    M3SetupRequest = SEQ(name='M3SetupRequest', mode=MODE_TYPE)
-    _M3SetupRequest_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
+    M3SetupRequest = SEQ(name=u'M3SetupRequest', mode=MODE_TYPE)
+    _M3SetupRequest_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
     __M3SetupRequest_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Field')))
-    ___M3SetupRequest_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['id']))
+    ___M3SetupRequest_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'id']))
     ____M3SetupRequest_protocolIEs__item__id_tab = CLASS(name='_tab_M3AP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _____M3SetupRequest_protocolIEs__item__id_tab_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Global-MCE-ID')))
-    _____M3SetupRequest_protocolIEs__item__id_tab_val_Value_1 = STR_PRINT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCEname')))
-    _____M3SetupRequest_protocolIEs__item__id_tab_val_Value_2 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSServiceAreaListItem')))
-    ____M3SetupRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 18), ('criticality', 'reject'), ('Value', _____M3SetupRequest_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 19), ('criticality', 'ignore'), ('Value', _____M3SetupRequest_protocolIEs__item__id_tab_val_Value_1), ('presence', 'optional')]), dict([('id', 20), ('criticality', 'reject'), ('Value', _____M3SetupRequest_protocolIEs__item__id_tab_val_Value_2), ('presence', 'mandatory')])], rr=[], ev=None, er=[])
+    _____M3SetupRequest_protocolIEs__item__id_tab_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Global-MCE-ID')))
+    _____M3SetupRequest_protocolIEs__item__id_tab_val_Value_1 = STR_PRINT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCEname')))
+    _____M3SetupRequest_protocolIEs__item__id_tab_val_Value_2 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSServiceAreaListItem')))
+    ____M3SetupRequest_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 18), (u'criticality', u'reject'), (u'Value', _____M3SetupRequest_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 19), (u'criticality', u'ignore'), (u'Value', _____M3SetupRequest_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'optional')]), dict([(u'id', 20), (u'criticality', u'reject'), (u'Value', _____M3SetupRequest_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'mandatory')])], rr=[], ev=None, er=[])
     ___M3SetupRequest_protocolIEs__item__id._const_tab = ____M3SetupRequest_protocolIEs__item__id_tab
     ___M3SetupRequest_protocolIEs__item__id._const_tab_at = None
-    ___M3SetupRequest_protocolIEs__item__id._const_tab_id = 'id'
-    ___M3SetupRequest_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['criticality']))
+    ___M3SetupRequest_protocolIEs__item__id._const_tab_id = u'id'
+    ___M3SetupRequest_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'criticality']))
     ___M3SetupRequest_protocolIEs__item__criticality._const_tab = ____M3SetupRequest_protocolIEs__item__id_tab
-    ___M3SetupRequest_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___M3SetupRequest_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___M3SetupRequest_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['Value']))
+    ___M3SetupRequest_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___M3SetupRequest_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___M3SetupRequest_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'Value']))
     ___M3SetupRequest_protocolIEs__item__value._const_tab = ____M3SetupRequest_protocolIEs__item__id_tab
-    ___M3SetupRequest_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___M3SetupRequest_protocolIEs__item__value._const_tab_id = 'Value'
+    ___M3SetupRequest_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___M3SetupRequest_protocolIEs__item__value._const_tab_id = u'Value'
     __M3SetupRequest_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___M3SetupRequest_protocolIEs__item__id),
-        ('criticality', ___M3SetupRequest_protocolIEs__item__criticality),
-        ('value', ___M3SetupRequest_protocolIEs__item__value),
+        (u'id', ___M3SetupRequest_protocolIEs__item__id),
+        (u'criticality', ___M3SetupRequest_protocolIEs__item__criticality),
+        (u'value', ___M3SetupRequest_protocolIEs__item__value),
         ])
     __M3SetupRequest_protocolIEs__item_._ext = None
     _M3SetupRequest_protocolIEs._cont = __M3SetupRequest_protocolIEs__item_
     _M3SetupRequest_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     M3SetupRequest._cont = ASN1Dict([
-        ('protocolIEs', _M3SetupRequest_protocolIEs),
+        (u'protocolIEs', _M3SetupRequest_protocolIEs),
         ])
     M3SetupRequest._ext = []
     
     #-----< M3SetupRequestIEs >-----#
-    M3SetupRequestIEs = CLASS(name='M3SetupRequestIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _M3SetupRequestIEs_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Global-MCE-ID')))
-    _M3SetupRequestIEs_val_Value_1 = STR_PRINT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCEname')))
-    _M3SetupRequestIEs_val_Value_2 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSServiceAreaListItem')))
-    M3SetupRequestIEs._val = ASN1Set(rv=[dict([('id', 18), ('criticality', 'reject'), ('Value', _M3SetupRequestIEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 19), ('criticality', 'ignore'), ('Value', _M3SetupRequestIEs_val_Value_1), ('presence', 'optional')]), dict([('id', 20), ('criticality', 'reject'), ('Value', _M3SetupRequestIEs_val_Value_2), ('presence', 'mandatory')])], rr=[], ev=[], er=[])
+    M3SetupRequestIEs = CLASS(name=u'M3SetupRequestIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
+    _M3SetupRequestIEs_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Global-MCE-ID')))
+    _M3SetupRequestIEs_val_Value_1 = STR_PRINT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCEname')))
+    _M3SetupRequestIEs_val_Value_2 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSServiceAreaListItem')))
+    M3SetupRequestIEs._val = ASN1Set(rv=[dict([(u'id', 18), (u'criticality', u'reject'), (u'Value', _M3SetupRequestIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 19), (u'criticality', u'ignore'), (u'Value', _M3SetupRequestIEs_val_Value_1), (u'presence', u'optional')]), dict([(u'id', 20), (u'criticality', u'reject'), (u'Value', _M3SetupRequestIEs_val_Value_2), (u'presence', u'mandatory')])], rr=[], ev=[], er=[])
     
     #-----< MBMSServiceAreaListItem >-----#
-    MBMSServiceAreaListItem = SEQ_OF(name='MBMSServiceAreaListItem', mode=MODE_TYPE)
+    MBMSServiceAreaListItem = SEQ_OF(name=u'MBMSServiceAreaListItem', mode=MODE_TYPE)
     _MBMSServiceAreaListItem__item_ = OCT_STR(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MBMSServiceArea1')))
     MBMSServiceAreaListItem._cont = _MBMSServiceAreaListItem__item_
     MBMSServiceAreaListItem._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=1, ub=65536)], ev=None, er=[])
     
     #-----< M3SetupResponse >-----#
-    M3SetupResponse = SEQ(name='M3SetupResponse', mode=MODE_TYPE)
-    _M3SetupResponse_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
+    M3SetupResponse = SEQ(name=u'M3SetupResponse', mode=MODE_TYPE)
+    _M3SetupResponse_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
     __M3SetupResponse_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Field')))
-    ___M3SetupResponse_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['id']))
+    ___M3SetupResponse_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'id']))
     ____M3SetupResponse_protocolIEs__item__id_tab = CLASS(name='_tab_M3AP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _____M3SetupResponse_protocolIEs__item__id_tab_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
-    ____M3SetupResponse_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 8), ('criticality', 'ignore'), ('Value', _____M3SetupResponse_protocolIEs__item__id_tab_val_Value_0), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____M3SetupResponse_protocolIEs__item__id_tab_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
+    ____M3SetupResponse_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 8), (u'criticality', u'ignore'), (u'Value', _____M3SetupResponse_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___M3SetupResponse_protocolIEs__item__id._const_tab = ____M3SetupResponse_protocolIEs__item__id_tab
     ___M3SetupResponse_protocolIEs__item__id._const_tab_at = None
-    ___M3SetupResponse_protocolIEs__item__id._const_tab_id = 'id'
-    ___M3SetupResponse_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['criticality']))
+    ___M3SetupResponse_protocolIEs__item__id._const_tab_id = u'id'
+    ___M3SetupResponse_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'criticality']))
     ___M3SetupResponse_protocolIEs__item__criticality._const_tab = ____M3SetupResponse_protocolIEs__item__id_tab
-    ___M3SetupResponse_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___M3SetupResponse_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___M3SetupResponse_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['Value']))
+    ___M3SetupResponse_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___M3SetupResponse_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___M3SetupResponse_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'Value']))
     ___M3SetupResponse_protocolIEs__item__value._const_tab = ____M3SetupResponse_protocolIEs__item__id_tab
-    ___M3SetupResponse_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___M3SetupResponse_protocolIEs__item__value._const_tab_id = 'Value'
+    ___M3SetupResponse_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___M3SetupResponse_protocolIEs__item__value._const_tab_id = u'Value'
     __M3SetupResponse_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___M3SetupResponse_protocolIEs__item__id),
-        ('criticality', ___M3SetupResponse_protocolIEs__item__criticality),
-        ('value', ___M3SetupResponse_protocolIEs__item__value),
+        (u'id', ___M3SetupResponse_protocolIEs__item__id),
+        (u'criticality', ___M3SetupResponse_protocolIEs__item__criticality),
+        (u'value', ___M3SetupResponse_protocolIEs__item__value),
         ])
     __M3SetupResponse_protocolIEs__item_._ext = None
     _M3SetupResponse_protocolIEs._cont = __M3SetupResponse_protocolIEs__item_
     _M3SetupResponse_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     M3SetupResponse._cont = ASN1Dict([
-        ('protocolIEs', _M3SetupResponse_protocolIEs),
+        (u'protocolIEs', _M3SetupResponse_protocolIEs),
         ])
     M3SetupResponse._ext = []
     
     #-----< M3SetupResponseIEs >-----#
-    M3SetupResponseIEs = CLASS(name='M3SetupResponseIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _M3SetupResponseIEs_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
-    M3SetupResponseIEs._val = ASN1Set(rv=[dict([('id', 8), ('criticality', 'ignore'), ('Value', _M3SetupResponseIEs_val_Value_0), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    M3SetupResponseIEs = CLASS(name=u'M3SetupResponseIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
+    _M3SetupResponseIEs_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
+    M3SetupResponseIEs._val = ASN1Set(rv=[dict([(u'id', 8), (u'criticality', u'ignore'), (u'Value', _M3SetupResponseIEs_val_Value_0), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< M3SetupFailure >-----#
-    M3SetupFailure = SEQ(name='M3SetupFailure', mode=MODE_TYPE)
-    _M3SetupFailure_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
+    M3SetupFailure = SEQ(name=u'M3SetupFailure', mode=MODE_TYPE)
+    _M3SetupFailure_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
     __M3SetupFailure_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Field')))
-    ___M3SetupFailure_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['id']))
+    ___M3SetupFailure_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'id']))
     ____M3SetupFailure_protocolIEs__item__id_tab = CLASS(name='_tab_M3AP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _____M3SetupFailure_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Cause')))
-    _____M3SetupFailure_protocolIEs__item__id_tab_val_Value_1 = ENUM(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'TimeToWait')))
-    _____M3SetupFailure_protocolIEs__item__id_tab_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
-    ____M3SetupFailure_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 9), ('criticality', 'ignore'), ('Value', _____M3SetupFailure_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 12), ('criticality', 'ignore'), ('Value', _____M3SetupFailure_protocolIEs__item__id_tab_val_Value_1), ('presence', 'optional')]), dict([('id', 8), ('criticality', 'ignore'), ('Value', _____M3SetupFailure_protocolIEs__item__id_tab_val_Value_2), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____M3SetupFailure_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Cause')))
+    _____M3SetupFailure_protocolIEs__item__id_tab_val_Value_1 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'TimeToWait')))
+    _____M3SetupFailure_protocolIEs__item__id_tab_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
+    ____M3SetupFailure_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 9), (u'criticality', u'ignore'), (u'Value', _____M3SetupFailure_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 12), (u'criticality', u'ignore'), (u'Value', _____M3SetupFailure_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'optional')]), dict([(u'id', 8), (u'criticality', u'ignore'), (u'Value', _____M3SetupFailure_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___M3SetupFailure_protocolIEs__item__id._const_tab = ____M3SetupFailure_protocolIEs__item__id_tab
     ___M3SetupFailure_protocolIEs__item__id._const_tab_at = None
-    ___M3SetupFailure_protocolIEs__item__id._const_tab_id = 'id'
-    ___M3SetupFailure_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['criticality']))
+    ___M3SetupFailure_protocolIEs__item__id._const_tab_id = u'id'
+    ___M3SetupFailure_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'criticality']))
     ___M3SetupFailure_protocolIEs__item__criticality._const_tab = ____M3SetupFailure_protocolIEs__item__id_tab
-    ___M3SetupFailure_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___M3SetupFailure_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___M3SetupFailure_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['Value']))
+    ___M3SetupFailure_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___M3SetupFailure_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___M3SetupFailure_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'Value']))
     ___M3SetupFailure_protocolIEs__item__value._const_tab = ____M3SetupFailure_protocolIEs__item__id_tab
-    ___M3SetupFailure_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___M3SetupFailure_protocolIEs__item__value._const_tab_id = 'Value'
+    ___M3SetupFailure_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___M3SetupFailure_protocolIEs__item__value._const_tab_id = u'Value'
     __M3SetupFailure_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___M3SetupFailure_protocolIEs__item__id),
-        ('criticality', ___M3SetupFailure_protocolIEs__item__criticality),
-        ('value', ___M3SetupFailure_protocolIEs__item__value),
+        (u'id', ___M3SetupFailure_protocolIEs__item__id),
+        (u'criticality', ___M3SetupFailure_protocolIEs__item__criticality),
+        (u'value', ___M3SetupFailure_protocolIEs__item__value),
         ])
     __M3SetupFailure_protocolIEs__item_._ext = None
     _M3SetupFailure_protocolIEs._cont = __M3SetupFailure_protocolIEs__item_
     _M3SetupFailure_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     M3SetupFailure._cont = ASN1Dict([
-        ('protocolIEs', _M3SetupFailure_protocolIEs),
+        (u'protocolIEs', _M3SetupFailure_protocolIEs),
         ])
     M3SetupFailure._ext = []
     
     #-----< M3SetupFailureIEs >-----#
-    M3SetupFailureIEs = CLASS(name='M3SetupFailureIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _M3SetupFailureIEs_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Cause')))
-    _M3SetupFailureIEs_val_Value_1 = ENUM(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'TimeToWait')))
-    _M3SetupFailureIEs_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
-    M3SetupFailureIEs._val = ASN1Set(rv=[dict([('id', 9), ('criticality', 'ignore'), ('Value', _M3SetupFailureIEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 12), ('criticality', 'ignore'), ('Value', _M3SetupFailureIEs_val_Value_1), ('presence', 'optional')]), dict([('id', 8), ('criticality', 'ignore'), ('Value', _M3SetupFailureIEs_val_Value_2), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    M3SetupFailureIEs = CLASS(name=u'M3SetupFailureIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
+    _M3SetupFailureIEs_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Cause')))
+    _M3SetupFailureIEs_val_Value_1 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'TimeToWait')))
+    _M3SetupFailureIEs_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
+    M3SetupFailureIEs._val = ASN1Set(rv=[dict([(u'id', 9), (u'criticality', u'ignore'), (u'Value', _M3SetupFailureIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 12), (u'criticality', u'ignore'), (u'Value', _M3SetupFailureIEs_val_Value_1), (u'presence', u'optional')]), dict([(u'id', 8), (u'criticality', u'ignore'), (u'Value', _M3SetupFailureIEs_val_Value_2), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< MCEConfigurationUpdate >-----#
-    MCEConfigurationUpdate = SEQ(name='MCEConfigurationUpdate', mode=MODE_TYPE)
-    _MCEConfigurationUpdate_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
+    MCEConfigurationUpdate = SEQ(name=u'MCEConfigurationUpdate', mode=MODE_TYPE)
+    _MCEConfigurationUpdate_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
     __MCEConfigurationUpdate_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Field')))
-    ___MCEConfigurationUpdate_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['id']))
+    ___MCEConfigurationUpdate_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'id']))
     ____MCEConfigurationUpdate_protocolIEs__item__id_tab = CLASS(name='_tab_M3AP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _____MCEConfigurationUpdate_protocolIEs__item__id_tab_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Global-MCE-ID')))
-    _____MCEConfigurationUpdate_protocolIEs__item__id_tab_val_Value_1 = STR_PRINT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCEname')))
-    _____MCEConfigurationUpdate_protocolIEs__item__id_tab_val_Value_2 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSServiceAreaListItem')))
-    ____MCEConfigurationUpdate_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 18), ('criticality', 'reject'), ('Value', _____MCEConfigurationUpdate_protocolIEs__item__id_tab_val_Value_0), ('presence', 'optional')]), dict([('id', 19), ('criticality', 'ignore'), ('Value', _____MCEConfigurationUpdate_protocolIEs__item__id_tab_val_Value_1), ('presence', 'optional')]), dict([('id', 20), ('criticality', 'reject'), ('Value', _____MCEConfigurationUpdate_protocolIEs__item__id_tab_val_Value_2), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____MCEConfigurationUpdate_protocolIEs__item__id_tab_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Global-MCE-ID')))
+    _____MCEConfigurationUpdate_protocolIEs__item__id_tab_val_Value_1 = STR_PRINT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCEname')))
+    _____MCEConfigurationUpdate_protocolIEs__item__id_tab_val_Value_2 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSServiceAreaListItem')))
+    ____MCEConfigurationUpdate_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 18), (u'criticality', u'reject'), (u'Value', _____MCEConfigurationUpdate_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'optional')]), dict([(u'id', 19), (u'criticality', u'ignore'), (u'Value', _____MCEConfigurationUpdate_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'optional')]), dict([(u'id', 20), (u'criticality', u'reject'), (u'Value', _____MCEConfigurationUpdate_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___MCEConfigurationUpdate_protocolIEs__item__id._const_tab = ____MCEConfigurationUpdate_protocolIEs__item__id_tab
     ___MCEConfigurationUpdate_protocolIEs__item__id._const_tab_at = None
-    ___MCEConfigurationUpdate_protocolIEs__item__id._const_tab_id = 'id'
-    ___MCEConfigurationUpdate_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['criticality']))
+    ___MCEConfigurationUpdate_protocolIEs__item__id._const_tab_id = u'id'
+    ___MCEConfigurationUpdate_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'criticality']))
     ___MCEConfigurationUpdate_protocolIEs__item__criticality._const_tab = ____MCEConfigurationUpdate_protocolIEs__item__id_tab
-    ___MCEConfigurationUpdate_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___MCEConfigurationUpdate_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___MCEConfigurationUpdate_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['Value']))
+    ___MCEConfigurationUpdate_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___MCEConfigurationUpdate_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___MCEConfigurationUpdate_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'Value']))
     ___MCEConfigurationUpdate_protocolIEs__item__value._const_tab = ____MCEConfigurationUpdate_protocolIEs__item__id_tab
-    ___MCEConfigurationUpdate_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___MCEConfigurationUpdate_protocolIEs__item__value._const_tab_id = 'Value'
+    ___MCEConfigurationUpdate_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___MCEConfigurationUpdate_protocolIEs__item__value._const_tab_id = u'Value'
     __MCEConfigurationUpdate_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___MCEConfigurationUpdate_protocolIEs__item__id),
-        ('criticality', ___MCEConfigurationUpdate_protocolIEs__item__criticality),
-        ('value', ___MCEConfigurationUpdate_protocolIEs__item__value),
+        (u'id', ___MCEConfigurationUpdate_protocolIEs__item__id),
+        (u'criticality', ___MCEConfigurationUpdate_protocolIEs__item__criticality),
+        (u'value', ___MCEConfigurationUpdate_protocolIEs__item__value),
         ])
     __MCEConfigurationUpdate_protocolIEs__item_._ext = None
     _MCEConfigurationUpdate_protocolIEs._cont = __MCEConfigurationUpdate_protocolIEs__item_
     _MCEConfigurationUpdate_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     MCEConfigurationUpdate._cont = ASN1Dict([
-        ('protocolIEs', _MCEConfigurationUpdate_protocolIEs),
+        (u'protocolIEs', _MCEConfigurationUpdate_protocolIEs),
         ])
     MCEConfigurationUpdate._ext = []
     
     #-----< MCEConfigurationUpdateIEs >-----#
-    MCEConfigurationUpdateIEs = CLASS(name='MCEConfigurationUpdateIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _MCEConfigurationUpdateIEs_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Global-MCE-ID')))
-    _MCEConfigurationUpdateIEs_val_Value_1 = STR_PRINT(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCEname')))
-    _MCEConfigurationUpdateIEs_val_Value_2 = SEQ_OF(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSServiceAreaListItem')))
-    MCEConfigurationUpdateIEs._val = ASN1Set(rv=[dict([('id', 18), ('criticality', 'reject'), ('Value', _MCEConfigurationUpdateIEs_val_Value_0), ('presence', 'optional')]), dict([('id', 19), ('criticality', 'ignore'), ('Value', _MCEConfigurationUpdateIEs_val_Value_1), ('presence', 'optional')]), dict([('id', 20), ('criticality', 'reject'), ('Value', _MCEConfigurationUpdateIEs_val_Value_2), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    MCEConfigurationUpdateIEs = CLASS(name=u'MCEConfigurationUpdateIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
+    _MCEConfigurationUpdateIEs_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Global-MCE-ID')))
+    _MCEConfigurationUpdateIEs_val_Value_1 = STR_PRINT(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'MCEname')))
+    _MCEConfigurationUpdateIEs_val_Value_2 = SEQ_OF(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSServiceAreaListItem')))
+    MCEConfigurationUpdateIEs._val = ASN1Set(rv=[dict([(u'id', 18), (u'criticality', u'reject'), (u'Value', _MCEConfigurationUpdateIEs_val_Value_0), (u'presence', u'optional')]), dict([(u'id', 19), (u'criticality', u'ignore'), (u'Value', _MCEConfigurationUpdateIEs_val_Value_1), (u'presence', u'optional')]), dict([(u'id', 20), (u'criticality', u'reject'), (u'Value', _MCEConfigurationUpdateIEs_val_Value_2), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< MCEConfigurationUpdateAcknowledge >-----#
-    MCEConfigurationUpdateAcknowledge = SEQ(name='MCEConfigurationUpdateAcknowledge', mode=MODE_TYPE)
-    _MCEConfigurationUpdateAcknowledge_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
+    MCEConfigurationUpdateAcknowledge = SEQ(name=u'MCEConfigurationUpdateAcknowledge', mode=MODE_TYPE)
+    _MCEConfigurationUpdateAcknowledge_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
     __MCEConfigurationUpdateAcknowledge_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Field')))
-    ___MCEConfigurationUpdateAcknowledge_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['id']))
+    ___MCEConfigurationUpdateAcknowledge_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'id']))
     ____MCEConfigurationUpdateAcknowledge_protocolIEs__item__id_tab = CLASS(name='_tab_M3AP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _____MCEConfigurationUpdateAcknowledge_protocolIEs__item__id_tab_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
-    ____MCEConfigurationUpdateAcknowledge_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 8), ('criticality', 'ignore'), ('Value', _____MCEConfigurationUpdateAcknowledge_protocolIEs__item__id_tab_val_Value_0), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____MCEConfigurationUpdateAcknowledge_protocolIEs__item__id_tab_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
+    ____MCEConfigurationUpdateAcknowledge_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 8), (u'criticality', u'ignore'), (u'Value', _____MCEConfigurationUpdateAcknowledge_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___MCEConfigurationUpdateAcknowledge_protocolIEs__item__id._const_tab = ____MCEConfigurationUpdateAcknowledge_protocolIEs__item__id_tab
     ___MCEConfigurationUpdateAcknowledge_protocolIEs__item__id._const_tab_at = None
-    ___MCEConfigurationUpdateAcknowledge_protocolIEs__item__id._const_tab_id = 'id'
-    ___MCEConfigurationUpdateAcknowledge_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['criticality']))
+    ___MCEConfigurationUpdateAcknowledge_protocolIEs__item__id._const_tab_id = u'id'
+    ___MCEConfigurationUpdateAcknowledge_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'criticality']))
     ___MCEConfigurationUpdateAcknowledge_protocolIEs__item__criticality._const_tab = ____MCEConfigurationUpdateAcknowledge_protocolIEs__item__id_tab
-    ___MCEConfigurationUpdateAcknowledge_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___MCEConfigurationUpdateAcknowledge_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___MCEConfigurationUpdateAcknowledge_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['Value']))
+    ___MCEConfigurationUpdateAcknowledge_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___MCEConfigurationUpdateAcknowledge_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___MCEConfigurationUpdateAcknowledge_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'Value']))
     ___MCEConfigurationUpdateAcknowledge_protocolIEs__item__value._const_tab = ____MCEConfigurationUpdateAcknowledge_protocolIEs__item__id_tab
-    ___MCEConfigurationUpdateAcknowledge_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___MCEConfigurationUpdateAcknowledge_protocolIEs__item__value._const_tab_id = 'Value'
+    ___MCEConfigurationUpdateAcknowledge_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___MCEConfigurationUpdateAcknowledge_protocolIEs__item__value._const_tab_id = u'Value'
     __MCEConfigurationUpdateAcknowledge_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___MCEConfigurationUpdateAcknowledge_protocolIEs__item__id),
-        ('criticality', ___MCEConfigurationUpdateAcknowledge_protocolIEs__item__criticality),
-        ('value', ___MCEConfigurationUpdateAcknowledge_protocolIEs__item__value),
+        (u'id', ___MCEConfigurationUpdateAcknowledge_protocolIEs__item__id),
+        (u'criticality', ___MCEConfigurationUpdateAcknowledge_protocolIEs__item__criticality),
+        (u'value', ___MCEConfigurationUpdateAcknowledge_protocolIEs__item__value),
         ])
     __MCEConfigurationUpdateAcknowledge_protocolIEs__item_._ext = None
     _MCEConfigurationUpdateAcknowledge_protocolIEs._cont = __MCEConfigurationUpdateAcknowledge_protocolIEs__item_
     _MCEConfigurationUpdateAcknowledge_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     MCEConfigurationUpdateAcknowledge._cont = ASN1Dict([
-        ('protocolIEs', _MCEConfigurationUpdateAcknowledge_protocolIEs),
+        (u'protocolIEs', _MCEConfigurationUpdateAcknowledge_protocolIEs),
         ])
     MCEConfigurationUpdateAcknowledge._ext = []
     
     #-----< MCEConfigurationUpdateAcknowledgeIEs >-----#
-    MCEConfigurationUpdateAcknowledgeIEs = CLASS(name='MCEConfigurationUpdateAcknowledgeIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _MCEConfigurationUpdateAcknowledgeIEs_val_Value_0 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
-    MCEConfigurationUpdateAcknowledgeIEs._val = ASN1Set(rv=[dict([('id', 8), ('criticality', 'ignore'), ('Value', _MCEConfigurationUpdateAcknowledgeIEs_val_Value_0), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    MCEConfigurationUpdateAcknowledgeIEs = CLASS(name=u'MCEConfigurationUpdateAcknowledgeIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
+    _MCEConfigurationUpdateAcknowledgeIEs_val_Value_0 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
+    MCEConfigurationUpdateAcknowledgeIEs._val = ASN1Set(rv=[dict([(u'id', 8), (u'criticality', u'ignore'), (u'Value', _MCEConfigurationUpdateAcknowledgeIEs_val_Value_0), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     #-----< MCEConfigurationUpdateFailure >-----#
-    MCEConfigurationUpdateFailure = SEQ(name='MCEConfigurationUpdateFailure', mode=MODE_TYPE)
-    _MCEConfigurationUpdateFailure_protocolIEs = SEQ_OF(name='protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
+    MCEConfigurationUpdateFailure = SEQ(name=u'MCEConfigurationUpdateFailure', mode=MODE_TYPE)
+    _MCEConfigurationUpdateFailure_protocolIEs = SEQ_OF(name=u'protocolIEs', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Container')))
     __MCEConfigurationUpdateFailure_protocolIEs__item_ = SEQ(name='_item_', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-Containers', 'ProtocolIE-Field')))
-    ___MCEConfigurationUpdateFailure_protocolIEs__item__id = INT(name='id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['id']))
+    ___MCEConfigurationUpdateFailure_protocolIEs__item__id = INT(name=u'id', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'id']))
     ____MCEConfigurationUpdateFailure_protocolIEs__item__id_tab = CLASS(name='_tab_M3AP-PROTOCOL-IES', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _____MCEConfigurationUpdateFailure_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Cause')))
-    _____MCEConfigurationUpdateFailure_protocolIEs__item__id_tab_val_Value_1 = ENUM(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'TimeToWait')))
-    _____MCEConfigurationUpdateFailure_protocolIEs__item__id_tab_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
-    ____MCEConfigurationUpdateFailure_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([('id', 9), ('criticality', 'ignore'), ('Value', _____MCEConfigurationUpdateFailure_protocolIEs__item__id_tab_val_Value_0), ('presence', 'mandatory')]), dict([('id', 12), ('criticality', 'ignore'), ('Value', _____MCEConfigurationUpdateFailure_protocolIEs__item__id_tab_val_Value_1), ('presence', 'optional')]), dict([('id', 8), ('criticality', 'ignore'), ('Value', _____MCEConfigurationUpdateFailure_protocolIEs__item__id_tab_val_Value_2), ('presence', 'optional')])], rr=[], ev=None, er=[])
+    _____MCEConfigurationUpdateFailure_protocolIEs__item__id_tab_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Cause')))
+    _____MCEConfigurationUpdateFailure_protocolIEs__item__id_tab_val_Value_1 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'TimeToWait')))
+    _____MCEConfigurationUpdateFailure_protocolIEs__item__id_tab_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
+    ____MCEConfigurationUpdateFailure_protocolIEs__item__id_tab._val = ASN1Set(rv=[dict([(u'id', 9), (u'criticality', u'ignore'), (u'Value', _____MCEConfigurationUpdateFailure_protocolIEs__item__id_tab_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 12), (u'criticality', u'ignore'), (u'Value', _____MCEConfigurationUpdateFailure_protocolIEs__item__id_tab_val_Value_1), (u'presence', u'optional')]), dict([(u'id', 8), (u'criticality', u'ignore'), (u'Value', _____MCEConfigurationUpdateFailure_protocolIEs__item__id_tab_val_Value_2), (u'presence', u'optional')])], rr=[], ev=None, er=[])
     ___MCEConfigurationUpdateFailure_protocolIEs__item__id._const_tab = ____MCEConfigurationUpdateFailure_protocolIEs__item__id_tab
     ___MCEConfigurationUpdateFailure_protocolIEs__item__id._const_tab_at = None
-    ___MCEConfigurationUpdateFailure_protocolIEs__item__id._const_tab_id = 'id'
-    ___MCEConfigurationUpdateFailure_protocolIEs__item__criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['criticality']))
+    ___MCEConfigurationUpdateFailure_protocolIEs__item__id._const_tab_id = u'id'
+    ___MCEConfigurationUpdateFailure_protocolIEs__item__criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'criticality']))
     ___MCEConfigurationUpdateFailure_protocolIEs__item__criticality._const_tab = ____MCEConfigurationUpdateFailure_protocolIEs__item__id_tab
-    ___MCEConfigurationUpdateFailure_protocolIEs__item__criticality._const_tab_at = ('..', 'id')
-    ___MCEConfigurationUpdateFailure_protocolIEs__item__criticality._const_tab_id = 'criticality'
-    ___MCEConfigurationUpdateFailure_protocolIEs__item__value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), ['Value']))
+    ___MCEConfigurationUpdateFailure_protocolIEs__item__criticality._const_tab_at = ('..', u'id')
+    ___MCEConfigurationUpdateFailure_protocolIEs__item__criticality._const_tab_id = u'criticality'
+    ___MCEConfigurationUpdateFailure_protocolIEs__item__value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-Containers', 'M3AP-PROTOCOL-IES'), [u'Value']))
     ___MCEConfigurationUpdateFailure_protocolIEs__item__value._const_tab = ____MCEConfigurationUpdateFailure_protocolIEs__item__id_tab
-    ___MCEConfigurationUpdateFailure_protocolIEs__item__value._const_tab_at = ('..', 'id')
-    ___MCEConfigurationUpdateFailure_protocolIEs__item__value._const_tab_id = 'Value'
+    ___MCEConfigurationUpdateFailure_protocolIEs__item__value._const_tab_at = ('..', u'id')
+    ___MCEConfigurationUpdateFailure_protocolIEs__item__value._const_tab_id = u'Value'
     __MCEConfigurationUpdateFailure_protocolIEs__item_._cont = ASN1Dict([
-        ('id', ___MCEConfigurationUpdateFailure_protocolIEs__item__id),
-        ('criticality', ___MCEConfigurationUpdateFailure_protocolIEs__item__criticality),
-        ('value', ___MCEConfigurationUpdateFailure_protocolIEs__item__value),
+        (u'id', ___MCEConfigurationUpdateFailure_protocolIEs__item__id),
+        (u'criticality', ___MCEConfigurationUpdateFailure_protocolIEs__item__criticality),
+        (u'value', ___MCEConfigurationUpdateFailure_protocolIEs__item__value),
         ])
     __MCEConfigurationUpdateFailure_protocolIEs__item_._ext = None
     _MCEConfigurationUpdateFailure_protocolIEs._cont = __MCEConfigurationUpdateFailure_protocolIEs__item_
     _MCEConfigurationUpdateFailure_protocolIEs._const_sz = ASN1Set(rv=[], rr=[ASN1RangeInt(lb=0, ub=65535)], ev=None, er=[])
     MCEConfigurationUpdateFailure._cont = ASN1Dict([
-        ('protocolIEs', _MCEConfigurationUpdateFailure_protocolIEs),
+        (u'protocolIEs', _MCEConfigurationUpdateFailure_protocolIEs),
         ])
     MCEConfigurationUpdateFailure._ext = []
     
     #-----< MCEConfigurationUpdateFailureIEs >-----#
-    MCEConfigurationUpdateFailureIEs = CLASS(name='MCEConfigurationUpdateFailureIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
-    _MCEConfigurationUpdateFailureIEs_val_Value_0 = CHOICE(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Cause')))
-    _MCEConfigurationUpdateFailureIEs_val_Value_1 = ENUM(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'TimeToWait')))
-    _MCEConfigurationUpdateFailureIEs_val_Value_2 = SEQ(name='Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
-    MCEConfigurationUpdateFailureIEs._val = ASN1Set(rv=[dict([('id', 9), ('criticality', 'ignore'), ('Value', _MCEConfigurationUpdateFailureIEs_val_Value_0), ('presence', 'mandatory')]), dict([('id', 12), ('criticality', 'ignore'), ('Value', _MCEConfigurationUpdateFailureIEs_val_Value_1), ('presence', 'optional')]), dict([('id', 8), ('criticality', 'ignore'), ('Value', _MCEConfigurationUpdateFailureIEs_val_Value_2), ('presence', 'optional')])], rr=[], ev=[], er=[])
+    MCEConfigurationUpdateFailureIEs = CLASS(name=u'MCEConfigurationUpdateFailureIEs', mode=MODE_SET, typeref=ASN1RefType(('M3AP-Containers', 'M3AP-PROTOCOL-IES')))
+    _MCEConfigurationUpdateFailureIEs_val_Value_0 = CHOICE(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'Cause')))
+    _MCEConfigurationUpdateFailureIEs_val_Value_1 = ENUM(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'TimeToWait')))
+    _MCEConfigurationUpdateFailureIEs_val_Value_2 = SEQ(name=u'Value', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-IEs', 'CriticalityDiagnostics')))
+    MCEConfigurationUpdateFailureIEs._val = ASN1Set(rv=[dict([(u'id', 9), (u'criticality', u'ignore'), (u'Value', _MCEConfigurationUpdateFailureIEs_val_Value_0), (u'presence', u'mandatory')]), dict([(u'id', 12), (u'criticality', u'ignore'), (u'Value', _MCEConfigurationUpdateFailureIEs_val_Value_1), (u'presence', u'optional')]), dict([(u'id', 8), (u'criticality', u'ignore'), (u'Value', _MCEConfigurationUpdateFailureIEs_val_Value_2), (u'presence', u'optional')])], rr=[], ev=[], er=[])
     
     _all_ = [
         ____MBMSSessionStartRequest_protocolIEs__item__id_tab,
@@ -2730,313 +2730,313 @@ class M3AP_PDU_Contents:
 
 class M3AP_PDU_Descriptions:
 
-    _name_  = 'M3AP-PDU-Descriptions'
+    _name_  = u'M3AP-PDU-Descriptions'
     _oid_   = [0, 4, 0, 0, 21, 3, 5, 1, 0]
     
     _obj_ = [
-        'M3AP-ELEMENTARY-PROCEDURE',
-        'M3AP-PDU',
-        'InitiatingMessage',
-        'SuccessfulOutcome',
-        'UnsuccessfulOutcome',
-        'M3AP-ELEMENTARY-PROCEDURES',
-        'M3AP-ELEMENTARY-PROCEDURES-CLASS-1',
-        'M3AP-ELEMENTARY-PROCEDURES-CLASS-2',
-        'mBMSsessionStart',
-        'mBMSsessionStop',
-        'mBMSsessionUpdate',
-        'errorIndication',
-        'reset',
-        'privateMessage',
-        'mCEConfigurationUpdate',
-        'm3Setup',
+        u'M3AP-ELEMENTARY-PROCEDURE',
+        u'M3AP-PDU',
+        u'InitiatingMessage',
+        u'SuccessfulOutcome',
+        u'UnsuccessfulOutcome',
+        u'M3AP-ELEMENTARY-PROCEDURES',
+        u'M3AP-ELEMENTARY-PROCEDURES-CLASS-1',
+        u'M3AP-ELEMENTARY-PROCEDURES-CLASS-2',
+        u'mBMSsessionStart',
+        u'mBMSsessionStop',
+        u'mBMSsessionUpdate',
+        u'errorIndication',
+        u'reset',
+        u'privateMessage',
+        u'mCEConfigurationUpdate',
+        u'm3Setup',
         ]
     _type_ = [
-        'M3AP-ELEMENTARY-PROCEDURE',
-        'M3AP-PDU',
-        'InitiatingMessage',
-        'SuccessfulOutcome',
-        'UnsuccessfulOutcome',
+        u'M3AP-ELEMENTARY-PROCEDURE',
+        u'M3AP-PDU',
+        u'InitiatingMessage',
+        u'SuccessfulOutcome',
+        u'UnsuccessfulOutcome',
         ]
     _set_ = [
-        'M3AP-ELEMENTARY-PROCEDURES',
-        'M3AP-ELEMENTARY-PROCEDURES-CLASS-1',
-        'M3AP-ELEMENTARY-PROCEDURES-CLASS-2',
+        u'M3AP-ELEMENTARY-PROCEDURES',
+        u'M3AP-ELEMENTARY-PROCEDURES-CLASS-1',
+        u'M3AP-ELEMENTARY-PROCEDURES-CLASS-2',
         ]
     _val_ = [
-        'mBMSsessionStart',
-        'mBMSsessionStop',
-        'mBMSsessionUpdate',
-        'errorIndication',
-        'reset',
-        'privateMessage',
-        'mCEConfigurationUpdate',
-        'm3Setup',
+        u'mBMSsessionStart',
+        u'mBMSsessionStop',
+        u'mBMSsessionUpdate',
+        u'errorIndication',
+        u'reset',
+        u'privateMessage',
+        u'mCEConfigurationUpdate',
+        u'm3Setup',
         ]
     _class_ = [
-        'M3AP-ELEMENTARY-PROCEDURE',
-        'M3AP-ELEMENTARY-PROCEDURES',
-        'M3AP-ELEMENTARY-PROCEDURES-CLASS-1',
-        'M3AP-ELEMENTARY-PROCEDURES-CLASS-2',
-        'mBMSsessionStart',
-        'mBMSsessionStop',
-        'mBMSsessionUpdate',
-        'errorIndication',
-        'reset',
-        'privateMessage',
-        'mCEConfigurationUpdate',
-        'm3Setup',
+        u'M3AP-ELEMENTARY-PROCEDURE',
+        u'M3AP-ELEMENTARY-PROCEDURES',
+        u'M3AP-ELEMENTARY-PROCEDURES-CLASS-1',
+        u'M3AP-ELEMENTARY-PROCEDURES-CLASS-2',
+        u'mBMSsessionStart',
+        u'mBMSsessionStop',
+        u'mBMSsessionUpdate',
+        u'errorIndication',
+        u'reset',
+        u'privateMessage',
+        u'mCEConfigurationUpdate',
+        u'm3Setup',
         ]
     _param_ = [
         ]
     
     #-----< M3AP-ELEMENTARY-PROCEDURE >-----#
-    M3AP_ELEMENTARY_PROCEDURE = CLASS(name='M3AP-ELEMENTARY-PROCEDURE', mode=MODE_TYPE)
-    _M3AP_ELEMENTARY_PROCEDURE_InitiatingMessage = OPEN(name='InitiatingMessage', mode=MODE_TYPE)
-    _M3AP_ELEMENTARY_PROCEDURE_SuccessfulOutcome = OPEN(name='SuccessfulOutcome', mode=MODE_TYPE, opt=True)
-    _M3AP_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome = OPEN(name='UnsuccessfulOutcome', mode=MODE_TYPE, opt=True)
-    _M3AP_ELEMENTARY_PROCEDURE_procedureCode = INT(name='procedureCode', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProcedureCode')), uniq=True)
-    _M3AP_ELEMENTARY_PROCEDURE_criticality = ENUM(name='criticality', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'Criticality')), default='ignore')
+    M3AP_ELEMENTARY_PROCEDURE = CLASS(name=u'M3AP-ELEMENTARY-PROCEDURE', mode=MODE_TYPE)
+    _M3AP_ELEMENTARY_PROCEDURE_InitiatingMessage = OPEN(name=u'InitiatingMessage', mode=MODE_TYPE)
+    _M3AP_ELEMENTARY_PROCEDURE_SuccessfulOutcome = OPEN(name=u'SuccessfulOutcome', mode=MODE_TYPE, opt=True)
+    _M3AP_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome = OPEN(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, opt=True)
+    _M3AP_ELEMENTARY_PROCEDURE_procedureCode = INT(name=u'procedureCode', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'ProcedureCode')), uniq=True)
+    _M3AP_ELEMENTARY_PROCEDURE_criticality = ENUM(name=u'criticality', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-CommonDataTypes', 'Criticality')), default=u'ignore')
     M3AP_ELEMENTARY_PROCEDURE._cont = ASN1Dict([
-        ('InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURE_InitiatingMessage),
-        ('SuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURE_SuccessfulOutcome),
-        ('UnsuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome),
-        ('procedureCode', _M3AP_ELEMENTARY_PROCEDURE_procedureCode),
-        ('criticality', _M3AP_ELEMENTARY_PROCEDURE_criticality),
+        (u'InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURE_InitiatingMessage),
+        (u'SuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURE_SuccessfulOutcome),
+        (u'UnsuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURE_UnsuccessfulOutcome),
+        (u'procedureCode', _M3AP_ELEMENTARY_PROCEDURE_procedureCode),
+        (u'criticality', _M3AP_ELEMENTARY_PROCEDURE_criticality),
         ])
     
     #-----< M3AP-PDU >-----#
-    M3AP_PDU = CHOICE(name='M3AP-PDU', mode=MODE_TYPE)
-    _M3AP_PDU_initiatingMessage = SEQ(name='initiatingMessage', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'InitiatingMessage')))
-    _M3AP_PDU_successfulOutcome = SEQ(name='successfulOutcome', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'SuccessfulOutcome')))
-    _M3AP_PDU_unsuccessfulOutcome = SEQ(name='unsuccessfulOutcome', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'UnsuccessfulOutcome')))
+    M3AP_PDU = CHOICE(name=u'M3AP-PDU', mode=MODE_TYPE)
+    _M3AP_PDU_initiatingMessage = SEQ(name=u'initiatingMessage', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'InitiatingMessage')))
+    _M3AP_PDU_successfulOutcome = SEQ(name=u'successfulOutcome', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'SuccessfulOutcome')))
+    _M3AP_PDU_unsuccessfulOutcome = SEQ(name=u'unsuccessfulOutcome', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'UnsuccessfulOutcome')))
     M3AP_PDU._cont = ASN1Dict([
-        ('initiatingMessage', _M3AP_PDU_initiatingMessage),
-        ('successfulOutcome', _M3AP_PDU_successfulOutcome),
-        ('unsuccessfulOutcome', _M3AP_PDU_unsuccessfulOutcome),
+        (u'initiatingMessage', _M3AP_PDU_initiatingMessage),
+        (u'successfulOutcome', _M3AP_PDU_successfulOutcome),
+        (u'unsuccessfulOutcome', _M3AP_PDU_unsuccessfulOutcome),
         ])
     M3AP_PDU._ext = []
     
     #-----< InitiatingMessage >-----#
-    InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE)
-    _InitiatingMessage_procedureCode = INT(name='procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE'), ['procedureCode']))
+    InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE)
+    _InitiatingMessage_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE'), [u'procedureCode']))
     __InitiatingMessage_procedureCode_tab = CLASS(name='_tab_M3AP-ELEMENTARY-PROCEDURE', mode=MODE_SET, typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartResponse')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartFailure')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStopRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStopResponse')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_2 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateResponse')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_2 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateFailure')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'Reset')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_3 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'ResetAcknowledge')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupRequest')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_4 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupResponse')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_4 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupFailure')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdate')))
-    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_5 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdateAcknowledge')))
-    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_5 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdateFailure')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'ErrorIndication')))
-    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'PrivateMessage')))
-    __InitiatingMessage_procedureCode_tab._val = ASN1Set(rv=[dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0), ('SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0), ('UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_0), ('procedureCode', 0), ('criticality', 'reject')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1), ('SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1), ('procedureCode', 1), ('criticality', 'reject')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2), ('SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_2), ('UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_2), ('procedureCode', 5), ('criticality', 'reject')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3), ('SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_3), ('procedureCode', 4), ('criticality', 'reject')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4), ('SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_4), ('UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_4), ('procedureCode', 7), ('criticality', 'reject')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5), ('SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_5), ('UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_5), ('procedureCode', 6), ('criticality', 'reject')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6), ('procedureCode', 2), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_7), ('procedureCode', 3), ('criticality', 'ignore')])], rr=[], ev=None, er=[])
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartResponse')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartFailure')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStopRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStopResponse')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateResponse')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_2 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateFailure')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'Reset')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_3 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'ResetAcknowledge')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupRequest')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_4 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupResponse')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_4 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupFailure')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdate')))
+    ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_5 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdateAcknowledge')))
+    ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_5 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdateFailure')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'ErrorIndication')))
+    ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'PrivateMessage')))
+    __InitiatingMessage_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_1), (u'procedureCode', 1), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_2), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_2), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_3), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_3), (u'procedureCode', 4), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_4), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_4), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_5), (u'SuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_SuccessfulOutcome_5), (u'UnsuccessfulOutcome', ___InitiatingMessage_procedureCode_tab_val_UnsuccessfulOutcome_5), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_6), (u'procedureCode', 2), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___InitiatingMessage_procedureCode_tab_val_InitiatingMessage_7), (u'procedureCode', 3), (u'criticality', u'ignore')])], rr=[], ev=None, er=[])
     _InitiatingMessage_procedureCode._const_tab = __InitiatingMessage_procedureCode_tab
     _InitiatingMessage_procedureCode._const_tab_at = None
-    _InitiatingMessage_procedureCode._const_tab_id = 'procedureCode'
-    _InitiatingMessage_criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE'), ['criticality']))
+    _InitiatingMessage_procedureCode._const_tab_id = u'procedureCode'
+    _InitiatingMessage_criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE'), [u'criticality']))
     _InitiatingMessage_criticality._const_tab = __InitiatingMessage_procedureCode_tab
-    _InitiatingMessage_criticality._const_tab_at = ('..', 'procedureCode')
-    _InitiatingMessage_criticality._const_tab_id = 'criticality'
-    _InitiatingMessage_value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE'), ['InitiatingMessage']))
+    _InitiatingMessage_criticality._const_tab_at = ('..', u'procedureCode')
+    _InitiatingMessage_criticality._const_tab_id = u'criticality'
+    _InitiatingMessage_value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE'), [u'InitiatingMessage']))
     _InitiatingMessage_value._const_tab = __InitiatingMessage_procedureCode_tab
-    _InitiatingMessage_value._const_tab_at = ('..', 'procedureCode')
-    _InitiatingMessage_value._const_tab_id = 'InitiatingMessage'
+    _InitiatingMessage_value._const_tab_at = ('..', u'procedureCode')
+    _InitiatingMessage_value._const_tab_id = u'InitiatingMessage'
     InitiatingMessage._cont = ASN1Dict([
-        ('procedureCode', _InitiatingMessage_procedureCode),
-        ('criticality', _InitiatingMessage_criticality),
-        ('value', _InitiatingMessage_value),
+        (u'procedureCode', _InitiatingMessage_procedureCode),
+        (u'criticality', _InitiatingMessage_criticality),
+        (u'value', _InitiatingMessage_value),
         ])
     InitiatingMessage._ext = None
     
     #-----< SuccessfulOutcome >-----#
-    SuccessfulOutcome = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE)
-    _SuccessfulOutcome_procedureCode = INT(name='procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE'), ['procedureCode']))
+    SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE)
+    _SuccessfulOutcome_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE'), [u'procedureCode']))
     __SuccessfulOutcome_procedureCode_tab = CLASS(name='_tab_M3AP-ELEMENTARY-PROCEDURE', mode=MODE_SET, typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartResponse')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartFailure')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStopRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStopResponse')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateResponse')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateFailure')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'Reset')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'ResetAcknowledge')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupRequest')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupResponse')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupFailure')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdate')))
-    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdateAcknowledge')))
-    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_5 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdateFailure')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'ErrorIndication')))
-    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'PrivateMessage')))
-    __SuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), ('SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0), ('UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0), ('procedureCode', 0), ('criticality', 'reject')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), ('SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1), ('procedureCode', 1), ('criticality', 'reject')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), ('SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2), ('UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2), ('procedureCode', 5), ('criticality', 'reject')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), ('SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3), ('procedureCode', 4), ('criticality', 'reject')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), ('SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4), ('UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4), ('procedureCode', 7), ('criticality', 'reject')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), ('SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5), ('UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_5), ('procedureCode', 6), ('criticality', 'reject')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6), ('procedureCode', 2), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7), ('procedureCode', 3), ('criticality', 'ignore')])], rr=[], ev=None, er=[])
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartResponse')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartFailure')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStopRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStopResponse')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateResponse')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateFailure')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'Reset')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'ResetAcknowledge')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupRequest')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupResponse')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupFailure')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdate')))
+    ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdateAcknowledge')))
+    ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_5 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdateFailure')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'ErrorIndication')))
+    ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'PrivateMessage')))
+    __SuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1), (u'procedureCode', 1), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3), (u'procedureCode', 4), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), (u'SuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5), (u'UnsuccessfulOutcome', ___SuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_5), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6), (u'procedureCode', 2), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___SuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7), (u'procedureCode', 3), (u'criticality', u'ignore')])], rr=[], ev=None, er=[])
     _SuccessfulOutcome_procedureCode._const_tab = __SuccessfulOutcome_procedureCode_tab
     _SuccessfulOutcome_procedureCode._const_tab_at = None
-    _SuccessfulOutcome_procedureCode._const_tab_id = 'procedureCode'
-    _SuccessfulOutcome_criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE'), ['criticality']))
+    _SuccessfulOutcome_procedureCode._const_tab_id = u'procedureCode'
+    _SuccessfulOutcome_criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE'), [u'criticality']))
     _SuccessfulOutcome_criticality._const_tab = __SuccessfulOutcome_procedureCode_tab
-    _SuccessfulOutcome_criticality._const_tab_at = ('..', 'procedureCode')
-    _SuccessfulOutcome_criticality._const_tab_id = 'criticality'
-    _SuccessfulOutcome_value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE'), ['SuccessfulOutcome']))
+    _SuccessfulOutcome_criticality._const_tab_at = ('..', u'procedureCode')
+    _SuccessfulOutcome_criticality._const_tab_id = u'criticality'
+    _SuccessfulOutcome_value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE'), [u'SuccessfulOutcome']))
     _SuccessfulOutcome_value._const_tab = __SuccessfulOutcome_procedureCode_tab
-    _SuccessfulOutcome_value._const_tab_at = ('..', 'procedureCode')
-    _SuccessfulOutcome_value._const_tab_id = 'SuccessfulOutcome'
+    _SuccessfulOutcome_value._const_tab_at = ('..', u'procedureCode')
+    _SuccessfulOutcome_value._const_tab_id = u'SuccessfulOutcome'
     SuccessfulOutcome._cont = ASN1Dict([
-        ('procedureCode', _SuccessfulOutcome_procedureCode),
-        ('criticality', _SuccessfulOutcome_criticality),
-        ('value', _SuccessfulOutcome_value),
+        (u'procedureCode', _SuccessfulOutcome_procedureCode),
+        (u'criticality', _SuccessfulOutcome_criticality),
+        (u'value', _SuccessfulOutcome_value),
         ])
     SuccessfulOutcome._ext = None
     
     #-----< UnsuccessfulOutcome >-----#
-    UnsuccessfulOutcome = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE)
-    _UnsuccessfulOutcome_procedureCode = INT(name='procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE'), ['procedureCode']))
+    UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE)
+    _UnsuccessfulOutcome_procedureCode = INT(name=u'procedureCode', mode=MODE_TYPE, tag=(0, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE'), [u'procedureCode']))
     __UnsuccessfulOutcome_procedureCode_tab = CLASS(name='_tab_M3AP-ELEMENTARY-PROCEDURE', mode=MODE_SET, typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartResponse')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartFailure')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStopRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStopResponse')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateResponse')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateFailure')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'Reset')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'ResetAcknowledge')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupRequest')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupResponse')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupFailure')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdate')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdateAcknowledge')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_5 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdateFailure')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'ErrorIndication')))
-    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'PrivateMessage')))
-    __UnsuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), ('SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0), ('UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0), ('procedureCode', 0), ('criticality', 'reject')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), ('SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1), ('procedureCode', 1), ('criticality', 'reject')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), ('SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2), ('UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2), ('procedureCode', 5), ('criticality', 'reject')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), ('SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3), ('procedureCode', 4), ('criticality', 'reject')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), ('SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4), ('UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4), ('procedureCode', 7), ('criticality', 'reject')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), ('SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5), ('UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_5), ('procedureCode', 6), ('criticality', 'reject')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6), ('procedureCode', 2), ('criticality', 'ignore')]), dict([('InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7), ('procedureCode', 3), ('criticality', 'ignore')])], rr=[], ev=None, er=[])
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartResponse')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartFailure')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStopRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStopResponse')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateResponse')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateFailure')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'Reset')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'ResetAcknowledge')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupRequest')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupResponse')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupFailure')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdate')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdateAcknowledge')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_5 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdateFailure')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'ErrorIndication')))
+    ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'PrivateMessage')))
+    __UnsuccessfulOutcome_procedureCode_tab._val = ASN1Set(rv=[dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_0), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_1), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_1), (u'procedureCode', 1), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_2), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_2), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_3), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_3), (u'procedureCode', 4), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_4), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_4), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_5), (u'SuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_SuccessfulOutcome_5), (u'UnsuccessfulOutcome', ___UnsuccessfulOutcome_procedureCode_tab_val_UnsuccessfulOutcome_5), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_6), (u'procedureCode', 2), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', ___UnsuccessfulOutcome_procedureCode_tab_val_InitiatingMessage_7), (u'procedureCode', 3), (u'criticality', u'ignore')])], rr=[], ev=None, er=[])
     _UnsuccessfulOutcome_procedureCode._const_tab = __UnsuccessfulOutcome_procedureCode_tab
     _UnsuccessfulOutcome_procedureCode._const_tab_at = None
-    _UnsuccessfulOutcome_procedureCode._const_tab_id = 'procedureCode'
-    _UnsuccessfulOutcome_criticality = ENUM(name='criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE'), ['criticality']))
+    _UnsuccessfulOutcome_procedureCode._const_tab_id = u'procedureCode'
+    _UnsuccessfulOutcome_criticality = ENUM(name=u'criticality', mode=MODE_TYPE, tag=(1, TAG_CONTEXT_SPEC, TAG_IMPLICIT), typeref=ASN1RefClassField(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE'), [u'criticality']))
     _UnsuccessfulOutcome_criticality._const_tab = __UnsuccessfulOutcome_procedureCode_tab
-    _UnsuccessfulOutcome_criticality._const_tab_at = ('..', 'procedureCode')
-    _UnsuccessfulOutcome_criticality._const_tab_id = 'criticality'
-    _UnsuccessfulOutcome_value = OPEN(name='value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE'), ['UnsuccessfulOutcome']))
+    _UnsuccessfulOutcome_criticality._const_tab_at = ('..', u'procedureCode')
+    _UnsuccessfulOutcome_criticality._const_tab_id = u'criticality'
+    _UnsuccessfulOutcome_value = OPEN(name=u'value', mode=MODE_TYPE, tag=(2, TAG_CONTEXT_SPEC, TAG_EXPLICIT), typeref=ASN1RefClassField(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE'), [u'UnsuccessfulOutcome']))
     _UnsuccessfulOutcome_value._const_tab = __UnsuccessfulOutcome_procedureCode_tab
-    _UnsuccessfulOutcome_value._const_tab_at = ('..', 'procedureCode')
-    _UnsuccessfulOutcome_value._const_tab_id = 'UnsuccessfulOutcome'
+    _UnsuccessfulOutcome_value._const_tab_at = ('..', u'procedureCode')
+    _UnsuccessfulOutcome_value._const_tab_id = u'UnsuccessfulOutcome'
     UnsuccessfulOutcome._cont = ASN1Dict([
-        ('procedureCode', _UnsuccessfulOutcome_procedureCode),
-        ('criticality', _UnsuccessfulOutcome_criticality),
-        ('value', _UnsuccessfulOutcome_value),
+        (u'procedureCode', _UnsuccessfulOutcome_procedureCode),
+        (u'criticality', _UnsuccessfulOutcome_criticality),
+        (u'value', _UnsuccessfulOutcome_value),
         ])
     UnsuccessfulOutcome._ext = None
     
     #-----< M3AP-ELEMENTARY-PROCEDURES >-----#
-    M3AP_ELEMENTARY_PROCEDURES = CLASS(name='M3AP-ELEMENTARY-PROCEDURES', mode=MODE_SET, typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE')))
-    _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartRequest')))
-    _M3AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartResponse')))
-    _M3AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_0 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartFailure')))
-    _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStopRequest')))
-    _M3AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStopResponse')))
-    _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateRequest')))
-    _M3AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_2 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateResponse')))
-    _M3AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_2 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateFailure')))
-    _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'Reset')))
-    _M3AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_3 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'ResetAcknowledge')))
-    _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupRequest')))
-    _M3AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_4 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupResponse')))
-    _M3AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_4 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupFailure')))
-    _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdate')))
-    _M3AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_5 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdateAcknowledge')))
-    _M3AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_5 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdateFailure')))
-    _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'ErrorIndication')))
-    _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_7 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'PrivateMessage')))
-    M3AP_ELEMENTARY_PROCEDURES._val = ASN1Set(rv=[dict([('InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0), ('SuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0), ('UnsuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_0), ('procedureCode', 0), ('criticality', 'reject')]), dict([('InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1), ('SuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1), ('procedureCode', 1), ('criticality', 'reject')]), dict([('InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2), ('SuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_2), ('UnsuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_2), ('procedureCode', 5), ('criticality', 'reject')]), dict([('InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3), ('SuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_3), ('procedureCode', 4), ('criticality', 'reject')]), dict([('InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4), ('SuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_4), ('UnsuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_4), ('procedureCode', 7), ('criticality', 'reject')]), dict([('InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5), ('SuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_5), ('UnsuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_5), ('procedureCode', 6), ('criticality', 'reject')]), dict([('InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6), ('procedureCode', 2), ('criticality', 'ignore')]), dict([('InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_7), ('procedureCode', 3), ('criticality', 'ignore')])], rr=[], ev=[], er=[])
+    M3AP_ELEMENTARY_PROCEDURES = CLASS(name=u'M3AP-ELEMENTARY-PROCEDURES', mode=MODE_SET, typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE')))
+    _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartRequest')))
+    _M3AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartResponse')))
+    _M3AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartFailure')))
+    _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStopRequest')))
+    _M3AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStopResponse')))
+    _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateRequest')))
+    _M3AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateResponse')))
+    _M3AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_2 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateFailure')))
+    _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'Reset')))
+    _M3AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_3 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'ResetAcknowledge')))
+    _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupRequest')))
+    _M3AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_4 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupResponse')))
+    _M3AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_4 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupFailure')))
+    _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdate')))
+    _M3AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_5 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdateAcknowledge')))
+    _M3AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_5 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdateFailure')))
+    _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'ErrorIndication')))
+    _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_7 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'PrivateMessage')))
+    M3AP_ELEMENTARY_PROCEDURES._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_0), (u'SuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_1), (u'SuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_1), (u'procedureCode', 1), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_2), (u'SuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_2), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_3), (u'SuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_3), (u'procedureCode', 4), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_4), (u'SuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_4), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_5), (u'SuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_val_SuccessfulOutcome_5), (u'UnsuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_val_UnsuccessfulOutcome_5), (u'procedureCode', 6), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_6), (u'procedureCode', 2), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_val_InitiatingMessage_7), (u'procedureCode', 3), (u'criticality', u'ignore')])], rr=[], ev=[], er=[])
     
     #-----< M3AP-ELEMENTARY-PROCEDURES-CLASS-1 >-----#
-    M3AP_ELEMENTARY_PROCEDURES_CLASS_1 = CLASS(name='M3AP-ELEMENTARY-PROCEDURES-CLASS-1', mode=MODE_SET, typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE')))
-    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartRequest')))
-    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartResponse')))
-    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_0 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartFailure')))
-    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStopRequest')))
-    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStopResponse')))
-    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateRequest')))
-    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateResponse')))
-    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_2 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateFailure')))
-    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_3 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'Reset')))
-    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_3 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'ResetAcknowledge')))
-    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_4 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupRequest')))
-    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_4 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupResponse')))
-    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_4 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupFailure')))
-    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_5 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdate')))
-    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_5 = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdateAcknowledge')))
-    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_5 = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdateFailure')))
-    M3AP_ELEMENTARY_PROCEDURES_CLASS_1._val = ASN1Set(rv=[dict([('InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0), ('SuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0), ('UnsuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_0), ('procedureCode', 0), ('criticality', 'reject')]), dict([('InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1), ('SuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1), ('procedureCode', 1), ('criticality', 'reject')]), dict([('InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2), ('SuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2), ('UnsuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_2), ('procedureCode', 5), ('criticality', 'reject')]), dict([('InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_3), ('SuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_3), ('procedureCode', 4), ('criticality', 'reject')]), dict([('InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_4), ('SuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_4), ('UnsuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_4), ('procedureCode', 7), ('criticality', 'reject')]), dict([('InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_5), ('SuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_5), ('UnsuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_5), ('procedureCode', 6), ('criticality', 'reject')])], rr=[], ev=[], er=[])
+    M3AP_ELEMENTARY_PROCEDURES_CLASS_1 = CLASS(name=u'M3AP-ELEMENTARY-PROCEDURES-CLASS-1', mode=MODE_SET, typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE')))
+    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartRequest')))
+    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartResponse')))
+    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_0 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartFailure')))
+    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStopRequest')))
+    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStopResponse')))
+    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateRequest')))
+    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateResponse')))
+    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_2 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateFailure')))
+    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_3 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'Reset')))
+    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_3 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'ResetAcknowledge')))
+    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_4 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupRequest')))
+    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_4 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupResponse')))
+    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_4 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupFailure')))
+    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_5 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdate')))
+    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_5 = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdateAcknowledge')))
+    _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_5 = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdateFailure')))
+    M3AP_ELEMENTARY_PROCEDURES_CLASS_1._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_0), (u'SuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_0), (u'UnsuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_0), (u'procedureCode', 0), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_1), (u'SuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_1), (u'procedureCode', 1), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_2), (u'SuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_2), (u'UnsuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_2), (u'procedureCode', 5), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_3), (u'SuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_3), (u'procedureCode', 4), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_4), (u'SuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_4), (u'UnsuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_4), (u'procedureCode', 7), (u'criticality', u'reject')]), dict([(u'InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_InitiatingMessage_5), (u'SuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_SuccessfulOutcome_5), (u'UnsuccessfulOutcome', _M3AP_ELEMENTARY_PROCEDURES_CLASS_1_val_UnsuccessfulOutcome_5), (u'procedureCode', 6), (u'criticality', u'reject')])], rr=[], ev=[], er=[])
     
     #-----< M3AP-ELEMENTARY-PROCEDURES-CLASS-2 >-----#
-    M3AP_ELEMENTARY_PROCEDURES_CLASS_2 = CLASS(name='M3AP-ELEMENTARY-PROCEDURES-CLASS-2', mode=MODE_SET, typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE')))
-    _M3AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'ErrorIndication')))
-    _M3AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1 = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'PrivateMessage')))
-    M3AP_ELEMENTARY_PROCEDURES_CLASS_2._val = ASN1Set(rv=[dict([('InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0), ('procedureCode', 2), ('criticality', 'ignore')]), dict([('InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1), ('procedureCode', 3), ('criticality', 'ignore')])], rr=[], ev=[], er=[])
+    M3AP_ELEMENTARY_PROCEDURES_CLASS_2 = CLASS(name=u'M3AP-ELEMENTARY-PROCEDURES-CLASS-2', mode=MODE_SET, typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE')))
+    _M3AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'ErrorIndication')))
+    _M3AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1 = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'PrivateMessage')))
+    M3AP_ELEMENTARY_PROCEDURES_CLASS_2._val = ASN1Set(rv=[dict([(u'InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_0), (u'procedureCode', 2), (u'criticality', u'ignore')]), dict([(u'InitiatingMessage', _M3AP_ELEMENTARY_PROCEDURES_CLASS_2_val_InitiatingMessage_1), (u'procedureCode', 3), (u'criticality', u'ignore')])], rr=[], ev=[], er=[])
     
     #-----< mBMSsessionStart >-----#
-    mBMSsessionStart = CLASS(name='mBMSsessionStart', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE')))
-    _mBMSsessionStart_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartRequest')))
-    _mBMSsessionStart_val_SuccessfulOutcome = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartResponse')))
-    _mBMSsessionStart_val_UnsuccessfulOutcome = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartFailure')))
-    mBMSsessionStart._val = dict([('InitiatingMessage', _mBMSsessionStart_val_InitiatingMessage), ('SuccessfulOutcome', _mBMSsessionStart_val_SuccessfulOutcome), ('UnsuccessfulOutcome', _mBMSsessionStart_val_UnsuccessfulOutcome), ('procedureCode', 0), ('criticality', 'reject')])
+    mBMSsessionStart = CLASS(name=u'mBMSsessionStart', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE')))
+    _mBMSsessionStart_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartRequest')))
+    _mBMSsessionStart_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartResponse')))
+    _mBMSsessionStart_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStartFailure')))
+    mBMSsessionStart._val = dict([(u'InitiatingMessage', _mBMSsessionStart_val_InitiatingMessage), (u'SuccessfulOutcome', _mBMSsessionStart_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _mBMSsessionStart_val_UnsuccessfulOutcome), (u'procedureCode', 0), (u'criticality', u'reject')])
     
     #-----< mBMSsessionStop >-----#
-    mBMSsessionStop = CLASS(name='mBMSsessionStop', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE')))
-    _mBMSsessionStop_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStopRequest')))
-    _mBMSsessionStop_val_SuccessfulOutcome = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStopResponse')))
-    mBMSsessionStop._val = dict([('InitiatingMessage', _mBMSsessionStop_val_InitiatingMessage), ('SuccessfulOutcome', _mBMSsessionStop_val_SuccessfulOutcome), ('procedureCode', 1), ('criticality', 'reject')])
+    mBMSsessionStop = CLASS(name=u'mBMSsessionStop', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE')))
+    _mBMSsessionStop_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStopRequest')))
+    _mBMSsessionStop_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionStopResponse')))
+    mBMSsessionStop._val = dict([(u'InitiatingMessage', _mBMSsessionStop_val_InitiatingMessage), (u'SuccessfulOutcome', _mBMSsessionStop_val_SuccessfulOutcome), (u'procedureCode', 1), (u'criticality', u'reject')])
     
     #-----< mBMSsessionUpdate >-----#
-    mBMSsessionUpdate = CLASS(name='mBMSsessionUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE')))
-    _mBMSsessionUpdate_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateRequest')))
-    _mBMSsessionUpdate_val_SuccessfulOutcome = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateResponse')))
-    _mBMSsessionUpdate_val_UnsuccessfulOutcome = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateFailure')))
-    mBMSsessionUpdate._val = dict([('InitiatingMessage', _mBMSsessionUpdate_val_InitiatingMessage), ('SuccessfulOutcome', _mBMSsessionUpdate_val_SuccessfulOutcome), ('UnsuccessfulOutcome', _mBMSsessionUpdate_val_UnsuccessfulOutcome), ('procedureCode', 5), ('criticality', 'reject')])
+    mBMSsessionUpdate = CLASS(name=u'mBMSsessionUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE')))
+    _mBMSsessionUpdate_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateRequest')))
+    _mBMSsessionUpdate_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateResponse')))
+    _mBMSsessionUpdate_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MBMSSessionUpdateFailure')))
+    mBMSsessionUpdate._val = dict([(u'InitiatingMessage', _mBMSsessionUpdate_val_InitiatingMessage), (u'SuccessfulOutcome', _mBMSsessionUpdate_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _mBMSsessionUpdate_val_UnsuccessfulOutcome), (u'procedureCode', 5), (u'criticality', u'reject')])
     
     #-----< errorIndication >-----#
-    errorIndication = CLASS(name='errorIndication', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE')))
-    _errorIndication_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'ErrorIndication')))
-    errorIndication._val = dict([('InitiatingMessage', _errorIndication_val_InitiatingMessage), ('procedureCode', 2), ('criticality', 'ignore')])
+    errorIndication = CLASS(name=u'errorIndication', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE')))
+    _errorIndication_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'ErrorIndication')))
+    errorIndication._val = dict([(u'InitiatingMessage', _errorIndication_val_InitiatingMessage), (u'procedureCode', 2), (u'criticality', u'ignore')])
     
     #-----< reset >-----#
-    reset = CLASS(name='reset', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE')))
-    _reset_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'Reset')))
-    _reset_val_SuccessfulOutcome = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'ResetAcknowledge')))
-    reset._val = dict([('InitiatingMessage', _reset_val_InitiatingMessage), ('SuccessfulOutcome', _reset_val_SuccessfulOutcome), ('procedureCode', 4), ('criticality', 'reject')])
+    reset = CLASS(name=u'reset', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE')))
+    _reset_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'Reset')))
+    _reset_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'ResetAcknowledge')))
+    reset._val = dict([(u'InitiatingMessage', _reset_val_InitiatingMessage), (u'SuccessfulOutcome', _reset_val_SuccessfulOutcome), (u'procedureCode', 4), (u'criticality', u'reject')])
     
     #-----< privateMessage >-----#
-    privateMessage = CLASS(name='privateMessage', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE')))
-    _privateMessage_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'PrivateMessage')))
-    privateMessage._val = dict([('InitiatingMessage', _privateMessage_val_InitiatingMessage), ('procedureCode', 3), ('criticality', 'ignore')])
+    privateMessage = CLASS(name=u'privateMessage', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE')))
+    _privateMessage_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'PrivateMessage')))
+    privateMessage._val = dict([(u'InitiatingMessage', _privateMessage_val_InitiatingMessage), (u'procedureCode', 3), (u'criticality', u'ignore')])
     
     #-----< mCEConfigurationUpdate >-----#
-    mCEConfigurationUpdate = CLASS(name='mCEConfigurationUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE')))
-    _mCEConfigurationUpdate_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdate')))
-    _mCEConfigurationUpdate_val_SuccessfulOutcome = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdateAcknowledge')))
-    _mCEConfigurationUpdate_val_UnsuccessfulOutcome = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdateFailure')))
-    mCEConfigurationUpdate._val = dict([('InitiatingMessage', _mCEConfigurationUpdate_val_InitiatingMessage), ('SuccessfulOutcome', _mCEConfigurationUpdate_val_SuccessfulOutcome), ('UnsuccessfulOutcome', _mCEConfigurationUpdate_val_UnsuccessfulOutcome), ('procedureCode', 6), ('criticality', 'reject')])
+    mCEConfigurationUpdate = CLASS(name=u'mCEConfigurationUpdate', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE')))
+    _mCEConfigurationUpdate_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdate')))
+    _mCEConfigurationUpdate_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdateAcknowledge')))
+    _mCEConfigurationUpdate_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'MCEConfigurationUpdateFailure')))
+    mCEConfigurationUpdate._val = dict([(u'InitiatingMessage', _mCEConfigurationUpdate_val_InitiatingMessage), (u'SuccessfulOutcome', _mCEConfigurationUpdate_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _mCEConfigurationUpdate_val_UnsuccessfulOutcome), (u'procedureCode', 6), (u'criticality', u'reject')])
     
     #-----< m3Setup >-----#
-    m3Setup = CLASS(name='m3Setup', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE')))
-    _m3Setup_val_InitiatingMessage = SEQ(name='InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupRequest')))
-    _m3Setup_val_SuccessfulOutcome = SEQ(name='SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupResponse')))
-    _m3Setup_val_UnsuccessfulOutcome = SEQ(name='UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupFailure')))
-    m3Setup._val = dict([('InitiatingMessage', _m3Setup_val_InitiatingMessage), ('SuccessfulOutcome', _m3Setup_val_SuccessfulOutcome), ('UnsuccessfulOutcome', _m3Setup_val_UnsuccessfulOutcome), ('procedureCode', 7), ('criticality', 'reject')])
+    m3Setup = CLASS(name=u'm3Setup', mode=MODE_VALUE, typeref=ASN1RefType(('M3AP-PDU-Descriptions', 'M3AP-ELEMENTARY-PROCEDURE')))
+    _m3Setup_val_InitiatingMessage = SEQ(name=u'InitiatingMessage', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupRequest')))
+    _m3Setup_val_SuccessfulOutcome = SEQ(name=u'SuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupResponse')))
+    _m3Setup_val_UnsuccessfulOutcome = SEQ(name=u'UnsuccessfulOutcome', mode=MODE_TYPE, typeref=ASN1RefType(('M3AP-PDU-Contents', 'M3SetupFailure')))
+    m3Setup._val = dict([(u'InitiatingMessage', _m3Setup_val_InitiatingMessage), (u'SuccessfulOutcome', _m3Setup_val_SuccessfulOutcome), (u'UnsuccessfulOutcome', _m3Setup_val_UnsuccessfulOutcome), (u'procedureCode', 7), (u'criticality', u'reject')])
     
     _all_ = [
         _M3AP_ELEMENTARY_PROCEDURE_InitiatingMessage,
