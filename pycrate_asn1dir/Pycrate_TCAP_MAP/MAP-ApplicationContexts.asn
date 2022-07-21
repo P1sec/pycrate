@@ -161,7 +161,7 @@ vcsgLocationCancellationContext-v3  OBJECT IDENTIFIER ::=
 --  existing in previous versions of the protocol
 
 -- AC Name & Version	Object Identifier
--- 
+--
 -- networkLocUpContext-v1	map-ac networkLocUp (1)	version1 (1)
 -- networkLocUpContext-v2	map-ac networkLocUp (1)	version2 (2)
 -- locationCancellationContext-v1	map-ac locationCancellation (2)	version1 (1)
@@ -177,7 +177,7 @@ vcsgLocationCancellationContext-v3  OBJECT IDENTIFIER ::=
 -- sIWFSAllocationContext-v3	map-ac sIWFSAllocation (12)	version3 (3)
 -- equipmentMngtContext-v1	map-ac equipmentMngt (13)	version1 (1)
 -- equipmentMngtContext-v2	map-ac equipmentMngt (13)	version2 (2)
--- infoRetrievalContext-v1	map-ac infoRetrieval (14)	version1 (1) 
+-- infoRetrievalContext-v1	map-ac infoRetrieval (14)	version1 (1)
 -- infoRetrievalContext-v2	map-ac infoRetrieval (14)	version2 (2)
 -- interVlrInfoRetrievalContext-v2	map-ac interVlrInfoRetrieval (15)	version2 (2)
 -- subscriberDataMngtContext-v1	map-ac subscriberDataMngt (16)	version1 (1)
@@ -192,9 +192,9 @@ vcsgLocationCancellationContext-v3  OBJECT IDENTIFIER ::=
 -- mwdMngtContext-v1	map-ac mwdMngt (24)	version1 (1)
 -- mwdMngtContext-v2	map-ac mwdMngt (24)	version2 (2)
 -- shortMsgMT-RelayContext-v2	map-ac shortMsgMT-Relay (25)	version2 (2)
--- msPurgingContext-v2	map-ac msPurging (27)	version2 (2) 
--- callControlTransferContext-v3	map-ac callControlTransferContext (6)	version3 (3) 
--- gprsLocationInfoRetrievalContext-v3	map-ac gprsLocationInfoRetrievalContext (33) version3 (3) 
+-- msPurgingContext-v2	map-ac msPurging (27)	version2 (2)
+-- callControlTransferContext-v3	map-ac callControlTransferContext (6)	version3 (3)
+-- gprsLocationInfoRetrievalContext-v3	map-ac gprsLocationInfoRetrievalContext (33) version3 (3)
 
 
 END

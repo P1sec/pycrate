@@ -21,7 +21,7 @@ EXPORTS
 	ReportSM-DeliveryStatusRes,
 	AlertServiceCentreArg,
 	InformServiceCentreArg,
-	ReadyForSM-Arg, 
+	ReadyForSM-Arg,
 	ReadyForSM-Res,
 	SM-DeliveryOutcome,
 	AlertReason,
@@ -82,14 +82,14 @@ SM-DeliveryNotIntended ::= ENUMERATED {
 	...}
 
 SM-RP-MTI ::= INTEGER (0..10)
-	-- 0 SMS Deliver 
+	-- 0 SMS Deliver
 	-- 1 SMS Status Report
 	-- other values are reserved for future use and shall be discarded if
 	-- received
 
 SM-RP-SMEA ::= OCTET STRING (SIZE (1..12))
-	-- this parameter contains an address field which is encoded 
-	-- as defined in 3GPP TS 23.040. An address field contains 3 elements :
+	-- this parameter contains an address field which is encoded
+	-- as defined in 3GPP TS 23.040. An address field contains 3 elements :
 	--	address-length
 	--	type-of-address
 	--	address-value
@@ -113,16 +113,16 @@ LocationInfoWithLMSI ::= SEQUENCE {
 	extensionContainer	ExtensionContainer	OPTIONAL,
 	...,
 	gprsNodeIndicator	[5]	NULL	OPTIONAL,
-	-- gprsNodeIndicator is set only if the SGSN number is sent as the 
+	-- gprsNodeIndicator is set only if the SGSN number is sent as the
 	-- Network Node Number
 	additional-Number	[6] Additional-Number	OPTIONAL,
 	networkNodeDiameterAddress	[7] NetworkNodeDiameterAddress	OPTIONAL,
 	additionalNetworkNodeDiameterAddress	[8] NetworkNodeDiameterAddress	OPTIONAL,
 	thirdNumber	[9] Additional-Number	OPTIONAL,
 	thirdNetworkNodeDiameterAddress	[10] NetworkNodeDiameterAddress	OPTIONAL,
-	imsNodeIndicator	[11] NULL	OPTIONAL, 
+	imsNodeIndicator	[11] NULL	OPTIONAL,
 	-- gprsNodeIndicator and imsNodeIndicator shall not both be present.
-	-- additionalNumber and thirdNumber shall not both contain the same type of number. 
+	-- additionalNumber and thirdNumber shall not both contain the same type of number.
 	smsf-3gpp-Number	[12]	ISDN-AddressString	OPTIONAL,
 	smsf-3gpp-DiameterAddress	[13]	NetworkNodeDiameterAddress	OPTIONAL,
 	smsf-non-3gpp-Number	[14]	ISDN-AddressString	OPTIONAL,
@@ -130,7 +130,7 @@ LocationInfoWithLMSI ::= SEQUENCE {
 	smsf-3gpp-address-indicator	[16]	NULL	OPTIONAL,
 	smsf-non-3gpp-address-indicator	[17]	NULL	OPTIONAL
 	--
-	-- If smsf-supportIndicator was not included in the request, in RoutingInfoForSM-Arg, 
+	-- If smsf-supportIndicator was not included in the request, in RoutingInfoForSM-Arg,
 	-- then smsf-3gpp Number/DiameterAddress, smsf-non-3gpp Number/DiameterAddress and
 	-- smsf-address-indicator and smsf-non-3gpp-address-indicator shall be absent.
 	--
@@ -152,9 +152,9 @@ LocationInfoWithLMSI ::= SEQUENCE {
 Additional-Number ::= CHOICE {
 	msc-Number	[0] ISDN-AddressString,
 	sgsn-Number	[1] ISDN-AddressString}
-	-- msc-number can be the MSC number or 
+	-- msc-number can be the MSC number or
 	-- the SMS Router number or the MME number for MT SMS
-	-- sgsn-number can be the SGSN number or the SMS Router number 
+	-- sgsn-number can be the SGSN number or the SMS Router number
 
 MO-ForwardSM-Arg ::= SEQUENCE {
 	sm-RP-DA	SM-RP-DA,
@@ -193,8 +193,8 @@ CorrelationID ::= SEQUENCE {
 	sip-uri-A	[1] SIP-URI	OPTIONAL,
 	sip-uri-B	[2] SIP-URI}
 
-SIP-URI ::= OCTET STRING 
--- octets are coded as defined in IETF RFC 3261 
+SIP-URI ::= OCTET STRING
+-- octets are coded as defined in IETF RFC 3261
 
 MT-ForwardSM-Res ::= SEQUENCE {
 	sm-RP-UI	SignalInfo	OPTIONAL,
@@ -223,7 +223,7 @@ ReportSM-DeliveryStatusArg ::= SEQUENCE {
 	extensionContainer	[1] ExtensionContainer	OPTIONAL,
 	...,
 	gprsSupportIndicator	[2]	NULL	OPTIONAL,
-	-- gprsSupportIndicator is set only if the SMS-GMSC supports 
+	-- gprsSupportIndicator is set only if the SMS-GMSC supports
 	-- handling of two delivery outcomes
 	deliveryOutcomeIndicator	[3]	NULL	OPTIONAL,
 	-- DeliveryOutcomeIndicator is set when the SM-DeliveryOutcome
@@ -233,18 +233,18 @@ ReportSM-DeliveryStatusArg ::= SEQUENCE {
 	-- If DeliveryOutcomeIndicator is set, then AdditionalSM-DeliveryOutcome shall be absent
 	additionalAbsentSubscriberDiagnosticSM	[5]	AbsentSubscriberDiagnosticSM OPTIONAL,
 	-- If received additionalAbsentSubscriberDiagnosticSM is for GPRS
-	-- If DeliveryOutcomeIndicator is set, then AdditionalAbsentSubscriberDiagnosticSM 
+	-- If DeliveryOutcomeIndicator is set, then AdditionalAbsentSubscriberDiagnosticSM
 	-- shall be absent
 	ip-sm-gw-Indicator	[6]	NULL	OPTIONAL,
 	-- the ip-sm-gw indicator indicates by its presence that sm-deliveryOutcome
 	-- is for delivery via IMS
 	-- If present, deliveryOutcomeIndicator shall be absent.
-	ip-sm-gw-sm-deliveryOutcome	[7]	SM-DeliveryOutcome	OPTIONAL, 
+	ip-sm-gw-sm-deliveryOutcome	[7]	SM-DeliveryOutcome	OPTIONAL,
 	-- If received ip-sm-gw-sm-deliveryOutcome is for delivery via IMS
 	-- If ip-sm-gw-Indicator is set, then ip-sm-gw-sm-deliveryOutcome shall be absent
 	ip-sm-gw-absentSubscriberDiagnosticSM	[8]	AbsentSubscriberDiagnosticSM	OPTIONAL,
 	-- If received ip-sm-gw-sm-absentSubscriberDiagnosticSM is for delivery via IMS
-	-- If ip-sm-gw-Indicator is set, then ip-sm-gw-sm-absentSubscriberDiagnosticSM 
+	-- If ip-sm-gw-Indicator is set, then ip-sm-gw-sm-absentSubscriberDiagnosticSM
 	-- shall be absent
 	imsi	[9] IMSI	OPTIONAL,
 	singleAttemptDelivery	[10] NULL	OPTIONAL,
@@ -306,7 +306,7 @@ InformServiceCentreArg ::= SEQUENCE {
 	... ,
 	absentSubscriberDiagnosticSM	AbsentSubscriberDiagnosticSM	OPTIONAL,
 	additionalAbsentSubscriberDiagnosticSM	[0]	AbsentSubscriberDiagnosticSM	OPTIONAL,
-	-- additionalAbsentSubscriberDiagnosticSM may be present only if 
+	-- additionalAbsentSubscriberDiagnosticSM may be present only if
 	-- absentSubscriberDiagnosticSM is present.
 	-- if included, additionalAbsentSubscriberDiagnosticSM is for GPRS and
 	-- absentSubscriberDiagnosticSM is for non-GPRS
@@ -327,7 +327,7 @@ ReadyForSM-Arg ::= SEQUENCE {
 	imsi	[0] IMSI,
 	alertReason	AlertReason,
 	alertReasonIndicator	NULL	OPTIONAL,
-	-- alertReasonIndicator is set only when the alertReason 
+	-- alertReasonIndicator is set only when the alertReason
 	-- sent to HLR is for GPRS
 	extensionContainer	ExtensionContainer	OPTIONAL,
 	...,
@@ -358,16 +358,16 @@ MT-ForwardSM-VGCS-Res ::= SEQUENCE {
 	extensionContainer	[2] ExtensionContainer	OPTIONAL,
 	...,
 	additionalDispatcherList	[3] AdditionalDispatcherList	OPTIONAL }
-	-- additionalDispatcherList shall be absent if dispatcherList is absent or 
+	-- additionalDispatcherList shall be absent if dispatcherList is absent or
 	-- contains less than 5 ISDN-AddressStrings
 
-DispatcherList ::= 
+DispatcherList ::=
 	SEQUENCE SIZE (1..maxNumOfDispatchers) OF
 	ISDN-AddressString
 
 maxNumOfDispatchers  INTEGER ::= 5
 
-AdditionalDispatcherList ::= 
+AdditionalDispatcherList ::=
 	SEQUENCE SIZE (1..maxNumOfAdditionalDispatchers) OF
 	ISDN-AddressString
 

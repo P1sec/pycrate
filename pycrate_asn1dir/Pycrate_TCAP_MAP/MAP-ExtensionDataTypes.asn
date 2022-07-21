@@ -29,12 +29,12 @@ MAP-EXTENSION  ::= CLASS {
 -- data types
 
 ExtensionContainer ::= SEQUENCE {
-	privateExtensionList	[0]PrivateExtensionList	OPTIONAL, 
+	privateExtensionList	[0]PrivateExtensionList	OPTIONAL,
 	pcs-Extensions	[1]PCS-Extensions	OPTIONAL,
 	...}
 
 SLR-ArgExtensionContainer ::= SEQUENCE {
-	privateExtensionList	[0]PrivateExtensionList	OPTIONAL, 
+	privateExtensionList	[0]PrivateExtensionList	OPTIONAL,
 	slr-Arg-PCS-Extensions	[1]SLR-Arg-PCS-Extensions	OPTIONAL,
 	...}
 

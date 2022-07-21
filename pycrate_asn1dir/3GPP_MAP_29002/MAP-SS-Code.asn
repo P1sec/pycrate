@@ -42,7 +42,7 @@ allNameIdentificationSS	SS-Code ::= '00011000'B
 cnap	SS-Code ::= '00011001'B
 	-- calling name presentation
 
-	-- SS-Codes '00011010'B to '00011111'B are reserved for future 
+	-- SS-Codes '00011010'B to '00011111'B are reserved for future
 	-- NameIdentification Supplementary Service use.
 
 allForwardingSS	SS-Code ::= '00100000'B
@@ -56,7 +56,7 @@ cfb	SS-Code ::= '00101001'B
 cfnry	SS-Code ::= '00101010'B
 	-- call forwarding on no reply
 cfnrc	SS-Code ::= '00101011'B
-	-- call forwarding on mobile subscriber not reachable 
+	-- call forwarding on mobile subscriber not reachable
 cd	SS-Code ::= '00100100'B
 	-- call deflection
 
@@ -78,7 +78,7 @@ hold	SS-Code ::= '01000010'B
 	-- call hold
 ccbs-A	SS-Code ::= '01000011'B
 	-- completion of call to busy subscribers, originating side
-	-- this SS-Code is used only in InsertSubscriberData, DeleteSubscriberData 
+	-- this SS-Code is used only in InsertSubscriberData, DeleteSubscriberData
 	-- and InterrogateSS
 ccbs-B	SS-Code ::= '01000100'B
 	-- completion of call to busy subscribers, destination side
@@ -110,7 +110,7 @@ allAdditionalInfoTransferSS	SS-Code ::= '10000000'B
 	-- reserved for possible future use
 	-- all additional information transfer SS
 uus1	SS-Code ::= '10000001'B
-	-- UUS1 user-to-user signalling 
+	-- UUS1 user-to-user signalling
 uus2	SS-Code ::= '10000010'B
 	-- UUS2 user-to-user signalling
 uus3	SS-Code ::= '10000011'B
@@ -163,12 +163,12 @@ allLCSPrivacyException	SS-Code ::= '10110000'B
 universal	SS-Code ::= '10110001'B
 	-- allow location by any LCS client
 callSessionRelated	SS-Code ::= '10110010'B
-	-- allow location by any value added LCS client to which a call/session 
+	-- allow location by any value added LCS client to which a call/session
 	-- is established from the target MS
 callSessionUnrelated	SS-Code ::= '10110011'B
 	-- allow location by designated external value added LCS clients
 plmnoperator	SS-Code ::= '10110100'B
-	-- allow location by designated PLMN operator LCS clients 
+	-- allow location by designated PLMN operator LCS clients
 serviceType	SS-Code ::= '10110101'B
 	-- allow location by LCS clients of a designated LCS service type
 

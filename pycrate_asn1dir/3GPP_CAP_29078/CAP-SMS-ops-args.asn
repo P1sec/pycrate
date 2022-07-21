@@ -98,33 +98,33 @@ gsm-Network(1) modules(3) map-CH-DataTypes(13) version12(12)}
 ;
 
 connectSMS {PARAMETERS-BOUND : bound} OPERATION ::= {
-	ARGUMENT		ConnectSMSArg {bound}
+	ARGUMENT	ConnectSMSArg {bound}
 	RETURN RESULT	FALSE
-	ERRORS			{missingParameter |
-					parameterOutOfRange |
-					systemFailure |
-					taskRefused |
-					unexpectedComponentSequence |
-					unexpectedDataValue |
-					unexpectedParameter}
-	CODE			opcode-connectSMS}
+	ERRORS		{missingParameter |
+			parameterOutOfRange |
+			systemFailure |
+			taskRefused |
+			unexpectedComponentSequence |
+			unexpectedDataValue |
+			unexpectedParameter}
+	CODE		opcode-connectSMS}
 --  Direction: gsmSCF -> gsmSSF or gprsSSF, Timer: Tconsms
 --  This operation is used to request the smsSSF to perform the SMS processing
 --  actions to route or forward a short message to a specified destination.
 
 ConnectSMSArg {PARAMETERS-BOUND : bound} ::= SEQUENCE {
-	callingPartysNumber					[0] SMS-AddressString						OPTIONAL,
-	destinationSubscriberNumber			[1] CalledPartyBCDNumber {bound}			OPTIONAL,
-	sMSCAddress							[2] ISDN-AddressString						OPTIONAL,
-	extensions							[10] Extensions {bound}						OPTIONAL,
+	callingPartysNumber			[0] SMS-AddressString			OPTIONAL,
+	destinationSubscriberNumber		[1] CalledPartyBCDNumber {bound}		OPTIONAL,
+	sMSCAddress				[2] ISDN-AddressString			OPTIONAL,
+	extensions				[10] Extensions {bound}			OPTIONAL,
 	...
 	}
 
 continueSMS OPERATION ::= {
 	RETURN RESULT	FALSE
 	ALWAYS RESPONDS	FALSE
-	CODE			opcode-continueSMS}
--- Direction: gsmSCF -> smsSSF, Timer: Tcuesms 
+	CODE		opcode-continueSMS}
+-- Direction: gsmSCF -> smsSSF, Timer: Tcuesms
 -- This operation is used to request the smsSSF to proceed with
 -- Short Message processing at the DP at which it previously suspended
 -- Short Message processing to await gsmSCF instructions (i.e. proceed
@@ -132,33 +132,33 @@ continueSMS OPERATION ::= {
 -- continues SMS processing without substituting new data from the gsmSCF.
 
 eventReportSMS {PARAMETERS-BOUND : bound} OPERATION ::= {
-	ARGUMENT		EventReportSMSArg {bound}
+	ARGUMENT	EventReportSMSArg {bound}
 	RETURN RESULT	FALSE
 	ALWAYS RESPONDS	FALSE
-	CODE			opcode-eventReportSMS}
+	CODE		opcode-eventReportSMS}
 --  Direction: gsmSSF or gprsSSF -> gsmSCF, Timer: Terbsms
 --  This operation is used to notify the gsmSCF of a Short Message related event (FSM events
 --  such as submission, delivery or failure) previously requested by the gsmSCF in a
 --  RequestReportSMSEvent operation.
 
 EventReportSMSArg {PARAMETERS-BOUND : bound} ::= SEQUENCE {
-	eventTypeSMS						[0] EventTypeSMS,
-	eventSpecificInformationSMS			[1] EventSpecificInformationSMS				OPTIONAL,
-	miscCallInfo						[2] MiscCallInfo DEFAULT {messageType request},
-	extensions							[10] Extensions {bound}						OPTIONAL,
+	eventTypeSMS			[0] EventTypeSMS,
+	eventSpecificInformationSMS		[1] EventSpecificInformationSMS		OPTIONAL,
+	miscCallInfo			[2] MiscCallInfo DEFAULT {messageType request},
+	extensions				[10] Extensions {bound}			OPTIONAL,
 	...
 	}
 
 furnishChargingInformationSMS {PARAMETERS-BOUND : bound} OPERATION ::= {
-	ARGUMENT		FurnishChargingInformationSMSArg {bound}
+	ARGUMENT	FurnishChargingInformationSMSArg {bound}
 	RETURN RESULT	FALSE
-	ERRORS			{missingParameter |
-					taskRefused |
-					unexpectedComponentSequence |
-					unexpectedDataValue |
-					unexpectedParameter}
-	CODE			opcode-furnishChargingInformationSMS}
---  Direction: gsmSCF ?? gsmSSF or gprsSSF, Timer: Tfcisms 
+	ERRORS		{missingParameter |
+			taskRefused |
+			unexpectedComponentSequence |
+			unexpectedDataValue |
+			unexpectedParameter}
+	CODE		opcode-furnishChargingInformationSMS}
+--  Direction: gsmSCF gsSSF or gprsSSF, Timer: Tfcisms
 --  This operation is used to request the smsSSF to generate, register a charging record
 --  or to include some information in the default SM record. The registered charging record is
 --  intended for off line charging of the Short Message.
@@ -167,99 +167,99 @@ FurnishChargingInformationSMSArg {PARAMETERS-BOUND : bound} ::=
 	FCISMSBillingChargingCharacteristics {bound}
 
 initialDPSMS {PARAMETERS-BOUND : bound} OPERATION ::= {
-	ARGUMENT		InitialDPSMSArg {bound}
+	ARGUMENT	InitialDPSMSArg {bound}
 	RETURN RESULT	FALSE
-	ERRORS			{missingCustomerRecord |
-					missingParameter |
-					parameterOutOfRange |
-					systemFailure |
-					taskRefused |
-					unexpectedComponentSequence |
-					unexpectedDataValue |
-					unexpectedParameter}
-	CODE			opcode-initialDPSMS}
+	ERRORS		{missingCustomerRecord |
+			missingParameter |
+			parameterOutOfRange |
+			systemFailure |
+			taskRefused |
+			unexpectedComponentSequence |
+			unexpectedDataValue |
+			unexpectedParameter}
+	CODE		opcode-initialDPSMS}
 --  Direction: gsmSSF or gprsSSF -> gsmSCF, Timer: Tidpsms
 --  This operation is used after a TDP to indicate request for service.
 
 InitialDPSMSArg {PARAMETERS-BOUND : bound} ::= SEQUENCE {
-	serviceKey							[0] ServiceKey,
-	destinationSubscriberNumber			[1] CalledPartyBCDNumber {bound}			OPTIONAL,
-	callingPartyNumber					[2] SMS-AddressString						OPTIONAL,
-	eventTypeSMS						[3] EventTypeSMS							OPTIONAL,
-	iMSI								[4] IMSI									OPTIONAL,
-	locationInformationMSC				[5] LocationInformation						OPTIONAL,
-	locationInformationGPRS				[6] LocationInformationGPRS					OPTIONAL,
-	sMSCAddress							[7] ISDN-AddressString						OPTIONAL,
-	timeAndTimezone						[8] TimeAndTimezone {bound}					OPTIONAL,
-	tPShortMessageSpecificInfo			[9] TPShortMessageSpecificInfo				OPTIONAL,
-	tPProtocolIdentifier				[10] TPProtocolIdentifier					OPTIONAL,
-	tPDataCodingScheme					[11] TPDataCodingScheme						OPTIONAL,
-	tPValidityPeriod					[12] TPValidityPeriod						OPTIONAL,
-	extensions							[13] Extensions {bound}						OPTIONAL,
+	serviceKey				[0] ServiceKey,
+	destinationSubscriberNumber		[1] CalledPartyBCDNumber {bound}		OPTIONAL,
+	callingPartyNumber			[2] SMS-AddressString			OPTIONAL,
+	eventTypeSMS			[3] EventTypeSMS				OPTIONAL,
+	iMSI				[4] IMSI					OPTIONAL,
+	locationInformationMSC		[5] LocationInformation			OPTIONAL,
+	locationInformationGPRS		[6] LocationInformationGPRS			OPTIONAL,
+	sMSCAddress				[7] ISDN-AddressString			OPTIONAL,
+	timeAndTimezone			[8] TimeAndTimezone {bound}			OPTIONAL,
+	tPShortMessageSpecificInfo		[9] TPShortMessageSpecificInfo		OPTIONAL,
+	tPProtocolIdentifier		[10] TPProtocolIdentifier			OPTIONAL,
+	tPDataCodingScheme			[11] TPDataCodingScheme			OPTIONAL,
+	tPValidityPeriod			[12] TPValidityPeriod			OPTIONAL,
+	extensions				[13] Extensions {bound}			OPTIONAL,
 	...,
-	smsReferenceNumber					[14] CallReferenceNumber					OPTIONAL,
-	mscAddress							[15] ISDN-AddressString						OPTIONAL,
-	sgsn-Number							[16] ISDN-AddressString						OPTIONAL,
-	ms-Classmark2						[17] MS-Classmark2							OPTIONAL,
-	gPRSMSClass 						[18] GPRSMSClass							OPTIONAL,
-	iMEI								[19] IMEI									OPTIONAL,
-	calledPartyNumber					[20] ISDN-AddressString						OPTIONAL
+	smsReferenceNumber			[14] CallReferenceNumber			OPTIONAL,
+	mscAddress				[15] ISDN-AddressString			OPTIONAL,
+	sgsn-Number				[16] ISDN-AddressString			OPTIONAL,
+	ms-Classmark2			[17] MS-Classmark2				OPTIONAL,
+	gPRSMSClass			[18] GPRSMSClass				OPTIONAL,
+	iMEI				[19] IMEI					OPTIONAL,
+	calledPartyNumber			[20] ISDN-AddressString			OPTIONAL
 	}
 
 --  The UserCSGInformation is conveyed in the LocationInformation for CS and LocationInformationGPRS
 --  for GPRS. The encoding of the parameter is as defined in 3GPP TS 29.002 [11].
 
 releaseSMS OPERATION ::= {
-	ARGUMENT		ReleaseSMSArg
+	ARGUMENT	ReleaseSMSArg
 	RETURN RESULT	FALSE
 	ALWAYS RESPONDS	FALSE
-	CODE			opcode-releaseSMS}
+	CODE		opcode-releaseSMS}
 --  Direction: gsmSCF -> gsmSSF or gprsSSF, Timer: Trelsms
---  This operation is used to prevent an attempt to submit or deliver a short message. 
+--  This operation is used to prevent an attempt to submit or deliver a short message.
 
 ReleaseSMSArg ::= RPCause
 
 requestReportSMSEvent {PARAMETERS-BOUND : bound} OPERATION ::= {
-	ARGUMENT		RequestReportSMSEventArg {bound}
+	ARGUMENT	RequestReportSMSEventArg {bound}
 	RETURN RESULT	FALSE
-	ERRORS			{missingParameter |
-					parameterOutOfRange |
-					systemFailure |
-					taskRefused |
-					unexpectedComponentSequence |
-					unexpectedDataValue |
-					unexpectedParameter}
-	CODE			opcode-requestReportSMSEvent}
+	ERRORS		{missingParameter |
+			parameterOutOfRange |
+			systemFailure |
+			taskRefused |
+			unexpectedComponentSequence |
+			unexpectedDataValue |
+			unexpectedParameter}
+	CODE		opcode-requestReportSMSEvent}
 --  Direction: gsmSCF -> gsmSSF or gprsSSF, Timer: Trrbsms
 --  This operation is used to request the gsmSSF or gprsSSF to monitor for a
 --  Short Message related event (FSM events such as submission, delivery or failure)
 --  and to send a notification to the gsmSCF when the event is detected.
 
 RequestReportSMSEventArg {PARAMETERS-BOUND : bound} ::= SEQUENCE {
-	sMSEvents							[0] SEQUENCE SIZE (1..bound.&numOfSMSEvents) OF SMSEvent,
-	extensions							[10] Extensions {bound}						OPTIONAL,
+	sMSEvents				[0] SEQUENCE SIZE (1..bound.&numOfSMSEvents) OF SMSEvent,
+	extensions				[10] Extensions {bound}			OPTIONAL,
 	...
 	}
 --  Indicates the Short Message related events(s) for notification.
 
 resetTimerSMS {PARAMETERS-BOUND : bound} OPERATION ::= {
-	ARGUMENT		ResetTimerSMSArg {bound}
+	ARGUMENT	ResetTimerSMSArg {bound}
 	RETURN RESULT	FALSE
-	ERRORS			{missingParameter |
-					parameterOutOfRange |
-					taskRefused |
-					unexpectedComponentSequence |
-					unexpectedDataValue |
-					unexpectedParameter}
-	CODE			opcode-resetTimerSMS}
--- Direction: gsmSCF -> smsSSF, Timer: Trtsms 
+	ERRORS		{missingParameter |
+			parameterOutOfRange |
+			taskRefused |
+			unexpectedComponentSequence |
+			unexpectedDataValue |
+			unexpectedParameter}
+	CODE		opcode-resetTimerSMS}
+-- Direction: gsmSCF -> smsSSF, Timer: Trtsms
 -- This operation is used to request the smsSSF to refresh an application
 -- timer in the smsSSF.
 
 ResetTimerSMSArg {PARAMETERS-BOUND : bound} ::= SEQUENCE {
-	timerID								[0] TimerID	DEFAULT tssf,
-	timervalue							[1] TimerValue,
-	extensions							[2] Extensions {bound} 						OPTIONAL,
+	timerID				[0] TimerID	DEFAULT tssf,
+	timervalue				[1] TimerValue,
+	extensions				[2] Extensions {bound}			OPTIONAL,
 	...
 	}
 

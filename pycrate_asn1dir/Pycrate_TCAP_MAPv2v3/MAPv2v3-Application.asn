@@ -269,7 +269,7 @@ locationUpdatingPackage-v3  OPERATION-PACKAGE ::= {
     CONSUMER IN { vlr }
     SUPPLIER INVOKES {
         MAP-MobileServiceOperations.forwardCheckSS-Indication }
-    SUPPLIER IN { hlr }
+    SUPPLIER IN { hlr }
     }
 
 locationUpdatingPackage-v2  OPERATION-PACKAGE ::= {
@@ -279,7 +279,7 @@ locationUpdatingPackage-v2  OPERATION-PACKAGE ::= {
     CONSUMER IN { vlr }
     SUPPLIER INVOKES {
         MAPv2-MobileServiceOperations.forwardCheckSS-Indication }
-    SUPPLIER IN { hlr }
+    SUPPLIER IN { hlr }
     }
 
 locationUpdatingPackage-v1  OPERATION-PACKAGE ::=
@@ -662,7 +662,7 @@ tracingPackage-v3  OPERATION-PACKAGE ::= {
     -- Supplier is VLR or SGSN if Consumer is HLR
     CONSUMER INVOKES {
         MAP-OperationAndMaintenanceOperations.activateTraceMode }
-    CONSUMER IN { hlr }
+    CONSUMER IN { hlr }
     SUPPLIER IN { vlr | sgsn }
     }
 
@@ -670,7 +670,7 @@ tracingPackage-v2  OPERATION-PACKAGE ::= {
     -- Supplier is VLR or SGSN if Consumer is HLR
     CONSUMER INVOKES {
         MAPv2-OperationAndMaintenanceOperations.activateTraceMode }
-    CONSUMER IN { hlr }
+    CONSUMER IN { hlr }
     SUPPLIER IN { vlr | sgsn }
     }
 
@@ -731,7 +731,7 @@ mo-ShortMsgRelayPackage-v3  OPERATION-PACKAGE ::= {
     CONSUMER INVOKES {
         MAP-ShortMessageServiceOperations.mo-ForwardSM }
     CONSUMER IN { msc | sgsn }
-    SUPPLIER IN { msc }
+    SUPPLIER IN { msc }
     }
 
 shortMsgRelayPackage-v2  OPERATION-PACKAGE ::= {
@@ -741,7 +741,7 @@ shortMsgRelayPackage-v2  OPERATION-PACKAGE ::= {
     CONSUMER INVOKES {
         MAPv2-ShortMessageServiceOperations.forwardSM }
     CONSUMER IN { msc | sgsn }
-    SUPPLIER IN { msc }
+    SUPPLIER IN { msc }
     }
 
 shortMsgRelayPackage-v1  OPERATION-PACKAGE ::=
@@ -1222,7 +1222,7 @@ authenticationFailureReportPackage-v3 OPERATION-PACKAGE ::= {
     -- Supplier is HLR if Consumer is SGSN
     CONSUMER INVOKES {
         MAP-MobileServiceOperations.authenticationFailureReport }
-    CONSUMER IN { vlr | sgsn }
+    CONSUMER IN { vlr | sgsn }
     SUPPLIER IN { hlr }
     }
 
@@ -1438,7 +1438,7 @@ locationCancellationContext-v3 APPLICATION-CONTEXT ::= {
     INITIATOR CONSUMER OF {
         locationCancellationPackage-v3 }
     INITIATOR IN { hlr }
-    RESPONDER IN { vlr | sgsn }
+    RESPONDER IN { vlr | sgsn }
     ID  {map-ac locationCancel (2) version3 (3)}
     }
 
@@ -1446,7 +1446,7 @@ locationCancellationContext-v2 APPLICATION-CONTEXT ::= {
     INITIATOR CONSUMER OF {
         locationCancellationPackage-v2 }
     INITIATOR IN { hlr }
-    RESPONDER IN { vlr | sgsn }
+    RESPONDER IN { vlr | sgsn }
     ID  {map-ac locationCancellation (2) version2 (2)}
     }
 
@@ -1454,7 +1454,7 @@ locationCancellationContext-v1 APPLICATION-CONTEXT ::= {
     INITIATOR CONSUMER OF {
         locationCancellationPackage-v1 }
     INITIATOR IN { hlr }
-    RESPONDER IN { vlr | sgsn }
+    RESPONDER IN { vlr | sgsn }
     ID  {map-ac locationCancellation (2) version1 (1)}
     }
 
@@ -1617,7 +1617,7 @@ imsiRetrievalContext-v2 APPLICATION-CONTEXT ::= {
     INITIATOR CONSUMER OF {
         imsiRetrievalPackage-v2 }
     INITIATOR IN { vlr }
-    RESPONDER IN { hlr }
+    RESPONDER IN { hlr }
     ID  {map-ac imsiRetrieval (26) version2 (2)}
     }
 
@@ -1913,8 +1913,8 @@ mwdMngtContext-v3 APPLICATION-CONTEXT ::= {
     -- Responder is HLR if Initiator is VLR
     INITIATOR CONSUMER OF {
         mwdMngtPackage-v3 }
-    INITIATOR IN { vlr | sgsn }
-    RESPONDER IN { hlr }
+    INITIATOR IN { vlr | sgsn }
+    RESPONDER IN { hlr }
     ID  {map-ac mwdMngt (24) version3 (3)}
     }
 
@@ -1922,7 +1922,7 @@ mwdMngtContext-v2 APPLICATION-CONTEXT ::= {
     INITIATOR CONSUMER OF {
         mwdMngtPackage-v2 }
     INITIATOR IN { vlr }
-    RESPONDER IN { hlr }
+    RESPONDER IN { hlr }
     ID  {map-ac mwdMngt (24) version2 (2)}
     }
 
@@ -1930,7 +1930,7 @@ mwdMngtContext-v1 APPLICATION-CONTEXT ::= {
     INITIATOR CONSUMER OF {
         mwdMngtPackage-v1 }
     INITIATOR IN { vlr }
-    RESPONDER IN { hlr }
+    RESPONDER IN { hlr }
     ID  {map-ac mwdMngt (24) version1 (1)}
     }
 
@@ -1944,7 +1944,7 @@ shortMsgMT-RelayContext-v3 APPLICATION-CONTEXT ::= {
     -- Responder is MSC or SGSN if Initiator is GMSC
     INITIATOR CONSUMER OF {
         mt-ShortMsgRelayPackage-v3 }
-    INITIATOR IN { msc }
+    INITIATOR IN { msc }
     RESPONDER IN { msc | sgsn }
     ID  {map-ac shortMsgMT-Relay (25) version3 (3)}
     }
@@ -1952,7 +1952,7 @@ shortMsgMT-RelayContext-v3 APPLICATION-CONTEXT ::= {
 shortMsgMT-RelayContext-v2 APPLICATION-CONTEXT ::= {
     INITIATOR CONSUMER OF {
         shortMsgRelayPackage-v2 }
-    INITIATOR IN { msc }
+    INITIATOR IN { msc }
     RESPONDER IN { msc | sgsn }
     ID  {map-ac shortMsgMT-Relay (25) version2 (2)}
     }
@@ -1960,7 +1960,7 @@ shortMsgMT-RelayContext-v2 APPLICATION-CONTEXT ::= {
 shortMsgMT-RelayContext-v1 APPLICATION-CONTEXT ::= {
     INITIATOR CONSUMER OF {
         shortMsgRelayPackage-v1 }
-    INITIATOR IN { msc | sgsn }
+    INITIATOR IN { msc | sgsn }
     RESPONDER IN { msc | sgsn }
     ID  {map-ac shortMsgMT-Relay (25) version2 (1)}
     }
@@ -2133,7 +2133,7 @@ ss-InvocationNotificationContext-v3 APPLICATION-CONTEXT ::= {
     -- Responder is gsmSCF, Initiator is HLR
     INITIATOR CONSUMER OF {
         ss-InvocationNotificationPackage-v3 }
-    INITIATOR IN { msc | hlr }
+    INITIATOR IN { msc | hlr }
     RESPONDER IN { gsmscf }
     ID  {map-ac ss-InvocationNotification (36) version3 (3)}
     }
@@ -2151,7 +2151,7 @@ reportingContext-v3 APPLICATION-CONTEXT ::= {
         setReportingStatePackage-v3 |
         statusReportPackage-v3 |
         remoteUserFreePackage-v3 }
-    INITIATOR IN { vlr | hlr }
+    INITIATOR IN { vlr | hlr }
     RESPONDER CONSUMER OF {
         setReportingStatePackage-v3 |
         statusReportPackage-v3 }
@@ -2202,8 +2202,8 @@ locationSvcEnquiryContext-v3 APPLICATION-CONTEXT ::= {
     INITIATOR CONSUMER OF {
         locationSvcEnquiryPackage-v3 |
         locationSvcReportingPackage-v3 }
-    INITIATOR IN { gmlc | msc | sgsn }
-    RESPONDER IN { gmlc | msc | sgsn }
+    INITIATOR IN { gmlc | msc | sgsn }
+    RESPONDER IN { gmlc | msc | sgsn }
     ID  {map-ac locationSvcEnquiry (38) version3 (3)}
     }
 
@@ -2339,7 +2339,7 @@ vcsgLocationUpdateContext-v3 APPLICATION-CONTEXT ::= {
     -- Responder is CSS if Initiator is VLR or SGSN
     INITIATOR CONSUMER OF {
         vcsgLocationUpdatingPackage-v3 }
-    INITIATOR IN { vlr | sgsn }
+    INITIATOR IN { vlr | sgsn }
     RESPONDER CONSUMER OF {
         subscriberDataMngtPackage-v3 }
     RESPONDER IN { css }

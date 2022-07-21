@@ -40,7 +40,7 @@ Ext-BearerServiceCode ::= OCTET STRING (SIZE (1..5))
 	-- OCTETS 2-5: reserved for future use. If received the
     -- Ext-TeleserviceCode shall be
 	-- treated according to the exception handling defined for the
-	-- operation that uses this type. 
+	-- operation that uses this type.
 
 
 	-- Ext-BearerServiceCode includes all values defined for BearerServiceCode.

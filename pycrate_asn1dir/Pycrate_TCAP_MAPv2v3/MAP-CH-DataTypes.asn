@@ -40,9 +40,9 @@ IMPORTS
 	SupportedCamelPhases,
 	OfferedCamel4CSIs,
 	CUG-Interlock,
-	O-CSI, 
+	O-CSI,
 	D-CSI,
-	O-BcsmCamelTDPCriteriaList, 
+	O-BcsmCamelTDPCriteriaList,
 	T-BCSM-CAMEL-TDP-CriteriaList,
 	IST-SupportIndicator,
 	IST-AlertTimerValue,
@@ -145,7 +145,7 @@ ForwardingReason ::= ENUMERATED {
 	busy  (1),
 	noReply  (2)}
 
-SupportedCCBS-Phase ::= INTEGER (1..127) 
+SupportedCCBS-Phase ::= INTEGER (1..127)
 -- exception handling:
 -- Only value 1 is used.
 -- Values in the ranges 2-127 are reserved for future use.
@@ -203,7 +203,7 @@ UnavailabilityCause ::= ENUMERATED {
 	callBarred	(5),
 	cug-Reject	(6),
 	...}
-	--	exception handling: 
+	--	exception handling:
 	--	Reception of other values than the ones listed shall result in the service
 	--	being unavailable for that call.
 
@@ -339,7 +339,7 @@ ReportingState ::= ENUMERATED {
 	startMonitoring	(1),
 	...}
 	-- exception handling:
-	-- reception of values 2-10 shall be mapped to 'stopMonitoring' 
+	-- reception of values 2-10 shall be mapped to 'stopMonitoring'
 	-- reception of values > 10 shall be mapped to 'startMonitoring'
 
 SetReportingStateRes ::= SEQUENCE{
@@ -352,10 +352,10 @@ CCBS-SubscriberStatus ::= ENUMERATED {
 	ccbsIdle	(1),
 	ccbsNotReachable	(2),
 	...}
-	--  exception handling: 
+	--  exception handling:
 	--  reception of values 3-10 shall be mapped to 'ccbsNotIdle'
 	--  reception of values 11-20 shall be mapped to 'ccbsIdle'
-	--  reception of values > 20 shall be mapped to 'ccbsNotReachable' 
+	--  reception of values > 20 shall be mapped to 'ccbsNotReachable'
 
 StatusReportArg ::= SEQUENCE{
 	imsi	[0]	IMSI,
@@ -379,7 +379,7 @@ MonitoringMode ::= ENUMERATED {
 	a-side	(0),
 	b-side	(1),
 	...}
-	--	exception handling: 
+	--	exception handling:
 	--  reception of values 2-10 shall be mapped 'a-side'
 	--  reception of values > 10 shall be mapped to 'b-side'
 
@@ -388,7 +388,7 @@ CallOutcome ::= ENUMERATED {
 	failure	(1),
 	busy	(2),
 	...}
-	--	exception handling: 
+	--	exception handling:
 	--  reception of values 3-10 shall be mapped to 'success'
 	--  reception of values 11-20 shall be mapped to 'failure'
 	--  reception of values > 20 shall be mapped to 'busy'
@@ -454,14 +454,14 @@ CallTerminationIndicator ::= ENUMERATED {
 	terminateAllCallActivities	(1),
 	...}
 	-- exception handling:
-	-- reception of values 2-10 shall be mapped to ' terminateCallActivityReferred ' 
+	-- reception of values 2-10 shall be mapped to ' terminateCallActivityReferred '
 	-- reception of values > 10 shall be mapped to ' terminateAllCallActivities '
 
 	-- In MSCs not supporting linkage of all call activities, any value received shall
 	-- be interpreted as ' terminateCallActivityReferred '
 
 ReleaseResourcesArg ::= SEQUENCE{
-	msrn	ISDN-AddressString, 
+	msrn	ISDN-AddressString,
 	extensionContainer	ExtensionContainer	OPTIONAL,
 	...}
 

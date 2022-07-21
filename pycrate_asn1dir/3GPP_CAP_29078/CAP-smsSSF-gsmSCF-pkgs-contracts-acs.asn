@@ -13,7 +13,7 @@ IMPORTS
 
 	PARAMETERS-BOUND,
 	cAPSpecificBoundSet
-FROM CAP-classes classes 
+FROM CAP-classes classes
 -- Elements that exist in cAPSpecificBoundSet in Rel-5 are not changed in Rel-6. As a
 -- result, the value range of data type definitions in Rel-5 are not changed in Rel-6.
 
@@ -22,7 +22,7 @@ FROM CAP-classes classes
 	OPERATION
 FROM Remote-Operations-Information-Objects ros-InformationObjects
 
-	TCMessage {} 
+	TCMessage {}
 FROM TCAPMessages tc-Messages
 
 	APPLICATION-CONTEXT,
@@ -56,8 +56,8 @@ FROM CAP-SMS-ops-args sms-Operations
 	id-package-smsConnect,
 	id-package-smsContinue,
 	id-package-smsRelease,
-	id-package-smsEventHandling, 
-	id-package-smsBilling, 
+	id-package-smsEventHandling,
+	id-package-smsBilling,
 	id-package-smsTimer,
 -- The OPERATION-PACKAGE Identifiers for CAP V3 and CAP V4 for SMS in Rel-6 are the same as
 -- in Rel-5.
@@ -91,19 +91,19 @@ umts-network(1) modules(3) cap-object-identifiers(100) version8(7)}
 -- dialogue-abstract-syntax ABSTRACT SYNTAX is defined in ITU-T Recommendation Q.775.
 
 cap3-sms-AC APPLICATION-CONTEXT ::= {
-	CONTRACT					cap3SMS
-	DIALOGUE MODE				structured
-	ABSTRACT SYNTAXES			{dialogue-abstract-syntax |
-								sms-AbstractSyntax} 
+	CONTRACT			cap3SMS
+	DIALOGUE MODE		structured
+	ABSTRACT SYNTAXES		{dialogue-abstract-syntax |
+				sms-AbstractSyntax}
 	APPLICATION CONTEXT NAME	id-ac-cap3-sms-AC}
 -- This application context shall be used for CAMEL support of MO-SMS.
 -- 'cap3SMS' and 'sms-AbstractSyntax' are defined in the present module.
 
 cap4-sms-AC APPLICATION-CONTEXT ::= {
-	CONTRACT					cap4SMS
-	DIALOGUE MODE				structured
-	ABSTRACT SYNTAXES			{dialogue-abstract-syntax |
-								sms-AbstractSyntax} 
+	CONTRACT			cap4SMS
+	DIALOGUE MODE		structured
+	ABSTRACT SYNTAXES		{dialogue-abstract-syntax |
+				sms-AbstractSyntax}
 	APPLICATION CONTEXT NAME	id-ac-cap4-sms-AC}
 -- This application context shall be used for CAMEL support of MT-SMS.
 -- 'cap4SMS' and 'sms-AbstractSyntax' are defined in the present module.
@@ -115,26 +115,26 @@ cap4-sms-AC APPLICATION-CONTEXT ::= {
 
 cap3SMS CONTRACT ::= {
 -- dialogue initiated by gprsSSF or gsmSSF with InitialDPSMS Operation
-	INITIATOR CONSUMER OF		{smsActivationPackage {cAPSpecificBoundSet}}
-	RESPONDER CONSUMER OF		{smsConnectPackage {cAPSpecificBoundSet} |
-								smsReleasePackage |
-								smsEventHandlingPackage {cAPSpecificBoundSet} |
-								smsTimerPackage {cAPSpecificBoundSet} |
-								smsBillingPackage {cAPSpecificBoundSet} |
-								smsProcessingPackage}
-	ID							id-cap3SmsSsfTogsmScf}
+	INITIATOR CONSUMER OF	{smsActivationPackage {cAPSpecificBoundSet}}
+	RESPONDER CONSUMER OF	{smsConnectPackage {cAPSpecificBoundSet} |
+				smsReleasePackage |
+				smsEventHandlingPackage {cAPSpecificBoundSet} |
+				smsTimerPackage {cAPSpecificBoundSet} |
+				smsBillingPackage {cAPSpecificBoundSet} |
+				smsProcessingPackage}
+	ID				id-cap3SmsSsfTogsmScf}
 -- The OPERATION-PACKAGEs are defined in the present module.
 
 cap4SMS CONTRACT ::= {
 -- dialogue initiated by gprsSSF or gsmSSF with InitialDPSMS Operation
-	INITIATOR CONSUMER OF		{smsActivationPackage {cAPSpecificBoundSet}}
-	RESPONDER CONSUMER OF		{smsConnectPackage {cAPSpecificBoundSet} |
-								smsReleasePackage |
-								smsEventHandlingPackage {cAPSpecificBoundSet} |
-								smsTimerPackage {cAPSpecificBoundSet} |
-								smsBillingPackage {cAPSpecificBoundSet} |
-								smsProcessingPackage }
-	ID							id-cap4SmsSsfTogsmScf}
+	INITIATOR CONSUMER OF	{smsActivationPackage {cAPSpecificBoundSet}}
+	RESPONDER CONSUMER OF	{smsConnectPackage {cAPSpecificBoundSet} |
+				smsReleasePackage |
+				smsEventHandlingPackage {cAPSpecificBoundSet} |
+				smsTimerPackage {cAPSpecificBoundSet} |
+				smsBillingPackage {cAPSpecificBoundSet} |
+				smsProcessingPackage }
+	ID				id-cap4SmsSsfTogsmScf}
 -- The OPERATION-PACKAGEs are defined in the present module.
 
 
@@ -144,32 +144,32 @@ cap4SMS CONTRACT ::= {
 
 smsActivationPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{initialDPSMS {bound}}
-	ID					id-package-smsActivation}
+	ID			id-package-smsActivation}
 
 smsConnectPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{connectSMS {bound}}
-	ID					id-package-smsConnect}
+	ID			id-package-smsConnect}
 
 smsProcessingPackage OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{continueSMS}
-	ID					id-package-smsContinue}
+	ID			id-package-smsContinue}
 
 smsReleasePackage OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{releaseSMS}
-	ID					id-package-smsRelease}
+	ID			id-package-smsRelease}
 
 smsEventHandlingPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{requestReportSMSEvent {bound}}
 	SUPPLIER INVOKES	{eventReportSMS {bound}}
-	ID					id-package-smsEventHandling}
+	ID			id-package-smsEventHandling}
 
 smsBillingPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{furnishChargingInformationSMS {bound}}
-	ID					id-package-smsBilling}
+	ID			id-package-smsBilling}
 
 smsTimerPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{resetTimerSMS {bound}}
-	ID					id-package-smsTimer}
+	ID			id-package-smsTimer}
 
 
 -- Abstract Syntaxes
@@ -186,7 +186,7 @@ sms-AbstractSyntax ABSTRACT-SYNTAX ::= {
 -- 'Generic-sms-PDUs' is defined in the present module.
 
 Generic-sms-PDUs ::= TCMessage {{SmsInvokable},
-								{SmsReturnable}}
+				{SmsReturnable}}
 -- 'SmsInvokable' and 'SmsReturnable' are defined in the present module.
 
 SmsInvokable OPERATION ::= {

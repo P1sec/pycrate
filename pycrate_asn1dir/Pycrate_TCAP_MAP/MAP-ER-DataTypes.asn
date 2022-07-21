@@ -35,7 +35,7 @@ EXPORTS
 	BusySubscriberParam,
 	NoSubscriberReplyParam,
 	ForwardingViolationParam,
-	ForwardingFailedParam, 
+	ForwardingFailedParam,
 	ATI-NotAllowedParam,
 	SubBusyForMT-SMS-Param,
 	MessageWaitListFullParam,
@@ -98,7 +98,7 @@ RoamingNotAllowedParam ::= SEQUENCE {
 	...,
 	additionalRoamingNotAllowedCause	[0] AdditionalRoamingNotAllowedCause OPTIONAL }
 
---	if the additionalRoamingNotallowedCause is received by the MSC/VLR or SGSN then the 
+--	if the additionalRoamingNotallowedCause is received by the MSC/VLR or SGSN then the
 --	roamingNotAllowedCause shall be discarded.
 
 AdditionalRoamingNotAllowedCause ::= ENUMERATED {
@@ -127,7 +127,7 @@ ExtensibleCallBarredParam ::= SEQUENCE {
 	unauthorisedMessageOriginator	[1] NULL	OPTIONAL,
 	anonymousCallRejection	[2] NULL	OPTIONAL }
 
--- unauthorisedMessageOriginator and anonymousCallRejection shall be mutually exclusive. 
+-- unauthorisedMessageOriginator and anonymousCallRejection shall be mutually exclusive.
 
 
 CUG-RejectParam ::= SEQUENCE {
@@ -169,17 +169,17 @@ SM-DeliveryFailureCause ::= SEQUENCE {
 
 AbsentSubscriberSM-Param ::= SEQUENCE {
 	absentSubscriberDiagnosticSM	AbsentSubscriberDiagnosticSM	OPTIONAL,
-	-- AbsentSubscriberDiagnosticSM can be either for non-GPRS 
+	-- AbsentSubscriberDiagnosticSM can be either for non-GPRS
 	-- or for GPRS
 	extensionContainer	ExtensionContainer	OPTIONAL,
 	...,
 	additionalAbsentSubscriberDiagnosticSM 	[0]	AbsentSubscriberDiagnosticSM	OPTIONAL,
-	-- if received, additionalAbsentSubscriberDiagnosticSM 
-	-- is for GPRS and absentSubscriberDiagnosticSM is 
+	-- if received, additionalAbsentSubscriberDiagnosticSM
+	-- is for GPRS and absentSubscriberDiagnosticSM is
 	-- for non-GPRS
 	imsi	[1] IMSI	OPTIONAL,
-	-- when sent from HLR to IP-SM-GW, IMSI shall be present if UNRI is not set 
-	-- to indicate that the absent condition is met for CS and PS but not for IMS. 
+	-- when sent from HLR to IP-SM-GW, IMSI shall be present if UNRI is not set
+	-- to indicate that the absent condition is met for CS and PS but not for IMS.
 	requestedRetransmissionTime	[2] Time	OPTIONAL,
 	userIdentifierAlert	[3] IMSI	OPTIONAL }
 
@@ -237,7 +237,7 @@ UnknownSubscriberDiagnostic ::= ENUMERATED {
 	gprs-eps-SubscriptionUnknown  (1),
 	...,
 	npdbMismatch  (2)}
-	-- if unknown values are received in	
+	-- if unknown values are received in
 	-- UnknownSubscriberDiagnostic they shall be discarded
 
 NumberChangedParam ::= SEQUENCE {
@@ -285,15 +285,15 @@ AbsentSubscriberReason ::= ENUMERATED {
 	purgedMS (3),
 	mtRoamingRetry (4),
 	busySubscriber (5)}
--- exception handling: at reception of other values than the ones listed the 
--- AbsentSubscriberReason shall be ignored. 
--- The AbsentSubscriberReason: purgedMS is defined for the Super-Charger feature 
+-- exception handling: at reception of other values than the ones listed the
+-- AbsentSubscriberReason shall be ignored.
+-- The AbsentSubscriberReason: purgedMS is defined for the Super-Charger feature
 -- (see TS 23.116). If this value is received in a Provide Roaming Number response
 -- it shall be mapped to the AbsentSubscriberReason: imsiDetach in the Send Routeing
 -- Information response
--- The AbsentSubscriberReason: mtRoamingRetry is used during MT Roaming Retry, 
+-- The AbsentSubscriberReason: mtRoamingRetry is used during MT Roaming Retry,
 -- see 3GPP TS 23.018[97].
--- The AbsentSubscriberReason: busySubscriber is used during MT Roaming Forwarding, 
+-- The AbsentSubscriberReason: busySubscriber is used during MT Roaming Forwarding,
 -- see 3GPP TS 23.018[97].
 
 BusySubscriberParam ::= SEQUENCE {
@@ -346,7 +346,7 @@ SubBusyForMT-SMS-Param ::= SEQUENCE {
 	extensionContainer	ExtensionContainer	OPTIONAL,
 	... ,
 	gprsConnectionSuspended	NULL	OPTIONAL }
-	-- If GprsConnectionSuspended is not understood it shall 
+	-- If GprsConnectionSuspended is not understood it shall
 	-- be discarded
 
 MessageWaitListFullParam ::= SEQUENCE {

@@ -128,7 +128,7 @@ roamingNotAllowed ERROR ::= {
 	CODE    local: 8 }
 
 illegalSubscriber ERROR ::= {
-    CODE    local: 9 }
+    CODE    local: 9 }
 
 illegalEquipment ERROR ::= {
     CODE    local: 12 }

@@ -34,7 +34,7 @@ EXPORTS
 
 	-- handover errors
 	noHandoverNumberAvailable,
-	subsequentHandoverFailure, 
+	subsequentHandoverFailure,
 	targetCellOutsideGroupCallArea,
 
 	-- operation and maintenance errors
@@ -80,7 +80,7 @@ EXPORTS
 	absentSubscriberSM,
 
 	-- Group Call errors
-	noGroupCallNumberAvailable, 
+	noGroupCallNumberAvailable,
 	ongoingGroupCall,
 
 	-- location service errors
@@ -129,7 +129,7 @@ FROM MAP-SS-DataTypes {
 	CallBarredParam,
 	ForwardingViolationParam,
 	ForwardingFailedParam,
-	CUG-RejectParam, 
+	CUG-RejectParam,
 	ATI-NotAllowedParam,
 	SubBusyForMT-SMS-Param,
 	MessageWaitListFullParam,

@@ -23,7 +23,7 @@ EXPORTS
 
 IMPORTS
 	ISDN-AddressString,
-	IMSI, 
+	IMSI,
 	TMSI,
 	EMLPP-Priority,
 	ASCI-CallReference,
@@ -62,7 +62,7 @@ PrepareGroupCallArg ::= SEQUENCE {
 	codec-Info	CODEC-Info,
 	cipheringAlgorithm	CipheringAlgorithm,
 	groupKeyNumber-Vk-Id	[0] GroupKeyNumber	OPTIONAL,
-	groupKey	[1] Kc	OPTIONAL, 
+	groupKey	[1] Kc	OPTIONAL,
 	-- this parameter shall not be sent and shall be discarded if received
 	priority	[2] EMLPP-Priority	OPTIONAL,
 	uplinkFree	[3] NULL	OPTIONAL,
@@ -108,7 +108,7 @@ ForwardGroupCallSignallingArg ::= SEQUENCE {
 	uplinkSeizedCommand	[3] NULL	OPTIONAL,
 	uplinkReleaseCommand	[4] NULL	OPTIONAL,
 	extensionContainer	ExtensionContainer	OPTIONAL,
-	..., 
+	...,
 	stateAttributes	[5] StateAttributes	OPTIONAL,
 	talkerPriority	[6] TalkerPriority	OPTIONAL,
 	additionalInfo	[7] AdditionalInfo	OPTIONAL,
@@ -132,13 +132,13 @@ GroupKeyNumber ::= INTEGER (0..15)
 
 CODEC-Info ::= OCTET STRING (SIZE (5..10))
 	-- Refers to channel type
-	-- coded according to 3GPP TS 48.008 [49] and including Element identifier and Length	
+	-- coded according to 3GPP TS 48.008 [49] and including Element identifier and Length
 
 CipheringAlgorithm ::= OCTET STRING (SIZE (1))
 	-- Refers to 'permitted algorithms' in 'encryption information'
 	-- coded according to 3GPP TS 48.008 [49]:
-	
-	-- Bits 8-1 
+
+	-- Bits 8-1
 	-- 8765 4321
 	-- 0000 0001	No encryption
 	-- 0000 0010	GSM A5/1
@@ -155,12 +155,12 @@ StateAttributes ::= SEQUENCE {
 	dualCommunication	[7] NULL	OPTIONAL,
 	callOriginator	[8] NULL	OPTIONAL }
 
-	-- Refers to 3GPP TS 44.068 for definitions of StateAttributes fields. 
+	-- Refers to 3GPP TS 44.068 for definitions of StateAttributes fields.
 
 
 SendGroupCallInfoArg ::= SEQUENCE {
 	requestedInfo	RequestedInfo,
-	groupId	Long-GroupId, 
+	groupId	Long-GroupId,
 	teleservice	Ext-TeleserviceCode,
 	cellId	[0] GlobalCellId	OPTIONAL,
 	imsi	[1] IMSI	OPTIONAL,
@@ -176,7 +176,7 @@ RequestedInfo ::= ENUMERATED {
 	imsiAndAdditionalInfoAndAdditionalSubscription	(1),
 	... }
 --	exception handling:
---	an unrecognized value shall be rejected by the receiver with a return error cause of 
+--	an unrecognized value shall be rejected by the receiver with a return error cause of
 --	unexpected data value
 
 SendGroupCallInfoRes ::= SEQUENCE {

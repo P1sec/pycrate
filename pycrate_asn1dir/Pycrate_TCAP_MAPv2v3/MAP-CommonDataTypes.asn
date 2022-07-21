@@ -18,8 +18,8 @@ EXPORTS
 	maxISDN-AddressLength,
 	FTN-AddressString,
 	ISDN-SubaddressString,
-	ExternalSignalInfo, 
-	Ext-ExternalSignalInfo, 
+	ExternalSignalInfo,
+	Ext-ExternalSignalInfo,
 AccessNetworkSignalInfo,
 	SignalInfo,
 	maxSignalInfoLength,
@@ -31,7 +31,7 @@ AccessNetworkSignalInfo,
 
 	-- data types for numbering and identification
 	IMSI,
-	TMSI, 
+	TMSI,
 	Identity,
 	SubscriberId,
 	IMEI,
@@ -40,20 +40,20 @@ AccessNetworkSignalInfo,
 	GlobalCellId,
 	NetworkResource,
 	AdditionalNetworkResource,
-	NAEA-PreferredCI, 
-	NAEA-CIC, 
+	NAEA-PreferredCI,
+	NAEA-CIC,
 	ASCI-CallReference,
 	SubscriberIdentity,
 	PLMN-Id,
 	E-UTRAN-CGI,
 	NR-CGI,
-	TA-Id, 
+	TA-Id,
 	NR-TA-Id,
 	RAIdentity,
 	NetworkNodeDiameterAddress,
 
 	-- data types for CAMEL
-	CellGlobalIdOrServiceAreaIdOrLAI, 
+	CellGlobalIdOrServiceAreaIdOrLAI,
 	CellGlobalIdOrServiceAreaIdFixedLength,
 	LAIFixedLength,
 
@@ -61,7 +61,7 @@ AccessNetworkSignalInfo,
 	BasicServiceCode,
 	Ext-BasicServiceCode,
 	EMLPP-Info,
-	EMLPP-Priority, 
+	EMLPP-Priority,
 	MC-SS-Info,
 	MaxMC-Bearers,
 	MC-Bearers,
@@ -161,21 +161,21 @@ AddressString ::= OCTET STRING (SIZE (1..maxAddressLength))
 
 maxAddressLength  INTEGER ::= 20
 
-ISDN-AddressString ::= 
+ISDN-AddressString ::=
 	AddressString (SIZE (1..maxISDN-AddressLength))
 	-- This type is used to represent ISDN numbers.
 
 maxISDN-AddressLength  INTEGER ::= 9
 
-FTN-AddressString ::= 
+FTN-AddressString ::=
 	AddressString (SIZE (1..maxFTN-AddressLength))
-	-- This type is used to represent forwarded-to numbers. 
+	-- This type is used to represent forwarded-to numbers.
 	-- If NAI = international the first digits represent the country code (CC)
 	-- and the network destination code (NDC) as for E.164.
 
 maxFTN-AddressLength  INTEGER ::= 15
 
-ISDN-SubaddressString ::= 
+ISDN-SubaddressString ::=
 	OCTET STRING (SIZE (1..maxISDN-SubaddressLength))
 	-- This type is used to represent ISDN subaddresses.
 	-- It is composed of
@@ -219,7 +219,7 @@ ExternalSignalInfo ::= SEQUENCE {
 	protocolId	ProtocolId,
 	signalInfo	SignalInfo,
 	-- Information about the internal structure is given in
-	-- clause 7.6.9.
+	-- clause 7.6.9.
 	extensionContainer	ExtensionContainer	OPTIONAL,
 	-- extensionContainer must not be used in version 2
 	...}
@@ -245,24 +245,24 @@ Ext-ExternalSignalInfo ::= SEQUENCE {
 	ext-ProtocolId	Ext-ProtocolId,
 	signalInfo	SignalInfo,
 	-- Information about the internal structure is given in
-	-- clause 7.6.9.10
+	-- clause 7.6.9.10
 	extensionContainer	ExtensionContainer	OPTIONAL,
 	...}
 
 Ext-ProtocolId ::= ENUMERATED {
 	ets-300356  (1),
-	... 
+	...
 	}
 -- exception handling:
 -- For Ext-ExternalSignalInfo sequences containing this parameter with any
--- other value than the ones listed the receiver shall ignore the whole 
+-- other value than the ones listed the receiver shall ignore the whole
 -- Ext-ExternalSignalInfo sequence.
 
 AccessNetworkSignalInfo ::= SEQUENCE {
 	accessNetworkProtocolId	AccessNetworkProtocolId,
 	signalInfo	LongSignalInfo,
-	-- Information about the internal structure is given in clause 7.6.9.1
-	
+	-- Information about the internal structure is given in clause 7.6.9.1
+
 	extensionContainer	ExtensionContainer	OPTIONAL,
 	...}
 
@@ -281,33 +281,33 @@ AccessNetworkProtocolId ::= ENUMERATED {
 	...}
 	-- exception handling:
 	-- For AccessNetworkSignalInfo sequences containing this parameter with any
-	-- other value than the ones listed the receiver shall ignore the whole 
+	-- other value than the ones listed the receiver shall ignore the whole
 	-- AccessNetworkSignalInfo sequence.
 
 AlertingPattern ::= OCTET STRING (SIZE (1) )
 	-- This type is used to represent Alerting Pattern
 
-	--	bits 8765 : 0000 (unused)
+	--	bits 8765 : 0000 (unused)
 
-	--	bits 43 : type of Pattern
+	--	bits 43 : type of Pattern
 	--	00 level
 	--	01 category
 	--	10 category
 	--	all other values are reserved.
 
-	--	bits 21 : type of alerting
+	--	bits 21 : type of alerting
 
-alertingLevel-0   AlertingPattern ::= '00000000'B
-alertingLevel-1   AlertingPattern ::= '00000001'B
-alertingLevel-2   AlertingPattern ::= '00000010'B
+alertingLevel-0   AlertingPattern ::= '00000000'B
+alertingLevel-1   AlertingPattern ::= '00000001'B
+alertingLevel-2   AlertingPattern ::= '00000010'B
 	-- all other values of Alerting level are reserved
 	-- Alerting Levels are defined in GSM 02.07
-	
-alertingCategory-1   AlertingPattern ::= '00000100'B
-alertingCategory-2   AlertingPattern ::= '00000101'B
-alertingCategory-3   AlertingPattern ::= '00000110'B
-alertingCategory-4   AlertingPattern ::= '00000111'B
-alertingCategory-5   AlertingPattern ::= '00001000'B
+
+alertingCategory-1   AlertingPattern ::= '00000100'B
+alertingCategory-2   AlertingPattern ::= '00000101'B
+alertingCategory-3   AlertingPattern ::= '00000110'B
+alertingCategory-4   AlertingPattern ::= '00000111'B
+alertingCategory-5   AlertingPattern ::= '00001000'B
 	-- all other values of Alerting Category are reserved
 	-- Alerting categories are defined in GSM 02.07
 
@@ -406,7 +406,7 @@ NAEA-PreferredCI ::= SEQUENCE {
 NAEA-CIC ::= OCTET STRING (SIZE (3))
 	-- The internal structure is defined by the Carrier Identification
 	-- parameter in ANSI T1.113.3. Carrier codes between "000" and "999" may
-	-- be encoded as 3 digits using "000" to "999" or as 4 digits using 
+	-- be encoded as 3 digits using "000" to "999" or as 4 digits using
 	-- "0000" to "0999". Carrier codes between "1000" and "9999" are encoded
 	-- using 4 digits.
 
@@ -446,7 +446,7 @@ navigation	LCSServiceTypeID ::= 8
 	--this service type is reserved for use in previous releases
 citySightseeing	LCSServiceTypeID ::= 9
 localizedAdvertising	LCSServiceTypeID ::= 10
-mobileYellowPages	LCSServiceTypeID ::= 11 
+mobileYellowPages	LCSServiceTypeID ::= 11
 trafficAndPublicTransportationInfo	LCSServiceTypeID ::= 12
 weather	LCSServiceTypeID ::= 13
 assetAndServiceFinding	LCSServiceTypeID ::= 14
@@ -574,8 +574,8 @@ CellGlobalIdOrServiceAreaIdFixedLength ::= OCTET STRING (SIZE (7))
 	-- octet 3 bits 4321	Mobile Network Code 1st digit
 	--         bits 8765	Mobile Network Code 2nd digit
 	-- octets 4 and 5	Location Area Code according to 3GPP TS 24.008
-	-- octets 6 and 7	Cell Identity (CI) value or 
-	--	Service Area Code (SAC) value 
+	-- octets 6 and 7	Cell Identity (CI) value or
+	--	Service Area Code (SAC) value
 	--	according to 3GPP TS 23.003
 
 LAIFixedLength ::= OCTET STRING (SIZE (5))

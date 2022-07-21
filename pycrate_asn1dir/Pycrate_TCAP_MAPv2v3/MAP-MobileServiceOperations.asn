@@ -15,7 +15,7 @@ EXPORTS
 	updateLocation,
 	cancelLocation,
 	purgeMS,
-	sendIdentification, 
+	sendIdentification,
 
 	-- gprs location registration operations
 	updateGprsLocation,
@@ -32,7 +32,7 @@ EXPORTS
 
 	-- any time information handling operations
 	anyTimeSubscriptionInterrogation,
-	anyTimeModification, 
+	anyTimeModification,
 
 	-- subscriber data modification notification operations
 	noteSubscriberDataModified,
@@ -46,7 +46,7 @@ EXPORTS
 	prepareSubsequentHandover,
 
 	-- authentication management operations
-	sendAuthenticationInfo, 
+	sendAuthenticationInfo,
 authenticationFailureReport,
 
 	-- IMEI management operations
@@ -63,10 +63,10 @@ authenticationFailureReport,
 
 -- gprs location information retrieval operations
 	sendRoutingInfoForGprs,
-	
+
 	-- failure reporting operations
 	failureReport,
-	
+
 	-- gprs notification operations
 	noteMsPresentForGprs,
 
@@ -79,7 +79,7 @@ IMPORTS
 	OPERATION
 FROM Remote-Operations-Information-Objects {
 joint-iso-itu-t remote-operations(4)
-  informationObjects(5) version1(0)} 
+  informationObjects(5) version1(0)}
 
 	systemFailure,
 	dataMissing,
@@ -88,7 +88,7 @@ joint-iso-itu-t remote-operations(4)
 	unknownMSC,
 	unidentifiedSubscriber,
 	unknownEquipment,
-	roamingNotAllowed, 
+	roamingNotAllowed,
 	ati-NotAllowed,
 	noHandoverNumberAvailable,
 	subsequentHandoverFailure,
@@ -115,15 +115,15 @@ FROM MAP-Errors {
 	UpdateLocationArg,
 	UpdateLocationRes,
 	CancelLocationArg,
-	CancelLocationRes, 
-	PurgeMS-Arg, 
+	CancelLocationRes,
+	PurgeMS-Arg,
 	PurgeMS-Res,
 	SendIdentificationArg,
-	SendIdentificationRes, 
+	SendIdentificationRes,
 	UpdateGprsLocationArg,
 	UpdateGprsLocationRes,
 	UpdateVcsgLocationArg,
-	UpdateVcsgLocationRes, 
+	UpdateVcsgLocationRes,
 	CancelVcsgLocationArg,
 	CancelVcsgLocationRes,
 	PrepareHO-Arg,
@@ -135,7 +135,7 @@ SendEndSignal-Res,
 PrepareSubsequentHO-Res,
 	PrepareSubsequentHO-Arg,
 	SendAuthenticationInfoArg,
-	SendAuthenticationInfoRes, 
+	SendAuthenticationInfoRes,
 	AuthenticationFailureReportArg,
 	AuthenticationFailureReportRes,
 	CheckIMEI-Arg,
@@ -256,7 +256,7 @@ anyTimeInterrogation  OPERATION ::= {	--Timer m
 	RESULT
 	AnyTimeInterrogationRes
 	ERRORS {
-	systemFailure | 
+	systemFailure |
 	ati-NotAllowed |
 	dataMissing |
 	unexpectedDataValue |

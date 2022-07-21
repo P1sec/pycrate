@@ -271,7 +271,7 @@ TraceDepthExtension ::= ENUMERATED {
 	mediumWithoutVendorSpecificExtension (1),
 	maximumWithoutVendorSpecificExtension (2),
 	...}
--- The value mediumWithoutVendorSpecificExtension is applicable only for RNC. For other 
+-- The value mediumWithoutVendorSpecificExtension is applicable only for RNC. For other
 -- network elements, if value mediumWithoutVendorSpecificExtension is received, value
 -- minimumWithoutVendorSpecificExtension shall be applied.
 

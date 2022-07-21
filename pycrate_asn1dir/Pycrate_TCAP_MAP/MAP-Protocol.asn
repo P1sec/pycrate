@@ -122,24 +122,24 @@ FROM MAP-LocationServiceOperations {
 
 
 ;
-Supported-MAP-Operations OPERATION ::= {updateLocation | cancelLocation | cancelVcsgLocation | 
-purgeMS | 
-sendIdentification | updateGprsLocation | updateVcsgLocation | prepareHandover | sendEndSignal | 
-processAccessSignalling | forwardAccessSignalling | prepareSubsequentHandover | 
-sendAuthenticationInfo | authenticationFailureReport | checkIMEI | insertSubscriberData | 
-deleteSubscriberData | reset | forwardCheckSS-Indication | restoreData | provideSubscriberInfo | 
-anyTimeInterrogation | anyTimeSubscriptionInterrogation | anyTimeModification | 
-sendRoutingInfoForGprs | failureReport |noteMsPresentForGprs | noteMM-Event | 
-noteSubscriberDataModified | activateTraceMode | deactivateTraceMode | sendIMSI | 
-sendRoutingInfo | provideRoamingNumber | resumeCallHandling | setReportingState | statusReport | 
-remoteUserFree | ist-Alert | 
-ist-Command | registerSS | eraseSS | activateSS | deactivateSS | interrogateSS | 
-processUnstructuredSS-Request | unstructuredSS-Request | unstructuredSS-Notify | 
-registerPassword | getPassword | ss-InvocationNotification | registerCC-Entry | eraseCC-Entry | 
-sendRoutingInfoForSM | mo-ForwardSM | mt-ForwardSM | reportSM-DeliveryStatus | 
-alertServiceCentre | informServiceCentre | readyForSM | prepareGroupCall | 
+Supported-MAP-Operations OPERATION ::= {updateLocation | cancelLocation | cancelVcsgLocation |
+purgeMS |
+sendIdentification | updateGprsLocation | updateVcsgLocation | prepareHandover | sendEndSignal |
+processAccessSignalling | forwardAccessSignalling | prepareSubsequentHandover |
+sendAuthenticationInfo | authenticationFailureReport | checkIMEI | insertSubscriberData |
+deleteSubscriberData | reset | forwardCheckSS-Indication | restoreData | provideSubscriberInfo |
+anyTimeInterrogation | anyTimeSubscriptionInterrogation | anyTimeModification |
+sendRoutingInfoForGprs | failureReport |noteMsPresentForGprs | noteMM-Event |
+noteSubscriberDataModified | activateTraceMode | deactivateTraceMode | sendIMSI |
+sendRoutingInfo | provideRoamingNumber | resumeCallHandling | setReportingState | statusReport |
+remoteUserFree | ist-Alert |
+ist-Command | registerSS | eraseSS | activateSS | deactivateSS | interrogateSS |
+processUnstructuredSS-Request | unstructuredSS-Request | unstructuredSS-Notify |
+registerPassword | getPassword | ss-InvocationNotification | registerCC-Entry | eraseCC-Entry |
+sendRoutingInfoForSM | mo-ForwardSM | mt-ForwardSM | reportSM-DeliveryStatus |
+alertServiceCentre | informServiceCentre | readyForSM | prepareGroupCall |
 processGroupCallSignalling | forwardGroupCallSignalling | sendGroupCallEndSignal |
-provideSubscriberLocation | sendRoutingInfoForLCS | subscriberLocationReport | 
+provideSubscriberLocation | sendRoutingInfoForLCS | subscriberLocationReport |
 releaseResources | mt-ForwardSM-VGCS | sendGroupCallInfo }
 
 
@@ -148,7 +148,7 @@ releaseResources | mt-ForwardSM-VGCS | sendGroupCallInfo }
 -- existing in previous versions of the protocol
 
 -- Operation Name	AC used	Oper. Code
--- 
+--
 -- sendParameters	map-ac infoRetrieval (14) version1 (1)	local:9
 -- processUnstructuredSS-Data	map-ac networkFunctionalSs (18) version1 (1)	local:19
 -- performHandover	map-ac handoverControl (11) version1 (1)	local:28
@@ -165,7 +165,7 @@ releaseResources | mt-ForwardSM-VGCS | sendGroupCallInfo }
 -- existing in previous versions of the protocol
 
 -- Error Name	AC used	Error Code
--- 
+--
 -- unknownBaseStation	map-ac handoverControl (11) version1 (1)	local:2
 -- invalidTargetBaseStation	map-ac handoverControl (11) version1 (1)	local:23
 -- noRadioResourceAvailable	map-ac handoverControl (11) version1 (1)	local:24
