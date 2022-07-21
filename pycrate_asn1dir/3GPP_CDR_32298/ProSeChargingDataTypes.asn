@@ -1,43 +1,44 @@
-ProSeChargingDataTypes {itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) charging (5) proseChargingDataType (11) asn1Module (0) version1 (0)}
+ProSeChargingDataTypes {itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) charging (5) proseChargingDataType (11) asn1Module (0) version2 (1)}
 DEFINITIONS IMPLICIT TAGS	::=
 
 BEGIN
 
--- EXPORTS everything 
+-- EXPORTS everything
 
-IMPORTS	
+IMPORTS
 
 IPAddress,
 LocalSequenceNumber,
 ManagementExtensions,
+NodeID,
+PLMN-Id,
 RecordType,
 ServiceContextID,
 TimeStamp
-FROM GenericChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) genericChargingDataTypes (0) asn1Module (0) version1 (0)}
+FROM GenericChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) genericChargingDataTypes (0) asn1Module (0) version2 (1)}
 
 
 IMSI
-FROM MAP-CommonDataTypes {itu-t identified-organization (4) etsi (0) mobileDomain (0) gsm-Network (1) modules (3) map-CommonDataTypes (18)  version15 (15) }
--- from TS 29.002 [214]
+FROM MAP-CommonDataTypes {itu-t identified-organization (4) etsi (0) mobileDomain (0) gsm-Network (1) modules (3) map-CommonDataTypes (18) version18 (18)}
+-- from TS 29.002 [214]
 
 
 ChargingCharacteristics,
 ChChSelectionMode,
-DataVolumeGPRS,
-NodeID,
-PLMN-Id
-FROM GPRSChargingDataTypes {itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) charging (5) gprsChargingDataTypes (2) asn1Module (0) version1 (0)}
+DataVolumeGPRS
+
+FROM GPRSChargingDataTypes {itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) charging (5) gprsChargingDataTypes (2) asn1Module (0) version2 (1)}
 
 ;
 
 --
---  ProSe RECORDS
+-- ProSe RECORDS
 --
 
-ProSeRecordType		::= CHOICE 
+ProSeRecordType		::= CHOICE
 --
 -- Record values 100..102 are ProSe specific
--- 
+--
 {
 	pFDDRecord			[100] PFDDRecord,
 	pFEDRecord			[101] PFEDRecord,
@@ -49,7 +50,7 @@ PFDDRecord 	::= SET
 	recordType						[0] RecordType,
 	retransmission					[1] NULL OPTIONAL,
 	serviceContextID				[2] ServiceContextID OPTIONAL,
-	servedIMSI						[3] IMSI OPTIONAL, 
+	servedIMSI						[3] IMSI OPTIONAL,
 	proSeFunctionIPAddress			[4] IPAddress OPTIONAL,
 	chargingCharacteristics			[5] ChargingCharacteristics,
 	chChSelectionMode				[6] ChChSelectionMode OPTIONAL,
@@ -60,17 +61,24 @@ PFDDRecord 	::= SET
 	roleofProSeFunction				[11] ProSeFunctionRole OPTIONAL,
 	proSeApplicationID				[12] UTF8String OPTIONAL,
 	proSeEventType					[13] ProSeEventType OPTIONAL,
-	nodeID							[14] NodeID OPTIONAL,	
-	proseFunctionId					[15] UTF8String OPTIONAL, 
+	nodeID							[14] NodeID OPTIONAL,
+	proseFunctionId					[15] UTF8String OPTIONAL,
 	announcingUEHPLMNIdentifier		[16] PLMN-Id OPTIONAL,
 	announcingUEVPLMNIdentifier		[17] PLMN-Id OPTIONAL,
 	monitoringUEHPLMNIdentifier	[18] PLMN-Id OPTIONAL,
 	monitoringUEVPLMNIdentifier		[19] PLMN-Id OPTIONAL,
-	monitoredPLMNIdentifier			[20] PLMN-Id OPTIONAL, 
-	applicationID					[21] UTF8String OPTIONAL, 
-	directDiscoveryModel			[22] UTF8String OPTIONAL, 
-	validityPeriod					[23] INTEGER OPTIONAL,	
-	monitoringUEIdentifier			[24] IMSI OPTIONAL
+	monitoredPLMNIdentifier			[20] PLMN-Id OPTIONAL,
+	applicationID					[21] UTF8String OPTIONAL,
+	directDiscoveryModel			[22] UTF8String OPTIONAL,
+	validityPeriod					[23] INTEGER OPTIONAL,
+	monitoringUEIdentifier			[24] IMSI OPTIONAL,
+discovererUEHPLMNIdentifier		[25] PLMN-Id OPTIONAL,
+discovererUEVPLMNIdentifier		[26] PLMN-Id OPTIONAL,
+discovereeUEHPLMNIdentifier		[27] PLMN-Id OPTIONAL,
+discovereeUEVPLMNIdentifier		[28] PLMN-Id OPTIONAL,
+announcingPLMNID				[29] PLMN-Id OPTIONAL,
+pc5RadioTechnology				[30] PC5RadioTechnology OPTIONAL
+
 }
 
 PFEDRecord 	::= SET
@@ -79,17 +87,17 @@ PFEDRecord 	::= SET
 	retransmission					[1] NULL OPTIONAL,
 	serviceContextID				[2] ServiceContextID OPTIONAL,
 	servedIMSI						[3] IMSI OPTIONAL,
-	proSeFunctionIPAddress			[4] IPAddress OPTIONAL,	
+	proSeFunctionIPAddress			[4] IPAddress OPTIONAL,
 	chargingCharacteristics			[5] ChargingCharacteristics,
 	chChSelectionMode				[6] ChChSelectionMode OPTIONAL,
 	recordExtensions				[7] ManagementExtensions OPTIONAL,
-	proSeRequestTimestamp			[8] TimeStamp OPTIONAL,	
+	proSeRequestTimestamp			[8] TimeStamp OPTIONAL,
 	roleofUE						[9] ProSeUERole OPTIONAL,
 	pCThreeEPCControlProtocolCause	[10] INTEGER OPTIONAL,
 	proseFunctionPLMNIdentifier		[11] PLMN-Id OPTIONAL,
 	proseFunctionId					[12] UTF8String OPTIONAL,
 	recordOpeningTime				[13] TimeStamp OPTIONAL,
-	recordClosureTime				[14] TimeStamp OPTIONAL,	
+	recordClosureTime				[14] TimeStamp OPTIONAL,
 	applicationID					[15] UTF8String OPTIONAL,
 	requestorApplicationLayerUserID [16] UTF8String OPTIONAL,
 	wLANLinkLayerID					[17] UTF8String OPTIONAL,
@@ -137,11 +145,24 @@ PFDCRecord 	::= SET
 	listOfTransmissionData			[22] SEQUENCE OF ChangeOfProSeCondition OPTIONAL,
 	listOfReceptionData				[23] SEQUENCE OF ChangeOfProSeCondition OPTIONAL,
 	causeForRecClosing				[24] ProSeCauseForRecClosing,
-	listOfAppSpecificData			[25] SEQUENCE OF AppSpecificData			
+	listOfAppSpecificData			[25] SEQUENCE OF AppSpecificData,
+targetIPaddress					[26] IPAddress OPTIONAL,
+	relayIPaddress					[27] IPAddress OPTIONAL,
+proSeUEtoNetworkRelayUEID		[28] OCTET STRING OPTIONAL,
+proSeTargetLayerTwoID			[29] OCTET STRING OPTIONAL
+
 }
 
 --
---  ProSe DATA TYPES
+-- ProSe DATA TYPES
+--
+--
+-- A
+--
+AppSpecificData	::= OCTET STRING
+
+--
+-- C
 --
 
 ChangeOfProSeCondition			::= SEQUENCE
@@ -160,9 +181,6 @@ ChangeOfProSeCondition			::= SEQUENCE
 	radiofrequency					[8] RadioFrequency OPTIONAL,
 	vPLMNIdentifier					[9] PLMN-Id OPTIONAL
 }
-
-AppSpecificData	::= OCTET STRING
-
 CoverageInfo	::= SEQUENCE
 {
 	coverageStatus	[0] CoverageStatus,
@@ -173,14 +191,88 @@ CoverageInfo	::= SEQUENCE
 CoverageStatus				::= ENUMERATED
 {
 	outOfCoverage				(0),
-	inCoverage					(1) 
+	inCoverage					(1)
 }
+
+--
+-- L
+--
 
 LocationInfo	::= SEQUENCE
 {
 	uELocation		[0] OCTET STRING OPTIONAL,
 	timeStamp		[1] TimeStamp OPTIONAL
 }
+
+--
+-- P
+--
+PC5RadioTechnology			::= ENUMERATED
+{
+	eUTRA					(0),
+	wLAN					(1),
+	bothEUTRAAndWLAN		(2)
+}
+
+ProSeCauseForRecClosing		::= ENUMERATED
+{
+	proximityAlerted			(0),
+	timeExpiredWithNoRrenewal	(1),
+	requestorCancellation		(2),
+	timeLimited					(3),
+	maxNumberOfReports			(4),
+	abnormalRelease				(5)
+}
+
+ProSeEventType				::= ENUMERATED
+{
+	openAnnouncing					(0),
+	openMonitoring					(1),
+	openMatchReport					(2),
+	restrictedAnnouncing 			(3),
+	restrictedMonitoring 			(4),
+	restrictedMatchReport			(5),
+	restrictedDiscoveryRequest 		(6),
+	restrictedDiscoveryReporting	(7)
+}
+
+ProSeFunctionRole			::= ENUMERATED
+{
+	hPLMN			(0),
+	vPLMN			(1),
+	localPLMN		(2)
+}
+
+ProSeUERole					::= ENUMERATED
+{
+	annoucingUE					(0),
+	monitoringUE				(1),
+	requestorUE					(2),
+	requestedUE					(3),
+	discovererUE				(4),
+	discovereeUE		 		(5)
+}
+
+ProximityAlertIndication	::= ENUMERATED
+{
+	alerted						(0),
+	noAlert						(1)
+}
+
+ProximityRequestRenewalInfoBlock			::= SEQUENCE
+--
+-- Used for EPC-level discovery charging
+--
+{
+	proSeRequestTimestamp			[0] TimeStamp OPTIONAL,
+	timeWindow						[1] INTEGER OPTIONAL,
+	rangeClass						[2] RangeClass OPTIONAL,
+	uELocation						[3] OCTET STRING OPTIONAL
+}
+
+--
+-- R
+--
 
 RadioFrequency	::= OCTET STRING
 --
@@ -204,65 +296,9 @@ RadioResourcesIndicator	::= INTEGER
 	configured			(2)
 }
 
-ServiceChangeCondition	::= BIT STRING
-{
-	pLMNchange 					(0),
-	coverageStatusChange		(1),
-	locationChange				(2)
-}
-
-ProSeCauseForRecClosing		::= ENUMERATED
-{
-	proximityAlerted			(0), 
-	timeExpiredWithNoRrenewal	(1),
-	requestorCancellation		(2),
-	timeLimited					(3),
-	maxNumberOfReports			(4),
-	abnormalRelease				(5)
-}
-
-ProSeEventType				::= ENUMERATED
-{
-	announcing					(0),
-	monitoring					(1),
-	matchReport					(2)
-}
-
-ProSeFunctionRole			::= ENUMERATED
-{
-	hPLMN			(0),
-	vPLMN			(1),
-	localPLMN		(2)
-}
-
-ProSeUERole					::= ENUMERATED
-{
-	annoucingUE					(0), 
-	monitoringUE				(1),
-	requestorUE					(2),
-	requestedUE					(3)
-}
-
-ProximityAlertIndication	::= ENUMERATED
-{
-	alerted						(0), 
-	noAlert						(1)
-}
-
-ProximityRequestRenewalInfoBlock			::= SEQUENCE
---
--- Used for EPC-level discovery charging
---
-{
-	proSeRequestTimestamp			[0] TimeStamp OPTIONAL,	
-	timeWindow						[1] INTEGER OPTIONAL,
-	rangeClass						[2] RangeClass OPTIONAL,
-	uELocation						[3] OCTET STRING OPTIONAL
-}
-
 RangeClass					::= ENUMERATED
 {
-	reserved					(0), 
+	reserved					(0),
 	fiftyMeter					(1),
 	onehundredMeter				(2),
 	twohundredMeter				(3),
@@ -272,10 +308,25 @@ RangeClass					::= ENUMERATED
 
 ReasonforCancellation		::= ENUMERATED
 {
-	proximityAlerted			(0), 
+	proximityAlerted			(0),
 	timeExpiredWithNoRrenewal	(1),
 	requestorCancellation		(2)
 }
+
+--
+-- S
+--
+
+ServiceChangeCondition	::= BIT STRING
+{
+	pLMNchange 					(0),
+	coverageStatusChange		(1),
+	locationChange				(2)
+}
+
+--
+-- T
+--
 
 TransmitterInfo		::= SEQUENCE
 {

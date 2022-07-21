@@ -22,7 +22,7 @@ FROM CAP-classes classes
 	OPERATION
 FROM Remote-Operations-Information-Objects ros-InformationObjects
 
-	TCMessage {} 
+	TCMessage {}
 FROM TCAPMessages tc-Messages
 
 	APPLICATION-CONTEXT,
@@ -122,7 +122,7 @@ FROM CAP-gsmSCF-gsmSRF-pkgs-contracts-acs gsmSCF-gsmSRF-Protocol
 	classes,
 	ros-InformationObjects,
 	tc-Messages,
-	tc-NotationExtensions, 
+	tc-NotationExtensions,
 
 	gsmSSF-gsmSCF-Operations,
 	gsmSCF-gsmSRF-Operations,
@@ -135,7 +135,8 @@ FROM CAP-gsmSCF-gsmSRF-pkgs-contracts-acs gsmSCF-gsmSRF-Protocol
 -- the present module IMPORTS Rel-6 versions of the CAP Operation Package definitions.
 
 FROM CAP-object-identifiers {itu-t(0) identified-organization(4) etsi(0) mobileDomain(0)
-umts-network(1) modules(3) cap-object-identifiers(100) version8(7)};
+umts-network(1) modules(3) cap-object-identifiers(100) version8(7)}
+;
 
 -- Application Contexts
 
@@ -148,28 +149,28 @@ umts-network(1) modules(3) cap-object-identifiers(100) version8(7)};
 -- dialogue-abstract-syntax ABSTRACT SYNTAX is defined in ITU-T Recommendation Q.775.
 
 capssf-scfGenericAC APPLICATION-CONTEXT ::= {
-	CONTRACT					capSsfToScfGeneric
-	DIALOGUE MODE				structured
-	ABSTRACT SYNTAXES			{dialogue-abstract-syntax |
-								gsmSSF-scfGenericAbstractSyntax} 
+	CONTRACT			capSsfToScfGeneric
+	DIALOGUE MODE		structured
+	ABSTRACT SYNTAXES		{dialogue-abstract-syntax |
+				gsmSSF-scfGenericAbstractSyntax}
 	APPLICATION CONTEXT NAME	id-ac-CAP-gsmSSF-scfGenericAC}
 -- 'capSsfToScfGeneric' and 'gsmSSF-scfGenericAbstractSyntax' are defined in the present
 -- module.
 
 capssf-scfAssistHandoffAC APPLICATION-CONTEXT ::= {
-	CONTRACT					capAssistHandoffssfToScf
-	DIALOGUE MODE				structured
-	ABSTRACT SYNTAXES			{dialogue-abstract-syntax |
-								assistHandoff-gsmSSF-scfAbstractSyntax}
+	CONTRACT			capAssistHandoffssfToScf
+	DIALOGUE MODE		structured
+	ABSTRACT SYNTAXES		{dialogue-abstract-syntax |
+				assistHandoff-gsmSSF-scfAbstractSyntax}
 	APPLICATION CONTEXT NAME	id-ac-CAP-gsmSSF-scfAssistHandoffAC}
 -- 'capAssistHandoffssfToScf' and 'assistHandoff-gsmSSF-scfAbstractSyntax' are defined in
 -- the present module.
 
 capscf-ssfGenericAC	APPLICATION-CONTEXT ::= {
-	CONTRACT					capScfToSsfGeneric
-	DIALOGUE MODE				structured
-	ABSTRACT SYNTAXES			{dialogue-abstract-syntax |
-								scf-gsmSSFGenericAbstractSyntax}
+	CONTRACT			capScfToSsfGeneric
+	DIALOGUE MODE		structured
+	ABSTRACT SYNTAXES		{dialogue-abstract-syntax |
+				scf-gsmSSFGenericAbstractSyntax}
 	APPLICATION CONTEXT NAME	id-ac-CAP-scf-gsmSSFGenericAC}
 -- 'capScfToSsfGeneric' and 'scf-gsmSSFGenericAbstractSyntax' are defined in the present
 -- module.
@@ -180,65 +181,65 @@ capscf-ssfGenericAC	APPLICATION-CONTEXT ::= {
 
 capSsfToScfGeneric CONTRACT ::= {
 -- dialogue initiated by gsmSSF with InitialDP Operation
-	INITIATOR CONSUMER OF		{exceptionInformPackage {cAPSpecificBoundSet} |
-								scfActivationPackage {cAPSpecificBoundSet}}
-	RESPONDER CONSUMER OF		{activityTestPackage |
-								assistConnectionEstablishmentPackage {cAPSpecificBoundSet} |
-								bcsmEventHandlingPackage {cAPSpecificBoundSet} |
-								billingPackage {cAPSpecificBoundSet} |
-								callHandlingPackage {cAPSpecificBoundSet} |
-								callReportPackage {cAPSpecificBoundSet} |
-								cancelPackage {cAPSpecificBoundSet} |
-								chargingPackage {cAPSpecificBoundSet} |
-								connectPackage {cAPSpecificBoundSet} |
-								cphResponsePackage {cAPSpecificBoundSet} |
-								genericDisconnectResourcePackage {cAPSpecificBoundSet} |
-								nonAssistedConnectionEstablishmentPackage {cAPSpecificBoundSet} |
-								playTonePackage {cAPSpecificBoundSet} |
-								signallingControlPackage {cAPSpecificBoundSet} |
-								specializedResourceControlPackage {cAPSpecificBoundSet} |
-								ssfCallProcessingPackage {cAPSpecificBoundSet} |
-								timerPackage {cAPSpecificBoundSet} |
-								trafficManagementPackage {cAPSpecificBoundSet} |
-								scfCallInitiationPackage {cAPSpecificBoundSet}}
-	ID							id-CAPSsfToScfGeneric}
+	INITIATOR CONSUMER OF	{exceptionInformPackage {cAPSpecificBoundSet} |
+				scfActivationPackage {cAPSpecificBoundSet}}
+	RESPONDER CONSUMER OF	{activityTestPackage |
+				assistConnectionEstablishmentPackage {cAPSpecificBoundSet} |
+				bcsmEventHandlingPackage {cAPSpecificBoundSet} |
+				billingPackage {cAPSpecificBoundSet} |
+				callHandlingPackage {cAPSpecificBoundSet} |
+				callReportPackage {cAPSpecificBoundSet} |
+				cancelPackage {cAPSpecificBoundSet} |
+				chargingPackage {cAPSpecificBoundSet} |
+				connectPackage {cAPSpecificBoundSet} |
+				cphResponsePackage {cAPSpecificBoundSet} |
+				genericDisconnectResourcePackage {cAPSpecificBoundSet} |
+				nonAssistedConnectionEstablishmentPackage {cAPSpecificBoundSet} |
+				playTonePackage {cAPSpecificBoundSet} |
+				signallingControlPackage {cAPSpecificBoundSet} |
+				specializedResourceControlPackage {cAPSpecificBoundSet} |
+				ssfCallProcessingPackage {cAPSpecificBoundSet} |
+				timerPackage {cAPSpecificBoundSet} |
+				trafficManagementPackage {cAPSpecificBoundSet} |
+				scfCallInitiationPackage {cAPSpecificBoundSet}}
+	ID				id-CAPSsfToScfGeneric}
 -- The OPERATION-PACKAGEs are defined in the present module, except for
 -- specializedResourceControlPackage, which is defined in CAP-gsmSCF-gsmSRF-pkgs-contracts-acs.
 
 capAssistHandoffssfToScf CONTRACT ::= {
 -- dialogue initiated by gsmSSF with AssistRequestInstructions
-	INITIATOR CONSUMER OF		{gsmSRF-scfActivationOfAssistPackage {cAPSpecificBoundSet}}
-	RESPONDER CONSUMER OF		{activityTestPackage |
-								cancelPackage {cAPSpecificBoundSet} |
-								genericDisconnectResourcePackage {cAPSpecificBoundSet} |
-								nonAssistedConnectionEstablishmentPackage {cAPSpecificBoundSet} |
-								specializedResourceControlPackage {cAPSpecificBoundSet} |
-								timerPackage {cAPSpecificBoundSet}}
-	ID							id-CAPAssistHandoffssfToScf}
+	INITIATOR CONSUMER OF	{gsmSRF-scfActivationOfAssistPackage {cAPSpecificBoundSet}}
+	RESPONDER CONSUMER OF	{activityTestPackage |
+				cancelPackage {cAPSpecificBoundSet} |
+				genericDisconnectResourcePackage {cAPSpecificBoundSet} |
+				nonAssistedConnectionEstablishmentPackage {cAPSpecificBoundSet} |
+				specializedResourceControlPackage {cAPSpecificBoundSet} |
+				timerPackage {cAPSpecificBoundSet}}
+	ID				id-CAPAssistHandoffssfToScf}
 -- The OPERATION-PACKAGEs are defined in the present module, except for
 -- specializedResourceControlPackage, which is defined in CAP-gsmSCF-gsmSRF-pkgs-contracts-acs.
 
 capScfToSsfGeneric CONTRACT ::= {
 -- dialogue initiated by gsmSCF with InitiateCallAttempt, Generic Case
-	INITIATOR CONSUMER OF		{activityTestPackage |
-								assistConnectionEstablishmentPackage {cAPSpecificBoundSet} |
-								bcsmEventHandlingPackage {cAPSpecificBoundSet} |
-								billingPackage {cAPSpecificBoundSet} |
-								callHandlingPackage {cAPSpecificBoundSet} |
-								callReportPackage {cAPSpecificBoundSet} |
-								cancelPackage {cAPSpecificBoundSet} |
-								chargingPackage {cAPSpecificBoundSet} |
-								connectPackage {cAPSpecificBoundSet} |
-								cphResponsePackage {cAPSpecificBoundSet} |
-								genericDisconnectResourcePackage {cAPSpecificBoundSet} |
-								nonAssistedConnectionEstablishmentPackage {cAPSpecificBoundSet} |
-								playTonePackage {cAPSpecificBoundSet} |
-								scfCallInitiationPackage {cAPSpecificBoundSet} |
-								specializedResourceControlPackage {cAPSpecificBoundSet} |
-								ssfCallProcessingPackage {cAPSpecificBoundSet} |
-								timerPackage {cAPSpecificBoundSet}}
-	RESPONDER CONSUMER OF		{exceptionInformPackage {cAPSpecificBoundSet}}
-	ID							id-CAPScfToSsfGeneric}
+	INITIATOR CONSUMER OF	{activityTestPackage |
+				assistConnectionEstablishmentPackage {cAPSpecificBoundSet} |
+				bcsmEventHandlingPackage {cAPSpecificBoundSet} |
+				billingPackage {cAPSpecificBoundSet} |
+				callHandlingPackage {cAPSpecificBoundSet} |
+				callReportPackage {cAPSpecificBoundSet} |
+				cancelPackage {cAPSpecificBoundSet} |
+				chargingPackage {cAPSpecificBoundSet} |
+				connectPackage {cAPSpecificBoundSet} |
+				cphResponsePackage {cAPSpecificBoundSet} |
+				genericDisconnectResourcePackage {cAPSpecificBoundSet} |
+				nonAssistedConnectionEstablishmentPackage {cAPSpecificBoundSet} |
+				playTonePackage {cAPSpecificBoundSet} |
+				scfCallInitiationPackage {cAPSpecificBoundSet} |
+				specializedResourceControlPackage {cAPSpecificBoundSet} |
+				ssfCallProcessingPackage {cAPSpecificBoundSet} |
+				timerPackage {cAPSpecificBoundSet}}
+	RESPONDER CONSUMER OF	{exceptionInformPackage {cAPSpecificBoundSet}}
+	ID				id-CAPScfToSsfGeneric}
 -- The OPERATION-PACKAGEs are defined in the present module, except for
 -- specializedResourceControlPackage, which is defined in CAP-gsmSCF-gsmSRF-pkgs-contracts-acs.
 
@@ -250,94 +251,94 @@ capScfToSsfGeneric CONTRACT ::= {
 
 scfActivationPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{initialDP {bound}}
-	ID					id-package-scfActivation}
+	ID			id-package-scfActivation}
 
 gsmSRF-scfActivationOfAssistPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{assistRequestInstructions {bound}}
-	ID					id-package-gsmSRF-scfActivationOfAssist}
+	ID			id-package-gsmSRF-scfActivationOfAssist}
 
 assistConnectionEstablishmentPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{establishTemporaryConnection {bound}}
-	ID					id-package-assistConnectionEstablishment}
+	ID			id-package-assistConnectionEstablishment}
 
 genericDisconnectResourcePackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{disconnectForwardConnection |
-						disconnectForwardConnectionWithArgument {bound}}
-	ID					id-package-genericDisconnectResource}
+			disconnectForwardConnectionWithArgument {bound}}
+	ID			id-package-genericDisconnectResource}
 
 nonAssistedConnectionEstablishmentPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{connectToResource {bound}}
-	ID					id-package-nonAssistedConnectionEstablishment}
+	ID			id-package-nonAssistedConnectionEstablishment}
 
 connectPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{connect {bound}}
-	ID					id-package-connect}
+	ID			id-package-connect}
 
 callHandlingPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{releaseCall {bound}}
-	ID					id-package-callHandling}
+	ID			id-package-callHandling}
 
 bcsmEventHandlingPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{requestReportBCSMEvent {bound}}
 	SUPPLIER INVOKES	{eventReportBCSM {bound}}
-	ID					id-package-bcsmEventHandling}
+	ID			id-package-bcsmEventHandling}
 
 ssfCallProcessingPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
-	CONSUMER INVOKES	{collectInformation | continueWithArgument {bound} | continue}
-	ID					id-package-ssfCallProcessing}
+	CONSUMER INVOKES	{ collectInformation {bound} | continueWithArgument {bound} | continue}
+	ID			id-package-ssfCallProcessing}
 
 scfCallInitiationPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{initiateCallAttempt {bound}}
-	ID					id-package-scfCallInitiation}
+	ID			id-package-scfCallInitiation}
 
 timerPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{resetTimer {bound}}
-	ID					id-package-timer}
+	ID			id-package-timer}
 
 billingPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{furnishChargingInformation {bound}}
-	ID					id-package-billing}
+	ID			id-package-billing}
 
 chargingPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{applyCharging {bound}}
 	SUPPLIER INVOKES	{applyChargingReport {bound}}
-	ID					id-package-charging}
+	ID			id-package-charging}
 
 trafficManagementPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{callGap {bound}}
-	ID					id-package-trafficManagement}
+	ID			id-package-trafficManagement}
 
 callReportPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{callInformationRequest {bound}}
 	SUPPLIER INVOKES	{callInformationReport {bound}}
-	ID					id-package-callReport}
+	ID			id-package-callReport}
 
 signallingControlPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{sendChargingInformation {bound}}
-	ID					id-package-signallingControl}
+	ID			id-package-signallingControl}
 
 activityTestPackage OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{activityTest}
-	ID					id-package-activityTest}
+	ID			id-package-activityTest}
 
 cancelPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{cancel {bound}}
-	ID					id-package-cancel}
+	ID			id-package-cancel}
 
 cphResponsePackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{continueWithArgument {bound} |
-						disconnectLeg {bound} |
-						moveLeg {bound} |
-						splitLeg {bound}}
-	ID					id-package-cphResponse}
+			disconnectLeg {bound} |
+			moveLeg {bound} |
+			splitLeg {bound}}
+	ID			id-package-cphResponse}
 
 exceptionInformPackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{entityReleased {bound}}
-	ID					id-package-exceptionInform}
+	ID			id-package-exceptionInform}
 
 playTonePackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 	CONSUMER INVOKES	{playTone {bound}}
-	ID					id-package-playTone}
+	ID			id-package-playTone}
 
 
 -- Abstract Syntaxes
@@ -350,11 +351,11 @@ playTonePackage {PARAMETERS-BOUND : bound} OPERATION-PACKAGE ::= {
 
 gsmSSF-scfGenericAbstractSyntax ABSTRACT-SYNTAX ::= {
 	GenericSSF-gsmSCF-PDUs
-	IDENTIFIED BY		id-as-gsmSSF-scfGenericAS}
+	IDENTIFIED BY	id-as-gsmSSF-scfGenericAS}
 -- 'GenericSSF-gsmSCF-PDUs' is defined in the present module.
 
 GenericSSF-gsmSCF-PDUs ::= TCMessage {{SsfToScfGenericInvokable},
-									  {SsfToScfGenericReturnable}}
+					 {SsfToScfGenericReturnable}}
 -- 'SsfToScfGenericInvokable' and 'SsfToScfGenericReturnable' are defined in the present module.
 
 SsfToScfGenericInvokable OPERATION ::= {
@@ -367,7 +368,7 @@ SsfToScfGenericInvokable OPERATION ::= {
 	connect {cAPSpecificBoundSet} |
 	continueWithArgument {cAPSpecificBoundSet} |
 	connectToResource {cAPSpecificBoundSet} |
-	collectInformation |
+	collectInformation {cAPSpecificBoundSet} |
 	disconnectForwardConnection |
 	disconnectForwardConnectionWithArgument {cAPSpecificBoundSet} |
 	disconnectLeg {cAPSpecificBoundSet} |
@@ -400,7 +401,7 @@ SsfToScfGenericReturnable OPERATION ::= {
 	cancel {cAPSpecificBoundSet} |
 	connect {cAPSpecificBoundSet} |
 	connectToResource {cAPSpecificBoundSet} |
-	collectInformation |
+	collectInformation {cAPSpecificBoundSet} |
 	continue |
 	continueWithArgument {cAPSpecificBoundSet} |
 	disconnectForwardConnection |
@@ -436,8 +437,10 @@ assistHandoff-gsmSSF-scfAbstractSyntax ABSTRACT-SYNTAX ::= {
 	IDENTIFIED BY	id-as-assistHandoff-gsmSSF-scfAS}
 -- 'AssistHandoffsSF-gsmSCF-PDUs' is defined in the present module.
 
-AssistHandoffsSF-gsmSCF-PDUs ::= TCMessage {{AssistHandoffssfToScfInvokable}, 
-											{AssistHandoffssfToScfReturnable}}
+AssistHandoffsSF-gsmSCF-PDUs ::= TCMessage {
+	{AssistHandoffssfToScfInvokable},
+	{AssistHandoffssfToScfReturnable}
+	}
 -- 'AssistHandoffssfToScfInvokable' and 'AssistHandoffssfToScfReturnable' are defined in the
 -- present module.
 
@@ -478,8 +481,10 @@ scf-gsmSSFGenericAbstractSyntax	ABSTRACT-SYNTAX ::= {
 	IDENTIFIED BY	id-as-scf-gsmSSFGenericAS}
 -- 'GenericSCF-gsmSSF-PDUs' is defined in the present module.
 
-GenericSCF-gsmSSF-PDUs ::= TCMessage {{ScfToSsfGenericInvokable},
-									  {ScfToSsfGenericReturnable}}
+GenericSCF-gsmSSF-PDUs ::= TCMessage {
+    {ScfToSsfGenericInvokable},
+    {ScfToSsfGenericReturnable}
+    }
 -- 'ScfToSsfGenericInvokable' and 'ScfToSsfGenericReturnable' are defined in the
 -- present module.
 
@@ -489,7 +494,7 @@ ScfToSsfGenericInvokable OPERATION ::= {
 	applyChargingReport {cAPSpecificBoundSet} |
 	callInformationRequest {cAPSpecificBoundSet} |
 	cancel {cAPSpecificBoundSet} |
-	collectInformation |
+	collectInformation {cAPSpecificBoundSet} |
 	connect {cAPSpecificBoundSet} |
 	connectToResource {cAPSpecificBoundSet} |
 	continue |

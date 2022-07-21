@@ -1,16 +1,17 @@
-CSChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) csChargingDataTypes (1) asn1Module (0) version1 (0)}  DEFINITIONS IMPLICIT TAGS	::=
+CSChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) csChargingDataTypes (1) asn1Module (0) version2 (1)}  DEFINITIONS IMPLICIT TAGS	::=
 
 BEGIN
 
 -- EXPORTS everything
 
-IMPORTS	
+IMPORTS
 
 AE-title,
 BCDDirectoryNumber,
 CallDuration,
 CalledNumber,
 CallingNumber,
+CauseForTerm,
 CellId,
 ChargeIndicator,
 Diagnostics,
@@ -35,60 +36,60 @@ SMSResult,
 SmsTpDestinationNumber,
 SystemType,
 TimeStamp
-FROM GenericChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) genericChargingDataTypes (0) asn1Module (0) version1 (0)}  
+FROM GenericChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) genericChargingDataTypes (0) asn1Module (0) version2 (1)}
 
 BearerServiceCode
-FROM MAP-BS-Code {itu-t identified-organization (4) etsi (0) mobileDomain (0) gsm-Network (1) modules (3) map-BS-Code (20)  version15 (15) }
--- from TS 29.002 [214]
+FROM MAP-BS-Code {itu-t identified-organization (4) etsi (0) mobileDomain (0) gsm-Network (1) modules (3) map-BS-Code (20)  version18 (18) }
+-- from TS 29.002 [214]
 
 TeleserviceCode
-FROM MAP-TS-Code {itu-t identified-organization (4) etsi (0) mobileDomain (0) gsm-Network (1) modules (3) map-TS-Code (19)  version15 (15) }
--- from TS 29.002 [214]
+FROM MAP-TS-Code {itu-t identified-organization (4) etsi (0) mobileDomain (0) gsm-Network (1) modules (3) map-TS-Code (19)  version18 (18) }
+-- from TS 29.002 [214]
 
 SS-Code
-FROM MAP-SS-Code { itu-t identified-organization (4) etsi (0) mobileDomain (0) gsm-Network (1) modules (3) map-SS-Code (15)  version15 (15) }
--- from TS 29.002 [214]
+FROM MAP-SS-Code { itu-t identified-organization (4) etsi (0) mobileDomain (0) gsm-Network (1) modules (3) map-SS-Code (15)  version18 (18) }
+-- from TS 29.002 [214]
 
 MOLR-Type
-FROM SS-DataTypes {itu-t identified-organization (4) etsi (0) mobileDomain (0) gsm-Access (2) modules (3) ss-DataTypes (2)  version15 (15)}
--- from TS 24.080 [209] 
+FROM SS-DataTypes {itu-t identified-organization (4) etsi (0) mobileDomain (0) gsm-Access (2) modules (3) ss-DataTypes (2)  version14 (14)}
+-- from TS 24.080 [209]
 
 DefaultCallHandling,
-DefaultSMS-Handling, 
+DefaultSMS-Handling,
 NotificationToMSUser,
-ServiceKey 
+ServiceKey
 FROM MAP-MS-DataTypes {itu-t identified-organization (4) etsi (0) mobileDomain (0)
-gsm-Network (1) modules (3) map-MS-DataTypes (11)  version15 (15) }
--- from TS 29.002 [214]
+gsm-Network (1) modules (3) map-MS-DataTypes (11)  version18 (18) }
+-- from TS 29.002 [214]
 
 CallReferenceNumber,
 NumberOfForwarding
-FROM MAP-CH-DataTypes {itu-t identified-organization (4) etsi (0) mobileDomain (0) gsm-Network (1) modules (3) map-CH-DataTypes (13)  version15 (15) }
--- from TS 29.002 [214]
+FROM MAP-CH-DataTypes {itu-t identified-organization (4) etsi (0) mobileDomain (0) gsm-Network (1) modules (3) map-CH-DataTypes (13)  version18 (18) }
+-- from TS 29.002 [214]
 
 AddressString,
 BasicServiceCode,
 IMEI,
 IMSI,
 ISDN-AddressString
-FROM MAP-CommonDataTypes {itu-t identified-organization (4) etsi (0) mobileDomain (0) gsm-Network (1) modules (3) map-CommonDataTypes (18)  version15 (15) }
--- from TS 29.002 [214]
+FROM MAP-CommonDataTypes {itu-t identified-organization (4) etsi (0) mobileDomain (0) gsm-Network (1) modules (3) map-CommonDataTypes (18)  version18 (18) }
+-- from TS 29.002 [214]
 
-Ext-GeographicalInformation, 
-LCSClientType, 
-LCS-Priority, 
+Ext-GeographicalInformation,
+LCSClientType,
+LCS-Priority,
 LocationType
-FROM MAP-LCS-DataTypes {itu-t identified-organization (4) etsi (0) mobileDomain (0) gsm-Network (1) modules (3) map-LCS-DataTypes (25)  version15 (15) }
--- from TS 29.002 [214]
+FROM MAP-LCS-DataTypes {itu-t identified-organization (4) etsi (0) mobileDomain (0) gsm-Network (1) modules (3) map-LCS-DataTypes (25)  version18 (18) }
+-- from TS 29.002 [214]
 
-IMS-Charging-Identifier, 
+IMS-Charging-Identifier,
 InterOperatorIdentifierList,
 TransitIOILists
-FROM IMSChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) imsChargingDataTypes (4) asn1Module (0) version1 (0)}
+FROM IMSChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) imsChargingDataTypes (4) asn1Module (0) version2 (1)}
 
 BasicService
 FROM Basic-Service-Elements	{itu-t(0) identified-organization (4) etsi (0) 196 basic-service-elements (8) }
--- from "Digital Subscriber Signalling System No. one (DSS1) protocol" ETS 300 196 [310]
+-- from "Digital Subscriber Signalling System No. one (DSS1) protocol" ETS 300 196 [310]
 
 DestinationRoutingAddress
 FROM CAP-datatypes { itu-t(0) identified-organization (4) etsi (0) mobileDomain (0) gsm-Network (1) modules (3) cap-datatypes (52) version8 (7) }
@@ -100,7 +101,7 @@ FROM CAP-datatypes { itu-t(0) identified-organization (4) etsi (0) mobileDomain 
 --  CS CALL AND EVENT RECORDS
 --
 
-CSRecord	::= CHOICE 
+CSRecord	::= CHOICE
 --
 -- Record values 0..21 are circuit switch specific
 --
@@ -349,7 +350,7 @@ TermCAMELRecord	::= SET
 	gsm-SCFAddress-2				[31] Gsm-SCFAddress OPTIONAL,
 	serviceKey-2					[32] ServiceKey OPTIONAL,
 	freeFormatData-2				[33] FreeFormatData OPTIONAL,
-	freeFormatDataAppend-2		[34] BOOLEAN OPTIONAL, 
+	freeFormatDataAppend-2		[34] BOOLEAN OPTIONAL,
 	mscServerIndication			[35] BOOLEAN OPTIONAL,
 	locationRoutNum				[36] LocationRoutingNumber OPTIONAL,
 	lrnSoInd						[37] LocationRoutingNumberSourceIndicator OPTIONAL,
@@ -696,7 +697,7 @@ MSCsRVCCRecord	::= SET
 	servedIMSI					[1] IMSI OPTIONAL,
 	servedIMEI					[2] IMEI OPTIONAL,
 	servedMSISDN					[3] MSISDN OPTIONAL,
-	calledNumber					[5] CalledNumber,		
+	calledNumber					[5] CalledNumber,
 	recordingEntity				[9] RecordingEntity,
 	mscOutgoingTKGP				[11] TrunkGroup OPTIONAL,
 	location						[12] LocationAreaAndCell,
@@ -757,7 +758,7 @@ ICSregisterRecord ::= SET
 	recordType					[0] RecordType,
 	servedIMSI					[1] IMSI,
 	servedMSISDN					[2] MSISDN,
-	privateUserID				[3] GraphicString OPTIONAL, 
+	privateUserID				[3] GraphicString OPTIONAL,
 	recordingEntity				[4] RecordingEntity,
 	newLocation					[5] Location-info,
 	locationExtension			[6] LocationCellExtension OPTIONAL,
@@ -829,7 +830,7 @@ JurisdictionInformationParameterQueryStatus 	::=	INTEGER
 --  CS DATA TYPES
 --
 
-AdditionalChgInfo		::= SEQUENCE 
+AdditionalChgInfo		::= SEQUENCE
 {
 	chargeIndicator		[0] ChargeIndicator OPTIONAL,
 	chargeParameters	[1] OCTET STRING OPTIONAL
@@ -837,9 +838,9 @@ AdditionalChgInfo		::= SEQUENCE
 
 AiurRequested			::= ENUMERATED
 --
--- See Bearer Capability TS 24.008 [208]
+-- See Bearer Capability TS 24.008 [208]
 -- (note that value "4" is intentionally missing
--- because it is not used in TS 24.008 [208])
+-- because it is not used in TS 24.008 [208])
 --
 {
 	aiur09600BitsPerSecond		(1),
@@ -856,8 +857,8 @@ AiurRequested			::= ENUMERATED
 }
 
 AOCParameters			::= SEQUENCE
--- 
--- See TS 22.024 [104]. 
+--
+-- See TS 22.024 [104].
 --
 {
 	e1					[1] EParameter OPTIONAL,
@@ -869,7 +870,7 @@ AOCParameters			::= SEQUENCE
 	e7					[7] EParameter OPTIONAL
 }
 
-AOCParmChange			::= SEQUENCE 
+AOCParmChange			::= SEQUENCE
 {
 	changeTime			[0] TimeStamp,
 	newParameters		[1] AOCParameters
@@ -933,7 +934,7 @@ CAMELSMSInformation		::= SET
 {
 	gsm-SCFAddress						[1] Gsm-SCFAddress OPTIONAL,
 	serviceKey							[2] ServiceKey OPTIONAL,
-	defaultSMSHandling			 		[3] DefaultSMS-Handling OPTIONAL, 
+	defaultSMSHandling			 		[3] DefaultSMS-Handling OPTIONAL,
 	freeFormatData       				[4] FreeFormatData OPTIONAL,
 	callingPartyNumber 					[5] CallingNumber OPTIONAL,
 	destinationSubscriberNumber			[6] SmsTpDestinationNumber OPTIONAL,
@@ -945,26 +946,6 @@ Category		::= OCTET STRING (SIZE(1))
 --
 -- The internal structure is defined in Recommendation Q.763.
 --
-
-CauseForTerm			::= INTEGER
---
--- Cause codes from 16 up to 31 are defined in GSM12.15 as CauseForRecClosing
--- (cause for record closing).
--- There is no direct correlation between these two types.
--- LCS related causes belong to the MAP error causes acc. TS 29.002 [214].
---
-{
-	normalRelease						(0),
-	partialRecord						(1),
-	partialRecordCallReestablishment		(2),
-	unsuccessfulCallAttempt				(3),
-	stableCallAbnormalTermination		(4),
-	cAMELInitCallRelease					(5),
-	unauthorizedRequestingNetwork		(52),
-	unauthorizedLCSClient				(53),
-	positionMethodFailure				(54),
-	unknownOrUnreachableLCSClient		(58)
-}
 
 ChangedParameters		::= SET
 {
@@ -1013,7 +994,7 @@ ChannelCoding				::= ENUMERATED
 
 Classmark				::= OCTET STRING
 --
--- See Mobile station classmark 2, Mobile station classmark 3, TS 24.008[208]
+-- See Mobile station classmark 2, Mobile station classmark 3, TS 24.008[208]
 --
 
 ConnectedNumber			::= BCDDirectoryNumber
@@ -1037,7 +1018,7 @@ DayDefinition			::= SEQUENCE
 
 DayDefinitions			::= SET OF DayDefinition
 
-DateDefinition			::= SEQUENCE 
+DateDefinition			::= SEQUENCE
 {
 	month				[0] Month,
 	day					[1] Day,
@@ -1080,13 +1061,13 @@ EquipmentType			::= INTEGER
 FileType				::= INTEGER
 {
 	callRecords			(1),
-	traceRecords			(9), 
+	traceRecords			(9),
 	observedIMEITicket	(14)
 }
 
 Fnur					::= ENUMERATED
 --
--- See Bearer Capability TS 24.008 [208]
+-- See Bearer Capability TS 24.008 [208]
 --
 {
 	fnurNotApplicable			(0),
@@ -1108,7 +1089,7 @@ ForwardToNumber 		::= AddressString
 FreeFormatData			::= OCTET STRING (SIZE(1..160))
 --
 -- Free formatted data as sent in the FCI message
--- See TS 29.078 [217]
+-- See TS 29.078 [217]
 --
 
 GenericNumber			::= BCDDirectoryNumber
@@ -1117,7 +1098,7 @@ GenericNumbers			::= SET OF GenericNumber
 
 Gsm-SCFAddress			::= ISDN-AddressString
 --
--- See TS 29.002 [214]
+-- See TS 29.002 [214]
 --
 
 GuaranteedBitRate ::= ENUMERATED
@@ -1208,11 +1189,11 @@ MSPowerClasses	::= SET OF RFPowerCapability
 
 NetworkCallReference	::= CallReferenceNumber
 --
--- See TS 29.002 [214]
+-- See TS 29.002 [214]
 --
 
 NetworkSpecificCode		::= INTEGER
--- 
+--
 -- To be defined by network operator
 --
 
@@ -1259,7 +1240,7 @@ RadioChannelsRequested	::= SET OF RadioChanRequested
 
 RadioChanRequested	::= ENUMERATED
 --
--- See Bearer Capability TS 24.008 [208]
+-- See Bearer Capability TS 24.008 [208]
 --
 {
 	halfRateChannel				(0),
@@ -1297,18 +1278,18 @@ RedirectingNumber	::= BCDDirectoryNumber
 RFPowerCapability	::= INTEGER
 --
 -- This field contains the RF power capability of the Mobile station
--- classmark 1 and 2 of TS 24.008 [208] expressed as an integer.
--- 
+-- classmark 1 and 2 of TS 24.008 [208] expressed as an integer.
+--
 
 RoamingNumber			::= ISDN-AddressString
--- 
--- See TS 23.003 [200]
+--
+-- See TS 23.003 [200]
 --
 
 RoutingNumber			::= CHOICE
 {
 	roaming				[1] RoamingNumber,
-	forwarded			[2] ForwardToNumber	
+	forwarded			[2] ForwardToNumber
 }
 
 Service						::= CHOICE
@@ -1489,7 +1470,7 @@ Visited-Location-info		::= SEQUENCE
 
 VlrNo		::= ISDN-AddressString
 --
--- See TS 23.003 [200]
+-- See TS 23.003 [200]
 --
 
 

@@ -1,32 +1,35 @@
-MMTelChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) mMTelChargingDataTypes (9) asn1Module (0) version1 (0)}
+MMTelChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) mMTelChargingDataTypes (9) asn1Module (0) version2 (1)}
 
 DEFINITIONS IMPLICIT TAGS	::=
 
 BEGIN
 
--- EXPORTS everything 
+-- EXPORTS everything
 
-IMPORTS	
+IMPORTS
 
+InvolvedParty,
 LocalSequenceNumber,
 ManagementExtensions,
 NodeAddress,
 RecordType,
 ServiceContextID,
+Session-Id,
 SubscriberEquipmentNumber,
 SubscriptionID,
+ThreeGPPPSDataOffStatus,
 TimeStamp
-FROM GenericChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) genericChargingDataTypes (0) asn1Module (0) version1 (0)}
+FROM GenericChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) genericChargingDataTypes (0) asn1Module (0) version2 (1)}
 
 AoCInformation,
 CarrierSelectRouting,
 CauseForRecordClosing,
 Early-Media-Components-List,
+FEIdentifierList,
 IMS-Charging-Identifier,
 IMSCommunicationServiceIdentifier,
 Incomplete-CDR-Indication,
 InterOperatorIdentifierList,
-InvolvedParty,
 ListOfInvolvedParties,
 ListOfReasonHeader,
 Media-Components-List,
@@ -37,11 +40,10 @@ RealTimeTariffInformation,
 ReasonHeaderInformation,
 Role-of-Node,
 Service-Id,
-Session-Id,
-SessionPriority, 
+SessionPriority,
 SIP-Method,
 TransitIOILists
-FROM IMSChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) imsChargingDataTypes (4) asn1Module (0) version1 (0)}
+FROM IMSChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) imsChargingDataTypes (4) asn1Module (0) version2 (1)}
 
 ;
 
@@ -49,10 +51,10 @@ FROM IMSChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileD
 --  MMTel RECORDS
 --
 
-MMTelServiceRecord	::= CHOICE 
+MMTelServiceRecord	::= CHOICE
 --
 -- Record values 83 are MMTel specific
--- 
+--
 {
 	mMTelRecord			[83] MMTelRecord
 }
@@ -65,7 +67,7 @@ MMTelRecord 	::= SET
 	role-of-Node						[3] Role-of-Node OPTIONAL,
 	nodeAddress							[4] NodeAddress OPTIONAL,
 	session-Id							[5] Session-Id OPTIONAL,
-	list-Of-Calling-Party-Address		[6] ListOfInvolvedParties OPTIONAL,	
+	list-Of-Calling-Party-Address		[6] ListOfInvolvedParties OPTIONAL,
 	called-Party-Address				[7] InvolvedParty OPTIONAL,
 	serviceRequestTimeStamp				[9] TimeStamp OPTIONAL,
 	serviceDeliveryStartTimeStamp		[10] TimeStamp OPTIONAL,
@@ -75,7 +77,7 @@ MMTelRecord 	::= SET
 	interOperatorIdentifiers			[14] InterOperatorIdentifierList OPTIONAL,
 	localRecordSequenceNumber			[15] LocalSequenceNumber OPTIONAL,
 	recordSequenceNumber				[16] INTEGER OPTIONAL,
-	causeForRecordClosing				[17] CauseForRecordClosing OPTIONAL, 
+	causeForRecordClosing				[17] CauseForRecordClosing OPTIONAL,
 	incomplete-CDR-Indication			[18] Incomplete-CDR-Indication OPTIONAL,
 	iMS-Charging-Identifier				[19] IMS-Charging-Identifier OPTIONAL,
 	list-Of-SDP-Media-Components		[21] SEQUENCE OF Media-Components-List OPTIONAL,
@@ -87,7 +89,7 @@ MMTelRecord 	::= SET
 	event								[28] UTF8String OPTIONAL,
 	accessNetworkInformation			[29] OCTET STRING OPTIONAL,
 	serviceContextID					[30] ServiceContextID OPTIONAL,
-	list-of-subscription-ID				[31] SEQUENCE OF SubscriptionID OPTIONAL, 
+	list-of-subscription-ID				[31] SEQUENCE OF SubscriptionID OPTIONAL,
 	list-Of-Early-SDP-Media-Components	[32] SEQUENCE OF Early-Media-Components-List OPTIONAL,
 	iMSCommunicationServiceIdentifier	[33] IMSCommunicationServiceIdentifier OPTIONAL,
 	numberPortabilityRouting			[34] NumberPortabilityRouting OPTIONAL,
@@ -102,13 +104,15 @@ MMTelRecord 	::= SET
 	iMSVisitedNetworkIdentifier				[54] OCTET STRING OPTIONAL,
 	listOfReasonHeader						[55] ListOfReasonHeader OPTIONAL,
 	additionalAccessNetworkInformation		[56] OCTET STRING OPTIONAL,
-	instanceId								[57] OCTET STRING OPTIONAL, 
+	instanceId								[57] OCTET STRING OPTIONAL,
 	subscriberEquipmentNumber				[58] SubscriberEquipmentNumber OPTIONAL,
 	cellularNetworkInformation				[64] OCTET STRING OPTIONAL,
 	requested-Party-Address					[101] InvolvedParty OPTIONAL,
 	list-Of-Called-Asserted-Identity		[102] ListOfInvolvedParties OPTIONAL,
 	outgoingSessionId						[104] Session-Id OPTIONAL,
-	mMTelInformation						[110] MMTelInformation OPTIONAL
+	mMTelInformation						[110] MMTelInformation OPTIONAL,
+	threeGPPPSDataOffStatus					[112] ThreeGPPPSDataOffStatus OPTIONAL,
+	fEIdentifierList                        [113] FEIdentifierList OPTIONAL
 }
 
 --
@@ -120,7 +124,7 @@ MMTelInformation			::= SET
 	listOfSupplServices	    [0] SEQUENCE OF SupplService OPTIONAL
 }
 
-ParticipantActionType ::= ENUMERATED
+ParticipantActionType ::= ENUMERATED
 {
 cREATE-CONF         (0),
 jOIN-CONF           (1),
@@ -143,8 +147,8 @@ aoCInformation				[9]	SEQUENCE OF AoCInformation OPTIONAL
 }
 
 ServiceType		::= INTEGER
--- 
--- Values  ? 1024 are reserved for specific Network/Manufacturer variants
+--
+-- Values  1024 are reserved for specific Network/Manufacturer variants
 --
 {
 	oIPresentation		(0),
@@ -171,7 +175,7 @@ ServiceType		::= INTEGER
 
 ServiceMode ::= INTEGER
 --
--- Values  ? 1024 are reserved for specific Network/Manufacturer variants
+-- Values  1024 are reserved for specific Network/Manufacturer variants
 --
 {	cFunCond			(0),
 	cFbusy				(1),

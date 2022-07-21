@@ -51,14 +51,14 @@ canceled ERROR ::= {
 
 cancelFailed ERROR ::= {
 	PARAMETER	SEQUENCE {
-		problem					[0] ENUMERATED {
-			unknownOperation		(0),
-			tooLate					(1),
-			operationNotCancellable	(2)
-			},
-		operation				[1] InvokeID,
-		...
-		}
+	problem			[0] ENUMERATED {
+		unknownOperation	(0),
+		tooLate			(1),
+		operationNotCancellable	(2)
+		},
+	operation		[1] InvokeID,
+	...
+	}
 	CODE	errcode-cancelFailed
 	}
 -- The operation failed to be canceled.
@@ -90,9 +90,9 @@ parameterOutOfRange ERROR ::= {
 
 requestedInfoError ERROR ::= {
 	PARAMETER	ENUMERATED {
-			unknownRequestedInfo		(1),
-			requestedInfoNotAvailable	(2)
-			}
+		unknownRequestedInfo	(1),
+		requestedInfoNotAvailable	(2)
+		}
 	CODE	errcode-requestedInfoError
 	}
 -- The requested information cannot be found.
@@ -105,10 +105,10 @@ systemFailure ERROR ::= {
 
 taskRefused ERROR ::= {
 	PARAMETER	ENUMERATED {
-			generic						(0),
-			unobtainable				(1),
-			congestion					(2)
-			}
+		generic			(0),
+		unobtainable		(1),
+		congestion			(2)
+		}
 	CODE	errcode-taskRefused
 	}
 -- An entity normally capable of the task requested cannot or chooses not to perform the task at
@@ -142,7 +142,7 @@ unknownLegID ERROR ::= {
 -- Leg not known to the gsmSSF.
 
 unknownCSID ERROR ::= {
-	CODE 	errcode-unknownCSID
+	CODE	errcode-unknownCSID
 	}
 -- Call Segment not known to the gsmSSF.
 

@@ -1,4 +1,4 @@
-LCSChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) lcsChargingDataTypes (6) asn1Module (0) version1 (0)}
+LCSChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) lcsChargingDataTypes (6) asn1Module (0) version2 (1)}
 
 DEFINITIONS IMPLICIT TAGS	::=
 
@@ -6,7 +6,7 @@ BEGIN
 
 -- EXPORTS everything
 
-IMPORTS	
+IMPORTS
 
 
 IPAddress,
@@ -14,25 +14,23 @@ LCSClientIdentity,
 LocalSequenceNumber,
 ManagementExtensions,
 MSISDN,
+PLMN-Id,
 PositioningData,
 RecordingEntity,
 RecordType,
 TimeStamp
-FROM GenericChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) genericChargingDataTypes (0) asn1Module (0) version1 (0)}
-
-PLMN-Id
-FROM GPRSChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) gprsChargingDataTypes (2) asn1Module (0) version1 (0)}
+FROM GenericChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) genericChargingDataTypes (0) asn1Module (0) version2 (1)}
 Ext-GeographicalInformation,
 LCSClientType,
 LCS-Priority,
 LocationType
-FROM MAP-LCS-DataTypes {itu-t identified-organization (4) etsi (0) mobileDomain (0) gsm-Network (1) modules (3) map-LCS-DataTypes (25)  version15 (15) }
--- from TS 29.002 [214]
+FROM MAP-LCS-DataTypes {itu-t identified-organization (4) etsi (0) mobileDomain (0) gsm-Network (1) modules (3) map-LCS-DataTypes (25)  version18 (18) }
+-- from TS 29.002 [214]
 
 AddressString,
 IMSI
-FROM MAP-CommonDataTypes {itu-t identified-organization (4) etsi (0) mobileDomain (0) gsm-Network (1) modules (3) map-CommonDataTypes (18)  version15 (15) }
--- from TS 29.002 [214]
+FROM MAP-CommonDataTypes {itu-t identified-organization (4) etsi (0) mobileDomain (0) gsm-Network (1) modules (3) map-CommonDataTypes (18)  version18 (18) }
+-- from TS 29.002 [214]
 
 ;
 
@@ -43,7 +41,7 @@ FROM MAP-CommonDataTypes {itu-t identified-organization (4) etsi (0) mobileDomai
 LCSRecord	::= CHOICE
 --
 -- Record values 71..75 are LCS specific
--- 
+--
 {
 	lCSGMORecord		[71] LCSGMORecord,
 	lCSRGMTRecord		[72] LCSRGMTRecord,
@@ -60,7 +58,7 @@ LCSGMORecord	::= SET
 	lcsClientIdentity			[3] LCSClientIdentity OPTIONAL,
 	servedIMSI					[4] IMSI,
 	servedMSISDN				[5] MSISDN OPTIONAL,
-	servingEntity				[6] ServingEntity OPTIONAL, 
+	servingEntity				[6] ServingEntity OPTIONAL,
 	locationEstimate			[7] Ext-GeographicalInformation OPTIONAL,
 	positioningData				[8] PositioningData OPTIONAL,
 	userError					[9] UserError OPTIONAL,
@@ -78,8 +76,8 @@ LCSRGMTRecord	::= SET
 	lcsClientIdentity			[3] LCSClientIdentity OPTIONAL,
 	targetIMSI					[4] IMSI,
 	targetMSISDN				[5] MSISDN OPTIONAL,
-	locationType				[6] LocationType, 
-	lCSPriority					[7] LCS-Priority OPTIONAL, 
+	locationType				[6] LocationType,
+	lCSPriority					[7] LCS-Priority OPTIONAL,
 	resultCode					[8] ResultCodeType OPTIONAL,
 	recordTimeStamp				[9] TimeStamp,
 	localSequenceNumber			[10] LocalSequenceNumber OPTIONAL,
@@ -92,11 +90,11 @@ LCSHGMTRecord	::= SET
 	recordType					[0] RecordType,
 	recordingEntity				[1] RecordingEntity,
 	lcsClientType				[2] LCSClientType OPTIONAL,
-	lcsClientIdentity			[3] LCSClientIdentity OPTIONAL, 
+	lcsClientIdentity			[3] LCSClientIdentity OPTIONAL,
 	targetIMSI					[4] IMSI,
 	targetMSISDN				[5] MSISDN OPTIONAL,
-	locationType				[6] LocationType, 
-	lCSPriority					[7] LCS-Priority OPTIONAL, 
+	locationType				[6] LocationType,
+	lCSPriority					[7] LCS-Priority OPTIONAL,
 	resultCode					[8] ResultCodeType OPTIONAL,
 	recordTimeStamp				[9] TimeStamp,
 	localSequenceNumber			[10] LocalSequenceNumber OPTIONAL,
@@ -111,11 +109,11 @@ LCSVGMTRecord	::= SET
 	recordType					[0] RecordType,
 	recordingEntity				[1] RecordingEntity,
 	lcsClientType				[2] LCSClientType OPTIONAL,
-	lcsClientIdentity			[3] LCSClientIdentity OPTIONAL, 
+	lcsClientIdentity			[3] LCSClientIdentity OPTIONAL,
 	targetIMSI					[4] IMSI,
 	targetMSISDN				[5] MSISDN OPTIONAL,
-	locationType				[6] LocationType, 
-	lCSPriority					[7] LCS-Priority OPTIONAL, 
+	locationType				[6] LocationType,
+	lCSPriority					[7] LCS-Priority OPTIONAL,
 	resultCode					[8] ResultCodeType OPTIONAL,
 	recordTimeStamp				[9] TimeStamp,
 	localSequenceNumber			[10] LocalSequenceNumber OPTIONAL,
@@ -128,7 +126,7 @@ LCSGNIRecord	::= SET
 	recordType					[0] RecordType,
 	recordingEntity				[1] RecordingEntity,
 	lcsClientType				[2] LCSClientType OPTIONAL,
-	lcsClientIdentity			[3] LCSClientIdentity OPTIONAL, 
+	lcsClientIdentity			[3] LCSClientIdentity OPTIONAL,
 	servedIMSI					[4] IMSI,
 	servedMSISDN				[5] MSISDN OPTIONAL,
 	servingEntity				[6] ServingEntity OPTIONAL,

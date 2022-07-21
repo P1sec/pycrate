@@ -1,0 +1,1502 @@
+CHFChargingDataTypes {itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) charging (5) chfChargingDataTypes (15) asn1Module (0) version1 (0)}
+DEFINITIONS IMPLICIT TAGS	::=
+
+BEGIN
+
+-- EXPORTS everything
+
+IMPORTS
+
+CallDuration,
+CauseForRecClosing,
+ChargingID,
+DataVolumeOctets,
+Diagnostics,
+EnhancedDiagnostics,
+DynamicAddressFlag,
+InvolvedParty,
+IPAddress,
+LocalSequenceNumber,
+ManagementExtensions,
+MessageClass,
+MessageReference,
+MSTimeZone,
+NodeAddress,
+PLMN-Id,
+PriorityType,
+RANNASCause,
+RecordType,
+ServiceSpecificInfo,
+SubscriberEquipmentNumber,
+SubscriptionID,
+ThreeGPPPSDataOffStatus,
+TimeStamp
+FROM GenericChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) genericChargingDataTypes (0) asn1Module (0) version2 (1)}
+
+AddressString
+FROM MAP-CommonDataTypes {itu-t identified-organization (4) etsi (0) mobileDomain (0) gsm-Network (1) modules (3) map-CommonDataTypes (18)  version18 (18) }
+
+ChargingCharacteristics,
+ChargingRuleBaseName,
+ChChSelectionMode,
+EventBasedChargingInformation,
+PresenceReportingAreaInfo,
+RatingGroupId,
+ServiceIdentifier
+FROM GPRSChargingDataTypes {itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) charging (5) gprsChargingDataTypes (2) asn1Module (0) version2 (1)}
+
+OriginatorInfo,
+RecipientInfo,
+SMMessageType,
+SMSResult,
+SMSStatus
+FROM SMSChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5)  smsChargingDataTypes (10) asn1Module (0) version2 (1)}
+
+APIDirection
+FROM ExposureFunctionAPIChargingDataTypes {itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) charging (5) exposureFunctionAPIChargingDataTypes (14) asn1Module (0) version2 (1)}
+
+
+;
+
+--
+--  CHF RECORDS
+--
+
+CHFRecord	::= CHOICE
+--
+-- Record values 200..201 are specific
+--
+{
+	chargingFunctionRecord			[200] ChargingRecord
+}
+
+ChargingRecord 	::= SET
+{
+	recordType								[0] RecordType,
+	recordingNetworkFunctionID				[1] NetworkFunctionName,
+	subscriberIdentifier						[2] SubscriptionID OPTIONAL,
+	nFunctionConsumerInformation				[3] NetworkFunctionInformation,
+	triggers									[4] SEQUENCE OF Trigger OPTIONAL,
+	listOfMultipleUnitUsage					[5] SEQUENCE OF MultipleUnitUsage OPTIONAL,
+	recordOpeningTime						[6] TimeStamp,
+	duration									[7] CallDuration,
+	recordSequenceNumber						[8] INTEGER OPTIONAL,
+	causeForRecClosing						[9] CauseForRecClosing,
+	diagnostics								[10] Diagnostics OPTIONAL,
+	localRecordSequenceNumber				[11] LocalSequenceNumber OPTIONAL,
+	recordExtensions							[12] ManagementExtensions OPTIONAL,
+	pDUSessionChargingInformation			[13] PDUSessionChargingInformation OPTIONAL,
+	roamingQBCInformation					[14] RoamingQBCInformation OPTIONAL,
+	sMSChargingInformation					[15] SMSChargingInformation OPTIONAL,
+	chargingSessionIdentifier				[16] ChargingSessionIdentifier OPTIONAL,
+	serviceSpecificationInformation			[17] OCTET STRING OPTIONAL,
+	exposureFunctionAPIInformation			[18] ExposureFunctionAPIInformation OPTIONAL,
+	registrationChargingInformation			[19] RegistrationChargingInformation OPTIONAL,
+	n2ConnectionChargingInformation			[20] N2ConnectionChargingInformation OPTIONAL,
+	locationReportingChargingInformation	[21] LocationReportingChargingInformation OPTIONAL,
+	incompleteCDRIndication					[22] IncompleteCDRIndication OPTIONAL,
+	tenantIdentifier							[23] TenantIdentifier OPTIONAL,
+	mnSConsumerIdentifier					[24] MnSConsumerIdentifier OPTIONAL,
+	nSMChargingInformation					[25] NSMChargingInformation OPTIONAL,
+	nSPAChargingInformation					[26] NSPAChargingInformation OPTIONAL,
+	chargingID								[27] ChargingID OPTIONAL
+
+}
+
+--
+-- PDU Session Charging Information
+--
+
+PDUSessionChargingInformation 	::= SET
+{
+	pDUSessionChargingID				[0] ChargingID,
+	userIdentifier					[1] InvolvedParty OPTIONAL,
+	userEquipmentInfo				[2] SubscriberEquipmentNumber OPTIONAL,
+	userLocationInformation			[3] UserLocationInformation OPTIONAL,
+	userRoamerInOut					[4] RoamerInOut OPTIONAL,
+	presenceReportingAreaInfo		[5]	PresenceReportingAreaInfo OPTIONAL,
+	pDUSessionId						[6] PDUSessionId,
+	networkSliceInstanceID			[7] SingleNSSAI OPTIONAL,
+	pDUType							[8] PDUSessionType OPTIONAL,
+	sSCMode							[9] SSCMode OPTIONAL,
+	sUPIPLMNIdentifier				[10] PLMN-Id OPTIONAL,
+	servingNetworkFunctionID			[11] SEQUENCE OF ServingNetworkFunctionID OPTIONAL,
+	rATType							[12] RATType OPTIONAL,
+	dataNetworkNameIdentifier		[13] DataNetworkNameIdentifier OPTIONAL,
+	pDUAddress						[14] PDUAddress OPTIONAL,
+	authorizedQoSInformation			[15] AuthorizedQoSInformation OPTIONAL,
+	uETimeZone 						[16] MSTimeZone OPTIONAL,
+	pDUSessionstartTime				[17] TimeStamp OPTIONAL,
+	pDUSessionstopTime				[18] TimeStamp OPTIONAL,
+	diagnostics						[19] Diagnostics OPTIONAL,
+	chargingCharacteristics			[20] ChargingCharacteristics OPTIONAL,
+	chChSelectionMode				[21] ChChSelectionMode OPTIONAL,
+	threeGPPPSDataOffStatus			[22] ThreeGPPPSDataOffStatus OPTIONAL,
+	rANSecondaryRATUsageReport 		[23] SEQUENCE OF NGRANSecondaryRATUsageReport OPTIONAL,
+	subscribedQoSInformation 		[24] SubscribedQoSInformation OPTIONAL,
+	authorizedSessionAMBR 			[25] SessionAMBR OPTIONAL,
+	subscribedSessionAMBR 			[26] SessionAMBR OPTIONAL,
+	servingCNPLMNID					[27] PLMN-Id OPTIONAL,
+	sUPIunauthenticatedFlag 			[28] NULL OPTIONAL,
+	dnnSelectionMode					[29] DNNSelectionMode OPTIONAL,
+	homeProvidedChargingID			[30] ChargingID OPTIONAL,
+	mAPDUNonThreeGPPUserLocationInfo[31] UserLocationInformation OPTIONAL,
+	mAPDUNonThreeGPPRATType			[32] RATType OPTIONAL,
+	mAPDUSessionInformation			[33] MAPDUSessionInformation OPTIONAL,
+	enhancedDiagnostics				[34] EnhancedDiagnostics5G OPTIONAL,
+	userLocationInformationASN1		[35] UserLocationInformationStructured OPTIONAL,
+	mAPDUNonThreeGPPUserLocationInfoASN1 [36] UserLocationInformationStructured OPTIONAL,
+	userLocationTime					[37] TimeStamp OPTIONAL,
+	mAPDUNonThreeGPPUserLocationTime	[38] TimeStamp OPTIONAL,
+	listOfPresenceReportingAreaInformation	[39] SEQUENCE OF PresenceReportingAreaInfo OPTIONAL
+--
+}
+
+--
+-- Roaming QBC Information
+
+--
+
+RoamingQBCInformation 	::= SET
+{
+	multipleQFIcontainer			[0] SEQUENCE OF MultipleQFIContainer OPTIONAL,
+	uPFID							[1] NetworkFunctionName OPTIONAL,
+	roamingChargingProfile			[2] RoamingChargingProfile OPTIONAL
+}
+
+
+--
+-- SMS Charging Information
+--
+
+SMSChargingInformation	::= SET
+{
+	originatorInfo				[1] OriginatorInfo OPTIONAL,
+	recipientInfos				[2] SEQUENCE OF RecipientInfo OPTIONAL,
+	userEquipmentInfo			[3] SubscriberEquipmentNumber OPTIONAL,
+	userLocationInformation		[4] UserLocationInformation OPTIONAL,
+	uETimeZone 					[5] MSTimeZone OPTIONAL,
+	rATType						[6] RATType OPTIONAL,
+	sMSCAddress					[7] AddressString OPTIONAL,
+	eventtimestamp				[8] TimeStamp,
+-- 9 to 19 is for future use
+	sMDataCodingScheme			[20] INTEGER OPTIONAL,
+	sMMessageType				[21] SMMessageType OPTIONAL,
+	sMReplyPathRequested			[22] SMReplyPathRequested OPTIONAL,
+	sMUserDataHeader				[23] OCTET STRING OPTIONAL,
+	sMSStatus					[24] SMSStatus OPTIONAL,
+	sMDischargeTime				[25] TimeStamp OPTIONAL,
+	sMTotalNumber 				[26] INTEGER OPTIONAL,
+	sMServiceType				[27] SMServiceType OPTIONAL,
+	sMSequenceNumber 			[28] INTEGER OPTIONAL,
+	sMSResult					[29] SMSResult OPTIONAL,
+	submissionTime				[30] TimeStamp OPTIONAL,
+	sMPriority					[31] PriorityType OPTIONAL,
+	messageReference				[32] MessageReference OPTIONAL,
+	messageSize					[33] INTEGER OPTIONAL,
+	messageClass					[34] MessageClass OPTIONAL,
+	sMdeliveryReportRequested	[35] SMdeliveryReportRequested OPTIONAL,
+	messageClassTokenText		[36] UTF8String OPTIONAL,
+	userRoamerInOut				[37] RoamerInOut OPTIONAL,
+	userLocationInformationASN1	[38] UserLocationInformationStructured OPTIONAL
+
+}
+
+
+--
+-- Exposure Function API Information corresponds to NEF API Charging information
+--
+
+ExposureFunctionAPIInformation	::= SET
+{
+	groupIdentifier					[0] UTF8String OPTIONAL,
+-- This UTF8String is based on the string specified in TS 29.571 [249]
+-- The string may also be based on AddressString.	aPIDirection					[1] APIDirection OPTIONAL,
+	aPITargetNetworkFunction		[2] NetworkFunctionInformation OPTIONAL,
+	aPIResultCode					[3] APIResultCode OPTIONAL,
+	aPIName							[4] IA5String,
+	aPIReference					[5] IA5String OPTIONAL,
+	aPIContent						[6] OCTET STRING OPTIONAL,
+	externalIndividualIdentifier	[7] InvolvedParty OPTIONAL,
+	externalGroupIdentifier			[8] ExternalGroupIdentifier OPTIONAL
+
+}
+
+
+--
+-- Registration Charging Information
+--
+
+RegistrationChargingInformation 	::= SET
+{
+	registrationMessagetype				[0] RegistrationMessageType,
+	userIdentifier						[1] InvolvedParty OPTIONAL,
+	userEquipmentInfo					[2] SubscriberEquipmentNumber OPTIONAL,
+	sUPIunauthenticatedFlag 				[3] NULL OPTIONAL,
+	userRoamerInOut						[4] RoamerInOut OPTIONAL,
+	userLocationInformation				[5] UserLocationInformation OPTIONAL,
+	userLocationInfoTime					[6] TimeStamp OPTIONAL, -- This field is not used
+-- user location info time is included under UserLocationInformation
+	uETimeZone 							[7] MSTimeZone OPTIONAL,
+	rATType								[8] RATType OPTIONAL,
+	mICOModeIndication					[9] MICOModeIndication OPTIONAL,
+	smsIndication						[10] SmsIndication OPTIONAL,
+	taiList								[11] SEQUENCE OF TAI OPTIONAL,
+	serviceAreaRestriction				[12] ServiceAreaRestriction OPTIONAL,
+	requestedNSSAI						[13] SEQUENCE OF SingleNSSAI OPTIONAL,
+	allowedNSSAI							[14] SEQUENCE OF SingleNSSAI OPTIONAL,
+	rejectedNSSAI						[15] SEQUENCE OF SingleNSSAI OPTIONAL,
+	pSCellInformation					[16] PSCellInformation OPTIONAL,
+	fiveGMMCapability					[17] FiveGMMCapability OPTIONAL,
+	nSSAIMapList							[18] SEQUENCE OF NSSAIMap OPTIONAL,
+	amfUeNgapId							[19] AmfUeNgapId OPTIONAL,
+	ranUeNgapId							[20] RanUeNgapId OPTIONAL,
+	ranNodeId							[21] GlobalRanNodeId OPTIONAL,
+	userLocationInformationASN1			[22] UserLocationInformationStructured OPTIONAL
+
+
+}
+
+--
+-- N2 connection charging Information
+--
+
+N2ConnectionChargingInformation 	::= SET
+{
+	n2ConnectionMessageType				[0] N2ConnectionMessageType,
+	userIdentifier						[1] InvolvedParty OPTIONAL,
+	userEquipmentInfo					[2] SubscriberEquipmentNumber OPTIONAL,
+	sUPIunauthenticatedFlag 				[3] NULL OPTIONAL,
+	userRoamerInOut						[4] RoamerInOut OPTIONAL,
+	userLocationInformation				[5] UserLocationInformation OPTIONAL,
+	userLocationInfoTime					[6] TimeStamp OPTIONAL, -- This field is not used
+-- user location info time is included under UserLocationInformation
+	uETimeZone 							[7] MSTimeZone OPTIONAL,
+	rATType								[8] RATType OPTIONAL,
+	ranUeNgapId							[9] RanUeNgapId OPTIONAL,
+	ranNodeId							[10] GlobalRanNodeId OPTIONAL,
+	restrictedRatList					[11] SEQUENCE OF RATType OPTIONAL,
+	forbiddenAreaList					[12] SEQUENCE OF Area OPTIONAL,
+	serviceAreaRestriction				[13] ServiceAreaRestriction OPTIONAL,
+	restrictedCnList						[14] SEQUENCE OF CoreNetworkType OPTIONAL,
+	allowedNSSAI							[15] SEQUENCE OF SingleNSSAI OPTIONAL,
+	rrcEstablishmentCause				[16] RrcEstablishmentCause OPTIONAL,
+	pSCellInformation					[17] PSCellInformation OPTIONAL,
+	amfUeNgapId							[18] AmfUeNgapId OPTIONAL,
+	userLocationInformationASN1			[19] UserLocationInformationStructured OPTIONAL
+
+
+}
+
+
+--
+-- Location reporting charging Information
+--
+
+
+LocationReportingChargingInformation 	::= SET
+{
+	locationReportingMessagetype			[0] LocationReportingMessageType,
+	userIdentifier						[1] InvolvedParty OPTIONAL,
+	userEquipmentInfo					[2] SubscriberEquipmentNumber OPTIONAL,
+	sUPIunauthenticatedFlag 				[3] NULL OPTIONAL,
+	userRoamerInOut						[4] RoamerInOut OPTIONAL,
+	userLocationInformation				[5] UserLocationInformation OPTIONAL,
+	userLocationInfoTime					[6] TimeStamp OPTIONAL, -- This field is not used
+-- user location info time is included under UserLocationInformation
+	uETimeZone 							[7] MSTimeZone OPTIONAL,
+	presenceReportingAreaInfo			[8]	PresenceReportingAreaInfo OPTIONAL,
+	rATType								[9] RATType OPTIONAL,
+	pSCellInformation					[10] PSCellInformation OPTIONAL,
+	userLocationInformationASN1			[11] UserLocationInformationStructured OPTIONAL,
+	listOfPresenceReportingAreaInformation	[39] SEQUENCE OF PresenceReportingAreaInfo OPTIONAL
+
+
+}
+
+
+--
+-- Network Slice Performance and Analytics charging Information
+--
+
+NSPAChargingInformation			::= SET
+{
+	singelNSSAI					[0] SingleNSSAI
+}
+
+--
+-- PDU Container Information
+--
+
+PDUContainerInformation 		::= SEQUENCE
+{
+	chargingRuleBaseName					[0] ChargingRuleBaseName OPTIONAL,
+	-- aFCorrelationInformation [1] is replaced by afChargingIdentifier [14]
+	timeOfFirstUsage						[2] TimeStamp OPTIONAL,
+	timeOfLastUsage							[3] TimeStamp OPTIONAL,
+	qoSInformation							[4] FiveGQoSInformation OPTIONAL,
+	userLocationInformation					[5] UserLocationInformation OPTIONAL,
+	presenceReportingAreaInfo				[6] PresenceReportingAreaInfo OPTIONAL,
+	rATType									[7] RATType OPTIONAL,
+	sponsorIdentity							[8] OCTET STRING OPTIONAL,
+	applicationServiceProviderIdentity		[9] OCTET STRING OPTIONAL,
+	servingNetworkFunctionID				[10] SEQUENCE OF ServingNetworkFunctionID OPTIONAL,
+	uETimeZone 								[11] MSTimeZone OPTIONAL,
+	threeGPPPSDataOffStatus					[12] ThreeGPPPSDataOffStatus OPTIONAL,
+	qoSCharacteristics						[13] QoSCharacteristics OPTIONAL,
+	afChargingIdentifier					[14] ChargingID OPTIONAL,
+	afChargingIdString						[15] AFChargingID OPTIONAL,
+	mAPDUSteeringFunctionality				[16] MAPDUSteeringFunctionality OPTIONAL,
+	mAPDUSteeringMode						[17] MAPDUSteeringMode OPTIONAL,
+	userLocationInformationASN1				[18] UserLocationInformationStructured OPTIONAL,
+	listOfPresenceReportingAreaInformation	[19] SEQUENCE OF PresenceReportingAreaInfo OPTIONAL
+
+
+}
+
+--
+-- NSM charging Information
+--
+--
+-- See TS 28.541 [254] for more information
+--
+
+
+NSMChargingInformation 	::= SET
+{
+	managementOperation						[0] ManagementOperation OPTIONAL,
+	iDnetworkSliceInstance					[1] OCTET STRING OPTIONAL,
+	listOfserviceProfileChargingInformation	[2] SEQUENCE OF ServiceProfileChargingInformation OPTIONAL,
+	managementOperationStatus				[3]	ManagementOperationStatus OPTIONAL,
+	operationalState							[4]	OperationalState OPTIONAL,
+	administrativeState						[5]	AdministrativeState OPTIONAL
+
+
+}
+
+
+
+--
+-- QFI Container Information
+--
+
+MultipleQFIContainer 		::= SEQUENCE
+{
+	qosFlowId								[0] QoSFlowId OPTIONAL,
+	triggers								[1] SEQUENCE OF Trigger OPTIONAL,
+	triggerTimeStamp						[2] TimeStamp OPTIONAL,
+	dataTotalVolume							[3] DataVolumeOctets OPTIONAL,
+	dataVolumeUplink						[4] DataVolumeOctets OPTIONAL,
+	dataVolumeDownlink						[5] DataVolumeOctets OPTIONAL,
+	localSequenceNumber						[6] LocalSequenceNumber OPTIONAL,
+	timeOfFirstUsage						[8] TimeStamp OPTIONAL,
+	timeOfLastUsage							[9] TimeStamp OPTIONAL,
+	qoSInformation							[10] FiveGQoSInformation OPTIONAL,
+	userLocationInformation					[11] UserLocationInformation OPTIONAL,
+	uETimeZone	 							[12] MSTimeZone OPTIONAL,
+	presenceReportingAreaInfo				[13] PresenceReportingAreaInfo OPTIONAL,
+	rATType									[14] RATType OPTIONAL,
+	reportTime								[15] TimeStamp,
+	servingNetworkFunctionID				[16] SEQUENCE OF ServingNetworkFunctionID OPTIONAL,
+	threeGPPPSDataOffStatus					[17] ThreeGPPPSDataOffStatus OPTIONAL,
+	threeGPPChargingID						[18] ChargingID OPTIONAL,
+	diagnostics						[19] Diagnostics OPTIONAL,
+	extensionDiagnostics					[20] EnhancedDiagnostics OPTIONAL,
+	qoSCharacteristics						[21] QoSCharacteristics OPTIONAL,
+	time									[22] CallDuration OPTIONAL,
+	userLocationInformationASN1				[23] UserLocationInformationStructured OPTIONAL,
+	listOfPresenceReportingAreaInformation	[39] SEQUENCE OF PresenceReportingAreaInfo OPTIONAL
+
+
+}
+
+--
+-- CHF CHARGING TYPES
+--
+--
+-- A
+--
+
+
+AFChargingID	::= UTF8String
+--
+-- See 3GPP TS 29.571 [249] for details.
+--
+
+AgeOfLocationInformation 	::= INTEGER
+
+
+AdministrativeState 	::= ENUMERATED
+{
+	lOCKED		 (0),
+	uNLOCKED 	 (1),
+	sHUTTINGDOWN (2)
+
+}
+
+AccessType	::= ENUMERATED
+{
+	threeGPPAccess					(0),
+	nonThreeGPPAccess				(1)
+
+}
+
+
+AllocationRetentionPriority	::= SEQUENCE
+{
+	priorityLevel 			[1] INTEGER,
+	preemptionCapability	[2] PreemptionCapability,
+	preemptionVulnerability	[3] PreemptionVulnerability
+}
+
+AMFID	::= OCTET STRING (SIZE(3..6))
+-- See subclause 2.10.1 of 3GPP TS 23.003 [7] for encoding.
+-- Any byte following the 3 first shall be set to "F"
+
+AmfUeNgapId	::= INTEGER
+
+APIResultCode	::= INTEGER
+--
+-- See specific API for more information
+--
+Area	::= SEQUENCE
+{
+	tacs 		[0] SEQUENCE OF TAC OPTIONAL,
+	areaCode	[1] OCTET STRING OPTIONAL
+
+}
+
+
+ATSSSCapability	::= ENUMERATED
+{
+	aTSSS-LL					(0),
+	mPTCP-ATSS-LL				(1),
+	mPTCP-ATSS-LL-ASModeUL		(2),
+	mPTCP-ATSS-LL-ExSDModeUL	(3),
+ 	mPTCP-ATSS-LL-ASModeDLUL	(4)
+
+}
+
+
+AuthorizedQoSInformation	::= SEQUENCE
+--
+-- See TS 32.291 [58] for more information
+--
+{
+	fiveQi				[1] INTEGER OPTIONAL,
+	aRP					[2] AllocationRetentionPriority OPTIONAL,
+	priorityLevel 		[3] INTEGER OPTIONAL,
+	averWindow			[4] INTEGER OPTIONAL,
+	maxDataBurstVol		[5] INTEGER OPTIONAL
+}
+
+--
+-- B
+--
+
+Bitrate	::= OCTET STRING
+--
+--  See 3GPP TS 29.571 [249] Bitrate data type.
+--
+
+--
+-- C
+--
+
+
+ChargingSessionIdentifier	::= OCTET STRING
+-- See 3GPP TS 32.290 [57] for details.
+
+CoreNetworkType 		::= ENUMERATED
+{
+	fiveGC 		(0),
+	ePC			(1)
+}
+
+
+--
+-- D
+--
+
+DataNetworkNameIdentifier	::= IA5String (SIZE(1..63))
+--
+-- Network Identifier part of DNN in dot representation.
+-- For example, if the complete DNN is 'apn1a.apn1b.apn1c.mnc022.mcc111.gprs'
+-- The Identifier is 'apn1a.apn1b.apn1c' and is presented in this form in the CDR.
+--
+
+DelayToleranceIndicator   ::= ENUMERATED
+{
+	dTSupported 			(0),
+	dTNotSupported			(1)
+}
+
+DNNSelectionMode	::= ENUMERATED
+--
+-- See Information Elements TS 29.502 [250] for more information
+--
+{
+	uEorNetworkProvidedSubscriptionVerified				(0),
+	uEProvidedSubscriptionNotVerified					(1),
+	networkProvidedSubscriptionNotVerified				(2)
+}
+
+--
+-- E
+--
+
+Ecgi	::= SEQUENCE
+{
+	plmnId					[0] PLMN-Id,
+	eutraCellId			[1] EutraCellId,
+	nid						[2] Nid OPTIONAL
+}
+--
+-- See 3GPP TS 29.571 [249] for details
+--
+
+ENbId		::= UTF8String
+--
+-- See 3GPP TS 29.571 [249] for details
+--
+ExternalGroupIdentifier		::= UTF8String
+--
+-- See 3GPP TS 29.571 [249] for details
+--
+
+EutraCellId		::= UTF8String
+--
+-- See 3GPP TS 29.571 [249] for details
+--
+
+EutraLocation	::= SEQUENCE
+{
+	tai							[0] TAI OPTIONAL,
+	ecgi						[1] Ecgi OPTIONAL,
+	ageOfLocationInformation		[3] AgeOfLocationInformation OPTIONAL,
+	ueLocationTimestamp			[4] TimeStamp OPTIONAL,
+	geographicalInformation		[5] GeographicalInformation	OPTIONAL,
+	geodeticInformation			[6] GeodeticInformation OPTIONAL,
+	globalNgenbId				[7] GlobalRanNodeId OPTIONAL,
+	globalENbId					[8] GlobalRanNodeId OPTIONAL
+
+}
+
+
+
+
+
+EnhancedDiagnostics5G					::= SEQUENCE
+{
+	rANNASRelCause						[0] SEQUENCE OF RANNASRelCause
+}
+
+
+
+--
+-- F
+--
+
+FiveGMMCapability	::= OCTET STRING
+--
+-- See 3GPP TS 29.571 [249] for details
+--
+
+FiveGMmCause	::= INTEGER
+--
+-- See 3GPP TS 29.571 [249] for details
+--
+
+
+
+FiveGQoSInformation	::= SEQUENCE
+--
+-- See TS 32.291 [58] for more information
+--
+{
+	fiveQi					[1] INTEGER OPTIONAL,
+	aRP						[2] AllocationRetentionPriority OPTIONAL,
+	qoSNotificationControl	[3] BOOLEAN OPTIONAL,
+	reflectiveQos			[4] BOOLEAN OPTIONAL,
+	maxbitrateUL				[5] Bitrate OPTIONAL,
+	maxbitrateDL				[6] Bitrate OPTIONAL,
+	guaranteedbitrateUL		[7] Bitrate OPTIONAL,
+	guaranteedbitrateDL		[8] Bitrate OPTIONAL,
+	priorityLevel 			[9] INTEGER OPTIONAL,
+	averWindow				[10] INTEGER OPTIONAL,
+	maxDataBurstVol			[11] INTEGER OPTIONAL,
+	maxPacketLossRateDL 		[12] INTEGER OPTIONAL,
+	maxPacketLossRateUL 		[13] INTEGER OPTIONAL
+}
+
+FiveGSmCause	::= INTEGER
+--
+-- See 3GPP TS 29.571 [249] for details
+--
+
+
+--
+-- G
+--
+
+GCI		::= UTF8String
+--
+-- See 3GPP TS 29.571 [249] for details
+--
+
+
+GeodeticInformation 	::= UTF8String
+--
+-- See 3GPP TS 29.571 [249] for details
+--
+
+
+GeographicalInformation ::= UTF8String
+--
+-- See 3GPP TS 29.571 [249] for details
+--
+
+GLI		::= UTF8String
+--
+-- See 3GPP TS 29.571 [249] for details
+--
+
+
+GlobalRanNodeId		::= SEQUENCE
+{
+	pLMNId		[0] PLMN-Id OPTIONAL,
+	n3IwfId		[1] N3IwFId OPTIONAL,
+	gNbId		[2] GNbId OPTIONAL,
+	ngeNbId		[3] NgeNbId OPTIONAL,
+	wagfId		[4] WAgfId OPTIONAL,
+	tngfId		[5] TngfId OPTIONAL,
+	nid			[6] Nid OPTIONAL,
+	eNbId		[7] ENbId OPTIONAL
+
+}
+
+
+GNbId		::= SEQUENCE
+{
+	bitLength	[0] INTEGER,
+	gNbValue	[1] IA5String (SIZE(10))
+
+}
+
+--
+-- H
+--
+
+HFCNodeId		::= UTF8String
+--
+-- See 3GPP TS 29.571 [249] for details
+--
+
+--
+-- I
+--
+
+IncompleteCDRIndication	::= SEQUENCE
+-- The values are TRUE if the corresponding message was lost, FALSE if it is not lost
+-- and not included if the status is unknown
+{
+	initialLost		[0] BOOLEAN OPTIONAL,	-- Initial was lost
+	updateLost		[1] BOOLEAN OPTIONAL,	-- An Update was lost,
+	terminationLost	[2] BOOLEAN OPTIONAL	-- Termination was lost
+}
+
+--
+-- L
+--
+
+LineType		::= ENUMERATED
+{
+	dSL 	(0),
+	pON		(1)
+
+}
+
+LocationReportingMessageType		::= INTEGER
+
+
+--
+-- M
+--
+
+ManagementOperation 	::= ENUMERATED
+{
+	createMOI 			(0),
+	modifyMOIAttributes	(1),
+	deleteMOI			(2)
+
+}
+
+ManagementOperationStatus 	::= ENUMERATED
+{
+	oPERATION-SUCCEEDED	(0),
+	oPERATION-FAILED	(1)
+
+}
+
+MnSConsumerIdentifier		::= OCTET STRING
+
+
+MAPDUSessionIndicator	::= ENUMERATED
+{
+	mAPDURequest 					(0),
+	mAPDUNetworkUpgradeAllowed		(1)
+
+}
+
+
+MAPDUSessionInformation	::= SEQUENCE
+{
+	mAPDUSessionIndicator			[0] MAPDUSessionIndicator OPTIONAL,
+	aTSSSCapability					[1] ATSSSCapability OPTIONAL
+
+}
+
+
+
+MAPDUSteeringFunctionality	::= ENUMERATED
+{
+	mPTCP 		(0),
+	aTSSSLL		(1)
+
+}
+
+
+MAPDUSteeringMode	::= SEQUENCE
+{
+	steerModeValue			[0] SteerModeValue OPTIONAL,
+	active					[1] AccessType OPTIONAL,
+	standby					[2] AccessType OPTIONAL,
+	threegLoad				[3] INTEGER OPTIONAL,
+	prioAcc					[4] AccessType OPTIONAL
+
+}
+
+
+MICOModeIndication 		::= ENUMERATED
+{
+	mICOMode 			(0),
+	noMICOMode			(1)
+}
+
+MobilityLevel	::= ENUMERATED
+{
+	stationary			(0),
+	nomadic				(1),
+	restrictedMobility	(2),
+	fullyMobility		(3)
+
+}
+
+
+MultipleUnitUsage 		::= SEQUENCE
+{
+	ratingGroup							[0] RatingGroupId,
+	usedUnitContainers					[1] SEQUENCE OF UsedUnitContainer OPTIONAL,
+	uPFID								[2] NetworkFunctionName OPTIONAL,
+	multihomedPDUAddress				[3] PDUAddress OPTIONAL
+}
+
+--
+-- N
+--
+N2ConnectionMessageType		::= INTEGER
+
+N3IwFId		::= IA5String (SIZE(1..16))
+--
+-- See 3GPP TS 29.571 [249] for details.
+--
+
+N3gaLocation	::= SEQUENCE
+{
+	n3gppTai			[0] TAI OPTIONAL,
+	n3IwfId			[1] N3IwFId OPTIONAL,
+	ueIpv4Addr		[2] IPAddress OPTIONAL,
+	ueIpv6Addr		[3] IPAddress OPTIONAL,
+	portNumber		[4] INTEGER	OPTIONAL,
+	tnapId			[5] TNAPId	OPTIONAL,
+	twapId			[6] TWAPId	OPTIONAL,
+ 	hfcNodeId		[7] HFCNodeId OPTIONAL,
+	w5gbanLineType	[8] LineType OPTIONAL,
+	gli				[9] GLI OPTIONAL,
+	gci				[10] GCI OPTIONAL
+
+}
+
+
+Ncgi	::= SEQUENCE
+{
+	plmnId					[0] PLMN-Id,
+	nrCellId			[1] NrCellId,
+	nid						[2] Nid OPTIONAL
+}
+
+NrLocation	::= SEQUENCE
+{
+	tai							[0] TAI OPTIONAL,
+	ncgi						[1] Ncgi OPTIONAL,
+	ageOfLocationInformation		[2] AgeOfLocationInformation OPTIONAL,
+	ueLocationTimestamp			[3] TimeStamp OPTIONAL,
+	geographicalInformation		[4] GeographicalInformation	OPTIONAL,
+	geodeticInformation			[5] GeodeticInformation OPTIONAL,
+	globalGnbId					[6] GlobalRanNodeId OPTIONAL
+
+}
+
+
+--
+-- See 3GPP TS 29.571 [249] for details
+--
+
+
+NetworkAreaInfo	::= SEQUENCE
+{
+	ecgis				[0] SEQUENCE OF Ecgi OPTIONAL,
+	ncgis				[1] SEQUENCE OF Ncgi OPTIONAL,
+	gRanNodeIds			[2] SEQUENCE OF GlobalRanNodeId OPTIONAL,
+	tais				[3] SEQUENCE OF TAI OPTIONAL
+}
+
+
+NetworkFunctionInformation	::= SEQUENCE
+{
+	networkFunctionality					[0] NetworkFunctionality,
+	networkFunctionName					[1] NetworkFunctionName OPTIONAL,
+	networkFunctionIPv4Address			[2] IPAddress OPTIONAL,
+	networkFunctionPLMNIdentifier		[3] PLMN-Id OPTIONAL,
+	networkFunctionIPv6Address			[4] IPAddress OPTIONAL,
+	networkFunctionFQDN					[5] NodeAddress OPTIONAL
+
+}
+
+NetworkFunctionName	::= IA5String (SIZE(1..36))
+-- Shall be a Universally Unique Identifier (UUID) version 4, as described in IETF RFC 4122 [410]
+
+NetworkFunctionality	::= ENUMERATED
+{
+	cHF				(0),
+	-- CHF  may only to be used in failure cases
+	sMF				(1),
+	aMF				(2),
+	sMSF			(3),
+sGW			(4),
+-- SGW is only applicable for interworking with EPC scenario
+-- when UE is connected to P-GW+SMF via EPC
+	iSMF			(5),
+	ePDG			(6),
+-- ePDG is only applicable for interworking with EPC scenario
+-- when UE is connected to P-GW+SMF via EPC/ePDG
+	cEF				(7),
+	nEF			(8),
+	pGWCSMF			(9),
+	mnS-Producer 	(10)
+
+
+}
+
+NgApCause	::= SEQUENCE
+-- See 3GPP TS 29.571 [249] for details.
+{
+	group			[0] INTEGER,
+	value			[1] INTEGER
+}
+
+NgeNbId		::= IA5String (SIZE(1..21))
+--
+-- See 3GPP TS 29.571 [249] for details.
+--
+
+NGRANSecondaryRATType	::= OCTET STRING
+--
+-- "NR" or "EUTRA"
+--
+
+
+NGRANSecondaryRATUsageReport	::= SEQUENCE
+{
+	nGRANSecondaryRATType			[0] NGRANSecondaryRATType OPTIONAL,
+	qosFlowsUsageReports			[1] SEQUENCE OF QosFlowsUsageReport OPTIONAL
+}
+
+Nid		::= UTF8String--
+-- See 3GPP TS 29.571 [249] for details.
+--
+
+NrCellId		::= UTF8String
+--
+-- See 3GPP TS 29.571 [249] for details.
+--
+
+
+NsiLoadLevelInfo		::= SEQUENCE
+--
+-- See 3GPP TS 29.520 [233] for details
+--
+{
+	loadLevelInformation				[0] INTEGER OPTIONAL,
+	snssai								[1] SingleNSSAI OPTIONAL,
+	nsiId								[2] OCTET STRING OPTIONAL
+}
+
+NSPAContainerInformation		::= SEQUENCE
+{
+	latency								[0] INTEGER OPTIONAL,
+	throughput							[1] Throughput OPTIONAL,
+	maximumPacketLossRate				[3] UTF8String OPTIONAL,
+	serviceExperienceStatisticsData		[4] ServiceExperienceInfo OPTIONAL,
+	numberOfPDUSessions					[5] INTEGER OPTIONAL,
+	numberOfRegisteredSubscribers		[6] INTEGER OPTIONAL,
+	loadLevel							[7] NsiLoadLevelInfo OPTIONAL
+}
+
+NSSAIMap		::= SEQUENCE
+{
+	servingSnssai						[0] SingleNSSAI,
+	homeSnssai							[1] SingleNSSAI
+
+}
+
+
+--
+-- O
+--
+
+
+OperationalState 	::= ENUMERATED
+{
+	eNABLED	(0),
+	dISABLED(1)
+
+}
+
+
+--
+-- P
+--
+
+
+PartialRecordMethod	::= ENUMERATED
+{
+	default			(0),
+	individual		(1)
+}
+
+PDUAddress 	::= SEQUENCE
+{
+	pDUIPv4Address				[0] IPAddress OPTIONAL,
+	pDUIPv6AddresswithPrefix		[1] IPAddress OPTIONAL,
+	iPV4dynamicAddressFlag		[2] DynamicAddressFlag OPTIONAL,
+	iPV6dynamicPrefixFlag		[3] DynamicAddressFlag OPTIONAL,
+	additionalPDUIPv6Prefixes	[4]	SEQUENCE OF IPAddress OPTIONAL
+}
+
+PDUSessionId 		::= INTEGER (0..255)
+--
+-- See 3GPP TS 29.571 [249] for details
+--
+
+PDUSessionType		::= ENUMERATED
+{
+	iPv4v6			(0),
+	iPv4			(1),
+	iPv6			(2),
+	unstructured	(3),
+	ethernet		(4)
+}
+-- See 3GPP TS 29.571 [249] for details.
+
+
+PreemptionCapability		::= ENUMERATED
+{
+	nOT-PREEMPT			(0),
+	mAY-PREEMPT			(1)
+}
+
+PreemptionVulnerability		::= ENUMERATED
+{
+	nOT-PREEMPTABLE		(0),
+	pREEMPTABLE			(1)
+}
+
+PSCellInformation	::= SEQUENCE
+{
+	nRcgi					[0] Ncgi OPTIONAL,
+	ecgi					[1] Ecgi OPTIONAL
+
+}
+
+--
+-- Q
+--
+
+QoSCharacteristics	::= OCTET STRING
+--
+-- This data is converted from JSON format of the QoSCharacteristics as described in TS 29.512
+-- [251].
+--
+
+QoSFlowId		::= INTEGER
+
+QosFlowsUsageReport		::= SEQUENCE
+{
+	qosFlowId						[0] QoSFlowId OPTIONAL,
+	startTime						[1] TimeStamp,
+	endTime							[2] TimeStamp,
+	dataVolumeDownlink				[3] DataVolumeOctets,
+	dataVolumeUplink					[4] DataVolumeOctets
+}
+QuotaManagementIndicator	::= ENUMERATED
+{
+	onlineCharging				(0),
+	offlineCharging				(1),
+	quotaManagementSuspended	(2)
+}
+
+
+--
+-- R
+--
+
+RanUeNgapId	::= INTEGER
+
+
+RANNASRelCause 		::= SEQUENCE
+-- Mode details are described in TS 29.512[251].
+{
+	ngApCause		[0] NgApCause OPTIONAL,
+	fivegMmCause	[1] FiveGMmCause OPTIONAL,
+	fivegSmCause	[2] FiveGSmCause OPTIONAL,
+	epsCause		[3] RANNASCause OPTIONAL
+}
+
+RatingIndicator	::= BOOLEAN
+-- Included if the units have been rated.
+
+RATType		::= INTEGER
+--
+-- This integer is based on the RatType specified in TS 29.571 [249]
+-- with 3GPP RAT Type specified in TS 29.061 [216] added for backwards compatibility.
+--
+{
+-- 0 reserved
+-- 1 reserved for uTRA
+-- 2 reserved for gERA
+	wLAN			(3),
+-- 4 reserved for GAN
+-- 5 reserved for HSPA Evolution
+	eUTRAN			(6),
+	virtual			(7),
+-- 8 reserved for nBIoT
+-- 9 reserved for lTEM
+	nR				(51),
+-- 51 is used for NG-RAN
+	wIRELINE		(55),
+	wIRELINE-CABLE	(56),
+	wIRELINE-BBF	(57),
+	tRUSTED-N3GA	(65)
+-- 101 reserved for IEEE 802.16e
+-- 102 reserved for 3GPP2 eHRPD
+-- 103 reserved for 3GPP2 HRPD
+-- 104 reserved for 3GPP2 1xRTT
+-- 105 reserved for 3GPP2 UMB
+}
+
+RegistrationMessageType		::= ENUMERATED
+{
+	initial			(0),
+	mobility		(1),
+	periodic		(2),
+	emergency		(3),
+	deregistration	(4)
+}
+
+RestrictionType		::= ENUMERATED
+{
+	allowedAreas	(0),
+	notAllowedAreas	(1)
+}
+
+
+RoamingChargingProfile 		::= SEQUENCE
+{
+	roamingTriggers			[0] SEQUENCE OF RoamingTrigger OPTIONAL,
+	partialRecordMethod		[1] PartialRecordMethod OPTIONAL
+}
+
+RoamerInOut	::= ENUMERATED
+{
+	roamerInBound		(0),
+	roamerOutBound		(1)
+}
+
+RoamingTrigger 		::= SEQUENCE
+{
+	trigger					[0] SMFTrigger OPTIONAL,
+	triggerCategory			[1] TriggerCategory	 OPTIONAL,
+	timeLimit				[2] CallDuration OPTIONAL,
+	volumeLimit				[3] DataVolumeOctets OPTIONAL,
+	maxNbChargingConditions	[4] INTEGER OPTIONAL
+}
+
+RrcEstablishmentCause	::= OCTET STRING
+
+
+
+
+--
+-- S
+--
+
+ServiceAreaRestriction	::= SEQUENCE
+{
+	restrictionType					[0] RestrictionType OPTIONAL,
+	areas							[1] SEQUENCE OF Area OPTIONAL,
+	maxNumOfTAs						[2] INTEGER OPTIONAL,
+	maxNumOfTAsForNotAllowedAreas	[3] INTEGER OPTIONAL
+
+}
+-- See 3GPP TS 29.571 [249] for details.
+
+ServiceExperienceInfo	::= SEQUENCE
+--
+-- See 3GPP TS 29.520 [233] for details
+--
+{
+	svcExprc						[0] SvcExperience OPTIONAL,
+	svcExprcVariance				[1] INTEGER OPTIONAL,
+	snssai						[2] SingleNSSAI OPTIONAL,
+	appId						[3] OCTET STRING OPTIONAL,
+	confidence					[4] INTEGER OPTIONAL,
+	dnn							[5] DataNetworkNameIdentifier OPTIONAL,
+	networkArea					[6] NetworkAreaInfo OPTIONAL,
+	nsiId						[7] OCTET STRING OPTIONAL,
+	ratio						[8] INTEGER OPTIONAL
+}
+
+ServiceProfileChargingInformation 	::= SET
+{
+--
+-- attributes of the service profile: see TS 28.541 [254]
+--
+	serviceProfileIdentifier				[0] OCTET STRING OPTIONAL,
+	sNSSAIList							[1] SEQUENCE OF SingleNSSAI OPTIONAL,
+	sST			 						[2] SliceServiceType OPTIONAL,
+	latency								[3] INTEGER OPTIONAL,
+	availability							[4]	INTEGER OPTIONAL,
+	resourceSharingLevel					[5] SharingLevel OPTIONAL,
+	jitter								[6]	INTEGER OPTIONAL,
+	reliability							[7] OCTET STRING OPTIONAL,
+	maxNumberofUEs 						[8] INTEGER OPTIONAL,
+	coverageArea 						[9] OCTET STRING OPTIONAL,
+	uEMobilityLevel						[10] MobilityLevel OPTIONAL,
+	delayToleranceIndicator 				[11] DelayToleranceIndicator OPTIONAL,
+	dLThroughtputPerSlice				[12] Throughput OPTIONAL,
+	dLThroughtputPerUE					[13] Throughput OPTIONAL,
+	uLThroughtputPerSlice				[14] Throughput OPTIONAL,
+	uLThroughtputPerUE					[15] Throughput OPTIONAL,
+	maxNumberofPDUsessions 				[16] INTEGER OPTIONAL,
+	kPIsMonitoringList 					[17] OCTET STRING OPTIONAL,
+	supportedAccessTechnology			[18] INTEGER OPTIONAL,
+	v2XCommunicationMode 				[19] V2XCommunicationModeIndicator OPTIONAL,
+	addServiceProfileChargingInfo		[100] OCTET STRING OPTIONAL
+
+}
+
+ServingNetworkFunctionID	::= SEQUENCE
+{
+	servingNetworkFunctionInformation	[0] NetworkFunctionInformation,
+	aMFIdentifier						[1] AMFID OPTIONAL
+
+}
+
+SessionAMBR	::= SEQUENCE
+{
+	ambrUL				[1] Bitrate,
+	ambrDL				[2] Bitrate
+}
+
+SharingLevel	::= ENUMERATED
+{
+	sHARED			(0),
+	nON-SHARED		(1)
+
+}
+
+
+SingleNSSAI	::= SEQUENCE
+-- See S-NSSAI subclause 28.4.2 of TS 23.003 [200] for encoding.
+{
+	sST			[0] SliceServiceType,
+	sD 			[1] SliceDifferentiator OPTIONAL
+}
+
+SliceServiceType ::= INTEGER (0..255)
+--
+-- See subclause 28.4.2 TS 23.003 [200]
+--
+
+SliceDifferentiator		::= OCTET STRING (SIZE(3))
+--
+-- See subclause 28.4.2 TS 23.003 [200]
+--
+
+
+SMdeliveryReportRequested ::= ENUMERATED
+{
+	yes		(0),
+	no		(1)
+}
+
+SMFTrigger				::= INTEGER
+{
+	startOfPDUSession							(1),
+	startOfServiceDataFlowNoSession				(2),
+-- Change of Charging conditions
+	qoSChange									(100),
+	userLocationChange							(101),
+	servingNodeChange							(102),
+	presenceReportingAreaChange					(103),
+	threeGPPPSDataOffStatusChange				(104),
+	tariffTimeChange							(105),
+	uETimeZoneChange							(106),
+	pLMNChange									(107),
+	rATTypeChange								(108),
+	sessionAMBRChange							(109),
+	additionOfUPF								(110),
+	removalOfUPF 								(111),
+	insertionOfISMF								(112),
+	removalOfISMF								(113),
+	changeOfISMF								(114),
+	gFBRGuaranteedStatusChange					(115),
+	additionOfAccess							(116),
+	removalOfAccess 							(117),
+-- Limit per PDU session
+	pDUSessionExpiryDataTimeLimit				(200),
+	pDUSessionExpiryDataVolumeLimit				(201),
+	pDUSessionExpiryDataEventLimit				(202),
+	pDUSessionExpiryChargingConditionChanges	(203),
+-- Limit per Rating group
+	ratingGroupDataTimeLimit					(300),
+	ratingGroupDataVolumeLimit					(301),
+	ratingGroupDataEventLimit					(302),
+-- Quota management
+	timeThresholdReached						(400),
+	volumeThresholdReached						(401),
+	unitThresholdReached						(402),
+	timeQuotaExhausted							(403),
+	volumeQuotaExhausted						(404),
+	unitQuotaExhausted							(405),
+	expiryOfQuotaValidityTime					(406),
+	reAuthorizationRequest						(407),
+	startOfServiceDataFlowNoValidQuota			(408),
+	otherQuotaType								(409),
+	expiryOfQuotaHoldingTime					(410),
+	startOfSDFAdditionalAccessNoValidQuota		(411),
+-- Others
+	terminationOfServiceDataFlow				(500),
+	managementIntervention						(501),
+	unitCountInactivityTime						(502),
+	endOfPDUSession								(503),
+	cHFResponseWithSessionTermination			(504),
+	cHFAbortRequest								(505),
+	abnormalRelease								(506),
+	notProvidedBySMF							(507), -- used if not provided by SMF
+-- Limit per QoS Flow
+	qoSFlowExpiryDataTimeLimit					(600),
+	qoSFlowExpiryDataVolumeLimit				(601),
+-- interworking with EPC
+	eCGIChange									(700),
+	tAIChange									(701),
+	handoverCancel								(702),
+	handoverStart								(703),
+	handoverComplete							(704)
+
+}
+-- See TS 32.255 [15] for details.
+
+SMReplyPathRequested	::= ENUMERATED
+{
+	noReplyPathSet 			(0),
+	replyPathSet			(1)
+}
+
+SMServiceType 	::= INTEGER
+{
+-- 0 to 10 VAS4SMS Short Message, see TS TS 22.142 [x] for details
+	contentProcessing					(0),
+	forwarding							(1),
+	forwardingMultipleSubscriptions		(2),
+	filtering 							(3),
+	receipt								(4),
+	networkStorage						(5),
+	toMultipleDestinations				(6),
+	virtualPrivateNetwork				(7),
+	autoreply							(8),
+	personalSignature					(9),
+	deferredDelivery					(10)
+-- 11 to 99	Reserved for 3GPP defined SM services
+-- 100 to 199 Vendor specific SM services
+}
+
+SmsIndication   ::= ENUMERATED
+{
+	sMSSupported 			(0),
+	sMSNotSupported			(1)
+}
+
+
+
+SSCMode	::= INTEGER
+{
+	sSCMode1				(1),
+	sSCMode2				(2),
+	sSCMode3				(3)
+}
+-- See 3GPP TS 23.501 [247] for details.
+
+SteerModeValue	::= ENUMERATED
+{
+	activeStandby 		(0),
+	loadBalancing		(1),
+	smallestDelay 		(2),
+	priorityBased 		(3)
+
+}
+
+
+SubscribedQoSInformation	::= SEQUENCE
+--
+-- See TS 32.291 [58] for more information
+--
+{
+	fiveQi				[1] INTEGER OPTIONAL,
+	aRP					[2] AllocationRetentionPriority OPTIONAL,
+	priorityLevel 		[3] INTEGER OPTIONAL
+}
+
+
+SvcExperience 	::= SEQUENCE
+{
+	mos					[0] INTEGER OPTIONAL,
+	upperRange			[1] INTEGER OPTIONAL,
+	lowerRange			[2] INTEGER OPTIONAL
+}
+
+
+--
+-- T
+--
+
+
+TAC			::= OCTET STRING (SIZE(3))
+
+TAI	::= SEQUENCE
+{
+	pLMNId		[0] PLMN-Id,
+	tac			[1] TAC
+
+}
+
+TenantIdentifier			::= OCTET STRING
+
+
+Throughput	::= SEQUENCE
+{
+	guaranteedThpt			[0] Bitrate,
+	maximumThpt				[1] Bitrate
+}
+
+TNAPId		::= UTF8String
+--
+-- See 3GPP TS 29.571 [249] for details
+--
+
+TngfId		::= UTF8String
+--
+-- See 3GPP TS 29.571 [249] for details
+--
+
+
+Trigger	::= CHOICE
+{
+	sMFTrigger		[0] SMFTrigger
+}
+
+TriggerCategory	::= ENUMERATED
+{
+	immediateReport		(0),
+	deferredReport		(1)
+}
+
+TWAPId		::= UTF8String
+--
+-- See 3GPP TS 29.571 [249] for details
+--
+
+--
+-- U
+--
+
+UsedUnitContainer 		::= SEQUENCE
+{
+	serviceIdentifier					[0] ServiceIdentifier OPTIONAL,
+	time								[1] CallDuration OPTIONAL,
+	triggers								[2] SEQUENCE OF Trigger OPTIONAL,
+	triggerTimeStamp						[3] TimeStamp OPTIONAL,
+	dataTotalVolume						[4] DataVolumeOctets OPTIONAL,
+	dataVolumeUplink						[5] DataVolumeOctets OPTIONAL,
+	dataVolumeDownlink					[6] DataVolumeOctets OPTIONAL,
+	serviceSpecificUnits					[7] INTEGER OPTIONAL,
+	eventTimeStamp						[8] TimeStamp OPTIONAL,
+	localSequenceNumber					[9] LocalSequenceNumber OPTIONAL,
+	ratingIndicator						[10] RatingIndicator OPTIONAL,
+	pDUContainerInformation				[11] PDUContainerInformation OPTIONAL,
+	quotaManagementIndicator				[12] BOOLEAN OPTIONAL,
+	quotaManagementIndicatorExt			[13] QuotaManagementIndicator OPTIONAL,
+	nSPAContainerInformation				[14] NSPAContainerInformation OPTIONAL,
+	eventTimeStampExt					[15] SEQUENCE OF TimeStamp OPTIONAL
+}
+
+--
+-- UserLocationInformationStructured is an alternative ASN.1 format to UserLocationInformation
+--
+
+UserLocationInformation	::= OCTET STRING
+
+UserLocationInformationStructured 	::= SEQUENCE
+{
+	eutraLocation				[0] EutraLocation OPTIONAL,
+	nrLocation					[1] NrLocation OPTIONAL,
+	n3gaLocation					[2] N3gaLocation OPTIONAL
+
+}
+
+
+
+--
+-- This data is converted from JSON format of the User Location as described in TS 29.571 [249].
+--
+
+--
+-- V
+--
+
+V2XCommunicationModeIndicator   ::= ENUMERATED
+{
+	v2XComSupported 			(0),
+	v2XComNotSupported			(1)
+}
+
+--
+-- W
+--
+WAgfId		::= UTF8String
+--
+-- See 3GPP TS 29.571 [249] for details
+--
+
+END

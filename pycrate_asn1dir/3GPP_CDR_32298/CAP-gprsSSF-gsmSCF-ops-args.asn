@@ -46,7 +46,8 @@ FROM MAP-MS-DataTypes {itu-t(0) identified-organization(4) etsi(0) mobileDomain(
 gsm-Network(1) modules(3) map-MS-DataTypes(11) version12(12)}
 
 	PARAMETERS-BOUND
-FROM CAP-classes classes
+FROM CAP-classes {itu-t(0) identified-organization(4) etsi(0) mobileDomain(0) 
+umts-network(1) modules(3) cap-classes(54) version8(7)}
 
 	opcode-activityTestGPRS,
 	opcode-applyChargingGPRS,
@@ -86,7 +87,8 @@ FROM CAP-operationcodes operationcodes
 	TimeAndTimezone {},
 	TimerID,
 	TimerValue
-FROM CAP-datatypes datatypes
+FROM CAP-datatypes {itu-t(0) identified-organization(4) etsi(0) mobileDomain(0) 
+umts-network(1) modules(3) cap-datatypes(52) version8(7)}
 -- For Rel-6, the CAP-datatypes module is updated to version8(7); Object Identifier 'datatypes'
 -- is also updated to version8(7). As a result, the present module uses Rel-6 data type definitions.
 
@@ -99,7 +101,8 @@ FROM CAP-datatypes datatypes
 	unexpectedDataValue,
 	unexpectedParameter,
 	unknownPDPID
-FROM CAP-errortypes errortypes
+FROM CAP-errortypes {itu-t(0) identified-organization(4) etsi(0) mobileDomain(0) 
+umts-network(1) modules(3) cap-errortypes(51) version8(7)}
 -- For Rel-6, the CAP-errortypes module is updated to version8(7); Object Identifier
 -- 'errortypes' is also updated to version8(7). As a result, the present module uses Rel-6
 -- error type definitions.
@@ -108,124 +111,124 @@ FROM CAP-errortypes errortypes
 
 activityTestGPRS OPERATION ::= {
 	RETURN RESULT	TRUE
-	CODE			opcode-activityTestGPRS}
+	CODE		opcode-activityTestGPRS}
 -- Direction: gsmSCF -> gprsSSF, Timer: Tatg
--- This operation is used to check for the continued existence of a relationship between the gsmSCF 
--- and gprsSSF. If the relationship is still in existence, then the gprsSSF will respond. If no 
+-- This operation is used to check for the continued existence of a relationship between the gsmSCF
+-- and gprsSSF. If the relationship is still in existence, then the gprsSSF will respond. If no
 -- reply is received, then the gsmSCF will assume that the gprsSSF has failed in some way
 -- and will take the appropriate action.
 
 applyChargingGPRS OPERATION ::= {
-	ARGUMENT		ApplyChargingGPRSArg
+	ARGUMENT	ApplyChargingGPRSArg
 	RETURN RESULT	FALSE
-	ERRORS			{missingParameter |
-					unexpectedComponentSequence |
-					unexpectedParameter |
-					unexpectedDataValue |
-					parameterOutOfRange |
-					systemFailure |
-					taskRefused |
-					unknownPDPID}
-	CODE			opcode-applyChargingGPRS}
+	ERRORS		{missingParameter |
+			unexpectedComponentSequence |
+			unexpectedParameter |
+			unexpectedDataValue |
+			parameterOutOfRange |
+			systemFailure |
+			taskRefused |
+			unknownPDPID}
+	CODE		opcode-applyChargingGPRS}
 -- Direction gsmSCF -> gprsSSF, Timer Tacg
--- This operation is used for interacting from the gsmSCF with the gprsSSF CSE-controlled 
+-- This operation is used for interacting from the gsmSCF with the gprsSSF CSE-controlled
 -- GPRS session or PDP Context charging mechanism.
 
-ApplyChargingGPRSArg ::= SEQUENCE { 
-	chargingCharacteristics				[0] ChargingCharacteristics,
-	tariffSwitchInterval				[1] INTEGER (1..86400)						OPTIONAL,
-	pDPID								[2] PDPID									OPTIONAL,
+ApplyChargingGPRSArg ::= SEQUENCE {
+	chargingCharacteristics		[0] ChargingCharacteristics,
+	tariffSwitchInterval		[1] INTEGER (1..86400)			OPTIONAL,
+	pDPID				[2] PDPID					OPTIONAL,
 	...
 	}
 -- tariffSwitchInterval is measured in 1 second units.
 
 applyChargingReportGPRS OPERATION ::= {
-	ARGUMENT		ApplyChargingReportGPRSArg
+	ARGUMENT	ApplyChargingReportGPRSArg
 	RETURN RESULT	TRUE
-	ERRORS			{missingParameter |
-					unexpectedComponentSequence |
-					unexpectedParameter |
-					unexpectedDataValue |
-					parameterOutOfRange |
-					systemFailure |
-					taskRefused |
-					unknownPDPID}
-	CODE			opcode-applyChargingReportGPRS}
+	ERRORS		{missingParameter |
+			unexpectedComponentSequence |
+			unexpectedParameter |
+			unexpectedDataValue |
+			parameterOutOfRange |
+			systemFailure |
+			taskRefused |
+			unknownPDPID}
+	CODE		opcode-applyChargingReportGPRS}
 --	Direction gprsSSF -> gsmSCF,Timer Tacrg
---	The ApplyChargingReportGPRS operation provides the feedback from the gprsSCF to the gsmSCF 
+--	The ApplyChargingReportGPRS operation provides the feedback from the gprsSCF to the gsmSCF
 --	CSE-controlled GPRS session charging mechanism.
 
 ApplyChargingReportGPRSArg ::= SEQUENCE {
-	chargingResult						[0] ChargingResult,
-	qualityOfService					[1] QualityOfService						OPTIONAL,
-	active								[2] BOOLEAN DEFAULT TRUE,
-	pDPID								[3] PDPID									OPTIONAL,
+	chargingResult			[0] ChargingResult,
+	qualityOfService			[1] QualityOfService			OPTIONAL,
+	active				[2] BOOLEAN DEFAULT TRUE,
+	pDPID				[3] PDPID					OPTIONAL,
 	...,
-	chargingRollOver					[4]	ChargingRollOver						OPTIONAL
+	chargingRollOver			[4]	ChargingRollOver			OPTIONAL
 	}
 
 cancelGPRS OPERATION ::= {
-	ARGUMENT		CancelGPRSArg
+	ARGUMENT	CancelGPRSArg
 	RETURN RESULT	FALSE
-	ERRORS			{missingParameter |
-					taskRefused |
-					unknownPDPID}
-	CODE			opcode-cancelGPRS}
---  Direction: gsmSCF ?? gprsSSF, Timer: Tcag
---  This generic operation cancels all previous requests, 
+	ERRORS		{missingParameter |
+			taskRefused |
+			unknownPDPID}
+	CODE		opcode-cancelGPRS}
+--  Direction: gsmSCF gpsSSF, Timer: Tcag
+--  This generic operation cancels all previous requests,
 --	i.e. all EDPs and reports can be cancelled by the gsmSCF.
 
 CancelGPRSArg ::= SEQUENCE {
-	pDPID								[0] PDPID 									OPTIONAL,
+	pDPID				[0] PDPID					OPTIONAL,
 	...
 	}
 
 connectGPRS {PARAMETERS-BOUND: bound} OPERATION::= {
-	ARGUMENT		ConnectGPRSArg {bound}
+	ARGUMENT	ConnectGPRSArg {bound}
 	RETURN RESULT	FALSE
-	ERRORS			{missingParameter |
-					parameterOutOfRange |
-					unknownPDPID |
-					systemFailure |
-					taskRefused |
-					unexpectedComponentSequence |
-					unexpectedDataValue |
-					unexpectedParameter}
-	CODE			opcode-connectGPRS}
+	ERRORS		{missingParameter |
+			parameterOutOfRange |
+			unknownPDPID |
+			systemFailure |
+			taskRefused |
+			unexpectedComponentSequence |
+			unexpectedDataValue |
+			unexpectedParameter}
+	CODE		opcode-connectGPRS}
 -- Direction: gsmSCF -> gprsSSF, Timer: Tcong
 -- This operation is used to modify the Access Point Name used when establishing a PDP Context.
 
 ConnectGPRSArg {PARAMETERS-BOUND: bound}::= SEQUENCE {
-	accessPointName		[0] AccessPointName {bound},
-	pdpID		[1] PDPID			OPTIONAL,
+	accessPointName	[0] AccessPointName {bound},
+	pdpID	[1] PDPID		OPTIONAL,
 	...
 	}
 
 continueGPRS OPERATION ::= {
-	ARGUMENT		ContinueGPRSArg
+	ARGUMENT	ContinueGPRSArg
 	RETURN RESULT	FALSE
-	ERRORS			{missingParameter |
-					unknownPDPID |
-					unexpectedDataValue}
-	CODE			opcode-continueGPRS}
+	ERRORS		{missingParameter |
+			unknownPDPID |
+			unexpectedDataValue}
+	CODE		opcode-continueGPRS}
 --  Direction: gsmSCF -> gprsSSF, Timer: Tcueg
---  This operation is used to request the gprsSSF to proceed with processing at the DP at 
---  which it previously suspended processing to await gsmSCF instructions (i.e., proceed to 
+--  This operation is used to request the gprsSSF to proceed with processing at the DP at
+--  which it previously suspended processing to await gsmSCF instructions (i.e., proceed to
 --  the next point in processing in the Attach/Detach state model or PDP Context
 --	state model) substituting new data from the gsmSCF.
 
 ContinueGPRSArg ::= SEQUENCE {
-	pDPID								[0] PDPID									OPTIONAL,
+	pDPID				[0] PDPID					OPTIONAL,
 	...
 }
 
 entityReleasedGPRS {PARAMETERS-BOUND : bound} OPERATION ::= {
-	ARGUMENT		EntityReleasedGPRSArg {bound}
+	ARGUMENT	EntityReleasedGPRSArg {bound}
 	RETURN RESULT	TRUE
-	ERRORS			{missingParameter |
-					taskRefused |
-					unknownPDPID}
-	CODE			opcode-entityReleasedGPRS}
+	ERRORS		{missingParameter |
+			taskRefused |
+			unknownPDPID}
+	CODE		opcode-entityReleasedGPRS}
 --  Direction: gprsSSF -> gsmSCF, Timer: Terg
 --  This operation is used when the GPRS Session is detached or a PDP Context is diconnected and
 --  the associated event is not armed for reporting.
@@ -234,41 +237,41 @@ entityReleasedGPRS {PARAMETERS-BOUND : bound} OPERATION ::= {
 --  Disconnect.
 
 EntityReleasedGPRSArg {PARAMETERS-BOUND : bound} ::= SEQUENCE {
-	gPRSCause							[0] GPRSCause {bound},
-	pDPID								[1] PDPID									OPTIONAL,
+	gPRSCause				[0] GPRSCause {bound},
+	pDPID				[1] PDPID					OPTIONAL,
 	...
 	}
 
 eventReportGPRS {PARAMETERS-BOUND : bound} OPERATION ::= {
-	ARGUMENT		EventReportGPRSArg {bound}
+	ARGUMENT	EventReportGPRSArg {bound}
 	RETURN RESULT	TRUE
-	ERRORS			{unknownPDPID}
-	CODE			opcode-eventReportGPRS}
+	ERRORS		{unknownPDPID}
+	CODE		opcode-eventReportGPRS}
 --	Direction gprsSSF -> gsmSCF,Timer Tereg
---		This operation is used to notify the gsmSCF of a GPRS session or PDP context related 
---		events (e.g. PDP context activation) previously requested by the gsmSCF in a 
---		RequestReportGPRSEventoperation.
+--	This operation is used to notify the gsmSCF of a GPRS session or PDP context related
+--	events (e.g. PDP context activation) previously requested by the gsmSCF in a
+--	RequestReportGPRSEventoperation.
 
 EventReportGPRSArg {PARAMETERS-BOUND : bound}::= SEQUENCE {
-	gPRSEventType						[0] GPRSEventType,
-	miscGPRSInfo						[1] MiscCallInfo DEFAULT {messageType request},
-	gPRSEventSpecificInformation		[2]	GPRSEventSpecificInformation {bound}	OPTIONAL,
-	pDPID								[3]	PDPID OPTIONAL,
+	gPRSEventType			[0] GPRSEventType,
+	miscGPRSInfo			[1] MiscCallInfo DEFAULT {messageType request},
+	gPRSEventSpecificInformation	[2]	GPRSEventSpecificInformation {bound}	OPTIONAL,
+	pDPID				[3]	PDPID OPTIONAL,
 	...
 	}
 
 furnishChargingInformationGPRS {PARAMETERS-BOUND : bound} OPERATION ::= {
-	ARGUMENT		FurnishChargingInformationGPRSArg {bound}
+	ARGUMENT	FurnishChargingInformationGPRSArg {bound}
 	RETURN RESULT	FALSE
-	ERRORS			{missingParameter |
-					taskRefused |
-					unexpectedComponentSequence |
-					unexpectedDataValue |
-					unexpectedParameter |
-					unknownPDPID}
-	CODE			opcode-furnishChargingInformationGPRS}
--- Direction: gsmSCF -> gprsSSF, Timer: Tfcig 
--- This operation is used to request the gprsSSF to generate, register a logical record or to 
+	ERRORS		{missingParameter |
+			taskRefused |
+			unexpectedComponentSequence |
+			unexpectedDataValue |
+			unexpectedParameter |
+			unknownPDPID}
+	CODE		opcode-furnishChargingInformationGPRS}
+-- Direction: gsmSCF -> gprsSSF, Timer: Tfcig
+-- This operation is used to request the gprsSSF to generate, register a logical record or to
 -- include some information in the default logical GPRS record.
 -- The registered logical record is intended for off line charging of the GPRS session
 -- or PDP Context.
@@ -277,121 +280,120 @@ FurnishChargingInformationGPRSArg {PARAMETERS-BOUND : bound} ::=
 	FCIGPRSBillingChargingCharacteristics{bound}
 
 initialDPGPRS {PARAMETERS-BOUND : bound} OPERATION ::= {
-	ARGUMENT		InitialDPGPRSArg {bound}
+	ARGUMENT	InitialDPGPRSArg {bound}
 	RETURN RESULT	FALSE
-	ERRORS			{missingCustomerRecord |
-					missingParameter |
-					parameterOutOfRange |
-					systemFailure |
-					taskRefused |
-					unexpectedComponentSequence |
-					unexpectedDataValue |
-					unexpectedParameter}
-	CODE			opcode-initialDPGPRS}
+	ERRORS		{missingCustomerRecord |
+			missingParameter |
+			parameterOutOfRange |
+			systemFailure |
+			taskRefused |
+			unexpectedComponentSequence |
+			unexpectedDataValue |
+			unexpectedParameter}
+	CODE		opcode-initialDPGPRS}
 --	Direction gprsSSF -> gsmSCF,Timer Tidpg
 --	This operation is used by the gprsSSF when a trigger is detected at a DP in the GPRS state
 --	machines to request instructions from the gsmSCF
 
 InitialDPGPRSArg {PARAMETERS-BOUND : bound}::= SEQUENCE {
-	serviceKey							[0] ServiceKey,
-	gPRSEventType						[1] GPRSEventType,
-	mSISDN								[2] ISDN-AddressString,
-	iMSI								[3] IMSI,
-	timeAndTimeZone						[4] TimeAndTimezone {bound},
-	gPRSMSClass							[5] GPRSMSClass								OPTIONAL,
-	endUserAddress						[6] EndUserAddress {bound}					OPTIONAL,
-	qualityOfService					[7] QualityOfService						OPTIONAL,
-	accessPointName						[8] AccessPointName{bound}					OPTIONAL,
-	routeingAreaIdentity				[9] RAIdentity								OPTIONAL,
-	chargingID							[10] GPRSChargingID							OPTIONAL,
-	sGSNCapabilities					[11] SGSNCapabilities						OPTIONAL,
-	locationInformationGPRS				[12] LocationInformationGPRS				OPTIONAL,
-	pDPInitiationType					[13] PDPInitiationType						OPTIONAL,
-	extensions							[14] Extensions {bound}						OPTIONAL,
+	serviceKey				[0] ServiceKey,
+	gPRSEventType			[1] GPRSEventType,
+	mSISDN				[2] ISDN-AddressString,
+	iMSI				[3] IMSI,
+	timeAndTimeZone			[4] TimeAndTimezone {bound},
+	gPRSMSClass				[5] GPRSMSClass				OPTIONAL,
+	endUserAddress			[6] EndUserAddress {bound}			OPTIONAL,
+	qualityOfService			[7] QualityOfService			OPTIONAL,
+	accessPointName			[8] AccessPointName{bound}			OPTIONAL,
+	routeingAreaIdentity		[9] RAIdentity				OPTIONAL,
+	chargingID				[10] GPRSChargingID				OPTIONAL,
+	sGSNCapabilities			[11] SGSNCapabilities			OPTIONAL,
+	locationInformationGPRS		[12] LocationInformationGPRS		OPTIONAL,
+	pDPInitiationType			[13] PDPInitiationType			OPTIONAL,
+	extensions				[14] Extensions {bound}			OPTIONAL,
 	...,
-	gGSNAddress							[15] GSN-Address							OPTIONAL,
-	secondaryPDP-context				[16] NULL									OPTIONAL,
-	iMEI								[17] IMEI									OPTIONAL
+	gGSNAddress				[15] GSN-Address				OPTIONAL,
+	secondaryPDP-context		[16] NULL					OPTIONAL,
+	iMEI				[17] IMEI					OPTIONAL
 	}
--- The RouteingAreaIdentity parameter is not used. 
--- The receiving entity shall ignore RouteingAreaIdentity if received.
--- The RouteingAreaIdentity is conveyed in the LocationInformationGPRS parameter.
--- The CSGInformation is conveyed in the LocationInformationGPRS parameter. The encoding of the
--- parameter is as defined in 3GPP TS 29.002 [11].
-
+--	The RouteingAreaIdentity parameter is not used.
+--	The receiving entity shall ignore RouteingAreaIdentity if received.
+--  The RouteingAreaIdentity is conveyed in the LocationInformationGPRS parameter.
+--  The CSGInformation is conveyed in the LocationInformationGPRS parameter. The encoding of the
+--  parameter is as defined in 3GPP TS 29.002 [11].
 
 releaseGPRS {PARAMETERS-BOUND : bound} OPERATION ::= {
-	ARGUMENT		ReleaseGPRSArg {bound}
+	ARGUMENT	ReleaseGPRSArg {bound}
 	RETURN RESULT	FALSE
-	ERRORS			{missingParameter |
-					taskRefused |
-					unknownPDPID}
-	CODE			opcode-releaseGPRS}
+	ERRORS		{missingParameter |
+			taskRefused |
+			unknownPDPID}
+	CODE		opcode-releaseGPRS}
 --  Direction: gsmSCF -> gprsSSF, Timer: Trg
 --  This operation is used to tear down an existing GPRS session or PDP Context at any phase.
 
 ReleaseGPRSArg {PARAMETERS-BOUND : bound} ::= SEQUENCE {
-	gprsCause							[0] GPRSCause {bound},
-	pDPID								[1]	PDPID									OPTIONAL,
+	gprsCause				[0] GPRSCause {bound},
+	pDPID				[1]	PDPID					OPTIONAL,
 	...
 	}
 
 requestReportGPRSEvent {PARAMETERS-BOUND : bound} OPERATION ::= {
-	ARGUMENT		RequestReportGPRSEventArg {bound}
+	ARGUMENT	RequestReportGPRSEventArg {bound}
 	RETURN RESULT	FALSE
-	ERRORS			{missingParameter |
-					parameterOutOfRange |
-					systemFailure |
-					taskRefused |
-					unexpectedComponentSequence |
-					unexpectedDataValue |
-					unexpectedParameter |
-					unknownPDPID}
-	CODE			opcode-requestReportGPRSEvent}
+	ERRORS		{missingParameter |
+			parameterOutOfRange |
+			systemFailure |
+			taskRefused |
+			unexpectedComponentSequence |
+			unexpectedDataValue |
+			unexpectedParameter |
+			unknownPDPID}
+	CODE		opcode-requestReportGPRSEvent}
 -- Direction: gsmSCF -> gprsSSF, Timer: Trrqe
--- This operation is used to request the gprsSSF to monitor for an event (e.g., GPRS events 
--- such as attach or PDP Context activiation), then send a notification back to the 
+-- This operation is used to request the gprsSSF to monitor for an event (e.g., GPRS events
+-- such as attach or PDP Context activiation), then send a notification back to the
 -- gsmSCF when the event is detected.
 
 RequestReportGPRSEventArg {PARAMETERS-BOUND : bound} ::= SEQUENCE {
-	gPRSEvent							[0] SEQUENCE SIZE (1..bound.&numOfGPRSEvents) OF GPRSEvent,
-	pDPID								[1]	PDPID									OPTIONAL,
+	gPRSEvent				[0] SEQUENCE SIZE (1..bound.&numOfGPRSEvents) OF GPRSEvent,
+	pDPID				[1]	PDPID					OPTIONAL,
 	...
 	}
 -- Indicates the GPRS related events for notification.
 
 resetTimerGPRS OPERATION ::= {
-	ARGUMENT		ResetTimerGPRSArg
+	ARGUMENT	ResetTimerGPRSArg
 	RETURN RESULT	FALSE
-	ERRORS			{missingParameter |
-					parameterOutOfRange |
-					taskRefused |
-					unexpectedComponentSequence |
-					unexpectedDataValue |
-					unexpectedParameter |
-					unknownPDPID}
-	CODE			opcode-resetTimerGPRS}
---  Direction: gsmSCF -? gprsSSF, Timer: Trtg
+	ERRORS		{missingParameter |
+			parameterOutOfRange |
+			taskRefused |
+			unexpectedComponentSequence |
+			unexpectedDataValue |
+			unexpectedParameter |
+			unknownPDPID}
+	CODE		opcode-resetTimerGPRS}
+--  Direction: gsmSCF -gprsSSF, Timer: Trtg
 --  This operation is used to request the gprsSSF to refresh an application timer in the gprsSSF.
 
 ResetTimerGPRSArg ::= SEQUENCE {
-	timerID								[0] TimerID					DEFAULT tssf,
-	timervalue							[1] TimerValue,
+	timerID				[0] TimerID			DEFAULT tssf,
+	timervalue				[1] TimerValue,
 	...
 	}
 
 sendChargingInformationGPRS {PARAMETERS-BOUND: bound} OPERATION ::= {
-	ARGUMENT		SendChargingInformationGPRSArg { bound}
+	ARGUMENT	SendChargingInformationGPRSArg { bound}
 	RETURN RESULT	FALSE
-	ERRORS			{missingParameter |
-					unexpectedComponentSequence |
-					unexpectedParameter |
-					parameterOutOfRange |
-					systemFailure |
-					taskRefused |
-					unexpectedDataValue |
-					unknownPDPID}
-	CODE			opcode-sendChargingInformationGPRS}
+	ERRORS		{missingParameter |
+			unexpectedComponentSequence |
+			unexpectedParameter |
+			parameterOutOfRange |
+			systemFailure |
+			taskRefused |
+			unexpectedDataValue |
+			unknownPDPID}
+	CODE		opcode-sendChargingInformationGPRS}
 -- Direction: gsmSCF -> gprsSSF, Timer: Tscig
 -- This operation is used to instruct the gprsSSF on the charging information which the
 -- gprsSSF shall send to the Mobile Station by means of GSM access signalling.

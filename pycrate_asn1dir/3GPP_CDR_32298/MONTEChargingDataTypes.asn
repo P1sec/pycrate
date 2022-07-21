@@ -1,40 +1,40 @@
-MONTEChargingDataTypes {itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) charging (5) mONTEChargingDataType (12) asn1Module (0) version1 (0)}
+MONTEChargingDataTypes {itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) charging (5) mONTEChargingDataType (12) asn1Module (0) version2 (1)}
 DEFINITIONS IMPLICIT TAGS	::=
 
 BEGIN
 
--- EXPORTS everything 
+-- EXPORTS everything
 
-IMPORTS	
+IMPORTS
 
 DiameterIdentity,
 LocalSequenceNumber,
 ManagementExtensions,
+NodeID,
 RecordType,
 ServiceContextID,
 TimeStamp
-FROM GenericChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) genericChargingDataTypes (0) asn1Module (0) version1 (0)}
+FROM GenericChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) genericChargingDataTypes (0) asn1Module (0) version2 (1)}
 
 
 IMSI
-FROM MAP-CommonDataTypes {itu-t identified-organization (4) etsi (0) mobileDomain (0) gsm-Network (1) modules (3) map-CommonDataTypes (18)  version15 (15) }
--- from TS 29.002 [214]
+FROM MAP-CommonDataTypes {itu-t identified-organization (4) etsi (0) mobileDomain (0) gsm-Network (1) modules (3) map-CommonDataTypes (18) version18 (18)}
+-- from TS 29.002 [214]
 
 
-NodeID,
 UserCSGInformation
-FROM GPRSChargingDataTypes {itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) charging (5) gprsChargingDataTypes (2) asn1Module (0) version1 (0)}
+FROM GPRSChargingDataTypes {itu-t (0) identified-organization (4) etsi (0) mobileDomain (0) charging (5) gprsChargingDataTypes (2) asn1Module (0) version2 (1)}
 
 ;
 
 --
---  Monitoring Event RECORDS
+-- Monitoring Event RECORDS
 --
 
-MERecordType		::= CHOICE 
+MERecordType		::= CHOICE
 --
 -- Record values 103..104 are Monitoring Event specific
--- 
+--
 {
 	mECORecord			[103] MECORecord,
 	mERERecord			[104] MERERecord
@@ -43,9 +43,9 @@ MERecordType		::= CHOICE
 MECORecord	::= SET
 {
 	recordType								[0] RecordType,
-	retransmission							[1] NULL OPTIONAL, 	
+	retransmission							[1] NULL OPTIONAL,
 	serviceContextID						[2] ServiceContextID OPTIONAL,
-	nodeID									[3] NodeID OPTIONAL,	
+	nodeID									[3] NodeID OPTIONAL,
 	recordTimeStamp							[4] TimeStamp OPTIONAL,
 	eventTimestamp							[5] TimeStamp OPTIONAL,
 	monitoringEventConfigurationActivity	[6] MonitoringEventConfigurationActivity OPTIONAL,
@@ -69,21 +69,24 @@ MECORecord	::= SET
 MERERecord	::= SET
 {
 	recordType								[0] RecordType,
-	retransmission							[1] NULL OPTIONAL, 	
+	retransmission							[1] NULL OPTIONAL,
 	serviceContextID						[2] ServiceContextID OPTIONAL,
-	nodeID									[3] NodeID OPTIONAL,	
+	nodeID									[3] NodeID OPTIONAL,
 	recordTimeStamp							[4] TimeStamp OPTIONAL,
 	localRecordSequenceNumber				[5] LocalSequenceNumber OPTIONAL,
 	listofMonitoringEventReportData			[6] SEQUENCE OF MonitoringEventReportData OPTIONAL,	recordExtensions						[7] ManagementExtensions OPTIONAL
 }
 
 --
---  Monitoring Event DATA TYPES
+-- Monitoring Event DATA TYPES
+--
+--
+-- A
 --
 
 Accuracy			::= ENUMERATED
 --
--- Note: value "3" is not used in this specification: it is provided to reflect 
+-- Note: value "3" is not used in this specification: it is provided to reflect
 -- the full list specified in TS 29.336 Accuracy AVP
 --
 
@@ -102,6 +105,10 @@ CauseType		::= ENUMERATED
 	miscellaneous			(4)
 }
 
+--
+-- C
+--
+
 CommunicationFailureInfo		::= SEQUENCE
 {
 	causeType	[0] CauseType OPTIONAL,
@@ -116,20 +123,32 @@ CurrentLocationRetrieved		::= ENUMERATED
 	activeLocationRetrieval		(0)
 }
 
+--
+-- E
+--
+
 EPSLocationInfo		::= SEQUENCE
 --
--- Only one element is present. 
+-- Only one element is present.
 --
 {
 	mMELocationInformation	[0] MMELocationInformation OPTIONAL,
 	sGSNLocationInformation	[1] SGSNLocationInformation OPTIONAL
 }
 
+--
+-- L
+--
+
 LocationType				::= ENUMERATED
 {
 	currentLocation				(0),
-	lastKnownLocation			(1) 
+	lastKnownLocation			(1)
 }
+
+--
+-- M
+--
 
 MMELocationInformation		::= SEQUENCE
 {
@@ -189,11 +208,19 @@ MonitoringType				::= ENUMERATED
 	numberOfUEPerLocation					(7)
 }
 
+--
+-- N
+--
+
 NumberOfUEPerLocationReport		::= SEQUENCE
 {
 	ePSLocationInformation	[0] EPSLocationInfo OPTIONAL,
 	uECount					[1] INTEGER OPTIONAL
 }
+
+--
+-- R
+--
 
 ReachabilityConfiguration		::= SEQUENCE
 {
@@ -205,8 +232,12 @@ ReachabilityConfiguration		::= SEQUENCE
 ReachabilityType			::= ENUMERATED
 {
 	reachabilityforSMS				(0),
-	reachabilityforData				(1) 
+	reachabilityforData				(1)
 }
+
+--
+-- S
+--
 
 SGSNLocationInformation		::= SEQUENCE
 {

@@ -1,35 +1,35 @@
-POCChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) pocChargingDataTypes (7) asn1Module (0) version1 (0)}
+POCChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) pocChargingDataTypes (7) asn1Module (0) version2 (1)}
 
 DEFINITIONS IMPLICIT TAGS	::=
 
 BEGIN
 
--- EXPORTS everything 
+-- EXPORTS everything
 
-IMPORTS	
+IMPORTS
 
 CallDuration,
+InvolvedParty,
 LocalSequenceNumber,
 ManagementExtensions,
 NodeAddress,
+NodeID,
 RecordType,
 ServiceContextID,
+Session-Id,
 TimeStamp
-FROM GenericChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) genericChargingDataTypes (0) asn1Module (0) version1 (0)}
+FROM GenericChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) genericChargingDataTypes (0) asn1Module (0) version2 (1)}
 
-GSNAddress, 
-NodeID 
-FROM GPRSChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) gprsChargingDataTypes (2) asn1Module (0) version1 (0)}
+GSNAddress
+FROM GPRSChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) gprsChargingDataTypes (2) asn1Module (0) version2 (1)}
 
 IMS-Charging-Identifier,
 Incomplete-CDR-Indication,
 InterOperatorIdentifiers,
-InvolvedParty,
 MessageBody,
 Media-Components-List,
-Session-Id,
 SIP-Method
-FROM IMSChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) imsChargingDataTypes (4) asn1Module (0) version1 (0)}
+FROM IMSChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) imsChargingDataTypes (4) asn1Module (0) version2 (1)}
 
 ;
 
@@ -37,10 +37,10 @@ FROM IMSChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileD
 --  POC RECORDS
 --
 
-POCRecord	::= CHOICE 
+POCRecord	::= CHOICE
 --
 -- Record values 80..81 are PoC specific
--- 
+--
 {
 	pPFRecord			[80] PPFRecord,
 	cPFRecord			[81] CPFRecord

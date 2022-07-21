@@ -60,20 +60,20 @@ umts-network(1) modules(3) cap-object-identifiers(100) version8(7)}
 ;
 
 playAnnouncement {PARAMETERS-BOUND : bound} OPERATION ::= {
-	ARGUMENT		PlayAnnouncementArg {bound}
+	ARGUMENT	PlayAnnouncementArg {bound}
 	RETURN RESULT	FALSE
-	ERRORS			{canceled |
-					missingParameter |
-					parameterOutOfRange |
-					systemFailure |
-					taskRefused |
-					unexpectedComponentSequence |
-					unexpectedDataValue |
-					unexpectedParameter |
-					unavailableResource |
-					unknownCSID}
-	LINKED			{specializedResourceReport}
-	CODE			opcode-playAnnouncement}
+	ERRORS		{canceled |
+			missingParameter |
+			parameterOutOfRange |
+			systemFailure |
+			taskRefused |
+			unexpectedComponentSequence |
+			unexpectedDataValue |
+			unexpectedParameter |
+			unavailableResource |
+			unknownCSID}
+	LINKED		{specializedResourceReport}
+	CODE		opcode-playAnnouncement}
 -- Direction: gsmSCF -> gsmSRF, Timer: Tpa
 -- This operation is to be used after Establish Temporary Connection (assist procedure
 -- with a second gsmSSF) or a Connect to Resource (no assist) operation. It may be used
@@ -85,60 +85,60 @@ playAnnouncement {PARAMETERS-BOUND : bound} OPERATION ::= {
 -- be of a sufficient duration to allow its linked operation to be correctly correlated.
 
 PlayAnnouncementArg {PARAMETERS-BOUND : bound}::= SEQUENCE {
-	informationToSend					[0] InformationToSend {bound},
-	disconnectFromIPForbidden			[1] BOOLEAN DEFAULT TRUE,
+	informationToSend			[0] InformationToSend {bound},
+	disconnectFromIPForbidden		[1] BOOLEAN DEFAULT TRUE,
 	requestAnnouncementCompleteNotification	[2] BOOLEAN DEFAULT TRUE,
-	extensions							[3] Extensions {bound}						OPTIONAL,
-	callSegmentID						[5] CallSegmentID {bound}					OPTIONAL,
+	extensions				[3] Extensions {bound}			OPTIONAL,
+	callSegmentID			[5] CallSegmentID {bound}			OPTIONAL,
 	requestAnnouncementStartedNotification	[51] BOOLEAN DEFAULT FALSE,
 	...
 	}
 
 promptAndCollectUserInformation {PARAMETERS-BOUND : bound} OPERATION ::= {
-	ARGUMENT		PromptAndCollectUserInformationArg {bound}
-	RESULT			ReceivedInformationArg {bound}
-	ERRORS			{canceled |
-					improperCallerResponse |
-					missingParameter |
-					parameterOutOfRange |
-					systemFailure |
-					taskRefused |
-					unexpectedComponentSequence |
-					unavailableResource |
-					unexpectedDataValue |
-					unexpectedParameter |
-					unknownCSID}
-	LINKED			{specializedResourceReport}
-	CODE			opcode-promptAndCollectUserInformation}
--- Direction: gsmSCF -> gsmSRF, Timer: Tpc 
+	ARGUMENT	PromptAndCollectUserInformationArg {bound}
+	RESULT		ReceivedInformationArg {bound}
+	ERRORS		{canceled |
+			improperCallerResponse |
+			missingParameter |
+			parameterOutOfRange |
+			systemFailure |
+			taskRefused |
+			unexpectedComponentSequence |
+			unavailableResource |
+			unexpectedDataValue |
+			unexpectedParameter |
+			unknownCSID}
+	LINKED		{specializedResourceReport}
+	CODE		opcode-promptAndCollectUserInformation}
+-- Direction: gsmSCF -> gsmSRF, Timer: Tpc
 -- This operation is used to interact with a user to collect information.
 
 PromptAndCollectUserInformationArg {PARAMETERS-BOUND : bound}::= SEQUENCE {
-	collectedInfo						[0] CollectedInfo,
-	disconnectFromIPForbidden			[1] BOOLEAN	DEFAULT TRUE,
-	informationToSend					[2] InformationToSend {bound}				OPTIONAL,
-	extensions							[3] Extensions {bound}						OPTIONAL,
-	callSegmentID						[4]	CallSegmentID {bound}					OPTIONAL,
+	collectedInfo			[0] CollectedInfo,
+	disconnectFromIPForbidden		[1] BOOLEAN	DEFAULT TRUE,
+	informationToSend			[2] InformationToSend {bound}		OPTIONAL,
+	extensions				[3] Extensions {bound}			OPTIONAL,
+	callSegmentID			[4]	CallSegmentID {bound}			OPTIONAL,
 	requestAnnouncementStartedNotification [51] BOOLEAN DEFAULT FALSE,
 	...
 	}
 
 ReceivedInformationArg {PARAMETERS-BOUND : bound}::= CHOICE {
-	digitsResponse						[0] Digits {bound}
+	digitsResponse			[0] Digits {bound}
 	}
 
 specializedResourceReport OPERATION ::= {
-	ARGUMENT		SpecializedResourceReportArg
+	ARGUMENT	SpecializedResourceReportArg
 	RETURN RESULT	FALSE
 	ALWAYS RESPONDS	FALSE
-	CODE			opcode-specializedResourceReport}
--- Direction: gsmSRF -> gsmSCF, Timer: Tsrr 
--- This operation is used as the response to a PlayAnnouncement operation when the announcement 
+	CODE		opcode-specializedResourceReport}
+-- Direction: gsmSRF -> gsmSCF, Timer: Tsrr
+-- This operation is used as the response to a PlayAnnouncement operation when the announcement
 -- completed report indication is set.
 
 SpecializedResourceReportArg ::= CHOICE {
-	allAnnouncementsComplete			[50] NULL,
-	firstAnnouncementStarted			[51] NULL
+	allAnnouncementsComplete		[50] NULL,
+	firstAnnouncementStarted		[51] NULL
 	}
 
 END
