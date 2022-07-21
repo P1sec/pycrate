@@ -20,15 +20,16 @@ jobs:
           - 3.7
           - 3.8
           - 3.9
+          - 3.10
         exclude:
           - os: windows-latest
             python-version: 2.7
     runs-on: ${{ matrix.os }}
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: setup python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
       - name: update build tools
@@ -48,9 +49,9 @@ jobs:
           - wheel
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: setup python ${{ env.DEFAULT_PYTHON }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ env.DEFAULT_PYTHON }}
       - name: install build tool
@@ -72,14 +73,14 @@ jobs:
       - build
     steps:
       - name: setup python ${{ env.DEFAULT_PYTHON }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
       - name: download sdist artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: sdist
           path: dist/
       - name: download wheel artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: wheel
           path: dist/

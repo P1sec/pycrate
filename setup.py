@@ -5,7 +5,7 @@ import sys
 from setuptools import setup, find_packages
 
 # Pycrate Version
-VERSION = "0.5.4"
+VERSION = "0.5.5"
 
 
 # get dependencies according to the Python version
