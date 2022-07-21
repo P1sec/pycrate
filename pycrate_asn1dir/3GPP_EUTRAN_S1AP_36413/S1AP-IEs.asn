@@ -83,6 +83,9 @@ IMPORTS
 	id-TraceCollectionEntityURI,
 	id-EmergencyIndicator,
 	id-SourceTransportLayerAddress,
+	id-SourceNodeTransportLayerAddress,
+	id-SourceSNID,
+	id-Direct-Forwarding-Path-Availability,
 	maxnoofCSGs,
 	maxnoofE-RABs,
 	maxnoofErrors,
@@ -975,7 +978,7 @@ EN-DCSONConfigurationTransfer ::= SEQUENCE {
 	transfertype				EN-DCSONTransferType,
 	sONInformation					SONInformation,
 	x2TNLConfigInfo					X2TNLConfigurationInfo 	OPTIONAL,
-	-- This IE shall be present if the SON Information IE contains the SON Information Request IE and the SON Information Request IE is set to “X2TNL Configuration Info” --
+	-- This IE shall be present if the SON Information IE contains the SON Information Request IE and the SON Information Request IE is set to "X2TNL Configuration Info" --
 	iE-Extensions			ProtocolExtensionContainer { {EN-DCSONConfigurationTransfer-ExtIEs} }			OPTIONAL,
 ...
 }
@@ -1079,8 +1082,9 @@ E-RABInformationListItem ::= SEQUENCE {
 }
 
 E-RABInformationListItem-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
-	{ ID id-DAPSRequestInfo						CRITICALITY ignore	EXTENSION DAPSRequestInfo	PRESENCE optional }|
-	{ ID id-SourceTransportLayerAddress			CRITICALITY ignore	EXTENSION TransportLayerAddress				PRESENCE optional},
+	{ ID id-DAPSRequestInfo						CRITICALITY ignore	EXTENSION DAPSRequestInfo						PRESENCE optional }|
+	{ ID id-SourceTransportLayerAddress			CRITICALITY ignore	EXTENSION TransportLayerAddress				PRESENCE optional}|
+	{ ID id-SourceNodeTransportLayerAddress		CRITICALITY ignore	EXTENSION TransportLayerAddress				PRESENCE optional},
 	...
 }
 
@@ -1132,7 +1136,7 @@ E-RABUsageReportItem-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 }
 
 E-RABQoSParameters-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
--- Extended for introduction of downlink and uplink packet loss rate for enhanced Voice performance –-
+-- Extended for introduction of downlink and uplink packet loss rate for enhanced Voice performance --
 	{ ID id-DownlinkPacketLossRate		CRITICALITY ignore	EXTENSION Packet-LossRate		PRESENCE optional}|
 	{ ID id-UplinkPacketLossRate			CRITICALITY ignore	EXTENSION Packet-LossRate		PRESENCE optional},
 	...
@@ -1606,7 +1610,7 @@ M5period ::= ENUMERATED {ms1024, ms2048, ms5120, ms10240, min1, ... }
 M6Configuration ::= SEQUENCE {
 	m6report-Interval	M6report-Interval,
 	m6delay-threshold	M6delay-threshold		OPTIONAL,
--- This IE shall be present if the M6 Links to log IE is set to “uplink” or to “both-uplink-and-downlink” --
+-- This IE shall be present if the M6 Links to log IE is set to "uplink" or to "both-uplink-and-downlink" --
 	m6-links-to-log		Links-to-log,
 	iE-Extensions		ProtocolExtensionContainer { { M6Configuration-ExtIEs} } OPTIONAL,
 	...
@@ -2342,10 +2346,10 @@ SONConfigurationTransfer ::= SEQUENCE {
 SONConfigurationTransfer-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 -- Extension for Release 10 to transfer the IP addresses of the eNB initiating the ANR action --
 	{ID id-x2TNLConfigurationInfo		CRITICALITY ignore	EXTENSION X2TNLConfigurationInfo				PRESENCE conditional
-	-- This IE shall be present if the SON Information IE contains the SON Information Request IE and the SON Information Request IE is set to “X2TNL Configuration Info” --}|
+	-- This IE shall be present if the SON Information IE contains the SON Information Request IE and the SON Information Request IE is set to "X2TNL Configuration Info" --}|
 -- Extension for Release 12 to transfer information concerning the source cell of synchronisation and the aggressor cell --
 	{ID id-Synchronisation-Information	CRITICALITY ignore	EXTENSION SynchronisationInformation			PRESENCE conditional
-	-- This IE shall be present if the SON Information IE contains the SON Information Request IE set to “ Activate Muting ” --},
+	-- This IE shall be present if the SON Information IE contains the SON Information Request IE set to " Activate Muting " --},
 	...
 }
 
@@ -2418,14 +2422,16 @@ SourceeNB-ToTargeteNB-TransparentContainer		::= SEQUENCE {
 }
 
 SourceeNB-ToTargeteNB-TransparentContainer-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
-	{ID id-MobilityInformation					CRITICALITY ignore	EXTENSION MobilityInformation						PRESENCE optional}|
-	{ID id-uE-HistoryInformationFromTheUE		CRITICALITY ignore	EXTENSION UE-HistoryInformationFromTheUE		PRESENCE optional}|
-	{ID id-IMSvoiceEPSfallbackfrom5G			CRITICALITY ignore	EXTENSION IMSvoiceEPSfallbackfrom5G				PRESENCE optional}|
-	{ID id-AdditionalRRMPriorityIndex			CRITICALITY ignore	EXTENSION AdditionalRRMPriorityIndex				PRESENCE optional}|
-	{ID id-ContextatSource						CRITICALITY ignore	EXTENSION ContextatSource							PRESENCE optional}|
-	{ID id-IntersystemMeasurementConfiguration	CRITICALITY ignore	EXTENSION IntersystemMeasurementConfiguration	PRESENCE optional}|
+	{ID id-MobilityInformation					CRITICALITY ignore	EXTENSION MobilityInformation								PRESENCE optional}|
+	{ID id-uE-HistoryInformationFromTheUE		CRITICALITY ignore	EXTENSION UE-HistoryInformationFromTheUE				PRESENCE optional}|
+	{ID id-IMSvoiceEPSfallbackfrom5G			CRITICALITY ignore	EXTENSION IMSvoiceEPSfallbackfrom5G						PRESENCE optional}|
+	{ID id-AdditionalRRMPriorityIndex			CRITICALITY ignore	EXTENSION AdditionalRRMPriorityIndex					PRESENCE optional}|
+	{ID id-ContextatSource						CRITICALITY ignore	EXTENSION ContextatSource									PRESENCE optional}|
+	{ID id-IntersystemMeasurementConfiguration	CRITICALITY ignore	EXTENSION IntersystemMeasurementConfiguration		PRESENCE optional}|
 	{ID id-SourceNodeID							CRITICALITY ignore	EXTENSION SourceNodeID										PRESENCE optional}|
-	{ID id-EmergencyIndicator					CRITICALITY ignore	EXTENSION EmergencyIndicator								PRESENCE optional},
+	{ID id-EmergencyIndicator					CRITICALITY ignore	EXTENSION EmergencyIndicator								PRESENCE optional}|
+	{ID id-Direct-Forwarding-Path-Availability		CRITICALITY ignore	EXTENSION Direct-Forwarding-Path-Availability			PRESENCE optional}|
+	{ID id-SourceSNID							CRITICALITY ignore	EXTENSION Global-RAN-NODE-ID								PRESENCE optional},
 	...
 }
 
@@ -2738,7 +2744,8 @@ TargeteNB-ToSourceeNB-TransparentContainer		::= SEQUENCE {
 }
 
 TargeteNB-ToSourceeNB-TransparentContainer-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
-	{ ID id-DAPSResponseInfoList						CRITICALITY ignore	EXTENSION DAPSResponseInfoList	PRESENCE optional},
+	{ ID id-DAPSResponseInfoList					CRITICALITY ignore	EXTENSION DAPSResponseInfoList							PRESENCE optional}|
+	{ ID id-Direct-Forwarding-Path-Availability		CRITICALITY ignore	EXTENSION Direct-Forwarding-Path-Availability			PRESENCE optional},
 	...
 }
 
@@ -2797,7 +2804,7 @@ traceCollectionEntityIPAddress		TransportLayerAddress,
 TraceActivation-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 -- Extension for Rel-10 to support MDT --
 	{ ID id-MDTConfiguration	CRITICALITY ignore	EXTENSION MDT-Configuration		PRESENCE optional }|
--- Extension for Rel-15 to support QMC –
+-- Extension for Rel-15 to support QMC -
 	{ ID id-UEAppLayerMeasConfig	CRITICALITY ignore	EXTENSION UEAppLayerMeasConfig		PRESENCE optional }|
 	{ ID id-MDTConfigurationNR		CRITICALITY ignore	EXTENSION MDT-ConfigurationNR		PRESENCE optional }|
 	{ ID id-TraceCollectionEntityURI	CRITICALITY ignore	EXTENSION URI-Address			PRESENCE optional	},

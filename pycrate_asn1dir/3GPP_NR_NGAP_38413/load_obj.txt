@@ -418,6 +418,7 @@ NGAP-Constants.id-QosFlowFailedToSetupList
 NGAP-Constants.id-SourceTNLAddrInfo
 NGAP-Constants.id-ExtendedReportIntervalMDT
 NGAP-Constants.id-SourceNodeID
+NGAP-Constants.id-SourceNodeTNLAddrInfo
 NGAP-Containers.NGAP-PROTOCOL-IES
 NGAP-Containers.NGAP-PROTOCOL-IES-PAIR
 NGAP-Containers.NGAP-PROTOCOL-EXTENSION

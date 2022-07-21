@@ -114,7 +114,7 @@ WITH SYNTAX {
 --
 -- **************************************************************
 
-ProtocolIE-Container {M2AP-PROTOCOL-IES : IesSetParam} ::=
+ProtocolIE-Container {M2AP-PROTOCOL-IES : IesSetParam} ::=
 	SEQUENCE (SIZE (0..maxProtocolIEs)) OF
 	ProtocolIE-Field {{IesSetParam}}
 
@@ -133,7 +133,7 @@ ProtocolIE-Field {M2AP-PROTOCOL-IES : IesSetParam} ::= SEQUENCE {
 --
 -- **************************************************************
 
-ProtocolIE-ContainerPair {M2AP-PROTOCOL-IES-PAIR : IesSetParam} ::=
+ProtocolIE-ContainerPair {M2AP-PROTOCOL-IES-PAIR : IesSetParam} ::=
 	SEQUENCE (SIZE (0..maxProtocolIEs)) OF
 	ProtocolIE-FieldPair {{IesSetParam}}
 

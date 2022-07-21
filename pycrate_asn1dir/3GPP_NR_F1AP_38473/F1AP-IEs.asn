@@ -3439,8 +3439,8 @@ PRSAngleItem-ItemExtIEs 	F1AP-PROTOCOL-EXTENSION ::= {
 }
 
 PRSMuting::= SEQUENCE {
-	pRSMutingOption1			PRSMutingOption1,
-	pRSMutingOption2			PRSMutingOption2,
+	pRSMutingOption1			PRSMutingOption1		OPTIONAL,
+	pRSMutingOption2			PRSMutingOption2		OPTIONAL,
 	iE-Extensions					ProtocolExtensionContainer { { PRSMuting-ExtIEs} } OPTIONAL
 }
 
@@ -3754,7 +3754,7 @@ Requested-PDCCH-BlindDetectionSCG ::= OCTET STRING
 
 RequestedSRSTransmissionCharacteristics ::= SEQUENCE {
 	numberOfTransmissions		INTEGER (0..500, ...)		OPTIONAL,
--- The IE shall be present if the Resource Type IE is set to “periodic” --
+-- The IE shall be present if the Resource Type IE is set to "periodic" --
 	resourceType				ENUMERATED  {periodic, semi-persistent, aperiodic,...},
 	bandwidthSRS				BandwidthSRS,
 	sRSResourceSetList 			SRSResourceSetList				OPTIONAL,
@@ -5443,7 +5443,8 @@ UL-AoA ::= SEQUENCE {
 	azimuthAoA					INTEGER (0..3599),
 	zenithAoA					INTEGER (0..1799)	OPTIONAL,
 	lCS-to-GCS-TranslationAoA	LCS-to-GCS-TranslationAoA		OPTIONAL,
-	iE-extensions			ProtocolExtensionContainer { { UL-AoA-ExtIEs } }
+	iE-extensions			ProtocolExtensionContainer { { UL-AoA-ExtIEs } }	OPTIONAL,
+	...
 }
 
 UL-AoA-ExtIEs F1AP-PROTOCOL-EXTENSION ::= {

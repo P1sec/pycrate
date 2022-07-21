@@ -313,11 +313,11 @@ PMCH-Configuration-Item ::= SEQUENCE {
 	...
 }
 
-PMCH-Configuration-ItemExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+PMCH-Configuration-ItemExtIEs M2AP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
-MBSFN-Subframe-ConfigurationList ::= SEQUENCE (SIZE(1.. maxnoofMBSFN-Allocations)) OF ProtocolIE-Single-Container { { MBSFN-Subframe-ConfigurationItem } }
+MBSFN-Subframe-ConfigurationList ::= SEQUENCE (SIZE(1.. maxnoofMBSFN-Allocations)) OF ProtocolIE-Single-Container { { MBSFN-Subframe-ConfigurationItem } }
 
 MBSFN-Subframe-ConfigurationItem M2AP-PROTOCOL-IES ::= {
 	{ ID id-MBSFN-Subframe-Configuration-Item		CRITICALITY reject	TYPE MBSFN-Subframe-Configuration		PRESENCE mandatory },
@@ -338,7 +338,7 @@ MBMS-Suspension-Notification-Item ::= SEQUENCE {
 	...
 }
 
-MBMS-Suspension-Notification-ItemExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+MBMS-Suspension-Notification-ItemExtIEs M2AP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
@@ -348,12 +348,12 @@ MBMS-Suspension-Notification-ItemExtIEs M2AP-PROTOCOL-EXTENSION ::= {
 --
 -- **************************************************************
 
-MbmsSchedulingInformationResponse ::= SEQUENCE {
+MbmsSchedulingInformationResponse ::= SEQUENCE {
 	protocolIEs                     ProtocolIE-Container       {{ MbmsSchedulingInformationResponse-Ies}},
 	...
 }
 
-MbmsSchedulingInformationResponse-Ies M2AP-PROTOCOL-IES ::= {
+MbmsSchedulingInformationResponse-Ies M2AP-PROTOCOL-IES ::= {
 	{ ID id-CriticalityDiagnostics				CRITICALITY ignore	TYPE CriticalityDiagnostics			PRESENCE optional },
 	...
 }

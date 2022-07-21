@@ -807,8 +807,8 @@ PDUSessionToBeAddedAddReq-Item ::= SEQUENCE {
 	sN-PDUSessionAMBR		PDUSessionAggregateMaximumBitRate			OPTIONAL,
 	sn-terminated			PDUSessionResourceSetupInfo-SNterminated	OPTIONAL,
 	mn-terminated			PDUSessionResourceSetupInfo-MNterminated	OPTIONAL,
--- NOTE: If neither the PDU Session Resource Setup Info – SN terminated IE
--- nor the PDU Session Resource Setup Info – MN terminated IE is present,
+-- NOTE: If neither the PDU Session Resource Setup Info - SN terminated IE
+-- nor the PDU Session Resource Setup Info - MN terminated IE is present,
 -- abnormal conditions as specified in clause 8.3.1.4 apply.
 	iE-Extension			ProtocolExtensionContainer { {PDUSessionToBeAddedAddReq-Item-ExtIEs} }	OPTIONAL,
 	...
@@ -853,8 +853,8 @@ PDUSessionAdmittedAddedAddReqAck-Item ::= SEQUENCE {
 	pduSessionId							PDUSession-ID,
 	sn-terminated			PDUSessionResourceSetupResponseInfo-SNterminated	OPTIONAL,
 	mn-terminated			PDUSessionResourceSetupResponseInfo-MNterminated	OPTIONAL,
--- NOTE: If neither the PDU Session Resource Setup Response Info – SN terminated IE
--- nor the PDU Session Resource Setup Response Info – MN terminated IE is present,
+-- NOTE: If neither the PDU Session Resource Setup Response Info - SN terminated IE
+-- nor the PDU Session Resource Setup Response Info - MN terminated IE is present,
 -- abnormal conditions as specified in clause 8.3.1.4 apply.
 	iE-Extension			ProtocolExtensionContainer { {PDUSessionAdmittedAddedAddReqAck-Item-ExtIEs} }	OPTIONAL,
 	...
@@ -1019,8 +1019,8 @@ PDUSessionsToBeAdded-SNModRequest-Item ::= SEQUENCE {
 	sN-PDUSessionAMBR		PDUSessionAggregateMaximumBitRate			OPTIONAL,
 	sn-terminated			PDUSessionResourceSetupInfo-SNterminated	OPTIONAL,
 	mn-terminated			PDUSessionResourceSetupInfo-MNterminated	OPTIONAL,
--- NOTE: If neither the PDU Session Resource Setup Info – SN terminated IE
--- nor the PDU Session Resource Setup Info – MN terminated IE is present,
+-- NOTE: If neither the PDU Session Resource Setup Info - SN terminated IE
+-- nor the PDU Session Resource Setup Info - MN terminated IE is present,
 -- abnormal conditions as specified in clause 8.3.3.4 apply.
 	iE-Extension			ProtocolExtensionContainer { {PDUSessionsToBeAdded-SNModRequest-Item-ExtIEs} }	OPTIONAL,
 	...
@@ -1038,8 +1038,8 @@ PDUSessionsToBeModified-SNModRequest-Item ::= SEQUENCE {
 	sN-PDUSessionAMBR		PDUSessionAggregateMaximumBitRate				OPTIONAL,
 	sn-terminated			PDUSessionResourceModificationInfo-SNterminated	OPTIONAL,
 	mn-terminated			PDUSessionResourceModificationInfo-MNterminated	OPTIONAL,
--- NOTE: If neither the PDU Session Resource Modification Info – SN terminated IE
--- nor the PDU Session Resource Modification Info – MN terminated IE is present,
+-- NOTE: If neither the PDU Session Resource Modification Info - SN terminated IE
+-- nor the PDU Session Resource Modification Info - MN terminated IE is present,
 -- abnormal conditions as specified in clause 8.3.3.4 apply.
 	iE-Extension			ProtocolExtensionContainer { {PDUSessionsToBeModified-SNModRequest-Item-ExtIEs} }	OPTIONAL,
 	...
@@ -1109,8 +1109,8 @@ PDUSessionAdmittedToBeAddedSNModResponse-Item ::= SEQUENCE {
 	pduSessionId			PDUSession-ID,
 	sn-terminated			PDUSessionResourceSetupResponseInfo-SNterminated	OPTIONAL,
 	mn-terminated			PDUSessionResourceSetupResponseInfo-MNterminated	OPTIONAL,
--- NOTE: If neither the PDU Session Resource Setup Response Info – SN terminated IE
--- nor the PDU Session Resource Setup Response Info – MN terminated IE is present,
+-- NOTE: If neither the PDU Session Resource Setup Response Info - SN terminated IE
+-- nor the PDU Session Resource Setup Response Info - MN terminated IE is present,
 -- abnormal conditions as specified in clause 8.3.3.4 apply.
 	iE-Extension			ProtocolExtensionContainer { {PDUSessionAdmittedToBeAddedSNModResponse-Item-ExtIEs} }	OPTIONAL,
 	...
@@ -1125,8 +1125,8 @@ PDUSessionAdmittedToBeModifiedSNModResponse-Item ::= SEQUENCE {
 	pduSessionId			PDUSession-ID,
 	sn-terminated			PDUSessionResourceModificationResponseInfo-SNterminated	OPTIONAL,
 	mn-terminated			PDUSessionResourceModificationResponseInfo-MNterminated	OPTIONAL,
--- NOTE: If neither the PDU Session Resource Modification Response Info – SN terminated IE
--- nor the PDU Session Resource Modification Response Info – MN terminated IE is present,
+-- NOTE: If neither the PDU Session Resource Modification Response Info - SN terminated IE
+-- nor the PDU Session Resource Modification Response Info - MN terminated IE is present,
 -- abnormal conditions as specified in clause 8.3.3.4 apply.
 	iE-Extension			ProtocolExtensionContainer { {PDUSessionAdmittedToBeModifiedSNModResponse-Item-ExtIEs} }	OPTIONAL,
 	...
@@ -1226,8 +1226,8 @@ PDUSessionToBeModifiedSNModRequired-Item ::= SEQUENCE {
 	pduSessionId						PDUSession-ID,
 	sn-terminated			PDUSessionResourceModRqdInfo-SNterminated	OPTIONAL,
 	mn-terminated			PDUSessionResourceModRqdInfo-MNterminated	OPTIONAL,
--- NOTE: If neither the PDU Session Resource Modification Required Info – SN terminated IE
--- nor the PDU Session Resource Modification Required Info – MN terminated IE is present,
+-- NOTE: If neither the PDU Session Resource Modification Required Info - SN terminated IE
+-- nor the PDU Session Resource Modification Required Info - MN terminated IE is present,
 -- abnormal conditions as specified in clause 8.3.4.4 apply.
 	iE-Extension		ProtocolExtensionContainer { {PDUSessionToBeModifiedSNModRequired-Item-ExtIEs} }	OPTIONAL,
 	...
@@ -1277,8 +1277,8 @@ PDUSessionAdmittedModSNModConfirm-Item ::= SEQUENCE {
 	pduSessionId				PDUSession-ID,
 	sn-terminated			PDUSessionResourceModConfirmInfo-SNterminated	OPTIONAL,
 	mn-terminated			PDUSessionResourceModConfirmInfo-MNterminated	OPTIONAL,
--- NOTE: If neither the PDU Session Resource Modification Confirm Info – SN terminated IE
--- nor the PDU Session Resource Modification Confirm Info – MN terminated IE is present,
+-- NOTE: If neither the PDU Session Resource Modification Confirm Info - SN terminated IE
+-- nor the PDU Session Resource Modification Confirm Info - MN terminated IE is present,
 -- abnormal conditions as specified in clause 8.3.4.4 apply.
 	iE-Extension			ProtocolExtensionContainer { {PDUSessionAdmittedModSNModConfirm-Item-ExtIEs} }	OPTIONAL,
 	...
@@ -1512,7 +1512,7 @@ PDUSession-SNChangeRequired-Item ::= SEQUENCE {
 	pduSessionId				PDUSession-ID,
 	sn-terminated			PDUSessionResourceChangeRequiredInfo-SNterminated	OPTIONAL,
 	mn-terminated			PDUSessionResourceChangeRequiredInfo-MNterminated	OPTIONAL,
--- NOTE: If the PDU Session Resource Change Required Info – SN terminated IE is not present,
+-- NOTE: If the PDU Session Resource Change Required Info - SN terminated IE is not present,
 -- abnormal conditions as specified in clause 8.3.5.4 apply.
 	iE-Extension			ProtocolExtensionContainer { {PDUSession-SNChangeRequired-Item-ExtIEs} }	OPTIONAL,
 	...
@@ -1547,7 +1547,7 @@ PDUSession-SNChangeConfirm-Item ::= SEQUENCE {
 	pduSessionId				PDUSession-ID,
 	sn-terminated			PDUSessionResourceChangeConfirmInfo-SNterminated	OPTIONAL,
 	mn-terminated			PDUSessionResourceChangeConfirmInfo-MNterminated	OPTIONAL,
--- NOTE: If the PDU Session Resource Change Confirm Info – SN terminated IE is not present,
+-- NOTE: If the PDU Session Resource Change Confirm Info - SN terminated IE is not present,
 -- abnormal conditions as specified in clause 8.3.5.4 apply.
 	iE-Extension			ProtocolExtensionContainer { {PDUSession-SNChangeConfirm-Item-ExtIEs} }	OPTIONAL,
 	...

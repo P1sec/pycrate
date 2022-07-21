@@ -980,7 +980,7 @@ E-RAB-Level-QoS-Parameters ::= SEQUENCE {
 }
 
 E-RAB-Level-QoS-Parameters-ExtIEs X2AP-PROTOCOL-EXTENSION ::= {
--- Extended for introduction of downlink and uplink packet loss rate for enhanced Voice performance –
+-- Extended for introduction of downlink and uplink packet loss rate for enhanced Voice performance -
 	{ ID id-DownlinkPacketLossRate			CRITICALITY ignore	EXTENSION Packet-LossRate		PRESENCE optional}|
 	{ ID id-UplinkPacketLossRate			CRITICALITY ignore	EXTENSION Packet-LossRate		PRESENCE optional},
 	...
@@ -1579,7 +1579,7 @@ M5period ::= ENUMERATED {ms1024, ms2048, ms5120, ms10240, min1, ... }
 M6Configuration ::= SEQUENCE {
 	m6report-interval	M6report-interval,
 	m6delay-threshold	M6delay-threshold	OPTIONAL,
--- This IE shall be present if the M6 Links to log IE is set to “uplink” or to “both-uplink-and-downlink” --
+-- This IE shall be present if the M6 Links to log IE is set to "uplink" or to "both-uplink-and-downlink" --
 	m6-links-to-log		Links-to-log,
 	iE-Extensions		ProtocolExtensionContainer { {M6Configuration-ExtIEs} } OPTIONAL,
 	...
@@ -2103,7 +2103,7 @@ PC5QoSParameters ::= SEQUENCE {
 }
 
 PC5QoSParameters-ExtIEs X2AP-PROTOCOL-EXTENSION ::= {
-    ...
+    ...
 }
 
 PC5QoSFlowList ::= SEQUENCE (SIZE(1..maxnoofPC5QoSFlows)) OF PC5QoSFlowItem
@@ -2117,7 +2117,7 @@ PC5QoSFlowItem::= SEQUENCE {
 }
 
 PC5QoSFlowItem-ExtIEs X2AP-PROTOCOL-EXTENSION ::= {
-             ...
+             ...
 }
 
 PC5FlowBitRates ::= SEQUENCE {
@@ -2128,7 +2128,7 @@ PC5FlowBitRates ::= SEQUENCE {
 }
 
 PC5FlowBitRates-ExtIEs X2AP-PROTOCOL-EXTENSION ::= {
-             ...
+             ...
 }
 
 PDCPChangeIndication ::= ENUMERATED {s-KgNB-update-required, pDCP-data-recovery-required,...}
@@ -2610,7 +2610,7 @@ SgNBResourceCoordinationInformationExtIEs X2AP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
-SgNB-UE-X2AP-ID ::= INTEGER (0..4294967295)
+SgNB-UE-X2AP-ID ::= INTEGER (0..4294967295)
 
 SIPTOBearerDeactivationIndication ::= ENUMERATED {
 	true,

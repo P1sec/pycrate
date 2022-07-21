@@ -292,7 +292,7 @@ DLInformationTransfer-IEs ::=       SEQUENCE {
 }
 
 DLInformationTransfer-v1610-IEs ::= SEQUENCE {
-    referenceTimeInfo-r16               ReferenceTimeInfo-r16               OPTIONAL,   -- Need R
+    referenceTimeInfo-r16               ReferenceTimeInfo-r16               OPTIONAL,   -- Need N
     nonCriticalExtension                SEQUENCE {}                         OPTIONAL
 }
 
@@ -1092,6 +1092,11 @@ RRCSetupComplete-v1610-IEs ::=      SEQUENCE {
     ue-MeasurementsAvailable-r16        UE-MeasurementsAvailable-r16                    OPTIONAL,
     mobilityHistoryAvail-r16            ENUMERATED {true}                               OPTIONAL,
     mobilityState-r16                   ENUMERATED {normal, medium, high, spare}        OPTIONAL,
+    nonCriticalExtension                RRCSetupComplete-v1690-IEs                      OPTIONAL
+}
+
+RRCSetupComplete-v1690-IEs ::=      SEQUENCE {
+    ul-RRC-Segmentation-r16             ENUMERATED {true}                               OPTIONAL,
     nonCriticalExtension                SEQUENCE{}                                      OPTIONAL
 }
 
@@ -1732,10 +1737,7 @@ RA-ReportList-r16 ::= SEQUENCE (SIZE (1..maxRAReport-r16)) OF RA-Report-r16
 RA-Report-r16 ::=                    SEQUENCE {
     cellId-r16                           CHOICE {
         cellGlobalId-r16                     CGI-Info-Logging-r16,
-        pci-arfcn-r16                        SEQUENCE {
-            physCellId-r16                       PhysCellId,
-            carrierFreq-r16                      ARFCN-ValueNR
-        }
+        pci-arfcn-r16                        PCI-ARFCN-NR-r16
     },
     ra-InformationCommon-r16             RA-InformationCommon-r16                         OPTIONAL,
     raPurpose-r16                        ENUMERATED {accessRelated, beamFailureRecovery, reconfigurationWithSync, ulUnSynchronized,
@@ -1757,13 +1759,19 @@ RA-InformationCommon-r16 ::=         SEQUENCE {
     perRAInfoList-r16                    PerRAInfoList-r16,
     ...,
     [[
-    perRAInfoListExt-v1660               PerRAInfoListExt-v1660                           OPTIONAL
+    perRAInfoList-v1660               PerRAInfoList-v1660                           OPTIONAL
+    ]],
+    [[
+    msg1-SCS-From-prach-ConfigurationIndex-r16  ENUMERATED {kHz1dot25, kHz5, spare2, spare1}  OPTIONAL
+    ]],
+    [[
+    msg1-SCS-From-prach-ConfigurationIndexCFRA-r16  ENUMERATED {kHz1dot25, kHz5, spare2, spare1}  OPTIONAL
     ]]
 }
 
 PerRAInfoList-r16 ::= SEQUENCE (SIZE (1..200)) OF PerRAInfo-r16
 
-PerRAInfoListExt-v1660 ::= SEQUENCE (SIZE (1..200)) OF PerRACSI-RSInfoExt-v1660
+PerRAInfoList-v1660 ::= SEQUENCE (SIZE (1..200)) OF PerRACSI-RSInfo-v1660
 
 PerRAInfo-r16 ::=                    CHOICE {
     perRASSBInfoList-r16                 PerRASSBInfo-r16,
@@ -1781,7 +1789,7 @@ PerRACSI-RSInfo-r16 ::=              SEQUENCE {
     numberOfPreamblesSentOnCSI-RS-r16    INTEGER (1..200)
 }
 
-PerRACSI-RSInfoExt-v1660 ::=         SEQUENCE {
+PerRACSI-RSInfo-v1660 ::=         SEQUENCE {
     csi-RS-Index-v1660                   INTEGER (1..96)                     OPTIONAL
 }
 
@@ -1808,17 +1816,11 @@ RLF-Report-r16 ::=                   CHOICE {
         failedPCellId-r16                    CHOICE {
             nrFailedPCellId-r16                  CHOICE {
                 cellGlobalId-r16                     CGI-Info-Logging-r16,
-                pci-arfcn-r16                        SEQUENCE {
-                    physCellId-r16                       PhysCellId,
-                    carrierFreq-r16                      ARFCN-ValueNR
-                }
+                pci-arfcn-r16                        PCI-ARFCN-NR-r16
             },
             eutraFailedPCellId-r16           CHOICE {
                 cellGlobalId-r16                 CGI-InfoEUTRALogging,
-                pci-arfcn-r16                    SEQUENCE {
-                    physCellId-r16                   EUTRA-PhysCellId,
-                    carrierFreq-r16                  ARFCN-ValueEUTRA
-                }
+                pci-arfcn-r16                    PCI-ARFCN-EUTRA-r16
             }
         },
         reconnectCellId-r16                  CHOICE {
@@ -1844,7 +1846,10 @@ RLF-Report-r16 ::=                   CHOICE {
     eutra-RLF-Report-r16                 SEQUENCE {
         failedPCellId-EUTRA                  CGI-InfoEUTRALogging,
         measResult-RLF-Report-EUTRA-r16      OCTET STRING,
-        ...
+        ...,
+        [[
+        measResult-RLF-Report-EUTRA-v1690    OCTET STRING                                        OPTIONAL
+        ]]
     }
 }
 
@@ -2123,7 +2128,7 @@ InterFreqCarrierFreqInfo ::=        SEQUENCE {
     ssbSubcarrierSpacing                SubcarrierSpacing,
     ssb-ToMeasure                       SSB-ToMeasure                                               OPTIONAL,   -- Need S
     deriveSSB-IndexFromCell             BOOLEAN,
-    ss-RSSI-Measurement                 SS-RSSI-Measurement                                         OPTIONAL,
+    ss-RSSI-Measurement                 SS-RSSI-Measurement                                         OPTIONAL,   -- Need R
     q-RxLevMin                          Q-RxLevMin,
     q-RxLevMinSUL                       Q-RxLevMin                                                  OPTIONAL,   -- Need R
     q-QualMin                           Q-QualMin                                                   OPTIONAL,   -- Need S
@@ -4910,13 +4915,13 @@ NeedForGapsConfigNR-r16 ::=        SEQUENCE {
 -- TAG-NeedForGapsInfoNR-START
 
 NeedForGapsInfoNR-r16 ::=        SEQUENCE {
-    intraFreq-needForGap-r16      NeedForGapsIntraFreqlist-r16,
-    interFreq-needForGap-r16      NeedForGapsBandlistNR-r16
+    intraFreq-needForGap-r16      NeedForGapsIntraFreqList-r16,
+    interFreq-needForGap-r16      NeedForGapsBandListNR-r16
 }
 
-NeedForGapsIntraFreqlist-r16 ::=          SEQUENCE (SIZE (1.. maxNrofServingCells)) OF NeedForGapsIntraFreq-r16
+NeedForGapsIntraFreqList-r16 ::=          SEQUENCE (SIZE (1.. maxNrofServingCells)) OF NeedForGapsIntraFreq-r16
 
-NeedForGapsBandlistNR-r16 ::=             SEQUENCE (SIZE (1..maxBands)) OF NeedForGapsNR-r16
+NeedForGapsBandListNR-r16 ::=             SEQUENCE (SIZE (1..maxBands)) OF NeedForGapsNR-r16
 
 NeedForGapsIntraFreq-r16  ::=                 SEQUENCE {
     servCellId-r16                               ServCellIndex,
@@ -5029,6 +5034,22 @@ NZP-CSI-RS-ResourceSetId ::=        INTEGER (0..maxNrofNZP-CSI-RS-ResourceSets-1
 P-Max ::=                           INTEGER (-30..33)
 
 -- TAG-P-MAX-STOP
+-- TAG-PCIARFCNEUTRA-START
+
+PCI-ARFCN-EUTRA-r16 ::=                        SEQUENCE {
+            physCellId-r16                       EUTRA-PhysCellId,
+            carrierFreq-r16                      ARFCN-ValueEUTRA
+}
+
+-- TAG-PCIARFCNEUTRA-STOP
+-- TAG-PCIARFCNNR-START
+
+PCI-ARFCN-NR-r16 ::=                        SEQUENCE {
+            physCellId-r16                       PhysCellId,
+            carrierFreq-r16                      ARFCN-ValueNR
+}
+
+-- TAG-PCIARFCNNR-STOP
 -- TAG-PCI-LIST-START
 
 PCI-List ::=                        SEQUENCE (SIZE (1..maxNrofCellMeas)) OF PhysCellId
@@ -5219,12 +5240,12 @@ EthernetHeaderCompression-r16 ::=  SEQUENCE {
          ...
     },
     ehc-Downlink-r16               SEQUENCE {
-        drb-ContinueEHC-DL-r16         ENUMERATED { true }                                      OPTIONAL,   -- Need R
+        drb-ContinueEHC-DL-r16         ENUMERATED { true }                                      OPTIONAL,   -- Need N
         ...
     }                                                                                           OPTIONAL,   -- Need M
     ehc-Uplink-r16                 SEQUENCE {
         maxCID-EHC-UL-r16              INTEGER (1..32767),
-        drb-ContinueEHC-UL-r16         ENUMERATED { true }                                      OPTIONAL,   -- Need R
+        drb-ContinueEHC-UL-r16         ENUMERATED { true }                                      OPTIONAL,   -- Need N
         ...
     }                                                                                           OPTIONAL    -- Need M
 }
@@ -5593,7 +5614,7 @@ PUCCH-Config ::=                        SEQUENCE {
     pucch-PowerControl                      PUCCH-PowerControl                                                    OPTIONAL, -- Need M
     ...,
     [[
-    resourceToAddModListExt-r16             SEQUENCE (SIZE (1..maxNrofPUCCH-Resources)) OF PUCCH-ResourceExt-r16  OPTIONAL, -- Need N
+    resourceToAddModListExt-v1610           SEQUENCE (SIZE (1..maxNrofPUCCH-Resources)) OF PUCCH-ResourceExt-v1610  OPTIONAL, -- Need N
     dl-DataToUL-ACK-r16                     SetupRelease { DL-DataToUL-ACK-r16 }                                  OPTIONAL, -- Need M
     ul-AccessConfigListDCI-1-1-r16          SetupRelease { UL-AccessConfigListDCI-1-1-r16 }                       OPTIONAL, -- Need M
     subslotLengthForPUCCH-r16               CHOICE {
@@ -5655,7 +5676,7 @@ PUCCH-Resource ::=                      SEQUENCE {
     }
 }
 
-PUCCH-ResourceExt-r16 ::=               SEQUENCE {
+PUCCH-ResourceExt-v1610 ::=             SEQUENCE {
     interlaceAllocation-r16                 SEQUENCE {
         rb-SetIndex                             INTEGER (0..4),
         interlace0                              CHOICE {
@@ -5663,7 +5684,7 @@ PUCCH-ResourceExt-r16 ::=               SEQUENCE {
             scs30                                   INTEGER (0..4)
         }
     }                                                                                                             OPTIONAL,  --Need R
-    formatExt-v1610                         CHOICE {
+    format-v1610                            CHOICE {
         interlace1-v1610                            INTEGER (0..9),
         occ-v1610                                   SEQUENCE {
             occ-Length-v1610                                ENUMERATED {n2,n4}                                       OPTIONAL, -- Need M
@@ -5804,7 +5825,7 @@ PUCCH-SpatialRelationInfo ::=           SEQUENCE {
 }
 
 PUCCH-SpatialRelationInfoExt-r16 ::=       SEQUENCE {
-    pucch-SpatialRelationInfoId-v1610         PUCCH-SpatialRelationInfoId-v1610                              OPTIONAL,   -- Cond SetupOnly
+    pucch-SpatialRelationInfoId-v1610         PUCCH-SpatialRelationInfoId-v1610                              OPTIONAL,   -- Need S
     pucch-PathlossReferenceRS-Id-v1610        PUCCH-PathlossReferenceRS-Id-v1610                             OPTIONAL,    --Need R
     ...
 }
@@ -7207,7 +7228,7 @@ SearchSpace ::=                         SEQUENCE {
         sl1280                                  INTEGER (0..1279),
         sl2560                                  INTEGER (0..2559)
     }                                                                                                   OPTIONAL,   -- Cond Setup
-    duration                                INTEGER (2..2559)                                           OPTIONAL,   -- Need R
+    duration                                INTEGER (2..2559)                                           OPTIONAL,   -- Need S
     monitoringSymbolsWithinSlot             BIT STRING (SIZE (14))                                      OPTIONAL,   -- Cond Setup
     nrofCandidates                          SEQUENCE {
         aggregationLevel1                       ENUMERATED {n0, n1, n2, n3, n4, n5, n6, n8},
@@ -7549,7 +7570,7 @@ ShortMAC-I ::=                      BIT STRING (SIZE (16))
 SINR-Range ::=                      INTEGER(0..127)
 
 -- TAG-SINR-RANGE-STOP
--- TAG–SI-REQUESTCONFIG-START
+-- TAG-SI-REQUESTCONFIG-START
 
 SI-RequestConfig ::=                SEQUENCE {
     rach-OccasionsSI                    SEQUENCE {
@@ -7566,7 +7587,7 @@ SI-RequestResources ::=             SEQUENCE {
     ra-ssb-OccasionMaskIndex            INTEGER (0..15)                                                     OPTIONAL    -- Need R
 }
 
--- TAG–SI-SCHEDULINGINFO-START
+-- TAG-SI-SCHEDULINGINFO-START
 
 SI-SchedulingInfo ::=               SEQUENCE {
     schedulingInfoList                  SEQUENCE (SIZE (1..maxSI-Message)) OF SchedulingInfo,
@@ -8160,8 +8181,6 @@ TAG ::=                             SEQUENCE {
 
 TAG-Id ::=                          INTEGER (0..maxNrofTAGs-1)
 
-TimeAlignmentTimer ::=              ENUMERATED {ms500, ms750, ms1280, ms1920, ms2560, ms5120, ms10240, infinity}
-
 -- TAG-TAG-CONFIG-STOP
 -- TAG-TCI-STATE-START
 
@@ -8266,6 +8285,11 @@ TrackingAreaCode ::= BIT STRING (SIZE (24))
 T-Reselection ::=                   INTEGER (0..7)
 
 -- TAG-TRESELECTION-STOP
+-- TAG-TIMEALIGNMENTTIMER-START
+
+TimeAlignmentTimer ::=              ENUMERATED {ms500, ms750, ms1280, ms1920, ms2560, ms5120, ms10240, infinity}
+
+-- TAG-TIMEALIGNMENTTIMER-STOP
 -- TAG-TIMETOTRIGGER-START
 
 TimeToTrigger ::=                   ENUMERATED {
@@ -8331,7 +8355,7 @@ UE-TimersAndConstants ::=           SEQUENCE {
 -- TAG-ULDELAYVALUECONFIG-START
 
 UL-DelayValueConfig-r16 ::=  SEQUENCE {
-    delay-DRBlist                SEQUENCE (SIZE(1..maxDRB)) OF DRB-Identity
+    delay-DRBlist-r16            SEQUENCE (SIZE(1..maxDRB)) OF DRB-Identity
 }
 
 -- TAG-ULDELAYVALUECONFIG-STOP
@@ -8472,6 +8496,8 @@ BandCombinationList-v1580 ::=       SEQUENCE (SIZE (1..maxBandComb)) OF BandComb
 
 BandCombinationList-v1590 ::=       SEQUENCE (SIZE (1..maxBandComb)) OF BandCombination-v1590
 
+BandCombinationList-v15g0 ::=       SEQUENCE (SIZE (1..maxBandComb)) OF BandCombination-v15g0
+
 BandCombinationList-v1610 ::=       SEQUENCE (SIZE (1..maxBandComb)) OF BandCombination-v1610
 
 BandCombinationList-v1630 ::=       SEQUENCE (SIZE (1..maxBandComb)) OF BandCombination-v1630
@@ -8480,6 +8506,10 @@ BandCombinationList-v1640 ::=       SEQUENCE (SIZE (1..maxBandComb)) OF BandComb
 
 BandCombinationList-v1650 ::=       SEQUENCE (SIZE (1..maxBandComb)) OF BandCombination-v1650
 
+BandCombinationList-v1680 ::=       SEQUENCE (SIZE (1..maxBandComb)) OF BandCombination-v1680
+
+BandCombinationList-v1690 ::=       SEQUENCE (SIZE (1..maxBandComb)) OF BandCombination-v1690
+
 BandCombinationList-UplinkTxSwitch-r16 ::= SEQUENCE (SIZE (1..maxBandComb)) OF BandCombination-UplinkTxSwitch-r16
 
 BandCombinationList-UplinkTxSwitch-v1630 ::= SEQUENCE (SIZE (1..maxBandComb)) OF BandCombination-UplinkTxSwitch-v1630
@@ -8487,6 +8517,10 @@ BandCombinationList-UplinkTxSwitch-v1630 ::= SEQUENCE (SIZE (1..maxBandComb)) OF
 BandCombinationList-UplinkTxSwitch-v1640 ::= SEQUENCE (SIZE (1..maxBandComb)) OF BandCombination-UplinkTxSwitch-v1640
 
 BandCombinationList-UplinkTxSwitch-v1650 ::= SEQUENCE (SIZE (1..maxBandComb)) OF BandCombination-UplinkTxSwitch-v1650
+
+BandCombinationList-UplinkTxSwitch-v1670 ::= SEQUENCE (SIZE (1..maxBandComb)) OF BandCombination-UplinkTxSwitch-v1670
+
+BandCombinationList-UplinkTxSwitch-v1690 ::= SEQUENCE (SIZE (1..maxBandComb)) OF BandCombination-UplinkTxSwitch-v1690
 
 BandCombination ::=                 SEQUENCE {
     bandList                            SEQUENCE (SIZE (1..maxSimultaneousBands)) OF BandParameters,
@@ -8526,6 +8560,12 @@ BandCombination-v1590::=            SEQUENCE {
     mrdc-Parameters-v1590                      MRDC-Parameters-v1590
 }
 
+BandCombination-v15g0::=            SEQUENCE {
+    ca-ParametersNR-v15g0               CA-ParametersNR-v15g0                      OPTIONAL,
+    ca-ParametersNRDC-v15g0             CA-ParametersNRDC-v15g0                    OPTIONAL,
+    mrdc-Parameters-v15g0               MRDC-Parameters-v15g0                      OPTIONAL
+}
+
 BandCombination-v1610 ::=          SEQUENCE {
     bandList-v1610                      SEQUENCE (SIZE (1..maxSimultaneousBands)) OF BandParameters-v1610  OPTIONAL,
         ca-ParametersNR-v1610               CA-ParametersNR-v1610                  OPTIONAL,
@@ -8555,6 +8595,14 @@ BandCombination-v1650 ::=          SEQUENCE {
     ca-ParametersNRDC-v1650             CA-ParametersNRDC-v1650                 OPTIONAL
 }
 
+BandCombination-v1680 ::=          SEQUENCE {
+    intrabandConcurrentOperationPowerClass-r16 SEQUENCE (SIZE (1..maxBandComb)) OF IntraBandPowerClass-r16     OPTIONAL
+}
+
+BandCombination-v1690 ::=          SEQUENCE {
+    ca-ParametersNR-v1690              CA-ParametersNR-v1690                 OPTIONAL
+}
+
 BandCombination-UplinkTxSwitch-r16 ::= SEQUENCE {
     bandCombination-r16                 BandCombination,
     bandCombination-v1540               BandCombination-v1540                      OPTIONAL,
@@ -8566,7 +8614,10 @@ BandCombination-UplinkTxSwitch-r16 ::= SEQUENCE {
     supportedBandPairListNR-r16         SEQUENCE (SIZE (1..maxULTxSwitchingBandPairs)) OF ULTxSwitchingBandPair-r16,
     uplinkTxSwitching-OptionSupport-r16 ENUMERATED {switchedUL, dualUL, both}      OPTIONAL,
     uplinkTxSwitching-PowerBoosting-r16 ENUMERATED {supported}                     OPTIONAL,
-    ...
+    ...,
+    [[
+    uplinkTxSwitching-PUSCH-TransCoherence-r16     ENUMERATED {nonCoherent, fullCoherent}   OPTIONAL
+    ]]
 }
 
 BandCombination-UplinkTxSwitch-v1630 ::=    SEQUENCE {
@@ -8579,6 +8630,14 @@ BandCombination-UplinkTxSwitch-v1640 ::=    SEQUENCE {
 
 BandCombination-UplinkTxSwitch-v1650 ::= SEQUENCE {
     bandCombination-v1650               BandCombination-v1650                      OPTIONAL
+}
+
+BandCombination-UplinkTxSwitch-v1670 ::= SEQUENCE {
+    bandCombination-v15g0                    BandCombination-v15g0                 OPTIONAL
+}
+
+BandCombination-UplinkTxSwitch-v1690 ::= SEQUENCE {
+    bandCombination-v1690                    BandCombination-v1690                 OPTIONAL
 }
 
 ULTxSwitchingBandPair-r16 ::=       SEQUENCE {
@@ -8625,6 +8684,8 @@ BandParameters-v1610 ::=         SEQUENCE {
 }
 
 ScalingFactorSidelink-r16 ::=       ENUMERATED {f0p4, f0p75, f0p8, f1}
+
+IntraBandPowerClass-r16 ::=         ENUMERATED {pc2, pc3, spare6, spare5, spare4, spare3, spare2, spare1}
 
 -- TAG-BANDCOMBINATIONLIST-STOP
 -- TAG-BANDCOMBINATIONLISTSIDELINKEUTRANR-START
@@ -8722,6 +8783,11 @@ CA-ParametersNR-v1550 ::=           SEQUENCE {
 
 CA-ParametersNR-v1560 ::=           SEQUENCE {
     diffNumerologyWithinPUCCH-GroupLargerSCS      ENUMERATED {supported}            OPTIONAL
+}
+
+CA-ParametersNR-v15g0 ::=           SEQUENCE {
+    simultaneousRxTxInterBandCAPerBandPair        SimultaneousRxTxPerBandPair       OPTIONAL,
+    simultaneousRxTxSULPerBandPair                SimultaneousRxTxPerBandPair       OPTIONAL
 }
 
 CA-ParametersNR-v1610 ::=           SEQUENCE {
@@ -8836,6 +8902,21 @@ CA-ParametersNR-v1640 ::= SEQUENCE {
     }                                                                                             OPTIONAL
 }
 
+CA-ParametersNR-v1690 ::= SEQUENCE {
+    csi-ReportingCrossPUCCH-Grp-r16      SEQUENCE {
+        computationTimeForA-CSI-r16          ENUMERATED {sameAsNoCross, relaxed},
+        additionalSymbols-r16                SEQUENCE {
+            scs-15kHz-additionalSymbols-r16      ENUMERATED {sl4, s28}        OPTIONAL,
+            scs-30kHz-additionalSymbols-r16      ENUMERATED {sl4, s28}        OPTIONAL,
+            scs-60kHz-additionalSymbols-r16      ENUMERATED {sl4, s28, s56}   OPTIONAL,
+            scs-120kHz-additionalSymbols-r16     ENUMERATED {sl4, s28, s56}   OPTIONAL
+        }                                                                     OPTIONAL,
+        sp-CSI-ReportingOnPUCCH-r16          ENUMERATED {supported}           OPTIONAL,
+        sp-CSI-ReportingOnPUSCH-r16          ENUMERATED {supported}           OPTIONAL,
+        carrierTypePairList-r16              SEQUENCE (SIZE (1..maxCarrierTypePairList-r16)) OF CarrierTypePair-r16
+    }                                                                         OPTIONAL
+}
+
 SimulSRS-ForAntennaSwitching-r16 ::= SEQUENCE {
     supportSRS-xTyR-xLessThanY-r16       ENUMERATED {supported}                     OPTIONAL,
     supportSRS-xTyR-xEqualToY-r16        ENUMERATED {supported}                     OPTIONAL,
@@ -8850,6 +8931,11 @@ TwoPUCCH-Grp-Configurations-r16 ::=  SEQUENCE {
 TwoPUCCH-Grp-ConfigParams-r16 ::=    SEQUENCE {
     pucch-GroupMapping-r16               PUCCH-Grp-CarrierTypes-r16,
     pucch-TX-r16                         PUCCH-Grp-CarrierTypes-r16
+}
+
+CarrierTypePair-r16 ::=              SEQUENCE {
+    carrierForCSI-Measurement-r16        PUCCH-Grp-CarrierTypes-r16,
+    carrierForCSI-Reporting-r16          PUCCH-Grp-CarrierTypes-r16
 }
 
 PUCCH-Grp-CarrierTypes-r16 ::=       SEQUENCE {
@@ -8868,6 +8954,10 @@ CA-ParametersNRDC ::=                         SEQUENCE {
      ca-ParametersNR-ForDC-v1550                 CA-ParametersNR-v1550                        OPTIONAL,
      ca-ParametersNR-ForDC-v1560                 CA-ParametersNR-v1560                        OPTIONAL,
      featureSetCombinationDC                     FeatureSetCombinationId                      OPTIONAL
+}
+
+CA-ParametersNRDC-v15g0 ::=                  SEQUENCE {
+    ca-ParametersNR-ForDC-v15g0                   CA-ParametersNR-v15g0                        OPTIONAL
 }
 
 CA-ParametersNRDC-v1610 ::= SEQUENCE {
@@ -10101,8 +10191,8 @@ MIMO-ParametersPerBand ::=          SEQUENCE {
         }                                                                                                          OPTIONAL
     }                                                                                                              OPTIONAL,
     singleDCI-SDM-scheme-Parameters-r16         SEQUENCE {
-        -- R1 16-2b-1b: Single-DCI based SDM scheme – Support of new DMRS port entry
-        supportNewDMRS-Port-r16                     ENUMERATED {n0, n2, n3}                                        OPTIONAL,
+        -- R1 16-2b-1b: Single-DCI based SDM scheme - Support of new DMRS port entry
+        supportNewDMRS-Port-r16                     ENUMERATED {supported1, supported2, supported3}                                        OPTIONAL,
         -- R1 16-2b-1a: Support of s-port DL PTRS
         supportTwoPortDL-PTRS-r16                   ENUMERATED {supported}                                         OPTIONAL
     }                                                                                                              OPTIONAL,
@@ -10161,6 +10251,9 @@ MIMO-ParametersPerBand ::=          SEQUENCE {
     [[
     -- R1 16-2a-9: Interpretation of maxNumberMIMO-LayersPDSCH for multi-DCI based mTRP
     maxMIMO-LayersForMulti-DCI-mTRP-r16         ENUMERATED {supported}                                         OPTIONAL
+    ]],
+    [[
+    supportedSINR-meas-v1670                    BIT STRING (SIZE (4))                                          OPTIONAL
     ]]
 }
 
@@ -10285,6 +10378,10 @@ MRDC-Parameters-v1580 ::= SEQUENCE {
 
 MRDC-Parameters-v1590 ::=	SEQUENCE {
 	interBandContiguousMRDC             ENUMERATED {supported}              OPTIONAL
+}
+
+MRDC-Parameters-v15g0 ::=   SEQUENCE {
+    simultaneousRxTxInterBandENDCPerBandPair   SimultaneousRxTxPerBandPair  OPTIONAL
 }
 
 MRDC-Parameters-v1620 ::=    SEQUENCE {
@@ -10482,9 +10579,9 @@ Phy-ParametersCommon ::=            SEQUENCE {
     -- R1 14-8: CSI trigger states containing non-active BWP
     csi-TriggerStateNon-ActiveBWP-r16           ENUMERATED {supported}              OPTIONAL,
     -- R1 20-2: Support up to 4 SMTCs configured for an IAB node MT per frequency location, including IAB-specific SMTC window periodicities
-    seperateSMTC-InterIAB-Support-r16           ENUMERATED {supported}              OPTIONAL,
+    separateSMTC-InterIAB-Support-r16           ENUMERATED {supported}              OPTIONAL,
     -- R1 20-3: Support RACH configuration separately from the RACH configuration for UE access, including new IAB-specific offset and scaling factors
-    seperateRACH-IAB-Support-r16                ENUMERATED {supported}              OPTIONAL,
+    separateRACH-IAB-Support-r16                ENUMERATED {supported}              OPTIONAL,
     -- R1 20-5a: Support semi-static configuration/indication of UL-Flexible-DL slot formats for IAB-MT resources
     ul-flexibleDL-SlotFormatSemiStatic-IAB-r16  ENUMERATED {supported}              OPTIONAL,
     -- R1 20-5b: Support dynamic indication of UL-Flexible-DL slot formats for IAB-MT resources
@@ -10527,11 +10624,11 @@ Phy-ParametersCommon ::=            SEQUENCE {
         maxNumberResAcrossCC-AcrossFR-r16           ENUMERATED {n2, n4, n8, n12, n16, n32, n40, n48, n64, n72, n80, n96, n128, n256}
                                                                                     OPTIONAL
     }                                                                               OPTIONAL,
-    -- R1 16-2a-4: HARQ-ACK for multi-DCI based multi-TRP – separate
+    -- R1 16-2a-4: HARQ-ACK for multi-DCI based multi-TRP - separate
     harqACK-separateMultiDCI-MultiTRP-r16       SEQUENCE {
     maxNumberLongPUCCHs-r16                         ENUMERATED {longAndLong, longAndShort, shortAndShort}    OPTIONAL
     }                                                                               OPTIONAL,
-    -- R1 16-2a-4: HARQ-ACK for multi-DCI based multi-TRP – joint
+    -- R1 16-2a-4: HARQ-ACK for multi-DCI based multi-TRP - joint
     harqACK-jointMultiDCI-MultiTRP-r16          ENUMERATED {supported}              OPTIONAL,
     -- R4 9-1: BWP switching on multiple CCs RRM requirements
     bwp-SwitchingMultiCCs-r16                   CHOICE {
@@ -10561,6 +10658,9 @@ Phy-ParametersCommon ::=            SEQUENCE {
     newBeamIdentifications2PortCSI-RS-r16       ENUMERATED {supported}              OPTIONAL,
     -- R1 16-1j-2: Support of 2 port CSI-RS for pathloss estimation
     pathlossEstimation2PortCSI-RS-r16           ENUMERATED {supported}              OPTIONAL
+    ]],
+    [[
+    mux-HARQ-ACK-withoutPUCCH-onPUSCH-r16       ENUMERATED {supported}              OPTIONAL
     ]]
 }
 
@@ -10671,7 +10771,7 @@ Phy-ParametersFRX-Diff ::=                  SEQUENCE {
     twoTCI-Act-servingCellInCC-List-r16         ENUMERATED {supported}                      OPTIONAL
     ]],
     [[
-    -- R1 22-11: Support of ‘cri-RI-CQI’ report without non-PMI-PortIndication
+    -- R1 22-11: Support of 'cri-RI-CQI' report without non-PMI-PortIndication
     cri-RI-CQI-WithoutNon-PMI-PortInd-r16       ENUMERATED {supported}                      OPTIONAL
     ]]
 }
@@ -10685,7 +10785,13 @@ Phy-ParametersFR1 ::=                       SEQUENCE {
     [[
     pdsch-RE-MappingFR1-PerSlot                 ENUMERATED {n16, n32, n48, n64, n80, n96, n112, n128,
                                                 n144, n160, n176, n192, n208, n224, n240, n256}         OPTIONAL
+    ]],
+    [[
+    -- R1 22-12: PDCCH monitoring with a single span of three contiguous OFDM symbols that is within the first four OFDM symbols in a
+    -- slot
+    pdcch-MonitoringSingleSpanFirst4Sym-r16     ENUMERATED {supported}                                  OPTIONAL
     ]]
+
 }
 
 Phy-ParametersFR2 ::=                       SEQUENCE {
@@ -10860,8 +10966,21 @@ RF-Parameters ::=                                   SEQUENCE {
     ]],
     [[
     extendedBand-n77-r16                                ENUMERATED {supported}                      OPTIONAL
+    ]],
+    [[
+    supportedBandCombinationList-UplinkTxSwitch-v1670   BandCombinationList-UplinkTxSwitch-v1670    OPTIONAL
+    ]],
+    [[
+    supportedBandCombinationList-v1680                  BandCombinationList-v1680                   OPTIONAL
+    ]],
+    [[
+    supportedBandCombinationList-v1690                  BandCombinationList-v1690                   OPTIONAL,
+    supportedBandCombinationList-UplinkTxSwitch-v1690   BandCombinationList-UplinkTxSwitch-v1690    OPTIONAL
     ]]
+}
 
+RF-Parameters-v15g0 ::=                   SEQUENCE {
+    supportedBandCombinationList-v15g0        BandCombinationList-v15g0                   OPTIONAL
 }
 
 BandNR ::=                          SEQUENCE {
@@ -11031,7 +11150,12 @@ BandNR ::=                          SEQUENCE {
     [[
     enhancedSkipUplinkTxConfigured-v1660      ENUMERATED {supported}                       OPTIONAL,
     enhancedSkipUplinkTxDynamic-v1660         ENUMERATED {supported}                       OPTIONAL
+    ]],
+    [[
+    maxUplinkDutyCycle-PC1dot5-MPE-FR1-r16    ENUMERATED {n10, n15, n20, n25, n30, n40, n50, n60, n70, n80, n90, n100}   OPTIONAL,
+    txDiversity-r16                           ENUMERATED {supported}                       OPTIONAL
     ]]
+
 }
 
 -- TAG-RF-PARAMETERS-STOP
@@ -11084,7 +11208,15 @@ RF-ParametersMRDC ::=                   SEQUENCE {
     supportedBandCombinationList-v1640                  BandCombinationList-v1640                   OPTIONAL,
     supportedBandCombinationListNEDC-Only-v1640         BandCombinationList-v1640                   OPTIONAL,
     supportedBandCombinationList-UplinkTxSwitch-v1640   BandCombinationList-UplinkTxSwitch-v1640    OPTIONAL
+    ]],
+    [[
+    supportedBandCombinationList-UplinkTxSwitch-v1670   BandCombinationList-UplinkTxSwitch-v1670    OPTIONAL
     ]]
+}
+
+RF-ParametersMRDC-v15g0 ::=                    SEQUENCE {
+    supportedBandCombinationList-v15g0             BandCombinationList-v15g0        OPTIONAL,
+    supportedBandCombinationListNEDC-Only-v15g0    BandCombinationList-v15g0        OPTIONAL
 }
 
 -- TAG-RF-PARAMETERSMRDC-STOP
@@ -11251,10 +11383,19 @@ BandSidelink-r16 ::=  SEQUENCE {
     sl-openLoopPC-RSRP-ReportSidelink-r16         ENUMERATED {supported}                            OPTIONAL,
     --13-1
     sl-Rx-256QAM-r16                              ENUMERATED {supported}                            OPTIONAL
+    ]],
+    [[
+    ue-PowerClassSidelink-r16                         ENUMERATED {pc2, pc3, spare6, spare5, spare4, spare3, spare2, spare1}
+                                                                                                                     OPTIONAL
     ]]
 }
 
 -- TAG-SIDELINKPARAMETERS-STOP
+-- TAG-SIMULTANEOUSRXTXPERBANDPAIR-START
+
+SimultaneousRxTxPerBandPair ::=             BIT STRING (SIZE (3..496))
+
+-- TAG-SIMULTANEOUSRXTXPERBANDPAIR-STOP
 -- TAG-SON-PARAMETERS-START
 
 SON-Parameters-r16 ::= SEQUENCE {
@@ -11394,10 +11535,11 @@ UE-MRDC-Capability ::=              SEQUENCE {
     fr2-Add-UE-MRDC-Capabilities        UE-MRDC-CapabilityAddFRX-Mode                                                   OPTIONAL,
     featureSetCombinations              SEQUENCE (SIZE (1..maxFeatureSetCombinations)) OF FeatureSetCombination         OPTIONAL,
     pdcp-ParametersMRDC-v1530           PDCP-ParametersMRDC                                                             OPTIONAL,
-    lateNonCriticalExtension            OCTET STRING                                                                    OPTIONAL,
+    lateNonCriticalExtension            OCTET STRING (CONTAINING UE-MRDC-Capability-v15g0)                              OPTIONAL,
     nonCriticalExtension                UE-MRDC-Capability-v1560                                                        OPTIONAL
 }
 
+-- Regular non-critical extensions:
 UE-MRDC-Capability-v1560 ::=        SEQUENCE {
     receivedFilters                     OCTET STRING (CONTAINING UECapabilityEnquiry-v1560-IEs)                         OPTIONAL,
     measAndMobParametersMRDC-v1560      MeasAndMobParametersMRDC-v1560                                                  OPTIONAL,
@@ -11410,6 +11552,12 @@ UE-MRDC-Capability-v1610 ::=        SEQUENCE {
     measAndMobParametersMRDC-v1610      MeasAndMobParametersMRDC-v1610                                                  OPTIONAL,
     generalParametersMRDC-v1610         GeneralParametersMRDC-v1610                                                     OPTIONAL,
     pdcp-ParametersMRDC-v1610           PDCP-ParametersMRDC-v1610                                                       OPTIONAL,
+    nonCriticalExtension                SEQUENCE {}                                                                     OPTIONAL
+}
+
+-- Late non-critical extensions:
+UE-MRDC-Capability-v15g0 ::=        SEQUENCE {
+    rf-ParametersMRDC-v15g0             RF-ParametersMRDC-v15g0                                                         OPTIONAL,
     nonCriticalExtension                SEQUENCE {}                                                                     OPTIONAL
 }
 
@@ -11501,6 +11649,11 @@ UE-NR-Capability-v1570 ::=               SEQUENCE {
 UE-NR-Capability-v15c0 ::=               SEQUENCE {
     nrdc-Parameters-v15c0                    NRDC-Parameters-v15c0                                        OPTIONAL,
     partialFR2-FallbackRX-Req                ENUMERATED {true}                                            OPTIONAL,
+    nonCriticalExtension                     UE-NR-Capability-v15g0                                       OPTIONAL
+}
+
+UE-NR-Capability-v15g0 ::=               SEQUENCE {
+    rf-Parameters-v15g0                      RF-Parameters-v15g0                                          OPTIONAL,
     nonCriticalExtension                     SEQUENCE {}                                                  OPTIONAL
 }
 
@@ -11538,7 +11691,12 @@ UE-NR-Capability-v1640 ::=               SEQUENCE {
 UE-NR-Capability-v1650 ::=               SEQUENCE {
     mpsPriorityIndication-r16                ENUMERATED {supported}                                       OPTIONAL,
     highSpeedParameters-v1650                HighSpeedParameters-v1650                                    OPTIONAL,
-    nonCriticalExtension                     SEQUENCE {}                                                  OPTIONAL
+    nonCriticalExtension                     UE-NR-Capability-v1690                                       OPTIONAL
+}
+
+UE-NR-Capability-v1690 ::=               SEQUENCE {
+    ul-RRC-Segmentation-r16                  ENUMERATED {supported}                                       OPTIONAL,
+    nonCriticalExtension                     SEQUENCE{}                                                   OPTIONAL
 }
 
 UE-NR-CapabilityAddXDD-Mode ::=         SEQUENCE {
@@ -11705,8 +11863,8 @@ AreaConfig-r16 ::=     CHOICE {
 }
 
 InterFreqTargetInfo-r16    ::=   SEQUENCE {
-    dl-CarrierFreq	                ARFCN-ValueNR,
-    cellList                         SEQUENCE (SIZE (1..32)) OF  PhysCellId  OPTIONAL
+    dl-CarrierFreq-r16               ARFCN-ValueNR,
+    cellList-r16                     SEQUENCE (SIZE (1..32)) OF  PhysCellId  OPTIONAL      -- Need R
 }
 
 CellGlobalIdList-r16 ::=         SEQUENCE (SIZE (1..32)) OF CGI-Info-Logging-r16
@@ -11878,6 +12036,7 @@ WLAN-RTT-r16 ::=                 SEQUENCE {
     ...
 }
 
+-- TAG-LOGMEASRESULTLISTWLAN-STOP
 -- TAG-OTHERCONFIG-START
 
 OtherConfig ::=                 SEQUENCE {
@@ -12016,17 +12175,11 @@ VisitedCellInfo-r16 ::=  SEQUENCE {
     visitedCellId-r16        CHOICE {
         nr-CellId-r16            CHOICE {
             cgi-Info                 CGI-Info-Logging-r16,
-            pci-arfcn-r16            SEQUENCE {
-                physCellId-r16           PhysCellId,
-                carrierFreq-r16          ARFCN-ValueNR
-            }
+            pci-arfcn-r16            PCI-ARFCN-NR-r16
         },
         eutra-CellId-r16         CHOICE {
             cellGlobalId-r16         CGI-InfoEUTRA,
-            pci-arfcn-r16                SEQUENCE {
-                physCellId-r16               EUTRA-PhysCellId,
-                carrierFreq-r16              ARFCN-ValueEUTRA
-            }
+            pci-arfcn-r16                PCI-ARFCN-EUTRA-r16
         }
     }                                        OPTIONAL,
     timeSpent-r16            INTEGER (0..4095),
@@ -12811,7 +12964,7 @@ maxCBR-Config-r16                       INTEGER ::= 8       -- Maximum number of
                                                             -- congestion control
 maxCBR-Config-1-r16                     INTEGER ::= 7       -- Maximum number of CBR range configurations for sidelink communication
                                                             -- congestion control minus 1
-maxCBR-Level-r16                        INTEGER ::= 16      -- Maximum nuber of CBR levels
+maxCBR-Level-r16                        INTEGER ::= 16      -- Maximum number of CBR levels
 maxCBR-Level-1-r16                      INTEGER ::= 15      -- Maximum number of CBR levels minus 1
 maxCellBlack                            INTEGER ::= 16      -- Maximum number of NR blacklisted cell ranges in SIB3, SIB4
 maxCellGroupings-r16                    INTEGER ::= 32      -- Maximum number of cell groupings for NR-DC
@@ -12821,6 +12974,9 @@ maxCellIntra                            INTEGER ::= 16      -- Maximum number of
 maxCellMeasEUTRA                        INTEGER ::= 32      -- Maximum number of cells in E-UTRAN
 maxCellMeasIdle-r16                     INTEGER ::= 8       -- Maximum number of cells per carrier for idle/inactive measurements
 maxCellMeasUTRA-FDD-r16                 INTEGER ::= 32      -- Maximum number of cells in FDD UTRAN
+maxCarrierTypePairList-r16              INTEGER ::= 16      -- Maximum number of supported carrier type pair of {carrier type on which
+                                                            -- CSI measurement is performed, carrier type on which CSI reporting is
+                                                            -- performed} for CSI reporting cross PUCCH group
 maxCellWhite                            INTEGER ::= 16      -- Maximum number of NR whitelisted cell ranges in SIB3, SIB4
 maxEARFCN                               INTEGER ::= 262143  -- Maximum value of E-UTRA carrier frequency
 maxEUTRA-CellBlack                      INTEGER ::= 16      -- Maximum number of E-UTRA blacklisted physical cell identity ranges
@@ -12832,7 +12988,7 @@ maxNARFCN                               INTEGER ::= 3279165 -- Maximum value of 
 maxNR-NS-Pmax                           INTEGER ::= 8       -- Maximum number of NS and P-Max values per band
 maxFreqIdle-r16                         INTEGER ::= 8       -- Maximum number of carrier frequencies for idle/inactive measurements
 maxNrofServingCells                     INTEGER ::= 32      -- Max number of serving cells (SpCells + SCells)
-maxNrofServingCells-1                   INTEGER ::= 31      -- Max number of serving cells (SpCell + SCells) per cell group
+maxNrofServingCells-1                   INTEGER ::= 31      -- Max number of serving cells (SpCells + SCells) minus 1
 maxNrofAggregatedCellsPerCellGroup      INTEGER ::= 16
 maxNrofAggregatedCellsPerCellGroupMinus4-r16   INTEGER ::= 12
 maxNrofDUCells-r16                      INTEGER ::= 512     -- Max number of cells configured on the collocated IAB-DU
@@ -12906,21 +13062,21 @@ maxNrofCSI-SSB-ResourceSets-1           INTEGER ::= 63      -- Maximum number of
 maxNrofCSI-SSB-ResourceSetsPerConfig    INTEGER ::= 1       -- Maximum number of CSI SSB resource sets per resource configuration
 maxNrofFailureDetectionResources        INTEGER ::= 10      -- Maximum number of failure detection resources
 maxNrofFailureDetectionResources-1      INTEGER ::= 9       -- Maximum number of failure detection resources minus 1
-maxNrofFreqSL-r16                       INTEGER ::= 8       -- Maximum number of carrier frequncy for for NR sidelink communication
-maxNrofSL-BWPs-r16                      INTEGER ::= 4       -- Maximum number of BWP for for NR sidelink communication
-maxFreqSL-EUTRA-r16                     INTEGER ::= 8       -- Maximum number of EUTRA anchor carrier frequncy for NR sidelink communication
+maxNrofFreqSL-r16                       INTEGER ::= 8       -- Maximum number of carrier frequency for NR sidelink communication
+maxNrofSL-BWPs-r16                      INTEGER ::= 4       -- Maximum number of BWP for NR sidelink communication
+maxFreqSL-EUTRA-r16                     INTEGER ::= 8       -- Maximum number of EUTRA anchor carrier frequency for NR sidelink communication
 maxNrofSL-MeasId-r16                    INTEGER ::= 64      -- Maximum number of sidelink measurement identity (RSRP) per destination
 maxNrofSL-ObjectId-r16                  INTEGER ::= 64      -- Maximum number of sidelink measurement objects (RSRP) per destination
 maxNrofSL-ReportConfigId-r16            INTEGER ::= 64      -- Maximum number of sidelink measurement reporting configuration(RSRP) per destination
-maxNrofSL-PoolToMeasureNR-r16           INTEGER ::= 8       -- Maximum number of resoure pool for NR sidelink measurement to measure for
+maxNrofSL-PoolToMeasureNR-r16           INTEGER ::= 8       -- Maximum number of resource pool for NR sidelink measurement to measure for
                                                             -- each measurement object (for CBR)
-maxFreqSL-NR-r16                        INTEGER ::= 8       -- Maximum number of NR anchor carrier frequncy for NR sidelink communication
+maxFreqSL-NR-r16                        INTEGER ::= 8       -- Maximum number of NR anchor carrier frequency for NR sidelink communication
 maxNrofSL-QFIs-r16                      INTEGER ::= 2048    -- Maximum number of QoS flow for NR sidelink communication per UE
 maxNrofSL-QFIsPerDest-r16               INTEGER ::= 64      -- Maximum number of QoS flow per destination for NR sidelink communication
 maxNrofObjectId                         INTEGER ::= 64      -- Maximum number of measurement objects
 maxNrofPageRec                          INTEGER ::= 32      -- Maximum number of page records
 maxNrofPCI-Ranges                       INTEGER ::= 8       -- Maximum number of PCI ranges
-maxPLMN                                 INTEGER ::= 12      -- Maximum number of PLMNs broadcast and reported by UE at establisghment
+maxPLMN                                 INTEGER ::= 12      -- Maximum number of PLMNs broadcast and reported by UE at establishment
 maxNrofCSI-RS-ResourcesRRM              INTEGER ::= 96      -- Maximum number of CSI-RS resources per cell for an RRM measurement object
 maxNrofCSI-RS-ResourcesRRM-1            INTEGER ::= 95      -- Maximum number of CSI-RS resources per cell for an RRM measurement object minus 1
 maxNrofMeasId                           INTEGER ::= 64      -- Maximum number of configured measurements
@@ -12931,11 +13087,11 @@ maxNrofSL-Dest-1-r16                    INTEGER ::= 31      -- Highest index of 
 maxNrofSLRB-r16                         INTEGER ::= 512     -- Maximum number of radio bearer for NR sidelink communication per UE
 maxSL-LCID-r16                          INTEGER ::= 512     -- Maximum number of RLC bearer for NR sidelink communication per UE
 maxSL-SyncConfig-r16                    INTEGER ::= 16      -- Maximum number of sidelink Sync configurations
-maxNrofRXPool-r16                       INTEGER ::= 16      -- Maximum number of Rx resource poolfor NR sidelink communication
-maxNrofTXPool-r16                       INTEGER ::= 8       -- Maximum number of Tx resourcepoolfor NR sidelink communication
+maxNrofRXPool-r16                       INTEGER ::= 16      -- Maximum number of Rx resource pool for NR sidelink communication
+maxNrofTXPool-r16                       INTEGER ::= 8       -- Maximum number of Tx resource pool for NR sidelink communication
 maxNrofPoolID-r16                       INTEGER ::= 16      -- Maximum index of resource pool for NR sidelink communication
 maxNrofSRS-PathlossReferenceRS-r16      INTEGER ::= 64      -- Maximum number of RSs used as pathloss reference for SRS power control.
-maxNrofSRS-PathlossReferenceRS-1-r16    INTEGER ::= 63      -- Maximum number of RSs used as pathloss reference for SRS power control-1.
+maxNrofSRS-PathlossReferenceRS-1-r16    INTEGER ::= 63      -- Maximum number of RSs used as pathloss reference for SRS power control minus 1.
 maxNrofSRS-ResourceSets                 INTEGER ::= 16      -- Maximum number of SRS resource sets in a BWP.
 maxNrofSRS-ResourceSets-1               INTEGER ::= 15      -- Maximum number of SRS resource sets in a BWP minus 1.
 maxNrofSRS-PosResourceSets-r16          INTEGER ::= 16      -- Maximum number of SRS Positioning resource sets in a BWP.
@@ -12943,8 +13099,7 @@ maxNrofSRS-PosResourceSets-1-r16        INTEGER ::= 15      -- Maximum number of
 maxNrofSRS-Resources                    INTEGER ::= 64      -- Maximum number of SRS resources.
 maxNrofSRS-Resources-1                  INTEGER ::= 63      -- Maximum number of SRS resources minus 1.
 maxNrofSRS-PosResources-r16             INTEGER ::= 64      -- Maximum number of SRS Positioning resources.
-maxNrofSRS-PosResources-1-r16           INTEGER ::= 63      -- Maximum number of SRS Positioning resources in an SRS Positioning
-                                                            -- resource set minus 1.
+maxNrofSRS-PosResources-1-r16           INTEGER ::= 63      -- Maximum number of SRS Positioning resources minus 1.
 maxNrofSRS-ResourcesPerSet              INTEGER ::= 16      -- Maximum number of SRS resources in an SRS resource set
 maxNrofSRS-TriggerStates-1              INTEGER ::= 3       -- Maximum number of SRS trigger states minus 1, i.e., the largest code point.
 maxNrofSRS-TriggerStates-2              INTEGER ::= 2       -- Maximum number of SRS trigger states minus 2.
@@ -12969,12 +13124,13 @@ maxNrofPUCCH-PathlossReferenceRSsDiff-r16 INTEGER ::= 60    -- Difference betwee
 maxNrofPUCCH-ResourceGroups-r16         INTEGER ::= 4       -- Maximum number of PUCCH resources groups.
 maxNrofPUCCH-ResourcesPerGroup-r16      INTEGER ::= 128     -- Maximum number of PUCCH resources in a PUCCH group.
 maxNrofMultiplePUSCHs-r16               INTEGER ::= 8       -- Maximum number of multiple PUSCHs in PUSCH TDRA list
-maxNrofP0-PUSCH-AlphaSets               INTEGER ::= 30      -- Maximum number of P0-pusch-alpha-sets (see 38,213, clause 7.1)
-maxNrofP0-PUSCH-AlphaSets-1             INTEGER ::= 29      -- Maximum number of P0-pusch-alpha-sets minus 1 (see 38,213, clause 7.1)
+maxNrofP0-PUSCH-AlphaSets               INTEGER ::= 30      -- Maximum number of P0-pusch-alpha-sets (see TS 38.213 [13], clause 7.1)
+maxNrofP0-PUSCH-AlphaSets-1             INTEGER ::= 29      -- Maximum number of P0-pusch-alpha-sets minus 1 (see TS 38.213 [13], clause 7.1)
 maxNrofPUSCH-PathlossReferenceRSs       INTEGER ::= 4       -- Maximum number of RSs used as pathloss reference for PUSCH power control.
 maxNrofPUSCH-PathlossReferenceRSs-1     INTEGER ::= 3       -- Maximum number of RSs used as pathloss reference for PUSCH power control minus 1.
 maxNrofPUSCH-PathlossReferenceRSs-r16   INTEGER ::= 64      -- Maximum number of RSs used as pathloss reference for PUSCH power control extended
-maxNrofPUSCH-PathlossReferenceRSs-1-r16 INTEGER ::= 63      -- Maximum number of RSs used as pathloss reference for PUSCH power control minus 1
+maxNrofPUSCH-PathlossReferenceRSs-1-r16 INTEGER ::= 63      -- Maximum number of RSs used as pathloss reference for PUSCH power control
+                                                            -- extended minus 1
 maxNrofPUSCH-PathlossReferenceRSsDiff-r16  INTEGER ::= 60   -- Difference between maxNrofPUSCH-PathlossReferenceRSs-r16 and
                                                             -- maxNrofPUSCH-PathlossReferenceRSs
 maxNrofNAICS-Entries                    INTEGER ::= 8       -- Maximum number of supported NAICS capability set
@@ -12982,16 +13138,16 @@ maxBands                                INTEGER ::= 1024    -- Maximum number of
 maxBandsMRDC                            INTEGER ::= 1280
 maxBandsEUTRA                           INTEGER ::= 256
 maxCellReport                           INTEGER ::= 8
-maxDRB                                  INTEGER ::= 29      -- Maximum number of DRBs (that can be added in DRB-ToAddModLIst).
+maxDRB                                  INTEGER ::= 29      -- Maximum number of DRBs (that can be added in DRB-ToAddModList).
 maxFreq                                 INTEGER ::= 8       -- Max number of frequencies.
 maxFreqLayers                           INTEGER ::= 4       -- Max number of frequency layers.
 maxFreqIDC-r16                          INTEGER ::= 128     -- Max number of frequencies for IDC indication.
 maxCombIDC-r16                          INTEGER ::= 128     -- Max number of reported UL CA for IDC indication.
 maxFreqIDC-MRDC                         INTEGER ::= 32      -- Maximum number of candidate NR frequencies for MR-DC IDC indication
-maxNrofCandidateBeams                   INTEGER ::= 16      -- Max number of PRACH-ResourceDedicatedBFR that in BFR config.
+maxNrofCandidateBeams                   INTEGER ::= 16      -- Max number of PRACH-ResourceDedicatedBFR in BFR config.
 maxNrofCandidateBeams-r16               INTEGER ::= 64      -- Max number of candidate beam resources in BFR config.
 maxNrofCandidateBeamsExt-r16            INTEGER ::= 48      -- Max number of PRACH-ResourceDedicatedBFR in the CandidateBeamRSListExt
-maxNrofPCIsPerSMTC                      INTEGER ::= 64      -- Maximun number of PCIs per SMTC.
+maxNrofPCIsPerSMTC                      INTEGER ::= 64      -- Maximum number of PCIs per SMTC.
 maxNrofQFIs                             INTEGER ::= 64
 maxNrofResourceAvailabilityPerCombination-r16 INTEGER ::= 256
 maxNrOfSemiPersistentPUSCH-Triggers     INTEGER ::= 64      -- Maximum number of triggers for semi persistent reporting on PUSCH
@@ -13022,7 +13178,7 @@ maxMBSFN-Allocations                    INTEGER ::= 8
 maxNrofMultiBands                       INTEGER ::= 8
 maxCellSFTD                             INTEGER ::= 3       -- Maximum number of cells for SFTD reporting
 maxReportConfigId                       INTEGER ::= 64
-maxNrofCodebooks                        INTEGER ::= 16      -- Maximum number of codebooks suppoted by the UE
+maxNrofCodebooks                        INTEGER ::= 16      -- Maximum number of codebooks supported by the UE
 maxNrofCSI-RS-ResourcesExt-r16          INTEGER ::= 16      -- Maximum number of codebook resources supported by the UE for eType2/Codebook combo
 maxNrofCSI-RS-Resources                 INTEGER ::= 7       -- Maximum number of codebook resources supported by the UE
 maxNrofCSI-RS-ResourcesAlt-r16          INTEGER ::= 512     -- Maximum number of alternative codebook resources supported by the UE
@@ -13036,7 +13192,7 @@ maxAccessCat-1                          INTEGER ::= 63      -- Maximum number of
 maxBarringInfoSet                       INTEGER ::= 8       -- Maximum number of access control parameter sets
 maxCellEUTRA                            INTEGER ::= 8       -- Maximum number of E-UTRA cells in SIB list
 maxEUTRA-Carrier                        INTEGER ::= 8       -- Maximum number of E-UTRA carriers in SIB list
-maxPLMNIdentities                       INTEGER ::= 8       -- Maximum number of PLMN identites in RAN area configurations
+maxPLMNIdentities                       INTEGER ::= 8       -- Maximum number of PLMN identities in RAN area configurations
 maxDownlinkFeatureSets                  INTEGER ::= 1024    -- (for NR DL) Total number of FeatureSets (size of the pool)
 maxUplinkFeatureSets                    INTEGER ::= 1024    -- (for NR UL) Total number of FeatureSets (size of the pool)
 maxEUTRA-DL-FeatureSets                 INTEGER ::= 256     -- (for E-UTRA) Total number of FeatureSets (size of the pool)

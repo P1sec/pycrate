@@ -1447,6 +1447,8 @@ UL-ConfigCommon-NB-r14 ::=			SEQUENCE {
 	nprach-ParametersList-r14			NPRACH-ParametersList-NB-r14	OPTIONAL, -- Need OR
 	...,
 	[[	nprach-ParametersListEDT-r15	NPRACH-ParametersList-NB-r14	OPTIONAL -- Cond EDT
+	]],
+	[[	rsrp-ThresholdsPrachInfoList-r16	RSRP-ThresholdsNPRACH-InfoList-NB-r13	OPTIONAL -- Need OR
 	]]
 }
 
@@ -2029,7 +2031,7 @@ PhysicalConfigDedicated-NB-r13 ::=	SEQUENCE {
 	[[	npusch-ConfigDedicated-v1610		NPUSCH-ConfigDedicated-NB-v1610
 																	OPTIONAL,	-- Cond twoHARQ
 		npdsch-ConfigDedicated-r16			NPDSCH-ConfigDedicated-NB-r16
-																	OPTIONAL,
+																	OPTIONAL,	-- Need ON
 		resourceReservationConfigDL-r16		SetupRelease {ResourceReservationConfig-NB-r16}
 																		OPTIONAL,	-- Cond dl-NonAnchor
 		resourceReservationConfigUL-r16		SetupRelease {ResourceReservationConfig-NB-r16}
@@ -2041,7 +2043,7 @@ PhysicalConfigDedicated-NB-r13 ::=	SEQUENCE {
 PUR-Config-NB-r16	::=				SEQUENCE {
 	pur-ConfigID-r16					PUR-ConfigID-NB-r16				OPTIONAL,	--Need OR
 	pur-TimeAlignmentTimer-r16			INTEGER (1..8)				OPTIONAL,	--Need OR
-	pur-NRSRP-ChangeThreshold-r16		SetupRelease {PUR-NRSRP-ChangeThreshold-r16}
+	pur-NRSRP-ChangeThreshold-r16		SetupRelease {PUR-NRSRP-ChangeThreshold-NB-r16}
 																		OPTIONAL,	--Need ON
 	pur-ImplicitReleaseAfter-r16		ENUMERATED {n2, n4, n8, spare}	OPTIONAL,	--Need OR
 	pur-RNTI-r16						C-RNTI							OPTIONAL,	--Need ON
@@ -2080,7 +2082,7 @@ PUR-Config-NB-r16	::=				SEQUENCE {
 	]]
 }
 
-PUR-NRSRP-ChangeThreshold-r16 ::=	SEQUENCE {
+PUR-NRSRP-ChangeThreshold-NB-r16 ::=	SEQUENCE {
 	increaseThresh-r16						NRSRP-ChangeThresh-NB-r16,
 	decreaseThresh-r16						NRSRP-ChangeThresh-NB-r16	OPTIONAL	--Need OP
 }
@@ -2568,7 +2570,7 @@ UE-Capability-NB-v1610-IEs ::=		SEQUENCE {
 	mac-Parameters-v1610				MAC-Parameters-NB-v1610,
 	phyLayerParameters-v1610			PhyLayerParameters-NB-v1610		OPTIONAL,
 	son-Parameters-r16					SON-Parameters-NB-r16		OPTIONAL,
-	meas-Parameters-r16					Meas-Parameters-NB-r16,
+	measParameters-r16					MeasParameters-NB-r16,
 	tdd-UE-Capability-v1610				TDD-UE-Capability-NB-v1610		OPTIONAL,
 	nonCriticalExtension				SEQUENCE	{}					OPTIONAL
 }
@@ -2621,7 +2623,7 @@ MAC-Parameters-NB-v1610		::=		SEQUENCE {
 	rai-SupportEnh-r16					ENUMERATED {supported}			OPTIONAL
 }
 
-Meas-Parameters-NB-r16		::=		SEQUENCE {
+MeasParameters-NB-r16		::=		SEQUENCE {
 	dl-ChannelQualityReporting-r16		ENUMERATED {supported}			OPTIONAL
 }
 

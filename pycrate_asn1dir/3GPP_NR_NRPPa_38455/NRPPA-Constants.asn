@@ -161,5 +161,9 @@ id-CGI-NR														ProtocolIE-ID ::= 58
 id-SFNInitialisationTime-NR										ProtocolIE-ID ::= 59
 id-Cell-ID														ProtocolIE-ID ::= 60
 id-SrsFrequency													ProtocolIE-ID ::= 61
+id-TRPType														ProtocolIE-ID ::= 62
+id-SRSSpatialRelationPerSRSResource								ProtocolIE-ID ::= 63
+id-MeasurementPeriodicityExtended								ProtocolIE-ID ::= 64
+id-PRS-Resource-ID												ProtocolIE-ID ::= 65
 
 END

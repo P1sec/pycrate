@@ -1,4 +1,3 @@
--- ASN1START
 -- **************************************************************
 --
 -- Information Element Definitions
@@ -57,6 +56,7 @@ IMPORTS
 	id-QoSFlowsDRBRemapping,
 	id-SecurityIndicationModify,
 	id-DataForwardingSourceIPAddress,
+	id-DiscardTimerExtended,
 	maxnoofQoSParaSets,
 	maxnoofErrors,
 	maxnoofSliceItems,
@@ -436,6 +436,8 @@ DirectForwardingPathAvailability ::= ENUMERATED {
 
 DiscardTimer	::=	ENUMERATED {ms10, ms20, ms30, ms40, ms50, ms60, ms75, ms100, ms150, ms200, ms250, ms300, ms500, ms750, ms1500, infinity}
 
+DiscardTimerExtended	::=	ENUMERATED {ms0dot5, ms1, ms2, ms4, ms6, ms8,... }
+
 DLDiscarding ::= SEQUENCE {
 	dLDiscardingCountVal			PDCP-Count,
 	iE-Extensions					ProtocolExtensionContainer { { DLDiscarding-ExtIEs } } 		OPTIONAL
@@ -704,6 +706,7 @@ DRB-Setup-Mod-Item-EUTRAN	::=	SEQUENCE {
 }
 
 DRB-Setup-Mod-Item-EUTRAN-ExtIEs		E1AP-PROTOCOL-EXTENSION ::= {
+{ ID id-DataForwardingSourceIPAddress			CRITICALITY ignore	EXTENSION TransportLayerAddress		PRESENCE optional},
 	...
 }
 
@@ -932,6 +935,7 @@ DRB-To-Setup-Mod-Item-EUTRAN	::=	SEQUENCE {
 }
 
 DRB-To-Setup-Mod-Item-EUTRAN-ExtIEs		E1AP-PROTOCOL-EXTENSION ::= {
+{ ID id-DataForwardingSourceIPAddress			CRITICALITY ignore	EXTENSION TransportLayerAddress		PRESENCE optional},
 	...
 }
 
@@ -1051,7 +1055,7 @@ EHC-Common-Parameters-ExtIEs E1AP-PROTOCOL-EXTENSION ::= {
 }
 
 EHC-Downlink-Parameters ::= SEQUENCE {
-	drb-ContinueEHC-DL					ENUMERATED { true, ...},
+	drb-ContinueEHC-DL					ENUMERATED { true, ..., false},
 	iE-Extensions						ProtocolExtensionContainer { { EHC-Downlink-Parameters-ExtIEs } } 		OPTIONAL
 }
 
@@ -1061,7 +1065,7 @@ EHC-Downlink-Parameters-ExtIEs E1AP-PROTOCOL-EXTENSION ::= {
 }
 
 EHC-Uplink-Parameters ::= SEQUENCE {
-	drb-ContinueEHC-UL					ENUMERATED { true, ...},
+	drb-ContinueEHC-UL					ENUMERATED { true, ..., false },
 	iE-Extensions						ProtocolExtensionContainer { { EHC-Uplink-Parameters-ExtIEs } } 		OPTIONAL
 }
 
@@ -1688,7 +1692,8 @@ PDCP-Configuration	::=	SEQUENCE {
 PDCP-Configuration-ExtIEs		E1AP-PROTOCOL-EXTENSION ::= {
 	{ID id-PDCP-StatusReportIndication					CRITICALITY ignore	EXTENSION PDCP-StatusReportIndication					PRESENCE	optional}|
 	{ ID id-AdditionalPDCPduplicationInformation		CRITICALITY ignore	EXTENSION AdditionalPDCPduplicationInformation	PRESENCE optional	}|
-	{ ID id-EHC-Parameters								CRITICALITY ignore	EXTENSION EHC-Parameters									PRESENCE optional},
+	{ ID id-EHC-Parameters								CRITICALITY ignore	EXTENSION EHC-Parameters										PRESENCE optional}|
+	{ ID id-DiscardTimerExtended						CRITICALITY reject	EXTENSION DiscardTimerExtended					PRESENCE optional},
 	...
 }
 

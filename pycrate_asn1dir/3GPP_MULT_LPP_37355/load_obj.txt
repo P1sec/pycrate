@@ -48,6 +48,8 @@ LPP-PDU-Definitions.EPDU-ID
 LPP-PDU-Definitions.EPDU-Name
 LPP-PDU-Definitions.EPDU-Body
 LPP-PDU-Definitions.FreqBandIndicatorNR-r16
+LPP-PDU-Definitions.HA-EllipsoidPointWithAltitudeAndScalableUncertaintyEllipsoid-r16
+LPP-PDU-Definitions.HA-EllipsoidPointWithScalableUncertaintyEllipse-r16
 LPP-PDU-Definitions.HighAccuracyEllipsoidPointWithUncertaintyEllipse-r15
 LPP-PDU-Definitions.HighAccuracyEllipsoidPointWithAltitudeAndUncertaintyEllipsoid-r15
 LPP-PDU-Definitions.HorizontalVelocity

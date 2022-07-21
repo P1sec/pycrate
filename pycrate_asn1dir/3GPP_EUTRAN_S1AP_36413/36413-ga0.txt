@@ -1,8 +1,37 @@
-﻿
+﻿3GPP TS 36.413 V16.10.0 (2022-06)
+Technical Specification
+3rd Generation Partnership Project;
+Technical Specification Group Radio Access Network;
+Evolved Universal Terrestrial Radio Access Network
+(E-UTRAN);
+S1 Application Protocol (S1AP)
+(Release 16)
 
 
+Keywords
+LTE, radio
 
+3GPP
+Postal address
 
+3GPP support office address
+650 Route des Lucioles - Sophia Antipolis
+Valbonne - FRANCE
+Tel.: +33 4 92 94 42 00 Fax: +33 4 93 65 47 16
+Internet
+http://www.3gpp.org
+
+Copyright Notification
+No part may be reproduced except as authorized by written permission.
+The copyright and the foregoing restriction extend to reproduction in all media.
+
+© 2022, 3GPP Organizational Partners (ARIB, ATIS, CCSA, ETSI, TSDSI, TTA, TTC).
+All rights reserved.
+
+UMTS™ is a Trade Mark of ETSI registered for the benefit of its members
+3GPP™ is a Trade Mark of ETSI registered for the benefit of its Members and of the 3GPP Organizational Partners
+LTE™ is a Trade Mark of ETSI registered for the benefit of its Members and of the 3GPP Organizational Partners
+GSM® and the GSM logo are registered and owned by the GSM Association
 Contents
 Foreword	15
 1	Scope	16
@@ -111,11 +140,11 @@ Foreword	15
 8.4.2.1	General	60
 8.4.2.2	Successful Operation	61
 8.4.2.3	Unsuccessful Operation	65
-8.4.2.4	Abnormal Conditions	65
+8.4.2.4	Abnormal Conditions	66
 8.4.3	Handover Notification	66
 8.4.3.1	General	66
 8.4.3.2	Successful Operation	66
-8.4.3.3	Abnormal Conditions	66
+8.4.3.3	Abnormal Conditions	67
 8.4.4	Path Switch Request	67
 8.4.4.1	General	67
 8.4.4.2	Successful Operation	67
@@ -123,7 +152,7 @@ Foreword	15
 8.4.4.4	Abnormal Conditions	70
 8.4.5	Handover Cancellation	70
 8.4.5.1	General	70
-8.4.5.2	Successful Operation	70
+8.4.5.2	Successful Operation	71
 8.4.5.3	Unsuccessful Operation	71
 8.4.5.4	Abnormal Conditions	71
 8.4.6	eNB Status Transfer	71
@@ -134,7 +163,7 @@ Foreword	15
 8.4.7	MME Status Transfer	72
 8.4.7.1	General	72
 8.4.7.2	Successful Operation	72
-8.4.7.3	Unsuccessful Operation	72
+8.4.7.3	Unsuccessful Operation	73
 8.4.7.4	Abnormal Conditions	73
 8.4.8	Handover Success	73
 8.4.8.1	General	73
@@ -142,38 +171,38 @@ Foreword	15
 8.4.8.3	Abnormal Conditions	73
 8.4.9	eNB Early Status Transfer	73
 8.4.9.1	General	73
-8.4.9.2	Successful Operation	73
+8.4.9.2	Successful Operation	74
 8.4.9.3	Unsuccessful Operation	74
 8.4.9.4	Abnormal Conditions	74
 8.4.10	MME Early Status Transfer	74
 8.4.10.1	General	74
 8.4.10.2	Successful Operation	74
-8.4.10.3	Unsuccessful Operation	74
-8.4.10.4	Abnormal Conditions	74
-8.5	Paging	74
-8.5.1	General	74
+8.4.10.3	Unsuccessful Operation	75
+8.4.10.4	Abnormal Conditions	75
+8.5	Paging	75
+8.5.1	General	75
 8.5.2	Successful Operation	75
 8.5.3	Unsuccessful Operation	76
 8.5.4	Abnormal Conditions	76
 8.6	NAS transport	76
 8.6.1	General	76
-8.6.2	Successful Operations	76
-8.6.2.1	Initial UE Message	76
+8.6.2	Successful Operations	77
+8.6.2.1	Initial UE Message	77
 8.6.2.2	DOWNLINK NAS TRANSPORT	78
-8.6.2.3	UPLINK NAS TRANSPORT	79
+8.6.2.3	UPLINK NAS TRANSPORT	80
 8.6.2.4	NAS NON DELIVERY INDICATION	80
-8.6.2.4a	NAS DELIVERY INDICATION	80
-8.6.2.5	Reroute NAS Request	80
+8.6.2.4a	NAS DELIVERY INDICATION	81
+8.6.2.5	Reroute NAS Request	81
 8.6.3	Unsuccessful Operation	81
 8.6.4	Abnormal Conditions	81
-8.7	Management procedures	81
-8.7.1	Reset	81
-8.7.1.1	General	81
+8.7	Management procedures	82
+8.7.1	Reset	82
+8.7.1.1	General	82
 8.7.1.2	Successful Operation	82
 8.7.1.2.1	Reset Procedure Initiated from the MME	82
 8.7.1.2.2	Reset Procedure Initiated from the E-UTRAN	83
-8.7.1.3	Abnormal Conditions	83
-8.7.1.3.1	Abnormal Condition at the EPC	83
+8.7.1.3	Abnormal Conditions	84
+8.7.1.3.1	Abnormal Condition at the EPC	84
 8.7.1.3.2	Abnormal Condition at the E-UTRAN	84
 8.7.1.3.3	Crossing of Reset Messages	84
 8.7.2	Error Indication	84
@@ -424,13 +453,13 @@ Foreword	15
 9.2.1.7	Source eNB to Target eNB Transparent Container	167
 9.2.1.8	Target eNB to Source eNB Transparent Container	169
 9.2.1.9	Source RNC to Target RNC Transparent Container	169
-9.2.1.10	Target RNC to Source RNC Transparent Container	169
-9.2.1.11	Source BSS to Target BSS Transparent Container	169
-9.2.1.12	Target BSS to Source BSS Transparent Container	169
+9.2.1.10	Target RNC to Source RNC Transparent Container	170
+9.2.1.11	Source BSS to Target BSS Transparent Container	170
+9.2.1.12	Target BSS to Source BSS Transparent Container	170
 9.2.1.13	Handover Type	170
 9.2.1.14	Extended RNC-ID	170
 9.2.1.15	E-RAB Level QoS Parameters	170
-9.2.1.16	Paging DRX	170
+9.2.1.16	Paging DRX	171
 9.2.1.17	Paging Cause	171
 9.2.1.18	GBR QoS Information	171
 9.2.1.19	Bit Rate	172
@@ -649,7 +678,7 @@ Foreword	15
 9.3.4	Information Element Definitions	318
 9.3.5	Common Definitions	378
 9.3.6	Constant Definitions	378
-9.3.7	Container Definitions	387
+9.3.7	Container Definitions	388
 9.4	Message Transfer Syntax	392
 9.5	Timers	392
 10	Handling of Unknown, Unforeseen and Erroneous Protocol Data	393
@@ -958,92 +987,116 @@ Successful Outcome
 Unsuccessful Outcome
 
 
+
 Response message
 Response message
+
 Handover Preparation
 HANDOVER REQUIRED
 HANDOVER COMMAND
 HANDOVER PREPARATION FAILURE
+
 Handover Resource Allocation
 HANDOVER REQUEST
 HANDOVER REQUEST ACKNOWLEDGE
 HANDOVER FAILURE
+
 Path Switch Request
 PATH SWITCH REQUEST
 PATH SWITCH REQUEST ACKNOWLEDGE
 PATH SWITCH REQUEST FAILURE
+
 Handover Cancellation
 HANDOVER CANCEL
 HANDOVER CANCEL ACKNOWLEDGE
+
 
 E-RAB Setup
 E-RAB SETUP REQUEST
 E-RAB SETUP RESPONSE
 
+
 E-RAB Modify
 E-RAB MODIFY REQUEST
 E-RAB MODIFY RESPONSE
+
 
 E-RAB Modification Indication
 E-RAB MODIFICATION INDICATION
 E-RAB MODIFICATION CONFIRM
 
+
 E-RAB Release
 E-RAB RELEASE COMMAND
 E-RAB RELEASE RESPONSE
+
 
 Initial Context Setup
 INITIAL CONTEXT SETUP REQUEST
 INITIAL CONTEXT SETUP RESPONSE
 INITIAL CONTEXT SETUP FAILURE
+
 Reset
 RESET
 RESET ACKNOWLEDGE
+
 
 S1 Setup
 S1 SETUP REQUEST
 S1 SETUP RESPONSE
 S1 SETUP FAILURE
+
 UE Context Release
 UE CONTEXT RELEASE COMMAND
 UE CONTEXT RELEASE COMPLETE
+
 
 UE Context Modification
 UE CONTEXT MODIFICATION REQUEST
 UE CONTEXT MODIFICATION RESPONSE
 UE CONTEXT MODIFICATION FAILURE
+
 eNB Configuration Update
 ENB CONFIGURATION UPDATE
 ENB CONFIGURATION UPDATE ACKNOWLEDGE
 ENB CONFIGURATION UPDATE FAILURE
+
 MME Configuration Update
 MME CONFIGURATION UPDATE
 MME CONFIGURAION UPDATE ACKNOWLEDGE
 MME CONFIGURATION UPDATE FAILURE
+
 Write-Replace Warning 
 WRITE-REPLACE WARNING REQUEST
 WRITE-REPLACE WARNING RESPONSE
+
 
 Kill
 KILL REQUEST
 KILL RESPONSE
 
+
 UE Radio Capability Match
 UE RADIO CAPABILITY MATCH REQUEST
 UE RADIO CAPABILITY MATCH RESPONSE
+
 
 UE Context Modification Indication
 UE CONTEXT MODIFICATION INDICATION
 UE CONTEXT MODIFICATION CONFIRM
 
+
 UE Context Suspend
 UE CONTEXT SUSPEND REQUEST
 UE CONTEXT SUSPEND RESPONSE
+
 
 UE Context Resume
 UE CONTEXT RESUME REQUEST
 UE CONTEXT RESUME RESPONSE
 UE CONTEXT RESUME FAILURE
+
+
 UE Radio Capability ID Mapping
 UE RADIO CAPABILITY ID MAPPING REQUEST
 UE RADIO CAPABILITY ID MAPPING RESPONSE
@@ -1711,6 +1764,7 @@ In case the SRVCC operation is performed, the SRVCC HO Indication IE in the HAND
 If the HANDOVER COMMAND message contains the DL GTP-TEID IE and the DL Transport Layer Address IE for a given bearer in the E-RABs Subject to Forwarding List IE, then the source eNB shall consider that the forwarding of downlink data for this given bearer is possible.
 If the HANDOVER COMMAND message contains the UL GTP-TEID IE and the UL Transport Layer Address IE for a given bearer in the E-RABs Subject to Forwarding List IE, then it means the target eNB has requested the forwarding of uplink data for this given bearer.
 If the DAPS Request Information IE is included for an E-RAB in the Source eNB to Target eNB Transparent Container IE within the HANDOVER REQUIRED message, it indicates that the request concerns a DAPS Handover for that E-RAB, as described in TS 36.300 [14].
+If the Direct Forwarding Path Availability IE is included in the Target eNB to Source eNB Transparent Container IE, the source eNB shall, if supported, use it for direct data forwarding between the source SN and the target eNB as specified in TS 37.340 [32].
 Interactions with E-RAB Management procedures:
 If, after a HANDOVER REQUIRED message is sent and before the Handover Preparation procedure is terminated, the source eNB receives an MME initiated E-RAB Management procedure on the same UE associated signalling connection, the source eNB shall either:
 1.	cancel the Handover Preparation procedure by executing the Handover Cancel procedure with an appropriate cause value. After successful completion of the Handover Cancel procedure, the source eNB shall continue the MME initiated E-RAB Management procedure
@@ -1802,7 +1856,10 @@ The cells that exceed the threshold in the first UE measurement report are inclu
 If the UE Radio Capability ID IE is included in the HANDOVER REQUEST message, the eNB shall, if supported, use it as defined in TS 23.401 [11].
 If the DAPS Request Information IE is included for an E-RAB in the Source eNB to Target eNB Transparent Container IE within the HANDOVER REQUEST message, the target eNB shall consider that the request concerns a DAPS Handover for that E-RAB, as described in TS 36.300 [14]. The target eNB shall include the DAPS Response information List IE in the Target eNB to Source eNB Transparent Container IE within the HANDOVER REQUEST ACKNOWLEDGE message, containing the DAPS Response Information IE for each E-RAB requested to be configured with DAPS Handover.
 If the IMS voice EPS fallback from 5G IE is included in the Source eNB to Target eNB Transparent Container IE within the HANDOVER REQUEST message, the target eNB shall, if supported, store the information in the UE context and consider that the UE is handed over from NG-RAN to E-UTRAN due to an IMS voice fallback.
-If for a given QoS flow the Source Transport Layer Address IE is included within the Source eNB to Target eNB Transparent Container IE in the HANDOVER REQUEST message, the target eNB shall, if supported, store this information and use it as part of its ACL functionality configuration actions for direct data forwarding, if such ACL functionality is deployed.
+If for a given E-RAB the Source Transport Layer Address IE is included within the Source eNB to Target eNB Transparent Container IE in the HANDOVER REQUEST message, the target eNB shall, if supported, store this information and use it as part of its ACL functionality configuration actions for direct data forwarding, if such ACL functionality is deployed.
+If for a given E-RAB the Source Node Transport Layer Address IE is included within the Source eNB to Target eNB Transparent Container IE in the HANDOVER REQUEST message, the target eNB shall, if supported, store this information and use it as part of its ACL functionality configuration actions for direct data forwarding, if such ACL functionality is deployed.
+If the Direct Forwarding Path Availability IE is included in the Source eNB to Target eNB Transparent Container IE within the HANDOVER REQUEST message, the target eNB may use the information to assign tunnel endpoints in case of inter-system handover.
+If the Source SN ID IE is included in the Source eNB to Target eNB Transparent Container IE within the HANDOVER REQUEST message, the target eNB shall, if supported, use it to decide whether direct forwarding path is available between the target eNB and this source RAN node. If the direct forwarding path is available, the target eNB shall include the Direct Forwarding Path Availability IE in the Target eNB to Source eNB Transparent Container IE within the HANDOVER REQUEST ACKNOWLEDGE message.
 8.4.2.3	Unsuccessful Operation
 
 Figure 8.4.2.3-1: Handover resource allocation: unsuccessful operation
@@ -2147,7 +2204,7 @@ If the S1 SETUP REQUEST message contains the eNB Name IE the MME may use this IE
 If the S1 SETUP RESPONSE message contains the MME Name IE the eNB may use this IE as a human readable name of the MME.
 If the MME Relay Support Indicator IE is included in the S1 SETUP RESPONSE message, the eNB shall consider this information when selecting an appropriate MME for the Relay Node.
 If the UE Retention Information IE set to “ues-retained“ was included in the S1 SETUP REQUEST message, then the MME may accept the proposal to retain the existing UE related contexts and signalling connections by including the UE Retention Information IE set to “ues-retained“ in the S1 SETUP RESPONSE message.
-If the NB-IoT Default Paging DRX IE is included in the S1 SETUP REQUEST message, the MME will take it into account as specified in TS36.300 [14].
+If the NB-IoT Default Paging DRX IE is included in the S1 SETUP REQUEST message, the MME will take it into account as specified in TS 36.300 [14].
 If the Connected en-gNB List IE is included in the S1 SETUP REQUEST message, the MME shall take it into account as specified in TS 36.300 [14].
 If the S1 SETUP RESPONSE message contains the ServedDCNs IE then the eNB shall, if supported, use it as defined in TS 23.401 [11].
 If the S1 SETUP RESPONSE message contains the GUMMEI Type IE then the eNB shall, if supported, use it to route the UE to the correct MME as specified in TS 23.401 [11].
@@ -2217,7 +2274,7 @@ If the Overload Action IE in the Overload Response IE within the OVERLOAD START 
 -	"only permit RRC connection establishments for emergency sessions and mobile terminated services" (i.e., only permit traffic corresponding to RRC cause "emergency" and "mt-Access" in TS 36.331 [16]), or
 -	"only permit RRC connection establishments for high priority sessions and mobile terminated services" (i.e., only permit traffic corresponding to RRC cause "highPriorityAccess" and "mt-Access" in TS 36.331 [16]), or
 -	"reject only RRC connection establishment for delay tolerant access" (i.e., only reject traffic corresponding to RRC cause "delayTolerantAccess" in TS 36.331 [16]), or
--	"not accept RRC connection requests for data transmission from UEs that only support Control Plane CIoT EPS Optimisation" (i.e. not accept traffic corresponding to RRC cause "mo-data" or "delayTolerantAccess" in TS36.331 [16] for those UEs), or
+-	"not accept RRC connection requests for data transmission from UEs that only support Control Plane CIoT EPS Optimisation" (i.e. not accept traffic corresponding to RRC cause "mo-data" or "delayTolerantAccess" in TS 36.331 [16] for those UEs), or
 -	"only permit RRC connection establishments for high priority sessions, exception reporting and mobile terminated services" (i.e., only permit traffic corresponding to RRC cause "highPriorityAccess", “mo-ExceptionData” and "mt-Access" in TS 36.331 [16]),
 the eNB shall:
 -	if the Traffic Load Reduction Indication IE is included in the OVERLOAD START message and, if supported, reduce the signalling traffic indicated as to be rejected by the indicated percentage,
@@ -10435,12 +10492,14 @@ IE type and reference
 Semantics description
 Criticality
 Assigned Criticality
+
 RRC Container
 M
 
 OCTET STRING
 Includes the RRC Handover Preparation Information message as defined in subclause 10.2.2 of TS 36.331 [16].
 -
+
 
 E-RABs Information List
 
@@ -10449,6 +10508,7 @@ E-RABs Information List
 
 -
 
+
 >E-RABs Information Item
 
 1 .. <maxnoof E-RABs>
@@ -10456,12 +10516,14 @@ E-RABs Information List
 
 EACH
 ignore
+
 >>E-RAB ID
 M
 
 9.2.1.2
 
 -
+
 
 >>DL Forwarding
 O
@@ -10470,6 +10532,7 @@ O
 
 -
 
+
 >>DAPS Request Information
 O
 
@@ -10477,6 +10540,7 @@ O
 
 YES
 ignore
+
 >>Source Transport Layer Address
 O
 
@@ -10485,6 +10549,16 @@ Identifies the TNL address used by the sending node for direct data forwarding
 towards the target eNB
 YES
 ignore
+
+>>Source Node Transport Layer Address
+O
+
+9.2.2.1
+Identifies the TNL address used by the source SN node for direct data forwarding
+towards the target eNB
+YES
+ignore
+
 Target Cell ID
 M
 
@@ -10493,12 +10567,14 @@ E-UTRAN CGI
 
 -
 
+
 Subscriber Profile ID for RAT/Frequency priority
 O
 
 9.2.1.39
 
 -
+
 
 UE History Information
 M
@@ -10507,6 +10583,7 @@ M
 
 -
 
+
 Mobility Information
 O
 
@@ -10514,6 +10591,7 @@ BIT STRING (SIZE (32))
 Information related to the handover; the external handover source provides it in order to enable later analysis of the conditions that led to a wrong HO.
 YES
 ignore
+
 UE History Information from the UE
 O
 
@@ -10521,6 +10599,7 @@ OCTET STRING
 VisitedCellInfoList contained in the UEInformationResponse message (TS 36.331 [16])
 YES
 ignore
+
 IMS voice EPS fallback from 5G
 O
 
@@ -10528,6 +10607,7 @@ ENUMERATED (true, …)
 
 YES
 ignore
+
 Additional RRM Policy Index
 O
 
@@ -10535,6 +10615,7 @@ O
 
 YES
 ignore
+
 UE Context Reference at Source
 O
 
@@ -10542,6 +10623,8 @@ O
 
 YES
 ignore
+
+
 Inter-system measurement Configuration
 O
 
@@ -10549,6 +10632,7 @@ O
 
 YES
 ignore
+
 Source Node ID
 O
 
@@ -10556,11 +10640,29 @@ O
 
 YES
 ignore
+
 Emergency Indicator
 O
 
 ENUMERATED (true, …)
 Indicates an emergency EPS voice fallback
+YES
+ignore
+
+Direct Forwarding Path Availability
+O
+
+9.2.3.15
+Indicates whether a direct forwarding path between the source RAN node and the target eNB is available
+YES
+ignore
+
+Source SN ID
+O
+
+Global RAN Node ID
+9.2.1.131
+
 YES
 ignore
 
@@ -10614,6 +10716,13 @@ M
 Indicates the response to a requested DAPS Handover
 -
 
+Direct Forwarding Path Availability
+O
+
+9.2.3.15
+Indicates whether a direct forwarding path between the source SN and the target eNB is available for intra-system and inter-system handover with 5GS
+YES
+ignore
 
 Range bound
 Explanation
@@ -15838,16 +15947,20 @@ Presence
 Range
 IE type and reference
 Semantics description
+
 UE RLF Report Container
 M
 
 OCTET STRING
 rlf-Report-r9 contained in UEInformationResponse message as defined in TS 36.331 [16].
+
 UE RLF Report Container for extended bands
 O
 
 OCTET STRING
 rlf-Report-v9e0 contained in the UEInformationResponse message (TS 36.331 [16])
+
+
 NB-IoT RLF Report Container
 O
 
@@ -20304,6 +20417,9 @@ IMPORTS
 	id-TraceCollectionEntityURI,
 	id-EmergencyIndicator,
 	id-SourceTransportLayerAddress,
+	id-SourceNodeTransportLayerAddress,
+	id-SourceSNID,
+	id-Direct-Forwarding-Path-Availability,
 	maxnoofCSGs,
 	maxnoofE-RABs,
 	maxnoofErrors,
@@ -21300,8 +21416,9 @@ E-RABInformationListItem ::= SEQUENCE {
 }
 
 E-RABInformationListItem-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
-	{ ID id-DAPSRequestInfo						CRITICALITY ignore	EXTENSION DAPSRequestInfo	PRESENCE optional }|
-	{ ID id-SourceTransportLayerAddress			CRITICALITY ignore	EXTENSION TransportLayerAddress				PRESENCE optional},
+	{ ID id-DAPSRequestInfo						CRITICALITY ignore	EXTENSION DAPSRequestInfo						PRESENCE optional }|
+	{ ID id-SourceTransportLayerAddress			CRITICALITY ignore	EXTENSION TransportLayerAddress				PRESENCE optional}|
+	{ ID id-SourceNodeTransportLayerAddress		CRITICALITY ignore	EXTENSION TransportLayerAddress				PRESENCE optional},
 	...
 }
 
@@ -22639,14 +22756,16 @@ SourceeNB-ToTargeteNB-TransparentContainer		::= SEQUENCE {
 }
 
 SourceeNB-ToTargeteNB-TransparentContainer-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
-	{ID id-MobilityInformation					CRITICALITY ignore	EXTENSION MobilityInformation						PRESENCE optional}|
-	{ID id-uE-HistoryInformationFromTheUE		CRITICALITY ignore	EXTENSION UE-HistoryInformationFromTheUE		PRESENCE optional}|
-	{ID id-IMSvoiceEPSfallbackfrom5G			CRITICALITY ignore	EXTENSION IMSvoiceEPSfallbackfrom5G				PRESENCE optional}|
-	{ID id-AdditionalRRMPriorityIndex			CRITICALITY ignore	EXTENSION AdditionalRRMPriorityIndex				PRESENCE optional}|
-	{ID id-ContextatSource						CRITICALITY ignore	EXTENSION ContextatSource							PRESENCE optional}|
-	{ID id-IntersystemMeasurementConfiguration	CRITICALITY ignore	EXTENSION IntersystemMeasurementConfiguration	PRESENCE optional}|
+	{ID id-MobilityInformation					CRITICALITY ignore	EXTENSION MobilityInformation								PRESENCE optional}|
+	{ID id-uE-HistoryInformationFromTheUE		CRITICALITY ignore	EXTENSION UE-HistoryInformationFromTheUE				PRESENCE optional}|
+	{ID id-IMSvoiceEPSfallbackfrom5G			CRITICALITY ignore	EXTENSION IMSvoiceEPSfallbackfrom5G						PRESENCE optional}|
+	{ID id-AdditionalRRMPriorityIndex			CRITICALITY ignore	EXTENSION AdditionalRRMPriorityIndex					PRESENCE optional}|
+	{ID id-ContextatSource						CRITICALITY ignore	EXTENSION ContextatSource									PRESENCE optional}|
+	{ID id-IntersystemMeasurementConfiguration	CRITICALITY ignore	EXTENSION IntersystemMeasurementConfiguration		PRESENCE optional}|
 	{ID id-SourceNodeID							CRITICALITY ignore	EXTENSION SourceNodeID										PRESENCE optional}|
-	{ID id-EmergencyIndicator					CRITICALITY ignore	EXTENSION EmergencyIndicator								PRESENCE optional},
+	{ID id-EmergencyIndicator					CRITICALITY ignore	EXTENSION EmergencyIndicator								PRESENCE optional}|
+	{ID id-Direct-Forwarding-Path-Availability		CRITICALITY ignore	EXTENSION Direct-Forwarding-Path-Availability			PRESENCE optional}|
+	{ID id-SourceSNID							CRITICALITY ignore	EXTENSION Global-RAN-NODE-ID								PRESENCE optional},
 	...
 }
 
@@ -22959,7 +23078,8 @@ TargeteNB-ToSourceeNB-TransparentContainer		::= SEQUENCE {
 }
 
 TargeteNB-ToSourceeNB-TransparentContainer-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
-	{ ID id-DAPSResponseInfoList						CRITICALITY ignore	EXTENSION DAPSResponseInfoList	PRESENCE optional},
+	{ ID id-DAPSResponseInfoList					CRITICALITY ignore	EXTENSION DAPSResponseInfoList							PRESENCE optional}|
+	{ ID id-Direct-Forwarding-Path-Availability		CRITICALITY ignore	EXTENSION Direct-Forwarding-Path-Availability			PRESENCE optional},
 	...
 }
 
@@ -23852,6 +23972,8 @@ id-TraceCollectionEntityURI							ProtocolIE-ID ::= 325
 id-EmergencyIndicator								ProtocolIE-ID ::= 326
 id-UERadioCapabilityForPaging-NR-Format 			ProtocolIE-ID ::= 327
 id-SourceTransportLayerAddress						ProtocolIE-ID ::= 328
+id-SourceNodeTransportLayerAddress					ProtocolIE-ID ::= 340
+id-SourceSNID										ProtocolIE-ID ::= 343
 
 END
 
@@ -25465,13 +25587,13 @@ RAN3 agreed changes for TS 36.413
 RP-080584
 0223
 
-changes to TS36.413 agreed in RAN3#61
+changes to TS 36.413 agreed in RAN3#61
 8.3.0
 42
 RP-080846
 0325
 1
-changes to TS36.413 agreed in RAN3#62
+changes to TS 36.413 agreed in RAN3#62
 8.4.0
 43
 RP-090083
@@ -28437,4 +28559,28 @@ RP-220280
 F
 Correction of maxNARFCN in ASN.1
 16.9.0
+2022-06
+RP-96
+RP-221150
+1879
+1
+F
+Dynamic ACL over S1 CR 36.413
+16.10.0
+2022-06
+RP-96
+RP-221157
+1889
+1
+F
+Data forwarding address allocation for handover to EN-DC
+16.10.0
+2022-06
+RP-96
+RP-221157
+1890
+1
+F
+Direct data forwarding for mobility from MR-DC to eNB
+16.10.0
 

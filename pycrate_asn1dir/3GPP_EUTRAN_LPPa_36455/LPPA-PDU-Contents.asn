@@ -97,7 +97,7 @@ E-CIDMeasurementInitiationRequest-IEs LPPA-PROTOCOL-IES ::= {
 	{ ID id-E-SMLC-UE-Measurement-ID		CRITICALITY reject	TYPE Measurement-ID						PRESENCE mandatory}|
 	{ ID id-ReportCharacteristics			CRITICALITY reject	TYPE ReportCharacteristics				PRESENCE mandatory}|
 	{ ID id-MeasurementPeriodicity			CRITICALITY reject	TYPE MeasurementPeriodicity				PRESENCE conditional}|
--- The IE shall be present if the Report Characteritics IE is set to “periodic” --
+-- The IE shall be present if the Report Characteritics IE is set to "periodic" --
 	{ ID id-MeasurementQuantities			CRITICALITY reject	TYPE MeasurementQuantities				PRESENCE mandatory}|
 	{ ID id-InterRATMeasurementQuantities	CRITICALITY ignore	TYPE InterRATMeasurementQuantities	PRESENCE optional}|
 	{ ID id-WLANMeasurementQuantities		CRITICALITY ignore	TYPE WLANMeasurementQuantities			PRESENCE optional},

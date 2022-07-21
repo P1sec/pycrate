@@ -1497,7 +1497,7 @@ PagingIEs S1AP-PROTOCOL-IES ::= {
 	{ ID id-CSG-IdList						CRITICALITY ignore	TYPE CSG-IdList							PRESENCE optional}|
 	{ ID id-PagingPriority					CRITICALITY ignore	TYPE PagingPriority						PRESENCE optional}|
 	{ ID id-UERadioCapabilityForPaging		CRITICALITY ignore	TYPE UERadioCapabilityForPaging			PRESENCE optional}|
--- Extension for Release 13 to support Paging Optimisation and Coverage Enhancement paging –-
+-- Extension for Release 13 to support Paging Optimisation and Coverage Enhancement paging --
 	{ ID id-AssistanceDataForPaging			CRITICALITY ignore	TYPE AssistanceDataForPaging			PRESENCE optional}|
 	{ ID id-Paging-eDRXInformation			CRITICALITY ignore	TYPE Paging-eDRXInformation				PRESENCE optional}|
 	{ ID id-extended-UEIdentityIndexValue	CRITICALITY ignore	TYPE Extended-UEIdentityIndexValue	PRESENCE optional}|
@@ -1591,7 +1591,7 @@ UEContextReleaseComplete-IEs S1AP-PROTOCOL-IES ::= {
 	{ ID id-UserLocationInformation						CRITICALITY ignore	TYPE UserLocationInformation				PRESENCE optional}|
 -- Extension for Release 13 to support Paging Optimisation
 	{ ID id-InformationOnRecommendedCellsAndENBsForPaging	CRITICALITY ignore	TYPE InformationOnRecommendedCellsAndENBsForPaging		PRESENCE optional}|
--- Extension for Release 13 to support coverage enhancement paging –
+-- Extension for Release 13 to support coverage enhancement paging -
 	{ ID id-CellIdentifierAndCELevelForCECapableUEs		CRITICALITY ignore	TYPE CellIdentifierAndCELevelForCECapableUEs	PRESENCE optional}|
 	{ ID id-SecondaryRATDataUsageReportList				CRITICALITY ignore	TYPE SecondaryRATDataUsageReportList		PRESENCE optional }|
 	{ ID id-TimeSinceSecondaryNodeRelease				CRITICALITY ignore	TYPE TimeSinceSecondaryNodeRelease				PRESENCE optional },

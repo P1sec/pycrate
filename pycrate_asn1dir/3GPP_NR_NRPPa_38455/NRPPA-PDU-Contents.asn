@@ -57,7 +57,9 @@ IMPORTS
 	AbortTransmission,
 	SystemFrameNumber,
 	SlotNumber,
-	RelativeTime1900
+	RelativeTime1900,
+	SpatialRelationPerSRSResource,
+	MeasurementPeriodicityExtended
 
 
 FROM NRPPA-IEs
@@ -116,7 +118,9 @@ FROM NRPPA-Containers
 	id-SystemFrameNumber,
 	id-SlotNumber,
 	id-SRSResourceTrigger,
-	id-SFNInitialisationTime
+	id-SFNInitialisationTime,
+	id-SRSSpatialRelationPerSRSResource,
+	id-MeasurementPeriodicityExtended
 
 
 
@@ -137,7 +141,7 @@ E-CIDMeasurementInitiationRequest-IEs NRPPA-PROTOCOL-IES ::= {
 	{ ID id-LMF-UE-Measurement-ID			CRITICALITY reject	TYPE UE-Measurement-ID						PRESENCE mandatory}|
 	{ ID id-ReportCharacteristics			CRITICALITY reject	TYPE ReportCharacteristics				PRESENCE mandatory}|
 	{ ID id-MeasurementPeriodicity			CRITICALITY reject	TYPE MeasurementPeriodicity				PRESENCE conditional}|
--- The IE shall be present if the Report Characteritics IE is set to “periodic” --
+-- The IE shall be present if the Report Characteritics IE is set to "periodic" --
 	{ ID id-MeasurementQuantities			CRITICALITY reject	TYPE MeasurementQuantities				PRESENCE mandatory}|
 	{ ID id-OtherRATMeasurementQuantities	CRITICALITY ignore	TYPE OtherRATMeasurementQuantities		PRESENCE optional}|
 	{ ID id-WLANMeasurementQuantities		CRITICALITY ignore	TYPE WLANMeasurementQuantities			PRESENCE optional},
@@ -464,13 +468,16 @@ MeasurementRequest-IEs NRPPA-PROTOCOL-IES ::= {
 	{ ID id-TRP-MeasurementRequestList		CRITICALITY reject	TYPE TRP-MeasurementRequestList PRESENCE mandatory}|
 	{ ID id-ReportCharacteristics			CRITICALITY reject	TYPE ReportCharacteristics		PRESENCE mandatory}|
 	{ ID id-MeasurementPeriodicity			CRITICALITY reject	TYPE MeasurementPeriodicity		PRESENCE conditional}|
--- The IE shall be present if the Report Characteritics IE is set to “periodic” –
+-- The IE shall be present if the Report Characteritics IE is set to "periodic" -
 	{ ID id-TRPMeasurementQuantities			CRITICALITY reject	TYPE TRPMeasurementQuantities		PRESENCE mandatory}|
 	{ ID id-SFNInitialisationTime			CRITICALITY ignore	TYPE RelativeTime1900		PRESENCE optional}|
 	{ ID id-SRSConfiguration				CRITICALITY ignore	TYPE SRSConfiguration			PRESENCE optional}|
 	{ ID id-MeasurementBeamInfoRequest		CRITICALITY ignore	TYPE MeasurementBeamInfoRequest	PRESENCE optional}|
 	{ ID id-SystemFrameNumber				CRITICALITY ignore	TYPE SystemFrameNumber			PRESENCE optional}|
-	{ ID id-SlotNumber						CRITICALITY ignore	TYPE SlotNumber					PRESENCE optional},
+	{ ID id-SlotNumber						CRITICALITY ignore	TYPE SlotNumber					PRESENCE optional}|
+	{ ID id-MeasurementPeriodicityExtended	CRITICALITY reject	TYPE MeasurementPeriodicityExtended PRESENCE conditional}
+-- The IE shall be present the MeasurementPeriodicity IE is set to the value "extended"
+,
 	...
 }
 
@@ -657,7 +664,7 @@ PositioningActivationRequestIEs NRPPA-PROTOCOL-IES ::= {
 SRSType ::= CHOICE {
 	semipersistentSRS				SemipersistentSRS,
 	aperiodicSRS					AperiodicSRS,
-	sRSType-extension				ProtocolIE-Single-Container { { SRSType-ExtIEs} }
+	choice-Extension				ProtocolIE-Single-Container { { SRSType-ExtIEs} }
 }
 
 SRSType-ExtIEs NRPPA-PROTOCOL-IES ::= {
@@ -671,8 +678,9 @@ SemipersistentSRS ::= SEQUENCE {
 }
 
 SemipersistentSRS-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
-{ ID id-SRSSpatialRelation	CRITICALITY ignore	EXTENSION SpatialRelationInfo PRESENCE optional},
-...
+	{ ID id-SRSSpatialRelation					CRITICALITY ignore	EXTENSION SpatialRelationInfo					PRESENCE optional}|
+	{ ID id-SRSSpatialRelationPerSRSResource		CRITICALITY ignore	EXTENSION SpatialRelationPerSRSResource	PRESENCE optional},
+	...
 }
 
 AperiodicSRS ::= SEQUENCE {

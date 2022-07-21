@@ -478,5 +478,7 @@ id-TraceCollectionEntityURI							ProtocolIE-ID ::= 325
 id-EmergencyIndicator								ProtocolIE-ID ::= 326
 id-UERadioCapabilityForPaging-NR-Format 			ProtocolIE-ID ::= 327
 id-SourceTransportLayerAddress						ProtocolIE-ID ::= 328
+id-SourceNodeTransportLayerAddress					ProtocolIE-ID ::= 340
+id-SourceSNID										ProtocolIE-ID ::= 343
 
 END

@@ -1,8 +1,5 @@
 
-LPP-PDU-Definitions {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
-eps-Access (21) modules (3) lpp (7) version1 (1) lpp-PDU-Definitions (1) }
-
+LPP-PDU-Definitions
 DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
@@ -447,6 +444,30 @@ EPDU-Body ::= OCTET STRING
 FreqBandIndicatorNR-r16 ::= INTEGER (1..1024)
 
 
+HA-EllipsoidPointWithAltitudeAndScalableUncertaintyEllipsoid-r16 ::= SEQUENCE {
+	degreesLatitude-r16							INTEGER(-2147483648..2147483647),
+	degreesLongitude-r16						INTEGER(-2147483648..2147483647),
+	altitude-r16								INTEGER(-64000..1280000),
+	uncertaintySemiMajor-r16					INTEGER (0..255),
+	uncertaintySemiMinor-r16					INTEGER (0..255),
+	orientationMajorAxis-r16					INTEGER (0..179),
+	horizontalConfidence-r16					INTEGER (0..100),
+	uncertaintyAltitude-r16						INTEGER (0..255),
+	verticalConfidence-r16						INTEGER (0..100),
+	ha-HorizontalExtendedRangeUsed-r16			BOOLEAN,
+	ha-VerticalExtendedRangeUsed-r16			BOOLEAN
+}
+
+HA-EllipsoidPointWithScalableUncertaintyEllipse-r16 ::= SEQUENCE {
+	degreesLatitude-r16							INTEGER(-2147483648..2147483647),
+	degreesLongitude-r16						INTEGER(-2147483648..2147483647),
+	uncertaintySemiMajor-r16					INTEGER (0..255),
+	uncertaintySemiMinor-r16					INTEGER (0..255),
+	orientationMajorAxis-r16					INTEGER (0..179),
+	confidence-r16								INTEGER (0..100),
+	ha-ExtendedUncertaintyRangeUsed-r16			BOOLEAN
+}
+
 HighAccuracyEllipsoidPointWithUncertaintyEllipse-r15 ::= SEQUENCE {
 	degreesLatitude-r15				INTEGER(-2147483648..2147483647),
 	degreesLongitude-r15			INTEGER(-2147483648..2147483647),
@@ -514,6 +535,12 @@ LocationCoordinateTypes ::= SEQUENCE {
 		highAccuracyEllipsoidPointWithUncertaintyEllipse-r15
 															BOOLEAN		OPTIONAL, -- Need ON
 		highAccuracyEllipsoidPointWithAltitudeAndUncertaintyEllipsoid-r15
+															BOOLEAN		OPTIONAL  -- Need ON
+	]],
+	[[
+		ha-EllipsoidPointWithScalableUncertaintyEllipse-r16
+															BOOLEAN		OPTIONAL, -- Need ON
+		ha-EllipsoidPointWithAltitudeAndScalableUncertaintyEllipsoid-r16
 															BOOLEAN		OPTIONAL  -- Need ON
 	]]
 }
@@ -769,7 +796,10 @@ LocationCoordinates ::= CHOICE {
 	highAccuracyEllipsoidPointWithUncertaintyEllipse-v1510
 								HighAccuracyEllipsoidPointWithUncertaintyEllipse-r15,
 	highAccuracyEllipsoidPointWithAltitudeAndUncertaintyEllipsoid-v1510
-								HighAccuracyEllipsoidPointWithAltitudeAndUncertaintyEllipsoid-r15
+								HighAccuracyEllipsoidPointWithAltitudeAndUncertaintyEllipsoid-r15,
+	ha-EllipsoidPointWithScalableUncertaintyEllipse-v1680																				HA-EllipsoidPointWithScalableUncertaintyEllipse-r16,
+	ha-EllipsoidPointWithAltitudeAndScalableUncertaintyEllipsoid-v1680
+								HA-EllipsoidPointWithAltitudeAndScalableUncertaintyEllipsoid-r16
 }
 
 Velocity ::= CHOICE {
@@ -889,7 +919,10 @@ NR-DL-PRS-AssistanceDataPerTRP-r16 ::= SEQUENCE {
 	nr-DL-PRS-ExpectedRSTD-Uncertainty-r16
 									INTEGER (0..246),
 	nr-DL-PRS-Info-r16				NR-DL-PRS-Info-r16,
-	...
+	...,
+	[[
+		prs-OnlyTP-r16				ENUMERATED { true }		OPTIONAL	-- Need ON
+	]]
 }
 
 NR-DL-PRS-PositioningFrequencyLayer-r16 ::= SEQUENCE {
@@ -1265,15 +1298,15 @@ NR-SelectedDL-PRS-PerFreq-r16 ::= SEQUENCE {
 	nr-SelectedDL-PRS-FrequencyLayerIndex-r16	INTEGER (0..nrMaxFreqLayers-1-r16),
 	nr-SelectedDL-PRS-IndexListPerFreq-r16 		SEQUENCE (SIZE (1..nrMaxTRPsPerFreq-r16)) OF
 														NR-SelectedDL-PRS-IndexPerTRP-r16
-																			OPTIONAL,	--Need ON
+																			OPTIONAL,	--Need OP
 	...
 }
 
 NR-SelectedDL-PRS-IndexPerTRP-r16 ::= SEQUENCE {
 	nr-SelectedTRP-Index-r16					INTEGER (0..nrMaxTRPsPerFreq-1-r16),
-	dl-SelectedPRS-ResourceSetIndexList-r16		SEQUENCE (SIZE (1..nrMaxSetsPerTrpPerFreqLayer-r16)) OF
-														DL-SelectedPRS-ResourceSetIndex-r16
-																			OPTIONAL,	--Need ON
+	dl-SelectedPRS-ResourceSetIndexList-r16		SEQUENCE (SIZE (1..nrMaxSetsPerTrpPerFreqLayer-r16))
+													OF	DL-SelectedPRS-ResourceSetIndex-r16
+																			OPTIONAL,	--Need OP
 	...
 }
 
@@ -1281,7 +1314,7 @@ DL-SelectedPRS-ResourceSetIndex-r16 ::= SEQUENCE {
 	nr-DL-SelectedPRS-ResourceSetIndex-r16		INTEGER (0..nrMaxSetsPerTrpPerFreqLayer-1-r16),
 	dl-SelectedPRS-ResourceIndexList-r16		SEQUENCE (SIZE (1..nrMaxResourcesPerSet-r16)) OF
 														DL-SelectedPRS-ResourceIndex-r16
-																			OPTIONAL	--Need ON
+																			OPTIONAL	--Need OP
 }
 
 DL-SelectedPRS-ResourceIndex-r16 ::= SEQUENCE {
@@ -2458,7 +2491,9 @@ BDS-ClockModel-r12 ::= SEQUENCE {
 	bdsA1-r12			INTEGER (-2097152..2097151),
 	bdsA2-r12			INTEGER (-1024..1023),
 	bdsTgd1-r12			INTEGER (-512..511),
-	...
+	...,
+	[[ bdsTgd2-r16		INTEGER (-512..511)			OPTIONAL		-- Need ON
+	]]
 }
 
 BDS-ClockModel2-r16 ::= SEQUENCE {
@@ -4030,7 +4065,7 @@ GNSS-GenericAssistanceDataSupport ::=
 
 GNSS-GenericAssistDataSupportElement ::= SEQUENCE {
 	gnss-ID								GNSS-ID,
-	sbas-ID								SBAS-ID						OPTIONAL, -- Cond GNSS‑ID‑SBAS
+	sbas-ID								SBAS-ID						OPTIONAL, -- Cond GNSS-ID-SBAS
 	gnss-TimeModelsSupport				GNSS-TimeModelListSupport
 																	OPTIONAL, -- Cond TimeModSup
 	gnss-DifferentialCorrectionsSupport	GNSS-DifferentialCorrectionsSupport

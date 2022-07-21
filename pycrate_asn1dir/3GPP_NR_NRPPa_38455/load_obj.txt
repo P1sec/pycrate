@@ -128,6 +128,10 @@ NRPPA-Constants.id-CGI-NR
 NRPPA-Constants.id-SFNInitialisationTime-NR
 NRPPA-Constants.id-Cell-ID
 NRPPA-Constants.id-SrsFrequency
+NRPPA-Constants.id-TRPType
+NRPPA-Constants.id-SRSSpatialRelationPerSRSResource
+NRPPA-Constants.id-MeasurementPeriodicityExtended
+NRPPA-Constants.id-PRS-Resource-ID
 NRPPA-Containers.NRPPA-PROTOCOL-IES
 NRPPA-Containers.NRPPA-PROTOCOL-EXTENSION
 NRPPA-Containers.NRPPA-PRIVATE-IES
@@ -181,6 +185,7 @@ NRPPA-IEs.Measurement-ID
 NRPPA-IEs.MeasurementBeamInfoRequest
 NRPPA-IEs.MeasurementBeamInfo-ExtIEs
 NRPPA-IEs.MeasurementPeriodicity
+NRPPA-IEs.MeasurementPeriodicityExtended
 NRPPA-IEs.MeasurementQuantities-ItemIEs
 NRPPA-IEs.MeasurementQuantitiesValue-ExtIEs
 NRPPA-IEs.MeasurementQuantitiesValue
@@ -313,6 +318,9 @@ NRPPA-IEs.SpatialDirectionInformation-ExtIEs
 NRPPA-IEs.SpatialRelationInfo-ExtIEs
 NRPPA-IEs.SpatialRelationforResourceID
 NRPPA-IEs.SpatialRelationforResourceIDItem-ExtIEs
+NRPPA-IEs.SpatialRelationPerSRSResource-ExtIEs
+NRPPA-IEs.SpatialRelationPerSRSResource-List
+NRPPA-IEs.SpatialRelationPerSRSResourceItem-ExtIEs
 NRPPA-IEs.SpatialInformationPos-ExtIEs
 NRPPA-IEs.SRSConfig-ExtIEs
 NRPPA-IEs.SRSCarrier-List
@@ -372,6 +380,7 @@ NRPPA-IEs.TRPPositionDirect-ExtIEs
 NRPPA-IEs.TRPPositionDirectAccuracy-ExtIEs
 NRPPA-IEs.TRPPositionReferenced-ExtIEs
 NRPPA-IEs.TRPReferencePointType-ExtIEs
+NRPPA-IEs.TRPType
 NRPPA-IEs.TypeOfError
 NRPPA-IEs.UARFCN
 NRPPA-IEs.UE-Measurement-ID
@@ -561,6 +570,8 @@ NRPPA-IEs.Search-window-information
 NRPPA-IEs.SpatialDirectionInformation
 NRPPA-IEs.SpatialRelationInfo
 NRPPA-IEs.SpatialRelationforResourceIDItem
+NRPPA-IEs.SpatialRelationPerSRSResource
+NRPPA-IEs.SpatialRelationPerSRSResourceItem
 NRPPA-IEs.SpatialRelationPos
 NRPPA-IEs.SRSConfig
 NRPPA-IEs.SRSCarrier-List-Item

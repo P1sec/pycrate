@@ -97,6 +97,7 @@ IMPORTS
 	id-S-NSSAI,
 	id-SONInformationReport,
 	id-SourceNodeID,
+	id-SourceNodeTNLAddrInfo,
 	id-SourceTNLAddrInfo,
 	id-TNLAssociationTransportLayerAddressNGRAN,
 	id-TargetRNC-ID,
@@ -1490,6 +1491,8 @@ E-RABInformationItem ::= SEQUENCE {
 }
 
 E-RABInformationItem-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
+	{ID id-SourceTNLAddrInfo		CRITICALITY ignore	EXTENSION TransportLayerAddress	PRESENCE optional}|
+	{ID id-SourceNodeTNLAddrInfo	CRITICALITY ignore	EXTENSION TransportLayerAddress	PRESENCE optional},
 	...
 }
 
@@ -2046,15 +2049,15 @@ InterfacesToTrace ::= BIT STRING (SIZE(8))
 ImmediateMDTNr ::= SEQUENCE {
 	measurementsToActivate					MeasurementsToActivate,
 	m1Configuration							M1Configuration						OPTIONAL,
--- The above IE shall be present if the Measurements to Activate IE has the first bit set to “1”
+-- The above IE shall be present if the Measurements to Activate IE has the first bit set to "1"
 	m4Configuration							M4Configuration						OPTIONAL,
--- The above IE shall be present if the Measurements to Activate IE has the third bit set to “1”
+-- The above IE shall be present if the Measurements to Activate IE has the third bit set to "1"
 	m5Configuration							M5Configuration						OPTIONAL,
--- The above IE shall be present if the Measurements to Activate IE has the fourth bit set to “1”
+-- The above IE shall be present if the Measurements to Activate IE has the fourth bit set to "1"
 	m6Configuration							M6Configuration						OPTIONAL,
--- The above IE shall be present if the Measurements to Activate IE has the fifth bit set to “1”
+-- The above IE shall be present if the Measurements to Activate IE has the fifth bit set to "1"
 	m7Configuration							M7Configuration						OPTIONAL,
--- The above IE shall be present if the Measurements to Activate IE has the sixth bit set to “1”
+-- The above IE shall be present if the Measurements to Activate IE has the sixth bit set to "1"
 	bluetoothMeasurementConfiguration		BluetoothMeasurementConfiguration	OPTIONAL,
 	wLANMeasurementConfiguration			WLANMeasurementConfiguration 		OPTIONAL,
 	mDT-Location-Info 						MDT-Location-Info 					OPTIONAL,
@@ -2249,7 +2252,7 @@ LocationReportingRequestType ::= SEQUENCE {
 	reportArea										ReportArea,
 	areaOfInterestList								AreaOfInterestList								OPTIONAL,
 	locationReportingReferenceIDToBeCancelled		LocationReportingReferenceID					OPTIONAL,
--- The above IE shall be present if the event type is set to “stop reporting UE presence in the area of interest”
+-- The above IE shall be present if the event type is set to "stop reporting UE presence in the area of interest"
 	iE-Extensions		ProtocolExtensionContainer { {LocationReportingRequestType-ExtIEs} }		OPTIONAL,
 	...
 }
@@ -2433,9 +2436,9 @@ MeasurementsToActivate ::= BIT STRING(SIZE(8))
 M1Configuration ::= SEQUENCE {
 	m1reportingTrigger			M1ReportingTrigger,
 	m1thresholdEventA2			M1ThresholdEventA2									OPTIONAL,
---	The above IE shall be present if the M1 Reporting Trigger IE is set to “A2event-triggered” or “A2event-triggered periodic”
+--	The above IE shall be present if the M1 Reporting Trigger IE is set to "A2event-triggered" or "A2event-triggered periodic"
 	m1periodicReporting			M1PeriodicReporting									OPTIONAL,
---	The above IE shall be present if the M1 Reporting Trigger IE is set to “periodic” or “A2event-triggered periodic”
+--	The above IE shall be present if the M1 Reporting Trigger IE is set to "periodic" or "A2event-triggered periodic"
 	iE-Extensions		ProtocolExtensionContainer { { M1Configuration-ExtIEs} } 	OPTIONAL,
 	...
 }
@@ -3899,8 +3902,9 @@ QosFlowInformationItem ::= SEQUENCE {
 }
 
 QosFlowInformationItem-ExtIEs NGAP-PROTOCOL-EXTENSION ::= {
-	{ID id-ULForwarding			CRITICALITY ignore	EXTENSION ULForwarding			PRESENCE optional}|
-	{ID id-SourceTNLAddrInfo	CRITICALITY ignore	EXTENSION TransportLayerAddress	PRESENCE optional},
+	{ID id-ULForwarding				CRITICALITY ignore	EXTENSION ULForwarding			PRESENCE optional}|
+	{ID id-SourceTNLAddrInfo		CRITICALITY ignore	EXTENSION TransportLayerAddress	PRESENCE optional}|
+	{ID id-SourceNodeTNLAddrInfo	CRITICALITY ignore	EXTENSION TransportLayerAddress	PRESENCE optional},
 	...
 }
 
@@ -4468,7 +4472,7 @@ SONConfigurationTransfer ::= SEQUENCE {
 	sourceRANNodeID				SourceRANNodeID,
 	sONInformation				SONInformation,
 	xnTNLConfigurationInfo		XnTNLConfigurationInfo										OPTIONAL,
--- The above IE shall be present if the SON Information IE contains the SON Information Request IE set to “Xn TNL Configuration Info”
+-- The above IE shall be present if the SON Information IE contains the SON Information Request IE set to "Xn TNL Configuration Info"
 	iE-Extensions		ProtocolExtensionContainer { {SONConfigurationTransfer-ExtIEs} }	OPTIONAL,
 	...
 }

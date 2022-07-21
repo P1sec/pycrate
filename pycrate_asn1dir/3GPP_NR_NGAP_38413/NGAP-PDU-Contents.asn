@@ -1160,7 +1160,7 @@ HandoverCommandIEs NGAP-PROTOCOL-IES ::= {
 	{ ID id-RAN-UE-NGAP-ID								CRITICALITY reject	TYPE RAN-UE-NGAP-ID											PRESENCE mandatory	}|
 	{ ID id-HandoverType								CRITICALITY reject	TYPE HandoverType											PRESENCE mandatory	}|
 	{ ID id-NASSecurityParametersFromNGRAN				CRITICALITY reject	TYPE NASSecurityParametersFromNGRAN					PRESENCE conditional	}|
-	-- This IE shall be present if HandoverType IE is set to value "5GStoEPPS" or “5GStoUTRAN” --
+	-- This IE shall be present if HandoverType IE is set to value "5GStoEPPS" or "5GStoUTRAN" --
 	{ ID id-PDUSessionResourceHandoverList				CRITICALITY ignore	TYPE PDUSessionResourceHandoverList					PRESENCE optional		}|
 	{ ID id-PDUSessionResourceToReleaseListHOCmd		CRITICALITY ignore	TYPE PDUSessionResourceToReleaseListHOCmd			PRESENCE optional		}|
 	{ ID id-TargetToSource-TransparentContainer			CRITICALITY reject	TYPE TargetToSource-TransparentContainer			PRESENCE mandatory	}|

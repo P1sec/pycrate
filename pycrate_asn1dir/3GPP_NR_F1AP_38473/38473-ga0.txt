@@ -1,9 +1,38 @@
-﻿
+﻿3GPP TS 38.473 V16.10.0 (2022-06)
+Technical Specification
+3rd Generation Partnership Project;
+Technical Specification Group Radio Access Network;
+ NG-RAN;
+F1 application protocol (F1AP)
+(Release 16)
 
 
 
+Keywords
+NG-RAN, Radio
 
 
+3GPP
+Postal address
+
+3GPP support office address
+650 Route des Lucioles - Sophia Antipolis
+Valbonne - FRANCE
+Tel.: +33 4 92 94 42 00 Fax: +33 4 93 65 47 16
+Internet
+http://www.3gpp.org
+
+Copyright Notification
+No part may be reproduced except as authorized by written permission.
+The copyright and the foregoing restriction extend to reproduction in all media.
+
+© 2022, 3GPP Organizational Partners (ARIB, ATIS, CCSA, ETSI, TSDSI, TTA, TTC).
+All rights reserved.
+
+UMTS™ is a Trade Mark of ETSI registered for the benefit of its members
+3GPP™ is a Trade Mark of ETSI registered for the benefit of its Members and of the 3GPP Organizational Partners
+LTE™ is a Trade Mark of ETSI registered for the benefit of its Members and of the 3GPP Organizational Partners
+GSM® and the GSM logo are registered and owned by the GSM Association
 Contents
 Foreword	14
 1	Scope	15
@@ -40,7 +69,7 @@ Foreword	14
 8.2.4.1	General	28
 8.2.4.2	Successful Operation	28
 8.2.4.3	Unsuccessful Operation	30
-8.2.4.4	Abnormal Conditions	30
+8.2.4.4	Abnormal Conditions	31
 8.2.5	gNB-CU Configuration Update	31
 8.2.5.1	General	31
 8.2.5.2	Successful Operation	31
@@ -89,29 +118,29 @@ Foreword	14
 8.3.4	UE Context Modification (gNB-CU initiated)	48
 8.3.4.1	General	48
 8.3.4.2	Successful Operation	48
-8.3.4.3	Unsuccessful Operation	54
+8.3.4.3	Unsuccessful Operation	55
 8.3.4.4	Abnormal Conditions	55
 8.3.5	UE Context Modification Required (gNB-DU initiated)	55
 8.3.5.1	General	55
-8.3.5.2	Successful Operation	55
+8.3.5.2	Successful Operation	56
 8.3.5.2A	Unsuccessful Operation	57
 8.3.5.3	Abnormal Conditions	57
 8.3.6	UE Inactivity Notification	57
 8.3.6.1	General	57
-8.3.6.2	Successful Operation	57
-8.3.6.3	Abnormal Conditions	57
+8.3.6.2	Successful Operation	58
+8.3.6.3	Abnormal Conditions	58
 8.3.7	Notify	58
 8.3.7.1	General	58
 8.3.7.2	Successful Operation	58
 8.3.7.3	Abnormal Conditions	58
-8.3.8	Access Success	58
-8.3.8.1	General	58
+8.3.8	Access Success	59
+8.3.8.1	General	59
 8.3.8.2	Successful Operation	59
 8.3.8.3	Abnormal Conditions	59
 8.4	RRC Message Transfer procedures	59
 8.4.1	Initial UL RRC Message Transfer	59
 8.4.1.1	General	59
-8.4.1.2	Successful operation	59
+8.4.1.2	Successful operation	60
 8.4.1.3	Abnormal Conditions	60
 8.4.2	DL RRC Message Transfer	60
 8.4.2.1	General	60
@@ -120,60 +149,60 @@ Foreword	14
 8.4.3	UL RRC Message Transfer	61
 8.4.3.1	General	61
 8.4.3.2	Successful operation	61
-8.4.3.3	Abnormal Conditions	61
-8.4.4	RRC Delivery Report	61
-8.4.4.1	General	61
+8.4.3.3	Abnormal Conditions	62
+8.4.4	RRC Delivery Report	62
+8.4.4.1	General	62
 8.4.4.2	Successful operation	62
 8.4.4.3	Abnormal Conditions	62
 8.5	Warning Message Transmission Procedures	62
 8.5.1	Write-Replace Warning	62
 8.5.1.1	General	62
-8.5.1.2	Successful Operation	62
+8.5.1.2	Successful Operation	63
 8.5.1.3	Unsuccessful Operation	63
 8.5.1.4	Abnormal Conditions	63
-8.5.2	PWS Cancel	63
-8.5.2.1	General	63
-8.5.2.2	Successful Operation	63
+8.5.2	PWS Cancel	64
+8.5.2.1	General	64
+8.5.2.2	Successful Operation	64
 8.5.2.3	Unsuccessful Operation	64
-8.5.3	PWS Restart Indication	64
-8.5.3.1	General	64
-8.5.3.2	Successful Operation	64
+8.5.3	PWS Restart Indication	65
+8.5.3.1	General	65
+8.5.3.2	Successful Operation	65
 8.5.3.3	Abnormal Conditions	65
 8.5.4	PWS Failure Indication	65
 8.5.4.1	General	65
 8.5.4.2	Successful Operation	65
 8.5.4.3	Abnormal Conditions	65
-8.6	System Information Procedures	65
-8.6.1	System Information Delivery	65
-8.6.1.1	General	65
-8.6.1.2	Successful Operation	65
+8.6	System Information Procedures	66
+8.6.1	System Information Delivery	66
+8.6.1.1	General	66
+8.6.1.2	Successful Operation	66
 8.6.1.3	Abnormal Conditions	66
 8.7	Paging procedures	66
 8.7.1	Paging	66
 8.7.1.1	General	66
-8.7.1.2	Successful Operation	66
-8.7.1.3	Abnormal Conditions	66
+8.7.1.2	Successful Operation	67
+8.7.1.3	Abnormal Conditions	67
 8.8	Trace Procedures	67
 8.8.1	Trace Start	67
 8.8.1.1	General	67
 8.8.1.2	Successful Operation	67
-8.8.1.3	Abnormal Conditions	67
-8.8.2	Deactivate Trace	67
-8.8.2.1	General	67
+8.8.1.3	Abnormal Conditions	68
+8.8.2	Deactivate Trace	68
+8.8.2.1	General	68
 8.8.2.2	Successful Operation	68
 8.8.2.3	Abnormal Conditions	68
 8.8.3	Cell Traffic Trace	68
 8.8.3.1	General	68
-8.8.3.2	Successful Operation	68
-8.8.3.3	Abnormal Conditions	68
+8.8.3.2	Successful Operation	69
+8.8.3.3	Abnormal Conditions	69
 8.9	Radio Information Transfer procedures	69
 8.9.1	DU-CU Radio Information Transfer	69
 8.9.1.1	General	69
 8.9.1.2	Successful operation	69
 8.9.1.3	Abnormal Conditions	69
-8.9.2	CU-DU Radio Information Transfer	69
-8.9.2.1	General	69
-8.9.2.2	Successful operation	69
+8.9.2	CU-DU Radio Information Transfer	70
+8.9.2.1	General	70
+8.9.2.2	Successful operation	70
 8.9.2.3	Abnormal Conditions	70
 8.10	IAB Procedures	70
 8.10.0	General	70
@@ -181,17 +210,17 @@ Foreword	14
 8.10.1.1	General	70
 8.10.1.2	Successful Operation	70
 8.10.1.A	Unsuccessful Operation	71
-8.10.1.3	Abnormal Conditions	71
-8.10.2	gNB-DU Resource Configuration	71
-8.10.2.1	General	71
+8.10.1.3	Abnormal Conditions	72
+8.10.2	gNB-DU Resource Configuration	72
+8.10.2.1	General	72
 8.10.2.2	Successful Operation	72
 8.10.2.B	Unsuccessful Operation	72
-8.10.2.3	Abnormal Conditions	72
-8.10.3	IAB TNL Address Allocation	72
-8.10.3.1	General	72
+8.10.2.3	Abnormal Conditions	73
+8.10.3	IAB TNL Address Allocation	73
+8.10.3.1	General	73
 8.10.3.2	Successful Operation	73
-8.10.3.C	Unsuccessful Operation	73
-8.10.3.3	Abnormal Conditions	73
+8.10.3.C	Unsuccessful Operation	74
+8.10.3.3	Abnormal Conditions	74
 8.10.4	IAB UP Configuration Update	74
 8.10.4.1	General	74
 8.10.4.2	Successful Operation	74
@@ -200,81 +229,81 @@ Foreword	14
 8.11	Self Optimisation Support procedures	75
 8.11.1	Access and Mobility Indication	75
 8.11.1.1	General	75
-8.11.1.2	Successful Operation	75
+8.11.1.2	Successful Operation	76
 8.11.1.3	Abnormal Conditions	76
 8.12	Reference Time Information Reporting procedures	76
 8.12.1	Reference Time Information Reporting Control	76
 8.12.1.1	General	76
 8.12.1.2	Successful Operation	76
-8.12.1.3	Abnormal Conditions	76
-8.12.2	Reference Time Information Report	76
-8.12.2.1	General	76
+8.12.1.3	Abnormal Conditions	77
+8.12.2	Reference Time Information Report	77
+8.12.2.1	General	77
 8.12.2.2	Successful Operation	77
 8.12.2.3	Abnormal Conditions	77
 8.13	Positioning Procedures	77
 8.13.1	Positioning Assistance Information Control	77
 8.13.1.1	General	77
-8.13.1.2	Successful Operation	77
+8.13.1.2	Successful Operation	78
 8.13.1.3	Abnormal Conditions	78
 8.13.2	Positioning Assistance Information Feedback	78
 8.13.2.1	General	78
-8.13.2.2	Successful Operation	78
-8.13.2.3	Abnormal Conditions	78
-8.13.3	Positioning Measurement	78
-8.13.3.1	General	78
+8.13.2.2	Successful Operation	79
+8.13.2.3	Abnormal Conditions	79
+8.13.3	Positioning Measurement	79
+8.13.3.1	General	79
 8.13.3.2	Successful Operation	79
-8.13.3.3	Unsuccessful Operation	79
+8.13.3.3	Unsuccessful Operation	80
 8.13.3.4	Abnormal Conditions	80
 8.13.4	Positioning Measurement Report	80
 8.13.4.1	General	80
-8.13.4.2	Successful Operation	80
-8.13.4.3	Unsuccessful Operation	80
-8.13.4.4	Abnormal Conditions	80
-8.13.5	Positioning Measurement Abort	80
-8.13.5.1	General	80
+8.13.4.2	Successful Operation	81
+8.13.4.3	Unsuccessful Operation	81
+8.13.4.4	Abnormal Conditions	81
+8.13.5	Positioning Measurement Abort	81
+8.13.5.1	General	81
 8.13.5.2	Successful Operation	81
 8.13.5.3	Unsuccessful Operation	81
 8.13.5.4	Abnormal Conditions	81
-8.13.6	Positioning Measurement Failure Indication	81
-8.13.6.1	General	81
-8.13.6.2	Successful Operation	81
-8.13.6.3	Unsuccessful Operation	81
-8.13.6.4	Abnormal Conditions	81
+8.13.6	Positioning Measurement Failure Indication	82
+8.13.6.1	General	82
+8.13.6.2	Successful Operation	82
+8.13.6.3	Unsuccessful Operation	82
+8.13.6.4	Abnormal Conditions	82
 8.13.7	Positioning Measurement Update	82
 8.13.7.1	General	82
 8.13.7.2	Successful Operation	82
-8.13.7.3	Unsuccessful Operation	82
-8.13.7.4	Abnormal Conditions	82
-8.13.8	TRP Information Exchange	82
-8.13.8.1	General	82
+8.13.7.3	Unsuccessful Operation	83
+8.13.7.4	Abnormal Conditions	83
+8.13.8	TRP Information Exchange	83
+8.13.8.1	General	83
 8.13.8.2	Successful Operation	83
-8.13.8.3	Unsuccessful Operation	83
+8.13.8.3	Unsuccessful Operation	84
 8.13.9	Positioning Information Exchange	84
 8.13.9.1	General	84
 8.13.9.2	Successful Operation	84
-8.13.9.3	Unsuccessful Operation	84
+8.13.9.3	Unsuccessful Operation	85
 8.13.10	Positioning Activation	85
 8.13.10.1	General	85
 8.13.10.2	Successful Operation	85
-8.13.10.3	Unsuccessful Operation	85
+8.13.10.3	Unsuccessful Operation	86
 8.13.10.4	Abnormal Conditions	86
 8.13.11	Positioning Deactivation	86
 8.13.11.1	General	86
 8.13.11.2	Successful Operation	86
 8.13.11.3	Unsuccessful Operation	86
 8.13.11.4	Abnormal Conditions	86
-8.13.12	E-CID Measurement Initiation	86
-8.13.12.1	General	86
+8.13.12	E-CID Measurement Initiation	87
+8.13.12.1	General	87
 8.13.12.2	Successful Operation	87
 8.13.12.3	Unsuccessful Operation	87
-8.13.13	E-CID Measurement Failure Indication	87
-8.13.13.1	General	87
+8.13.13	E-CID Measurement Failure Indication	88
+8.13.13.1	General	88
 8.13.13.2	Successful Operation	88
 8.13.13.3	Unsuccessful Operation	88
 8.13.14	E-CID Measurement Report	88
 8.13.14.1	General	88
 8.13.14.2	Successful Operation	88
-8.13.14.3	Unsuccessful Operation	88
+8.13.14.3	Unsuccessful Operation	89
 8.13.15	E-CID Measurement Termination	89
 8.13.15.1	General	89
 8.13.15.2	Successful Operation	89
@@ -305,7 +334,7 @@ Foreword	14
 9.2.1.15	GNB-DU STATUS INDICATION	103
 9.2.1.16	F1 REMOVAL REQUEST	103
 9.2.1.17	F1 REMOVAL RESPONSE	103
-9.2.1.18	F1 REMOVAL FAILURE	103
+9.2.1.18	F1 REMOVAL FAILURE	104
 9.2.1.19	NETWORK ACCESS RATE REDUCTION	104
 9.2.1.20	RESOURCE STATUS REQUEST	104
 9.2.1.21	RESOURCE STATUS RESPONSE	106
@@ -628,7 +657,7 @@ Foreword	14
 9.5	Message Transfer Syntax	465
 9.6	Timers	465
 10	Handling of unknown, unforeseen and erroneous protocol data	465
-Annex A (informative):	Change History	466
+Annex A (informative): Change History	466
 	
 Foreword
 This Technical Specification has been produced by the 3rd Generation Partnership Project (3GPP).
@@ -809,92 +838,116 @@ Successful Outcome
 Unsuccessful Outcome
 
 
+
 Response message
 Response message
+
 Reset
 RESET
 RESET ACKNOWLEDGE
+
 
 F1 Setup
 F1 SETUP REQUEST
 F1 SETUP RESPONSE
 F1 SETUP FAILURE
+
 gNB-DU Configuration Update
 GNB-DU CONFIGURATION UPDATE
 GNB-DU CONFIGURATION UPDATE ACKNOWLEDGE
 GNB-DU CONFIGURATION UPDATE FAILURE
+
 gNB-CU Configuration Update
 GNB-CU CONFIGURATION UPDATE
 GNB-CU CONFIGURATION UPDATE ACKNOWLEDGE
 GNB-CU CONFIGURATION UPDATE FAILURE
+
 UE Context Setup
 UE CONTEXT SETUP REQUEST
 UE CONTEXT SETUP RESPONSE
 UE CONTEXT SETUP FAILURE
+
 UE Context Release (gNB-CU initiated)
 UE CONTEXT RELEASE COMMAND
 UE CONTEXT RELEASE COMPLETE
+
 
 UE Context Modification (gNB-CU initiated)
 UE CONTEXT MODIFICATION REQUEST
 UE CONTEXT MODIFICATION RESPONSE
 UE CONTEXT MODIFICATION FAILURE
+
 UE Context Modification Required (gNB-DU initiated)
 UE CONTEXT MODIFICATION REQUIRED
 UE CONTEXT MODIFICATION CONFIRM
 UE CONTEXT MODIFICATION REFUSE
+
 Write-Replace Warning 
 WRITE-REPLACE WARNING REQUEST
 WRITE-REPLACE WARNING RESPONSE
+
 
 PWS Cancel
 PWS CANCEL REQUEST
 PWS CANCEL RESPONSE
 
+
 gNB-DU Resource Coordination
 GNB-DU RESOURCE COORDINATION REQUEST
 GNB-DU RESOURCE COORDINATION RESPONSE
+
 
 F1 Removal
 F1 REMOVAL REQUEST
 F1 REMOVAL RESPONSE
 F1 REMOVAL FAILURE
+
+
 BAP Mapping Configuration
 BAP MAPPING CONFIGURATION 
 BAP MAPPING CONFIGURATION ACKNOWLEDGE
 BAP MAPPING CONFIGURATION FAILURE
+
 GNB-DU Resource Configuration
 GNB-DU RESOURCE CONFIGURATION
 GNB-DU RESOURCE CONFIGURATION ACKNOWLEDGE
 GNB-DU RESOURCE CONFIGURATION FAILURE
+
 IAB TNL Address Allocation
 IAB TNL ADDRESS REQUEST
 IAB TNL ADDRESS RESPONSE
 IAB TNL ADDRESS FAILURE
+
 IAB UP Configuration Update
 IAB UP CONFIGURATION UPDATE REQUEST
 IAB UP CONFIGURATION UPDATE RESPONSE
 IAB UP CONFIGURATION UPDATE FAILURE
+
 Resource Status Reporting Initiation
 RESOURCE STATUS REQUEST
 RESOURCE STATUS RESPONSE
 RESOURCE STATUS FAILURE
+
 Positioning Measurement
 POSITIONING MEASUREMENT REQUEST
 POSITIONING MEASUREMENT RESPONSE
 POSITIONING MEASUREMENT FAILURE
+
 Positioning Information Exchange
 POSITIONING INFORMATION REQUEST
 POSITIONING INFORMATION RESPONSE
 POSITIONING INFORMATION FAILURE
+
 TRP Information Exchange
 TRP INFORMATION REQUEST
 TRP INFORMATION RESPONSE
 TRP INFORMATION FAILURE
+
 Positioning Activation
 POSITIONING ACTIVATION REQUEST
 POSITIONING ACTIVATION RESPONSE
 POSITIONING ACTIVATION FAILURE
+
 E-CID Measurement Initiation
 E-CID MEASUREMENT INITIATION REQUEST
 E-CID MEASUREMENT INITIATION RESPONSE
@@ -903,76 +956,112 @@ E-CID MEASUREMENT INITIATION FAILURE
 Table 2: Class 2 procedures
 Elementary Procedure
 Message
+
 Error Indication
 ERROR INDICATION
+
 UE Context Release Request (gNB-DU initiated)
 UE CONTEXT RELEASE REQUEST
+
 Initial UL RRC Message Transfer
 INITIAL UL RRC MESSAGE TRANSFER
+
 DL RRC Message Transfer
 DL RRC MESSAGE TRANSFER
+
 UL RRC Message Transfer
 UL RRC MESSAGE TRANSFER
+
 UE Inactivity Notification 
 UE INACTIVITY NOTIFICATION
+
 System Information Delivery
 SYSTEM INFORMATION DELIVERY COMMAND
+
 Paging
 PAGING
+
 Notify
 NOTIFY
+
 PWS Restart Indication
 PWS RESTART INDICATION
+
 PWS Failure Indication
 PWS FAILURE INDICATION
+
 gNB-DU Status Indication
 GNB-DU STATUS INDICATION
+
 RRC Delivery Report
 RRC DELIVERY REPORT
+
 Network Access Rate Reduction
 NETWORK ACCESS RATE REDUCTION
+
+
 Trace Start
 TRACE START
+
 Deactivate Trace
 DEACTIVATE TRACE
 DU-CU Radio Information Transfer
 DU-CU RADIO INFORMATION TRANSFER
+
 CU-DU Radio Information Transfer
 CU-DU RADIO INFORMATION TRANSFER
+
 Resource Status Reporting
 RESOURCE STATUS UPDATE
+
 Access And Mobility Indication
 ACCESS AND MOBILITY INDICATION
+
+
 Reference Time Information Reporting Control
 REFERENCE TIME INFORMATION REPORTING CONTROL
+
 Reference Time Information Report
 REFERENCE TIME INFORMATION REPORT
+
 Access Success
 ACCESS SUCCESS
 Cell Traffic Trace
 CELL TRAFFIC TRACE
+
 Positioning Assistance Information Control
 POSITIONING ASSISTANCE INFORMATION CONTROL
+
 Positioning Assistance Information Feedback
 POSITIONING ASSISTANCE INFORMATION FEEDBACK
+
 Positioning Measurement Report
 POSITIONING MEASUREMENT REPORT
+
 Positioning Measurement Abort
 POSITIONING MEASUREMENT ABORT
+
 Positioning Measurement Failure Indication
 POSITIONING MEASUREMENT FAILURE INDICATION
+
 Positioning Measurement Update
 POSITIONING MEASUREMENT UPDATE
+
 Positioning Deactivation
 POSITIONING DEACTIVATION
+
 E-CID Measurement Failure Indication
 E-CID MEASUREMENT FAILURE INDICATION
+
 E-CID Measurement Report
 E-CID MEASUREMENT REPORT
+
 E-CID Measurement Termination
 E-CID MEASUREMENT TERMINATION COMMAND
+
 Positioning Information Update
 POSITIONING INFORMATION UPDATE
+
 
 8.2	Interface Management procedures
 8.2.1	Reset
@@ -1099,6 +1188,7 @@ If the GNB-DU CONFIGURATION UPDATE ACKNOWLEDGE message contains the Uplink BH No
 If the SFN Offset IE is contained in the Served Cell Information IE in GNB-DU CONFIGURATION UPDATE message, the gNB-CU shall, if supported, use this information to deduce the SFN0 offset of the reported cell.
 If the NR Cell PRACH Configuration IE is included in the Served Cell Information IE contained in the GNB-DU CONFIGURATION UPDATE message, the gNB-CU may store the information, and forward it to other RAN nodes for RACH optimisation.
 If the GNB-DU CONFIGURATION UPDATE ACKNOWLEDGE message contains the BAP Address IE, the gNB-DU shall, if supported, store the received BAP address and use it as specified in TS 38.340 [30].
+If the gNB-DU Name IE is included in the GNB-DU CONFIGURATION UPDATE message, the gNB-CU may store it or update this IE value if already stored, and use it as a human readable name of the gNB-DU. If the Extended gNB-DU Name IE is included in the GNB-DU CONFIGURATION UPDATE message, the gNB-CU may store it or update this IE value if already stored, and use it as a human readable name of the gNB-DU and shall ignore the gNB-DU Name IE if also included.
 8.2.4.3	Unsuccessful Operation
 
 Figure 8.2.4.3-1: gNB-DU Configuration Update procedure: Unsuccessful Operation
@@ -1138,6 +1228,7 @@ If the GNB-CU CONFIGURATION UPDATE ACKNOWLEDGE message includes Transport Layer 
 If the GNB-CU CONFIGURATION UPDATE message contains the Uplink BH Non-UP Traffic Mapping IE, the gNB-DU shall, if supported, consider the information therein for mapping of non-UP uplink traffic. 
 If the IAB Barred IE is included in the GNB-CU CONFIGURATION UPDATE message, the gNB-DU shall, if supported, consider it as an indication of whether the cell allows IAB-node access or not.
 If the BAP Address IE is included in the GNB-CU CONFIGURATION UPDATE message, the gNB-DU shall, if supported, store the received BAP address and use it as specified in TS 38.340 [30].
+If the gNB-CU Name IE is included in the GNB-CU CONFIGURATION UPDATE message, the gNB-DU may store it or update this IE value if already stored, and use it as a human readable name of the gNB-CU. If the Extended gNB-CU Name IE is included in the GNB-CU CONFIGURATION UPDATE message, the gNB-DU may store it or update this IE value if already stored, and use it as a human readable name of the gNB-CU and shall ignore the gNB-CU Name IE if also included.
 8.2.5.3	Unsuccessful Operation
 
 Figure 8.2.5.3-1: gNB-CU Configuration Update: Unsuccessful Operation
@@ -1472,7 +1563,9 @@ If the Conditional Intra-DU Mobility Information IE is included in the UE CONTEX
 If the Transmission Stop Indicator IE is included within the DRB to Be Modified Item IE in the UE CONTEXT MODIFICATION REQUEST message and set to “true”, the gNB-DU shall, if supported, stop the data transmission for the DRB. It is up to gNB-DU implementation when to stop the UE scheduling for that DRB.
 If the SCG Indicator IE is contained in the UE CONTEXT MODIFICATION REQUEST message and it is set to “released”, the gNB-DU shall, if supported, deduce that an SCG is removed.
 If the Estimated Arrival Probability IE is contained in the Conditional Inter-DU Mobility Information IE included in the UE CONTEXT MODIFICATION REQUEST message, then the gNB-DU may use the information to allocate necessary resources for the UE.
-If the Location Measurement Information IE is included in the CU to DU RRC Information IE in the UE CONTEXT MODIFICATION REQUEST message, the gNB-DU shall, if supported, take it into account when configuring measurement gaps for the UE. 
+If the Location Measurement Information IE is included in the CU to DU RRC Information IE in the UE CONTEXT MODIFICATION REQUEST message, the gNB-DU shall, if supported, take it into account when configuring measurement gaps for the UE.
+If for a given E-RAB for EN-DC operation the ENB DL Transport Layer Address IE is included in the UE CONTEXT MODIFICATION REQUEST message, the gNB-DU shall, if supported, use it as part of its ACL functionality configuration actions, if such ACL functionality is deployed.
+If for a given Qos flow for NG-RAN operation the PDCP Terminating Node DL Transport Layer Address IE is included in the UE CONTEXT MODIFICATION REQUEST message, then the gNB-DU shall, if supported, use it as part of its ACL functionality configuration actions, if such ACL functionality is deployed.
 8.3.4.3	Unsuccessful Operation
 
 Figure 8.3.4.3-1: UE Context Modification procedure. Unsuccessful operation
@@ -2766,6 +2859,20 @@ O
 
 YES
 ignore
+gNB-DU Name
+O
+
+PrintableString(SIZE(1..150,...))
+Human readable name of the gNB-DU.
+YES
+ignore
+Extended gNB-DU Name
+O
+
+9.3.1.205
+
+YES
+ignore
 
 Range bound
 Explanation
@@ -3296,6 +3403,20 @@ O
 
 9.3.1.111
 Indicates a BAP address assigned to the IAB-donor-DU.
+YES
+ignore
+gNB-CU Name
+O
+
+PrintableString(SIZE(1..150,...))
+Human readable name of the gNB-CU. 
+YES
+ignore
+Extended gNB-CU Name
+O
+
+9.3.1.206
+
 YES
 ignore
 
@@ -8881,6 +9002,7 @@ IE type and reference
 Semantics description
 Criticality
 Assigned Criticality
+
 Message Type
 M
 
@@ -8888,6 +9010,7 @@ M
 
 YES
 ignore
+
 UE Identity Index value
 M
 
@@ -8895,6 +9018,7 @@ M
 
 YES
 reject
+
 CHOICE Paging Identity 
 M
 
@@ -8902,12 +9026,14 @@ M
 
 YES
 reject
+
 >RAN UE Paging identity
 M
 
 9.3.1.43
 
 -
+
 
 >CN UE paging identity 
 M
@@ -8916,6 +9042,7 @@ M
 
 -
 
+
 Paging DRX
 O
 
@@ -8923,6 +9050,7 @@ O
 It is defined as the minimum between the RAN UE Paging DRX and CN UE Paging DRX
 YES
 ignore
+
 Paging Priority
 O
 
@@ -8930,6 +9058,7 @@ O
 
 YES
 ignore
+
 Paging Cell List 
 
 1
@@ -8937,6 +9066,7 @@ Paging Cell List
 
 YES
 ignore
+
 >Paging Cell Item IEs
 
 1 .. <maxnoofPagingCells>
@@ -8944,12 +9074,14 @@ ignore
 
 EACH
 ignore
+
 >>NR CGI
 M
 
 9.3.1.12
 
 -
+
 
 Paging Origin
 O
@@ -9421,28 +9553,6 @@ M
 
 -
 
->>>TDD
-
-
-
-
-
-
->>>>TDD Info
-
-1
-
-
-
-
->>>>>gNB-DU Cell Resource Configuration-TDD
-M
-
-gNB-DU Cell Resource Configuration 
-9.3.1.107
-Contains TDD resource configuration of the gNB-DU’s cell.
--
-
 >>>FDD
 
 
@@ -9471,6 +9581,28 @@ M
 gNB-DU Cell Resource Configuration 
 9.3.1.107
 Contains FDD DL resource configuration of the gNB-DU’s cell.
+-
+
+>>>TDD
+
+
+
+
+
+
+>>>>TDD Info
+
+1
+
+
+
+
+>>>>>gNB-DU Cell Resource Configuration-TDD
+M
+
+gNB-DU Cell Resource Configuration 
+9.3.1.107
+Contains TDD resource configuration of the gNB-DU’s cell.
 -
 
 Child-Nodes List
@@ -9529,28 +9661,6 @@ O
 
 -
 
->>>>>TDD
-
-
-
-
--
-
->>>>>>TDD Info
-
-1
-
-
--
-
->>>>>>>gNB-DU Cell Resource Configuration-TDD
-M
-
-gNB-DU Cell Resource Configuration 
-9.3.1.107
-Contains TDD resource configuration of gNB-DU’s cell.
--
-
 >>>>>FDD
 
 
@@ -9573,12 +9683,34 @@ gNB-DU Cell Resource Configuration
 Contains FDD UL resource configuration of gNB-DU’s cell.
 -
 
->>>>>>> gNB-DU Cell Resource Configuration-FDD-DL
+>>>>>>>gNB-DU Cell Resource Configuration-FDD-DL
 M
 
 gNB-DU Cell Resource Configuration 
 9.3.1.107
 Contains FDD DL resource configuration of gNB-DU’s cell.
+-
+
+>>>>>TDD
+
+
+
+
+-
+
+>>>>>>TDD Info
+
+1
+
+
+-
+
+>>>>>>>gNB-DU Cell Resource Configuration-TDD
+M
+
+gNB-DU Cell Resource Configuration 
+9.3.1.107
+Contains TDD resource configuration of gNB-DU’s cell.
 -
 
 >>>>IAB STC Info
@@ -13554,7 +13686,7 @@ SIB type to Be Updated List
 M
 
 INTEGER (2..32, ...)
-Indicates a certain SIB block, e.g. 2 means sibType2, 3 for sibType3, etc. Values 6, 7, 8 and values 10 and higher are not applicable in this version of the specifications.
+Indicates a certain SIB block, e.g. 2 means sibType2, 3 for sibType3, etc. Values for SIBs generated by the gNB-DU as defined subclause 5.2.2 in TS 38.470 [2], values 6, 7, 8 and values corresponding to not defined SIBs in TS 38.331 are not applicable in this version of the specifications.
 
 
 >>SIB message
@@ -15645,7 +15777,7 @@ The SSB subcarrier spacing.
 >>SSB Transmission Periodicity
 M
 
-ENUMERATED (sf5, sf10, sf20, sf40, sf80, sf160, sf320, sf640, ,,,)
+ENUMERATED (sf5, sf10, sf20, sf40, sf80, sf160, sf320, sf640, ...)
 
 >>SSB Transmission Timing Offset
 M
@@ -21536,7 +21668,9 @@ GNBDUConfigurationUpdateIEs F1AP-PROTOCOL-IES ::= {
 	{ ID id-Dedicated-SIDelivery-NeededUE-List		CRITICALITY ignore	TYPE Dedicated-SIDelivery-NeededUE-List					PRESENCE optional	}|
 	{ ID id-gNB-DU-ID								CRITICALITY reject	TYPE GNB-DU-ID													PRESENCE optional	}|
 	{ ID id-GNB-DU-TNL-Association-To-Remove-List	CRITICALITY reject	TYPE GNB-DU-TNL-Association-To-Remove-List				PRESENCE optional	}|
-	{ ID id-Transport-Layer-Address-Info			CRITICALITY ignore	TYPE Transport-Layer-Address-Info							PRESENCE optional	},
+	{ ID id-Transport-Layer-Address-Info			CRITICALITY ignore	TYPE Transport-Layer-Address-Info							PRESENCE optional	}|
+	{ ID id-gNB-DU-Name								CRITICALITY ignore	TYPE GNB-DU-Name												PRESENCE optional	}|
+	{ ID id-Extended-GNB-DU-Name					CRITICALITY ignore	TYPE Extended-GNB-DU-Name										PRESENCE optional	},
 	...
 } 
 
@@ -21642,17 +21776,19 @@ GNBCUConfigurationUpdate ::= SEQUENCE {
 
 GNBCUConfigurationUpdateIEs F1AP-PROTOCOL-IES ::= {
 	{ ID id-TransactionID							CRITICALITY reject	TYPE TransactionID												PRESENCE mandatory	}|
-	{ ID id-Cells-to-be-Activated-List				CRITICALITY reject	TYPE	 Cells-to-be-Activated-List						PRESENCE optional	}|
-	{ ID id-Cells-to-be-Deactivated-List			CRITICALITY reject	TYPE	 Cells-to-be-Deactivated-List						PRESENCE optional	}|
-	{ ID id-GNB-CU-TNL-Association-To-Add-List		CRITICALITY ignore	TYPE	 GNB-CU-TNL-Association-To-Add-List				PRESENCE optional	}|
-	{ ID id-GNB-CU-TNL-Association-To-Remove-List	CRITICALITY ignore	TYPE	 GNB-CU-TNL-Association-To-Remove-List			PRESENCE optional	}|
-	{ ID id-GNB-CU-TNL-Association-To-Update-List	CRITICALITY ignore	TYPE	 GNB-CU-TNL-Association-To-Update-List			PRESENCE optional	}|
-	{ ID id-Cells-to-be-Barred-List					CRITICALITY ignore	TYPE	 Cells-to-be-Barred-List							PRESENCE optional	}|
-	{ ID id-Protected-EUTRA-Resources-List			CRITICALITY reject	TYPE	 Protected-EUTRA-Resources-List					PRESENCE optional	}|
-	{ ID id-Neighbour-Cell-Information-List			CRITICALITY ignore	TYPE	 Neighbour-Cell-Information-List					PRESENCE optional	}|
-	{ ID id-Transport-Layer-Address-Info			CRITICALITY ignore	TYPE	 Transport-Layer-Address-Info						PRESENCE optional	}|
-	{ ID id-UL-BH-Non-UP-Traffic-Mapping			CRITICALITY reject	TYPE	 UL-BH-Non-UP-Traffic-Mapping						PRESENCE optional	}|
-	{ ID id-BAPAddress								CRITICALITY ignore  TYPE 		BAPAddress												PRESENCE optional },
+	{ ID id-Cells-to-be-Activated-List				CRITICALITY reject	TYPE	Cells-to-be-Activated-List							PRESENCE optional	}|
+	{ ID id-Cells-to-be-Deactivated-List			CRITICALITY reject	TYPE	Cells-to-be-Deactivated-List						PRESENCE optional	}|
+	{ ID id-GNB-CU-TNL-Association-To-Add-List		CRITICALITY ignore	TYPE	GNB-CU-TNL-Association-To-Add-List				PRESENCE optional	}|
+	{ ID id-GNB-CU-TNL-Association-To-Remove-List	CRITICALITY ignore	TYPE	GNB-CU-TNL-Association-To-Remove-List			PRESENCE optional	}|
+	{ ID id-GNB-CU-TNL-Association-To-Update-List	CRITICALITY ignore	TYPE	GNB-CU-TNL-Association-To-Update-List			PRESENCE optional	}|
+	{ ID id-Cells-to-be-Barred-List					CRITICALITY ignore	TYPE	Cells-to-be-Barred-List								PRESENCE optional	}|
+	{ ID id-Protected-EUTRA-Resources-List			CRITICALITY reject	TYPE	Protected-EUTRA-Resources-List					PRESENCE optional	}|
+	{ ID id-Neighbour-Cell-Information-List			CRITICALITY ignore	TYPE	Neighbour-Cell-Information-List					PRESENCE optional	}|
+	{ ID id-Transport-Layer-Address-Info			CRITICALITY ignore	TYPE	Transport-Layer-Address-Info						PRESENCE optional	}|
+	{ ID id-UL-BH-Non-UP-Traffic-Mapping			CRITICALITY reject	TYPE	UL-BH-Non-UP-Traffic-Mapping						PRESENCE optional	}|
+	{ ID id-BAPAddress								CRITICALITY ignore	TYPE	BAPAddress												PRESENCE optional }|
+	{ ID id-gNB-CU-Name								CRITICALITY ignore	TYPE GNB-CU-Name												PRESENCE optional	}|
+	{ ID id-Extended-GNB-CU-Name					CRITICALITY ignore	TYPE Extended-GNB-CU-Name										PRESENCE optional	},
 	...
 } 
 
@@ -27826,8 +27962,8 @@ PRSAngleItem-ItemExtIEs 	F1AP-PROTOCOL-EXTENSION ::= {
 }
 
 PRSMuting::= SEQUENCE {
-	pRSMutingOption1			PRSMutingOption1,
-	pRSMutingOption2			PRSMutingOption2,
+	pRSMutingOption1			PRSMutingOption1		OPTIONAL,
+	pRSMutingOption2			PRSMutingOption2		OPTIONAL,
 	iE-Extensions					ProtocolExtensionContainer { { PRSMuting-ExtIEs} } OPTIONAL
 }
 
@@ -29830,7 +29966,8 @@ UL-AoA ::= SEQUENCE {
 	azimuthAoA					INTEGER (0..3599),
 	zenithAoA					INTEGER (0..1799)	OPTIONAL,
 	lCS-to-GCS-TranslationAoA	LCS-to-GCS-TranslationAoA		OPTIONAL,
-	iE-extensions			ProtocolExtensionContainer { { UL-AoA-ExtIEs } }
+	iE-extensions			ProtocolExtensionContainer { { UL-AoA-ExtIEs } }	OPTIONAL,
+	...
 }
 
 UL-AoA-ExtIEs F1AP-PROTOCOL-EXTENSION ::= {
@@ -32808,4 +32945,52 @@ RP-220276
 F
 (Stage-3) Clarification on IAB Address Remove
 16.9.0
+2022-06
+RP-96
+RP-221150
+0878
+-
+F
+F1AP CR for ACL remaining issues
+16.10.0
+2022-06
+RP-96
+RP-221149
+0912
+1
+F
+Correction on IAB-DU cell resource configuration
+16.10.0
+2022-06
+RP-96
+RP-221152
+0922
+2
+F
+Correction for PRS Muting
+16.10.0
+2022-06
+RP-96
+RP-221150
+0950
+2
+F
+SIB Issues Rel-16
+16.10.0
+2022-06
+RP-96
+RP-221150
+0952
+1
+F
+gNB-CU and gNB-DU Name in Configuration Update Procedures
+16.10.0
+2022-06
+RP-96
+RP-221152
+0963
+1
+F
+ASN.1 correction for UL-AoA
+16.10.0
 

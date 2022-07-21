@@ -466,5 +466,6 @@ maxProtocolIEs							INTEGER ::= 65535
 	id-SourceTNLAddrInfo										ProtocolIE-ID ::= 284
 	id-ExtendedReportIntervalMDT							ProtocolIE-ID ::= 285
 	id-SourceNodeID											ProtocolIE-ID ::= 286
+	id-SourceNodeTNLAddrInfo									ProtocolIE-ID ::= 354
 
 END

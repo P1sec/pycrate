@@ -750,7 +750,7 @@ CompositeAvailableCapacityGroup-ExtIEs XNAP-PROTOCOL-EXTENSION ::= {
 
 CompositeAvailableCapacity ::= SEQUENCE {
 	cellCapacityClassValue	CellCapacityClassValue             OPTIONAL,
-	capacityValueInfo	     	CapacityValueInfo, -- this IE represents the IE "CapacityValue" in 9.2.2.a, it’s used to distinguish the "CapacityValue"  in 9.2.2.c
+	capacityValueInfo	     	CapacityValueInfo, -- this IE represents the IE "CapacityValue" in 9.2.2.a, it's used to distinguish the "CapacityValue"  in 9.2.2.c
 	iE-Extensions				ProtocolExtensionContainer { { CompositeAvailableCapacity-ExtIEs} }OPTIONAL,
 	...
 }
@@ -2772,7 +2772,7 @@ NRUESidelinkAggregateMaximumBitRate-ExtIEs XNAP-PROTOCOL-EXTENSION ::= {
 -- O
 
 
-OfferedCapacity ::= INTEGER (1.. 16777216,...)
+OfferedCapacity ::= INTEGER (1.. 16777216,...)
 
 OffsetOfNbiotChannelNumberToEARFCN ::= ENUMERATED {
 		minusTen,
@@ -2899,6 +2899,7 @@ PC5QoSParameters-ExtIEs XNAP-PROTOCOL-EXTENSION ::= {
 }
 
 PC5QoSFlowList ::= SEQUENCE (SIZE(1..maxnoofPC5QoSFlows)) OF PC5QoSFlowItem
+-- The size of the PC5 QoS Flow List shall not exceed 2048 items.
 
 PC5QoSFlowItem::= SEQUENCE {
 	pQI							FiveQI,
@@ -5286,7 +5287,7 @@ TraceActivation ::= SEQUENCE {
 }
 
 TraceActivation-ExtIEs XNAP-PROTOCOL-EXTENSION ::= {
--- Extension to support MDT –
+-- Extension to support MDT -
 	{ ID id-TraceCollectionEntityURI	CRITICALITY ignore	EXTENSION URIaddress				PRESENCE optional}|
 	{ ID id-MDT-Configuration			CRITICALITY ignore	EXTENSION MDT-Configuration			PRESENCE optional},
 	...

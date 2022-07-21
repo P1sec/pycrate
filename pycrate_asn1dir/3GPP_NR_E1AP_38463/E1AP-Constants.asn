@@ -1,4 +1,3 @@
--- ASN1START
 -- **************************************************************
 --
 -- Constant definitions
@@ -240,6 +239,7 @@ id-QoSFlowsDRBRemapping											ProtocolIE-ID ::= 141
 id-DataForwardingSourceIPAddress								ProtocolIE-ID ::= 142
 id-SecurityIndicationModify										ProtocolIE-ID ::= 143
 id-IAB-Donor-CU-UPPSKInfo											ProtocolIE-ID ::= 144
+id-DiscardTimerExtended												ProtocolIE-ID ::= 177
 
 
 END

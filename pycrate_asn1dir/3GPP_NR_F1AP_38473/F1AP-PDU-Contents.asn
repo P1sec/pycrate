@@ -858,7 +858,9 @@ GNBDUConfigurationUpdateIEs F1AP-PROTOCOL-IES ::= {
 	{ ID id-Dedicated-SIDelivery-NeededUE-List		CRITICALITY ignore	TYPE Dedicated-SIDelivery-NeededUE-List					PRESENCE optional	}|
 	{ ID id-gNB-DU-ID								CRITICALITY reject	TYPE GNB-DU-ID													PRESENCE optional	}|
 	{ ID id-GNB-DU-TNL-Association-To-Remove-List	CRITICALITY reject	TYPE GNB-DU-TNL-Association-To-Remove-List				PRESENCE optional	}|
-	{ ID id-Transport-Layer-Address-Info			CRITICALITY ignore	TYPE Transport-Layer-Address-Info							PRESENCE optional	},
+	{ ID id-Transport-Layer-Address-Info			CRITICALITY ignore	TYPE Transport-Layer-Address-Info							PRESENCE optional	}|
+	{ ID id-gNB-DU-Name								CRITICALITY ignore	TYPE GNB-DU-Name												PRESENCE optional	}|
+	{ ID id-Extended-GNB-DU-Name					CRITICALITY ignore	TYPE Extended-GNB-DU-Name										PRESENCE optional	},
 	...
 }
 
@@ -964,17 +966,19 @@ GNBCUConfigurationUpdate ::= SEQUENCE {
 
 GNBCUConfigurationUpdateIEs F1AP-PROTOCOL-IES ::= {
 	{ ID id-TransactionID							CRITICALITY reject	TYPE TransactionID												PRESENCE mandatory	}|
-	{ ID id-Cells-to-be-Activated-List				CRITICALITY reject	TYPE	 Cells-to-be-Activated-List						PRESENCE optional	}|
-	{ ID id-Cells-to-be-Deactivated-List			CRITICALITY reject	TYPE	 Cells-to-be-Deactivated-List						PRESENCE optional	}|
-	{ ID id-GNB-CU-TNL-Association-To-Add-List		CRITICALITY ignore	TYPE	 GNB-CU-TNL-Association-To-Add-List				PRESENCE optional	}|
-	{ ID id-GNB-CU-TNL-Association-To-Remove-List	CRITICALITY ignore	TYPE	 GNB-CU-TNL-Association-To-Remove-List			PRESENCE optional	}|
-	{ ID id-GNB-CU-TNL-Association-To-Update-List	CRITICALITY ignore	TYPE	 GNB-CU-TNL-Association-To-Update-List			PRESENCE optional	}|
-	{ ID id-Cells-to-be-Barred-List					CRITICALITY ignore	TYPE	 Cells-to-be-Barred-List							PRESENCE optional	}|
-	{ ID id-Protected-EUTRA-Resources-List			CRITICALITY reject	TYPE	 Protected-EUTRA-Resources-List					PRESENCE optional	}|
-	{ ID id-Neighbour-Cell-Information-List			CRITICALITY ignore	TYPE	 Neighbour-Cell-Information-List					PRESENCE optional	}|
-	{ ID id-Transport-Layer-Address-Info			CRITICALITY ignore	TYPE	 Transport-Layer-Address-Info						PRESENCE optional	}|
-	{ ID id-UL-BH-Non-UP-Traffic-Mapping			CRITICALITY reject	TYPE	 UL-BH-Non-UP-Traffic-Mapping						PRESENCE optional	}|
-	{ ID id-BAPAddress								CRITICALITY ignore  TYPE 		BAPAddress												PRESENCE optional },
+	{ ID id-Cells-to-be-Activated-List				CRITICALITY reject	TYPE	Cells-to-be-Activated-List							PRESENCE optional	}|
+	{ ID id-Cells-to-be-Deactivated-List			CRITICALITY reject	TYPE	Cells-to-be-Deactivated-List						PRESENCE optional	}|
+	{ ID id-GNB-CU-TNL-Association-To-Add-List		CRITICALITY ignore	TYPE	GNB-CU-TNL-Association-To-Add-List				PRESENCE optional	}|
+	{ ID id-GNB-CU-TNL-Association-To-Remove-List	CRITICALITY ignore	TYPE	GNB-CU-TNL-Association-To-Remove-List			PRESENCE optional	}|
+	{ ID id-GNB-CU-TNL-Association-To-Update-List	CRITICALITY ignore	TYPE	GNB-CU-TNL-Association-To-Update-List			PRESENCE optional	}|
+	{ ID id-Cells-to-be-Barred-List					CRITICALITY ignore	TYPE	Cells-to-be-Barred-List								PRESENCE optional	}|
+	{ ID id-Protected-EUTRA-Resources-List			CRITICALITY reject	TYPE	Protected-EUTRA-Resources-List					PRESENCE optional	}|
+	{ ID id-Neighbour-Cell-Information-List			CRITICALITY ignore	TYPE	Neighbour-Cell-Information-List					PRESENCE optional	}|
+	{ ID id-Transport-Layer-Address-Info			CRITICALITY ignore	TYPE	Transport-Layer-Address-Info						PRESENCE optional	}|
+	{ ID id-UL-BH-Non-UP-Traffic-Mapping			CRITICALITY reject	TYPE	UL-BH-Non-UP-Traffic-Mapping						PRESENCE optional	}|
+	{ ID id-BAPAddress								CRITICALITY ignore	TYPE	BAPAddress												PRESENCE optional }|
+	{ ID id-gNB-CU-Name								CRITICALITY ignore	TYPE GNB-CU-Name												PRESENCE optional	}|
+	{ ID id-Extended-GNB-CU-Name					CRITICALITY ignore	TYPE Extended-GNB-CU-Name										PRESENCE optional	},
 	...
 }
 
@@ -3090,7 +3094,7 @@ PositioningMeasurementRequestIEs F1AP-PROTOCOL-IES ::= {
 	{ ID id-TRP-MeasurementRequestList				CRITICALITY reject	TYPE TRP-MeasurementRequestList					PRESENCE mandatory}|
 	{ ID id-PosReportCharacteristics				CRITICALITY reject	TYPE PosReportCharacteristics				PRESENCE mandatory}|
 	{ ID id-PosMeasurementPeriodicity				CRITICALITY reject	TYPE MeasurementPeriodicity					PRESENCE conditional }|
-	-- The above IE shall be present if the PosReportCharacteristics IE is set to “periodic” --
+	-- The above IE shall be present if the PosReportCharacteristics IE is set to "periodic" --
 	{ ID id-PosMeasurementQuantities				CRITICALITY reject	TYPE PosMeasurementQuantities					PRESENCE mandatory}|
 	{ ID id-SFNInitialisationTime					CRITICALITY ignore	TYPE RelativeTime1900	PRESENCE optional	}|
 	{ ID id-SRSConfiguration						CRITICALITY ignore	TYPE SRSConfiguration								PRESENCE optional}|
@@ -3569,7 +3573,7 @@ E-CIDMeasurementInitiationRequest-IEs F1AP-PROTOCOL-IES ::= {
 	{ ID id-RAN-UE-MeasurementID			CRITICALITY reject	TYPE RAN-UE-MeasurementID				PRESENCE mandatory	}|
 	{ ID id-E-CID-ReportCharacteristics		CRITICALITY reject	TYPE E-CID-ReportCharacteristics		PRESENCE mandatory	}|
 	{ ID id-E-CID-MeasurementPeriodicity	CRITICALITY reject	TYPE MeasurementPeriodicity		PRESENCE conditional	}|
--- The above IE shall be present if the E-CID-ReportCharacteristics IE is set to “periodic” –-
+-- The above IE shall be present if the E-CID-ReportCharacteristics IE is set to "periodic" --
 	{ ID id-E-CID-MeasurementQuantities		CRITICALITY reject	TYPE E-CID-MeasurementQuantities		PRESENCE mandatory},
 	...
 }

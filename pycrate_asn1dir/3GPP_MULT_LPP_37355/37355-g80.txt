@@ -1,4 +1,4 @@
-﻿ 3GPP TS 37.355 V16.5.0 (2021-06)
+﻿ 3GPP TS 37.355 V16.8.0 (2022-03)
 Technical Specification
 3rd Generation Partnership Project;
 Technical Specification Group Radio Access Network;
@@ -22,7 +22,7 @@ Copyright Notification
 No part may be reproduced except as authorized by written permission.
 The copyright and the foregoing restriction extend to reproduction in all media.
 
-© 2021, 3GPP Organizational Partners (ARIB, ATIS, CCSA, ETSI, TSDSI, TTA, TTC).
+© 2022, 3GPP Organizational Partners (ARIB, ATIS, CCSA, ETSI, TSDSI, TTA, TTC).
 All rights reserved.
 
 UMTS™ is a Trade Mark of ETSI registered for the benefit of its members
@@ -37,532 +37,534 @@ Foreword	12
 3	Definitions and Abbreviations	15
 3.1	Definitions	15
 3.2	Abbreviations	15
-4	Functionality of Protocol	17
-4.1	General	17
-4.1.1	LPP Configuration	17
+4	Functionality of Protocol	18
+4.1	General	18
+4.1.1	LPP Configuration	18
 4.1.2	LPP Sessions and Transactions	18
-4.1.3	LPP Position Methods	18
-4.1.4	LPP Messages	18
+4.1.3	LPP Position Methods	19
+4.1.4	LPP Messages	19
 4.2	Common LPP Session Procedure	19
 4.3	LPP Transport	20
 4.3.1	Transport Layer Requirements	20
 4.3.2	LPP Duplicate Detection	20
-4.3.3	LPP Acknowledgement	20
-4.3.3.1	General	20
+4.3.3	LPP Acknowledgement	21
+4.3.3.1	General	21
 4.3.3.2	Procedure related to Acknowledgement	21
-4.3.4	LPP Retransmission	21
-4.3.4.1	General	21
-4.3.4.2	Procedure related to Retransmission	21
-4.3.5	LPP Message Segmentation	22
-5	LPP Procedures	23
-5.1	Procedures related to capability transfer	23
-5.1.1	Capability Transfer procedure	23
+4.3.4	LPP Retransmission	22
+4.3.4.1	General	22
+4.3.4.2	Procedure related to Retransmission	22
+4.3.5	LPP Message Segmentation	23
+5	LPP Procedures	24
+5.1	Procedures related to capability transfer	24
+5.1.1	Capability Transfer procedure	24
 5.1.2	Capability Indication procedure	24
-5.1.3	Reception of LPP Request Capabilities	24
+5.1.3	Reception of LPP Request Capabilities	25
 5.1.4	Transmission of LPP Provide Capabilities	25
 5.2	Procedures related to Assistance Data Transfer	25
 5.2.1	Assistance Data Transfer procedure	25
-5.2.1a	Periodic Assistance Data Transfer procedure	25
-5.2.1b	Periodic Assistance Data Transfer with Update procedure	27
+5.2.1a	Periodic Assistance Data Transfer procedure	26
+5.2.1b	Periodic Assistance Data Transfer with Update procedure	28
 5.2.2	Assistance Data Delivery procedure	28
-5.2.2a	Periodic Assistance Data Delivery procedure	28
-5.2.3	Transmission of LPP Request Assistance Data	30
-5.2.4	Reception of LPP Provide Assistance Data	30
-5.3	Procedures related to Location Information Transfer	30
-5.3.1	Location Information Transfer procedure	30
-5.3.2	Location Information Delivery procedure	31
-5.3.3	Reception of Request Location Information	31
-5.3.4	Transmission of Provide Location Information	32
-5.4	Error Handling Procedures	32
-5.4.1	General	32
-5.4.2	Procedures related to Error Indication	32
-5.4.3	LPP Error Detection	32
-5.4.4	Reception of an LPP Error Message	33
-5.5	Abort Procedure	34
-5.5.1	General	34
-5.5.2	Procedures related to Abort	34
-5.5.3	Reception of an LPP Abort Message	34
-6	Information Element Abstract Syntax Definition	34
-6.1	General	34
-6.2	LPP PDU Structure	35
-–	LPP-PDU-Definitions	35
-–	LPP-Message	35
-–	LPP-MessageBody	36
-–	LPP-TransactionID	36
-6.3	Message Body IEs	37
-–	RequestCapabilities	37
-–	ProvideCapabilities	37
-–	RequestAssistanceData	38
-–	ProvideAssistanceData	38
-–	RequestLocationInformation	39
-–	ProvideLocationInformation	40
-–	Abort	40
-–	Error	41
-6.4	Common IEs	41
-6.4.1	Common Lower-Level IEs	41
-–	AccessTypes	41
+5.2.2a	Periodic Assistance Data Delivery procedure	29
+5.2.3	Transmission of LPP Request Assistance Data	31
+5.2.4	Reception of LPP Provide Assistance Data	31
+5.3	Procedures related to Location Information Transfer	31
+5.3.1	Location Information Transfer procedure	31
+5.3.2	Location Information Delivery procedure	32
+5.3.3	Reception of Request Location Information	32
+5.3.4	Transmission of Provide Location Information	33
+5.4	Error Handling Procedures	33
+5.4.1	General	33
+5.4.2	Procedures related to Error Indication	33
+5.4.3	LPP Error Detection	33
+5.4.4	Reception of an LPP Error Message	34
+5.5	Abort Procedure	35
+5.5.1	General	35
+5.5.2	Procedures related to Abort	35
+5.5.3	Reception of an LPP Abort Message	35
+6	Information Element Abstract Syntax Definition	35
+6.1	General	35
+6.2	LPP PDU Structure	36
+–	LPP-PDU-Definitions	36
+–	LPP-Message	36
+–	LPP-MessageBody	37
+–	LPP-TransactionID	37
+6.3	Message Body IEs	38
+–	RequestCapabilities	38
+–	ProvideCapabilities	38
+–	RequestAssistanceData	39
+–	ProvideAssistanceData	39
+–	RequestLocationInformation	40
+–	ProvideLocationInformation	41
+–	Abort	41
+–	Error	42
+6.4	Common IEs	42
+6.4.1	Common Lower-Level IEs	42
+–	AccessTypes	42
 –	ARFCN-ValueEUTRA	42
-–	ARFCN-ValueNR	42
-–	ARFCN-ValueUTRA	42
-–	CarrierFreq-NB	42
-–	CellGlobalIdEUTRA-AndUTRA	43
-–	CellGlobalIdGERAN	43
-–	ECGI	44
-–	Ellipsoid-Point	44
-–	Ellipsoid-PointWithUncertaintyCircle	44
-–	EllipsoidPointWithUncertaintyEllipse	44
-–	EllipsoidPointWithAltitude	45
-–	EllipsoidPointWithAltitudeAndUncertaintyEllipsoid	45
-–	EllipsoidArc	45
-–	EPDU-Sequence	45
-–	FreqBandIndicatorNR	46
-–	HighAccuracyEllipsoidPointWithUncertaintyEllipse	46
-–	HighAccuracyEllipsoidPointWithAltitudeAndUncertaintyEllipsoid	47
-–	HorizontalVelocity	47
-–	HorizontalWithVerticalVelocity	47
-–	HorizontalVelocityWithUncertainty	47
-–	HorizontalWithVerticalVelocityAndUncertainty	48
-–	LocationCoordinateTypes	48
-–	NCGI	48
-–	NR-PhysCellId	48
-–	PeriodicAssistanceDataControlParameters	49
-–	Polygon	49
-–	PositioningModes	49
-–	SegmentationInfo	50
-–	VelocityTypes	50
-6.4.2	Common Positioning	50
-–	CommonIEsRequestCapabilities	50
-–	CommonIEsProvideCapabilities	51
-–	CommonIEsRequestAssistanceData	51
-–	CommonIEsProvideAssistanceData	52
-–	CommonIEsRequestLocationInformation	52
-–	CommonIEsProvideLocationInformation	56
-–	CommonIEsAbort	58
-–	CommonIEsError	59
-6.4.3	Common NR Positioning Information Elements	59
-–	DL-PRS-ID-Info	59
-–	NR-AdditionalPathList	60
-–	NR-DL-PRS-AssistanceData	60
-–	NR-DL-PRS-BeamInfo	63
-–	NR-DL-PRS-Info	65
-–	NR-DL-PRS-ProcessingCapability	68
-–	NR-DL-PRS-QCL-ProcessingCapability	69
-–	NR-DL-PRS-ResourceID	70
-–	NR-DL-PRS-ResourcesCapability	70
-–	NR-DL-PRS-ResourceSetID	71
-–	NR-PositionCalculationAssistance	71
-–	NR-RTD-Info	72
-–	NR-SelectedDL-PRS-IndexList	73
-–	NR-SSB-Config	74
-–	NR-TimeStamp	75
-–	NR-TimingQuality	75
-–	NR-TRP-LocationInfo	76
-–	NR-UL-SRS-Capability	77
-–	ReferencePoint	80
-–	RelativeLocation	80
-6.5	Positioning Method IEs	82
-6.5.1	OTDOA Positioning	82
-6.5.1.1	OTDOA Assistance Data	82
-–	OTDOA-ProvideAssistanceData	82
-6.5.1.2	OTDOA Assistance Data Elements	82
-–	OTDOA-ReferenceCellInfo	82
-–	PRS-Info	84
-–	TDD-Config	86
-–	OTDOA-NeighbourCellInfoList	86
-–	OTDOA-ReferenceCellInfoNB	89
-–	PRS-Info-NB	91
-–	OTDOA-NeighbourCellInfoListNB	94
-6.5.1.3	OTDOA Assistance Data Request	97
-–	OTDOA-RequestAssistanceData	97
-6.5.1.4	OTDOA Location Information	97
-–	OTDOA-ProvideLocationInformation	97
-6.5.1.5	OTDOA Location Information Elements	98
-–	OTDOA-SignalMeasurementInformation	98
-–	OTDOA-SignalMeasurementInformation-NB	101
-–	OTDOA-MeasQuality	103
-–	AdditionalPath	104
-6.5.1.6	OTDOA Location Information Request	104
-–	OTDOA-RequestLocationInformation	104
-6.5.1.7	OTDOA Capability Information	105
-–	OTDOA-ProvideCapabilities	105
-6.5.1.8	OTDOA Capability Information Request	107
-–	OTDOA-RequestCapabilities	107
-6.5.1.9	OTDOA Error Elements	107
-–	OTDOA-Error	107
-–	OTDOA-LocationServerErrorCauses	107
-–	OTDOA-TargetDeviceErrorCauses	108
-6.5.2	A-GNSS Positioning	108
-6.5.2.1	GNSS Assistance Data	108
-–	A-GNSS-ProvideAssistanceData	108
-–	GNSS-CommonAssistData	108
-–	GNSS-GenericAssistData	109
-–	GNSS-PeriodicAssistData	110
-6.5.2.2	GNSS Assistance Data Elements	110
-–	GNSS-ReferenceTime	110
-–	GNSS-SystemTime	112
-–	GPS-TOW-Assist	112
-–	NetworkTime	113
-–	GNSS-ReferenceLocation	116
-–	GNSS-IonosphericModel	116
-–	KlobucharModelParameter	116
-–	KlobucharModel2Parameter	117
-–	NeQuickModelParameter	118
-–	GNSS-EarthOrientationParameters	118
-–	GNSS-RTK-ReferenceStationInfo	119
-–	GNSS-RTK-CommonObservationInfo	121
-–	GNSS-RTK-AuxiliaryStationData	122
-–	GNSS-SSR-CorrectionPoints	124
-–	GNSS-TimeModelList	125
-–	GNSS-DifferentialCorrections	126
-–	GNSS-NavigationModel	129
-–	StandardClockModelList	131
-–	NAV-ClockModel	132
-–	CNAV-ClockModel	132
-–	GLONASS-ClockModel	133
-–	SBAS-ClockModel	134
-–	BDS-ClockModel	134
-–	BDS-ClockModel2	135
-–	NavIC-ClockModel	135
-–	NavModelKeplerianSet	136
-–	NavModelNAV-KeplerianSet	137
-–	NavModelCNAV-KeplerianSet	139
-–	NavModel-GLONASS-ECEF	140
-–	NavModel-SBAS-ECEF	141
-–	NavModel-BDS-KeplerianSet	142
-–	NavModel-BDS-KeplerianSet2	143
-–	NavModel-NavIC-KeplerianSet	145
-–	GNSS-RealTimeIntegrity	147
-–	GNSS-DataBitAssistance	147
-–	GNSS-AcquisitionAssistance	148
-–	GNSS-Almanac	152
-–	AlmanacKeplerianSet	153
-–	AlmanacNAV-KeplerianSet	153
-–	AlmanacReducedKeplerianSet	154
-–	AlmanacMidiAlmanacSet	155
-–	AlmanacGLONASS-AlmanacSet	156
-–	AlmanacECEF-SBAS-AlmanacSet	157
-–	AlmanacBDS-AlmanacSet	158
-–	AlmanacNavIC-AlmanacSet	159
-–	GNSS-UTC-Model	160
-–	UTC-ModelSet1	160
-–	UTC-ModelSet2	161
-–	UTC-ModelSet3	162
-–	UTC-ModelSet4	162
-–	UTC-ModelSet5	163
-–	GNSS-AuxiliaryInformation	164
-–	BDS-DifferentialCorrections	165
-–	BDS-GridModelParameter	166
-–	GNSS-RTK-Observations	166
-–	GLO-RTK-BiasInformation	169
-–	GNSS-RTK-MAC-CorrectionDifferences	170
-–	GNSS-RTK-Residuals	172
-–	GNSS-RTK-FKP-Gradients	173
-–	GNSS-SSR-OrbitCorrections	175
-–	GNSS-SSR-ClockCorrections	177
-–	GNSS-SSR-CodeBias	178
-–	GNSS-SSR-URA	179
-–	GNSS-SSR-PhaseBias	180
-–	GNSS-SSR-STEC-Correction	181
-–	GNSS-SSR-GriddedCorrection	184
-–	NavIC-DifferentialCorrections	186
-–	NavIC-GridModelParameter	188
-6.5.2.3	GNSS Assistance Data Request	189
-–	A-GNSS-RequestAssistanceData	189
-–	GNSS-CommonAssistDataReq	190
-–	GNSS-GenericAssistDataReq	191
-–	GNSS-PeriodicAssistDataReq	192
-6.5.2.4	GNSS Assistance Data Request Elements	193
-–	GNSS-ReferenceTimeReq	193
-–	GNSS-ReferenceLocationReq	194
-–	GNSS-IonosphericModelReq	194
-–	GNSS-EarthOrientationParametersReq	195
-–	GNSS-RTK-ReferenceStationInfoReq	195
-–	GNSS-RTK-AuxiliaryStationDataReq	195
-–	GNSS-SSR-CorrectionPointsReq	196
-–	GNSS-TimeModelListReq	196
-–	GNSS-DifferentialCorrectionsReq	196
-–	GNSS-NavigationModelReq	197
-–	GNSS-RealTimeIntegrityReq	198
-–	GNSS-DataBitAssistanceReq	199
-–	GNSS-AcquisitionAssistanceReq	199
-–	GNSS-AlmanacReq	200
-–	GNSS-UTC-ModelReq	200
-–	GNSS-AuxiliaryInformationReq	201
-–	BDS-DifferentialCorrectionsReq	201
-–	BDS-GridModelReq	201
-–	GNSS-RTK-ObservationsReq	201
-–	GLO-RTK-BiasInformationReq	202
-–	GNSS-RTK-MAC-CorrectionDifferencesReq	202
-–	GNSS-RTK-ResidualsReq	203
-–	GNSS-RTK-FKP-GradientsReq	203
-–	GNSS-SSR-OrbitCorrectionsReq	204
-–	GNSS-SSR-ClockCorrectionsReq	204
-–	GNSS-SSR-CodeBiasReq	204
-–	GNSS-SSR-URA-Req	205
-–	GNSS-SSR-PhaseBiasReq	205
-–	GNSS-SSR-STEC-CorrectionReq	205
-–	GNSS-SSR-GriddedCorrectionReq	205
-–	NavIC-DifferentialCorrectionsReq	206
-–	NavIC-GridModelReq	206
-6.5.2.5	GNSS Location Information	206
-–	A-GNSS-ProvideLocationInformation	206
-6.5.2.6	GNSS Location Information Elements	206
-–	GNSS-SignalMeasurementInformation	206
-–	MeasurementReferenceTime	207
-–	GNSS-MeasurementList	209
-–	GNSS-LocationInformation	213
-6.5.2.7	GNSS Location Information Request	214
-–	A-GNSS-RequestLocationInformation	214
-6.5.2.8	GNSS Location Information Request Elements	214
-–	GNSS-PositioningInstructions	214
-6.5.2.9	GNSS Capability Information	215
-–	A-GNSS-ProvideCapabilities	215
-6.5.2.10	GNSS Capability Information Elements	217
-–	GNSS-CommonAssistanceDataSupport	217
-–	GNSS-ReferenceTimeSupport	218
-–	GNSS-ReferenceLocationSupport	218
-–	GNSS-IonosphericModelSupport	218
-–	GNSS-EarthOrientationParametersSupport	219
-–	GNSS-RTK-ReferenceStationInfoSupport	219
-–	GNSS-RTK-AuxiliaryStationDataSupport	219
-–	GNSS-GenericAssistanceDataSupport	219
-–	GNSS-TimeModelListSupport	221
-–	GNSS-DifferentialCorrectionSupport	221
-–	GNSS-NavigationModelSupport	222
-–	GNSS-RealTimeIntegritySupport	222
-–	GNSS-DataBitAssistanceSupport	222
-–	GNSS-AcquisitionAssistanceSupport	223
-–	GNSS-AlmanacSupport	223
-–	GNSS-UTC-ModelSupport	223
-–	GNSS-AuxiliaryInformationSupport	224
-–	BDS-DifferentialCorrectionsSupport	224
-–	BDS-GridModelSupport	224
-–	GNSS-RTK-ObservationsSupport	224
-–	GLO-RTK-BiasInformationSupport	225
-–	GNSS-RTK-MAC-CorrectionDifferencesSupport	225
-–	GNSS-RTK-ResidualsSupport	225
-–	GNSS-RTK-FKP-GradientsSupport	225
-–	GNSS-SSR-OrbitCorrectionsSupport	226
-–	GNSS-SSR-ClockCorrectionsSupport	226
-–	GNSS-SSR-URA-Support	226
-–	GNSS-SSR-STEC-CorrectionSupport	227
-–	GNSS-SSR-GriddedCorrectionSupport	227
-–	NavIC-DifferentialCorrectionsSupport	227
-–	NavIC-GridModelSupport	227
-6.5.2.11	GNSS Capability Information Request	227
-–	A-GNSS-RequestCapabilities	227
-6.5.2.12	GNSS Error Elements	228
-–	A-GNSS-Error	228
-–	GNSS-LocationServerErrorCauses	228
-–	GNSS-TargetDeviceErrorCauses	229
-6.5.2.13	Common GNSS Information Elements	229
-–	GNSS-FrequencyID	229
-–	GNSS-ID	230
-–	GNSS-ID-Bitmap	230
-–	GNSS-Link-CombinationsList	231
-–	GNSS-NavListInfo	231
-–	GNSS-NetworkID	231
-–	GNSS-PeriodicControlParam	231
-–	GNSS-ReferenceStationID	232
-–	GNSS-SignalID	232
-–	GNSS-SignalIDs	234
-–	GNSS-SubNetworkID	235
-–	SBAS-ID	236
-–	SBAS-IDs	236
-–	SV-ID	236
-6.5.3	Enhanced Cell ID Positioning	237
-6.5.3.1	E‑CID Location Information	237
-–	ECID-ProvideLocationInformation	237
-6.5.3.2	E‑CID Location Information Elements	237
-–	ECID-SignalMeasurementInformation	237
-6.5.3.3	E‑CID Location Information Request	239
-–	ECID-RequestLocationInformation	239
-6.5.3.4	E‑CID Capability Information	239
-–	ECID-ProvideCapabilities	239
-6.5.3.5	E‑CID Capability Information Request	240
-–	ECID-RequestCapabilities	240
-6.5.3.6	E‑CID Error Elements	240
-–	ECID-Error	240
-–	ECID-LocationServerErrorCauses	240
-–	ECID-TargetDeviceErrorCauses	241
-6.5.4	Terrestrial Beacon System Positioning	241
-6.5.4.1	TBS Location Information	241
-–	TBS-ProvideLocationInformation	241
-6.5.4.2	TBS Location Information Elements	242
-–	TBS-MeasurementInformation	242
-–	MBS-BeaconMeasList	242
-6.5.4.3	TBS Location Information Request	243
-–	TBS-RequestLocationInformation	243
-6.5.4.4	TBS Capability Information	243
-–	TBS-ProvideCapabilities	243
--	MBS-AssistanceDataSupportList	244
-6.5.4.5	TBS Capability Information Request	244
-–	TBS-RequestCapabilities	244
-6.5.4.6	TBS Error Elements	245
-–	TBS-Error	245
-–	TBS-LocationServerErrorCauses	245
-–	TBS-TargetDeviceErrorCauses	245
-6.5.4.7	TBS Assistance Data	246
-–	TBS-ProvideAssistanceData	246
-6.5.4.8	TBS Assistance Data Elements	246
-–	TBS-AssistanceDataList	246
-–	MBS-AlmanacAssistance	246
-–	MBS-AcquisitionAssistance	247
-6.5.4.9	TBS Assistance Data Request	247
-–	TBS-RequestAssistanceData	247
-6.5.5	Sensor based Positioning	247
-6.5.5.0	Introduction	247
-6.5.5.1	Sensor Location Information	248
-–	Sensor-ProvideLocationInformation	248
-6.5.5.2	Sensor Location Information Elements	248
-–	Sensor-MeasurementInformation	248
-–	Sensor-MotionInformation	249
-6.5.5.3	Sensor Location Information Request	250
-–	Sensor-RequestLocationInformation	250
-6.5.5.4	Sensor Capability Information	251
-–	Sensor-ProvideCapabilities	251
-6.5.5.5	Sensor Capability Information Request	252
-–	Sensor-RequestCapabilities	252
-6.5.5.6	Sensor Error Elements	252
-–	Sensor-Error	252
-–	Sensor-LocationServerErrorCauses	252
-–	Sensor-TargetDeviceErrorCauses	252
-6.5.5.7	Sensor Assistance Data	253
-–	Sensor-ProvideAssistanceData	253
-6.5.5.8	Sensor Assistance Data Elements	253
-–	Sensor-AssistanceDataList	253
-6.5.5.9	Sensor Assistance Data Request	254
-–	Sensor-RequestAssistanceData	254
-6.5.6	WLAN-based Positioning	254
-6.5.6.1	WLAN Location Information	255
-–	WLAN-ProvideLocationInformation	255
-6.5.6.2	WLAN Location Information Elements	255
-–	WLAN-MeasurementInformation	255
-6.5.6.3	WLAN Location Information Request	256
-–	WLAN-RequestLocationInformation	256
-6.5.6.4	WLAN Capability Information	257
-–	WLAN-ProvideCapabilities	257
-6.5.6.5	WLAN Capability Information Request	257
-–	WLAN-RequestCapabilities	257
-6.5.6.6	WLAN Error Elements	258
-–	WLAN-Error	258
-–	WLAN-LocationServerErrorCauses	258
-–	WLAN-TargetDeviceErrorCauses	258
-6.5.7	Bluetooth-based Positioning	262
-6.5.7.1	Bluetooth Location Information	262
-–	BT-ProvideLocationInformation	262
-6.5.7.2	Bluetooth Location Information Elements	262
-–	BT-MeasurementInformation	262
-6.5.7.3	Bluetooth Location Information Request	263
-–	BT-RequestLocationInformation	263
-6.5.7.4	Bluetooth Capability Information	263
-–	BT-ProvideCapabilities	263
-6.5.7.5	Bluetooth Capability Information Request	264
-–	BT-RequestCapabilities	264
-6.5.7.6	BT Error Elements	264
-–	BT-Error	264
-–	BT-LocationServerErrorCauses	264
-–	BT-TargetDeviceErrorCauses	265
-6.5.8	NR UL Positioning	265
-6.5.8.1	NR UL Capability Information	265
-–	NR-UL-ProvideCapabilities	265
-6.5.8.2	NR UL Capability Information Request	265
-–	NR-UL-RequestCapabilities	265
-6.5.9	NR E-CID Positioning	265
-6.5.9.1	NR E-CID Location Information	266
-–	NR-ECID-ProvideLocationInformation	266
-6.5.9.2	NR E-CID Location Information Elements	266
-–	NR-ECID-SignalMeasurementInformation	266
-6.5.9.3	NR E-CID Location Information Request	267
-–	NR-ECID-RequestLocationInformation	267
-6.5.9.4	NR E-CID Capability Information	267
-–	NR-ECID-ProvideCapabilities	267
-6.5.9.5	NR E-CID Capability Information Request	268
-–	NR-ECID-RequestCapabilities	268
-6.5.9.6	NR E-CID Error Elements	268
-–	NR-ECID-Error	268
-–	NR-ECID-LocationServerErrorCauses	268
-–	NR-ECID-TargetDeviceErrorCauses	269
-6.5.10	NR DL-TDOA Positioning	269
-6.5.10.1	NR DL-TDOA Assistance Data	269
-–	NR-DL-TDOA-ProvideAssistanceData	269
-6.5.10.2	NR DL-TDOA Assistance Data Request	270
-–	NR-DL-TDOA-RequestAssistanceData	270
-6.5.10.3	NR DL-TDOA Location Information	270
-–	NR-DL-TDOA-ProvideLocationInformation	270
-6.5.10.4	NR DL-TDOA Location Information Elements	271
-–	NR-DL-TDOA-SignalMeasurementInformation	271
-–	NR-DL-TDOA-LocationInformation	272
-6.5.10.5	NR DL-TDOA Location Information Request	273
-–	NR-DL-TDOA-RequestLocationInformation	273
-6.5.10.6	NR DL-TDOA Capability Information	273
-–	NR-DL-TDOA-ProvideCapabilities	273
-–	NR-DL-TDOA-MeasurementCapability	274
-6.5.10.7	NR DL-TDOA Capability Information Request	274
-–	NR-DL-TDOA-RequestCapabilities	274
-6.5.10.8	NR DL-TDOA Error Elements	274
-–	NR-DL-TDOA-Error	274
-–	NR-DL-TDOA-LocationServerErrorCauses	275
-–	NR-DL-TDOA-TargetDeviceErrorCauses	275
-6.5.11	NR DL-AoD Positioning	275
-6.5.11.1	NR DL-AoD Assistance Data	275
-–	NR-DL-AoD-ProvideAssistanceData	275
-6.5.11.2	NR DL-AoD Assistance Data Request	276
-–	NR-DL-AoD-RequestAssistanceData	276
-6.5.11.3	NR DL-AoD Location Information	276
-–	NR-DL-AoD-ProvideLocationInformation	276
-6.5.11.4	NR DL-AoD Location Information Elements	277
-–	NR-DL-AoD-SignalMeasurementInformation	277
-–	NR-DL-AoD-LocationInformation	278
-6.5.11.5	NR DL-AoD Location Information Request	278
-–	NR-DL-AoD-RequestLocationInformation	278
-6.5.11.6	NR DL-AoD Capability Information	279
-–	NR-DL-AoD-ProvideCapabilities	279
-–	NR-DL-AoD-MeasurementCapability	279
-6.5.11.7	NR DL-AoD Capability Information Request	280
-–	NR-DL-AoD-RequestCapabilities	280
-6.5.11.8	NR DL-AoD Error Elements	280
-–	NR-DL-AoD-Error	280
-–	NR-DL-AoD-LocationServerErrorCauses	280
-–	NR-DL-AoD-TargetDeviceErrorCauses	281
-6.5.12	NR Multi-RTT Positioning	281
-6.5.12.1	NR Multi-RTT Assistance Data	281
-–	NR-Multi-RTT-ProvideAssistanceData	281
-6.5.12.2	NR Multi-RTT Assistance Data Request	282
-–	NR-Multi-RTT-RequestAssistanceData	282
-6.5.12.3	NR Multi-RTT Location Information	282
-–	NR-Multi-RTT-ProvideLocationInformation	282
-6.5.12.4	NR Multi-RTT Location Information Elements	282
-–	NR-Multi-RTT-SignalMeasurementInformation	282
-6.5.12.5	NR Multi-RTT Location Information Request	284
-–	NR-Multi-RTT-RequestLocationInformation	284
-6.5.12.6	NR Multi-RTT Capability Information	285
-–	NR-Multi-RTT-ProvideCapabilities	285
-–	NR-Multi-RTT-MeasurementCapability	285
-6.5.12.7	NR Multi-RTT Capability Information Request	286
-–	NR-Multi-RTT-RequestCapabilities	286
-6.5.12.8	NR Multi-RTT Error Elements	286
-–	NR-Multi-RTT-Error	286
-–	NR-Multi-RTT-LocationServerErrorCauses	286
-–	NR-Multi-RTT-TargetDeviceErrorCauses	287
-6.6	Multiplicity and type constraint values	287
-–	Multiplicity and type constraint definitions	287
-–	End of LPP-PDU-Definitions	287
-7	Broadcast of assistance data	288
-7.1	General	288
-7.2	Mapping of posSibType to assistance data element	288
-7.3	Procedures related to broadcast information elements	289
-7.4	Broadcast information elements	291
-7.4.1	Basic production	291
-–	LPP-Broadcast-Definitions	291
-7.4.2	Element definitions	291
-–	AssistanceDataSIBelement	291
-–	OTDOA-UE-Assisted	292
-–	NR-UEB-TRP-LocationData	293
-–	NR-UEB-TRP-RTD-Info	293
-–	End of LPP-Broadcast-Definitions	293
-7.5	Broadcast ciphering (informative)	293
-Annex A (informative):	Change History	296
+–	ARFCN-ValueNR	43
+–	ARFCN-ValueUTRA	43
+–	CarrierFreq-NB	43
+–	CellGlobalIdEUTRA-AndUTRA	44
+–	CellGlobalIdGERAN	44
+–	ECGI	45
+–	Ellipsoid-Point	45
+–	Ellipsoid-PointWithUncertaintyCircle	45
+–	EllipsoidPointWithUncertaintyEllipse	45
+–	EllipsoidPointWithAltitude	46
+–	EllipsoidPointWithAltitudeAndUncertaintyEllipsoid	46
+–	EllipsoidArc	46
+–	EPDU-Sequence	46
+–	FreqBandIndicatorNR	47
+–	HA-EllipsoidPointWithAltitudeAndScalableUncertaintyEllipsoid	47
+–	HA-EllipsoidPointWithScalableUncertaintyEllipse	48
+–	HighAccuracyEllipsoidPointWithUncertaintyEllipse	48
+–	HighAccuracyEllipsoidPointWithAltitudeAndUncertaintyEllipsoid	48
+–	HorizontalVelocity	48
+–	HorizontalWithVerticalVelocity	49
+–	HorizontalVelocityWithUncertainty	49
+–	HorizontalWithVerticalVelocityAndUncertainty	49
+–	LocationCoordinateTypes	49
+–	NCGI	50
+–	NR-PhysCellId	50
+–	PeriodicAssistanceDataControlParameters	50
+–	Polygon	51
+–	PositioningModes	51
+–	SegmentationInfo	51
+–	VelocityTypes	52
+6.4.2	Common Positioning	52
+–	CommonIEsRequestCapabilities	52
+–	CommonIEsProvideCapabilities	52
+–	CommonIEsRequestAssistanceData	53
+–	CommonIEsProvideAssistanceData	53
+–	CommonIEsRequestLocationInformation	54
+–	CommonIEsProvideLocationInformation	58
+–	CommonIEsAbort	59
+–	CommonIEsError	60
+6.4.3	Common NR Positioning Information Elements	60
+–	DL-PRS-ID-Info	60
+–	NR-AdditionalPathList	61
+–	NR-DL-PRS-AssistanceData	61
+–	NR-DL-PRS-BeamInfo	64
+–	NR-DL-PRS-Info	66
+–	NR-DL-PRS-ProcessingCapability	69
+–	NR-DL-PRS-QCL-ProcessingCapability	70
+–	NR-DL-PRS-ResourceID	71
+–	NR-DL-PRS-ResourcesCapability	71
+–	NR-DL-PRS-ResourceSetID	72
+–	NR-PositionCalculationAssistance	72
+–	NR-RTD-Info	73
+–	NR-SelectedDL-PRS-IndexList	74
+–	NR-SSB-Config	75
+–	NR-TimeStamp	76
+–	NR-TimingQuality	76
+–	NR-TRP-LocationInfo	77
+–	NR-UL-SRS-Capability	78
+–	ReferencePoint	81
+–	RelativeLocation	81
+6.5	Positioning Method IEs	83
+6.5.1	OTDOA Positioning	83
+6.5.1.1	OTDOA Assistance Data	83
+–	OTDOA-ProvideAssistanceData	83
+6.5.1.2	OTDOA Assistance Data Elements	83
+–	OTDOA-ReferenceCellInfo	83
+–	PRS-Info	85
+–	TDD-Config	87
+–	OTDOA-NeighbourCellInfoList	87
+–	OTDOA-ReferenceCellInfoNB	90
+–	PRS-Info-NB	92
+–	OTDOA-NeighbourCellInfoListNB	95
+6.5.1.3	OTDOA Assistance Data Request	98
+–	OTDOA-RequestAssistanceData	98
+6.5.1.4	OTDOA Location Information	98
+–	OTDOA-ProvideLocationInformation	98
+6.5.1.5	OTDOA Location Information Elements	99
+–	OTDOA-SignalMeasurementInformation	99
+–	OTDOA-SignalMeasurementInformation-NB	102
+–	OTDOA-MeasQuality	104
+–	AdditionalPath	105
+6.5.1.6	OTDOA Location Information Request	105
+–	OTDOA-RequestLocationInformation	105
+6.5.1.7	OTDOA Capability Information	106
+–	OTDOA-ProvideCapabilities	106
+6.5.1.8	OTDOA Capability Information Request	108
+–	OTDOA-RequestCapabilities	108
+6.5.1.9	OTDOA Error Elements	108
+–	OTDOA-Error	108
+–	OTDOA-LocationServerErrorCauses	108
+–	OTDOA-TargetDeviceErrorCauses	109
+6.5.2	A-GNSS Positioning	109
+6.5.2.1	GNSS Assistance Data	109
+–	A-GNSS-ProvideAssistanceData	109
+–	GNSS-CommonAssistData	109
+–	GNSS-GenericAssistData	110
+–	GNSS-PeriodicAssistData	111
+6.5.2.2	GNSS Assistance Data Elements	111
+–	GNSS-ReferenceTime	111
+–	GNSS-SystemTime	113
+–	GPS-TOW-Assist	113
+–	NetworkTime	114
+–	GNSS-ReferenceLocation	117
+–	GNSS-IonosphericModel	117
+–	KlobucharModelParameter	117
+–	KlobucharModel2Parameter	118
+–	NeQuickModelParameter	119
+–	GNSS-EarthOrientationParameters	119
+–	GNSS-RTK-ReferenceStationInfo	120
+–	GNSS-RTK-CommonObservationInfo	122
+–	GNSS-RTK-AuxiliaryStationData	123
+–	GNSS-SSR-CorrectionPoints	125
+–	GNSS-TimeModelList	126
+–	GNSS-DifferentialCorrections	127
+–	GNSS-NavigationModel	130
+–	StandardClockModelList	132
+–	NAV-ClockModel	133
+–	CNAV-ClockModel	133
+–	GLONASS-ClockModel	134
+–	SBAS-ClockModel	135
+–	BDS-ClockModel	135
+–	BDS-ClockModel2	136
+–	NavIC-ClockModel	136
+–	NavModelKeplerianSet	137
+–	NavModelNAV-KeplerianSet	138
+–	NavModelCNAV-KeplerianSet	140
+–	NavModel-GLONASS-ECEF	141
+–	NavModel-SBAS-ECEF	142
+–	NavModel-BDS-KeplerianSet	143
+–	NavModel-BDS-KeplerianSet2	144
+–	NavModel-NavIC-KeplerianSet	147
+–	GNSS-RealTimeIntegrity	148
+–	GNSS-DataBitAssistance	148
+–	GNSS-AcquisitionAssistance	149
+–	GNSS-Almanac	153
+–	AlmanacKeplerianSet	154
+–	AlmanacNAV-KeplerianSet	154
+–	AlmanacReducedKeplerianSet	155
+–	AlmanacMidiAlmanacSet	156
+–	AlmanacGLONASS-AlmanacSet	157
+–	AlmanacECEF-SBAS-AlmanacSet	158
+–	AlmanacBDS-AlmanacSet	159
+–	AlmanacNavIC-AlmanacSet	160
+–	GNSS-UTC-Model	161
+–	UTC-ModelSet1	161
+–	UTC-ModelSet2	162
+–	UTC-ModelSet3	163
+–	UTC-ModelSet4	163
+–	UTC-ModelSet5	164
+–	GNSS-AuxiliaryInformation	165
+–	BDS-DifferentialCorrections	166
+–	BDS-GridModelParameter	167
+–	GNSS-RTK-Observations	167
+–	GLO-RTK-BiasInformation	170
+–	GNSS-RTK-MAC-CorrectionDifferences	171
+–	GNSS-RTK-Residuals	173
+–	GNSS-RTK-FKP-Gradients	174
+–	GNSS-SSR-OrbitCorrections	176
+–	GNSS-SSR-ClockCorrections	178
+–	GNSS-SSR-CodeBias	179
+–	GNSS-SSR-URA	180
+–	GNSS-SSR-PhaseBias	181
+–	GNSS-SSR-STEC-Correction	182
+–	GNSS-SSR-GriddedCorrection	185
+–	NavIC-DifferentialCorrections	187
+–	NavIC-GridModelParameter	189
+6.5.2.3	GNSS Assistance Data Request	190
+–	A-GNSS-RequestAssistanceData	190
+–	GNSS-CommonAssistDataReq	191
+–	GNSS-GenericAssistDataReq	192
+–	GNSS-PeriodicAssistDataReq	193
+6.5.2.4	GNSS Assistance Data Request Elements	194
+–	GNSS-ReferenceTimeReq	194
+–	GNSS-ReferenceLocationReq	195
+–	GNSS-IonosphericModelReq	195
+–	GNSS-EarthOrientationParametersReq	196
+–	GNSS-RTK-ReferenceStationInfoReq	196
+–	GNSS-RTK-AuxiliaryStationDataReq	196
+–	GNSS-SSR-CorrectionPointsReq	197
+–	GNSS-TimeModelListReq	197
+–	GNSS-DifferentialCorrectionsReq	197
+–	GNSS-NavigationModelReq	198
+–	GNSS-RealTimeIntegrityReq	199
+–	GNSS-DataBitAssistanceReq	200
+–	GNSS-AcquisitionAssistanceReq	200
+–	GNSS-AlmanacReq	201
+–	GNSS-UTC-ModelReq	201
+–	GNSS-AuxiliaryInformationReq	202
+–	BDS-DifferentialCorrectionsReq	202
+–	BDS-GridModelReq	202
+–	GNSS-RTK-ObservationsReq	202
+–	GLO-RTK-BiasInformationReq	203
+–	GNSS-RTK-MAC-CorrectionDifferencesReq	203
+–	GNSS-RTK-ResidualsReq	204
+–	GNSS-RTK-FKP-GradientsReq	204
+–	GNSS-SSR-OrbitCorrectionsReq	205
+–	GNSS-SSR-ClockCorrectionsReq	205
+–	GNSS-SSR-CodeBiasReq	205
+–	GNSS-SSR-URA-Req	206
+–	GNSS-SSR-PhaseBiasReq	206
+–	GNSS-SSR-STEC-CorrectionReq	206
+–	GNSS-SSR-GriddedCorrectionReq	206
+–	NavIC-DifferentialCorrectionsReq	207
+–	NavIC-GridModelReq	207
+6.5.2.5	GNSS Location Information	207
+–	A-GNSS-ProvideLocationInformation	207
+6.5.2.6	GNSS Location Information Elements	207
+–	GNSS-SignalMeasurementInformation	207
+–	MeasurementReferenceTime	208
+–	GNSS-MeasurementList	210
+–	GNSS-LocationInformation	214
+6.5.2.7	GNSS Location Information Request	215
+–	A-GNSS-RequestLocationInformation	215
+6.5.2.8	GNSS Location Information Request Elements	215
+–	GNSS-PositioningInstructions	215
+6.5.2.9	GNSS Capability Information	216
+–	A-GNSS-ProvideCapabilities	216
+6.5.2.10	GNSS Capability Information Elements	218
+–	GNSS-CommonAssistanceDataSupport	218
+–	GNSS-ReferenceTimeSupport	219
+–	GNSS-ReferenceLocationSupport	219
+–	GNSS-IonosphericModelSupport	219
+–	GNSS-EarthOrientationParametersSupport	220
+–	GNSS-RTK-ReferenceStationInfoSupport	220
+–	GNSS-RTK-AuxiliaryStationDataSupport	220
+–	GNSS-GenericAssistanceDataSupport	220
+–	GNSS-TimeModelListSupport	222
+–	GNSS-DifferentialCorrectionSupport	222
+–	GNSS-NavigationModelSupport	223
+–	GNSS-RealTimeIntegritySupport	223
+–	GNSS-DataBitAssistanceSupport	223
+–	GNSS-AcquisitionAssistanceSupport	224
+–	GNSS-AlmanacSupport	224
+–	GNSS-UTC-ModelSupport	224
+–	GNSS-AuxiliaryInformationSupport	225
+–	BDS-DifferentialCorrectionsSupport	225
+–	BDS-GridModelSupport	225
+–	GNSS-RTK-ObservationsSupport	225
+–	GLO-RTK-BiasInformationSupport	226
+–	GNSS-RTK-MAC-CorrectionDifferencesSupport	226
+–	GNSS-RTK-ResidualsSupport	226
+–	GNSS-RTK-FKP-GradientsSupport	226
+–	GNSS-SSR-OrbitCorrectionsSupport	227
+–	GNSS-SSR-ClockCorrectionsSupport	227
+–	GNSS-SSR-URA-Support	227
+–	GNSS-SSR-STEC-CorrectionSupport	228
+–	GNSS-SSR-GriddedCorrectionSupport	228
+–	NavIC-DifferentialCorrectionsSupport	228
+–	NavIC-GridModelSupport	228
+6.5.2.11	GNSS Capability Information Request	228
+–	A-GNSS-RequestCapabilities	228
+6.5.2.12	GNSS Error Elements	229
+–	A-GNSS-Error	229
+–	GNSS-LocationServerErrorCauses	229
+–	GNSS-TargetDeviceErrorCauses	230
+6.5.2.13	Common GNSS Information Elements	230
+–	GNSS-FrequencyID	230
+–	GNSS-ID	231
+–	GNSS-ID-Bitmap	231
+–	GNSS-Link-CombinationsList	232
+–	GNSS-NavListInfo	232
+–	GNSS-NetworkID	232
+–	GNSS-PeriodicControlParam	232
+–	GNSS-ReferenceStationID	233
+–	GNSS-SignalID	233
+–	GNSS-SignalIDs	235
+–	GNSS-SubNetworkID	236
+–	SBAS-ID	237
+–	SBAS-IDs	237
+–	SV-ID	237
+6.5.3	Enhanced Cell ID Positioning	238
+6.5.3.1	E‑CID Location Information	238
+–	ECID-ProvideLocationInformation	238
+6.5.3.2	E‑CID Location Information Elements	238
+–	ECID-SignalMeasurementInformation	238
+6.5.3.3	E‑CID Location Information Request	240
+–	ECID-RequestLocationInformation	240
+6.5.3.4	E‑CID Capability Information	240
+–	ECID-ProvideCapabilities	240
+6.5.3.5	E‑CID Capability Information Request	241
+–	ECID-RequestCapabilities	241
+6.5.3.6	E‑CID Error Elements	241
+–	ECID-Error	241
+–	ECID-LocationServerErrorCauses	241
+–	ECID-TargetDeviceErrorCauses	242
+6.5.4	Terrestrial Beacon System Positioning	242
+6.5.4.1	TBS Location Information	242
+–	TBS-ProvideLocationInformation	242
+6.5.4.2	TBS Location Information Elements	243
+–	TBS-MeasurementInformation	243
+–	MBS-BeaconMeasList	243
+6.5.4.3	TBS Location Information Request	244
+–	TBS-RequestLocationInformation	244
+6.5.4.4	TBS Capability Information	244
+–	TBS-ProvideCapabilities	244
+-	MBS-AssistanceDataSupportList	245
+6.5.4.5	TBS Capability Information Request	245
+–	TBS-RequestCapabilities	245
+6.5.4.6	TBS Error Elements	246
+–	TBS-Error	246
+–	TBS-LocationServerErrorCauses	246
+–	TBS-TargetDeviceErrorCauses	246
+6.5.4.7	TBS Assistance Data	247
+–	TBS-ProvideAssistanceData	247
+6.5.4.8	TBS Assistance Data Elements	247
+–	TBS-AssistanceDataList	247
+–	MBS-AlmanacAssistance	247
+–	MBS-AcquisitionAssistance	248
+6.5.4.9	TBS Assistance Data Request	248
+–	TBS-RequestAssistanceData	248
+6.5.5	Sensor based Positioning	248
+6.5.5.0	Introduction	248
+6.5.5.1	Sensor Location Information	249
+–	Sensor-ProvideLocationInformation	249
+6.5.5.2	Sensor Location Information Elements	249
+–	Sensor-MeasurementInformation	249
+–	Sensor-MotionInformation	250
+6.5.5.3	Sensor Location Information Request	251
+–	Sensor-RequestLocationInformation	251
+6.5.5.4	Sensor Capability Information	252
+–	Sensor-ProvideCapabilities	252
+6.5.5.5	Sensor Capability Information Request	253
+–	Sensor-RequestCapabilities	253
+6.5.5.6	Sensor Error Elements	253
+–	Sensor-Error	253
+–	Sensor-LocationServerErrorCauses	253
+–	Sensor-TargetDeviceErrorCauses	253
+6.5.5.7	Sensor Assistance Data	254
+–	Sensor-ProvideAssistanceData	254
+6.5.5.8	Sensor Assistance Data Elements	254
+–	Sensor-AssistanceDataList	254
+6.5.5.9	Sensor Assistance Data Request	255
+–	Sensor-RequestAssistanceData	255
+6.5.6	WLAN-based Positioning	255
+6.5.6.1	WLAN Location Information	256
+–	WLAN-ProvideLocationInformation	256
+6.5.6.2	WLAN Location Information Elements	256
+–	WLAN-MeasurementInformation	256
+6.5.6.3	WLAN Location Information Request	257
+–	WLAN-RequestLocationInformation	257
+6.5.6.4	WLAN Capability Information	258
+–	WLAN-ProvideCapabilities	258
+6.5.6.5	WLAN Capability Information Request	258
+–	WLAN-RequestCapabilities	258
+6.5.6.6	WLAN Error Elements	259
+–	WLAN-Error	259
+–	WLAN-LocationServerErrorCauses	259
+–	WLAN-TargetDeviceErrorCauses	259
+6.5.7	Bluetooth-based Positioning	263
+6.5.7.1	Bluetooth Location Information	263
+–	BT-ProvideLocationInformation	263
+6.5.7.2	Bluetooth Location Information Elements	263
+–	BT-MeasurementInformation	263
+6.5.7.3	Bluetooth Location Information Request	264
+–	BT-RequestLocationInformation	264
+6.5.7.4	Bluetooth Capability Information	264
+–	BT-ProvideCapabilities	264
+6.5.7.5	Bluetooth Capability Information Request	265
+–	BT-RequestCapabilities	265
+6.5.7.6	BT Error Elements	265
+–	BT-Error	265
+–	BT-LocationServerErrorCauses	265
+–	BT-TargetDeviceErrorCauses	266
+6.5.8	NR UL Positioning	266
+6.5.8.1	NR UL Capability Information	266
+–	NR-UL-ProvideCapabilities	266
+6.5.8.2	NR UL Capability Information Request	266
+–	NR-UL-RequestCapabilities	266
+6.5.9	NR E-CID Positioning	266
+6.5.9.1	NR E-CID Location Information	267
+–	NR-ECID-ProvideLocationInformation	267
+6.5.9.2	NR E-CID Location Information Elements	267
+–	NR-ECID-SignalMeasurementInformation	267
+6.5.9.3	NR E-CID Location Information Request	268
+–	NR-ECID-RequestLocationInformation	268
+6.5.9.4	NR E-CID Capability Information	268
+–	NR-ECID-ProvideCapabilities	268
+6.5.9.5	NR E-CID Capability Information Request	269
+–	NR-ECID-RequestCapabilities	269
+6.5.9.6	NR E-CID Error Elements	269
+–	NR-ECID-Error	269
+–	NR-ECID-LocationServerErrorCauses	269
+–	NR-ECID-TargetDeviceErrorCauses	270
+6.5.10	NR DL-TDOA Positioning	270
+6.5.10.1	NR DL-TDOA Assistance Data	270
+–	NR-DL-TDOA-ProvideAssistanceData	270
+6.5.10.2	NR DL-TDOA Assistance Data Request	271
+–	NR-DL-TDOA-RequestAssistanceData	271
+6.5.10.3	NR DL-TDOA Location Information	271
+–	NR-DL-TDOA-ProvideLocationInformation	271
+6.5.10.4	NR DL-TDOA Location Information Elements	272
+–	NR-DL-TDOA-SignalMeasurementInformation	272
+–	NR-DL-TDOA-LocationInformation	273
+6.5.10.5	NR DL-TDOA Location Information Request	274
+–	NR-DL-TDOA-RequestLocationInformation	274
+6.5.10.6	NR DL-TDOA Capability Information	274
+–	NR-DL-TDOA-ProvideCapabilities	274
+–	NR-DL-TDOA-MeasurementCapability	275
+6.5.10.7	NR DL-TDOA Capability Information Request	275
+–	NR-DL-TDOA-RequestCapabilities	275
+6.5.10.8	NR DL-TDOA Error Elements	275
+–	NR-DL-TDOA-Error	275
+–	NR-DL-TDOA-LocationServerErrorCauses	276
+–	NR-DL-TDOA-TargetDeviceErrorCauses	276
+6.5.11	NR DL-AoD Positioning	276
+6.5.11.1	NR DL-AoD Assistance Data	276
+–	NR-DL-AoD-ProvideAssistanceData	276
+6.5.11.2	NR DL-AoD Assistance Data Request	277
+–	NR-DL-AoD-RequestAssistanceData	277
+6.5.11.3	NR DL-AoD Location Information	277
+–	NR-DL-AoD-ProvideLocationInformation	277
+6.5.11.4	NR DL-AoD Location Information Elements	278
+–	NR-DL-AoD-SignalMeasurementInformation	278
+–	NR-DL-AoD-LocationInformation	279
+6.5.11.5	NR DL-AoD Location Information Request	279
+–	NR-DL-AoD-RequestLocationInformation	279
+6.5.11.6	NR DL-AoD Capability Information	280
+–	NR-DL-AoD-ProvideCapabilities	280
+–	NR-DL-AoD-MeasurementCapability	280
+6.5.11.7	NR DL-AoD Capability Information Request	281
+–	NR-DL-AoD-RequestCapabilities	281
+6.5.11.8	NR DL-AoD Error Elements	281
+–	NR-DL-AoD-Error	281
+–	NR-DL-AoD-LocationServerErrorCauses	281
+–	NR-DL-AoD-TargetDeviceErrorCauses	282
+6.5.12	NR Multi-RTT Positioning	282
+6.5.12.1	NR Multi-RTT Assistance Data	282
+–	NR-Multi-RTT-ProvideAssistanceData	282
+6.5.12.2	NR Multi-RTT Assistance Data Request	283
+–	NR-Multi-RTT-RequestAssistanceData	283
+6.5.12.3	NR Multi-RTT Location Information	283
+–	NR-Multi-RTT-ProvideLocationInformation	283
+6.5.12.4	NR Multi-RTT Location Information Elements	283
+–	NR-Multi-RTT-SignalMeasurementInformation	283
+6.5.12.5	NR Multi-RTT Location Information Request	285
+–	NR-Multi-RTT-RequestLocationInformation	285
+6.5.12.6	NR Multi-RTT Capability Information	286
+–	NR-Multi-RTT-ProvideCapabilities	286
+–	NR-Multi-RTT-MeasurementCapability	286
+6.5.12.7	NR Multi-RTT Capability Information Request	287
+–	NR-Multi-RTT-RequestCapabilities	287
+6.5.12.8	NR Multi-RTT Error Elements	287
+–	NR-Multi-RTT-Error	287
+–	NR-Multi-RTT-LocationServerErrorCauses	287
+–	NR-Multi-RTT-TargetDeviceErrorCauses	288
+6.6	Multiplicity and type constraint values	288
+–	Multiplicity and type constraint definitions	288
+–	End of LPP-PDU-Definitions	288
+7	Broadcast of assistance data	289
+7.1	General	289
+7.2	Mapping of posSibType to assistance data element	289
+7.3	Procedures related to broadcast information elements	290
+7.4	Broadcast information elements	292
+7.4.1	Basic production	292
+–	LPP-Broadcast-Definitions	292
+7.4.2	Element definitions	292
+–	AssistanceDataSIBelement	292
+–	OTDOA-UE-Assisted	293
+–	NR-UEB-TRP-LocationData	294
+–	NR-UEB-TRP-RTD-Info	294
+–	End of LPP-Broadcast-Definitions	294
+7.5	Broadcast ciphering (informative)	294
+Annex A (informative):	Change History	297
 
 Foreword
 This Technical Specification has been produced by the 3rd Generation Partnership Project (3GPP).
@@ -629,6 +631,7 @@ The following documents contain provisions which, through reference in this text
 [45]	3GPP TS 38.214: "NR; Physical layer procedures for data".
 [46]	3GPP TS 38.133: "NR; Requirements for support of radio resource management".
 [47]	3GPP TS 38.300: "NR; NR and NG-RAN Overall Description; Stage 2".
+[48]	3GPP TS 38.213: "NR; Physical layer procedures for control".
 3	Definitions and Abbreviations
 3.1	Definitions
 For the purposes of the present document, the terms and definitions given in TR 21.905 [1], TS 36.305 [2], TS 23.271 [3], 38.305 [40] and TS 23.273 [42] apply. Other definitions are provided below.
@@ -636,7 +639,7 @@ Anchor carrier: In NB-IoT, a carrier where the UE assumes that NPSS/NSSS/NPBCH/S
 Location Server: a physical or logical entity (e.g., E-SMLC, SUPL SLP, or LMF) that manages positioning for a target device by obtaining measurements and other location information from one or more positioning units and providing assistance data to positioning units to help determine this. A Location Server may also compute or verify the final location estimate.
 NB-IoT: NB-IoT allows access to network services via E-UTRA with a channel bandwidth limited to 200 kHz.
 Observed Time Difference Of Arrival (OTDOA): The time interval that is observed by a target device between the reception of downlink signals from two different TPs. If a signal from TP 1 is received at the moment t1, and a signal from TP 2 is received at the moment t2, the OTDOA is t2 – t1.
-PRS-only TP: A TP which only transmits PRS signals for PRS-based TBS positioning and is not associated with a cell.
+PRS-only TP: A TP which only transmits PRS signals or DL-PRS for PRS-based TBS positioning and is not associated with a cell.
 Reference Source: a physical entity or part of a physical entity that provides signals (e.g., RF, acoustic, infra-red) that can be measured (e.g., by a Target Device) in order to obtain the location of a Target Device.
 Relative Time Difference (RTD): The relative time difference between a TRP i and a TRP j, is defined as tj – ti, where ti and tj are defined as the time when TRP i and j transmit the start of one subframe respectively.
 Target Device: the device that is being positioned (e.g., UE or SUPL SET).
@@ -1037,7 +1040,7 @@ The contents of each LPP message is specified in clause 6.2 using ASN.1 to speci
 The ASN.1 in this clause uses the same format and coding conventions as described in Annex A of TS 36.331 [12].
 Transfer syntax for LPP messages is derived from their ASN.1 definitions by use of Basic Packed Encoding Rules (BASIC-PER), Unaligned Variant, as specified in ITU-T Rec. X.691 [22]. The encoded LPP message always contains a multiple of 8 bits.
 Transfer syntax for LPP IEs is derived from their ASN.1 definitions by use of Basic Packed Encoding Rules (BASIC-PER), Unaligned Variant, as specified in ITU-T Rec. X.691 [22]. The encoded LPP IE always contains a multiple of 8 bits. This applies when a single LPP IE is encoded as the basic production, i.e. for other purposes than encoding the LPP IE within an LPP message.
-The need for fields to be present in a message or an abstract type, i.e., the ASN.1 fields that are specified as OPTIONAL in the abstract notation (ASN.1), is specified by means of comment text tags attached to the OPTIONAL statement in the abstract syntax. The meaning of each tag is specified in table 6.1-1. These tags are used in the downlink (server to target) direction only.
+The need for fields to be present in a message or an abstract type, i.e., the ASN.1 fields that are specified as OPTIONAL in the abstract notation (ASN.1), is specified by means of comment text tags attached to the OPTIONAL statement in the abstract syntax. The meaning of each tag is specified in table 6.1-1. The use of these tags in the uplink (target to server) direction does not impose any requirements on the server.
 Table 6.1-1: Meaning of abbreviations used to specify the need for fields to be present
 Abbreviation
 Meaning
@@ -1066,10 +1069,7 @@ When specifying information elements which are to be represented by BIT STRINGs,
 This ASN.1 segment is the start of the LPP PDU definitions.
 -- ASN1START
 
-LPP-PDU-Definitions {
-itu-t (0) identified-organization (4) etsi (0) mobileDomain (0)
-eps-Access (21) modules (3) lpp (7) version1 (1) lpp-PDU-Definitions (1) }
-
+LPP-PDU-Definitions
 DEFINITIONS AUTOMATIC TAGS ::=
 
 BEGIN
@@ -1729,6 +1729,40 @@ FreqBandIndicatorNR-r16 ::= INTEGER (1..1024)
 
 -- ASN1STOP
 
+–	HA-EllipsoidPointWithAltitudeAndScalableUncertaintyEllipsoid
+The IE HA-EllipsoidPointWithAltitudeAndScalableUncertaintyEllipsoid is used to describe a geographic shape as defined in TS 23.032 [15].
+-- ASN1START
+
+HA-EllipsoidPointWithAltitudeAndScalableUncertaintyEllipsoid-r16 ::= SEQUENCE {
+	degreesLatitude-r16							INTEGER(-2147483648..2147483647),
+	degreesLongitude-r16						INTEGER(-2147483648..2147483647),
+	altitude-r16								INTEGER(-64000..1280000),
+	uncertaintySemiMajor-r16					INTEGER (0..255),
+	uncertaintySemiMinor-r16					INTEGER (0..255),
+	orientationMajorAxis-r16					INTEGER (0..179),
+	horizontalConfidence-r16					INTEGER (0..100),
+	uncertaintyAltitude-r16						INTEGER (0..255),
+	verticalConfidence-r16						INTEGER (0..100),
+	ha-HorizontalExtendedRangeUsed-r16			BOOLEAN,
+	ha-VerticalExtendedRangeUsed-r16			BOOLEAN
+}
+-- ASN1STOP
+
+–	HA-EllipsoidPointWithScalableUncertaintyEllipse
+The IE HA-EllipsoidPointWithScalableUncertaintyEllipse is used to describe a geographic shape as defined in TS 23.032 [15].
+-- ASN1START
+
+HA-EllipsoidPointWithScalableUncertaintyEllipse-r16 ::= SEQUENCE {
+	degreesLatitude-r16							INTEGER(-2147483648..2147483647),
+	degreesLongitude-r16						INTEGER(-2147483648..2147483647),
+	uncertaintySemiMajor-r16					INTEGER (0..255),
+	uncertaintySemiMinor-r16					INTEGER (0..255),
+	orientationMajorAxis-r16					INTEGER (0..179),
+	confidence-r16								INTEGER (0..100),
+	ha-ExtendedUncertaintyRangeUsed-r16			BOOLEAN
+}
+-- ASN1STOP
+
 –	HighAccuracyEllipsoidPointWithUncertaintyEllipse
 The IE HighAccuracyEllipsoidPointWithUncertaintyEllipse is used to describe a geographic shape as defined in TS 23.032 [15].
 -- ASN1START
@@ -1830,6 +1864,12 @@ LocationCoordinateTypes ::= SEQUENCE {
 		highAccuracyEllipsoidPointWithUncertaintyEllipse-r15
 															BOOLEAN		OPTIONAL, -- Need ON
 		highAccuracyEllipsoidPointWithAltitudeAndUncertaintyEllipsoid-r15
+															BOOLEAN		OPTIONAL  -- Need ON
+	]],
+	[[
+		ha-EllipsoidPointWithScalableUncertaintyEllipse-r16
+															BOOLEAN		OPTIONAL, -- Need ON
+		ha-EllipsoidPointWithAltitudeAndScalableUncertaintyEllipsoid-r16
 															BOOLEAN		OPTIONAL  -- Need ON
 	]]
 }
@@ -2272,7 +2312,10 @@ LocationCoordinates ::= CHOICE {
 	highAccuracyEllipsoidPointWithUncertaintyEllipse-v1510
 								HighAccuracyEllipsoidPointWithUncertaintyEllipse-r15,
 	highAccuracyEllipsoidPointWithAltitudeAndUncertaintyEllipsoid-v1510
-								HighAccuracyEllipsoidPointWithAltitudeAndUncertaintyEllipsoid-r15
+								HighAccuracyEllipsoidPointWithAltitudeAndUncertaintyEllipsoid-r15,
+	ha-EllipsoidPointWithScalableUncertaintyEllipse-v1680																				HA-EllipsoidPointWithScalableUncertaintyEllipse-r16,
+	ha-EllipsoidPointWithAltitudeAndScalableUncertaintyEllipsoid-v1680
+								HA-EllipsoidPointWithAltitudeAndScalableUncertaintyEllipsoid-r16
 }
 
 Velocity ::= CHOICE {
@@ -2465,10 +2508,13 @@ NR-DL-PRS-AssistanceDataPerTRP-r16 ::= SEQUENCE {
 	nr-ARFCN-r16					ARFCN-ValueNR-r15			OPTIONAL,	-- Need ON
 	nr-DL-PRS-SFN0-Offset-r16		NR-DL-PRS-SFN0-Offset-r16,
 	nr-DL-PRS-ExpectedRSTD-r16		INTEGER (-3841..3841),
-	nr-DL-PRS-ExpectedRSTD-Uncertainty-r16	
+	nr-DL-PRS-ExpectedRSTD-Uncertainty-r16
 									INTEGER (0..246),
 	nr-DL-PRS-Info-r16				NR-DL-PRS-Info-r16,
-	...
+	...,
+	[[
+		prs-OnlyTP-r16				ENUMERATED { true }		OPTIONAL	-- Need ON	
+	]]
 }
 
 NR-DL-PRS-PositioningFrequencyLayer-r16 ::= SEQUENCE {
@@ -2502,11 +2548,11 @@ This field specifies the DL-PRS Resources for the TRPs within the Positioning Fr
 dl-PRS-ID
 This field is used along with a DL-PRS Resource Set ID and a DL-PRS Resource ID to uniquely identify a DL-PRS Resource, and is associated with a single TRP.
 nr-PhysCellID
-This field specifies the physical cell identity of the TRP.
+This field specifies the physical cell identity of the TRP. When the field prs-OnlyTP is included, this field is not included.
 nr-CellGlobalID
-This field specifies the NCGI, the globally unique identity of a cell in NR, as defined in TS 38.331 [35].
+This field specifies the NCGI, the globally unique identity of a cell in NR, as defined in TS 38.331 [35]. When the field prs-OnlyTP is included, this field is not included.
 nr-ARFCN
-This field specifies the NR-ARFCN of the TRP's CD-SSB (as defined in TS 38.300 [47]) corresponding to nr-PhysCellID.
+This field specifies the NR-ARFCN of the TRP's CD-SSB (as defined in TS 38.300 [47]) corresponding to nr-PhysCellID. When the field prs-OnlyTP is included, this field is not included.
 nr-DL-PRS-SFN0-Offset
 This field specifies the time offset of the SFN#0 slot#0 for the given TRP with respect to SFN#0 slot#0 of the assistance data reference TRP and comprises the following subfields:
 -	sfn-Offset specifies the SFN offset at the TRP antenna location between the assistance data reference TRP and this neighbour TRP.
@@ -2542,6 +2588,9 @@ dl-PRS-CombSizeN
 This field specifies the Resource Element spacing in each symbol of the DL-PRS Resource. All DL-PRS Resource Sets belonging to the same Positioning Frequency Layer have the same value of comb size N.
 dl-PRS-CyclicPrefix
 This field specifies the Cyclic Prefix length of the DL-PRS Resource. All DL-PRS Resources Sets belonging to the same Positioning Frequency Layer have the same value of dl-PRS-CyclicPrefix.
+prs-OnlyTP
+This field, if present, indicates that the NR-DL-PRS-AssistanceData is provided for a PRS-only TP. Whether the field is present or absent should be the same for all the NR-DL-PRS-AssistanceData of all the PRS transmitted under the same TP.
+The target device shall not assume that any other signals or physical channels are present for the TRP other than DL-PRS.
 
 –	NR-DL-PRS-BeamInfo
 The IE NR-DL-PRS-BeamInfo is used by the location server to provide spatial direction information of the DL-PRS Resources.
@@ -2950,12 +2999,13 @@ DL-PRS-QCL-ProcessingCapabilityPerBand-r16 ::= SEQUENCE {
 -- ASN1STOP
 
 NR-DL-PRS-QCL-ProcessingCapability field descriptions
-ssbFromNeighCellAsQCL
+ssb-FromNeighCellAsQCL
 Indicates the support of SSB from neighbour cell as QCL source of a DL-PRS. UE supporting this feature also support reusing SSB measurement from RRM for receiving PRS.
 Note: It refers to Type-C for FR1 and Type-C & Type-D support for FR2.
 prs-FromServNeighCellAsQCL
 Indicates the support of DL-PRS from serving/neighbour cell as QCL source of a DL-PRS.
-Note: It refers to Type-D support for FR2.
+Note 1:	It refers to Type-D support for FR2.
+Note 2:	A PRS from a PRS-only TP is treated as PRS from a non-serving cell.
 
 –	NR-DL-PRS-ResourceID
 The IE NR-DL-PRS-ResourceID defines the identity of a DL-PRS Resource of a DL-PRS Resource Set of a TRP.
@@ -3028,7 +3078,7 @@ Provides the capabilities of DL-PRS Resources for the indicated band combination
 maxNrOfDL-PRS-ResourcesPerResourceSet
 Indicates the maximum number of DL-PRS Resources per DL-PRS Resource Set. Value 16, 32, 64 are only applicable to FR2 bands. Value 1 is not applicable for DL-AoD. 
 maxNrOfDL-PRS-ResourcesPerPositioningFrequencylayer
-Indicates the maximum number of DL-PRS resources per TRP across all frequency layers. Value 6 is only applicable to FR1 bands. 
+Indicates the maximum number of DL-PRS resources per positioning frequency layer. Value 6 is only applicable to FR1 bands. 
 maxNrOfDL-PRS-ResourcesAcrossAllFL-TRP-ResourceSet
 Indicates the maximum number of DL-PRS Resources supported by UE across all frequency layers, TRPs and DL-PRS Resource Sets.
 fr1-Only: This is applicable for FR1 only band combinations;
@@ -3129,7 +3179,7 @@ This field specifies the quality of the RTD.
 
 –	NR-SelectedDL-PRS-IndexList
 The IE NR-SelectedDL-PRS-IndexList is used by the location server to provide the selected DL-PRS Resource of nr-DL-PRS-AssistanceDataList to the target device.
-In the case of assistance data for multiple NR positioning methods are provided, the IE NR-DL-PRS-ProvideAssistanceData shall be present in only one of NR-Multi-RTT-ProvideAssistanceData, NR-DL-AoD-ProvideAssistanceData, or NR-DL-TDOA-ProvideAssistanceData.
+In the case of assistance data for multiple NR positioning methods are provided, the IE NR-DL-PRS-AssistanceData shall be present in only one of NR-Multi-RTT-ProvideAssistanceData, NR-DL-AoD-ProvideAssistanceData, or NR-DL-TDOA-ProvideAssistanceData.
 -- ASN1START
 
 NR-SelectedDL-PRS-IndexList-r16 ::=	SEQUENCE (SIZE (1..nrMaxFreqLayers-r16)) OF
@@ -3139,15 +3189,15 @@ NR-SelectedDL-PRS-PerFreq-r16 ::= SEQUENCE {
 	nr-SelectedDL-PRS-FrequencyLayerIndex-r16	INTEGER (0..nrMaxFreqLayers-1-r16),
 	nr-SelectedDL-PRS-IndexListPerFreq-r16 		SEQUENCE (SIZE (1..nrMaxTRPsPerFreq-r16)) OF
 														NR-SelectedDL-PRS-IndexPerTRP-r16
-																			OPTIONAL,	--Need ON
+																			OPTIONAL,	--Need OP
 	...
 }
 
 NR-SelectedDL-PRS-IndexPerTRP-r16 ::= SEQUENCE {
 	nr-SelectedTRP-Index-r16					INTEGER (0..nrMaxTRPsPerFreq-1-r16),
-	dl-SelectedPRS-ResourceSetIndexList-r16		SEQUENCE (SIZE (1..nrMaxSetsPerTrpPerFreqLayer-r16)) OF
-														DL-SelectedPRS-ResourceSetIndex-r16
-																			OPTIONAL,	--Need ON
+	dl-SelectedPRS-ResourceSetIndexList-r16		SEQUENCE (SIZE (1..nrMaxSetsPerTrpPerFreqLayer-r16))
+													OF	DL-SelectedPRS-ResourceSetIndex-r16
+																			OPTIONAL,	--Need OP
 	...
 }
 
@@ -3155,7 +3205,7 @@ DL-SelectedPRS-ResourceSetIndex-r16 ::= SEQUENCE {
 	nr-DL-SelectedPRS-ResourceSetIndex-r16		INTEGER (0..nrMaxSetsPerTrpPerFreqLayer-1-r16),
 	dl-SelectedPRS-ResourceIndexList-r16		SEQUENCE (SIZE (1..nrMaxResourcesPerSet-r16)) OF
 														DL-SelectedPRS-ResourceIndex-r16
-																			OPTIONAL	--Need ON
+																			OPTIONAL	--Need OP
 }
 
 DL-SelectedPRS-ResourceIndex-r16 ::= SEQUENCE {
@@ -3207,13 +3257,13 @@ NR-SSB-Config field descriptions
 nr-ARFCN
 This field specifies the ARFCN of the first RE of SSB's RB#10.
 ss-PBCH-BlockPower
-Average EPRE of the resources elements that carry secondary synchronization signals in dBm that the NW used for SSB transmission, see TS 38.213 [13], clause 7.
+Average EPRE of the resources elements that carry secondary synchronization signals in dBm that the NW used for SSB transmission, see TS 38.213 [48], clause 7.
 halfFrameIndex
 Indicates the 5 msec offset of the SSB within a 10 msec system frame.
 ssb-periodicity
 The SSB periodicity in ms for the rate matching purpose.
 ssb-PositionsInBurst
-Indicates the time domain positions of the transmitted SS-blocks in a half frame with SS/PBCH blocks as defined in TS 38.213 [39], clause 4.1. The first/leftmost bit corresponds to SS/PBCH block index 0, the second bit corresponds to SS/PBCH block index 1, and so on. Value 0 in the bitmap indicates that the corresponding SS/PBCH block is not transmitted while value 1 indicates that the corresponding SS/PBCH block is transmitted. 
+Indicates the time domain positions of the transmitted SS-blocks in a half frame with SS/PBCH blocks as defined in TS 38.213 [48], clause 4.1. The first/leftmost bit corresponds to SS/PBCH block index 0, the second bit corresponds to SS/PBCH block index 1, and so on. Value 0 in the bitmap indicates that the corresponding SS/PBCH block is not transmitted while value 1 indicates that the corresponding SS/PBCH block is transmitted. 
 ssb-SubcarrierSpacing
 Subcarrier spacing of SSB. Only the values 15 kHz or 30 kHz (FR1), and 120 kHz or 240 kHz (FR2) are applicable.
 sfn-SSB-Offset
@@ -3243,6 +3293,10 @@ NR-TimeStamp-r16 ::= SEQUENCE {
 NR-TimeStamp field descriptions
 dl-PRS-ID
 This field specifies the DL-PRS ID of the TRP for which the nr-SFN is applicable.
+nr-PhysCellID
+This field specifies the physical cell identity of the associated TRP, as defined in TS 38.331 [35].
+nr-CellGlobalID
+This field specifies the NCGI, the globally unique identity of a cell in NR, of the associated TRP, as defined in TS 38.331 [35]. 
 nr-ARFCN
 This field specifies the ARFCN of the TRP's CD-SSB (as defined in TS 38.300 [47]) corresponding to nr-PhysCellID associated with the dl-PRS-ID.
 nr-SFN
@@ -3394,6 +3448,7 @@ Indicates whether the UE supports open-loop power control for SRS for positionin
 -	olpc-SRS-PosBasedOnPRS-Serving indicates whether the UE supports OLPC for SRS for positioning based on PRS from the serving cell in the same band. The UE can include this field only if the UE supports NR-DL-PRS-ProcessingCapability and srs-PosResources TS38.331 [35] Otherwise, the UE does not include this field.
 -	olpc-SRS-PosBasedOnSSB-Neigh indicates whether the UE supports OLPC for SRS for positioning based on SSB from the neighbouring cell in the same band. The UE can include this field only if the UE supports srs-PosResources TS 38.331 [35]. Otherwise, the UE does not include this field.
 -	olpc-SRS-PosBasedOnPRS-Neigh indicates whether the UE supports OLPC for SRS for positioning based on PRS from the neighbouring cell in the same band. The UE can include this field only if the UE supports olpc-SRS-PosBasedOnPRS-Serving. Otherwise, the UE does not include this field.
+Note:	A PRS from a PRS-only TP is treated as PRS from a non-serving cell.
 -	maxNumberPathLossEstimatePerServing indicates the maximum number of pathloss estimates that the UE can simultaneously maintain for all the SRS resource sets for positioning per serving cell in addition to the up to four pathloss estimates that the UE maintains per serving cell for the PUSCH/PUCCH/SRS transmissions. The UE shall include this field if the UE supports any of olpc-SRS-PosBasedOnPRS-Serving, olpc-SRS-PosBasedOnSSB-Neigh and olpc-SRS-PosBasedOnPRS-Neigh. Otherwise, the UE does not include this field.
 spatialRelationsSRS-Pos
 Indicates whether the UE supports spatial relations for SRS for positioning. It is only applicable for FR2. The capability signalling comprises the following parameters.
@@ -3403,6 +3458,7 @@ Indicates whether the UE supports spatial relations for SRS for positioning. It 
 -	spatialRelation-SRS-PosBasedOnSRS indicates whether the UE supports spatial relation for SRS for positioning based on SRS in the same band. The UE can include this field only if the UE supports srs-PosResources TS 38.331 [35]. Otherwise, the UE does not include this field.
 -	spatialRelation-SRS-PosBasedOnSSB-Neigh indicates whether the UE supports spatial relation for SRS for positioning based on SSB from the neighbouring cell in the same band. The UE can include this field only if the UE supports spatialRelation-SRS-PosBasedOnSSB-Serving. Otherwise, the UE does not include this field.
 -	spatialRelation-SRS-PosBasedOnPRS-Neigh indicates whether the UE supports spatial relation for SRS for positioning based on PRS from the neighbouring cell in the same band. The UE can include this field only if the UE supports spatialRelation-SRS-PosBasedOnPRS-Serving. Otherwise, the UE does not include this field.
+Note:	A PRS from a PRS-only TP is treated as PRS from a non-serving cell.
 srs-PosResourceConfigCA-BandList
 This field indicates the number of SRS for positioning resources supported by the target device. The target device includes this field for each band for the current configured CA band combination. The capability signalling comprises the following parameters.
 -	freqBandIndicatorNR indicates the current configured NR band of the target device.
@@ -6311,7 +6367,9 @@ BDS-ClockModel-r12 ::= SEQUENCE {
 	bdsA1-r12			INTEGER (-2097152..2097151),
 	bdsA2-r12			INTEGER (-1024..1023),
 	bdsTgd1-r12			INTEGER (-512..511),
-	...
+	...,
+	[[ bdsTgd2-r16		INTEGER (-512..511)			OPTIONAL		-- Need ON
+	]]
 }
 
 -- ASN1STOP
@@ -6333,6 +6391,9 @@ Parameter a2, Clock correction polynomial coefficient (sec/sec2) [23].
 Scale factor 2-66 sec/sec2.
 bdsTgd1
 Parameter Equipment group delay differential TGD1 [23].
+Scale factor is 0.1 nanosecond.
+bdsTgd2
+Parameter Equipment group delay differential TGD2 [23].
 Scale factor is 0.1 nanosecond.
 
 –	BDS-ClockModel2
@@ -6901,6 +6962,7 @@ Scale factor 2-9 metres.
 bdsAdot
 Parameter , Change rate in semi-major axis (metre/second), defined in [39], 7.7.1
 Scale factor 2-21 metre/second.
+The value 16777216 is not signalled.
 bdsDeltaN0
 Parameter n0, Mean motion difference from computed value at reference time (semi-circles /sec), defined in [39], 7.7.1
 Scale factor 2-44 semi-circles /second.
@@ -14281,7 +14343,7 @@ NR-ECID-ProvideCapabilities field descriptions
 nr-ECID-MeasSupported:
 Indicates the supported NR ECID measurements:
 -	ssrsrpSup indicates the UE supports SSB based cell/beam specific RSRP measurement;
--	ssrsqpSup indicates the UE supports SSB based cell/beam specific RSRQ measurement;
+-	ssrsrqSup indicates the UE supports SSB based cell/beam specific RSRQ measurement;
 -	csirsrpSup indicates the UE supports CSI-RS based cell/beam specific RSRP measurement;
 -	csirsrqSup indicates the UE supports CSI-RS based cell/beam specific RSRQ measurement.
 
@@ -14741,7 +14803,7 @@ NR-DL-AoD-ProvideLocationInformation-r16 ::= SEQUENCE {
 
 6.5.11.4	NR DL-AoD Location Information Elements
 –	NR-DL-AoD-SignalMeasurementInformation
-The IE NR-DL-AoD-SignalMeasurementInformation is used by the target device to provide NR DL-AoD measurements to the location server. The measurements are provided as a list of TRPs, where the first TRP in the list is used as reference TRP.
+The IE NR-DL-AoD-SignalMeasurementInformation is used by the target device to provide NR DL-AoD measurements to the location server.
 -- ASN1START
 
 NR-DL-AoD-SignalMeasurementInformation-r16 ::= SEQUENCE {
@@ -15014,7 +15076,7 @@ NR-Multi-RTT-ProvideLocationInformation-r16 ::= SEQUENCE {
 
 6.5.12.4	NR Multi-RTT Location Information Elements
 –	NR-Multi-RTT-SignalMeasurementInformation
-The IE NR-Multi-RTT-SignalMeasurementInformation is used by the target device to provide NR Multi-RTT measurements to the location server. The measurements are provided as a list of TRPs, where the first TRP in the list is used as reference TRP.
+The IE NR-Multi-RTT-SignalMeasurementInformation is used by the target device to provide NR Multi-RTT measurements to the location server.
 -- ASN1START
 
 NR-Multi-RTT-SignalMeasurementInformation-r16 ::= SEQUENCE {
@@ -16864,4 +16926,92 @@ RP-211474
 F
 Description on timestamp reference in NR positioning measurement report
 16.5.0
+2021-09
+RP-93
+RP-212443
+0305
+5
+F
+Correction to PRS-only TP
+16.6.0
+
+RP-93
+RP-212443
+0312
+1
+F
+Correction for LPP assistance information
+16.6.0
+
+RP-93
+RP-212443
+0313
+1
+F
+Corrections on the conditional presence tag clarification for Uplink LPP message
+16.6.0
+
+RP-93
+RP-212443
+0318
+-
+F
+Correction to the need code in NR-SelectedDL-PRS-IndexList
+16.6.0
+2021-12
+RP-94
+RP-213344
+0321
+2
+F
+Updates based on RAN1 NR positioning features list
+16.7.0
+
+RP-94
+RP-213345
+0323
+3
+F
+Correction on BDS B2I clock model [Rel16BDS]
+16.7.0
+2022-03
+RP-95
+RP-220835
+0326
+-
+F
+Addition of missing need code for the BDS TGD2 parameter
+16.8.0
+
+RP-95
+RP-220472
+0329
+1
+A
+Correction on the object identifier of LPP ASN.1 for R16
+16.8.0
+
+RP-95
+RP-220835
+0330
+-
+F
+Correction of reference TRP for DL-AoD and Multi-RTT measurement report
+16.8.0
+
+RP-95
+RP-220835
+0331
+-
+F
+Correction to NR-DL-PRS-ResourcesCapability field description
+16.8.0
+
+RP-95
+RP-220835
+0333
+1
+F
+Introducing new high accuracy GAD shape with scalable uncertainty
+16.8.0
 

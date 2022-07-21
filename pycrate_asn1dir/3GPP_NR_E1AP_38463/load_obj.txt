@@ -205,6 +205,7 @@ E1AP-Constants.id-QoSFlowsDRBRemapping
 E1AP-Constants.id-DataForwardingSourceIPAddress
 E1AP-Constants.id-SecurityIndicationModify
 E1AP-Constants.id-IAB-Donor-CU-UPPSKInfo
+E1AP-Constants.id-DiscardTimerExtended
 E1AP-Containers.E1AP-PROTOCOL-IES
 E1AP-Containers.E1AP-PROTOCOL-EXTENSION
 E1AP-Containers.E1AP-PRIVATE-IES
@@ -253,6 +254,7 @@ E1AP-IEs.Data-Usage-Report-ItemExtIEs
 E1AP-IEs.DefaultDRB
 E1AP-IEs.DirectForwardingPathAvailability
 E1AP-IEs.DiscardTimer
+E1AP-IEs.DiscardTimerExtended
 E1AP-IEs.DLDiscarding-ExtIEs
 E1AP-IEs.DLUPTNLAddressToUpdateItemExtIEs
 E1AP-IEs.DL-TX-Stop

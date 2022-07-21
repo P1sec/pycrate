@@ -1,8 +1,34 @@
-﻿
+﻿3GPP TS 38.463 V16.10.0 (2022-06)
+Technical Specification
+3rd Generation Partnership Project;
+Technical Specification Group Radio Access Network;
+NG-RAN;
+E1 Application Protocol (E1AP)
+(Release 16)
 
 
 
+3GPP
+Postal address
 
+3GPP support office address
+650 Route des Lucioles - Sophia Antipolis
+Valbonne - FRANCE
+Tel.: +33 4 92 94 42 00 Fax: +33 4 93 65 47 16
+Internet
+http://www.3gpp.org
+
+Copyright Notification
+No part may be reproduced except as authorized by written permission.
+The copyright and the foregoing restriction extend to reproduction in all media.
+
+© 2022, 3GPP Organizational Partners (ARIB, ATIS, CCSA, ETSI, TSDSI, TTA, TTC).
+All rights reserved.
+
+UMTS™ is a Trade Mark of ETSI registered for the benefit of its members
+3GPP™ is a Trade Mark of ETSI registered for the benefit of its Members and of the 3GPP Organizational Partners
+LTE™ is a Trade Mark of ETSI registered for the benefit of its Members and of the 3GPP Organizational Partners
+GSM® and the GSM logo are registered and owned by the GSM Association
 Contents
 Foreword	9
 1	Scope	10
@@ -181,74 +207,74 @@ Foreword	9
 9.2.2.2	BEARER CONTEXT SETUP RESPONSE	67
 9.2.2.3	BEARER CONTEXT SETUP FAILURE	67
 9.2.2.4	BEARER CONTEXT MODIFICATION REQUEST	67
-9.2.2.5	BEARER CONTEXT MODIFICATION RESPONSE	70
-9.2.2.6	BEARER CONTEXT MODIFICATION FAILURE	71
-9.2.2.7	BEARER CONTEXT MODIFICATION REQUIRED	72
-9.2.2.8	BEARER CONTEXT MODIFICATION CONFIRM	72
-9.2.2.9	BEARER CONTEXT RELEASE COMMAND	73
-9.2.2.10	BEARER CONTEXT RELEASE COMPLETE	73
-9.2.2.11	BEARER CONTEXT RELEASE REQUEST	74
-9.2.2.12	BEARER CONTEXT INACTIVITY NOTIFICATION	74
-9.2.2.13	DL DATA NOTIFICATION	75
-9.2.2.14	DATA USAGE REPORT	76
-9.2.2.15	GNB-CU-UP COUNTER CHECK REQUEST	76
-9.2.2.16	UL DATA NOTIFICATION	77
-9.2.2.17	MR-DC DATA USAGE REPORT	78
-9.2.2.18	EARLY FORWARDING SN TRANSFER	78
-9.2.2.19	GNB-CU-CP MEASUREMENT RESULTS INFORMATION	79
-9.2.3	Trace Messages	79
-9.2.3.1	TRACE START	79
-9.2.3.2	DEACTIVATE TRACE	80
-9.2.3.3	CELL TRAFFIC TRACE	80
-9.2.4	IAB Messages	81
-9.2.4.1	IAB UP TNL ADDRESS UPDATE	81
-9.2.4.2	IAB UP TNL ADDRESS UPDATE ACKNOWLEDGE	82
-9.2.4.3	IAB UP TNL ADDRESS UPDATE FAILURE	82
-9.2.4.4	IAB PSK NOTIFICATION	82
-9.3	Information Element Definitions	83
-9.3.1	Radio Network Layer Related IEs	83
-9.3.1.1	Message Type	83
-9.3.1.2	Cause	83
-9.3.1.3	Criticality Diagnostics	87
-9.3.1.4	gNB-CU-CP UE E1AP ID	88
-9.3.1.5	gNB-CU-UP UE E1AP ID	88
-9.3.1.6	Time To wait	89
-9.3.1.7	PLMN Identity	89
-9.3.1.8	Slice Support List	89
-9.3.1.9	S-NSSAI	89
-9.3.1.10	Security Information	89
-9.3.1.11	Cell Group Information	90
-9.3.1.12	QoS Flow List	91
-9.3.1.13	UP Parameters	91
-9.3.1.14	NR CGI	91
-9.3.1.15	gNB-CU-UP ID	92
-9.3.1.16	DRB ID	92
-9.3.1.17	E-UTRAN QoS	92
-9.3.1.18	E-UTRAN Allocation and Retention Priority	92
-9.3.1.19	GBR QoS Information	93
-9.3.1.20	Bit Rate	94
-9.3.1.21	PDU Session ID	94
-9.3.1.22	PDU Session Type	94
-9.3.1.23	Security Indication	95
-9.3.1.24	QoS Flow Identifier	95
-9.3.1.25	QoS Flow QoS Parameters List	95
-9.3.1.26	QoS Flow Level QoS Parameters	96
-9.3.1.27	Non Dynamic 5QI Descriptor	97
-9.3.1.28	Dynamic 5QI Descriptor	98
-9.3.1.29	NG-RAN Allocation and Retention Priority	99
-9.3.1.30	GBR QoS Flow Information	100
-9.3.1.31	Security Algorithm	101
-9.3.1.32	User Plane Security Keys	101
-9.3.1.33	UL Configuration	101
-9.3.1.34	gNB-CU-UP Cell Group Related Configuration	102
-9.3.1.35	PDCP Count	102
-9.3.1.36	NR CGI Support List	103
-9.3.1.37	QoS Parameters Support List	103
-9.3.1.38	PDCP Configuration	103
-9.3.1.39	SDAP Configuration	105
-9.3.1.40	ROHC Parameters	105
-9.3.1.41	T-Reordering Timer	106
-9.3.1.42	Discard Timer	106
+9.2.2.5	BEARER CONTEXT MODIFICATION RESPONSE	69
+9.2.2.6	BEARER CONTEXT MODIFICATION FAILURE	70
+9.2.2.7	BEARER CONTEXT MODIFICATION REQUIRED	71
+9.2.2.8	BEARER CONTEXT MODIFICATION CONFIRM	71
+9.2.2.9	BEARER CONTEXT RELEASE COMMAND	72
+9.2.2.10	BEARER CONTEXT RELEASE COMPLETE	72
+9.2.2.11	BEARER CONTEXT RELEASE REQUEST	73
+9.2.2.12	BEARER CONTEXT INACTIVITY NOTIFICATION	73
+9.2.2.13	DL DATA NOTIFICATION	74
+9.2.2.14	DATA USAGE REPORT	75
+9.2.2.15	GNB-CU-UP COUNTER CHECK REQUEST	75
+9.2.2.16	UL DATA NOTIFICATION	76
+9.2.2.17	MR-DC DATA USAGE REPORT	77
+9.2.2.18	EARLY FORWARDING SN TRANSFER	77
+9.2.2.19	GNB-CU-CP MEASUREMENT RESULTS INFORMATION	78
+9.2.3	Trace Messages	78
+9.2.3.1	TRACE START	78
+9.2.3.2	DEACTIVATE TRACE	79
+9.2.3.3	CELL TRAFFIC TRACE	79
+9.2.4	IAB Messages	80
+9.2.4.1	IAB UP TNL ADDRESS UPDATE	80
+9.2.4.2	IAB UP TNL ADDRESS UPDATE ACKNOWLEDGE	81
+9.2.4.3	IAB UP TNL ADDRESS UPDATE FAILURE	81
+9.2.4.4	IAB PSK NOTIFICATION	81
+9.3	Information Element Definitions	82
+9.3.1	Radio Network Layer Related IEs	82
+9.3.1.1	Message Type	82
+9.3.1.2	Cause	82
+9.3.1.3	Criticality Diagnostics	86
+9.3.1.4	gNB-CU-CP UE E1AP ID	87
+9.3.1.5	gNB-CU-UP UE E1AP ID	87
+9.3.1.6	Time To wait	88
+9.3.1.7	PLMN Identity	88
+9.3.1.8	Slice Support List	88
+9.3.1.9	S-NSSAI	88
+9.3.1.10	Security Information	88
+9.3.1.11	Cell Group Information	89
+9.3.1.12	QoS Flow List	90
+9.3.1.13	UP Parameters	90
+9.3.1.14	NR CGI	90
+9.3.1.15	gNB-CU-UP ID	91
+9.3.1.16	DRB ID	91
+9.3.1.17	E-UTRAN QoS	91
+9.3.1.18	E-UTRAN Allocation and Retention Priority	91
+9.3.1.19	GBR QoS Information	92
+9.3.1.20	Bit Rate	93
+9.3.1.21	PDU Session ID	93
+9.3.1.22	PDU Session Type	93
+9.3.1.23	Security Indication	94
+9.3.1.24	QoS Flow Identifier	94
+9.3.1.25	QoS Flow QoS Parameters List	94
+9.3.1.26	QoS Flow Level QoS Parameters	95
+9.3.1.27	Non Dynamic 5QI Descriptor	96
+9.3.1.28	Dynamic 5QI Descriptor	97
+9.3.1.29	NG-RAN Allocation and Retention Priority	98
+9.3.1.30	GBR QoS Flow Information	99
+9.3.1.31	Security Algorithm	100
+9.3.1.32	User Plane Security Keys	100
+9.3.1.33	UL Configuration	100
+9.3.1.34	gNB-CU-UP Cell Group Related Configuration	101
+9.3.1.35	PDCP Count	101
+9.3.1.36	NR CGI Support List	102
+9.3.1.37	QoS Parameters Support List	102
+9.3.1.38	PDCP Configuration	102
+9.3.1.39	SDAP Configuration	104
+9.3.1.40	ROHC Parameters	104
+9.3.1.41	T-Reordering Timer	105
+9.3.1.42	Discard Timer	105
 9.3.1.43	UL Data Split Threshold	106
 9.3.1.44	Data Usage Report List	106
 9.3.1.45	 Flow Failed List	107
@@ -296,62 +322,63 @@ Foreword	9
 9.3.1.89	MDT PLMN List	120
 9.3.1.90	EHC Parameters	120
 9.3.1.91	DAPS Request Information	121
-9.3.1.92	Early Forwarding COUNT Information	121
+9.3.1.92	Early Forwarding COUNT Information	122
 9.3.1.93	Alternative QoS Parameters Set List	122
 9.3.1.94	Extended Slice Support List	122
-9.3.1.95	Extended gNB-CU-CP Name	122
+9.3.1.95	Extended gNB-CU-CP Name	123
 9.3.1.96	Extended gNB-CU-UP Name	123
 9.3.1.97	Extended NR CGI Support List	123
 9.3.1.98	Direct Forwarding Path Availability	123
 9.3.1.99	IAB-donor-CU-UP PSK Info	123
+9.3.1.100	Discard Timer Extended	124
 9.3.2	Transport Network Layer Related IEs	124
 9.3.2.1	UP Transport Layer Information	124
 9.3.2.2	CP Transport Layer Information	124
-9.3.2.3	GTP-TEID	124
-9.3.2.4	Transport Layer Address	124
+9.3.2.3	GTP-TEID	125
+9.3.2.4	Transport Layer Address	125
 9.3.2.5	Data Forwarding Information Request	125
-9.3.2.6	Data Forwarding Information	125
-9.3.2.7	Transport Network Layer Address Info	125
-9.3.2.8	URI	126
-9.3.3	Container and List IE definitions	126
-9.3.3.1	DRB To Setup List E-UTRAN	126
-9.3.3.2	PDU Session Resource To Setup List	127
-9.3.3.3	DRB Setup List E-UTRAN	129
-9.3.3.4	DRB Failed List E-UTRAN	130
-9.3.3.5	PDU Session Resource Setup List	130
-9.3.3.6	PDU Session Resource Failed List	131
-9.3.3.7	DRB To Setup Modification List E-UTRAN	132
-9.3.3.8	DRB To Modify List E-UTRAN	132
-9.3.3.9	DRB To Remove List E-UTRAN	133
-9.3.3.10	PDU Session Resource To Setup Modification List	133
-9.3.3.11	PDU Session Resource To Modify List	135
-9.3.3.12	PDU Session Resource To Remove List	139
-9.3.3.13	DRB Setup Modification List E-UTRAN	139
-9.3.3.14	DRB Failed Modification List E-UTRAN	139
-9.3.3.15	DRB Modified List E-UTRAN	139
-9.3.3.16	DRB Failed To Modify List E-UTRAN	140
-9.3.3.17	PDU Session Resource Setup Modification List	140
-9.3.3.18	PDU Session Resource Failed Modification List	141
-9.3.3.19	PDU Session Resource Modified List	142
-9.3.3.20	PDU Session Resource Failed To Modify List	144
-9.3.3.21	DRB Required To Modify List E-UTRAN	144
-9.3.3.22	DRB Required To Remove List E-UTRAN	144
-9.3.3.23	PDU Session Resource Required To Modify List	145
-9.3.3.24	DRB Confirm Modified List E-UTRAN	145
-9.3.3.25	PDU Session Resource Confirm Modified List	146
-9.4	Message and Information Element Abstract Syntax (with ASN.1)	146
-9.4.1	General	146
-9.4.2	Usage of private message mechanism for non-standard use	146
-9.4.3	Elementary Procedure Definitions	148
-9.4.4	PDU Definitions	156
-9.4.5	Information Element Definitions	186
-9.4.6	Common Definitions	235
-9.4.7	Constant Definitions	236
-9.4.8	Container Definitions	241
-10	Handling of unknown, unforeseen and erroneous protocol data	245
-Annex A (informative): Change History	246
+9.3.2.6	Data Forwarding Information	126
+9.3.2.7	Transport Network Layer Address Info	126
+9.3.2.8	URI	127
+9.3.3	Container and List IE definitions	127
+9.3.3.1	DRB To Setup List E-UTRAN	127
+9.3.3.2	PDU Session Resource To Setup List	128
+9.3.3.3	DRB Setup List E-UTRAN	130
+9.3.3.4	DRB Failed List E-UTRAN	131
+9.3.3.5	PDU Session Resource Setup List	131
+9.3.3.6	PDU Session Resource Failed List	132
+9.3.3.7	DRB To Setup Modification List E-UTRAN	133
+9.3.3.8	DRB To Modify List E-UTRAN	133
+9.3.3.9	DRB To Remove List E-UTRAN	134
+9.3.3.10	PDU Session Resource To Setup Modification List	134
+9.3.3.11	PDU Session Resource To Modify List	136
+9.3.3.12	PDU Session Resource To Remove List	140
+9.3.3.13	DRB Setup Modification List E-UTRAN	140
+9.3.3.14	DRB Failed Modification List E-UTRAN	140
+9.3.3.15	DRB Modified List E-UTRAN	141
+9.3.3.16	DRB Failed To Modify List E-UTRAN	141
+9.3.3.17	PDU Session Resource Setup Modification List	141
+9.3.3.18	PDU Session Resource Failed Modification List	142
+9.3.3.19	PDU Session Resource Modified List	143
+9.3.3.20	PDU Session Resource Failed To Modify List	145
+9.3.3.21	DRB Required To Modify List E-UTRAN	145
+9.3.3.22	DRB Required To Remove List E-UTRAN	145
+9.3.3.23	PDU Session Resource Required To Modify List	146
+9.3.3.24	DRB Confirm Modified List E-UTRAN	146
+9.3.3.25	PDU Session Resource Confirm Modified List	147
+9.4	Message and Information Element Abstract Syntax (with ASN.1)	147
+9.4.1	General	147
+9.4.2	Usage of private message mechanism for non-standard use	147
+9.4.3	Elementary Procedure Definitions	149
+9.4.4	PDU Definitions	157
+9.4.5	Information Element Definitions	187
+9.4.6	Common Definitions	236
+9.4.7	Constant Definitions	237
+9.4.8	Container Definitions	242
+10	Handling of unknown, unforeseen and erroneous protocol data	246
+Annex A (informative): Change History	247
 
-Foreword
+1   Foreword
 This Technical Specification has been produced by the 3rd Generation Partnership Project (3GPP).
 The contents of the present document are subject to continuing work within the TSG and may change following formal TSG approval. Should the TSG modify the contents of the present document, it will be re-released by the TSG with an identifying change of release date and an increase in version number as follows:
 Version x.y.z
@@ -362,9 +389,9 @@ x	the first digit:
 3	or greater indicates TSG approved document under change control.
 y	the second digit is incremented for all changes of substance, i.e. technical enhancements, corrections, updates, etc.
 z	the third digit is incremented when editorial only changes have been incorporated in the document.
-1	Scope
+2   1	Scope
 The present document specifies the 5G radio network layer signalling protocol for the E1 interface. The E1 interface provides means for interconnecting a gNB-CU-CP and a gNB-CU-UP of a gNB within an NG-RAN, or for interconnecting a gNB-CU-CP and a gNB-CU-UP of an en-gNB within an E-UTRAN. The E1 Application Protocol (E1AP) supports the functions of E1 interface by signalling procedures defined in the present document. E1AP is developed in accordance to the general principles stated in TS 38.401 [2] and TS 38.460 [3].
-2	References
+3   2	References
 The following documents contain provisions which, through reference in this text, constitute provisions of the present document.
 -	References are either specific (identified by date of publication, edition number, version number, etc.) or non‑specific.
 -	For a specific reference, subsequent revisions do not apply.
@@ -398,8 +425,8 @@ The following documents contain provisions which, through reference in this text
 [27]	3GPP TS 37.320: "Universal Terrestrial Radio Access (UTRA) and Evolved Universal Terrestrial Radio Access (E-UTRA); Radio measurement collection for Minimization of Drive Tests (MDT);Overall description; Stage 2".
 [28]	3GPP TS 38.474: "NG-RAN; F1 data transport".
 [29]	3GPP TS 29.244: "Interface between the Control Plane and the User Plane Nodes; Stage 3".
-3	Definitions and abbreviations
-3.1	Definitions
+4   3	Definitions and abbreviations
+4.1   3.1	Definitions
 For the purposes of the present document, the terms and definitions given in 3GPP TR 21.905 [1] and the following apply. A term defined in the present document takes precedence over the definition of the same term, if any, in 3GPP TR 21.905 [1].
 Elementary Procedure: E1AP consists of Elementary Procedures (EPs). An Elementary Procedure is a unit of interaction between gNB-CU-CP and gNB-CU-UP. These Elementary Procedures are defined separately and are intended to be used to build up complete sequences in a flexible manner. If the independence between some EPs is restricted, it is described under the relevant EP description. Unless otherwise stated by the restrictions, the EPs may be invoked independently of each other as standalone procedures, which can be active in parallel. The usage of several E1AP EPs together is specified in stage 2 specifications (e.g., TS 38.460 [3]).
 An EP consists of an initiating message and possibly a response message. Two kinds of EPs are used:
@@ -427,7 +454,7 @@ UE-associated signalling: When E1AP messages associated to one UE uses the UE-as
 UE-associated logical E1-connection: The UE-associated logical E1-connection uses the identities GNB-CU-CP UE E1AP ID and GNB-CU-UP UE E1AP ID according to the definition in TS 38.401 [2]. For a received UE associated E1AP message the gNB-CU-CP identifies the associated UE based on the GNB-CU-CP UE E1AP ID IE and the gNB-CU-UP identifies the associated UE based on the GNB-CU-UP UE E1AP ID IE.
 Public Network Integrated NPN: as defined in TS 23.501 [20].
 Stand-alone Non-Public Network: as defined in TS 23.501 [20].
-3.2	Abbreviations
+4.2   3.2	Abbreviations
 For the purposes of the present document, the abbreviations given in TR 21.905 [1] and the following apply. 
 An abbreviation defined in the present document takes precedence over the definition of the same abbreviation, if any, in TR 21.905 [1].
 5GC	5G Core Network
@@ -455,8 +482,8 @@ SDAP	Service Data Adaptation Protocol
 SNPN	Stand-alone Non-Public Network
 S-NSSAI	Single Network Slice Selection Assistance Information
 TNLA	Transport Network Layer Association
-4	General
-4.1	Procedure specification principles
+5   4	General
+5.1   4.1	Procedure specification principles
 The principle for specifying the procedure logic is to specify the functional behaviour of the terminating node exactly and completely. Any rule that specifies the behaviour of the originating node shall be possible to be verified with information that is visible within the system.
 The following specification principles have been applied for the procedure text in clause 8:
 -	The procedure text discriminates between:
@@ -465,25 +492,25 @@ The following specification principles have been applied for the procedure text 
 2)	Functionality which "shall, if supported" be executed.
 	The procedure text indicates that the receiving node "shall, if supported," perform a certain function Y under a certain condition. If the receiving node supports procedure X, but does not support functionality Y, the receiving node shall proceed with the execution of the EP, possibly informing the requesting node about the not supported functionality.
 -	Any required inclusion of an optional IE in a response message is explicitly indicated in the procedure text. If the procedure text does not explicitly indicate that an optional IE shall be included in a response message, the optional IE shall not be included. For requirements on including Criticality Diagnostics IE, see clause 10.
-4.2	Forwards and backwards compatibility
+5.2   4.2	Forwards and backwards compatibility
 The forwards and backwards compatibility of the protocol is assured by mechanism where all current and future messages, and IEs or groups of related IEs, include ID and criticality fields that are coded in a standard format that will not be changed in the future. These parts can always be decoded regardless of the standard version.
-4.3	Specification notations
+5.3   4.3	Specification notations
 For the purposes of the present document, the following notations apply:
 Procedure	When referring to an elementary procedure in the specification the Procedure Name is written with the first letters in each word in upper case characters followed by the word "procedure", e.g. Handover Preparation procedure.
 Message	When referring to a message in the specification the MESSAGE NAME is written with all letters in upper case characters followed by the word "message", e.g. HANDOVER REQUEST message.
 IE	When referring to an information element (IE) in the specification the Information Element Name is written with the first letters in each word in upper case characters and all letters in Italic font followed by the abbreviation "IE", e.g. E-RAB ID IE.
 Value of an IE	When referring to the value of an information element (IE) in the specification the "Value" is written as it is specified in the specification enclosed by quotation marks, e.g. "Value".
-5	E1AP services
+6   5	E1AP services
 E1AP provides the signalling service between the gNB-CU-CP and the gNB-CU-UP that is required to fulfil the E1AP functions described in clause 7. E1AP services are divided into two groups:
 Non UE-associated services:	They are related to the whole E1 interface instance between the gNB-CU-CP and gNB-CU-UP utilising a non UE-associated signalling connection.
 UE-associated services:	They are related to one UE. E1AP functions that provide these services are associated with a UE-associated signalling connection that is maintained for the UE in question.
 Unless explicitly indicated in the procedure specification, at any instance in time one protocol endpoint shall have a maximum of one ongoing E1AP procedure related to a certain UE.
-6	Services expected from signalling transport
+7   6	Services expected from signalling transport
 The signalling connection shall provide in sequence delivery of E1AP messages. E1AP shall be notified if the signalling connection breaks.
-7	Functions of E1AP
+8   7	Functions of E1AP
 The functions of E1AP are described in TS 38.460 [3].
-8	E1AP procedures
-8.1	List of E1AP Elementary Procedures
+9   8	E1AP procedures
+9.1   8.1	List of E1AP Elementary Procedures
 In the following tables, all EPs are divided into Class 1 and Class 2 EPs (see subclause 3.1 for explanation of the different classes):
 Table 1: Class 1 procedures
 Elementary Procedure
@@ -492,52 +519,66 @@ Successful Outcome
 Unsuccessful Outcome
 
 
+
 Response message
 Response message
+
 Reset
 RESET
 RESET ACKNOWLEDGE
+
 
 gNB-CU-UP E1 Setup
 GNB-CU-UP E1 SETUP REQUEST
 GNB-CU-UP E1 SETUP RESPONSE
 GNB-CU-UP E1 SETUP FAILURE
+
 gNB-CU-CP E1 Setup
 GNB-CU-CP E1 SETUP REQUEST
 GNB-CU-CP E1 SETUP RESPONSE
 GNB-CU-CP E1 SETUP FAILURE
+
 gNB-CU-UP Configuration Update
 GNB-CU-UP CONFIGURATION UPDATE
 GNB-CU-UP CONFIGURATION UPDATE ACKNOWLEDGE
 GNB-CU-UP CONFIGURATION UPDATE FAILURE
+
 gNB-CU-CP Configuration Update
 GNB-CU-CP CONFIGURATION UPDATE
 GNB-CU-CP CONFIGURATION UPDATE ACKNOWLEDGE
 GNB-CU-CP CONFIGURATION UPDATE FAILURE
+
 E1 Release 
 E1 RELEASE REQUEST
 E1 RELEASE RESPONSE
+
 
 Bearer Context Setup
 BEARER CONTEXT SETUP REQUEST
 BEARER CONTEXT SETUP RESPONSE
 BEARER CONTEXT SETUP FAILURE
+
 Bearer Context Modification (gNB-CU-CP initiated)
 BEARER CONTEXT MODIFICATION REQUEST
 BEARER CONTEXT MODIFICATION RESPONSE
 BEARER CONTEXT MODIFICATION FAILURE
+
 Bearer Context Modification Required (gNB-CU-UP initiated)
 BEARER CONTEXT MODIFICATION REQUIRED
 BEARER CONTEXT MODIFICATION CONFIRM
+
 
 Bearer Context Release (gNB-CU-CP initiated)
 BEARER CONTEXT RELEASE COMMAND
 BEARER CONTEXT RELEASE COMPLETE
 
+
+
 Resource Status Reporting Initiation
 RESOURCE STATUS REQUEST
 RESOURCE STATUS RESPONSE
 RESOURCE STATUS FAILURE
+
 IAB UP TNL Address Update
 IAB UP TNL ADDRESS UPDATE
 IAB UP TNL ADDRESS UPDATE ACKNOWLEDGE
@@ -546,44 +587,76 @@ IAB UP TNL ADDRESS UPDATE FAILURE
 Table 2: Class 2 procedures
 Elementary Procedure
 Message
+
+
 Error Indication
 ERROR INDICATION
+
+
 Bearer Context Release Request (gNB-CU-UP initiated)
 BEARER CONTEXT RELEASE REQUEST
+
+
 Bearer Context Inactivity Notification 
 BEARER CONTEXT INACTIVITY NOTIFICATION
+
+
 DL Data Notification
 DL DATA NOTIFICATION
+
+
 UL Data Notification
 UL DATA NOTIFICATION
+
+
 Data Usage Report
 DATA USAGE REPORT
+
+
 gNB-CU-UP Counter Check
 GNB-CU-UP COUNTER CHECK
+
+
 gNB-CU-UP Status Indication
 GNB-CU-UP STATUS INDICATION
+
+
 MR-DC Data Usage Report
 MR-DC DATA USAGE REPORT
+
+
+
 Trace Start
 TRACE START
+
+
 Deactivate Trace
 DEACTIVATE TRACE
+
+
 Resource Status Reporting
 RESOURCE STATUS UPDATE
+
+
+
 Early Forwarding SN Transfer
 EARLY FORWARDING SN TRANSFER
+
+
 GNB-CU-CP Measurement Results Information
 GNB-CU-CP MEASUREMENT RESULTS INFORMATION
+
+
 IAB PSK Notification
 IAB PSK NOTIFICATION
 
-8.2	Interface Management procedures
-8.2.1	Reset
-8.2.1.1	General
+9.2   8.2	Interface Management procedures
+9.2.1   8.2.1	Reset
+9.2.1.1   8.2.1.1	General
 The purpose of the Reset procedure is to initialise or re-initialise the E1AP UE-related contexts, in the event of a failure in the gNB-CU-CP or gNB-CU-UP. This procedure does not affect the application level configuration data exchanged during, e.g., the E1 Setup procedure.
 The procedure uses non-UE associated signalling.
-8.2.1.2	Successful Operation
-8.2.1.2.1	Reset Procedure Initiated from the gNB-CU-CP
+9.2.1.2   8.2.1.2	Successful Operation
+9.2.1.2.1 8.2.1.2.1	Reset Procedure Initiated from the gNB-CU-CP
 
 Figure 8.2.1.2.1-1: Reset procedure initiated from the gNB-CU-CP. Successful operation.
 In the event of a failure at the gNB-CU-CP, which has resulted in the loss of some or all transaction reference information, a RESET message shall be sent to the gNB-CU-UP.
@@ -596,7 +669,7 @@ If the RESET message contains the UE-associated logical E1-connection list IE, t
 -	If the gNB-CU-UP UE E1AP ID IE is included in the UE-associated logical E1-connection Item IE for a UE association, the gNB-CU-UP shall include the gNB-CU-UP UE E1AP ID IE in the corresponding UE-associated logical E1-connection Item IE in the RESET ACKNOWLEDGE message.
 Interactions with other procedures:
 If the RESET message is received, any other ongoing procedure (except for another Reset procedure) on the same E1 interface related to a UE association, indicated explicitly or implicitly in the RESET message, shall be aborted.
-8.2.1.2.2	Reset Procedure Initiated from the gNB-CU-UP
+9.2.1.2.2 8.2.1.2.2	Reset Procedure Initiated from the gNB-CU-UP
 
 Figure 8.2.1.2.2-1: Reset procedure initiated from the gNB-CU-UP. Successful operation.
 In the event of a failure at the gNB-CU-UP, which has resulted in the loss of some or all transaction reference information, a RESET message shall be sent to the gNB-CU-CP.
@@ -609,13 +682,13 @@ If the RESET message contains the UE-associated logical E1-connection list IE, t
 -	If the gNB-CU-UP UE E1AP ID IE is included in a UE-associated logical E1-connection Item IE for a UE association, the gNB-CU-CP shall include the gNB-CU-UP UE E1AP ID IE in the corresponding UE-associated logical E1-connection Item IE in the RESET ACKNOWLEDGE message.
 Interactions with other procedures:
 If the RESET message is received, any other ongoing procedure (except for another Reset procedure) on the same E1 interface related to a UE association, indicated explicitly or implicitly in the RESET message, shall be aborted.
-8.2.1.3	Abnormal Conditions
+9.2.1.3   8.2.1.3	Abnormal Conditions
 Not applicable.
-8.2.2	Error Indication
-8.2.2.1	General
+9.2.2   8.2.2	Error Indication
+9.2.2.1   8.2.2.1	General
 The Error Indication procedure is initiated by a node in order to report detected errors in one incoming message, provided they cannot be reported by an appropriate failure message.
 If the error situation arises due to reception of a message utilising UE associated signalling, then the Error Indication procedure uses UE associated signalling. Otherwise the procedure uses non-UE associated signalling.
-8.2.2.2	Successful Operation
+9.2.2.2   8.2.2.2	Successful Operation
 
 Figure 8.2.2.2-1: Error Indication procedure, gNB-CU-CP originated. Successful operation.
 
@@ -623,13 +696,13 @@ Figure 8.2.2.2-1: Error Indication procedure, gNB-CU-CP originated. Successful o
 Figure 8.2.2.2-2: Error Indication procedure, gNB-CU-UP originated. Successful operation.
 When the conditions defined in clause 10 are fulfilled, the Error Indication procedure is initiated by an ERROR INDICATION message sent from the receiving node.
 The ERROR INDICATION message shall contain at least either the Cause IE or the Criticality Diagnostics IE. In case the Error Indication procedure is triggered by utilising UE associated signalling the gNB-CU-CP UE E1AP ID IE and gNB-CU-UP UE E1AP ID IE shall be included in the ERROR INDICATION message. If one or both of the gNB-CU-CP UE E1AP ID IE and the gNB-CU-UP UE E1AP ID IE are not correct, the cause shall be set to appropriate value, e.g., "Unknown or already allocated gNB-CU-CP UE E1AP ID", "Unknown or already allocated gNB-CU-UP UE E1AP ID" or "Unknown or inconsistent pair of UE E1AP ID".
-8.2.2.3	Abnormal Conditions 
+9.2.2.3   8.2.2.3	Abnormal Conditions 
 Not applicable.
-8.2.3	gNB-CU-UP E1 Setup
-8.2.3.1	General
+9.2.3   8.2.3	gNB-CU-UP E1 Setup
+9.2.3.1   8.2.3.1	General
 The purpose of the gNB-CU-UP E1 Setup procedure is to exchange application level data needed for the gNB-CU-UP and the gNB-CU-CP to correctly interoperate on the E1 interface. If the gNB-CU-UP initiates the first TNL association, it shall also initiate the gNB-CU-UP E1 Setup procedure. The procedure uses non-UE associated signalling.
 This procedure erases any existing application level configuration data in the two nodes and replaces it by the one received. This procedure also re-initialises the E1AP UE-related contexts (if any) and erases all related signalling connections in the two nodes like a Reset procedure would do. 
-8.2.3.2	Successful Operation
+9.2.3.2   8.2.3.2	Successful Operation
 
 Figure 8.2.3.2-1: gNB-CU-UP E1 Setup procedure: Successful Operation.
 The gNB-CU-UP initiates the procedure by sending a GNB-CU-UP E1 SETUP REQUEST message including the appropriate data to the gNB-CU-CP. The gNB-CU-CP responds with a GNB-CU-UP E1 SETUP RESPONSE message including the appropriate data. 
@@ -643,22 +716,22 @@ The exchanged data shall be stored in respective node and used as long as there 
 If the gNB-CU-UP Capacity IE is contained in the GNB-CU-UP E1 SETUP REQUEST message, the gNB-CU-CP shall take this IE into account.
 If the GNB-CU-UP E1 SETUP REQUEST message includes the Transport Network Layer Address Info IE, the gNB-CU-CP shall, if supported, take this IE into account for IPSec tunnel establishment.
 If the GNB-CU-UP E1 SETUP RESPONSE message includes the Transport Network Layer Address Info IE, the gNB-CU-UP shall, if supported, take this IE into account for IPSec tunnel establishment.
-8.2.3.3	Unsuccessful Operation
+9.2.3.3   8.2.3.3	Unsuccessful Operation
 
 Figure 8.2.3.3-1: gNB-CU-UP E1 Setup procedure: Unsuccessful Operation.
 If the gNB-CU-CP cannot accept the setup, it shall respond with a GNB-CU-UP E1 SETUP FAILURE and appropriate cause value.
 If the GNB-CU-UP E1 SETUP FAILURE message includes the Time To Wait IE, the gNB-CU-UP shall wait at least for the indicated time before reinitiating the E1 setup towards the same gNB-CU-CP.
-8.2.3.4	Abnormal Conditions
+9.2.3.4   8.2.3.4	Abnormal Conditions
 If the first message received for a specific TNL association is not a GNB-CU-CP E1 SETUP REQUEST, GNB-CU-UP E1 SETUP RESPONSE, or GNB-CU-UP E1 SETUP FAILURE message then this shall be treated as a logical error.
 If the gNB-CU-UP does not receive either GNB-CU-UP E1 SETUP RESPONSE message or GNB-CU-UP E1 SETUP FAILURE message, the gNB-CU-UP may reinitiate the gNB-CU-UP E1 Setup procedure towards the same gNB-CU-CP, provided that the content of the new GNB-CU-UP E1 SETUP REQUEST message is identical to the content of the previously unacknowledged GNB-CU-UP E1 SETUP REQUEST message.
 If the gNB-CU-UP receives a GNB-CU-CP E1 SETUP REQUEST message from the peer entity on the same E1 interface:
 -	In case the gNB-CU-UP answers with a GNB-CU-CP E1 SETUP RESPONSE message and receives a subsequent GNB-CU-UP E1 SETUP FAILURE message, the gNB-CU-UP shall consider the E1 interface as non operational and the procedure as unsuccessfully terminated according to sub clause 8.2.3.3.
 -	In case the gNB-CU-UP answers with a GNB-CU-CP E1 SETUP FAILURE message and receives a subsequent GNB-CU-UP E1 SETUP RESPONSE message, the gNB-CU-UP shall ignore the GNB-CU-UP E1 SETUP RESPONSE message and consider the E1 interface as non operational.
-8.2.4	gNB-CU-CP E1 Setup
-8.2.4.1	General
+9.2.4   8.2.4	gNB-CU-CP E1 Setup
+9.2.4.1   8.2.4.1	General
 The purpose of the gNB-CU-CP E1 Setup procedure is to exchange application level data needed for the gNB-CU-CP and the gNB-CU-UP to correctly interoperate on the E1 interface. If the gNB-CU-CP initiates the first TNL association, it shall also initiate the gNB-CU-CP E1 Setup procedure.The procedure uses non-UE associated signalling.
 This procedure erases any existing application level configuration data in the two nodes and replaces it by the one received. This procedure also re-initialises the E1AP UE-related contexts (if any) and erases all related signalling connections in the two nodes like a Reset procedure would do. 
-8.2.4.2	Successful Operation
+9.2.4.2   8.2.4.2	Successful Operation
 
 Figure 8.2.4.2-1: gNB-CU-CP E1 Setup procedure: Successful Operation.
 The gNB-CU-CP initiates the procedure by sending a GNB-CU-CP E1 SETUP REQUEST message including the appropriate data to the gNB-CU-UP. The gNB-CU-UP responds with a GNB-CU-CP E1 SETUP RESPONSE message including the appropriate data. 
@@ -670,21 +743,21 @@ If the GNB-CU-CP E1 SETUP REQUEST message includes the Transport Network Layer A
 If the GNB-CU-CP E1 SETUP RESPONSE message includes the Transport Network Layer Address Info IE, the gNB-CU-CP shall, if supported, take this IE into account for IPSec tunnel establishment.
 If the NPN Support Information IE is contained in the GNB-CU-CP E1 SETUP RESPONSE message, the gNB-CU-CP shall store the corresponding information and it may take it into account for bearer context establishment.
 If the NR CGI Support List or the Extended NR CGI Support List IE is contained in the GNB-CU-CP E1 SETUP RESPONSE message, the gNB-CU-CP shall store the corresponding information and it may take it into account for bearer context establishment.
-8.2.4.3	Unsuccessful Operation
+9.2.4.3   8.2.4.3	Unsuccessful Operation
 
 Figure 8.2.4.3-1: gNB-CU-CP E1 Setup procedure: Unsuccessful Operation.
 If the gNB-CU-UP cannot accept the setup, it shall respond with a GNB-CU-CP E1 SETUP FAILURE and appropriate cause value.
 If the GNB-CU-CP E1 SETUP FAILURE message includes the Time To Wait IE, the gNB-CU-CP shall wait at least for the indicated time before reinitiating the E1 setup towards the same gNB-CU-UP.
-8.2.4.4	Abnormal Conditions
+9.2.4.4   8.2.4.4	Abnormal Conditions
 If the first message received for a specific TNL association is not a GNB-CU-UP E1 SETUP REQUEST, GNB-CU-CP E1 SETUP RESPONSE, or GNB-CU-CP E1 SETUP FAILURE message then this shall be treated as a logical error.
 If the gNB-CU-CP does not receive either GNB-CU-CP E1 SETUP RESPONSE message or GNB-CU-CP E1 SETUP FAILURE message, the gNB-CU-CP may reinitiate the gNB-CU-CP E1 Setup procedure towards the same gNB-CU-UP, provided that the content of the new GNB-CU-CP E1 SETUP REQUEST message is identical to the content of the previously unacknowledged GNB-CU-CP E1 SETUP REQUEST message.
 If the gNB-CU-CP receives a GNB-CU-UP E1 SETUP REQUEST message from the peer entity on the same E1 interface:
 -	In case the gNB-CU-CP answers with a GNB-CU-UP E1 SETUP RESPONSE message and receives a subsequent GNB-CU-CP E1 SETUP FAILURE message, the gNB-CU-CP shall consider the E1 interface as non operational and the procedure as unsuccessfully terminated according to sub clause 8.2.4.3.
 -	In case the gNB-CU-CP answers with a GNB-CU-UP E1 SETUP FAILURE message and receives a subsequent GNB-CU-CP E1 SETUP RESPONSE message, the gNB-CU-CP shall ignore the GNB-CU-CP E1 SETUP RESPONSE message and consider the E1 interface as non operational.
-8.2.5	gNB-CU-UP Configuration Update 
-8.2.5.1	General
+9.2.5   8.2.5	gNB-CU-UP Configuration Update 
+9.2.5.1   8.2.5.1	General
 The purpose of the gNB-CU-UP Configuration Update procedure is to update application level configuration data needed for the gNB-CU-UP and the gNB-CU-CP to interoperate correctly on the E1 interface. This procedure does not affect existing UE-related contexts, if any. The procedure uses non-UE associated signalling.
-8.2.5.2	Successful Operation
+9.2.5.2   8.2.5.2	Successful Operation
 
 Figure 8.2.5.2-1: gNB-CU-UP Configuration Update procedure: Successful Operation.
 The gNB-CU-UP initiates the procedure by sending a GNB-CU-UP CONFIGURATION UPDATE message to the gNB-CU-CP including an appropriate set of updated configuration data that it has just taken into operational use. The gNB-CU-CP responds with GNB-CU-UP CONFIGURATION UPDATE ACKNOWLEDGE message to acknowledge that it successfully updated the configuration data. If an information element is not included in the GNB-CU-UP CONFIGURATION UPDATE message, the gNB-CU-CP shall interpret that the corresponding configuration data is not changed and shall continue to operate with the existing related configuration data.
@@ -700,17 +773,17 @@ If the gNB-CU-UP Name IE is included in the GNB-CU-UP CONFIGURATION UPDATE messa
 If the GNB-CU-UP CONFIGURATION UPDATE message includes gNB-CU-UP TNLA To Remove List IE, and the Endpoint IP address IE and the Port Number IE for both TNL endpoints of the TNL association(s) are included in the gNB-CU-UP TNLA To Remove List IE, the gNB-CU-CP shall, if supported, consider that the TNL association(s) indicated by both received TNL endpoints will be removed by the gNB-CU-UP. If the Endpoint IP address IE, or the Endpoint IP address IE and the Port Number IE for one or both of the TNL endpoints is included in the gNB-CU-UP TNLA To Remove List IE in GNB-CU-UP CONFIGURATION UPDATE message, the gNB-CU-CP shall, if supported, consider that the TNL association(s) indicated by the received endpoint IP address(es) will be removed by the gNB-CU-UP.
 If the GNB-CU-UP CONFIGURATION UPDATE message includes the Transport Network Layer Address Info IE, the gNB-CU-CP shall, if supported, take this IE into account for IPSec tunnel establishment.
 If the GNB-CU-UP CONFIGURATION UPDATE ACKNOWLEDGE message includes the Transport Network Layer Address Info IE, the gNB-CU-UP shall, if supported, take this IE into account for IPSec tunnel establishment.
-8.2.5.3	Unsuccessful Operation
+9.2.5.3   8.2.5.3	Unsuccessful Operation
 
 Figure 8.2.5.3-1: gNB-CU-UP Configuration Update procedure: Unsuccessful Operation.
 If the gNB-CU-CP cannot accept the update, it shall respond with a GNB-CU-UP CONFIGURATION UPDATE FAILURE message and appropriate cause value. 
 If the GNB-CU-UP CONFIGURATION UPDATE FAILURE message includes the Time To Wait IE, the gNB-CU-UP shall wait at least for the indicated time before reinitiating the GNB-CU-UP CONFIGURATION UPDATE message towards the same gNB-CU-CP.
-8.2.5.4	Abnormal Conditions
+9.2.5.4   8.2.5.4	Abnormal Conditions
 Not applicable.
-8.2.6	gNB-CU-CP Configuration Update 
-8.2.6.1	General
+9.2.6   8.2.6	gNB-CU-CP Configuration Update 
+9.2.6.1   8.2.6.1	General
 The purpose of the gNB-CU-CP Configuration Update procedure is to update application level configuration data needed for the gNB-CU-CP and the gNB-CU-UP to interoperate correctly on the E1 interface. This procedure does not affect existing UE-related contexts, if any. The procedure uses non-UE associated signalling.
-8.2.6.2	Successful Operation
+9.2.6.2   8.2.6.2	Successful Operation
 
 Figure 8.2.6.2-1: gNB-CU-CP Configuration Update procedure: Successful Operation.
 The gNB-CU-CP initiates the procedure by sending a GNB-CU-CP CONFIGURATION UPDATE message to the gNB-CU-UP including an appropriate set of updated configuration data that it has just taken into operational use. The gNB-CU-UP responds with GNB-CU-CP CONFIGURATION UPDATE ACKNOWLEDGE message to acknowledge that it successfully updated the configuration data. If an information element is not included in the GNB-CU-CP CONFIGURATION UPDATE message, the gNB-CU-UP shall interpret that the corresponding configuration data is not changed and shall continue to operate with the existing related configuration data.
@@ -724,49 +797,49 @@ If the gNB-CU-CP TNLA To Update List IE is contained in the gNB-CU-CP CONFIGURAT
 If the TNLA Usage IE is included in the gNB-CU-CP TNLA To Add List IE or the gNB-CU-CP TNLA To Update List IE in the gNB-CU-CP CONFIGURATION UPDATE message, the gNB-CU-UP shall, if supported, use it as described in TS 38.462 [18].
 If the GNB-CU-CP CONFIGURATION UPDATE message includes the Transport Network Layer Address Info IE, the gNB-CU-UP shall, if supported, take this IE into account for IPSec tunnel establishment.
 If the GNB-CU-CP CONFIGURATION UPDATE ACKNOWLEDGE message includes the Transport Network Layer Address Info IE, the gNB-CU-CP shall, if supported, take this IE into account for IPSec tunnel establishment.
-8.2.6.3	Unsuccessful Operation
+9.2.6.3   8.2.6.3	Unsuccessful Operation
 
 Figure 8.2.6.3-1: gNB-CU-CP Configuration Update procedure: Unsuccessful Operation.
 If the gNB-CU-UP cannot accept the update, it shall respond with a GNB-CU-CP CONFIGURATION UPDATE FAILURE message and appropriate cause value. 
 If the GNB-CU-CP CONFIGURATION UPDATE FAILURE message includes the Time To Wait IE, the gNB-CU-CP shall wait at least for the indicated time before reinitiating the GNB-CU-CP CONFIGURATION UPDATE message towards the same gNB-CU-UP.
-8.2.6.4	Abnormal Conditions
+9.2.6.4   8.2.6.4	Abnormal Conditions
 Not applicable.
-8.2.7	E1 Release 
-8.2.7.1	General
+9.2.7   8.2.7	E1 Release 
+9.2.7.1   8.2.7.1	General
 The purpose of the E1 Release procedure is to release all existing signalling connections and related application level data. This procedure does not affect existing UE-related contexts, if any. The procedure uses non-UE associated signalling.
-8.2.7.2	Successful Operation
-8.2.7.2.1	E1 Release Procedure Initiated from the gNB-CU-CP
+9.2.7.2   8.2.7.2	Successful Operation
+9.2.7.2.1 8.2.7.2.1	E1 Release Procedure Initiated from the gNB-CU-CP
 
 
 Figure 8.2.7.2.1-1: E1 Release procedure initiated from the gNB-CU-CP. Successful operation.
 The gNB-CU-CP initiates the procedure by sending the E1 RELEASE REQUEST message to the gNB-CU-UP. 
 Upon reception of the E1 RELEASE REQUEST message, the gNB-CU-UP shall release any existing resources related to the E1 interface. The gNB-CU-UP shall respond with a E1 RELEASE RESPONSE message to confirm that it has initiated the release of the resources, if existing, and that the signalling connection for the E1AP application protocol is released. 
-8.2.7.2.2	E1 Release Procedure Initiated from the gNB-CU-UP
+9.2.7.2.2 8.2.7.2.2	E1 Release Procedure Initiated from the gNB-CU-UP
 
 
 Figure 8.2.7.2.2-1: E1 Release procedure initiated from the gNB-CU-UP. Successful operation.
 The gNB-CU-UP initiates the procedure by sending the E1 RELEASE REQUEST message to the gNB-CU-CP. 
 Upon reception of the E1 RELEASE REQUEST message, the gNB-CU-CP shall release any existing resources related to the E1 interface. The gNB-CU-CP shall respond with a E1 RELEASE RESPONSE message to confirm that it has initiated the release of the resources, if existing, and that the signalling connection for the E1AP application protocol is released. 
-8.2.7.3	Abnormal Conditions
+9.2.7.3   8.2.7.3	Abnormal Conditions
 Not applicable.
 
-8.2.8	gNB-CU-UP Status Indication
-8.2.8.1	General
+9.2.8   8.2.8	gNB-CU-UP Status Indication
+9.2.8.1   8.2.8.1	General
 The purpose of the gNB-CU-UP Status Indication procedure is to inform the gNB-CU-CP that the gNB-CU-UP is overloaded so that overload reduction actions can be applied. The procedure uses non-UE associated signalling.
-8.2.8.2	Successful Operation
+9.2.8.2   8.2.8.2	Successful Operation
 
  
 Figure 8.3.7.2-1: DL Data Notification procedure: Successful Operation.
 The gNB-CU-UP initiates the procedure by sending the GNB-CU-UP STATUS INDICATION message to the gNB-CU-CP.
 If the gNB-CU-UP Overload Information IE in the GNB-CU-UP STATUS INDICATION message indicates that the gNB-CU-UP is overloaded, the gNB-CU-CP shall apply overload reduction actions until informed, with a new GNB-CU-UP STATUS INDICATION message, that the overload situation has ceased.
 The detailed overload reduction policy is up to gNB-CU-CP implementation.
-8.2.8.3	Abnormal Conditions
+9.2.8.3   8.2.8.3	Abnormal Conditions
 Not applicable.
-8.2.9	Resource Status Reporting Initiation
-8.2.9.1	General
+9.2.9   8.2.9	Resource Status Reporting Initiation
+9.2.9.1   8.2.9.1	General
 This procedure is used by an gNB-CU-CP to request the reporting of load measurements to gNB-CU-UP.
 The procedure uses non UE-associated signalling.
-8.2.9.2	Successful Operation
+9.2.9.2   8.2.9.2	Successful Operation
 
 Figure 8.2.9.2-1: Resource Status Reporting Initiation, successful operation
 The procedure is initiated with a RESOURCE STATUS REQUEST message sent from gNB-CU-CP to gNB-CU-UP to start a measurement or stop a measurements. 
@@ -776,31 +849,31 @@ When starting a measurement, the Report Characteristics IE in the RESOURCE STATU
 -	the HW Capacity Indicator IE, if the second bit, "HW Capacity Ind Periodic" of the Report Characteristics IE included in the RESOURCE STATUS REQUEST message is set to 1;
 -	the TNL Available Capacity Indicator IE, if the first bit, " TNL Available Capacity Ind Periodic " of the Report Characteristics IE included in the RESOURCE STATUS REQUEST message is set to 1;
 If the Reporting Periodicity IE is included in the RESOURCE STATUS REQUEST message, this indicates the periodicity for the reporting of periodic measurements. The gNB-CU-UP shall report only once, unless otherwise requested within the Reporting Periodicity IE.
-8.2.9.3	Unsuccessful Operation
+9.2.9.3   8.2.9.3	Unsuccessful Operation
 
 Figure 8.2.9.3-1: Resource Status Reporting Initiation, unsuccessful operation
 If any of the requested measurements cannot be initiated, gNB-CU-UP shall send a RESOURCE STATUS FAILURE message with an appropriate cause value.
-8.2.9.4	Abnormal Conditions
+9.2.9.4   8.2.9.4	Abnormal Conditions
 If the initiating gNB-CU-CP does not receive either RESOURCE STATUS RESPONSE message or RESOURCE STATUS FAILURE message, the gNB-CU-CP may reinitiate the Resource Status Reporting Initiation procedure towards the same gNB-CU-UP, provided that the content of the new RESOURCE STATUS REQUEST message is identical to the content of the previously unacknowledged RESOURCE STATUS REQUEST message with the same Transaction ID.
 If the Report Characteristics IE bitmap is set to "0" (all bits are set to "0") in the RESOURCE STATUS REQUEST message then gNB-CU-UP shall initiate a RESOURCE STATUS FAILURE message with an appropriate cause value.
 If the gNB-CU-UP receives a RESOURCE STATUS REQUEST message which includes the Registration Request IE set to "start" and the gNB-CU-CP Measurement ID IE corresponding to an existing on-going load measurement reporting, for which a different Transaction ID is used, then gNB-CU-UP shall initiate a RESOURCE STATUS FAILURE message with an appropriate cause value.
-8.2.10	Resource Status Reporting
-8.2.10.1	General
+9.2.10   8.2.10	Resource Status Reporting
+9.2.10.1   8.2.10.1	General
 This procedure is initiated by gNB-CU-UP to report the result of measurements admitted by gNB-CU-UP following a successful Resource Status Reporting Initiation procedure.
 The procedure uses non UE-associated signalling.
-8.2.10.2	Successful Operation
+9.2.10.2   8.2.10.2	Successful Operation
 
 Figure 8.2.10.2-1: Resource Status Reporting, successful operation
 The gNB-CU-UP shall report the results of the admitted measurements in RESOURCE STATUS UPDATE message. The admitted measurements are the measurements that were successfully initiated during the preceding Resource Status Reporting Initiation procedure.
-8.2.10.3	Unsuccessful Operation
+9.2.10.3   8.2.10.3	Unsuccessful Operation
 Not applicable.
-8.2.10.4	Abnormal Conditions
+9.2.10.4   8.2.10.4	Abnormal Conditions
 Void.
-8.3	Bearer Context Management procedures
-8.3.1	Bearer Context Setup
-8.3.1.1	General
+9.3   8.3	Bearer Context Management procedures
+9.3.1   8.3.1	Bearer Context Setup
+9.3.1.1   8.3.1.1	General
 The purpose of the Bearer Context Setup procedure is to allow the gNB-CU-CP to establish a bearer context in the gNB-CU-UP. The procedure uses UE-associated signalling.
-8.3.1.2	Successful Operation
+9.3.1.2   8.3.1.2	Successful Operation
 
 Figure 8.3.1.2-1: Bearer Context Setup procedure: Successful Operation.
 The gNB-CU-CP initiates the procedure by sending the BEARER CONTEXT SETUP REQUEST message to the gNB-CU-UP. If the gNB-CU-UP succeeds to establish the requested resources, it replies to the gNB-CU-CP with the BEARER CONTEXT SETUP RESPONSE message.
@@ -853,7 +926,7 @@ If the TSC Traffic Characteristics IE is included in the BEARER CONTEXT SETUP RE
 For each QoS flow whose DRB has been successfully established and the QoS Monitoring Request IE was included in the QoS Flow Level QoS Parameters IE contained in the BEARER CONTEXT SETUP REQUEST message, the gNB-CU-UP shall store this information, and, if supported, perform delay measurement and QoS monitoring, as specified in TS 23.501 [20]. If the QoS Monitoring Reporting Frequency IE was included in the QoS Flow Level QoS Parameters IE contained in the BEARER CONTEXT SETUP REQUEST message, the gNB-CU-UP shall store this information, and, if supported, use it for RAN part delay reporting.
 If the BEARER CONTEXT SETUP REQUEST message contains the NPN Context Information IE the gNB-CU-UP shall, if supported, take it into account when allocating UP resources for the bearer context.
 For each requested DRB, if the EHC Parameters IE is included in the PDCP Configuration IE, the gNB-CU-CP shall, if supported, also include ROHC Parameters IE in the PDCP Configuration IE in the BEARER CONTEXT SETUP REQUEST message, to enable the gNB-CU-UP to perform appropriate header compression.
-If the EHC parameters IE is included in the PDCP Configuration IE contained in the BEARER CONTEXT SETUP REQUEST message, the gNB-CU-UP may take these parameters into account to perform appropriate header compression for the concerned DRB.
+If the EHC parameters IE is included in the PDCP Configuration IE contained in the BEARER CONTEXT SETUP REQUEST message, the gNB-CU-UP may take these parameters into account to perform appropriate header compression for the concerned DRB. If the EHC Downlink IE is included in the EHC parameters IE and the value of drb-ContinueEHC-DL IE is set to ‘true’, the gNB-CU-UP shall, if supported, configure Ethernet header compression for downlink and continue the downlink EHC header compression protocol as specified in TS 38.331 [10]. If the EHC Downlink IE is included in the EHC parameters IE and the value of drb-ContinueEHC-DL IE is set to ‘false’, the gNB-CU-UP shall, if supported, configure Ethernet header compression for downlink and reset the downlink EHC header compression protocol during PDCP re-establishment as specified in TS 38.331 [10].If the EHC Uplink IE is included in the EHC parameters IE and the value of drb-ContinueEHC-UL IE is set to ‘true’, the gNB-CU-UP shall, if supported, configure Ethernet header compression for uplink and continue the uplink EHC header compression protocol as specified in TS 38.331 [10]. If the EHC Uplink IE is included in the EHC parameters IE and the value of drb-ContinueEHC-UL IE is set to ‘false’, the gNB-CU-UP shall, if supported, configure Ethernet header compression for uplink and resets the uplink EHC header compression protocol during PDCP re-establishment as specified in TS 38.331 [10].
 If the DAPS Request Information IE is included for a DRB to be setup in the BEARER CONTEXT SETUP REQUEST message, the gNB-CU-UP shall consider that the request concerns a DAPS handover for that DRB and, if admitted, act as specified in TS 38.300 [4].
 If the CHO Initiation IE is contained in the BEARER CONTEXT SETUP REQUEST message, the gNB-CU-UP shall consider that the request concerns conditional handover or conditional PSCell change and act as specified in TS 38.401 [2].
 If the MCG Offered GBR QoS Flow Information IE is contained in the QoS Flows Information To Be Setup IE within the DRB To Setup List IE in the BEARER CONTEXT SETUP REQUEST message, the gNB-CU-UP may take it into account when two cell groups are served by the gNB-CU-UP.
@@ -864,17 +937,17 @@ If the Direct Forwarding Path Availability IE set to “intra-system direct path
 If the gNB-CU-UP UE E1AP ID IE is contained in the BEARER CONTEXT SETUP REQUEST message, the gNB-CU-UP may use it to identify the UE context as specified in TS 38.401 [2].
 If the Data Forwarding Source IP Address IE is included in the DRB To Setup List E-UTRAN IE or in the QoS Flow Level QoS Parameters IE contained in the BEARER CONTEXT SETUP REQUEST message, the gNB-CU-UP shall, if supported, store this information in the UE context and use it as part of its ACL functionality configuration actions, if such ACL functionality is deployed.
 If the Data Forwarding Source IP Address IE is included in the DRB Setup List E-UTRAN IE or in the Flow Setup List IE within the DRB Setup List IE in the PDU Session Resource Setup List IE of the BEARER CONTEXT SETUP RESPONSE message, the gNB-CU-CP shall, if supported, store this information in the UE context and use it as part of its ACL functionality configuration actions, if such ACL functionality is deployed.
-8.3.1.3	Unsuccessful Operation
+9.3.1.3   8.3.1.3	Unsuccessful Operation
 
 Figure 8.3.1.3-1: Bearer Context Setup procedure: Unsuccessful Operation.
 If the gNB-CU-UP cannot establish the requested bearer context, or cannot even establish one bearer it shall consider the procedure as failed and respond with a BEARER CONTEXT SETUP FAILURE message and appropriate cause value.
-8.3.1.4	Abnormal Conditions
+9.3.1.4   8.3.1.4	Abnormal Conditions
 If the gNB-CU-UP receives a BEARER CONTEXT SETUP REQUEST message containing a E-UTRAN QoS IE in the DRB To Setup List IE for a GBR QoS DRB but where the GBR QoS Information IE is not present, the gNB-CU-UP shall report the establishment of the corresponding DRB as failed in the DRB Failed List IE of the BEARER CONTEXT SETUP RESPONSE message with an appropriate cause value.
 If the gNB-CU-UP receives a BEARER CONTEXT SETUP REQUEST message containing a QoS Flow Level QoS Parameters IE in the PDU Session Resource To Setup List IE for a GBR QoS Flow but where the GBR QoS Flow Information IE is not present, the gNB-CU-UP shall report the establishment of the corresponding QoS Flow as failed in the corresponding  Flow Failed List IE of the BEARER CONTEXT SETUP RESPONSE message with an appropriate cause value.
-8.3.2	Bearer Context Modification (gNB-CU-CP initiated) 
-8.3.2.1	General
+9.3.2   8.3.2	Bearer Context Modification (gNB-CU-CP initiated) 
+9.3.2.1   8.3.2.1	General
 The purpose of the Bearer Context Modification procedure is to allow the gNB-CU-CP to modify a bearer context in the gNB-CU-UP. The procedure uses UE-associated signalling.
-8.3.2.2	Successful Operation
+9.3.2.2   8.3.2.2	Successful Operation
 
 Figure 8.3.2.2-1: Bearer Context Modification procedure: Successful Operation.
 The gNB-CU-CP initiates the procedure by sending the BEARER CONTEXT MODIFICATION REQUEST message to the gNB-CU-UP. If the gNB-CU-UP succeeds to modify the bearer context, it replies to the gNB-CU-CP with the BEARER CONTEXT MODIFICATION RESPONSE message.
@@ -947,42 +1020,44 @@ If the Early Forwarding COUNT Information IE is contained in the DRB To Modify L
 If the Ignore Mapping Rule Indication IE is contained within the DRB To Setup List IE for a DRB in the BEARER CONTEXT MODIFICATION REQUEST message, the gNB-CU-UP shall, if supported, ignore the QoS flow mapping information indicated by the QoS Flows Information To Be Setup IE for the concerned DRB.
 If the DAPS Request Information IE is included for a DRB to be modified in the BEARER CONTEXT MODIFICATION REQUEST message, the gNB-CU-UP shall consider that the request concerns a DAPS handover for that DRB and, if admitted, act as specified in TS 38.300 [4].
 If the Early Data Forwarding Indicator IE set to “stop” is contained in the DRB To Modify List IE in the BEARER CONTEXT MODIFICATION REQUEST message, the gNB-CU-UP shall, if supported and if already initiated, stop the early data forwarding for the concerned DRB. If the DRB Data forwarding information IE containing the DL Data Forwarding IE is included together in the DRB To Modify List IE, the gNB-CU-UP shall consider that the stop is only for the early data forwarding initiated toward that forwarding TNL.
+If the Data Forwarding Source IP Address IE is included in the DRB To Setup Modification List E-UTRAN IE or in the QoS Flow Level QoS Parameters IE within the PDU Session Resource To Setup Modification List IE and the PDU Session Resource To Modify List IE contained in the BEARER CONTEXT MODIFICATION REQUEST message, the gNB-CU-UP shall, if supported, store this information in the UE context and use it as part of its ACL functionality configuration actions, if such ACL functionality is deployed.
+If the Data Forwarding Source IP Address IE is included in the DRB Setup Modification List E-UTRAN IE or in the Flow Setup List IE within the PDU Session Resource Setup Modification List IE and the PDU Session Resource Modified List IE of the BEARER CONTEXT MODIFICATION RESPONSE message, the gNB-CU-CP shall, if supported, store this information in the UE context and use it as part of its ACL functionality configuration actions, if such ACL functionality is deployed.
 Interaction with the Bearer Context Modification (gNB-CU-CP initiated)
 If the BEARER CONTEXT MODIFICATION REQUEST message includes for a DRB in the DRB To Modify List IE the PDCP SN Status Request IE set to “requested” and if the gNB-CU-UP has not yet received a SDAP end marker packet for a QoS flow which has been previously re-configured to another DRB by means of a gNB-CU-CP initiated Bearer Context Modification procedure, the gNB-CU-UP shall includes the QoS Flow Identifier of that QoS flow in the Old QoS Flow List - UL End Marker expected IE in the PDU Session Resource Modified List IE in the BEARER CONTEXT MODIFICATION RESPONSE message.
-8.3.2.3	Unsuccessful Operation
+9.3.2.3   8.3.2.3	Unsuccessful Operation
 
 Figure 8.3.2.3-1: Bearer Context Modification procedure: Unsuccessful Operation.
 If the gNB-CU-UP cannot successfully perform any of the requested bearer context modifications, it shall respond with a BEARER CONTEXT MODIFICATION FAILURE message and appropriate cause value.
 If the gNB-CU-UP receives a BEARER CONTEXT MODIFICATION REQUEST message containing the Security Indication Modify IE in the PDU Session Resource To Modify List IE for a PDU session that may result in the change of security status that has been applied but the DRBs that have been established for that PDU session are not requested to be released via the DRB To Remove List IEs as specified in TS 38.331 [10], then the gNB-CU-UP shall respond with a BEARER CONTEXT MODIFICATION FAILURE message and appropriate cause value.
-8.3.2.4	Abnormal Conditions
+9.3.2.4   8.3.2.4	Abnormal Conditions
 If the gNB-CU-UP receives a BEARER CONTEXT MODIFICATION REQUEST message containing a E-UTRAN QoS IE in the DRB To Setup List or the DRB To Modify List IE for a GBR QoS DRB but where the GBR QoS Information IE is not present, the gNB-CU-UP shall report the addition or the modification of the corresponding DRB as failed in the DRB Failed List IE or the DRB Failed To Modify List IE of the BEARER CONTEXT MODIFICATION RESPONSE message with an appropriate cause value.
 If the gNB-CU-UP receives a BEARER CONTEXT MODIFICATION REQUEST message containing a QoS Flow Level QoS Parameters IE in the PDU Session Resource To Setup List IE or the PDU Session Resource To Modify List IE for a GBR QoS Flow but where the GBR QoS Flow Information IE is not present, the gNB-CU-UP shall report the addition or the modification of the corresponding QoS Flow as failed in the corresponding  Flow Failed List IE of the BEARER CONTEXT MODIFICATION RESPONSE message with an appropriate cause value.
-8.3.3	Bearer Context Modification Required (gNB-CU-UP initiated) 
-8.3.3.1	General
+9.3.3   8.3.3	Bearer Context Modification Required (gNB-CU-UP initiated) 
+9.3.3.1   8.3.3.1	General
 The purpose of the Bearer Context Modification Required procedure is to allow the gNB-CU-UP to modify a bearer context (e.g., due to local problems) and inform the gNB-CU-CP. The procedure uses UE-associated signalling.
-8.3.3.2	Successful Operation
+9.3.3.2   8.3.3.2	Successful Operation
 
 Figure 8.3.3.2-1: Bearer Context Modification Required procedure: Successful Operation.
 The gNB-CU-UP initiates the procedure by sending the BEARER CONTEXT MODIFICATION REQUIRED message to the gNB-CU-CP. The gNB-CU-CP replies with the BEARER CONTEXT MODIFICATION CONFIRM message.
 If the S1 DL UP Transport Layer Information IE or the NG DL UP Transport Layer Information IE or the Redundant NG DL UP Transport Layer Information IE is contained in the BEARER CONTEXT MODIFICATION REQUIRED message, the gNB-CU-CP shall update the corresponding information. 
 If the gNB-CU-UP Cell Group Related Configuration IE is contained in the DRB To Modify List IE in the BEARER CONTEXT MODIFICATION REQUIRED message, the gNB-CU-CP shall try to change the cell group related configuration accordingly. If the gNB-CU-CP is not able to update the requested cell group related configuration, it shall include the Cell Group Information IE with the current cell group configuration in the DRB Modified List IE in the BEARER CONTEXT MODIFICATION CONFIRM message.
-8.3.3.3	Abnormal Conditions
+9.3.3.3   8.3.3.3	Abnormal Conditions
 Not applicable.
-8.3.4	Bearer Context Release (gNB-CU-CP initiated) 
-8.3.4.1	General
+9.3.4   8.3.4	Bearer Context Release (gNB-CU-CP initiated) 
+9.3.4.1   8.3.4.1	General
 The purpose of the Bearer Context Release procedure is to allow the gNB-CU-CP to command the release of an UE-associated logical E1 connection. The procedure uses UE-associated signalling.
-8.3.4.2	Successful Operation
+9.3.4.2   8.3.4.2	Successful Operation
 
 Figure 8.3.4.2-1: Bearer Context Release procedure: Successful Operation.
 The gNB-CU-CP initiates the procedure by sending the BEARER CONTEXT RELEASE COMMAND message to the gNB-CU-UP. The gNB-CU-UP replies with the BEARER CONTEXT RELEASE COMPLETE message.
 Upon reception of the BEARER CONTEXT RELEASE COMMAND message, the gNB-CU-UP shall release all related signalling and user data transport resources and reply with the BEARER CONTEXT RELEASE COMPLETE message.
 The gNB-CU-UP shall, if supported, include the Retainability Measurements Information IE in the BEARER CONTEXT RELEASE COMPLETE message, providing information on the removed DRB(s) for retainability measurements in the gNB-CU-CP, as described in TS 32.425 [26] and TS 28.552 [22].
-8.3.4.3	Abnormal Conditions
+9.3.4.3   8.3.4.3	Abnormal Conditions
 Not applicable.
-8.3.5	Bearer Context Release Request (gNB-CU-UP initiated) 
-8.3.5.1	General
+9.3.5   8.3.5	Bearer Context Release Request (gNB-CU-UP initiated) 
+9.3.5.1   8.3.5.1	General
 The purpose of the Bearer Context Release Request procedure is to allow the gNB-CU-UP to request the gNB-CU-CP to release an UE-associated logical E1 connection. The procedure uses UE-associated signalling.
-8.3.5.2	Successful Operation
+9.3.5.2   8.3.5.2	Successful Operation
 
 Figure 8.3.5.2-1: Bearer Context Release Requset procedure: Successful Operation.
 The gNB-CU-UP initiates the procedure by sending the BEARER CONTEXT RELEASE REQUEST message to the gNB-CU-CP. 
@@ -992,157 +1067,159 @@ Interactions with Bearer Context Release procedure:
 The Bearer Context Release (gNB-CU-CP initiated) procedure may be initiated upon reception of a BEARER CONTEXT RELEASE REQUEST message. 
 Interaction with Bearer Context Modification (gNB-CU-CP initiated) procedure:
 If applicable, as specified in TS 38.401 [2], the gNB-CU-UP may receive, after having performed the Bearer Context Release Request (gNB-CU-UP initiated) procedure, the BEARER CONTEXT MODIFICATION REQUEST message including the Data Forwarding Information Request IE within the DRBs To Modify List IE.
-8.3.5.3	Abnormal Conditions
+9.3.5.3   8.3.5.3	Abnormal Conditions
 Not applicable.
-8.3.6	Bearer Context Inactivity Notification
-8.3.6.1	General
+9.3.6   8.3.6	Bearer Context Inactivity Notification
+9.3.6.1   8.3.6.1	General
 This procedure is initiated by the gNB-CU-UP to indicate the inactivity/resumption of activity related to the UE. The procedure uses UE-associated signalling.
-8.3.6.2	Successful Operation
+9.3.6.2   8.3.6.2	Successful Operation
 
 Figure 8.3.6.2-1: Bearer Context Inactivity Notification procedure: Successful Operation.
 The gNB-CU-UP initiates the procedure by sending the BEARER CONTEXT INACTIVITY NOTIFICATION message to the gNB-CU-CP.
 If the Activity Notification Level was set to “DRB” during the Bearer Context establishment, the gNB-CU-UP shall include the DRB Activity List IE in the BEARER CONTEXT INACTIVITY NOTIFICATION message.
 If the Activity Notification Level was set to “PDU Session” during the Bearer Context establishment, the gNB-CU-UP shall include the PDU Session Resource Activity List IE in the BEARER CONTEXT INACTIVITY NOTIFICATION message.
 If the Activity Notification Level was set to “UE” during the Bearer Context establishment, the gNB-CU-UP shall include the UE Activity IE in the BEARER CONTEXT INACTIVITY NOTIFICATION message.
-8.3.6.3	Abnormal Conditions
+9.3.6.3   8.3.6.3	Abnormal Conditions
 Not applicable.
-8.3.7	DL Data Notification
-8.3.7.1	General
+9.3.7   8.3.7	DL Data Notification
+9.3.7.1   8.3.7.1	General
 This procedure is initiated by the gNB-CU-UP to indicate the detection of DL data arrival for the UE, or indicate that a DL packet including a QFI value in the NG-U header not configured by the QoS Flows Information To Be Setup IE or the Flow Mapping Information IE is received for the first time. The procedure uses UE-associated signalling.
-8.3.7.2	Successful Operation
+9.3.7.2   8.3.7.2	Successful Operation
 
 Figure 8.3.7.2-1: DL Data Notification procedure: Successful Operation.
 The gNB-CU-UP initiates the procedure by sending the DL DATA NOTIFICATION message to the gNB-CU-CP.
 If the PPI IE is included in the DL DATA NOTIFICATION message, the gNB-CU-CP shall use it for paging policy differentiation.
 If the PDU Session To Notify List IE is included in the DL DATA NOTIFICATION message, the gNB-CU-CP shall, if supported, either map the flow(s) included in PDU Session To Notify List IE to the existing DRB or establish a new DRB for the flow(s).
 NOTE: 	If a DL packet including a QFI value in the NG-U header not configured by the QoS Flows Information To Be Setup IE or the Flow Mapping Information IE is received, the gNB-CU-UP may deliver the DL packet via any existing configured DRB before it initiates DL Data Notification procedure.
-8.3.7.3	Abnormal Conditions
+9.3.7.3   8.3.7.3	Abnormal Conditions
 Not applicable.
-8.3.8	Data Usage Report
-8.3.8.1	General
+9.3.8   8.3.8	Data Usage Report
+9.3.8.1   8.3.8.1	General
 This procedure is initiated by the gNB-CU-UP to report data volume served at the gNB-CU-UP. The procedure uses UE-associated signalling.
-8.3.8.2	Successful Operation
+9.3.8.2   8.3.8.2	Successful Operation
 
 Figure 8.3.8.2-1: Data Usage Report procedure: Successful Operation.
 The gNB-CU-UP initiates the procedure by sending the DATA USAGE REPORT message to the gNB-CU-CP.
-8.3.8.3	Abnormal Conditions
+9.3.8.3   8.3.8.3	Abnormal Conditions
 Not applicable.
-8.3.9	gNB-CU-UP Counter Check
-8.3.9.1	General
+9.3.9   8.3.9	gNB-CU-UP Counter Check
+9.3.9.1   8.3.9.1	General
 This procedure is initiated by the gNB-CU-UP to request the gNB-CU-CP to execute a counter check procedure to verify the value of the PDCP COUNTs associated with DRBs established in the gNB-CU-UP.
 The procedure uses UE-associated signalling.
-8.3.9.2	Successful Operation
+9.3.9.2   8.3.9.2	Successful Operation
 
 Figure 8.3.9.2-1: gNB-CU-UP Counter Check procedure, successful operation.
 The gNB-CU-UP initiates the procedure by sending the gNB-CU-UP COUNTER CHECK REQUEST message to the gNB-CU-CP.
 Upon reception of the gNB-CU-UP COUNTER CHECK REQUEST message, the gNB-CU-CP may perform the RRC counter check procedure as defined in TS 33.501 [13].
-8.3.9.3	Unsuccessful Operation
+9.3.9.3   8.3.9.3	Unsuccessful Operation
 Not applicable.
-8.3.9.4	Abnormal Conditions
+9.3.9.4   8.3.9.4	Abnormal Conditions
 Not applicable.
-8.3.10	UL Data Notification
-8.3.10.1	General
+9.3.10   8.3.10	UL Data Notification
+9.3.10.1   8.3.10.1	General
 This procedure is initiated by the gNB-CU-UP to notify the gNB-CU-CP that an UL packet including a QFI value in the SDAP header not configured by the QoS Flows Information To Be Setup IE or the Flow Mapping Information IE is received for the first time at the default DRB. The procedure uses UE-associated signalling.
-8.3.10.2	Successful Operation
+9.3.10.2   8.3.10.2	Successful Operation
 
 Figure 8.3.10.2-1: UL Data Notification procedure: Successful Operation.
 The gNB-CU-UP initiates the procedure by sending the UL DATA NOTIFICATION message to the gNB-CU-CP.
-8.3.10.3	Abnormal Conditions
+9.3.10.3   8.3.10.3	Abnormal Conditions
 Not applicable.
-8.3.11	MR-DC Data Usage Report
-8.3.11.1	General
+9.3.11   8.3.11	MR-DC Data Usage Report
+9.3.11.1   8.3.11.1	General
 This procedure is initiated by the gNB-CU-UP to report data volume served at the gNB-CU-UP, where the UE is connected to the 5GC. The procedure uses UE-associated signalling.
-8.3.11.2	Successful Operation
+9.3.11.2   8.3.11.2	Successful Operation
 
 Figure 8.3.11.2-1: MR-DC Data Usage Report procedure: Successful Operation.
 The gNB-CU-UP initiates the procedure by sending the MR-DC DATA USAGE REPORT message to the gNB-CU-CP.
-8.3.11.3	Abnormal Conditions
+9.3.11.3   8.3.11.3	Abnormal Conditions
 Not applicable.
-8.3.12	Early Forwarding SN Transfer
-8.3.12.1	General
+9.3.12   8.3.12	Early Forwarding SN Transfer
+9.3.12.1   8.3.12.1	General
 The purpose of the Early Forwarding SN Transfer procedure is to transfer, from the source gNB-CU-UP to the source gNB-CU-CP, DL COUNT of the last PDCP SDU successfully delivered or transmitted to the UE, for the purpose of discarding early forwarded downlink PDCP SDUs during Conditional Handover or conditional PSCell change.
 The procedure uses UE-associated signalling.
-8.3.12.2	Successful Operation
+9.3.12.2   8.3.12.2	Successful Operation
 
 Figure 8.3.12.2-1: Early Forwarding SN Transfer procedure: Successful Operation.
 The source gNB-CU-UP initiates the procedure by sending the EARLY FORWARDING SN TRANSFER message.
 The DRBs Subject To Early Forwarding List IE included in the EARLY FORWARDING SN TRANSFER message contains the DRB ID(s) corresponding to the DRB(s) subject to early data forwarding during Conditional Handover or conditional PSCell change.
 For each DRB in the DRBs Subject To Early Forwarding List IE, the value of the DL COUNT Value IE indicates the DL COUNT of the last PDCP SDU successfully delivered in-sequence to the UE, if RLC-AM, and successfully transmitted, if RLC-UM.
-8.3.12.3	Unsuccessful Operation
+9.3.12.3   8.3.12.3	Unsuccessful Operation
 Not applicable.
-8.3.12.4	Abnormal Conditions
+9.3.12.4   8.3.12.4	Abnormal Conditions
 If the source gNB-CU-CP receives this message for a UE for which no prepared Conditional Handover exists, the source gNB-CU-CP shall ignore the message.
-8.3.13	GNB-CU-CP Measurement Results Information
-8.3.13.1	General
-This procedure is initiated by the gNB-CU-CP to inform the measurement results received from the UE to the gNB-CU-UP. 
+9.3.13   8.3.13	GNB-CU-CP Measurement Results Information
+9.3.13.1   8.3.13.1	General
+This procedure is initiated by the gNB-CU-CP to inform the measurement results received from the UE to the gNB-CU-UP.
 The procedure uses UE-associated signalling.
-8.3.13.2	Successful Operation
-Figure 8.3.x.2-1: GNB-CU-CP Measurement Results Information procedure. Successful operation. 
-The gNB-CU-CP initiates the procedure by sending a GNB-CU-CP MEASUREMENT RESULTS INFORMATION message. 
-8.3.13.3	Abnormal Conditions
+9.3.13.2   8.3.13.2	Successful Operation
+
+Figure 8.3.13.2-1: GNB-CU-CP Measurement Results Information procedure. Successful operation.
+The gNB-CU-CP initiates the procedure by sending a GNB-CU-CP MEASUREMENT RESULTS INFORMATION message.
+9.3.13.3   8.3.13.3	Abnormal Conditions
 Not applicable.
-8.4	Trace Procedures
-8.4.1	Trace Start
-8.4.1.1	General
+9.4   8.4	Trace Procedures
+9.4.1   8.4.1	Trace Start
+9.4.1.1   8.4.1.1	General
 The purpose of the Trace Start procedure is to allow the gNB-CU-CP to request the gNB-CU-UP to initiate a trace session for a UE. The procedure uses UE-associated signalling.
-8.4.1.2	Successful Operation
+9.4.1.2   8.4.1.2	Successful Operation
 
 Figure 8.4.1.2-1: Trace start procedure: Successful Operation.
 Upon reception of the TRACE START message, the gNB-CU-UP shall initiate the requested trace session for the requested UE, as described in TS 32.422 [24]. In particular, the gNB-CU-UP shall, if supported:
 -	if the MDT Activation IE is set to "Immediate MDT Only", initiate the requested MDT session as described in TS 32.422 [24] and the gNB-CU-UP shall ignore Interfaces To Trace IE, and Trace Depth IE.
-8.4.1.3	Abnormal Conditions
+9.4.1.3   8.4.1.3	Abnormal Conditions
 Void.
-8.4.2	Deactivate Trace
-8.4.2.1	General
+9.4.2   8.4.2	Deactivate Trace
+9.4.2.1   8.4.2.1	General
 The purpose of the Deactivate Trace procedure is to allow the gNB-CU-CP to request the gNB-CU-UP to stop the trace session for the indicated trace reference. The procedure uses UE-associated signalling.
-8.4.2.2	Successful Operation
+9.4.2.2   8.4.2.2	Successful Operation
 
 Figure 8.4.2.2-1: Deactivate trace procedure: Successful Operation.
 Upon reception of the DEACTIVATE TRACE message, the gNB-CU-UP shall stop the trace session for the indicated trace reference contained in the Trace ID IE, as described in TS 32.422 [24].
-8.4.2.3	Abnormal Conditions
+9.4.2.3   8.4.2.3	Abnormal Conditions
 Void.
-8.4.3	Cell Traffic Trace
-8.4.3.1	General
+9.4.3   8.4.3	Cell Traffic Trace
+9.4.3.1   8.4.3.1	General
 The purpose of the Cell Traffic Trace procedure is to send the allocated Trace Recording Session Reference and the Trace Reference to the gNB-CU-CP. The procedure uses UE-associated signalling.
-8.4.3.2	Successful Operation
+9.4.3.2   8.4.3.2	Successful Operation
 
 Figure 8.4.3.2-1: Cell Traffic Trace procedure. Successful operation.
 The procedure is initiated with a CELL TRAFFIC TRACE message sent from the gNB-CU-UP to the gNB-CU-CP. 
 If the Privacy Indicator IE is included in the message, the gNB-CU-CP shall store the information so that it can be transferred towards the AMF.
-8.4.3.3	Abnormal Conditions
+9.4.3.3   8.4.3.3	Abnormal Conditions
 Void.
-8.5	IAB Procedures
-8.5.1	IAB UP TNL Address Update
-8.5.1.1	General
+9.5   8.5	IAB Procedures
+9.5.1   8.5.1	IAB UP TNL Address Update
+9.5.1.1   8.5.1.1	General
 The purpose of the IAB UP TNL Address Update procedure is to allow the gNB-CU-CP to request the gNB-CU-UP to update the TNL Address(es) for all the DL F1-U GTP-U tunnels related to this (these) TNL address(es), and to allow the gNB-CU-UP to inform the gNB-CU-CP about the updated TNL Address(es) for all the UL F1-U GTP-U tunnels. The procedure uses non-UE associated signalling.
 NOTE: 	This procedure is applicable for IAB-nodes, where the term "gNB-CU-CP" applies to IAB-donor-CU-CP, and the term “gNB-CU-UP” applies to IAB-donor-CU-UP.
 NOTE:	Implementation shall ensure the avoidance of potential race conditions, i.e. it must ensure that the UP configuration (e.g., UL/DL UP TNL address) update is not concurrently performed using the non-UE-associated IAB UP TNL Address Update procedure and the UE-associated procedures for Bearer Context Management.
-8.5.1.2	Successful Operation
+9.5.1.2   8.5.1.2	Successful Operation
 
 Figure 8.5.1.2-1: IAB UP TNL Address Update procedure: Successful Operation.
 The gNB-CU-CP initiates the procedure by sending the IAB UP TNL ADDRESS UPDATE message to the gNB-CU-UP. If the gNB-CU-UP succeeds to update the TNL Address(es), it replies to the gNB-CU-CP with the IAB UP TNL ADDRESS UPDATE ACKNOWLEDGE message.
 Upon reception of the IAB UP TNL ADDRESS UPDATE message, if the DL UP TNL Address to Update List IE is included therein, the gNB-CU-UP shall replace the old TNL Address(es) by the new TNL Address(es) for all the maintained DL F1-U GTP tunnels corresponding to the old TNL Address(es).
 If the UL UP TNL Address to Update List IE is contained in the IAB UP TNL ADDRESS UPDATE ACKNOWLEDGE message, the gNB-CU-CP shall consider the new TNL address(es) as replacement for the corresponding old TNL address(es).
-8.5.1.3	Unsuccessful Operation
+9.5.1.3   8.5.1.3	Unsuccessful Operation
 
 Figure 8.5.1.3-1: IAB UP TNL Address Update procedure: Unsuccessful Operation.
 If the gNB-CU-UP receives an IAB UP TNL ADDRESS UPDATE message, but cannot perform the update accordingly, it shall consider the update procedure as failed and respond with an IAB UP TNL ADDRESS UPDATE FAILURE message and appropriate cause value.
 If the IAB UP TNL ADDRESS UPDATE FAILURE message includes the Time To Wait IE, the gNB-CU-CP shall wait at least for the indicated amount of time before reinitiating the IAB UP TNL Address Update procedure towards the same gNB-CU-UP.
-8.5.1.4	Abnormal Conditions
+9.5.1.4   8.5.1.4	Abnormal Conditions
 Not Applicable.
-8.5.2	IAB PSK Notification
-8.5.2.1	General
+9.5.2   8.5.2	IAB PSK Notification
+9.5.2.1   8.5.2.1	General
 The purpose of the IAB PSK Notification procedure is to allow the gNB-CU-CP to send the security key info to the gNB-CU-UP, which will be used for the IKEv2 Pre-shared Secret Key (PSK) authentication to protect the F1-U interface of the IAB-node(s) as specified in TS 33.501 [13]. The procedure uses non-UE associated signalling.
 NOTE: 	This procedure is applicable for IAB-nodes, where the term "gNB-CU-CP" applies to IAB-donor-CU-CP, and the term “gNB-CU-UP” applies to IAB-donor-CU-UP.
-8.5.2.2	Successful Operation
+NOTE: 	Implementation should ensure that the IAB PSK Notification procedure be performed after the IAB-donor-CU-CP obtains the IP address of the IAB-DU and of the IAB-donor-CU-UP.
+9.5.2.2   8.5.2.2	Successful Operation
 
 Figure 8.5.2.2-1: IAB PSK Notification procedure: Successful Operation.
 The gNB-CU-CP initiates the procedure by sending the IAB PSK NOTIFICATION message to the gNB-CU-UP.
 The gNB-CU-UP uses the IAB-Donor-CU-UP PSK Info IE included in the IAB PSK NOTIFICATION message as specified in TS 33.501 [13].
-8.5.2.3	Abnormal Conditions
+9.5.2.3   8.5.2.3	Abnormal Conditions
 Not applicable. 
-9	Elements for E1AP communication
-9.1	General
+10   9	Elements for E1AP communication
+10.1   9.1	General
 Subclauses 9.2 and 9.3 present the E1AP message and IE definitions in tabular format. The corresponding ASN.1 definition is presented in subclause 9.4. In case there is contradiction between the tabular format and the ASN.1 definition, the ASN.1 shall take precedence, except for the definition of conditions for the presence of conditional IEs, where the tabular format shall take precedence. 
 The messages have been defined in accordance to the guidelines specified in TR 25.921 [5].
 When specifying IEs which are to be represented by bitstrings, if not otherwise specifically stated in the semantics description of the concerned IE or elsewhere, the following principle applies with regards to the ordering of bits:
@@ -1150,9 +1227,9 @@ When specifying IEs which are to be represented by bitstrings, if not otherwise 
 -	The last bit (rightmost bit) contains the least significant bit (LSB);
 -	When importing bitstrings from other specifications, the first bit of the bitstring contains the first bit of the concerned information;
 The following attributes are used for the tabular description of the messages and information elements: Presence, Range Criticality and Assigned Criticality. Their definition and use can be found in TS 38.413 [6].
-9.2	Message Functional Definition and Content
-9.2.1	Interface Management messages
-9.2.1.1	RESET
+10.2   9.2	Message Functional Definition and Content
+10.2.1   9.2.1	Interface Management messages
+10.2.1.1   9.2.1.1	RESET
 This message is sent by both the gNB-CU-CP and the gNB-CU-UP and is used to request that the E1 interface, or parts of the E1 interface, to be reset.
 Direction: gNB-CU-CP  gNB-CU-UP and gNB-CU-UP  gNB-CU-CP
 IE/Group Name
@@ -1245,7 +1322,7 @@ Explanation
 maxnoofIndividualE1ConnectionsToReset
 Maximum no. of UE-associated logical E1-connections allowed to reset in one message. Value is 65536.
 
-9.2.1.2	RESET ACKNOWLEDGE
+10.2.1.2   9.2.1.2	RESET ACKNOWLEDGE
 This message is sent by both the gNB-CU-CP and the gNB-CU-UP as a response to a RESET message.
 Direction: gNB-CU-UP  gNB-CU-CP and gNB-CU-CP  gNB-CU-UP.
 IE/Group Name
@@ -1310,7 +1387,7 @@ Explanation
 maxnoofIndividualE1ConnectionsToReset
 Maximum no. of UE-associated logical E1-connections allowed to reset in one message. Value is 65536.
 
-9.2.1.3	ERROR INDICATION
+10.2.1.3   9.2.1.3	ERROR INDICATION
 This message is sent by both the gNB-CU-CP and the gNB-CU-UP and is used to indicate that some error has been detected in the node.
 Direction: gNB-CU-CP  gNB-CU-UP and gNB-CU-UP  gNB-CU-CP
 IE/Group Name
@@ -1363,7 +1440,7 @@ O
 YES
 ignore
 
-9.2.1.4	GNB-CU-UP E1 SETUP REQUEST
+10.2.1.4   9.2.1.4	GNB-CU-UP E1 SETUP REQUEST
 This message is sent by the gNB-CU-UP to transfer information for a TNL association.
 Direction: gNB-CU-UP  gNB-CU-CP
 IE/Group Name
@@ -1492,7 +1569,7 @@ Explanation
 maxnoofSPLMNs
 Maximum no. of Supported PLMN Ids. Value is 12.
 
-9.2.1.5	GNB-CU-UP E1 SETUP RESPONSE
+10.2.1.5   9.2.1.5	GNB-CU-UP E1 SETUP RESPONSE
 This message is sent by the gNB-CU-CP to transfer information for a TNL association.
 Direction: gNB-CU-CP  gNB-CU-UP
 IE/Group Name
@@ -1538,7 +1615,7 @@ O
 YES
 ignore
 
-9.2.1.6	GNB-CU-UP E1 SETUP FAILURE
+10.2.1.6   9.2.1.6	GNB-CU-UP E1 SETUP FAILURE
 This message is sent by the gNB-CU-CP to indicate E1 Setup failure.
 Direction: gNB-CU-CP  gNB-CU-UP
 IE/Group Name
@@ -1584,7 +1661,7 @@ O
 YES
 ignore
 
-9.2.1.7	GNB-CU-CP E1 SETUP REQUEST
+10.2.1.7   9.2.1.7	GNB-CU-CP E1 SETUP REQUEST
 This message is sent by the gNB-CU-CP to transfer information for a TNL association.
 Direction: gNB-CU-CP  gNB-CU-UP
 IE/Group Name
@@ -1630,7 +1707,7 @@ O
 YES
 ignore
 
-9.2.1.8	GNB-CU-CP E1 SETUP RESPONSE
+10.2.1.8   9.2.1.8	GNB-CU-CP E1 SETUP RESPONSE
 This message is sent by the gNB-CU-UP to transfer information for a TNL association.
 Direction: gNB-CU-UP  gNB-CU-CP
 IE/Group Name
@@ -1759,7 +1836,7 @@ Explanation
 maxnoofSPLMNs
 Maximum no. of Supported PLMN Ids. Value is 12.
 
-9.2.1.9	GNB-CU-CP E1 SETUP FAILURE
+10.2.1.9   9.2.1.9	GNB-CU-CP E1 SETUP FAILURE
 This message is sent by the gNB-CU-UP to indicate E1 Setup failure.
 Direction: gNB-CU-UP  gNB-CU-CP
 IE/Group Name
@@ -1805,7 +1882,7 @@ O
 YES
 ignore
 
-9.2.1.10	GNB-CU-UP CONFIGURATION UPDATE
+10.2.1.10   9.2.1.10	GNB-CU-UP CONFIGURATION UPDATE
 This message is sent by the gNB-CU-UP to transfer updated information for a TNL association.
 Direction: gNB-CU-UP  gNB-CU-CP
 IE/Group Name
@@ -1959,7 +2036,7 @@ Maximum no. of Supported PLMN Ids. Value is 12.
 maxnoofTNLAssociations
 Maximum numbers of TNL Associations between the gNB-CU-UP and the gNB-CU-CP. Value is 32.
 
-9.2.1.11	GNB-CU-UP CONFIGURATION UPDATE ACKNOWLEDGE
+10.2.1.11   9.2.1.11	GNB-CU-UP CONFIGURATION UPDATE ACKNOWLEDGE
 This message is sent by a gNB-CU-CP to a gNB-CU-UP to acknowledge update of information for a TNL association.
 Direction: gNB-CU-CP  gNB-CU-UP
 IE/Group Name
@@ -1998,7 +2075,7 @@ O
 YES
 ignore
 
-9.2.1.12	GNB-CU-UP CONFIGURATION UPDATE FAILURE
+10.2.1.12   9.2.1.12	GNB-CU-UP CONFIGURATION UPDATE FAILURE
 This message is sent by the gNB-CU-CP to indicate gNB-CU-UP Configuration Update failure.
 Direction: gNB-CU-CP  gNB-CU-UP
 IE/Group Name
@@ -2044,7 +2121,7 @@ O
 YES
 ignore
 
-9.2.1.13	GNB-CU-CP CONFIGURATION UPDATE
+10.2.1.13   9.2.1.13	GNB-CU-CP CONFIGURATION UPDATE
 This message is sent by the gNB-CU-CP to transfer updated information for a TNL association.
 Direction: gNB-CU-CP  gNB-CU-UP
 IE/Group Name
@@ -2183,7 +2260,7 @@ Explanation
 maxnoofTNLAssociations
 Maximum numbers of TNL Associations between the gNB-CU-CP and the gNB-CU-UP. Value is 32.
 
-9.2.1.14	GNB-CU-CP CONFIGURATION UPDATE ACKNOWLEDGE
+10.2.1.14   9.2.1.14	GNB-CU-CP CONFIGURATION UPDATE ACKNOWLEDGE
 This message is sent by a gNB-CU-UP to a gNB-CU-CP to acknowledge update of information for a TNL association.
 Direction: gNB-CU-UP  gNB-CU-CP
 IE/Group Name
@@ -2278,7 +2355,7 @@ Explanation
 maxnoofTNLAssociations
 Maximum numbers of TNL Associations between the gNB-CU-CP and the gNB-CU-UP. Value is 32.
 
-9.2.1.15	GNB-CU-CP CONFIGURATION UPDATE FAILURE
+10.2.1.15   9.2.1.15	GNB-CU-CP CONFIGURATION UPDATE FAILURE
 This message is sent by the gNB-CU-UP to indicate gNB-CU-CP Configuration Update failure.
 Direction: gNB-CU-UP  gNB-CU-CP
 IE/Group Name
@@ -2324,7 +2401,7 @@ O
 YES
 ignore
 
-9.2.1.16	E1 RELEASE REQUEST 
+10.2.1.16   9.2.1.16	E1 RELEASE REQUEST 
 This message is sent by both the gNB-CU-CP and the gNB-CU-UP and is used to request the release of the E1 interface.
 Direction: gNB-CU-CP  gNB-CU-UP and gNB-CU-UP  gNB-CU-CP
 IE/Group Name
@@ -2356,7 +2433,7 @@ M
 YES
 ignore
 
-9.2.1.17	E1 RELEASE RESPONSE 
+10.2.1.17   9.2.1.17	E1 RELEASE RESPONSE 
 This message is sent by both the gNB-CU-CP and the gNB-CU-UP as a response to an E1 RELEASE REQUEST message.
 Direction: gNB-CU-UP  gNB-CU-CP and gNB-CU-CP  gNB-CU-UP.
 IE/Group Name
@@ -2381,7 +2458,7 @@ M
 YES
 reject
 
-9.2.1.18	GNB-CU-UP STATUS INDICATION
+10.2.1.18   9.2.1.18	GNB-CU-UP STATUS INDICATION
 This message is sent by the gNB-CU-UP to indicate to the gNB-CU-CP its status of overload.
 Direction: gNB-CU-UP  gNB-CU-CP
 IE/Group Name
@@ -2413,7 +2490,7 @@ ENUMERATED (overloaded, not-overloaded)
 YES
 reject
 
-9.2.1.19	RESOURCE STATUS REQUEST
+10.2.1.19   9.2.1.19	RESOURCE STATUS REQUEST
 This message is sent by an gNB-CU-CP to gNB-CU-UP to initiate the requested measurement according to the parameters given in the message.
 Direction: gNB-CU-CP  gNB-CU-UP.
 IE/Group Name
@@ -2469,6 +2546,7 @@ Second Bit = HW Capacity Ind Periodic.
 Other bits shall be ignored by the gNB-CU-UP.
 YES
 reject
+
 Reporting Periodicity
 O
 
@@ -2477,6 +2555,7 @@ Periodicity that can be used for reporting. Also used as the averaging window le
 YES
 ignore
 
+
 Condition
 Explanation
 ifRegistrationRequestStop
@@ -2484,7 +2563,7 @@ This IE shall be present if the Registration Request IE is set to the value “s
 ifRegistrationRequestStart
 This IE shall be present if the Registration Request IE is set to the value "start".
 
-9.2.1.20	RESOURCE STATUS RESPONSE
+10.2.1.20   9.2.1.20	RESOURCE STATUS RESPONSE
 This message is sent by the gNB-CU-UP to indicate that the requested measurement, for all the measurement objects included in the measurement is successfully initiated.
 Direction: gNB-CU-UP  gNB-CU-CP
 IE/Group Name
@@ -2530,7 +2609,7 @@ O
 YES
 ignore
 
-9.2.1.21	RESOURCE STATUS FAILURE
+10.2.1.21   9.2.1.21	RESOURCE STATUS FAILURE
 This message is sent by the gNB-CU-UP to indicate that for any of the requested measurement objects the measurement cannot be initiated.
 Direction: gNB-CU-UP  gNB-CU-CP.
 IE/Group Name
@@ -2588,7 +2667,7 @@ Explanation
 ifRegistrationRequestStop
 This IE shall be present if the Registration Request IE is set to the value “stop”
 
-9.2.1.22	RESOURCE STATUS UPDATE
+10.2.1.22   9.2.1.22	RESOURCE STATUS UPDATE
 This message is sent by gNB-CU-UP to gNB-CU-CP to report the results of the requested measurements.
 Direction: gNB-CU-UP  gNB-CU-CP.
 IE/Group Name
@@ -2619,6 +2698,7 @@ INTEGER (1..4095,...)
 Allocated by gNB-CU-CP
 YES
 Reject
+
 gNB-CU-UP Measurement ID
 M
 
@@ -2626,10 +2706,12 @@ INTEGER (1..4095,...)
 Allocated by gNB-CU-UP
 YES
 Reject
+
 TNL Available Capacity Indicator
 O
 
 9.3.1.72
+
 
 
 
@@ -2641,6 +2723,7 @@ O
 
 
 
+
 Range bound
 Explanation
 maxnoofSPLMNs
@@ -2648,8 +2731,8 @@ Maximum no. of Supported PLMN Ids. Value is 12.
 maxnoofSliceItems
 Maximum no. of signalled slice support items. Value is 1024.
 
-9.2.2	Bearer Context Management messages
-9.2.2.1	BEARER CONTEXT SETUP REQUEST
+10.2.2   9.2.2	Bearer Context Management messages
+10.2.2.1   9.2.2.1	BEARER CONTEXT SETUP REQUEST
 This message is sent by the gNB-CU-CP to request the gNB-CU-UP to setup a bearer context. 
 Direction: gNB-CU-CP  gNB-CU-UP
 IE/Group Name
@@ -2846,7 +2929,7 @@ Maximum no. of DRBs for a UE. Value is 32.
 maxnoofPDUSessionResource 
 Maximum no. of PDU Sessions for a UE. Value is 256.
 
-9.2.2.2	BEARER CONTEXT SETUP RESPONSE
+10.2.2.2   9.2.2.2	BEARER CONTEXT SETUP RESPONSE
 This message is sent by the gNB-CU-UP to confirm the setup of the requested bearer context.  
 Direction: gNB-CU-UP  gNB-CU-CP
 IE/Group Name
@@ -2936,7 +3019,7 @@ Maximum no. of DRBs for a UE. Value is 32.
 maxnoofPDUSessionResource 
 Maximum no. of PDU Sessions for a UE. Value is 256.
 
-9.2.2.3	BEARER CONTEXT SETUP FAILURE
+10.2.2.3   9.2.2.3	BEARER CONTEXT SETUP FAILURE
 This message is sent by the gNB-CU-UP to indicate that the setup of the bearer context was unsuccessful. 
 Direction: gNB-CU-UP  gNB-CU-CP
 IE/Group Name
@@ -2982,7 +3065,7 @@ O
 YES
 ignore
 
-9.2.2.4	BEARER CONTEXT MODIFICATION REQUEST
+10.2.2.4   9.2.2.4	BEARER CONTEXT MODIFICATION REQUEST
 This message is sent by the gNB-CU-CP to request the gNB-CU-UP to modify a bearer context. 
 Direction: gNB-CU-CP  gNB-CU-UP
 IE/Group Name
@@ -3173,7 +3256,7 @@ Maximum no. of DRBs for a UE. Value is 32.
 maxnoofPDUSessionResource 
 Maximum no. of PDU Sessions for a UE. Value is 256.
 
-9.2.2.5	BEARER CONTEXT MODIFICATION RESPONSE
+10.2.2.5   9.2.2.5	BEARER CONTEXT MODIFICATION RESPONSE
 This message is sent by the gNB-CU-UP to confirm the modification of the requested bearer context.  
 Direction: gNB-CU-UP  gNB-CU-CP
 IE/Group Name
@@ -3309,7 +3392,7 @@ Maximum no. of DRBs for a UE. Value is 32.
 maxnoofPDUSessionResource 
 Maximum no. of PDU Sessions for a UE. Value is 256.
 
-9.2.2.6	BEARER CONTEXT MODIFICATION FAILURE
+10.2.2.6   9.2.2.6	BEARER CONTEXT MODIFICATION FAILURE
 This message is sent by the gNB-CU-UP to indicate that the modification of the bearer context was unsuccessful. 
 Direction: gNB-CU-UP  gNB-CU-CP
 IE/Group Name
@@ -3355,7 +3438,7 @@ O
 YES
 ignore
 
-9.2.2.7	BEARER CONTEXT MODIFICATION REQUIRED
+10.2.2.7   9.2.2.7	BEARER CONTEXT MODIFICATION REQUIRED
 This message is sent by the gNB-CU-UP to inform the gNB-CU-CP that a modification of a bearer context is required (e.g., due to local problems at the gNB-CU-UP).
 Direction: gNB-CU-UP  gNB-CU-CP
 IE/Group Name
@@ -3446,7 +3529,7 @@ Maximum no. of DRBs for a UE. Value is 32.
 maxnoofPDUSessionResource 
 Maximum no. of PDU Sessions for a UE. Value is 256.
 
-9.2.2.8	BEARER CONTEXT MODIFICATION CONFIRM
+10.2.2.8   9.2.2.8	BEARER CONTEXT MODIFICATION CONFIRM
 This message is sent by the gNB-CU-CP to confirm the modification of the requested bearer context.  
 Direction: gNB-CU-CP  gNB-CU-UP
 IE/Group Name
@@ -3522,7 +3605,7 @@ Maximum no. of DRBs for a UE. Value is 32.
 maxnoofPDUSessionResource 
 Maximum no. of PDU Sessions for a UE. Value is 256.
 
-9.2.2.9	BEARER CONTEXT RELEASE COMMAND
+10.2.2.9   9.2.2.9	BEARER CONTEXT RELEASE COMMAND
 This message is sent by the gNB-CU-CP to command the gNB-CU-UP to release an UE-associated logical E1 connection.
 Direction: gNB-CU-CP  gNB-CU-UP
 IE/Group Name
@@ -3561,7 +3644,7 @@ M
 YES
 ignore
 
-9.2.2.10	BEARER CONTEXT RELEASE COMPLETE
+10.2.2.10   9.2.2.10	BEARER CONTEXT RELEASE COMPLETE
 This message is sent by the gNB-CU-UP to confirm the release of the UE-associated logical E1 connection.
 Direction: gNB-CU-UP  gNB-CU-CP
 IE/Group Name
@@ -3607,7 +3690,7 @@ Provides information on all the removed DRB(s) and QoS Flow(s), needed for retai
 YES
 ignore
 
-9.2.2.11	BEARER CONTEXT RELEASE REQUEST
+10.2.2.11   9.2.2.11	BEARER CONTEXT RELEASE REQUEST
 This message is sent by the gNB-CU-UP to request the release of an UE-associated logical E1 connection.
 Direction: gNB-CU-UP  gNB-CU-CP
 IE/Group Name
@@ -3688,7 +3771,7 @@ Explanation
 maxnoofDRBs
 Maximum no. of DRBs for a UE. Value is 32.
 
-9.2.2.12	BEARER CONTEXT INACTIVITY NOTIFICATION
+10.2.2.12   9.2.2.12	BEARER CONTEXT INACTIVITY NOTIFICATION
 This message is sent by the gNB-CU-UP to provide information about the UE activity to the gNB-CU-CP.
 Direction: gNB-CU-UP  gNB-CU-CP
 IE/Group Name
@@ -3797,7 +3880,7 @@ Maximum no. of DRB for a UE, the maximum value is 32.
 maxnoofPDUSessionResource 
 Maximum no. of PDU Sessions for a UE. Value is 256.
 
-9.2.2.13	DL DATA NOTIFICATION
+10.2.2.13   9.2.2.13	DL DATA NOTIFICATION
 This message is sent by the gNB-CU-UP to provide information about the DL data detection to the gNB-CU-CP.
 Direction: gNB-CU-UP  gNB-CU-CP
 IE/Group Name
@@ -3869,7 +3952,7 @@ Explanation
 maxnoofPDUSessionResource 
 Maximum no. of PDU Sessions for a UE. Value is 256.
 
-9.2.2.14	DATA USAGE REPORT
+10.2.2.14   9.2.2.14	DATA USAGE REPORT
 This message is sent by the gNB-CU-UP to report data volumes.
 Direction: gNB-CU-UP  gNB-CU-CP
 IE/Group Name
@@ -3908,7 +3991,7 @@ M
 YES
 ignore
 
-9.2.2.15	GNB-CU-UP COUNTER CHECK REQUEST
+10.2.2.15   9.2.2.15	GNB-CU-UP COUNTER CHECK REQUEST
 This message is sent by the gNB-CU-UP to request the verification of the value of the PDCP COUNTs associated with the DRBs established in the gNB-CU-UP.
 Direction: gNB-CU-UP  gNB-CU-CP.
 IE/Group Name
@@ -4044,7 +4127,7 @@ Explanation
 maxnoofDRBs
 Maximum no. of DRBs for a UE. Value is 32.
 
-9.2.2.16	UL DATA NOTIFICATION
+10.2.2.16   9.2.2.16	UL DATA NOTIFICATION
 This message is sent by the gNB-CU-UP to provide information about the UL data detection to the gNB-CU-CP.
 Direction: gNB-CU-UP  gNB-CU-CP
 IE/Group Name
@@ -4104,7 +4187,7 @@ M
 -
 -
 
-9.2.2.17	MR-DC DATA USAGE REPORT
+10.2.2.17   9.2.2.17	MR-DC DATA USAGE REPORT
 This message is sent by the gNB-CU-UP to report data volumes when the UE is connected to the 5GC.
 Direction: gNB-CU-UP  gNB-CU-CP.
 IE/Group Name
@@ -4169,7 +4252,7 @@ Explanation
 maxnoofPDUsessions
 Maximum no. of PDU sessions. Value is 256
 
-9.2.2.18	EARLY FORWARDING SN TRANSFER
+10.2.2.18   9.2.2.18	EARLY FORWARDING SN TRANSFER
 This message is sent by the source gNB-CU-UP to the source gNB-CU-CP to transfer the COUNT value(s) related to early forwarded downlink PDCP SDUs during Conditional Handover or conditional PSCell change.
 Direction: gNB-CU-UP  gNB-CU-CP
 IE/Group Name
@@ -4230,7 +4313,7 @@ PDCP-SN and Hyper frame number of the last DL SDU successfully delivered in sequ
 -
 -
 
-9.2.2.19	GNB-CU-CP MEASUREMENT RESULTS INFORMATION
+10.2.2.19   9.2.2.19	GNB-CU-CP MEASUREMENT RESULTS INFORMATION
 This message is sent to the gNB-CU-UP to provide the measurement result received by the gNB-CU-CP.
 Direction: gNB-CU-CP  gNB-CU-UP
 IE/Group Name
@@ -4295,8 +4378,8 @@ Explanation
 maxnoofDRBs
 Maximum no. of DRB allowed towards one UE, the maximum value is 64. 
 
-9.2.3	Trace Messages
-9.2.3.1	TRACE START
+10.2.3   9.2.3	Trace Messages
+10.2.3.1   9.2.3.1	TRACE START
 This message is sent by the gNB-CU-CP to initiate a trace session for a UE.
 Direction: gNB-CU-CP  gNB-CU-UP
 IE/Group Name
@@ -4335,7 +4418,7 @@ M
 YES
 ignore
 
-9.2.3.2	DEACTIVATE TRACE
+10.2.3.2   9.2.3.2	DEACTIVATE TRACE
 This message is sent by the gNB-CU-CP to deactivate a trace session.
 Direction: gNB-CU-CP  gNB-CU-UP
 IE/Group Name
@@ -4374,7 +4457,7 @@ As per Trace ID in Trace Activation IE
 YES
 ignore
 
-9.2.3.3	CELL TRAFFIC TRACE
+10.2.3.3   9.2.3.3	CELL TRAFFIC TRACE
 This message is sent by the gNB-CU-UP to initiate a trace session for a UE.
 Direction: gNB-CU-UP  gNB-CU-CP
 IE/Group Name
@@ -4439,8 +4522,8 @@ Replaces Trace Collection Entity IP Address if present.
 YES
 ignore
 
-9.2.4	IAB Messages
-9.2.4.1	IAB UP TNL ADDRESS UPDATE
+10.2.4   9.2.4	IAB Messages
+10.2.4.1   9.2.4.1	IAB UP TNL ADDRESS UPDATE
 This message is sent by the gNB-CU-CP to request the gNB-CU-UP to update the TNL address(es) of the DL F1-U GTP tunnel information.
 Direction: gNB-CU-CP  gNB-CU-UP
 IE/Group Name
@@ -4498,7 +4581,7 @@ Explanation
 maxnoofTNLAddresses
 Maximum no. of TNL addresses to be updated in one E1AP procedure. Value is 8.
 
-9.2.4.2	IAB UP TNL ADDRESS UPDATE ACKNOWLEDGE
+10.2.4.2   9.2.4.2	IAB UP TNL ADDRESS UPDATE ACKNOWLEDGE
 This message is sent by the gNB-CU-UP to the gNB-CU-CP to acknowledge the update of TNL address in DL F1-U GTP tunnel information, or provide the updated TNL address(es) of the UL F1-U GTP tunnel information.
 Direction: gNB-CU-UP  gNB-CU-CP
 IE/Group Name
@@ -4563,7 +4646,7 @@ Explanation
 maxnoofTNLAddresses
 Maximum no. of TNL addresses updated in one E1AP procedure. Value is 8.
 
-9.2.4.3	IAB UP TNL ADDRESS UPDATE FAILURE
+10.2.4.3   9.2.4.3	IAB UP TNL ADDRESS UPDATE FAILURE
 This message is sent by the gNB-CU-UP to indicate IAB UP TNL address Update failure.
 Direction: gNB-CU-UP  gNB-CU-CP
 IE/Group Name
@@ -4609,7 +4692,7 @@ O
 YES
 ignore
 
-9.2.4.4	IAB PSK NOTIFICATION
+10.2.4.4   9.2.4.4	IAB PSK NOTIFICATION
 This message is sent by the gNB-CU-CP to the gNB-CU-UP to transfer the security key info to be used for the IKEv2 Pre-shared Secret Key (PSK) authentication to protect the F1-U interface of the IAB-node(s).
 Direction: gNB-CU-CP  gNB-CU-UP
 IE/Group Name
@@ -4641,9 +4724,9 @@ M
 YES
 reject
 
-9.3	Information Element Definitions
-9.3.1	Radio Network Layer Related IEs
-9.3.1.1	Message Type
+10.3   9.3	Information Element Definitions
+10.3.1   9.3.1	Radio Network Layer Related IEs
+10.3.1.1   9.3.1.1	Message Type
 The Message Type IE uniquely identifies the message being sent. It is mandatory for all messages.
 IE/Group Name
 Presence
@@ -4666,7 +4749,7 @@ M
 CHOICE (Initiating Message, Successful Outcome, Unsuccessful Outcome, …)
 
 
-9.3.1.2	Cause
+10.3.1.2   9.3.1.2	Cause
 The purpose of the Cause IE is to indicate the reason for a particular event for the E1AP protocol.
 IE/Group Name
 Presence
@@ -4880,7 +4963,7 @@ The action is due to O&M intervention.
 Unspecified Failure
 Sent when none of the above cause values applies and the cause is not related to any of the categories Radio Network Layer, Transport Network Layer, NAS or Protocol.
 
-9.3.1.3	Criticality Diagnostics
+10.3.1.3   9.3.1.3	Criticality Diagnostics
 The Criticality Diagnostics IE is sent by the gNB-CU-UP or the gNB-CU-CP when parts of a received message have not been comprehended or were missing, or if the message contained logical errors. When applicable, it contains information about which IEs were not comprehended or were missing. The conditions for inclusion of the Transaction ID IE are described in clause 10.
 For further details on how to use the Criticality Diagnostics IE, (see clause 10).
 IE/Group Name
@@ -4934,7 +5017,7 @@ Explanation
 maxnoofErrors
 Maximum no. of IE errors allowed to be reported with a single message. The value for maxnoofErrors is 256.
 
-9.3.1.4	gNB-CU-CP UE E1AP ID
+10.3.1.4   9.3.1.4	gNB-CU-CP UE E1AP ID
 The gNB-CU-CP UE E1AP ID uniquely identifies the UE association over the E1 interface within the gNB-CU-CP.
 IE/Group Name
 Presence
@@ -4947,7 +5030,7 @@ M
 INTEGER (0 .. 232 -1)
 
 
-9.3.1.5	gNB-CU-UP UE E1AP ID
+10.3.1.5   9.3.1.5	gNB-CU-UP UE E1AP ID
 The gNB-CU-UP UE E1AP ID uniquely identifies the UE association over the E1 interface within the gNB-CU-UP.
 IE/Group Name
 Presence
@@ -4960,7 +5043,7 @@ M
 INTEGER (0 .. 232 -1)
 
 
-9.3.1.6	Time To wait
+10.3.1.6   9.3.1.6	Time To wait
 This IE defines the minimum allowed waiting times.
 IE/Group Name
 Presence
@@ -4973,7 +5056,7 @@ M
 ENUMERATED(1s, 2s, 5s, 10s, 20s, 60s)
 
 
-9.3.1.7	PLMN Identity
+10.3.1.7   9.3.1.7	PLMN Identity
 This information element indicates the PLMN Identity.
 IE/Group Name
 Presence
@@ -4994,7 +5077,7 @@ two digits per octet,
 -a filler digit plus 2 digits from MNC (in case of 2 digit MNC) or 
 -3 digits from MNC (in case of a 3 digit MNC).
 
-9.3.1.8	Slice Support List
+10.3.1.8   9.3.1.8	Slice Support List
 This IE indicates the list of supported slices.
 IE/Group Name
 Presence
@@ -5023,7 +5106,7 @@ Explanation
 maxnoofSliceItems
 Maximum no. of signalled slice support items. Value is 1024.
 
-9.3.1.9	S-NSSAI
+10.3.1.9   9.3.1.9	S-NSSAI
 This IE indicates the S-NSSAI as defined in TS 23.003 [23].
 IE/Group Name
 Presence
@@ -5041,7 +5124,7 @@ O
 OCTET STRING (SIZE(3))
 
 
-9.3.1.10	Security Information 
+10.3.1.10   9.3.1.10	Security Information 
 This IE provides the information for configuring UP ciphering and/or integrity protection.
 IE/Group Name
 Presence
@@ -5059,7 +5142,7 @@ M
 9.3.1.32
 
 
-9.3.1.11	Cell Group Information
+10.3.1.11   9.3.1.11	Cell Group Information
 This IE provides information about the cell group(s) (i.e., radio leg(s)) that are part of the DRB.
 
 IE/Group Name
@@ -5128,7 +5211,7 @@ Explanation
 maxnoofCellGroups
 Maximum no. of cell groups for a DRB. Value is 4.
 
-9.3.1.12	QoS Flow List 
+10.3.1.12   9.3.1.12	QoS Flow List 
 This IE includes a list of QoS Flows that are identified by the QoS Flow Identifier.
 IE/Group Name
 Presence
@@ -5179,7 +5262,7 @@ Explanation
 maxnoofQoSFlows
 Maximum no. of QoS flows in a PDU Session. Value is 64.
 
-9.3.1.13	UP Parameters
+10.3.1.13   9.3.1.13	UP Parameters
 This IE provides information related to a DRB configured in the gNB-CU-UP.
 IE/Group Name
 Presence
@@ -5230,7 +5313,7 @@ maxnoofUPParameters
 Maximum no. of UP parameters (e.g., GTP tunnels) for a DRB. Value is 8
 
 
-9.3.1.14	NR CGI 
+10.3.1.14   9.3.1.14	NR CGI 
 The NR Cell Global Identifier (NR CGI) is used to globally identify a cell.
 IE/Group Name
 Presence
@@ -5248,7 +5331,7 @@ M
 BIT STRING (SIZE(36))
 
 
-9.3.1.15	gNB-CU-UP ID 
+10.3.1.15   9.3.1.15	gNB-CU-UP ID 
 The gNB-CU-UP ID uniquely identifies the gNB-CU-UP at least within a gNB-CU-CP.
 IE/Group Name
 Presence
@@ -5261,7 +5344,7 @@ M
 INTEGER (0 .. 236-1)
 
 
-9.3.1.16	DRB ID
+10.3.1.16   9.3.1.16	DRB ID
 This IE uniquely identifies a DRB for a UE.
 IE/Group Name
 Presence
@@ -5274,7 +5357,7 @@ M
 INTEGER (1.. 32, ...)
 Corresponds to the DRB-Identity defined in TS 38.331 [10].
 
-9.3.1.17	E-UTRAN QoS
+10.3.1.17   9.3.1.17	E-UTRAN QoS
 This IE defines the QoS to be applied to a DRB for EN-DC case.
 IE/Group Name
 Presence
@@ -5306,7 +5389,7 @@ This IE applies to GBR bearers only and is ignored otherwise.
 –
 –
 
-9.3.1.18	E-UTRAN Allocation and Retention Priority
+10.3.1.18   9.3.1.18	E-UTRAN Allocation and Retention Priority
 This IE specifies the relative importance compared to other E-RABs for allocation and retention of the E-UTRAN Radio Access Bearer.
 IE/Group Name
 Presence
@@ -5339,7 +5422,7 @@ Usage:
 The E-RAB shall not be pre-empted by other E-RABs or the E-RAB may be pre-empted by other RABs.
 Pre-emption Vulnerability indicator applies for the entire duration of the E-RAB, unless modified, and as such indicates whether the E-RAB is a target of the pre-emption procedures/processes of the eNB.
 
-9.3.1.19	GBR QoS Information
+10.3.1.19   9.3.1.19	GBR QoS Information
 This IE indicates the maximum and guaranteed bit rates of a GBR E-RAB for downlink and uplink.
 IE/Group Name
 Presence
@@ -5385,7 +5468,7 @@ Details in TS 23.401 [11].
 –
 –
 
-9.3.1.20	Bit Rate
+10.3.1.20   9.3.1.20	Bit Rate
 This IE indicates the number of bits delivered by NG-RAN in UL or to NG-RAN in DL within a period of time, divided by the duration of the period. It is used, for example, to indicate the maximum or guaranteed bit rate for a GBR QoS flow, or an aggregated maximum bit rate.
 IE/Group Name
 Presence
@@ -5398,7 +5481,7 @@ M
 INTEGER (0.. 4,000,000,000,000,…)
 The unit is: bit/s
 
-9.3.1.21	PDU Session ID
+10.3.1.21   9.3.1.21	PDU Session ID
 This IE identifies a PDU Session for a UE. The definition and use of the PDU Session ID is specified in TS 23.501 [20].
 IE/Group Name
 Presence
@@ -5411,7 +5494,7 @@ M
 INTEGER (0 ..255)
 
 
-9.3.1.22	PDU Session Type
+10.3.1.22   9.3.1.22	PDU Session Type
 This IE indicates the PDU Session Type as specified in TS 23.501 [20].
 IE/Group Name
 Presence
@@ -5424,7 +5507,7 @@ M
 ENUMERATED (IPv4, IPv6, IPv4v6, ethernet, unstructured, ...)
 
 
-9.3.1.23	Security Indication
+10.3.1.23   9.3.1.23	Security Indication
 This IE contains the user plane integrity protection indication and confidentiality protection indication which indicates the requirements on UP integrity protection and ciphering for corresponding PDU Session Resources, respectively.
 IE/Group Name
 Presence
@@ -5453,7 +5536,7 @@ Explanation
 ifIntegrityProtectionrequiredorpreferred
 This IE shall be present if the Integrity Protection Indication IE within the Security Indication IE is set to “required” or “preferred”.
 
-9.3.1.24	QoS Flow Identifier
+10.3.1.24   9.3.1.24	QoS Flow Identifier
 This IE identifies a QoS Flow within a PDU Session. Definition and use of the QoS Flow Identifier is specified in TS 23.501 [20].
 IE/Group Name
 Presence
@@ -5466,7 +5549,7 @@ M
 INTEGER (0 ..63)
 
 
-9.3.1.25	QoS Flow QoS Parameters List
+10.3.1.25   9.3.1.25	QoS Flow QoS Parameters List
 This IE contains a list of QoS Flows including the QoS Flow parameters.
 IE/Group Name
 Presence
@@ -5530,7 +5613,7 @@ Explanation
 maxnoofQoSFlows
 Maximum no. of QoS flows in a PDU Session. Value is 64.
 
-9.3.1.26	QoS Flow Level QoS Parameters
+10.3.1.26   9.3.1.26	QoS Flow Level QoS Parameters
 This IE defines the QoS parameters to be applied to a QoS Flow.
 IE/Group Name
 Presence
@@ -5654,7 +5737,7 @@ Identifies the TNL address used by the source node for data forwarding.
 YES
 ignore
 
-9.3.1.27	Non Dynamic 5QI Descriptor
+10.3.1.27   9.3.1.27	Non Dynamic 5QI Descriptor
 This IE indicates the QoS Characteristics for a standardized or pre-configured 5QI for downlink and uplink.
 IE/Group Name
 Presence
@@ -5708,7 +5791,7 @@ Core Network Packet Delay Budget is specified in TS 23.501 [9]. This IE may be p
 YES
 ignore
 
-9.3.1.28	Dynamic 5QI Descriptor
+10.3.1.28   9.3.1.28	Dynamic 5QI Descriptor
 This IE indicates the QoS Characteristics for a Non-standardised or not pre-configured 5QI for downlink and uplink.
 IE/Group Name
 Presence
@@ -5796,7 +5879,7 @@ Explanation
 ifGBRflow
 This IE shall be present if the GBR QoS Flow Information IE is present in the QoS Flow Level QoS Parameters IE.
 
-9.3.1.29	NG-RAN Allocation and Retention Priority
+10.3.1.29   9.3.1.29	NG-RAN Allocation and Retention Priority
 This IE specifies the relative importance of a QoS flow compared to other QoS flows for allocation and retention of NG-RAN resources.
 IE/Group Name
 Presence
@@ -5825,7 +5908,7 @@ Desc.: This IE indicates the vulnerability of the QoS flow to pre-emption of oth
 Usage: The QoS flow shall not be pre-empted by other QoS flows or the QoS flow may be pre-empted by other QoS flows. Specified in TS 23.501 [20]
 NOTE: The Pre-emption Vulnerability indicator applies for the entire duration of the QoS flow, unless modified and as such indicates whether the QoS flow is a target of the pre-emption procedures/processes of the NG-RAN node.
 
-9.3.1.30	GBR QoS Flow Information
+10.3.1.30   9.3.1.30	GBR QoS Flow Information
 This IE indicates QoS parameters for a GBR QoS flow for downlink and uplink.
 IE/Group Name
 Presence
@@ -5890,7 +5973,7 @@ Indicates alternative sets of QoS Parameters for the QoS flow.
 YES
 
 
-9.3.1.31	Security Algorithm
+10.3.1.31   9.3.1.31	Security Algorithm
 This IE defines the type of ciphering algorithm and/or integrity protection used for the DRBs.
 IE/Group Name
 Presence
@@ -5908,7 +5991,7 @@ O
 ENUMERATED (NIA0, 128-NIA1, 128-NIA2, 128-NIA3)
 As defined in TS 33.501 [13] for NG-RAN.
 
-9.3.1.32	User Plane Security Keys
+10.3.1.32   9.3.1.32	User Plane Security Keys
 This IE contains the ciphering and/or integrity protection keys generated by the gNB-CU-CP.
 IE/Group Name
 Presence
@@ -5926,7 +6009,7 @@ O
 OCTET STRING
 As defined in TS 33.501 [13] for NG-RAN.
 
-9.3.1.33	UL Configuration
+10.3.1.33   9.3.1.33	UL Configuration
 This IE includes the UL configuration for the DRB and the corresponding Cell Groups.
 IE/Group Name
 Presence
@@ -5939,7 +6022,7 @@ M
 ENUMERATED (no-data, shared, only, ..)
 Indicates the UL configuration for a Cell Group that is part of a DRB.  “no data” means  that the Cell Group is not used for UL data. “shared” means that the Cell Group is used for UL data together with at least another Cell Group. “only” means that only this Cellg Group is used for UL data. 
 
-9.3.1.34	gNB-CU-UP Cell Group Related Configuration
+10.3.1.34   9.3.1.34	gNB-CU-UP Cell Group Related Configuration
 This IE provides information related to a cell group that the gNB-CU-UP is allowed to change.
 IE/Group Name
 Presence
@@ -5989,7 +6072,7 @@ Explanation
 maxnoofUPParameters
 Maximum no. of UP parameters (e.g., GTP tunnels) for a DRB. Value is 8.
 
-9.3.1.35	PDCP Count
+10.3.1.35   9.3.1.35	PDCP Count
 This IE include the PDCP Count information.
 IE/Group Name
 Presence
@@ -6009,7 +6092,7 @@ INTEGER (0 .. 232-PDCP_SN_Size-1)
 
 The PDCP SN Size is provided in the PDCP Configuration IE.
 
-9.3.1.36	NR CGI Support List
+10.3.1.36   9.3.1.36	NR CGI Support List
 This IE indicates the list of supported NR CGIs.
 IE/Group Name
 Presence
@@ -6032,7 +6115,7 @@ Explanation
 maxnoofNRCGI
 Maximum no. of supported NR CGIs. Value is 512. This range may be redefined. 
 
-9.3.1.37	QoS Parameters Support List
+10.3.1.37   9.3.1.37	QoS Parameters Support List
 This IE indicates the list of supported QoS parameters.
 IE/Group Name
 Presence
@@ -6077,7 +6160,7 @@ Maximum no. of supported E-UTRAN QoS parameters. Value is 256. This range may be
 maxnoofNGRANQOSParameters 
 Maximum no. of supported NG-RAN QoS parameters. Value is 256. This range may be redefined.
 
-9.3.1.38	PDCP Configuration 
+10.3.1.38   9.3.1.38	PDCP Configuration 
 This IE carries the PDCP configuration.
 IE/Group Name
 
@@ -6131,7 +6214,7 @@ Discard Timer
 O
 
 9.3.1.42
-
+This IE is ignored if the Discard Timer Extended IE is present.
 -
 -
 UL Data Split Threshold
@@ -6198,8 +6281,15 @@ O
 
 YES
 ignore
+Discard Timer Extended
+O
 
-9.3.1.39	SDAP Configuration
+9.3.1.100
+
+YES
+reject
+
+10.3.1.39   9.3.1.39	SDAP Configuration
 This IE carries the SDAP configuration.
 IE/Group Name
 Presence
@@ -6222,7 +6312,7 @@ M
 ENUMERATED (Present, Absent, …)
 Indicates whether or not a SDAP header is present for DL data on this DRB. For more information see SDAP-Config IE in TS 38.331 [10].
 
-9.3.1.40	ROHC Parameters 
+10.3.1.40   9.3.1.40	ROHC Parameters 
 This IE carries the ROCH parameters for header compressions.
 IE/Group Name
 Presence
@@ -6277,7 +6367,7 @@ ENUMERATED
 (true, …)
 See description of drb-ContinueROHC inTS 38.331 [10]
 
-9.3.1.41	T-Reordering Timer
+10.3.1.41   9.3.1.41	T-Reordering Timer
 This IE indicates the t-Reordering timer.
 IE/Group Name
 Presence
@@ -6290,7 +6380,7 @@ M
 ENUMERATED (0, 1, 2, 4, 5, 8, 10, 15, 20, 30, 40, 50, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 500, 750, 1000, 1250, 1500, 1750, 2000, 2250, 2500, 2750, 3000, …)
 Indicates the t-Reordering UL timer. The values are expressed in ms. For more information see PDCP-Config IE in TS 38.331 [10].
 
-9.3.1.42	Discard Timer 
+10.3.1.42   9.3.1.42	Discard Timer 
 This IE indicates PDCP discard timer.
 IE/Group Name
 Presence
@@ -6303,7 +6393,7 @@ Discard Timer
 ENUMERATED (10, 20, 30, 40, 50, 60, 75, 100, 150, 200, 250, 300, 500, 750, 1500, Infinity)
 Indicates the PDCP discard timer. The values are expressed in ms. For more information see PDCP-Config IE in TS 38.331 [10].
 
-9.3.1.43	UL Data Split Threshold
+10.3.1.43   9.3.1.43	UL Data Split Threshold
 This IE indicates UL data split threshold.
 IE/Group Name
 Presence
@@ -6316,7 +6406,7 @@ UL Data Split Threshold
 ENUMERATED (0, 100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600, 51200, 102400, 204800, 409600, 819200, 1228800, 1638400, 2457600, 3276800, 4096000, 4915200, 5734400, 6553600,  Infinity, …)
 Indicates the UL data split threshold. The values are expressed in bytes. For more information see PDCP-Config IE in TS 38.331 [10].
 
-9.3.1.44	Data Usage Report List
+10.3.1.44   9.3.1.44	Data Usage Report List
 This IE provides information on the data usage for the UE, e.g., secondary NR RAT in EN-DC as specified in TS 37.340 [19]. 
 IE/Group Name
 Presence
@@ -6396,7 +6486,7 @@ Maximum no. of DRBs. Value is 32.
 Maxnooftimeperiods
 Maximum no. of time reporting periods. Value is 2.
 
-9.3.1.45	 Flow Failed List
+10.3.1.45   9.3.1.45	 Flow Failed List
 This IE contains a list of QoS flows with a cause value. It is used for example to indicate failed QoS flow(s) or QoS flow(s) to be released.
 IE/Group Name
 Presence
@@ -6432,7 +6522,7 @@ Explanation
 maxnoofQoSFlows
 Maximum no. of QoS flows in a PDU Session. Value is 64.
 
-9.3.1.46	Packet Loss Rate
+10.3.1.46   9.3.1.46	Packet Loss Rate
 This IE indicates the Packet Loss Rate for a QoS Flow.
 IE/Group Name
 Presence
@@ -6445,7 +6535,7 @@ M
 INTEGER (0..1000, …)
 Ratio of lost packets per number of packets sent, expressed in tenth of percent.
 
-9.3.1.47	Packet Delay Budget
+10.3.1.47   9.3.1.47	Packet Delay Budget
 This IE indicates the Packet Delay Budget for a QoS Flow.
 IE/Group Name
 Presence
@@ -6458,7 +6548,7 @@ M
 INTEGER (0..1023, …)
 Upper bound value for the delay that a packet may experience expressed in unit of 0.5ms.
 
-9.3.1.48	Packet Error Rate
+10.3.1.48   9.3.1.48	Packet Error Rate
 This IE indicates the Packet Error Rate for a QoS Flow.
 IE/Group Name
 Presence
@@ -6476,7 +6566,7 @@ M
 INTEGER (0..9, …)
 
 
-9.3.1.49	Averaging Window
+10.3.1.49   9.3.1.49	Averaging Window
 This IE indicates the Averaging Window for a QoS Flow.
 IE/Group Name
 Presence
@@ -6490,7 +6580,7 @@ INTEGER (0..4095, …)
 Unit: ms.
 The default value is 2000ms.
 
-9.3.1.50	Maximum Data Burst Volume
+10.3.1.50   9.3.1.50	Maximum Data Burst Volume
 This IE indicates the Maximum Data Burst Volume for a QoS Flow and applies to delay critical GBR QoS flows only.
 IE/Group Name
 Presence
@@ -6503,7 +6593,7 @@ M
 INTEGER (0..4095, ..., 4096.. 2000000)
 Unit: byte.
 
-9.3.1.51	Priority Level
+10.3.1.51   9.3.1.51	Priority Level
 This IE indicates the Priority Level for a QoS Flow.
 IE/Group Name
 Presence
@@ -6516,7 +6606,7 @@ M
 INTEGER (1..127, …)
  Values ordered in decreasing order of priority i.e. with 1 as the highest priority and 127 as the lowest priority.
 
-9.3.1.52	Security Result
+10.3.1.52   9.3.1.52	Security Result
 This IE indicates whether the security policy indicated as "preferred" in the Security Indication IE is performed or not.
 IE/Group Name
 Presence
@@ -6534,7 +6624,7 @@ M
 ENUMERATED (performed, not performed, …)
 Indicates whether UP ciphering is performed or not for the concerned PDU Session Resource.
 
-9.3.1.53	Transaction ID
+10.3.1.53   9.3.1.53	Transaction ID
 The Transaction ID IE uniquely identifies a procedure among all ongoing parallel procedures of the same type initiated by the same protocol peer. Messages belonging to the same procedure shall use the same Transaction ID. The Transaction ID is determined by the initiating peer of a procedure.
 IE/Group Name
 Presence
@@ -6547,7 +6637,7 @@ M
 INTEGER (0..255, …)
 
 
-9.3.1.54	Inactivity timer
+10.3.1.54   9.3.1.54	Inactivity timer
 This IE indicates the inactivity timer.
 IE/Group Name
 Presence
@@ -6561,7 +6651,7 @@ INTEGER
 (1.. 7200, …)
 Indicates the inactivity timer. The values are expressed in seconds.
 
-9.3.1.55	Paging Priority Indicator (PPI) 
+10.3.1.55   9.3.1.55	Paging Priority Indicator (PPI) 
 The Paging Policy Indicator is used for paging policy differentiation (see details in TS 23.501 [20]).
 IE/Group Name
 Presence
@@ -6575,7 +6665,7 @@ INTEGER
 (0.. 7, …)
 
 
-9.3.1.56	gNB-CU-UP Capacity
+10.3.1.56   9.3.1.56	gNB-CU-UP Capacity
 This IE indicates the relative processing capacity of an gNB-CU-UP with respect to other gNB-CU-UPs in order to load-balance among different gNB-CU-UPs.
 IE/Group Name
 Presence
@@ -6605,7 +6695,7 @@ M
 ENUMERATED (64kbps, max-UErate, …)
 Defines the upper bound of the aggregated data rate of user plane integrity protected data. This limit applies to both UL and DL independently.
 
-9.3.1.58	PDCP SN Status Information
+10.3.1.57   9.3.1.58	PDCP SN Status Information
 This IE contains information about PDCP PDU transfer status of a DRB.
 IE/Group Name
 Presence
@@ -6656,7 +6746,7 @@ PDCP-SN and Hyper Frame Number that the target NG-RAN node (handover) or the NG-
 –
 
 
-9.3.1.59	QoS Flow Mapping List
+10.3.1.58   9.3.1.59	QoS Flow Mapping List
 This IE contains a list of DRBs containing information about the mapped QoS flows.
 IE/Group Name
 Presence
@@ -6692,7 +6782,7 @@ Explanation
 maxnoofQoSFlows
 Maximum no. of QoS flows allowed within one PDU Session. Value is 64.
 
-9.3.1.60	QoS Flow Mapping Indication
+10.3.1.59   9.3.1.60	QoS Flow Mapping Indication
 This IE is used to indicate whether only the uplink or only the downlink of a QoS flow is mapped to a DRB.
 IE/Group Name
 Presence
@@ -6705,7 +6795,7 @@ M
 ENUMERATED (ul, dl, ...)
 Indicates that only the uplink or downlink QoS flow is mapped to the DRB
 
-9.3.1.61	PDCP SN Size 
+10.3.1.60   9.3.1.61	PDCP SN Size 
 This IE carries the PDCP SN Size.
 IE/Group Name
 
@@ -6719,7 +6809,7 @@ M
 ENUMERATED (s-12, s-18, …)
 Indicates the PDCP SN size in bits. For more information see PDCP-Config IE in TS 38.331 [10].
 
-9.3.1.62	Network Instance
+10.3.1.61   9.3.1.62	Network Instance
 This IE provides the network instance to be used by the NG-RAN node when selecting a particular transport network resource as described in TS 23.501 [20].
 IE/Group Name
 Presence
@@ -6732,7 +6822,7 @@ M
 INTEGER (1..256, …)
 
 
-9.3.1.63	MR-DC Usage Information
+10.3.1.62   9.3.1.63	MR-DC Usage Information
 This IE provides information on the data usage for the UE connected to 5GC, e.g., secondary RAT in MR-DC as specified in TS 37.340 [19].
 IE/Group Name
 Presence
@@ -6805,7 +6895,7 @@ Explanation
 maxnoofQoSFlows
 Maximum no. of QoS flows allowed within one PDU session. Value is 64.
 
-9.3.1.64	MR-DC Data Usage Report List
+10.3.1.63   9.3.1.64	MR-DC Data Usage Report List
 This IE provides information on the data usage.
 IE/Group Name
 Presence
@@ -6843,7 +6933,7 @@ Explanation
 maxnooftimeperiods
 Maximum no. of time reporting periods. Value is 2.
 
-9.3.1.65	gNB-DU ID
+10.3.1.64   9.3.1.65	gNB-DU ID
 The gNB-DU ID uniquely identifies a gNB-DU at least within a gNB-CU.
 IE/Group Name
 Presence
@@ -6856,7 +6946,7 @@ M
 INTEGER (0 .. 236-1)
 The gNB-DU ID is independently configured from cell identifiers, i.e. no connection between gNB-DU ID and cell identifiers.
 
-9.3.1.66	Common Network Instance
+10.3.1.65   9.3.1.66	Common Network Instance
 This IE provides the common network instance to be used by the NG-RAN node when selecting a particular transport network resource as described in TS 23.501 [9] in a format common with 5GC.
 IE/Group Name
 Presence
@@ -6869,7 +6959,7 @@ M
 OCTET STRING
 The octets of OCTET STRING are encoded as the Network Instance field of the Network Instance IE specified in TS 29.244 [29]
 
-9.3.1.67	Activity Notification Level
+10.3.1.66   9.3.1.67	Activity Notification Level
 This IE contains information on which level activity notification shall be performed..
 IE/Group Name
 Presence
@@ -6882,7 +6972,7 @@ M
 ENUMERATED (DRB, PDU Session, UE, …)
 
 
-9.3.1.68	Trace Activation
+10.3.1.67   9.3.1.68	Trace Activation
 This IE defines parameters related to a trace session activation.
 IE/Group Name
 Presence
@@ -6945,7 +7035,7 @@ O
 YES
 ignore
 
-9.3.1.69	Subscriber Profile ID for RAT/Frequency priority 
+10.3.1.68   9.3.1.69	Subscriber Profile ID for RAT/Frequency priority 
 This parameter is used to define local configuration for RRM strategies.
 IE/Group Name
 Presence
@@ -6958,7 +7048,7 @@ M
 INTEGER (1.. 256, ...)
 
 
-9.3.1.70	Additional RRM Policy Index
+10.3.1.69   9.3.1.70	Additional RRM Policy Index
 The Additional RRM Policy Index IE is used to provide additional information as specified in TS 36.300 [25].
 IE/Group Name
 Presence
@@ -6971,7 +7061,7 @@ M
 BIT STRING (SIZE(32))
 
 
-9.3.1.71	Retainability Measurements Information
+10.3.1.70   9.3.1.71	Retainability Measurements Information
 This IE contains information on removed DRB(s) and QoS Flow(s) which are needed to perform retainability measurements.
 IE/Group Name
 Presence
@@ -7058,7 +7148,7 @@ Maximum no. of DRBs for a UE. Value is 32.
 maxnoofQoSFlows
 Maximum no. of QoS flows in a PDU Session. Value is 64.
 
-9.3.1.72	TNL Available Capacity Indicator
+10.3.1.71   9.3.1.72	TNL Available Capacity Indicator
 The TNL Available Capacity Indicator IE indicates offered and available capacity of the Transport Network.
 IE/Group Name
 Presence
@@ -7086,7 +7176,7 @@ M
 INTEGER (0.. 100,...)
 Available capacity. Value 100 corresponds to the offered capacity.
 
-9.3.1.73	HW Capacity Indicator
+10.3.1.72   9.3.1.73	HW Capacity Indicator
 The HW Capacity Indicator IE indicates offered and available throughput experienced by the gNB-CU-UP.
 IE/Group Name
 Presence
@@ -7117,7 +7207,7 @@ M
 ENUMERATED (true, false)
 This IE indicates that this QoS flow is requested for the redundant transmission. Value “true” indicates that redundant transmission is requested for this QoS flow. Value “false” indicates that redundant transmission is requested to be stopped if started.
 
-9.3.1.75	TSC Traffic Characteristics
+10.3.1.73   9.3.1.75	TSC Traffic Characteristics
 This IE provides the traffic characteristics of TSC QoS flows.
 IE/Group Name
 Presence
@@ -7137,7 +7227,7 @@ TSC Assistance Information
 9.3.1.76
 
 
-9.3.1.76	TSC Assistance Information
+10.3.1.74   9.3.1.76	TSC Assistance Information
 This IE provides the TSC assistance information for a TSC QoS flow in the uplink or downlink (see TS 23.501 [20]). 
 IE/Group Name
 Presence
@@ -7155,7 +7245,7 @@ O
 9.3.1.78
 
 
-9.3.1.77	Periodicity
+10.3.1.75   9.3.1.77	Periodicity
 This IE indicates the Periodicity of the TSC QoS flow as defined in TS 23.501 [20]. 
 IE/Group Name
 Presence
@@ -7168,7 +7258,7 @@ M
 INTEGER (0..640000, …)
 Periodicity expressed in units of 1 us.
 
-9.3.1.78	Burst Arrival Time
+10.3.1.76   9.3.1.78	Burst Arrival Time
 This IE indicates the Burst Arrival Time of the TSC QoS flow as defined in TS 23.501 [9]. 
 IE/Group Name
 Presence
@@ -7181,7 +7271,7 @@ M
 OCTET STRING
 Encoded in the same format as the ReferenceTime IE as defined in TS 38.331 [10]. The value is truncated to 1 us granularity.
 
-9.3.1.79	Extended Packet Delay Budget
+10.3.1.77   9.3.1.79	Extended Packet Delay Budget
 This IE indicates the Packet Delay Budget for a QoS flow.
 IE/Group Name
 Presence
@@ -7194,7 +7284,7 @@ M
 INTEGER (0..65535, …)
 Upper bound value for the delay that a packet may experience expressed in unit of 0.01ms.
 
-9.3.1.80	Redundant PDU Session Information
+10.3.1.78   9.3.1.80	Redundant PDU Session Information
 This IE defines Redundancy information to be applied to a PDU Session.
 IE/Group Name
 Presence
@@ -7207,7 +7297,7 @@ M
 ENUMERATED (v1, v2, …)
 
 
-9.3.1.81	QoS Mapping Information
+10.3.1.79   9.3.1.81	QoS Mapping Information
 This IE indicates the DSCP and/or IPv6 Flow Label field(s) of IP packet which is sent through the GTP-U tunnel of a requested DRB. This IE is only used for IAB.
 IE/Group Name
 Presence
@@ -7225,7 +7315,7 @@ O
 BIT STRING (SIZE(20))
 
 
-9.3.1.82	NID
+10.3.1.80   9.3.1.82	NID
 This IE contains the Network Identifier of an SNPN, as specified in TS 23.501 [20]. The NID is specified in TS 23.003 [23].
 IE/Group Name
 Presence
@@ -7238,7 +7328,7 @@ M
 BIT STRING (SIZE(44))
 
 
-9.3.1.83	NPN Support Information
+10.3.1.81   9.3.1.83	NPN Support Information
 This IE provides NPN related information.
 IE/Group Name
 Presence
@@ -7262,7 +7352,7 @@ M
 This IE is associated with the PLMN Identity and the Slice Support List contained in the Supported PLMNs IE.
 Together with the PLMN Identity it identifies the SNPN supported by the gNB-CU-UP.
 
-9.3.1.84	NPN Context Information
+10.3.1.82   9.3.1.84	NPN Context Information
 This IE provides bearer context related NPN information.
 IE/Group Name
 Presence
@@ -7286,7 +7376,7 @@ M
 This IE is associated with Serving PLMN information contained in bearer context related E1AP message. 
 Together with the Serving PLMN identity it identifies the serving SNPN.
 
-9.3.1.85	MDT Configuration
+10.3.1.83   9.3.1.85	MDT Configuration
 The IE defines the NR MDT configuration parameters.
 IE/Group Name
 Presence
@@ -7344,7 +7434,7 @@ This IE shall be present if the Measurements to Activate IE has the seventh bit 
 ifM7
 This IE shall be present if the Measurements to Activate IE has the eighth bit set to “1”.
 
-9.3.1.86	M4 Configuration
+10.3.1.84   9.3.1.86	M4 Configuration
 This IE defines the parameters for M4 measurement collection.
 IE/Group Name
 Presence
@@ -7362,7 +7452,7 @@ M
 ENUMERATED(uplink, downlink, both-uplink-and-downlink, …)
 
 
-9.3.1.87	M6 Configuration
+10.3.1.85   9.3.1.87	M6 Configuration
 This IE defines the parameters for M6 measurement collection.
 IE/Group Name
 Presence
@@ -7380,7 +7470,7 @@ M
 ENUMERATED(uplink, downlink, both-uplink-and-downlink, …)
 
 
-9.3.1.88	M7 Configuration
+10.3.1.86   9.3.1.88	M7 Configuration
 This IE defines the parameters for M7 measurement collection.
 IE/Group Name
 Presence
@@ -7398,7 +7488,7 @@ M
 ENUMERATED(uplink, …)
 
 
-9.3.1.89	MDT PLMN List
+10.3.1.87   9.3.1.89	MDT PLMN List
 The purpose of the MDT PLMN List IE is to provide the list of PLMN allowed for MDT.
 IE/Group Name
 Presence
@@ -7421,7 +7511,7 @@ Explanation
 maxnoofMDTPLMNs
 Maximum no. of PLMNs in the MDT PLMN list. Value is 16.
 
-9.3.1.90	EHC Parameters
+10.3.1.88   9.3.1.90	EHC Parameters
 This IE carries the EHC parameters for ethernet header compression.
 IE/Group Name
 Presence
@@ -7454,8 +7544,8 @@ O
 >drb-ContinueEHC-DL
 M
 
-ENUMERATED { true, … }
-See description of drb-ContinueEHC-DL in TS 38.331 [10]
+ENUMERATED { true, … ,false }
+See description of drb-ContinueEHC-DL in TS 38.331 [10]. The value “false” indicates that the PDCP entity resets the downlink EHC header compression protocol during PDCP re-establishment.
 -
 -
 >maxCID-EHC-DL
@@ -7475,12 +7565,12 @@ O
 >drb-ContinueEHC-UL
 M
 
-ENUMERATED { true, … }
-See description of drb-ContinueEHC-UL in TS 38.331 [10]
+ENUMERATED { true, … ,false }
+See description of drb-ContinueEHC-UL in TS 38.331 [10]. The value “false” indicates that the PDCP entity resets the uplink EHC header compression protocol during PDCP re-establishment.
 -
 -
 
-9.3.1.91	DAPS Request Information
+10.3.1.89   9.3.1.91	DAPS Request Information
 The DAPS Indicator IE indicates that DAPS HO is requested for the concerned DRB.
 IE/Group Name
 Presence
@@ -7493,7 +7583,7 @@ M
 ENUMERATED (DAPS HO required, …)
 Indicates that DAPS HO is requested
 
-9.3.1.92	Early Forwarding COUNT Information
+10.3.1.90   9.3.1.92	Early Forwarding COUNT Information
 This IE contains DL COUNT value related to early data forwarding during DAPS Handover or Conditional Handover or conditional PSCell change.
 IE/Group Name
 Presence
@@ -7528,7 +7618,7 @@ PDCP Count
 9.3.1.35
 PDCP-SN and Hyper frame number for which the target NG-RAN node should discard forwarded DL SDUs associated with lower values.
 
-9.3.1.93	Alternative QoS Parameters Set List
+10.3.1.91   9.3.1.93	Alternative QoS Parameters Set List
 This IE contains alternative sets of QoS parameters which the NG-RAN node can indicate to be fulfilled when notification control is enabled and it cannot fulfil the requested list of QoS parameters.
 IE/Group Name
 Presence
@@ -7573,7 +7663,7 @@ Explanation
 maxnoofQoSParaSets
 Maximum no. of alternative sets of QoS Parameters allowed for the QoS under Notification Control. Value is 8.
 
-9.3.1.94	Extended Slice Support List
+10.3.1.92   9.3.1.94	Extended Slice Support List
 This IE indicates a list of supported slices.
 IE/Group Name
 Presence
@@ -7602,7 +7692,7 @@ Explanation
 maxnoofExtSliceItems
 Maximum no. of signalled slice support items. Value is 65535.
 
-9.3.1.95	Extended gNB-CU-CP Name
+10.3.1.93   9.3.1.95	Extended gNB-CU-CP Name
 This IE provides extended human readable name of the gNB-CU-CP.
 IE/Group Name
 Presence
@@ -7626,7 +7716,7 @@ UTF8String (SIZE(1..150, …))
 -
 
 
-9.3.1.96	Extended gNB-CU-UP Name
+10.3.1.94   9.3.1.96	Extended gNB-CU-UP Name
 This IE provides extended human readable name of the gNB-CU-UP.
 IE/Group Name
 Presence
@@ -7650,7 +7740,7 @@ UTF8String (SIZE(1..150, …))
 -
 
 
-9.3.1.97	Extended NR CGI Support List
+10.3.1.95   9.3.1.97	Extended NR CGI Support List
 This IE indicates the list of supported NR CGIs.
 IE/Group Name
 Presence
@@ -7673,7 +7763,7 @@ Explanation
 maxnoofExtNRCGI
 Maximum no. of extended NR CGIs supported. Value is 16384. 
 
-9.3.1.98	Direct Forwarding Path Availability
+10.3.1.96   9.3.1.98	Direct Forwarding Path Availability
 This IE indicates whether a direct forwarding path is available.
 IE/Group Name
 Presence
@@ -7686,7 +7776,7 @@ M
 ENUMERATED (inter-system direct path available, …, intra-system direct path available)
 
 
-9.3.1.99	IAB-donor-CU-UP PSK Info
+10.3.1.97   9.3.1.99	IAB-donor-CU-UP PSK Info
 This IE contains the IAB-Donor-CU-UP Pre-Shared Key generated by the gNB-CU-CP and IP addresses for IAB-donor-CU-UP and IAB-DU.
 IE/Group Name
 Presence
@@ -7719,8 +7809,21 @@ Explanation
 maxnoofPSKs
 Maximum no. of PSKs to be updated in one E1AP procedure. Value is 256.
 
-9.3.2	Transport Network Layer Related IEs
-9.3.2.1	UP Transport Layer Information
+10.3.1.98   9.3.1.100	Discard Timer Extended 
+This IE indicates the extended PDCP discard timer.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Discard Timer Extended
+M
+
+ENUMERATED (0.5, 1, 2, 4, 6, 8, …)
+Indicates the PDCP discard timer. The values are expressed in ms. For more information see DiscardTimerExt-r16 in PDCP-Config IE in TS 38.331 [10].
+
+10.3.2   9.3.2	Transport Network Layer Related IEs
+10.3.2.1   9.3.2.1	UP Transport Layer Information
 The UP Transport Layer Information IE identifies an transport bearer associated to a DRB. It contains a Transport Layer Address and a GTP Tunnel Endpoint Identifier. The Transport Layer Address is an IP address to be used for the user plane transport. 
 IE/Group Name
 Presence
@@ -7748,7 +7851,7 @@ M
 9.3.2.3
 
 
-9.3.2.2	CP Transport Layer Information
+10.3.2.2   9.3.2.2	CP Transport Layer Information
 This IE is used to provide the E1 control plane transport layer information associated with an gNB-CU-CP and gNB-CU-UP pair.
 IE/Group Name
 Presence
@@ -7802,7 +7905,7 @@ BIT STRING (SIZE(16))
 -
 -
 
-9.3.2.3	GTP-TEID
+10.3.2.3   9.3.2.3	GTP-TEID
 The GTP-TEID IE is the GTP Tunnel Endpoint Identifier to be used for the user plane transport.
 IE/Group Name
 Presence
@@ -7815,7 +7918,7 @@ M
 OCTET STRING (SIZE(4))
 For details and range, see TS 29.281 [15].
 
-9.3.2.4	Transport Layer Address
+10.3.2.4   9.3.2.4	Transport Layer Address
 This Transport Layer Address IE is an IP address.
 IE/Group Name
 Presence
@@ -7829,7 +7932,7 @@ BIT STRING (SIZE(1..160, …))
 The Radio Network Layer is not supposed to interpret the address information. It should pass it to the Transport Layer for interpretation.
 For details, see TS 38.414 [16].
 
-9.3.2.5	Data Forwarding Information Request
+10.3.2.5   9.3.2.5	Data Forwarding Information Request
 This IE offers the possibility for the gNB-CU-CP to request data forwarding addresses to the gNB-CU-UP. It also offers the possibility for the gNB-CU-CP to provide a list of QoS flows subject to PDU Session level or DRB level data forwarding to the gNB to which DRBs or QoS flows have been offloaded.
 IE/Group Name
 Presence
@@ -7850,7 +7953,7 @@ This IE contains information for which QoS flows forwarded data packets are sent
 - either the PDU Session forwarding tunnel (UL and DL)
 - or the DRB forwarding tunnel (UL and DL).
 
-9.3.2.6	Data Forwarding Information
+10.3.2.6   9.3.2.6	Data Forwarding Information
 This IE provides the data forwarding information when performing handover or data offloading.
 IE/Group Name
 Presence
@@ -7898,7 +8001,7 @@ QoS Flow Identifier
 -
 -
 
-9.3.2.7	Transport Network Layer Address Info
+10.3.2.7   9.3.2.7	Transport Network Layer Address Info
 This IE is used for signalling TNL address information.
 IE/Group Name
 Presence
@@ -7977,7 +8080,7 @@ Maximum no. of Transport Layer Addresses in the message. Value is 16.
 maxnoofGTPTLAs
 Maximum no. of GTP Transport Layer Addresses for a GTP end-point in the message. Value is 16.
 
-9.3.2.8	URI
+10.3.2.8   9.3.2.8	URI
 This IE is defined to contain a URI  address.
 IE/Group Name
 Presence
@@ -7990,8 +8093,8 @@ M
 VisibleString
 String representing URI (Uniform Resource Identifier)
 
-9.3.3	Container and List IE definitions
-9.3.3.1	DRB To Setup List E-UTRAN
+10.3.3   9.3.3	Container and List IE definitions
+10.3.3.1   9.3.3.1	DRB To Setup List E-UTRAN
 This IE contains DRB related information used at Bearer Context Setup Request in E-UTRAN
 IE/Group Name
 Presence
@@ -8089,7 +8192,7 @@ Explanation
 maxnoofDRBs
 Maximum no. of DRBs for a UE. Value is 32.
 
-9.3.3.2	PDU Session Resource To Setup List
+10.3.3.2   9.3.3.2	PDU Session Resource To Setup List
 This IE contains PDU session resource related information used at Bearer Context Setup Request
 IE/Group Name
 Presence
@@ -8319,7 +8422,7 @@ Maximum no. of DRBs for a UE. Value is 32.
 maxnoofPDUSessionResource 
 Maximum no. of PDU Sessions for a UE. Value is 256.
 
-9.3.3.3	DRB Setup List E-UTRAN
+10.3.3.3   9.3.3.3	DRB Setup List E-UTRAN
 This IE contains setup DRB related information at Bearer Context Setup Response in E-UTRAN
 IE/Group Name
 Presence
@@ -8387,7 +8490,7 @@ Explanation
 maxnoofDRBs
 Maximum no. of DRBs for a UE. Value is 32.
 
-9.3.3.4	DRB Failed List E-UTRAN
+10.3.3.4   9.3.3.4	DRB Failed List E-UTRAN
 This IE contains failed to setup DRB related information at Bearer Context Setup Response in E-UTRAN
 IE/Group Name
 Presence
@@ -8415,7 +8518,7 @@ Explanation
 maxnoofDRBs
 Maximum no. of DRBs for a UE. Value is 32.
 
-9.3.3.5	PDU Session Resource Setup List
+10.3.3.5   9.3.3.5	PDU Session Resource Setup List
 This IE contains setup PDU session resource related information used at Bearer Context Setup Response
 IE/Group Name
 Presence
@@ -8563,17 +8666,20 @@ O
 
 YES
 ignore
+
 Range bound
 Explanation
 
+
 maxnoofDRBs
 Maximum no. of DRBs for a UE. Value is 32.
+
 
 maxnoofPDUSessionResource 
 Maximum no. of PDU Sessions for a UE. Value is 256.
 
 
-9.3.3.6	PDU Session Resource Failed List
+10.3.3.6   9.3.3.6	PDU Session Resource Failed List
 This IE contains failed PDU session resource related information used at Bearer Context Setup Response
 IE/Group Name
 Presence
@@ -8601,68 +8707,96 @@ Explanation
 maxnoofPDUSessionResource 
 Maximum no. of PDU Sessions for a UE. Value is 256.
 
-9.3.3.7	DRB To Setup Modification List E-UTRAN
+10.3.3.7   9.3.3.7	DRB To Setup Modification List E-UTRAN
 This IE contains DRB to setup related information used at Bearer Context Modification Request in E-UTRAN
 IE/Group Name
 Presence
 Range
 IE type and reference
 Semantics description
+Criticality
+Assigned Criticality
 DRB To Setup Modification Item E-UTRAN
 
 1..<maxnoofDRBs>
 
 
+-
+-
 >DRB ID 
 M
 
 9.3.1.16
 
+-
+-
 >PDCP Configuration 
 M
 
 9.3.1.38
 
+-
+-
 >E-UTRAN QoS
 M
 
 9.3.1.17
 
+-
+-
 >S1 UL UP Transport Layer Information
 M
 
 UP Transport Layer Information
 9.3.2.1
 
+-
+-
 >Data Forwarding Information Request
 O
 
 9.3.2.5
 Requesting forwarding info from the target gNB-CU-UP.
+-
+-
 >Cell Group Information
 M
 
 9.3.1.11
 
+-
+-
 >DL UP Parameters
 O
 
 UP Parameters
 9.3.1.13
 
+-
+-
 >DRB Inactivity Timer
 O
 
 Inactivity Timer 
 9.3.1.54
 Included if the Activity Notification Level is set to DRB.
+-
+-
+>Data Forwarding Source IP Address
+O
+
+Transport Layer Address
+9.3.2.4
+Identifies the TNL address used by the source node for data forwarding.
+YES
+ignore
 
 Range bound
 Explanation
 maxnoofDRBs
 Maximum no. of DRBs for a UE. Value is 32.
 
-9.3.3.8	DRB To Modify List E-UTRAN
+10.3.3.8   9.3.3.8	DRB To Modify List E-UTRAN
 This IE contains DRB to modify related information used at Bearer Context Modification Request in E-UTRAN
 IE/Group Name
 Presence
@@ -8743,7 +8877,7 @@ Explanation
 maxnoofDRBs
 Maximum no. of DRBs for a UE. Value is 32.
 
-9.3.3.9	DRB To Remove List E-UTRAN
+10.3.3.9   9.3.3.9	DRB To Remove List E-UTRAN
 This IE contains DRB to remove related information used at Bearer Context Modification Request in E-UTRAN
 IE/Group Name
 Presence
@@ -8766,7 +8900,7 @@ Explanation
 maxnoofDRBs
 Maximum no. of DRBs for a UE. Value is 32.
 
-9.3.3.10	PDU Session Resource To Setup Modification List
+10.3.3.10   9.3.3.10	PDU Session Resource To Setup Modification List
 This IE contains PDU session resource to setup related information used at Bearer Context Modification Request
 IE/Group Name
 Presence
@@ -8973,7 +9107,7 @@ Maximum no. of DRBs for a UE. Value is 32.
 maxnoofPDUSessionResource 
 Maximum no. of PDU Sessions for a UE. Value is 256.
 
-9.3.3.11	PDU Session Resource To Modify List
+10.3.3.11   9.3.3.11	PDU Session Resource To Modify List
 This IE contains PDU session resource to modify related information used at Bearer Context Modification Request
 IE/Group Name
 Presence
@@ -9414,7 +9548,7 @@ Maximum no. of Data Forwarding Tunnels to E-UTRAN for a UE. Value is 256.
 maxnoofQoSflows
 Maximum no. of QoS flows in a PDU Session. Value is 64.
 
-9.3.3.12	PDU Session Resource To Remove List
+10.3.3.12   9.3.3.12	PDU Session Resource To Remove List
 This IE contains PDU session resource to remove related information
 IE/Group Name
 Presence
@@ -9450,47 +9584,67 @@ Explanation
 maxnoofPDUSessionResource 
 Maximum no. of PDU Sessions for a UE. Value is 256.
 
-9.3.3.13	DRB Setup Modification List E-UTRAN
+10.3.3.13   9.3.3.13	DRB Setup Modification List E-UTRAN
 This IE contains setup DRB related information at Bearer Context Modification Response in E-UTRAN
 IE/Group Name
 Presence
 Range
 IE type and reference
 Semantics description
+Criticality
+Assigned Criticality
 DRB Setup Modification Item E-UTRAN
 
 1..<maxnoofDRBs>
 
 
+-
+-
 >DRB ID 
 M
 
 9.3.1.16
 
+-
+-
 >S1 DL UP Transport Layer Information 
 M
 
 UP Transport Layer Information 
 9.3.2.1
 
+-
+-
 >Data Forwarding Information Response
 O
 
 9.3.2.6
 Provides forwarding information from the target gNB-CU-UP.
+-
+-
 >UL UP Parameters
 M
 
 UP Parameters 
 9.3.1.13
 
+-
+-
+>Data Forwarding Source IP Address
+O
+
+Transport Layer Address
+9.3.2.4
+Identifies the TNL address used by the source node for data forwarding.
+YES
+ignore
 
 Range bound
 Explanation
 maxnoofDRBs
 Maximum no. of DRBs for a UE. Value is 32.
 
-9.3.3.14	DRB Failed Modification List E-UTRAN
+10.3.3.14   9.3.3.14	DRB Failed Modification List E-UTRAN
 This IE contains failed to setup DRB related information at Bearer Context Modification Response in E-UTRAN
 IE/Group Name
 Presence
@@ -9518,7 +9672,7 @@ Explanation
 maxnoofDRBs
 Maximum no. of DRBs for a UE. Value is 32.
 
-9.3.3.15	DRB Modified List E-UTRAN
+10.3.3.15   9.3.3.15	DRB Modified List E-UTRAN
 This IE contains modified DRB related information at Bearer Context Modification Response in E-UTRAN
 IE/Group Name
 Presence
@@ -9557,7 +9711,7 @@ Explanation
 maxnoofDRBs
 Maximum no. of DRBs for a UE. Value is 32.
 
-9.3.3.16	DRB Failed To Modify List E-UTRAN
+10.3.3.16   9.3.3.16	DRB Failed To Modify List E-UTRAN
 This IE contains failed to modify DRB related information at Bearer Context Modification Response in E-UTRAN
 IE/Group Name
 Presence
@@ -9585,7 +9739,7 @@ Explanation
 maxnoofDRBs
 Maximum no. of DRBs for a UE. Value is 32.
 
-9.3.3.17	PDU Session Resource Setup Modification List
+10.3.3.17   9.3.3.17	PDU Session Resource Setup Modification List
 This IE contains setup PDU session resource related information used at Bearer Context Modification Response
 IE/Group Name
 Presence
@@ -9728,7 +9882,7 @@ Maximum no. of DRBs for a UE. Value is 32.
 maxnoofPDUSessionResource 
 Maximum no. of PDU Sessions for a UE. Value is 256.
 
-9.3.3.18	PDU Session Resource Failed Modification List
+10.3.3.18   9.3.3.18	PDU Session Resource Failed Modification List
 This IE contains failed to setup PDU session resource related information used at Bearer Context Modification Response
 IE/Group Name
 Presence
@@ -9756,7 +9910,7 @@ Explanation
 maxnoofPDUSessionResource 
 Maximum no. of PDU Sessions for a UE. Value is 256.
 
-9.3.3.19	PDU Session Resource Modified List
+10.3.3.19   9.3.3.19	PDU Session Resource Modified List
 This IE contains modified PDU session resource related information used at Bearer Context Modification Response
 IE/Group Name
 Presence
@@ -9993,7 +10147,7 @@ Maximum no. of DRBs for a UE. Value is 32.
 maxnoofPDUSessionResource 
 Maximum no. of PDU Sessions for a UE. Value is 256.
 
-9.3.3.20	PDU Session Resource Failed To Modify List
+10.3.3.20   9.3.3.20	PDU Session Resource Failed To Modify List
 This IE contains failed to modify PDU session resource related information used at Bearer Context Modification Response
 IE/Group Name
 Presence
@@ -10021,7 +10175,7 @@ Explanation
 maxnoofPDUSessionResource 
 Maximum no. of PDU Sessions for a UE. Value is 256.
 
-9.3.3.21	DRB Required To Modify List E-UTRAN
+10.3.3.21   9.3.3.21	DRB Required To Modify List E-UTRAN
 This IE contains DRB to modify related information used at Bearer Context Modification Required in E-UTRAN
 IE/Group Name
 Presence
@@ -10060,7 +10214,7 @@ Explanation
 maxnoofDRBs
 Maximum no. of DRBs for a UE. Value is 32.
 
-9.3.3.22	DRB Required To Remove List E-UTRAN
+10.3.3.22   9.3.3.22	DRB Required To Remove List E-UTRAN
 This IE contains DRB to remove related information used at Bearer Context Modification Required in E-UTRAN
 IE/Group Name
 Presence
@@ -10088,7 +10242,7 @@ Explanation
 maxnoofDRBs
 Maximum no. of DRBs for a UE. Value is 32.
 
-9.3.3.23	PDU Session Resource Required To Modify List
+10.3.3.23   9.3.3.23	PDU Session Resource Required To Modify List
 This IE contains PDU session resource to modify related information used at Bearer Context Modification Required
 IE/Group Name
 Presence
@@ -10206,7 +10360,7 @@ Maximum no. of DRBs for a UE. Value is 32.
 maxnoofPDUSessionResource 
 Maximum no. of PDU Sessions for a UE. Value is 256.
 
-9.3.3.24	DRB Confirm Modified List E-UTRAN
+10.3.3.24   9.3.3.24	DRB Confirm Modified List E-UTRAN
 This IE contains modified DRB related information at Bearer Context Modification Confirm in E-UTRAN
 IE/Group Name
 Presence
@@ -10234,7 +10388,7 @@ Explanation
 maxnoofDRBs
 Maximum no. of DRBs for a UE. Value is 32.
 
-9.3.3.25	PDU Session Resource Confirm Modified List
+10.3.3.25   9.3.3.25	PDU Session Resource Confirm Modified List
 This IE contains modified PDU session resource related information used at Bearer Context Modification Confirm
 IE/Group Name
 Presence
@@ -10279,21 +10433,21 @@ Maximum no. of DRBs for a UE. Value is 32.
 maxnoofPDUSessionResource 
 Maximum no. of PDU Sessions for a UE. Value is 256.
 
-9.4	Message and Information Element Abstract Syntax (with ASN.1)
-9.4.1	General
+10.4   9.4	Message and Information Element Abstract Syntax (with ASN.1)
+10.4.1   9.4.1	General
 E1AP ASN.1 definition conforms to ITU-T Rec. X.691 [7], ITU-T Rec. X.680 [8] and ITU-T Rec. X.681 [9].
 The ASN.1 definition specifies the structure and content of E1AP messages. E1AP messages can contain any IEs specified in the object set definitions for that message without the order or number of occurrence being restricted by ASN.1. However, for this version of the standard, a sending entity shall construct an E1AP message according to the PDU definitions module and with the following additional rules:
 -	IEs shall be ordered (in an IE container) in the order they appear in object set definitions.
 -	Object set definitions specify how many times IEs may appear. An IE shall appear exactly once if the presence field in an object has value "mandatory". An IE may appear at most once if the presence field in an object has value "optional" or "conditional". If in a tabular format there is multiplicity specified for an IE (i.e., an IE list) then in the corresponding ASN.1 definition the list definition is separated into two parts. The first part defines an IE container list where the list elements reside. The second part defines list elements. The IE container list appears as an IE of its own. For this version of the standard an IE container list may contain only one kind of list elements.
 NOTE:	In the above “IE” means an IE in the object set with an explicit ID. If one IE needs to appear more than once in one object set, then the different occurrences will have different IE IDs.
 If an E1AP message that is not constructed as defined above is received, this shall be considered as Abstract Syntax Error, and the message shall be handled as defined for Abstract Syntax Error in clause 10.
-9.4.2	Usage of private message mechanism for non-standard use
+10.4.2   9.4.2	Usage of private message mechanism for non-standard use
 The private message mechanism for non-standard use may be used:
 -	for special operator- (and/or vendor) specific features considered not to be part of the basic functionality, i.e., the functionality required for a complete and high-quality specification in order to guarantee multivendor interoperability;
 -	by vendors for research purposes, e.g., to implement and evaluate new algorithms/features before such features are proposed for standardisation.
 The private message mechanism shall not be used for basic functionality. Such functionality shall be standardised.
 
-9.4.3	Elementary Procedure Definitions
+10.4.3   9.4.3	Elementary Procedure Definitions
 -- ASN1START
 -- **************************************************************
 --
@@ -10709,7 +10863,7 @@ iABPSKNotification E1AP-ELEMENTARY-PROCEDURE ::= {
 END
 -- ASN1STOP
 
-9.4.4	PDU Definitions
+10.4.4   9.4.4	PDU Definitions
 -- ASN1START
 -- **************************************************************
 --
@@ -12279,7 +12433,7 @@ IAB-Donor-CU-UPPSKInfo	::= SEQUENCE (SIZE(1.. maxnoofPSKs)) OF IAB-Donor-CU-UPPS
 END
 -- ASN1STOP
 
-9.4.5	Information Element Definitions
+10.4.5   9.4.5	Information Element Definitions
 -- ASN1START
 -- **************************************************************
 --
@@ -12339,6 +12493,7 @@ IMPORTS
 	id-QoSFlowsDRBRemapping,
 	id-SecurityIndicationModify,
 	id-DataForwardingSourceIPAddress,
+	id-DiscardTimerExtended,
 	maxnoofQoSParaSets,
 	maxnoofErrors,
 	maxnoofSliceItems,
@@ -12718,6 +12873,8 @@ DirectForwardingPathAvailability ::= ENUMERATED {
 
 DiscardTimer	::=	ENUMERATED {ms10, ms20, ms30, ms40, ms50, ms60, ms75, ms100, ms150, ms200, ms250, ms300, ms500, ms750, ms1500, infinity}
 
+DiscardTimerExtended	::=	ENUMERATED {ms0dot5, ms1, ms2, ms4, ms6, ms8,... }
+
 DLDiscarding ::= SEQUENCE {
 	dLDiscardingCountVal			PDCP-Count,
 	iE-Extensions					ProtocolExtensionContainer { { DLDiscarding-ExtIEs } } 		OPTIONAL
@@ -12986,6 +13143,7 @@ DRB-Setup-Mod-Item-EUTRAN	::=	SEQUENCE {
 }
 
 DRB-Setup-Mod-Item-EUTRAN-ExtIEs		E1AP-PROTOCOL-EXTENSION ::= {
+{ ID id-DataForwardingSourceIPAddress			CRITICALITY ignore	EXTENSION TransportLayerAddress		PRESENCE optional},
 	...
 }
 
@@ -13214,6 +13372,7 @@ DRB-To-Setup-Mod-Item-EUTRAN	::=	SEQUENCE {
 }
 
 DRB-To-Setup-Mod-Item-EUTRAN-ExtIEs		E1AP-PROTOCOL-EXTENSION ::= {
+{ ID id-DataForwardingSourceIPAddress			CRITICALITY ignore	EXTENSION TransportLayerAddress		PRESENCE optional},
 	...
 }
 
@@ -13333,7 +13492,7 @@ EHC-Common-Parameters-ExtIEs E1AP-PROTOCOL-EXTENSION ::= {
 }
 
 EHC-Downlink-Parameters ::= SEQUENCE {
-	drb-ContinueEHC-DL					ENUMERATED { true, ...},
+	drb-ContinueEHC-DL					ENUMERATED { true, ..., false},
 	iE-Extensions						ProtocolExtensionContainer { { EHC-Downlink-Parameters-ExtIEs } } 		OPTIONAL
 }
 
@@ -13343,7 +13502,7 @@ EHC-Downlink-Parameters-ExtIEs E1AP-PROTOCOL-EXTENSION ::= {
 }
 
 EHC-Uplink-Parameters ::= SEQUENCE {
-	drb-ContinueEHC-UL					ENUMERATED { true, ...},
+	drb-ContinueEHC-UL					ENUMERATED { true, ..., false },
 	iE-Extensions						ProtocolExtensionContainer { { EHC-Uplink-Parameters-ExtIEs } } 		OPTIONAL
 }
 
@@ -13970,7 +14129,8 @@ PDCP-Configuration	::=	SEQUENCE {
 PDCP-Configuration-ExtIEs		E1AP-PROTOCOL-EXTENSION ::= {
 	{ID id-PDCP-StatusReportIndication					CRITICALITY ignore	EXTENSION PDCP-StatusReportIndication					PRESENCE	optional}|
 	{ ID id-AdditionalPDCPduplicationInformation		CRITICALITY ignore	EXTENSION AdditionalPDCPduplicationInformation	PRESENCE optional	}|
-	{ ID id-EHC-Parameters								CRITICALITY ignore	EXTENSION EHC-Parameters									PRESENCE optional},
+	{ ID id-EHC-Parameters								CRITICALITY ignore	EXTENSION EHC-Parameters										PRESENCE optional}|
+	{ ID id-DiscardTimerExtended						CRITICALITY reject	EXTENSION DiscardTimerExtended					PRESENCE optional},
 	...
 }
 
@@ -14896,7 +15056,7 @@ URIaddress ::= VisibleString
 
 END
 -- ASN1STOP
-9.4.6	Common Definitions
+10.4.6   9.4.6	Common Definitions
 -- ASN1START
 -- **************************************************************
 --
@@ -14950,7 +15110,7 @@ TriggeringMessage	::= ENUMERATED { initiating-message, successful-outcome, unsuc
 END
 -- ASN1STOP
 
-9.4.7	Constant Definitions
+10.4.7   9.4.7	Constant Definitions
 -- ASN1START
 -- **************************************************************
 --
@@ -15193,6 +15353,7 @@ id-QoSFlowsDRBRemapping											ProtocolIE-ID ::= 141
 id-DataForwardingSourceIPAddress								ProtocolIE-ID ::= 142
 id-SecurityIndicationModify										ProtocolIE-ID ::= 143
 id-IAB-Donor-CU-UPPSKInfo											ProtocolIE-ID ::= 144
+id-DiscardTimerExtended												ProtocolIE-ID ::= 177
 
 
 END
@@ -15200,7 +15361,7 @@ END
 
 
 
-9.4.8	Container Definitions
+10.4.8   9.4.8	Container Definitions
 -- ASN1START
 -- **************************************************************
 --
@@ -15358,13 +15519,13 @@ END
 9.5	Message Transfer Syntax
 E1AP shall use the ASN.1 Basic Packed Encoding Rules (BASIC-PER) Aligned Variant as transfer syntax, as specified in ITU-T Recommendation X.691 [7].
 9.6	Timers
-10	Handling of unknown, unforeseen and erroneous protocol data
+11   10	Handling of unknown, unforeseen and erroneous protocol data
 Section 10 of TS 38.413 [6] is applicable for the purposes of the present document, with the following additions for non-UE-associated procedures: 
 -	In case of Abstract Syntax Error, when reporting the Criticality Diagnostics IE for not comprehended IE/IEgroups or missing IE/IE groups, the Transaction ID IE shall also be included;
 -	In case of Logical Error, when reporting the Criticality Diagnostics IE, the Transaction ID IE shall also be included;
 - 	In case of Logical Error in a response message of a Class 1 procedure, or failure to comprehend Transaction ID IE from a received message, the procedure shall be considered as unsuccessfully terminated or not terminated (e.g., transaction ID unknown in response message), and local error handling shall be initiated. 
 
-Annex A (informative):
+11.1.1.1.1.1.1.1 Annex A (informative):
 Change History
 
 Change history
@@ -16242,4 +16403,36 @@ RP-220282
 F
 Offered GBR in NR-DC
 16.9.0
+2022-06
+RP-96
+RP-221154
+0694
+2
+F
+Extended PDCP Discard Timer over E1 interface
+16.10.0
+2022-06
+RP-96
+RP-221154
+0697
+3
+F
+Correction on EHC parameters
+16.10.0
+2022-06
+RP-96
+RP-221150
+0698
+1
+F
+Dynamic ACL over E1 CR 38.463
+16.10.0
+2022-06
+RP-96
+RP-221149
+0699
+2
+F
+Correction on IAB PSK generation
+16.10.0
 

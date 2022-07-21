@@ -44,21 +44,21 @@ Foreword	12
 8.2.4.4	Abnormal Conditions	30
 8.2.5	RAN Paging	30
 8.2.5.1	General	30
-8.2.5.2	Successful operation	30
+8.2.5.2	Successful operation	31
 8.2.5.3	Unsuccessful Operation	31
 8.2.5.4	Abnormal Condition	31
 8.2.6	XN-U Address Indication	31
 8.2.6.1	General	31
-8.2.6.2	Successful Operation	31
-8.2.6.3	Unsuccessful Operation	32
-8.2.6.4	Abnormal Conditions	32
+8.2.6.2	Successful Operation	32
+8.2.6.3	Unsuccessful Operation	33
+8.2.6.4	Abnormal Conditions	33
 8.2.7	UE Context Release	33
 8.2.7.1	General	33
 8.2.7.2	Successful Operation	33
 8.2.7.3	Unsuccessful Operation	34
 8.2.7.4	Abnormal Conditions	34
-8.2.8	Handover Success	34
-8.2.8.1	General	34
+8.2.8	Handover Success	35
+8.2.8.1	General	35
 8.2.8.2	Successful Operation	35
 8.2.8.3	Unsuccessful Operation	35
 8.2.8.4	Abnormal Conditions	35
@@ -957,6 +957,7 @@ The procedure uses UE-associated signalling.
 Figure 8.2.4.2-1: Retrieve UE Context, successful operation
 The new NG-RAN node initiates the procedure by sending the RETRIEVE UE CONTEXT REQUEST message to the old NG-RAN node.
 If the old NG-RAN node is able to identify the UE context by means of the UE Context ID, and to successfully verify the UE by means of the integrity protection contained in the RETRIEVE UE CONTEXT REQUEST message, and decides to provide the UE context to the new NG-RAN node, it shall respond to the new NG-RAN node with the RETRIEVE UE CONTEXT RESPONSE message.
+If the Trace Activation IE is included in the RETRIEVE UE CONTEXT RESPONSE message, the new NG-RAN node shall, if supported, initiate the requested trace function as specified in TS 32.422 [23].
 If the Index to RAT/Frequency Selection Priority IE is contained in the RETRIEVE UE CONTEXT RESPONSE message, the new NG-RAN node shall store this information and use it as defined in TS 23.501 [7].
 If the Location Reporting Information IE is included in the RETRIEVE UE CONTEXT RESPONSE message, then the new NG-RAN node should initiate the requested location reporting functionality as defined in TS 38.413 [5].
 If the Trace Activation IE is included in the RETRIEVE UE CONTEXT RESPONSE message which includes 
@@ -1312,6 +1313,8 @@ For each DRB configured as MN-terminated split bearer/SCG bearer, if the QoS Map
 For each DRB configured as SN-terminated split bearer/MCG bearer, if the QoS Mapping Information IE is included in the DRBs To Be Modified List IE in the PDU Session Resource Modification Info – SN terminated IE of the S-NODE MODIFICATION REQUEST message, the S-NG-RAN node shall, if supported, use it to set DSCP and/or flow label fields for the downlink IP packets which are transmitted from S-NG-RAN node to M-NG-RAN node through the GTP tunnels indicated by the UP Transport Layer Information IE.
 If the Security Indication IE is included in the PDU Session Resource Modification Info – SN terminated IE of the S-NODE MODIFICATION REQUEST message, the S-NG-RAN node shall, if supported, replace any existing security indication, and enable/disable ciphering or integrity protection as specified in TS 38.331 [10], for the concerned PDU session, and the S-NG-RAN node shall include the Security Result IE in the PDU Session Resource Modification Response Info – SN terminated IE.
 If the Target Node ID IE is included in the S-NODE MODIFICATION REQUEST message, the S-NG-RAN node shall, if supported, include the Direct Forwarding Path Availability IE in the S-NODE MODIFICATION REQUEST ACKNOWLEDGE message if the direct forwarding path is available between the S-NG-RAN node and the indicated target node.
+If for a given QoS Flow the Source DL Forwarding IP Address IE is included within the Data Forwarding and Offloading Info from source NG-RAN node IE in the PDU Session Resource Setup Info – SN terminated IE and/or in the PDU Session Resource Modification Info – SN terminated IE contained in the S-NODE MODIFICATION REQUEST message, the S-NG-RAN node shall, if supported, store this information and use it as part of its ACL functionality configuration actions, if such ACL functionality is deployed.
+If for a given QoS Flow the Source DL Forwarding IP Address IE is included within the QoS Flows Mapped To DRB List IE in the PDU Session Resource Setup Response Info – SN terminated IE and/or in the PDU Session Resource Modification Response Info – SN terminated IE contained in the S-NODE MODIFICATION REQUEST ACKNOWLEDGE message, the M-NG-RAN node shall, if supported, store this information and use it as part of its ACL functionality to identify source TNL address for data forwarding in case of subsequent handover preparation, if such ACL functionality is deployed.
 Interactions with the S-NG-RAN node Reconfiguration Completion procedure:
 If the S-NG-RAN node admits a modification of the UE context requiring the M-NG-RAN node to report about the success of the RRC connection reconfiguration procedure, the S-NG-RAN node shall start the timer TXnDCoverall when sending the S-NODE MODIFICATION REQUEST ACKNOWLEDGE message to the M-NG-RAN node. The reception of the S-NG-RAN node RECONFIGURATION COMPLETE message shall stop the timer TXnDCoverall.
 Interaction with the Activity Notification procedure
@@ -9645,6 +9648,14 @@ Alternative QoS Parameters Set Index
 
 YES
 ignore
+>>>>Source DL Forwarding IP Address
+O
+
+Transport Layer Address
+9.2.3.29
+Identifies the TNL address used by the source node for data forwarding.
+YES
+ignore
 >>Additional PDCP Duplication TNL List
 
 0..1
@@ -9758,6 +9769,14 @@ O
 Alternative QoS Parameters Set Index
 9.2.3.103
 
+YES
+ignore
+>>>>Source DL Forwarding IP Address
+O
+
+Transport Layer Address
+9.2.3.29
+Identifies the TNL address used by the source node for data forwarding.
 YES
 ignore
 >>Additional PDCP Duplication TNL List
@@ -18053,6 +18072,7 @@ Range bound
 Explanation
 maxnoofPC5QoSFlows
 Maximum no. of PC5 QoS flows allowed towards one UE. Value is 2048. 
+NOTE: ASN.1 value definition of the maxnoofPC5QoSFlows is 2064. The size of the PC5 QoS Flow List shall not exceed 2048 items.
 
 9.2.3.110	UE History Information from the UE
 This IE contains information about mobility history report for a UE.
@@ -25124,6 +25144,7 @@ PC5QoSParameters-ExtIEs XNAP-PROTOCOL-EXTENSION ::= {
 }
 
 PC5QoSFlowList ::= SEQUENCE (SIZE(1..maxnoofPC5QoSFlows)) OF PC5QoSFlowItem
+-- The size of the PC5 QoS Flow List shall not exceed 2048 items.
 
 PC5QoSFlowItem::= SEQUENCE {
 	pQI							FiveQI,
@@ -30098,4 +30119,28 @@ RP-220279
 F
 Correction of S-NODE MODIFICATION CONFIRM message
 16.9.0
+2022-06
+RP-96
+RP-221150
+0803
+1
+F
+Dynamic ACL over Xn CR 38.423
+16.10.0
+2022-06
+RP-96
+RP-221155
+0805
+1
+F
+Corrections caused by rapporteur corrections for Version 17.0.0
+16.10.0
+2022-06
+RP-96
+RP-221153
+0811
+2
+F
+Trace Activation IE support for the Retrieve UE Context procedure
+16.10.0
 
