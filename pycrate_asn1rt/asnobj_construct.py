@@ -113,8 +113,7 @@ Specific attributes:
             self._cont[ident]._parent = _par
             return txt
         else:
-            raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'\
-                  .format(self.fullname(), txt)))
+            raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'.format(self.fullname(), txt)))
     
     def _to_asn1(self):
         ident = self._val[0]
@@ -189,7 +188,7 @@ Specific attributes:
         try:
             ident = self._root[ind]
         except IndexError:
-            raise(ASN1PERDecodeErr('{0}: invalid CHOICE index, %r'.format(self.fullname(), ind)))
+            raise(ASN1PERDecodeErr('{0}: invalid CHOICE index, {1!r}'.format(self.fullname(), ind)))
         Cho = self._cont[ident]
         # decode the chosen object
         _par = Cho._parent
@@ -247,7 +246,7 @@ Specific attributes:
         try:
             ident = self._root[ind]
         except IndexError:
-            raise(ASN1PERDecodeErr('{0}: invalid CHOICE index, %r'.format(self.fullname(), ind)))
+            raise(ASN1PERDecodeErr('{0}: invalid CHOICE index, {1!r}'.format(self.fullname(), ind)))
         Cho = self._cont[ident]
         # decode the chosen object
         _par = Cho._parent
@@ -596,12 +595,11 @@ Specific attributes:
                 tag_class, _, tag = int(self._val[0][5:6]), int(
                     self._val[0][6:7]), int(self._val[0][7:])
             else:
-                raise ASN1OEREncodeErr("Unknown tag for item {0}".format(
-                    self._val[0]))
+                raise(ASN1OEREncodeErr('Unknown tag for item {0}'.format(self._val[0])))
         try:
             tag_class = ASN1CodecOER.TagClassLUT[tag_class]
         except KeyError:
-            ASN1OEREncodeErr("Unknown tag class: {0}".format(tag_class))
+            raise(ASN1OEREncodeErr('Unknown tag class: {0}'.format(tag_class)))
 
         return tag_class, tag
 
@@ -684,9 +682,8 @@ Specific attributes:
                 val_bytes = ASN1CodecOER.decode_open_type(char)
                 self._val = (ident, val_bytes)
             else:
-                raise ASN1OERDecodeErr(
-                    'CHOICE._from_oer: %s, unknown extension tag %r' \
-                           % (self.fullname(), (tag_class, tag)))
+                raise(ASN1OERDecodeErr('CHOICE._from_oer: %s, unknown extension tag %r' \
+                      % (self.fullname(), (tag_class, tag))))
 
     def _from_oer_ws(self, char):
         tag_class, tag, tag_struct = ASN1CodecOER.decode_tag_ws(char)
@@ -727,9 +724,8 @@ Specific attributes:
                 self._struct = Envelope(self._name, GEN=tuple(_gen))
                 self._val = (ident, val)
             else:
-                raise ASN1OERDecodeErr(
-                    'CHOICE._from_oer_ws: %s, unknown extension tag %r' \
-                    % (self.fullname(), (tag_class, tag)))
+                raise(ASN1OERDecodeErr('CHOICE._from_oer_ws: %s, unknown extension tag %r' \
+                      % (self.fullname(), (tag_class, tag))))
 
 #------------------------------------------------------------------------------#
 # SEQUENCE and SET
@@ -2277,8 +2273,7 @@ Specific attributes:
     
     def _from_asn1(self, txt):
         if txt[0:1] != '{':
-            raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'\
-                  .format(self.fullname(), txt)))
+            raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'.format(self.fullname(), txt)))
         #
         # 1) init local value
         txt, val = txt[1:].strip(), {}
@@ -2653,8 +2648,7 @@ class _CONSTRUCT_OF(ASN1Obj):
     
     def _from_asn1(self, txt):
         if txt[0:1] != '{':
-            raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'\
-                  .format(self.fullname(), txt)))
+            raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'.format(self.fullname(), txt)))
         txt, self._val = txt[1:].strip(), []
         if txt[0:1] == '}':
             # empty value
@@ -2671,8 +2665,7 @@ class _CONSTRUCT_OF(ASN1Obj):
                 #self._val = self._val
                 return txt[1:].strip()
             else:
-                raise(ASN1ASNDecoderErr('{0}: invalid text, {1!r}'\
-                      .format(self.fullname(), txt)))
+                raise(ASN1ASNDecoderErr('{0}: invalid text, {1!r}'.format(self.fullname(), txt)))
     
     def _to_asn1(self):
         if not self._val:
