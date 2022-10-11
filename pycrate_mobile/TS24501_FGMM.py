@@ -549,7 +549,7 @@ class FGMMServiceAccept(Layer3E):
 #------------------------------------------------------------------------------#
 
 class FGMMServiceReject(Layer3E):
-    _name = '5GMMServiceAccept'
+    _name = '5GMMServiceReject'
     _GEN = (
         FGMMHeader(val={'Type':77}),
         Type3V('5GMMCause', val={'V':b'\x16'}, bl={'V':8}, IE=FGMMCause()),
