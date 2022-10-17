@@ -3012,7 +3012,7 @@ ASN.1 basic type VisibleString object
     _codec    = 'ascii'
     _clen     = 7
     _ALPHA_RE = \
-    '!"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}'
+    ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~'
     
     TYPE  = TYPE_STR_VIS
     TAG   = 26
