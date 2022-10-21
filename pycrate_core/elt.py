@@ -1651,22 +1651,22 @@ class Envelope(Element):
         if vals is None:
             [elt.set_val(None) for elt in self.__iter__()]
         elif isinstance(vals, (tuple, list)):
-            for ind, elt in enumerate(self.__iter__()):
-                elt.set_val(vals[ind])
+            if vals:
+                for ind, elt in enumerate(self.__iter__()):
+                    elt.set_val(vals[ind])
         elif isinstance(vals, dict):
-            # ordered values is sometimes required, depending of the structure
-            # -> happens in particular when an Alt() is present in the envelope
-            vals_ind = {self._by_name.index(k): v for (k, v) in vals.items() \
-                        if isinstance(k, str_types)}
-            if vals_ind:
+            if vals:
+                # ordered values is sometimes required, depending of the structure
+                # -> happens in particular when an Alt() is present in the envelope
+                vals_ind = {self._by_name.index(k): v for (k, v) in vals.items() \
+                            if isinstance(k, str_types)}
                 if len(vals_ind) == len(vals):
                     vals = vals_ind
                 else:
-                    vals = {k: v for (k, v) in vals.items() \
-                            if isinstance(k, integer_types)}
+                    vals = {k: v for (k, v) in vals.items() if isinstance(k, integer_types)}
                     vals.update(vals_ind)
-            for k in sorted(vals.keys()):
-                self.__setitem__(k, vals[k])
+                for k in sorted(vals.keys()):
+                    self.__setitem__(k, vals[k])
         elif self._SAFE_STAT:
             raise(EltErr('{0} [set_val]: vals type is {1}, expecting None, '\
                   'tuple, list or dict'.format(self._name, type(vals).__name__)))
