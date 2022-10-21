@@ -1860,7 +1860,7 @@ for k, infos in GTPIEType_dict.items():
     if infos[3] in _globals:
         GTPIELUT[k] = _globals[infos[3]]
     elif infos[3] not in _undef:
-        print('warning: %s undefined' % infos[3])
+        print('warning: GTP-C v1 IE %s undefined' % infos[3])
 del _globals, _undef
 # enumeration for all IEs (name: type)
 GTPIEType = IntEnum('GTPIEType', {v[3]: k for k, v in GTPIEType_dict.items()})
@@ -1868,15 +1868,24 @@ GTPIEType = IntEnum('GTPIEType', {v[3]: k for k, v in GTPIEType_dict.items()})
 GTPIETypeDesc_dict = {k: v[2] for k, v in GTPIEType_dict.items()}
 
 
-
 class _GTPIE(Envelope):
     """parent class for GTPv1-C Information Element: GTPIETV and GTPIETLV
     """
-    pass
+    
+    def _init_data_attr(self):
+        if isinstance(self['Data'], Buf):
+            self._data_raw = self['Data']
+            self._data_cls = None
+        else:
+            self._data_raw = None
+            self._data_cls = self['Data']
 
 
 class GTPIETV(_GTPIE):
     """GTPv1-C Information Element in Tag-Value format, with fixed length
+    
+    The Data part is either a Buf object, either a dedicated object according to
+    the Type part.
     """
     
     _GEN = (
@@ -1884,65 +1893,99 @@ class GTPIETV(_GTPIE):
         Buf('Data', bl=8, rep=REPR_HEX)
         )
     
+    # common method with GTPIETLV to get IE's type
     def get_type(self):
-        return self['Type'].get_val()
+        return self[0].get_val()
     
+    def _set_data_raw(self):
+        if not hasattr(self, '_data_raw'):
+            self._init_data_attr()
+        if self._data_raw is None:
+            self._data_raw = Buf('Data', rep=REPR_HEX)
+            self._data_raw.set_bl(self._data_cls.get_bl())
+        self.replace(self[1], self._data_raw)
+    
+    def _set_data_cls(self):
+        if not hasattr(self, '_data_cls'):
+            self._init_data_attr()
+        if self._data_cls is None:
+            try:
+                self._data_cls = GTPIELUT[self[0].get_val()]('Data')
+            except KeyError:
+                pass
+        if self._data_cls is not None:
+            self.replace(self[1], self._data_cls)
+    
+    def _set_data_type(self, d, t):
+        if t is not None:
+            self[0].set_val(t)
+        if isinstance(d, bytes_types):
+            self._set_data_raw()
+        else:
+            self._set_data_cls()
+        self[1].set_val(d)
+    
+    # set_val() method can be used with both type of values for Data:
+    # - bytes, assigned to the Buf raw object
+    # - dedicated type, assigned to the dedicated object
     def set_val(self, val):
-        data_val = None
-        if isinstance(val, (tuple, list)) and len(val) == 2:
-            self['Type'].set_val(val[0])
-            if not isinstance(val[1], bytes_types):
-                self.set_ie_class()
-            data_val = val[1]
-        elif isinstance(val, dict) and 'Type' in val:
-            self['Type'].set_val(val['Type'])
+        if isinstance(val, (tuple, list)) and 1 <= len(val) <= 2:
+            if len(val) == 1:
+                # we only have the IE Type, hence set the data_cls structure
+                self[0].set_val(val[0])
+                self._set_data_cls()
+            else:
+                self._set_data_type(val[1], val[0])
+        elif isinstance(val, dict):
             if 'Data' in val:
-                if not isinstance(val['Data'], bytes_types):
-                    self.set_ie_class()
-                data_val = val['Data']
+                if 'Type' in val:
+                    self._set_data_type(val['Data'], val['Type'])
+                else:
+                    self._set_data_type(val['Data'], None)
+            elif 'Type' in val:
+                self[0].set_val(val['Type'])
+                self._set_data_cls()
         else:
             Envelope.set_val(self, val)
-        if data_val:
-            try:
-                self['Data'].set_val(data_val)
-            except PycrateErr:
-                # try to restore a simple Data buffer
-                data = Buf('Data', bl=self['Data'].get_bl(), rep=REPR_HEX)
-                data.set_val(data_val)
-                self.replace(self['Data'], data)
     
+    # need to patch the set_bl() method, as GTPIETV gets its Data bl assigned
+    # when GTP messages gets instantiated
+    def set_bl(self, bl):
+        if isinstance(bl, (tuple, list)):
+            if len(bl) > 1 and self[1] == self._data_cls:
+                bl = [bl[0]]
+        elif isinstance(bl, dict):
+            if 'Data' in bl and self[1] == self._data_cls:
+                if 'Type' in bl:
+                    bl = {'Type': bl['Type']}
+                else:
+                    return
+        Envelope.set_bl(bl)
+    
+    # _from_char() method attempts to decode Data with the dedicated object
+    # and fallbacks to the Buf raw object if failing with the former.
     def _from_char(self, char):
         if self.get_trans():
             return
         self[0]._from_char(char)
-        # check if a sub-structure is available to replace the Data buffer
-        typ = self['Type'].get_val()
-        buf = char.get_bytes(self['Data'].get_bl())
-        if typ in GTPIELUT:
-            data = GTPIELUT[typ]('Data')
-            try:
-                data.from_bytes(buf)
-            except PycrateErr:
-                # restore the basic buffer representation
-                data = Buf('Data', val=buf, bl=len(buf)<<3, rep=REPR_HEX)
-        else:
-            # only have the basic buffer representation
-            data = Buf('Data', val=buf, bl=len(buf)<<3, rep=REPR_HEX)
-        self.replace(self['Data'], data)
-    
-    def set_ie_class(self):
-        if isinstance(self['Data'], Buf):
-            # switch to the IE-specific sub-structure, if available
-            try:
-                ie = GTPIELUT[self['Type'].get_val()]('Data')
-            except KeyError:
-                pass
-            else:
-                self.replace(self['Data'], ie)
+        # 1st try decoding with the structured Data
+        char_cur = char._cur
+        self._set_data_cls()
+        try:
+            self[1]._from_char(char)
+        except PycrateErr:
+            # 2nd try decoding as raw Data
+            char._cur = char_cur
+            self._set_data_raw()
+            self[1]._from_char(char)
 
 
 class GTPIETLV(_GTPIE):
-    """GTPv1-C Information Element in Tag-Length-Value format
+    """GTPv1-C Information Element in Tag-Length-Value format, with extensible
+    tag and variable length
+    
+    The Data part is either a Buf object, either a dedicated object according to
+    the Type part.
     """
     
     ENV_SEL_TRANS = False
@@ -1975,89 +2018,111 @@ class GTPIETLV(_GTPIE):
         else:
             return self[1].get_val() << 3
     
+    # common method with GTPIETV to get IE's type
     def get_type(self):
-        typ = self[0].get_val()
-        if typ == 238:
+        t = self[0].get_val()
+        if t == 238:
             return self[2].get_val()
         else:
-            return typ
+            return t
     
+    def set_type(self, t):
+        if t > 255:
+            self[0].set_val(238)
+            self[2].set_val(t)
+        else:
+            self[0].set_val(t)
+    
+    def _set_data_raw(self):
+        if not hasattr(self, '_data_raw'):
+            self._init_data_attr()
+        if self._data_raw is None:
+            self._data_raw = Buf('Data', rep=REPR_HEX)
+            self._data_raw.set_blauto(lambda: self._get_data_len())
+        self.replace(self[3], self._data_raw)
+    
+    def _set_data_cls(self):
+        if not hasattr(self, '_data_cls'):
+            self._init_data_attr()
+        if self._data_cls is None:
+            try:
+                self._data_cls = GTPIELUT[self.get_type()]('Data')
+            except KeyError:
+                pass
+            else:
+                if not hasattr(self._data_cls, '_bl') or self._data_cls._bl is None:
+                    self._data_cls.set_blauto(lambda: self._get_data_len())
+        if self._data_cls is not None:
+            self.replace(self[3], self._data_cls)
+    
+    def _set_data_type(self, d, t):
+        if t is not None:
+            self.set_type(t)
+        if isinstance(d, bytes_types):
+            self._set_data_raw()
+        else:
+            self._set_data_cls()
+        self[3].set_val(d)
+    
+    # Due to the way set_val() works below, and the ENV_SEL_TRANS parameter,
+    # we need to patch get_val() for returning the full value
+    # Otherwise, it's not possible to re-encode what gets decoded.
+    def get_val(self):
+        return [elt() for elt in self._content]
+    
+    __call__ = get_val
+    
+    # set_val() method can be used with both type of values for Data:
+    # - bytes, assigned to the Buf raw object
+    # - dedicated type, assigned to the dedicated object
     def set_val(self, val):
-        data_val = None
-        if isinstance(val, (tuple, list)) and len(val) >= 3:
-            self['Type'].set_val(val[0])
-            self['Len'].set_val(val[1])
-            if val[0] == 238:
-                self['TypeExt'].set_val(val[2])
-                data_val = val[3]
+        if isinstance(val, (tuple, list)) and 1<= len(val) <= 4:
+            self[0].set_val(val[0])
+            if len(val) > 1:
+                self[1].set_val(val[1])
+            if len(val) > 2:
+                self[2].set_val(val[2])
+            if len(val) == 4:
+                if isinstance(val[3], bytes_types):
+                    self._set_data_raw()
+                else:
+                    self._set_data_cls()
+                self[3].set_val(val[3])
             else:
-                data_val = val[2]
-            if not isinstance(data_val, bytes_types):
-                self.set_ie_class()
-        elif isinstance(val, dict) and 'Type' in val:
-            val = dict(val)
-            if val['Type'] > 255:
-                self['Type'].set_val(238)
-                self['TypeExt'].set_val(val['Type'])
+                self._set_data_cls()
+        elif isinstance(val, dict):
+            if 'Data' in val:
+                if 'Type' in val:
+                    if val['Type'] != 238:
+                        self._set_data_type(val['Data'], val['Type'])
+                    elif 'TypeExt' in val:
+                        self._set_data_type(val['Data'], val['TypeExt'])
+                else:
+                    self._set_data_type(val['Data'], None)
             else:
-                self['Type'].set_val(val['Type'])
-            del val['Type']
-            if 'Len' in val:
-                self['Len'].set_val(val['Len'])
-                del val['Len']
-            if 'TypeExt' in val:
-                self['TypeExt'].set_val(val['TypeExt'])
-                del val['TypeExt']
-            if val:
-                data_val = val.popitem()
-                if not isinstance(data_val, bytes_types):
-                    self.set_ie_class()
+                Envelope.set_val(self, val)
+                self._set_data_cls()
         else:
             Envelope.set_val(self, val)
-        if data_val:
-            try:
-                self['Data'].set_val(data_val)
-            except PycrateErr:
-                # try to restore a simple Data buffer
-                data = Buf('Data', rep=REPR_HEX)
-                data.set_blauto(lambda: self._set_len())
-                data.set_val(data_val)
-                self.replace(self['Data'], data)
     
+    # _from_char() method attempts to decode Data with the dedicated object
+    # and fallbacks to the Buf raw object if failing with the former.
     def _from_char(self, char):
         if self.get_trans():
             return
         self[0]._from_char(char)
         self[1]._from_char(char)
         self[2]._from_char(char)
-        # check if a sub-structure is available to replace the Data buffer
-        typ = self.get_type()
-        buf = char.get_bytes(self._get_data_len())
-        if typ in GTPIELUT:
-            data = GTPIELUT[typ]('Data')
-            try:
-                data.from_bytes(buf)
-            except PycrateErr:
-                # restore the basic buffer representation
-                data = Buf('Data', val=buf, rep=REPR_HEX)
-                data.set_blauto(lambda: self._set_len())
-        else:
-            # only have the basic buffer representation
-            data = Buf('Data', val=buf, rep=REPR_HEX)
-            data.set_blauto(lambda: self._set_len())
-        self.replace(self['Data'], data)
-    
-    def set_ie_class(self):
-        if isinstance(self['Data'], Buf):
-            # switch to the IE-specific sub-structure, if available
-            try:
-                ie = GTPIELUT[self['Type'].get_val()]('Data')
-            except KeyError:
-                pass
-            else:
-                if not hasattr(ie, '_bl') or ie._bl is None:
-                    ie.set_blauto(lambda: self._set_len())
-                self.replace(self['Data'], ie)
+        # 1st try decoding with the structured Data
+        char_cur = char._cur
+        self._set_data_cls()
+        try:
+            self[3]._from_char(char)
+        except PycrateErr:
+            # 2nd try decoding as raw Data
+            char._cur = char_cur
+            self._set_data_raw()
+            self[3]._from_char(char)
 
 
 def _get_type_from_char(char):
@@ -2069,7 +2134,7 @@ def _get_type_from_char(char):
         typ = char.to_uint(16)
         char._cur -= 24
     return typ
-
+    
 
 class GTPIEs(Envelope):
     """GTPv1-C sequence of Information Elements
@@ -2087,15 +2152,36 @@ class GTPIEs(Envelope):
     # this is to raise in case a mandatory IE is not found during the decoding
     VERIF_MAND = True
     
+    
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         # ensure at least all mandatory IEs are there
         self.init_ies(wopt=False, wpriv=False)
-        # switch optional ones that were set explicitely to non-transparent
-        if 'val' in kwargs and isinstance(kwargs['val'], dict):
-            for k in kwargs['val']:
-                if k in self.OPT:
-                    self[k].set_trans(False)
+    
+    def set_val(self, vals):
+        if vals:
+            if isinstance(vals, (tuple, list)):
+                for ind, elt in enumerate(self.__iter__()):
+                    elt.set_val(vals[ind])
+                    if elt._trans:
+                        elt._trans = False
+            elif isinstance(vals, dict):
+                # ordered values is sometimes required, depending of the structure
+                # -> happens in particular when an Alt() is present in the envelope
+                vals_ind = {self._by_name.index(k): v for (k, v) in vals.items() \
+                            if isinstance(k, str_types)}
+                if len(vals_ind) == len(vals):
+                    vals = vals_ind
+                else:
+                    vals = {k: v for (k, v) in vals.items() if isinstance(k, integer_types)}
+                    vals.update(vals_ind)
+                for k in sorted(vals.keys()):
+                    elt = self.__getitem__(k)
+                    elt.set_val(vals[k])
+                    if elt._trans:
+                        elt._trans = False
+        else:
+            Envelope.set_val(self, vals)
     
     def _from_char(self, char):
         if self.get_trans():
@@ -2151,22 +2237,17 @@ class GTPIEs(Envelope):
         (raw bytes buffer or structured data) into its data part
         """
         ie = self.__getitem__(ie_name)
-        if ie.get_trans():
-            ie.set_trans(False)
+        if ie._trans:
+            ie._trans = False
         if val is not None:
-            # _GTPIE.set_val() takes care of setting the potential specific internal structure
-            ie.set_val(val)
-        else:
-            # if no specific value is provided, we set the potential specific internal structure
-            # with its default value
-            ie.set_ie_class()
+            ie['Data'].set_val(val)
     
     def rem_ie(self, ie_name):
         """remove the IE with the given identifier `ie_name`
         """
         ie = self[ie_name]
-        if not ie.get_trans():
-            ie.set_trans(True)
+        if not ie._trans:
+            ie._trans = True
     
     def init_ies(self, wopt=False, wpriv=False):
         """initialize all IEs that are mandatory,
@@ -2175,14 +2256,13 @@ class GTPIEs(Envelope):
         """
         for ie in self._content:
             if ie._name in self.OPT and wopt:
-                ie.set_trans(False)
-            ie.set_ie_class()
+                ie._trans = False
         if self._content and self._content[-1]._name == 'PrivateExt':
             if wpriv:
-                ie.set_trans(False)
+                ie._trans = False
             else:
-                ie.set_trans(True)
-
+                ie._trans = True
+    
     def chk_comp(self):
         """check the compliance of all the present IEs against the list of mandatory
         and potentially unexpected ones
@@ -2483,7 +2563,7 @@ class GTPMsg(Envelope):
     """
     
     # MAND and OPT class attributes are generated when module is loaded
-    # each one is a set listing IE types that are mandatory, respectively optional
+    # each one is a set listing IE types that are mandatories, respectively optionals
     
     _GEN = (
         GTPHdr(),
