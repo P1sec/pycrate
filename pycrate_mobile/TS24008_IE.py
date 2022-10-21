@@ -3061,9 +3061,9 @@ class QoS(Envelope):
         Uint('TrafficHandlingPriority', bl=2), # 9
         Uint8('GuaranteedULBitrate'),
         Uint8('GuaranteedDLBitrate'),
-        Uint('spare', bl=3),
+        Uint('spare', bl=3), # 11
         Uint('SignallingInd', bl=1, dic=_SignalInd_dict),
-        Uint('SourceStatsDesc', bl=4, dic=_SourceStats_dict), # 12
+        Uint('SourceStatsDesc', bl=4, dic=_SourceStats_dict), # 12, may also be omitted by certain implementation
         Uint8('MaxDLBitrateExt', trans=True),
         Uint8('GuaranteedDLBitrateExt', trans=True),
         Uint8('MaxULBitrateExt', trans=True),
@@ -3083,35 +3083,48 @@ class QoS(Envelope):
             self._set_trans_ulbrext2(True)
         elif isinstance(vals, (tuple, list)):
             if len(vals) > 29:
+                self._set_trans_oct12(False)
                 self._set_trans_dlbrext(False)
                 self._set_trans_ulbrext(False)
                 self._set_trans_dlbrext2(False)
                 self._set_trans_ulbrext2(False)
             elif len(vals) > 27:
+                self._set_trans_oct12(False)
                 self._set_trans_dlbrext(False)
                 self._set_trans_ulbrext(False)
                 self._set_trans_dlbrext2(False)
             elif len(vals) > 25:
+                self._set_trans_oct12(False)
                 self._set_trans_dlbrext(False)
                 self._set_trans_ulbrext(False)
             elif len(vals) > 23:
+                self._set_trans_oct12(False)
                 self._set_trans_dlbrext(False)
         elif isinstance(vals, dict):
             if 'MaxULBitrateExt2' in vals or 'GuaranteedULBitrateExt2' in vals:
+                self._set_trans_oct12(False)
                 self._set_trans_dlbrext(False)
                 self._set_trans_ulbrext(False)
                 self._set_trans_dlbrext2(False)
                 self._set_trans_ulbrext2(False)
             elif 'MaxDLBitrateExt2' in vals or 'GuaranteedDLBitrateExt2' in vals:
+                self._set_trans_oct12(False)
                 self._set_trans_dlbrext(False)
                 self._set_trans_ulbrext(False)
                 self._set_trans_dlbrext2(False)
             elif 'MaxULBitrateExt' in vals or 'GuaranteedULBitrateExt' in vals:
+                self._set_trans_oct12(False)
                 self._set_trans_dlbrext(False)
                 self._set_trans_ulbrext(False)
             elif 'MaxDLBitrateExt' in vals or 'GuaranteedDLBitrateExt' in vals:
+                self._set_trans_oct12(False)
                 self._set_trans_dlbrext(False)
         Envelope.set_val(self, vals)
+    
+    def _set_trans_oct12(self, trans):
+        self[20].set_trans(trans)
+        self[21].set_trans(trans)
+        self[22].set_trans(trans)
     
     def _set_trans_dlbrext(self, trans):
         self[23].set_trans(trans)
@@ -3146,6 +3159,8 @@ class QoS(Envelope):
             self._set_trans_ulbrext(False)
         elif l > 12:
             self._set_trans_dlbrext(False)
+        elif l < 12:
+            self._set_trans_oct12(True)
         Envelope._from_char(self, char)
 
 
