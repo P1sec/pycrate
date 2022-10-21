@@ -350,7 +350,7 @@ class GTPCHdr(Envelope):
         Uint8('Type', dic=GTPCMsgType_dict),
         Uint16('Len'),
         # if T=1
-        Uint32('TEID', rep=REPR_HEX),
+        Uint32('TEID', rep=REPR_HEX), # not present if T=0
         Uint24('SeqNum'),
         # if MP=0
         Uint8('spare'),
@@ -7508,8 +7508,10 @@ GTPCDispatcher = {
     }
 
 
-class GTPCMsgType(IntEnum):
-    pass
+GTPCMsgType = IntEnum(
+    'GTPCMsgType',
+    [(cls.__name__, val) for (val, cls) in GTPCDispatcher.items()]
+    )
 
 
 ERR_GTPC_BUF_TOO_SHORT = 1
