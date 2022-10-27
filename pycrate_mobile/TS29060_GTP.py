@@ -51,7 +51,7 @@ from pycrate_mobile.TS29244_PFCP    import (
     _LU8V, _Timer, FQDN
     )
 from pycrate_mobile.TS24008_IE      import (
-    BufBCD, RAI, NSAPI, PDPAddr, CiphAlgo_dict, DRXParam, QoS, IPAddr, APN,
+    BufBCD, RAI, PDPAddr, CiphAlgo_dict, DRXParam, QoS, IPAddr, APN,
     TFT, _PDPTypeOrg_dict, _PDPTypeNum_dict, TimeZone, DLSavingTime, TMGI, PLMN,
     PacketFlowId
     )
@@ -327,6 +327,18 @@ class TeardownInd(Envelope):
     _GEN = (
         Uint('spare', val=0x7f, bl=7, rep=REPR_HEX),
         Uint('Val', bl=1),
+        )
+
+
+#------------------------------------------------------------------------------#
+# NSAPI
+# TS 29.060, section 7.7.17
+#------------------------------------------------------------------------------#
+
+class NSAPI(Envelope):
+    _GEN = (
+        Uint('spare', val=0, bl=4, rep=REPR_HEX),
+        Uint('Val', val=5, bl=4),
         )
 
 
