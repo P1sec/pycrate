@@ -3851,6 +3851,7 @@ class GTPCIEHdr(Envelope):
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
+        self[1].set_valauto(lambda: self._set_len())
         self[4].set_transauto(lambda: self[0].get_val() != 254)
 
 
@@ -3865,96 +3866,138 @@ class GTPCIE(Envelope):
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[0][1].set_valauto(lambda: self._get_len())
-        
-    def _get_len(self):
-        l = 0
-        if len(self._content) > 1:
-            # IE data
-            l += self._content[1].get_len()
+        self[0][1].set_valauto(lambda: self._set_len())
+        if not hasattr(self[1], '_bl') or self[1]._bl is None:
+            self[1].set_blauto(lambda: self._get_data_len())
+    
+    def _set_len(self):
         if self[0][0].get_val() == 254:
             # extended type
-            l += 2
-        return l
+            return 2 + self[1].get_len()
+        else:
+            return self[1].get_len()
     
+    def _get_data_len(self):
+        if self[0][0].get_val() == 254:
+            # extended type
+            return (self[0][1].get_val()-2) << 3
+        else:
+            return self[0][1].get_val() << 3
+    
+    # common method with GTP-C v1 to get IE's type
+    def get_type(self):
+        t = self[0][0].get_val()
+        if t == 254:
+            return self[0][4].get_val()
+        else:
+            return t
+    
+    def set_type(self, t):
+        if t > 255 or t == 254:
+            self[0][0].set_val(254)
+            self[0][4].set_val(t)
+        else:
+            self[0][0].set_val(t)
+    
+    def _init_data_attr(self):
+        if isinstance(self[1], Buf):
+            self._data_raw = self[1]
+            self._data_cls = None
+        else:
+            self._data_raw = None
+            self._data_cls = self[1]
+    
+    def _set_data_raw(self):
+        if not hasattr(self, '_data_raw'):
+            self._init_data_attr()
+        if self._data_raw is None:
+            self._data_raw = Buf('Data', rep=REPR_HEX, hier=1)
+            self._data_raw.set_blauto(lambda: self._get_data_len())
+        if self[1] != self._data_raw:
+            self.replace(self[1], self._data_raw)
+    
+    def _set_data_cls(self):
+        if not hasattr(self, '_data_cls'):
+            self._init_data_attr()
+        ie_cls, ie_desc = self._select_ie(self.get_type(), self[0]['Inst'].get_val())
+        if ie_cls is not None \
+        and (self._data_cls is None or not isinstance(self._data_cls, ie_cls)):
+            self._name = ie_desc
+            self._data_cls = ie_cls('Data', hier=1)
+            if not hasattr(self._data_cls, '_bl') or self._data_cls._bl is None:
+                self._data_cls.set_blauto(lambda: self._get_data_len())
+        if self._data_cls is not None and self[1] != self._data_cls:
+            self.replace(self[1], self._data_cls)
+    
+    def _select_ie(self, ie_type, ie_inst=0):
+        # get the envelope of the IE (GTPCMsg or GTPCIEGrouped) to check 
+        # msg-specific (locally defined) MAND / OPT IEs
+        ie_cls, ie_desc = None, None
+        env = self.get_env()
+        if env is not None and hasattr(env, 'MAND') and hasattr(env, 'OPT'):
+            if (ie_type, ie_inst) in env.MAND:
+                ie_cls, ie_desc = env.MAND[(ie_type, ie_inst)]
+            elif (ie_type, ie_inst) in env.OPT:
+                ie_cls, ie_desc = env.OPT[(ie_type, ie_inst)]
+        if ie_cls is None and ie_type in GTPCIETags_dict:
+            # IE type / instance not defined for this specific msg
+            # we still enable to set it
+            ie_cls  = GTPCIETags_dict[ie_type][0]
+            ie_desc = ie_cls.__name__
+        return ie_cls, ie_desc
+    
+    def _set_data_type(self, d, t):
+        if t is not None:
+            self.set_type(t)
+        if isinstance(d, bytes_types):
+            self._set_data_raw()
+        else:
+            self._set_data_cls()
+        self[1].set_val(d)
+    
+    # set_val() method can be used with both type of values for Data:
+    # - bytes, assigned to the Buf raw object
+    # - dedicated type, assigned to the dedicated object
     def set_val(self, val):
-        data_val = None
-        if isinstance(val, (tuple, list)) and val:
+        if isinstance(val, (tuple, list)) and 1<= len(val) <= 2:
             self[0].set_val(val[0])
-            self.set_ie_class()
-            if len(val) > 1:
-                data_val = val[1]
-        elif isinstance(val, dict) and 'Hdr' in val:
-                # copy the dict to avoid emptying the one passed as args
-                val = dict(val)
-                self[0].set_val(val['Hdr'])
-                del val['Hdr']
-                self.set_ie_class()
-                if val:
-                    data_val = val.popitem()
+            if len(val) == 2:
+                if isinstance(val[1], bytes_types):
+                    self._set_data_raw()
+                else:
+                    self._set_data_cls()
+                self[1].set_val(val[1])
+            else:
+                self._set_data_cls()
+        elif isinstance(val, dict):
+            if 'Data' in val:
+                if 'Hdr' in val and 'Type' in val['Hdr']:
+                    if val['Hdr']['Type'] != 254:
+                        self._set_data_type(val['Data'], val['Hdr']['Type'])
+                    elif 'TypeExt' in val['Hdr']:
+                        self._set_data_type(val['Data'], val['Hdr']['TypeExt'])
+                else:
+                    self._set_data_type(val['Data'], None)
+            else:
+                Envelope.set_val(self, val)
+                self._set_data_cls()
         else:
             Envelope.set_val(self, val)
-        if data_val:
-            try:
-                self[1].set_val(data_val)
-            except PycrateErr:
-                # try to restore the default Data buffer
-                buf = Buf('Data', rep=REPR_HEX, hier=1)
-                buf.set_val(data_val)
-                self.replace(self[1], buf)
     
     def _from_char(self, char):
         if self.get_trans():
             return
         self[0]._from_char(char)
-        self.set_ie_class()
-        # truncate char according to Len and decode IE data
-        ie_len = self[0][1].get_val()
-        if self[0][0].get_val() == 254:
-            ie_len -= 2
-        char_lb = char._len_bit
-        char._len_bit = min(char._cur + 8 * ie_len, char_lb)
-        self[1]._from_char(char)
-        char._len_bit = char_lb
-    
-    def set_ie_class(self):
-        """replace the default Data buffer with a specifically defined class sub-structure
-        according to the IE Type and Inst values in the Hdr
-        """
-        # this is were the potential replacement of the generic Data happens,
-        # according to the Hdr value
-        if isinstance(self[1], Buf) and self[1]._name == 'Data':
-            ie_type = self[0][0].get_val()
-            if ie_type == 254:
-                ie_type = self[0][4].get_val()
-            ie_inst = self[0][3].get_val()
-            ie_data, ie_desc = self._select_ie(ie_type, ie_inst)
-            if ie_data is not None:
-                self.replace(self[1], ie_data)
-            if ie_desc is not None:
-                self._name = ie_desc
-    
-    def _select_ie(self, ie_type, ie_inst=0):
-        # get the envelope of the IE (GTPCMsg or GTPCIEGrouped) to check 
-        # msg-specific (locally defined) MAND / OPT IEs
-        ie_class, ie_desc = None, None
-        env = self.get_env()
-        if env is not None and hasattr(env, 'MAND') and hasattr(env, 'OPT'):
-            if ie_type in env.MAND:
-                ie_class, ie_desc = env.MAND[ie_type]
-            elif (ie_type, ie_inst) in env.MAND:
-                ie_class, ie_desc = env.MAND[(ie_type, ie_inst)]
-            elif ie_type in env.OPT:
-                ie_class, ie_desc = env.OPT[ie_type]
-            elif (ie_type, ie_inst) in env.OPT:
-                ie_class, ie_desc = env.OPT[(ie_type, ie_inst)]
-        if ie_class is None and ie_type in GTPCIETags_dict:
-            # IE type / instance not defined for this specific msg
-            ie_class = GTPCIETags_dict[ie_type][0]
-        if ie_class is None:
-            return None, ie_desc
-        else:
-            return ie_class(hier=1), ie_desc
+        # 1st try decoding with the structured Data
+        char_cur = char._cur
+        self._set_data_cls()
+        try:
+            self[1]._from_char(char)
+        except PycrateErr:
+            # 2nd try decoding as raw Data
+            char._cur = char_cur
+            self._set_data_raw()
+            self[1]._from_char(char)
 
 
 class GTPCIEs(Sequence):
@@ -3966,10 +4009,10 @@ class GTPCIEs(Sequence):
     # this is to raise in case not all mandatory IEs are set in the grouped IE
     VERIF_MAND = True
     
-    # Each IE is identified by its Tag + Instance identifiers
-    # Each mandatory IE must be included at least 1 time in the msg, IE order is 
-    #    not specified 
-    # Each C, CO or Optional IE can be included 1 time or more in the msg
+    # IE order is not specified (which is different from GTPv1)
+    # Each IE is identified by its (Type, Instance) identifier
+    # Each mandatory IE (Type) must be included at least 1 time in the msg
+    # Each C, CO or Optional IE (Type) can be included 1 time or more in the msg
     # When linking IE, locally defined (grouped) IE have precedence over 
     #    globally defined IE (defined in GTPCIETags_dict)
     
@@ -3979,10 +4022,10 @@ class GTPCIEs(Sequence):
     MAND = {}
     OPT  = {}
     
-    # Warning: a single IE can be identified by several Tags, corresponding to different
+    # Warning: a single IE can be identified by several Types, corresponding to different
     # formatting (e.g. MMContext with tags 103 to 108)
-    # Also a single tag can lead to different IE formatting, depending of the grouped IE
-    # this is due to locally defined grouped IE for certain message types
+    # Also a single Type can lead to different IE formatting, depending of the grouped IEs
+    # this is due to locally defined grouped IEs for certain message types
     
     def __init__(self, *args, **kwargs):
         Sequence.__init__(self, *args, **kwargs)
@@ -3990,7 +4033,7 @@ class GTPCIEs(Sequence):
         self._ie_mand = set(self.MAND)
         for ie in self:
             self._ie_mand.discard( (ie[0]['Type'].get_val(), ie[0]['Inst'].get_val()) )
-        # add missing mandatory IEs
+        # add missing mandatory IEs, so we have a minimum well-formed message
         for typ, inst in self._ie_mand:
             self.add_ie(typ, inst)
             if isinstance(self[-1][1], GTPCIEs):
@@ -4145,6 +4188,13 @@ class EchoResp(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 2, 'T': 0}),
         EchoRespIEs(hier=1)
+        )
+
+
+# 7.1.3: Version Not Supported
+class VersionNotSupportedInd(GTPCMsg):
+    _GEN = (
+        GTPCHdr(val={'Type': 3, 'T': 0})
         )
 
 
@@ -7405,6 +7455,7 @@ GTPCDispatcher = {
     # TS 29.274
     1  : EchoReq,
     2  : EchoResp,
+    3  : VersionNotSupportedInd,
     32 : CreateSessionReq,
     33 : CreateSessionResp,
     34 : ModifyBearerReq,

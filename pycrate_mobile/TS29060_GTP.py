@@ -154,13 +154,13 @@ CauseRespRej_dict = {
 class Cause(Envelope):
     _GEN = (
         Uint('Resp', bl=1),
-        Uint('Reject', bl=1),
-        Uint('Value', bl=6)
+        Uint('Rej', bl=1),
+        Uint('Val', bl=6)
         )
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self['Value'].set_dicauto(self._get_dict)
+        self['Val'].set_dicauto(self._get_dict)
     
     def _get_dict(self):
         resp, rej = self[0].get_val(), self[1].get_val()
@@ -211,7 +211,7 @@ class PTMSI(Uint32):
 class ReorderingRequired(Envelope):
     _GEN = (
         Uint('spare', val=0x7f, bl=7, rep=REPR_HEX),
-        Uint('Value', bl=1),
+        Uint('Val', bl=1),
         )
 
 
@@ -254,7 +254,7 @@ class PTMSISignature(Uint24):
 class MSValidated(Envelope):
     _GEN = (
         Uint('spare', val=0x7f, bl=7, rep=REPR_HEX),
-        Uint('Value', bl=1),
+        Uint('Val', bl=1),
         )
 
 
@@ -283,7 +283,7 @@ _SelMode_dict = {
 class SelectionMode(Envelope):
     _GEN = (
         Uint('spare', val=0x3f, bl=6, rep=REPR_HEX),
-        Uint('Value', val=0, bl=2, dic=_SelMode_dict),
+        Uint('Val', val=0, bl=2, dic=_SelMode_dict),
         )
 
 
@@ -314,7 +314,7 @@ class TEIDDataII(Envelope):
     _GEN = (
         Uint('spare', val=0, bl=4, rep=REPR_HEX),
         Uint('NSAPI', val=5, bl=4),
-        Uint32('Value', rep=REPR_HEX),
+        Uint32('Val', rep=REPR_HEX),
         )
 
 
@@ -326,7 +326,7 @@ class TEIDDataII(Envelope):
 class TeardownInd(Envelope):
     _GEN = (
         Uint('spare', val=0x7f, bl=7, rep=REPR_HEX),
-        Uint('Value', bl=1),
+        Uint('Val', bl=1),
         )
 
 
@@ -363,7 +363,7 @@ class RABContext(Envelope):
 class RadioPrioritySMS(Envelope):
     _GEN = (
         Uint('spare', val=0x1f, bl=5, rep=REPR_HEX),
-        Uint('Value', bl=3),
+        Uint('Val', bl=3),
         )
 
 
@@ -376,7 +376,7 @@ class RadioPriority(Envelope):
     _GEN = (
         Uint('NSAPI', val=5, bl=4),
         Uint('spare', val=0, bl=1),
-        Uint('Value', bl=3),
+        Uint('Val', bl=3),
         )
 
 
@@ -389,7 +389,7 @@ class PacketFlowId(Envelope):
     _GEN = (
         Uint('spare', val=0, bl=4, rep=REPR_HEX),
         Uint('NSAPI', val=5, bl=4),
-        Uint8('Value'),
+        Uint8('Val'),
         )
 
 
@@ -437,7 +437,7 @@ class MSNotReachableReason(Uint8):
 class RadioPriorityLCS(Envelope):
     _GEN = (
         Uint('spare', val=0x1f, bl=5, rep=REPR_HEX),
-        Uint('Value', bl=3),
+        Uint('Val', bl=3),
         )
 
 
@@ -1079,7 +1079,7 @@ _RIMRoutingAddrDiscriminator_dict = {
 class RIMRoutingAddrDiscriminator(Envelope):
     _GEN = (
         Uint('spare', val=0, bl=4, rep=REPR_HEX),
-        Uint('Value', bl=4)
+        Uint('Val', bl=4)
         )
 
 
@@ -1333,7 +1333,7 @@ class CSGInfoReportingAction(Envelope):
 class CSGID(Envelope):
     _GEN = (
         Uint('spare', bl=5, rep=REPR_HEX),
-        Uint('Value', bl=27, rep=REPR_HEX),
+        Uint('Val', bl=27, rep=REPR_HEX),
         )
 
 
@@ -1345,7 +1345,7 @@ class CSGID(Envelope):
 class CMI(Envelope):
     _GEN = (
         Uint('spare', bl=7, rep=REPR_HEX),
-        Uint('Value', bl=1, dic={0: 'CSG membership', 1: 'non-CSG membership'})
+        Uint('Val', bl=1, dic={0: 'CSG membership', 1: 'non-CSG membership'})
         )
 
 
@@ -1451,7 +1451,7 @@ class CMSISDN(BufBCD):
 
 class ExtRANAPCause(Envelope):
     _GEN = (
-        Uint16('Value', rep=REPR_HEX), # RANAP Cause IE, APER encoded
+        Uint16('Val', rep=REPR_HEX), # RANAP Cause IE, APER encoded
         Buf('ext', val=b'', rep=REPR_HEX)
         )
 
@@ -1486,7 +1486,7 @@ class SelectionModeWithNSAPI(Envelope):
         Uint('spare', bl=4, rep=REPR_HEX),
         Uint('NSAPI', val=5, bl=4),
         Uint('spare', bl=6, rep=REPR_HEX),
-        Uint('Value', val=0, bl=2, dic=_SelMode_dict),
+        Uint('Val', val=0, bl=2, dic=_SelMode_dict),
         )
 
 
@@ -1497,7 +1497,7 @@ class SelectionModeWithNSAPI(Envelope):
 
 class ULITimestamp(Envelope):
     _GEN = (
-        Uint32('Value'),
+        Uint32('Val'),
         Buf('ext', val=b'', rep=REPR_HEX),
         )
 
@@ -1523,7 +1523,7 @@ class LocalHomeNetworkIDWithNSAPI(Envelope):
 class CNOperatorSelectionEntity(Envelope):
     _GEN = (
         Uint('spare', bl=6, rep=REPR_HEX),
-        Uint('Value', val=0, bl=2, dic={
+        Uint('Val', val=0, bl=2, dic={
             0: 'Serving Network has been selected by the UE',
             1: 'Serving Network has been selected by the network'}),
         Buf('ext', val=b'', rep=REPR_HEX),
@@ -1903,17 +1903,19 @@ class GTPIETV(_GTPIE):
         if self._data_raw is None:
             self._data_raw = Buf('Data', rep=REPR_HEX)
             self._data_raw.set_bl(self._data_cls.get_bl())
-        self.replace(self[1], self._data_raw)
+        if self[1] != self._data_raw:
+            self.replace(self[1], self._data_raw)
     
     def _set_data_cls(self):
         if not hasattr(self, '_data_cls'):
             self._init_data_attr()
-        if self._data_cls is None:
-            try:
-                self._data_cls = GTPIELUT[self[0].get_val()]('Data')
-            except KeyError:
-                pass
-        if self._data_cls is not None:
+        try:
+            ie_cls = GTPIELUT[self[0].get_val()]
+        except KeyError:
+            return
+        if self._data_cls is None or not isinstance(self._data_cls, ie_cls):
+            self._data_cls = ie_cls('Data')
+        if self[1] != self._data_cls:
             self.replace(self[1], self._data_cls)
     
     def _set_data_type(self, d, t):
@@ -2027,7 +2029,7 @@ class GTPIETLV(_GTPIE):
             return t
     
     def set_type(self, t):
-        if t > 255:
+        if t > 255 or t == 238:
             self[0].set_val(238)
             self[2].set_val(t)
         else:
@@ -2039,20 +2041,21 @@ class GTPIETLV(_GTPIE):
         if self._data_raw is None:
             self._data_raw = Buf('Data', rep=REPR_HEX)
             self._data_raw.set_blauto(lambda: self._get_data_len())
-        self.replace(self[3], self._data_raw)
+        if self[3] != self._data_raw:
+            self.replace(self[3], self._data_raw)
     
     def _set_data_cls(self):
         if not hasattr(self, '_data_cls'):
             self._init_data_attr()
-        if self._data_cls is None:
-            try:
-                self._data_cls = GTPIELUT[self.get_type()]('Data')
-            except KeyError:
-                pass
-            else:
-                if not hasattr(self._data_cls, '_bl') or self._data_cls._bl is None:
-                    self._data_cls.set_blauto(lambda: self._get_data_len())
-        if self._data_cls is not None:
+        try:
+            ie_cls = GTPIELUT[self.get_type()]
+        except KeyError:
+            return
+        if self._data_cls is None or not isinstance(self._data_cls, ie_cls):
+            self._data_cls = ie_cls('Data')
+            if not hasattr(self._data_cls, '_bl') or self._data_cls._bl is None:
+                self._data_cls.set_blauto(lambda: self._get_data_len())
+        if self[3] != self._data_cls:
             self.replace(self[3], self._data_cls)
     
     def _set_data_type(self, d, t):
@@ -2309,7 +2312,7 @@ class BufAligned(Buf):
 # prototype for the content of a generic Ext Header
 class GTPHdrExtCont(Envelope):
     _GEN = (
-        BufAligned('Value', val=b'\0\0', rep=REPR_HEX),
+        BufAligned('Val', val=b'\0\0', rep=REPR_HEX),
         )
     
     _ID = 1
@@ -2331,7 +2334,7 @@ GTPHdrExtCont_dict = {
     1   : GTPHdrExtCont('MBMSSupportInd', val=[b'\xff\xff'], ID=1),
     2   : GTPHdrExtCont('MSInfoChangeReportSupportInd', val=[b'\xff\xff'], ID=2),
     130 : GTPHdrExtCont('PDCPPDUNumber', Gen=(
-            Uint16('Value', val=0),
+            Uint16('Val', val=0),
             ), ID=130),
     193 : GTPHdrExtCont('SuspendRequest', val=[b'\xff\xff'], ID=193),
     194 : GTPHdrExtCont('SuspendResponse', val=[b'\xff\xff'], ID=194),
