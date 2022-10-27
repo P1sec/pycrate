@@ -1909,13 +1909,12 @@ class GTPIETV(_GTPIE):
     def _set_data_cls(self):
         if not hasattr(self, '_data_cls'):
             self._init_data_attr()
-        try:
-            ie_cls = GTPIELUT[self[0].get_val()]
-        except KeyError:
-            return
-        if self._data_cls is None or not isinstance(self._data_cls, ie_cls):
-            self._data_cls = ie_cls('Data')
-        if self[1] != self._data_cls:
+        if self._data_cls is None:
+            try:
+                self._data_cls = GTPIELUT[self[0].get_val()]('Data')
+            except KeyError:
+                pass
+        if self._data_cls is not None and self[1] != self._data_cls:
             self.replace(self[1], self._data_cls)
     
     def _set_data_type(self, d, t):
@@ -2047,15 +2046,15 @@ class GTPIETLV(_GTPIE):
     def _set_data_cls(self):
         if not hasattr(self, '_data_cls'):
             self._init_data_attr()
-        try:
-            ie_cls = GTPIELUT[self.get_type()]
-        except KeyError:
-            return
-        if self._data_cls is None or not isinstance(self._data_cls, ie_cls):
-            self._data_cls = ie_cls('Data')
-            if not hasattr(self._data_cls, '_bl') or self._data_cls._bl is None:
-                self._data_cls.set_blauto(lambda: self._get_data_len())
-        if self[3] != self._data_cls:
+        if self._data_cls is None:
+            try:
+                self._data_cls = GTPIELUT[self.get_type()]('Data')
+            except KeyError:
+                pass
+            else:
+                if not hasattr(self._data_cls, '_bl') or self._data_cls._bl is None:
+                    self._data_cls.set_blauto(lambda: self._get_data_len())
+        if self._data_cls is not None and self[3] != self._data_cls:
             self.replace(self[3], self._data_cls)
     
     def _set_data_type(self, d, t):
