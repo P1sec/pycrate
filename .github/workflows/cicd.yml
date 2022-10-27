@@ -24,6 +24,10 @@ jobs:
         exclude:
           - os: windows-latest
             python-version: 2.7
+          - os: macos-latest
+            python-version: 2.7
+          - os: macos-latest
+            python-version: 3.5
     runs-on: ${{ matrix.os }}
     steps:
       - name: checkout
