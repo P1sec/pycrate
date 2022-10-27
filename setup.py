@@ -83,6 +83,10 @@ setup(
         },
     #include_package_data=False,
     
+    # include license file and remind the licensing here
+    license_files=('license.txt', ),
+    license="LGPL v2.1+",
+    
     author="Benoit Michau",
     author_email="michau.benoit@gmail.com",
     description="A software suite to handle various data formats",
@@ -90,5 +94,4 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/P1sec/pycrate/",
     keywords="protocol format ASN.1 CSN.1 compiler encoder decoder mobile core network Diameter NAS S1AP NGAP TCAP MAP GTP PFCP SCCP ISUP",
-    license="LGPL v2.1+",
     )
