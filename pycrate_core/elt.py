@@ -490,6 +490,22 @@ class Element(object):
         #
         return None
     
+    def fullname(self):
+        """Returns the full name of self, including all its envelopes' names
+        
+        Args:
+            None
+        
+        Returns:
+            fullname (str) : full name
+        """
+        fn  = [self._name]
+        env = self.get_env()
+        while env:
+            fn.append(env._name)
+            env = env.get_env()
+        return '.'.join(fn[::-1])
+    
     
     #--------------------------------------------------------------------------#
     # format routines
