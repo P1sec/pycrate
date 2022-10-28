@@ -3984,6 +3984,8 @@ class GTPCIE(Envelope):
         else:
             Envelope.set_val(self, val)
     
+    # _from_char() method attempts to decode Data with the dedicated object
+    # and fallbacks to the Buf raw object if failing with the former.
     def _from_char(self, char):
         if self.get_trans():
             return
@@ -4008,6 +4010,8 @@ class GTPCIEs(Sequence):
     
     # this is to raise in case not all mandatory IEs are set in the grouped IE
     VERIF_MAND = True
+    # this is to always add mandatory IEs, even if not set appropriately
+    _SET_MAND  = True
     
     # IE order is not specified (which is different from GTPv1)
     # Each IE is identified by its (Type, Instance) identifier
@@ -4016,7 +4020,7 @@ class GTPCIEs(Sequence):
     # When linking IE, locally defined (grouped) IE have precedence over 
     #    globally defined IE (defined in GTPCIETags_dict)
     
-    # Hence a GTPCIEGrouped have 2 dicts:
+    # Hence GTPCIEs has 2 dicts:
     # MAND: (Tag, Inst) -> locally or globally defined IE class
     # OPT : (Tag, Inst) -> locally or globally defined IE class
     MAND = {}
@@ -4027,17 +4031,23 @@ class GTPCIEs(Sequence):
     # Also a single Type can lead to different IE formatting, depending of the grouped IEs
     # this is due to locally defined grouped IEs for certain message types
     
+    
     def __init__(self, *args, **kwargs):
         Sequence.__init__(self, *args, **kwargs)
-        # ensure at least all mandatory IEs are there
-        self._ie_mand = set(self.MAND)
-        for ie in self:
-            self._ie_mand.discard( (ie[0]['Type'].get_val(), ie[0]['Inst'].get_val()) )
-        # add missing mandatory IEs, so we have a minimum well-formed message
-        for typ, inst in self._ie_mand:
-            self.add_ie(typ, inst)
-            if isinstance(self[-1][1], GTPCIEs):
-                self[-1][1].init_ies(wopt=False, wpriv=False)
+        if 'val' not in kwargs:
+            self.init_ies(wopt=False, wpriv=False)
+    
+    def set_val(self, vals):
+        Sequence.set_val(self, vals)
+        if self._SET_MAND:
+            # ensure at least all mandatory IEs are there
+            self._ie_mand = set(self.MAND)
+            for ie in self._content:
+                self._ie_mand.discard( (ie[0]['Type'].get_val(), ie[0]['Inst'].get_val()) )
+            for typ, inst in self._ie_mand:
+                self.add_ie(typ, inst)
+                if isinstance(self[-1][1], GTPCIEs):
+                    self[-1][1].init_ies(wopt=False, wpriv=False)
     
     def _from_char(self, char):
         if self.get_trans():
@@ -4045,7 +4055,7 @@ class GTPCIEs(Sequence):
         #
         if self._content:
             # reinitialize the Sequence to an empty one
-            self.__init__()
+            self.clear()
         # decode the sequence of IEs, whatever they are
         Sequence._from_char(self, char)
         #
@@ -4062,9 +4072,11 @@ class GTPCIEs(Sequence):
         """add the IE of given type `ie_type` and instance `ie_inst` and sets the
         value `val` (raw bytes buffer or structured data) into its data part
         """
-        self.set_val({self.get_num(): {'Hdr': {'Type': ie_type, 'Inst': ie_inst}}})
+        v = {'Hdr': {'Type': ie_type, 'Inst': ie_inst}}
         if val is not None:
-            self[-1][1].set_val(val)
+            v['Data'] = val
+        self.append( self._tmpl.clone() )
+        self._content[-1].set_val(v)
     
     def rem_ie(self, ie_type, ie_inst=0):
         """remove the IE of given type `ie_type` and instance `ie_inst`

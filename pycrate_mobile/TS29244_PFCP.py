@@ -501,58 +501,117 @@ class PFCPIE(Envelope):
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[1].set_valauto(lambda: self[3].get_len() + (2 if self[0].get_val() & 0x8000 else 0))
+        self[1].set_valauto(lambda: self._set_len())
         self[2].set_transauto(lambda: False if self[0].get_val() & 0x8000 else True)
-        self[3].set_blauto(lambda: (self[1].get_val() - (2 if self[0].get_val() & 0x8000 else 0)) << 3)
+        self[3].set_blauto(lambda: self._get_data_len())
     
+    def _set_len(self):
+        if self[0].get_val() & 0x8000:
+            # EID present
+            return 2 + self[3].get_len()
+        else:
+            return self[3].get_len()
+    
+    def _get_data_len(self):
+        if self[0].get_val() & 0x8000:
+            # EID present
+            return (self[1].get_val() - 2) << 3
+        else:
+            return self[1].get_val() << 3
+    
+    def _init_data_attr(self):
+        if isinstance(self[3], Buf):
+            self._data_raw = self[3]
+            self._data_cls = None
+        else:
+            self._data_raw = None
+            self._data_cls = self[3]
+    
+    def _set_data_raw(self):
+        if not hasattr(self, '_data_raw'):
+            self._init_data_attr()
+        if self._data_raw is None:
+            self._data_raw = Buf('Data', rep=REPR_HEX)
+            self._data_raw.set_blauto(lambda: self._get_data_len())
+        if self[3] != self._data_raw:
+            self.replace(self[3], self._data_raw)
+    
+    def _set_data_cls(self):
+        if not hasattr(self, '_data_cls'):
+            self._init_data_attr()
+        try:
+            ie_cls = PFCPIELUT[self[0].get_val()]
+        except KeyError:
+            return
+        if self._data_cls is None or not isinstance(self._data_cls, ie_cls):
+            self._name =  ie_cls.__name__
+            self._data_cls = ie_cls('Data')
+            if not hasattr(self._data_cls, '_bl') or self._data_cls._bl is None:
+                self._data_cls.set_blauto(lambda: self._get_data_len())
+        if self._data_cls is not None and self[3] != self._data_cls:
+            self.replace(self[3], self._data_cls)
+        
+    def _set_data_type(self, d, t):
+        if t is not None:
+            self[0].set_val(t)
+        if isinstance(d, bytes_types):
+            self._set_data_raw()
+        else:
+            self._set_data_cls()
+        self[3].set_val(d)
+    
+    # set_val() method can be used with both type of values for Data:
+    # - bytes, assigned to the Buf raw object
+    # - dedicated type, assigned to the dedicated object
     def set_val(self, val):
-        data_val = None
-        if isinstance(val, (tuple, list)) and len(val) > 3:
+        if isinstance(val, (tuple, list)) and 1 <= len(val) <= 4:
             self[0].set_val(val[0])
-            self.set_ie_class()
-            self[1].set_val(val[1])
-            self[2].set_val(val[2])
-            data_val = val[3]
-        elif isinstance(val, dict) and 'Type' in val:
-            data_val = dict(val)
-            hdr_val  = {k: data_val.pop(k) for k in ('Type', 'Len', 'EID') if k in data_val}
-            Envelope.set_val(self, hdr_val)
-            self.set_ie_class()
+            if len(val) > 1:
+                self[1].set_val(val[1])
+            if len(val) > 2:
+                self[2].set_val(val[2])
+            if len(val) == 4:
+                if isinstance(val[3], bytes_types):
+                    self._set_data_raw()
+                else:
+                    self._set_data_cls()
+                self[3].set_val(val[3])
+            else:
+                self._set_data_cls()
+        elif isinstance(val, dict):
+            if 'Data' in val:
+                if 'Type' in val:
+                    self._set_data_type(val['Data'], val['Type'])
+                else:
+                    self._set_data_type(val['Data'], None)
+                if 'Len' in val:
+                    self[1].set_val(val['Len'])
+                if 'EID' in val:
+                    self[2].set_val(val['EID'])
+            else:
+                Envelope.set_val(self, val)
+                self._set_data_cls()
         else:
             Envelope.set_val(self, val)
-        if data_val:
-            try:
-                self[3].set_val(data_val)
-            except PycrateErr:
-                # try to restore the default Data buffer
-                buf = Buf('Data', rep=REPR_HEX)
-                buf.set_blauto(lambda: (self[1].get_val() - (2 if self[0].get_val() & 0x8000 else 0)) << 3)
-                buf.set_val(data_val)
-                self.replace(self[3], buf)
     
+    # _from_char() method attempts to decode Data with the dedicated object
+    # and fallbacks to the Buf raw object if failing with the former.
     def _from_char(self, char):
         if self.get_trans():
             return
         self[0]._from_char(char)
         self[1]._from_char(char)
         self[2]._from_char(char)
-        self.set_ie_class()
-        self[3]._from_char(char)
-    
-    def set_ie_class(self):
-        """replace the default Data buffer with a specifically defined class sub-structure
-        according to the IE Type value
-        """
-        if isinstance(self[3], Buf) and self[3]._name == 'Data': 
-            ie_type = self[0].get_val()
-            if ie_type in PFCPIELUT:
-                # We instantiate the sub-structure for the IE data
-                # and provide the most appropriate naming to it (as we have some IEs 
-                # that may use the same structure) 
-                ie = PFCPIELUT[ie_type]()
-                if not hasattr(ie, '_bl') or ie._bl is None:
-                    ie.set_blauto(lambda: (self[1].get_val() - (2 if self[0].get_val() & 0x8000 else 0)) << 3)
-                self.replace(self[3], ie)
+        # 1st try decoding with the structured Data
+        char_cur = char._cur
+        self._set_data_cls()
+        try:
+            self[3]._from_char(char)
+        except PycrateErr:
+            # 2nd try decoding as raw Data
+            char._cur = char_cur
+            self._set_data_raw()
+            self[3]._from_char(char)
 
 
 class PFCPIEs(Sequence):
@@ -563,6 +622,8 @@ class PFCPIEs(Sequence):
     
     # this is to raise in case not all mandatory IEs are set in the grouped IE
     VERIF_MAND = True
+    # this is to always add mandatory IEs, even if not set appropriately
+    _SET_MAND  = True
     
     # Each IE is identified by its Type
     # Each mandatory IE must be included at least 1 time in the msg, IE order is 
@@ -570,21 +631,28 @@ class PFCPIEs(Sequence):
     # Each C, CO or Optional IE can be included 1 time or more in the msg
     
     # This defines sets of mandatory or optional (whether conditional or not) 
-    # IE types
-    MAND = {}
-    OPT  = {}
+    # PFCPIE types
+    MAND = set()
+    OPT  = set()
+    
     
     def __init__(self, *args, **kwargs):
         Sequence.__init__(self, *args, **kwargs)
         # ensure at least all mandatory IEs are there
-        self._ie_mand = set(self.MAND)
-        for ie in self:
-            self._ie_mand.discard( ie['Type'].get_val() )
-        # add missing mandatory IEs
-        for typ in self._ie_mand:
-            self.add_ie(typ)
-            if isinstance(self[-1], PFCPIEs):
-                self[-1].init_ies(wopt=False)
+        if 'val' not in kwargs:
+            self.init_ies(wopt=False)
+    
+    def set_val(self, vals):
+        Sequence.set_val(self, vals)
+        if self._SET_MAND:
+            # ensure at least all mandatory IEs are there
+            self._ie_mand = set(self.MAND)
+            for ie in self._content:
+                self._ie_mand.discard( ie[0].get_val() )
+            for typ in self._ie_mand:
+                self.add_ie(typ)
+                if isinstance(self[-1][1], PFCPIEs):
+                    self[-1][1].init_ies(wopt=False)
     
     def _from_char(self, char):
         if self.get_trans():
@@ -592,7 +660,7 @@ class PFCPIEs(Sequence):
         #
         if self._content:
             # reinitialize the Sequence to an empty one
-            self.__init__()
+            self.clear()
         # decode the sequence of IEs, whatever they are
         Sequence._from_char(self, char)
         #
@@ -600,7 +668,7 @@ class PFCPIEs(Sequence):
         if self.VERIF_MAND:
             self._ie_mand = set(self.MAND)
             for ie in self:
-                self._ie_mand.discard( ie['Type'].get_val() )
+                self._ie_mand.discard( ie[0].get_val() )
             if self._ie_mand:
                 raise(PFCPDecErr('{0}: missing mandatory IE(s), {1}'\
                       .format(self._name, ', '.join(['%i (%s)' % (i, PFCPIEType_dict[i]) for i in self._ie_mand]))))
@@ -609,10 +677,11 @@ class PFCPIEs(Sequence):
         """add the IE of given type `ie_type` and sets the value `val` (raw bytes 
         buffer or structured data) into its data part
         """
+        v = {'Type': ie_type}
         if val is not None:
-            self.set_val({self.get_num(): {'Type': ie_type, 'Data': val}})
-        else:
-            self.set_val({self.get_num(): {'Type': ie_type}})
+            v['Data'] = val
+        self.append( self._tmpl.clone() )
+        self._content[-1].set_val(v)
     
     def rem_ie(self, ie_type):
         """remove the IE of given type `ie_type`

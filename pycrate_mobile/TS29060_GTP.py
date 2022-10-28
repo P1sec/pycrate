@@ -2159,12 +2159,13 @@ class GTPIEs(Envelope):
     # this is to not show transparent (optional / conditional) IEs when they are not set
     ENV_SEL_TRANS = False
     
-    # MAND and OPT attributes are set for each GTPIEs subclass
-    MAND = set()
-    OPT  = set()
-    
     # this is to raise in case a mandatory IE is not found during the decoding
     VERIF_MAND = True
+    
+    # This defines sets of mandatory or optional (whether conditional or not) 
+    # GTPIE types
+    MAND = set()
+    OPT  = set()
     
     
     def __init__(self, *args, **kwargs):
