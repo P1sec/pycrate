@@ -2497,7 +2497,7 @@ class Array(Element):
         if vals is None:
             self._val = []
         #
-        elif isinstance(vals, dict):
+        elif isinstance(vals, dict) and vals:
             max_ind = max(vals.keys())
             if self._SAFE_STAT:
                 # ensure the val dict indexes are valid
@@ -2532,7 +2532,7 @@ class Array(Element):
             self._tmpl.set_val(None)
         #
         else:
-            raise(EltErr('{0} [set_val]: vals type is {1}, expecting None, tuple, list or dict'\
+            raise(EltErr('{0} [set_val]: vals type is {1}, expecting None, tuple, list or non-empty dict'\
                   .format(self._name, type(vals).__name__)))
     
     def get_val(self):
@@ -3401,7 +3401,7 @@ class Sequence(Element):
         if vals is None:
             self._content = []
         #
-        elif isinstance(vals, dict):
+        elif isinstance(vals, dict) and vals:
             max_ind = max(vals.keys())
             if self._SAFE_STAT:
                 # ensure the val dict indexes are valid
@@ -3445,7 +3445,7 @@ class Sequence(Element):
                 c.set_val(v)
         #
         else:
-            raise(EltErr('{0} [set_val]: vals type is {1}, expecting None, tuple, list or dict'\
+            raise(EltErr('{0} [set_val]: vals type is {1}, expecting None, tuple, list or non-empty dict'\
                   .format(self._name, type(vals).__name__)))
     
     def get_val(self):
