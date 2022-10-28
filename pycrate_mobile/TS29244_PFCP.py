@@ -2686,7 +2686,7 @@ class FQDN(Sequence):
     
     def encode(self, val):
         fqdn_labels = val.split('.')
-        Sequence.set_val(self, [{'Value': fqdn_label.encode()} for fqdn_label in fqdn_labels])
+        Sequence.set_val(self, [{'Val': fqdn_label.encode()} for fqdn_label in fqdn_labels])
     
     def decode(self):
         return '.'.join([fqdn_label[1].decode() for fqdn_label in self.get_val()])
