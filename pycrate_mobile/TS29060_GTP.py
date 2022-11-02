@@ -32,7 +32,6 @@
 #    ]
 
 from binascii import *
-from socket import inet_pton, inet_ntop, AF_INET, AF_INET6
 from enum   import IntEnum
 
 from pycrate_core.utils     import *
@@ -62,7 +61,7 @@ from pycrate_mobile.TS24007         import (
     TI
     )
 from pycrate_mobile.TS29002_MAPIE   import (
-    AddressString,
+    AddressString
     )
 
 
@@ -597,6 +596,18 @@ class QoSProfile(Envelope):
 # TS 29.060, section 7.7.29
 #------------------------------------------------------------------------------#
 
+class _LU8IPAddr(Envelope):
+    _GEN = (
+        Uint8('Len'),
+        IPAddr('Addr')
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: self[1].get_len())
+        self[1].set_blauto(lambda: self[0].get_val()<<3)
+
+
 class PDPContext(Envelope):
     _GEN = (
         Uint('EA', bl=1),
@@ -622,9 +633,9 @@ class PDPContext(Envelope):
         Uint('spare', val=0xf, bl=4, rep=REPR_HEX),
         Uint('PDPTypeOrg', val=1, bl=4, dic=_PDPTypeOrg_dict),
         Uint8('PDPType', val=33, dic=_PDPTypeNum_dict),
-        _LU8V('PDPAddr'),
-        GSNAddr('GSNAddrCP'),
-        GSNAddr('GSNAddrUP'),
+        _LU8IPAddr('PDPAddr'),
+        _LU8IPAddr('GSNAddrCP'),
+        _LU8IPAddr('GSNAddrUP'),
         Uint8('APNLen'),
         APN(),
         Uint('spare', val=0, bl=4, rep=REPR_HEX),
@@ -647,7 +658,7 @@ class PDPContext(Envelope):
 
 
 #------------------------------------------------------------------------------#
-# 
+# Authentication Quintuplet
 # TS 29.060, section 7.7.35
 #------------------------------------------------------------------------------#
 
@@ -1853,7 +1864,7 @@ GTPIEType_dict = {
     255 : ('TLV', -1, 'Private Extension', 'PrivateExt')
     }
 
-# LUT for IE resolving (name: class)
+# LUT for IE resolution (name: class)
 GTPIELUT = {}
 _globals = globals()
 _undef   = {
@@ -1973,7 +1984,7 @@ class GTPIETV(_GTPIE):
                     bl = {'Type': bl['Type']}
                 else:
                     return
-        Envelope.set_bl(bl)
+        Envelope.set_bl(self, bl)
     
     # _from_char() method attempts to decode Data with the dedicated object
     # and fallbacks to the Buf raw object if failing with the former.
