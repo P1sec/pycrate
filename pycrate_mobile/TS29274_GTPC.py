@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.4
+# * Version : 0.5
 # *
 # * Copyright 2019. Benoit Michau. P1Sec.
 # *
@@ -44,6 +44,7 @@ from pycrate_core.utils import *
 from pycrate_core.elt   import *
 from pycrate_core.base  import *
 
+from pycrate_ether.IP   import IPAddr
 from pycrate_mobile.TS29244_PFCP    import (
     BitFlags,
     FQCSID,
@@ -73,7 +74,6 @@ from pycrate_mobile.TS24008_IE      import (
     classmark_3_value_part,
     ms_network_capability_value_part,
     SuppCodecList,
-    IPAddr
     )
 from pycrate_mobile.TS44018_IE      import (
     ChanNeeded,

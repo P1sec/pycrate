@@ -27,12 +27,12 @@
 # *--------------------------------------------------------
 #*/ 
 
-from socket import inet_aton, inet_ntoa, AF_INET, AF_INET6
+from socket import inet_aton, inet_ntoa, inet_pton, inet_ntop, AF_INET, AF_INET6
 from struct import pack
 from array import array
 
-from pycrate_core.utils import reverse_dict, log
-from pycrate_core.elt   import Envelope, Sequence, REPR_RAW, REPR_HEX, REPR_BIN
+from pycrate_core.utils import reverse_dict, log, python_version, str_types
+from pycrate_core.elt   import Envelope, Sequence, REPR_RAW, REPR_HEX, REPR_BIN, REPR_HUM
 from pycrate_core.base  import *
 from pycrate_core.repr  import *
 
@@ -73,6 +73,58 @@ else:
 
 # End-Of-Scapy
 #------------------------------------------------------------------------------#
+
+
+class IPAddr(Buf):
+    """Custom `Buf' subclass supporting custom encode(), decode(), set_val() and repr() methods
+    specific for an IP address:
+    - IPv4 when length is 4 bytes
+    - IPv6 when length is 16 bytes
+    """
+    
+    _rep = REPR_HUM
+    
+    def encode(self, val):
+        try:
+            if val.count('.') == 3:
+                Buf.set_val(self, inet_pton(AF_INET, val))
+            elif val.count(':'):
+                Buf.set_val(self, inet_pton(AF_INET6, val))
+            else:
+                Buf.set_val(val)
+        except Exception as err:
+            raise(PycrateErr('invalid IP address string'))
+    
+    def decode(self):
+        val = self.get_val()
+        if len(val) == 4:
+            return inet_ntop(AF_INET, val)
+        elif len(val) == 16:
+            return inet_ntop(AF_INET6, val)
+        else:
+            return val
+    
+    def set_val(self, val):
+        if python_version == 2 and isinstance(val, unicode) \
+        or python_version > 2 and isinstance(val, str_types):
+            self.encode(val)
+        else:
+            Buf.set_val(self, val)
+    
+    def repr(self):
+        vallen = self.get_len()
+        if self._rep == REPR_HUM and vallen in {4, 16}:
+            # element transparency
+            if self.get_trans():
+                trans = ' [transparent]'
+            else:
+                trans = ''
+            val_repr = self.decode()
+            return '<%s%s : %s>' % (self._name, trans, val_repr)
+        else:
+            return Buf.repr(self)
+    
+    __repr__ = repr
 
 
 IPProt_dict = {
@@ -318,24 +370,12 @@ class IPv4(Envelope):
         Uint8('TTL', val=24),
         Uint8('proto', dic=IPProt_dict), # val automated, unless initialized to fixed value
         Uint16('hdr_cs', rep=REPR_HEX), # val automated
-        Buf('src', val=b'\x7f\0\0\x01', bl=32, rep=REPR_HEX),
-        Buf('dst', val=b'\x7f\0\0\x01', bl=32, rep=REPR_HEX),
+        IPAddr('src', val=b'\x7f\0\0\x01', bl=32),
+        IPAddr('dst', val=b'\x7f\0\0\x01', bl=32),
         Buf('opt', val=b'', rep=REPR_HEX), # bl automated
         )
     
     def __init__(self, *args, **kwargs):
-        if 'val' in kwargs:
-            # enable to pass IPv4 addr in human-readable format and convert them
-            if 'src' in kwargs['val'] and len(kwargs['val']['src']) > 4:
-                try:
-                    kwargs['val']['src'] = inet_aton(kwargs['val']['src'])
-                except Exception:
-                    pass
-            if 'dst' in kwargs['val'] and len(kwargs['val']['dst']) > 4:
-                try:
-                    kwargs['val']['dst'] = inet_aton(kwargs['val']['dst'])
-                except Exception:
-                    pass
         Envelope.__init__(self, *args, **kwargs)
         self['hdr_wlen'].set_valauto(lambda: 5 + (self['opt'].get_len()>>2))
         if 'val' not in kwargs or 'len' not in kwargs['val']:
@@ -390,23 +430,11 @@ class IPv6(Envelope):
         Uint16('plen'), # val automated, unless initialized to fixed value
         Uint8('next', dic=IPProt_dict), # val automated, unless initialized to fixed value
         Uint8('hop_limit', val=24),
-        Buf('src', val=15*b'\0'+b'\x01', bl=128, rep=REPR_HEX),
-        Buf('dst', val=15*b'\0'+b'\x01', bl=128, rep=REPR_HEX)
+        IPAddr('src', val=15*b'\0'+b'\x01', bl=128),
+        IPAddr('dst', val=15*b'\0'+b'\x01', bl=128)
         )
     
     def __init__(self, *args, **kwargs):
-        # enable to pass IPv4 addr in human-readable format
-        if 'val' in kwargs:
-            if 'src' in kwargs['val'] and len(kwargs['val']['src']) != 16:
-                try:
-                    kwargs['val']['src'] = inet_pton(AF_INET6, kwargs['val']['src'])
-                except:
-                    pass
-            if 'dst' in kwargs['val'] and len(kwargs['val']['dst']) != 16:
-                try:
-                    kwargs['val']['dst'] = inet_pton(AF_INET6, kwargs['val']['dst'])
-                except:
-                    pass
         Envelope.__init__(self, *args, **kwargs)
         if 'val' not in kwargs or 'plen' not in kwargs['val']:
             self[3].set_valauto(lambda: self._plen_val())

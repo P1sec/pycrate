@@ -77,7 +77,8 @@ from pycrate_core.base      import *
 from pycrate_core.charpy    import *
 
 from pycrate_ether.Ethernet     import EtherType_dict
-from pycrate_mobile.TS24008_IE  import PLMN, IPAddr
+from pycrate_ether.IP           import IPAddr
+from pycrate_mobile.TS24008_IE  import PLMN
 
 
 #------------------------------------------------------------------------------#

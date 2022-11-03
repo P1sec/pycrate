@@ -41,7 +41,8 @@ from pycrate_core.utils import *
 from pycrate_core.elt   import *
 from pycrate_core.base  import *
 
-from .TS24526_UEPOL import TrafficDescComp
+from pycrate_ether.IP   import IPAddr
+from pycrate_mobile.TS24526_UEPOL import TrafficDescComp
 
 
 #------------------------------------------------------------------------------#
@@ -144,11 +145,11 @@ class _IPAddr(Envelope):
     _GEN = (
         Uint8('Type', val=1, dic=_IPAddrType_dict),
         Alt('Addr', GEN={
-            1 : Buf('IPv4', bl=32, rep=REPR_HEX),
-            2 : Buf('IPv6', bl=128, rep=REPR_HEX),
+            1 : IPAddr('IPv4', bl=32, rep=REPR_HEX),
+            2 : IPAddr('IPv6', bl=128, rep=REPR_HEX),
             3 : Envelope('IPv4v6', GEN=(
-                    Buf('IPv4', bl=32, rep=REPR_HEX),
-                    Buf('IPv6', bl=128, rep=REPR_HEX))
+                    IPAddr('IPv4', bl=32, rep=REPR_HEX),
+                    IPAddr('IPv6', bl=128, rep=REPR_HEX))
                 )},
             DEFAULT=Buf('unk', val=b'', rep=REPR_HEX),
             sel=lambda self: self.get_env()['Type'].get_val())

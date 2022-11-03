@@ -34,21 +34,21 @@
 
 from binascii import hexlify, unhexlify
 from time     import struct_time
-from socket   import inet_ntop, inet_pton, AF_INET, AF_INET6
 
 from pycrate_core.utils  import *
 from pycrate_core.elt    import (
     Envelope, Array, Sequence, Alt,
     REPR_RAW, REPR_HEX, REPR_BIN, REPR_HD, REPR_HUM
     )
-from pycrate_core.base   import *
-from pycrate_core.repr   import *
-from pycrate_core.charpy import Charpy
+from pycrate_core.base      import *
+from pycrate_core.repr      import *
+from pycrate_core.charpy    import Charpy
 
-from .MCC_MNC import MNC_dict
-from .PPP     import LCP, LCPDataConf, NCP, NCPDataConf, PAP, CHAP
-from .TS23038 import *
-from .TS24007 import ProtDisc_dict
+from pycrate_ether.IP       import IPAddr
+from pycrate_mobile.MCC_MNC import MNC_dict
+from pycrate_mobile.PPP     import LCP, LCPDataConf, NCP, NCPDataConf, PAP, CHAP
+from pycrate_mobile.TS23038 import *
+from pycrate_mobile.TS24007 import ProtDisc_dict
 
 #------------------------------------------------------------------------------#
 # TS 24.008 IE specified with CSN.1
@@ -359,58 +359,6 @@ class PLMN(Buf):
         if self.REPR_MAXLEN > 0 and len(val_repr) > self.REPR_MAXLEN:
             val_repr = val_repr[:self.REPR_MAXLEN] + '...'
         return '<%s%s%s : %s>' % (self._name, desc, trans, val_repr)
-    
-    __repr__ = repr
-
-
-class IPAddr(Buf):
-    """Custom `Buf' subclass supporting custom encode(), decode(), set_val() and repr() methods
-    specific for an IP address:
-    - IPv4 when length is 4 bytes
-    - IPv6 when length is 16 bytes
-    """
-    
-    _rep = REPR_HUM
-    
-    def encode(self, val):
-        try:
-            if val.count('.') == 3:
-                Buf.set_val(self, inet_pton(AF_INET, val))
-            elif val.count(':'):
-                Buf.set_val(self, inet_pton(AF_INET6, val))
-            else:
-                Buf.set_val(val)
-        except Exception as err:
-            raise(PycrateErr('invalid IP address string'))
-    
-    def decode(self):
-        val = self.get_val()
-        if len(val) == 4:
-            return inet_ntop(AF_INET, val)
-        elif len(val) == 16:
-            return inet_ntop(AF_INET6, val)
-        else:
-            return val
-    
-    def set_val(self, val):
-        if python_version == 2 and isinstance(val, unicode) \
-        or python_version > 2 and isinstance(val, str_types):
-            self.encode(val)
-        else:
-            Buf.set_val(self, val)
-    
-    def repr(self):
-        vallen = self.get_len()
-        if self._rep == REPR_HUM and vallen in {4, 16}:
-            # element transparency
-            if self.get_trans():
-                trans = ' [transparent]'
-            else:
-                trans = ''
-            val_repr = self.decode()
-            return '<%s%s : %s>' % (self._name, trans, val_repr)
-        else:
-            return Buf.repr(self)
     
     __repr__ = repr
 
