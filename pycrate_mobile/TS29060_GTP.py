@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #/**
 # * Software Name : pycrate
-# * Version : 0.4
+# * Version : 0.5
 # *
 # * Copyright 2022. Benoit Michau. P1Sec.
 # *
@@ -40,6 +40,7 @@ from pycrate_core.base      import *
 from pycrate_core.utils     import PycrateErr
 from pycrate_core.charpy    import CharpyErr
 
+from pycrate_ether.IP       import IPAddr
 from pycrate_mobile.TS29274_GTPC    import (
     PCO, MMContextQuintuplet, MMContextTriplet, MMContextMSNetCap, RNCID, SAI,
     CGI, RIMRoutingAddr, PDUNumbers as GTPv2PDUNumbers, AMBR, 
@@ -50,7 +51,7 @@ from pycrate_mobile.TS29244_PFCP    import (
     _LU8V, _Timer, FQDN
     )
 from pycrate_mobile.TS24008_IE      import (
-    BufBCD, RAI, PDPAddr, CiphAlgo_dict, DRXParam, QoS, IPAddr, APN,
+    BufBCD, RAI, PDPAddr, CiphAlgo_dict, DRXParam, QoS, APN,
     TFT, _PDPTypeOrg_dict, _PDPTypeNum_dict, TimeZone, DLSavingTime, TMGI, PLMN,
     PacketFlowId
     )
@@ -1668,7 +1669,7 @@ class PacketTransferCmd(Uint8):
 class _DataRecord(Envelope):
     
     _GEN = (
-        Uint8('Len'),
+        Uint16('Len'),
         Buf('Val', rep=REPR_HEX)
         )
     
@@ -1907,8 +1908,8 @@ class _GTPIE(Envelope):
 class GTPIETV(_GTPIE):
     """GTPv1-C Information Element in Tag-Value format, with fixed length
     
-    The Data part is either a Buf object, either a dedicated object according to
-    the Type part.
+    The Data part is either a Buf object, or a dedicated object according to the
+    Type part.
     """
     
     _GEN = (
@@ -2008,8 +2009,8 @@ class GTPIETLV(_GTPIE):
     """GTPv1-C Information Element in Tag-Length-Value format, with extensible
     tag and variable length
     
-    The Data part is either a Buf object, either a dedicated object according to
-    the Type part.
+    The Data part is either a Buf object, or a dedicated object according to the
+    Type part.
     """
     
     ENV_SEL_TRANS = False
@@ -2150,17 +2151,6 @@ class GTPIETLV(_GTPIE):
             self[3]._from_char(char)
 
 
-def _get_type_from_char(char):
-    # this is only used inside GTPIEs._from_char()
-    # this routine can raise, and needs to be used inside a try-except stmt
-    typ = char.to_uint(8)
-    if typ == 238:
-        char._cur += 24
-        typ = char.to_uint(16)
-        char._cur -= 24
-    return typ
-    
-
 class GTPIEs(Envelope):
     """GTPv1-C sequence of Information Elements
     """
@@ -2178,6 +2168,8 @@ class GTPIEs(Envelope):
     MAND = set()
     OPT  = set()
     
+    # unknown / proprietary additional IE
+    _IE_unk = GTPIETLV
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
@@ -2209,6 +2201,16 @@ class GTPIEs(Envelope):
         else:
             Envelope.set_val(self, vals)
     
+    def _get_type_from_char(self, char):
+        # this is only used inside GTPIEs._from_char()
+        # this routine can raise, and needs to be used inside a try-except stmt
+        typ = char.to_uint(8)
+        if typ == 238:
+            char._cur += 24
+            typ = char.to_uint(16)
+            char._cur -= 24
+        return typ
+    
     def _from_char(self, char):
         if self.get_trans():
             return
@@ -2222,7 +2224,7 @@ class GTPIEs(Envelope):
         while char.len_byte() >= 1 and i < len_cont:
             ie = self._content[i]
             try:
-                char_type = _get_type_from_char(char)
+                char_type = self._get_type_from_char(char)
             except CharpyErr:
                 # not enough buffer available
                 break
@@ -2249,7 +2251,7 @@ class GTPIEs(Envelope):
         #
         # additional decoding for more undefined GTPIETLV 
         while char.len_bit() >= 24:
-            ie = GTPIETLV()
+            ie = self._IE_unk()
             try:
                 ie._from_char(char)
             except CharpyErr:
