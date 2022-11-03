@@ -170,6 +170,7 @@ class TestPycrate(unittest.TestCase):
         test_sigtran()
         test_sccp()
         test_isup()
+        test_gtpv0()
         test_gtp()
         test_gtpu()
         test_gtpc()

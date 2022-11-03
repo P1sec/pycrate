@@ -27,21 +27,23 @@
 # *--------------------------------------------------------
 #*/
 
-from timeit import timeit
+from binascii   import unhexlify
+from timeit     import timeit
 
 #from pycrate_core.elt               import Element
 #Element._SAFE_STAT = False
 #Element._SAFE_DYN  = False
 
 from pycrate_mobile.GSMTAP          import *
-from pycrate_mobile.NAS             import *
-from pycrate_mobile.SIGTRAN         import *
-from pycrate_mobile.SCCP            import *
-from pycrate_mobile.ISUP            import *
-from pycrate_mobile.TS29060_GTP     import *
-from pycrate_mobile.TS29281_GTPU    import *
-from pycrate_mobile.TS29274_GTPC    import *
-from pycrate_mobile.TS29244_PFCP    import *
+from pycrate_mobile.NAS             import parse_NAS_MO, parse_NAS_MT, parse_NAS5G
+from pycrate_mobile.SIGTRAN         import SIGTRAN
+from pycrate_mobile.SCCP            import parse_SCCP
+from pycrate_mobile.ISUP            import parse_ISUP
+from pycrate_mobile.TS0960_GTPv0    import parse_GTPv0
+from pycrate_mobile.TS29060_GTP     import parse_GTP
+from pycrate_mobile.TS29281_GTPU    import parse_GTPU
+from pycrate_mobile.TS29274_GTPC    import parse_GTPC
+from pycrate_mobile.TS29244_PFCP    import parse_PFCP
 from pycrate_diameter.Diameter      import DiameterGeneric
 from pycrate_diameter.DiameterIETF  import DiameterIETF
 from pycrate_diameter.Diameter3GPP  import Diameter3GPP
@@ -182,6 +184,14 @@ isup_pdu = tuple(map(unhexlify, (
     'bf081000', # ISUP Release Complete
     )))
 
+# GTPv0 messages
+gtpv0_pdu = tuple(map(unhexlify, (
+    '1e10008346830000ffffffff0001012143658759061b931f0e090ffc102d921126f8800002f1218300120573757065720361706e0767726f6c616e6484004080c0232301000023156d69636861656c2e6b61656c406e6577732e67726408746f746f3132333480211001000010810600000000830600000000000d000005008500040a141e288500040a141e2c860007919676688766f6', # CreatePDPCtxtReq
+    '1e11004f468326f8ffffffff00010121436587590180061b931f08fe1000431100437f162f405b800006f121c0a8424384002280000d0408080808000d0408080404802110030000108106080808088306080804048500040a46505a8500040a46505a', # CreatePDPCtxtResp
+    '1eff003000000043ffffffff000101214365875945000030004e0000ff06f6e4c0a84243c0a80101cd350050fcae3000000000007002400086550000020405b403030000', # GPDU
+    )))
+
+
 # GTPv1-C messages
 gtp_pdu = tuple(map(unhexlify, (
     '3213003527c9b42e6a2400000180100102030411010203047f11223344850004750102038500047501020487000f020a921f7396ccfe9601ffff003600', # UpdatePDPCtxtRespGGSN
@@ -212,7 +222,7 @@ gtpc_pdu = tuple(map(unhexlify, (
     '482400260000000100006e00490001000556000d001842f470102342f47000ad7b024d00040008000000', # Delete Session Req (nextepc project)
     '482000b300000000000012000100080042041728114920f656000d001842f470102342f47000ad7b025300030042f47052000100065700090086800000097f0000024700090008696e7465726e657480000100fc63000100014f00050001000000007f000100004e00100080000a00000d00001000ff00031301845d002c0049000100055700090284000000120a554bd3500016004d0900000000000000000000000000000000000000007200020021005f0002005400', # Create Session Req (nextepc project)
     '48b00012000000020000130049000100059b00010061', # DL Data Notif (nextepc project)
-    '485f0064000000010000020049000100055d0053004900010000540023002210010e301110ac160014ffffffff50c13321020e301110ac160014ffffffff50c1335700090081000000037f0000065000160008010000000041000000004100000000410000000041', #Create Bearer Req (open5gs project)
+    '485f0064000000010000020049000100055d0053004900010000540023002210010e301110ac160014ffffffff50c13321020e301110ac160014ffffffff50c1335700090081000000037f0000065000160008010000000041000000004100000000410000000041', # Create Bearer Req (open5gs project)
     '482000ec0012345601e240000100080000010189674523f14c00050011223344554b000800112233445566778856000d001800f110123400f110099887705300030000f1105200010006570009008612345678ac141e2847002300066d792d61706e08746573742d6d6e6f066d6e63303031066d63633030310467707273800001000163000100014f00050001000000007f000100004800080000100000001000004e001a008080211001000010810600000000830600000000000d00000a005d002c004900010005570009028444554455ac5a5046500016007c090000000000000000000000000000000000000000', #Create Session Req
     
     )))
@@ -359,6 +369,22 @@ def test_isup(isup_pdu=isup_pdu):
             assert( m.get_val() == v )
 
 
+def test_gtpv0(gtp_pdu=gtpv0_pdu):
+    for pdu in gtp_pdu:
+        m, e = parse_GTPv0(pdu)
+        assert( e == 0 )
+        v = m.get_val()
+        m.reautomate()
+        assert( m.get_val() == v )
+        m.set_val(v)
+        assert( m.to_bytes() == pdu )
+        #
+        if _with_json:
+            t = m.to_json()
+            m.from_json(t)
+            assert( m.get_val() == v )
+
+
 def test_gtp(gtp_pdu=gtp_pdu):
     for pdu in gtp_pdu:
         m, e = parse_GTP(pdu)
@@ -465,6 +491,10 @@ def test_perf_mobile():
     print('[+] ISUP decoding and re-encoding')
     Tj = timeit(test_isup, number=60)
     print('test_isup: {0:.4f}'.format(Tj))
+    
+    print('[+] GTPv0 decoding and re-encoding')
+    Tl = timeit(test_gtpv0, number=200)
+    print('test_gtpv0: {0:.4f}'.format(Tl))
     
     print('[+] GTPv1-C decoding and re-encoding')
     Tk = timeit(test_gtp, number=60)
