@@ -2861,7 +2861,7 @@ _PDPTypeOrg_dict = {
 
 _PDPTypeNum_dict = {
     # ETSI allocated
-    0 : 'reserved',
+    0 : 'X25', # TS 09.60, 7.9.18
     1 : 'PPP',
     # IETF allocated
     33 : 'IPv4',
