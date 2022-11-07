@@ -2214,6 +2214,12 @@ class GTPIEs(Envelope):
     def _from_char(self, char):
         if self.get_trans():
             return
+        # truncate char if length automation is set
+        if self._blauto is not None:
+            char_lb = char._len_bit
+            char._len_bit = char._cur + self._blauto()
+            if char._len_bit > char_lb:
+                raise(EltErr('{0} [_from_char]: bit length overflow'.format(self._name)))
         #
         # Go over all defined IE in the content 1 by 1
         # checking against the type decoded
@@ -2221,7 +2227,7 @@ class GTPIEs(Envelope):
         # decoding as much PrivateExt as present (can be set mutliple times)
         #
         i, len_cont = 0, len(self._content)
-        while char.len_byte() >= 1 and i < len_cont:
+        while char.len_bit() >= 8 and i < len_cont:
             ie = self._content[i]
             try:
                 char_type = self._get_type_from_char(char)
@@ -2259,6 +2265,10 @@ class GTPIEs(Envelope):
                 break
             else:
                 self.append(ie)
+        #
+        # in case of length automation, set the original length back
+        if self._blauto is not None:
+            char._len_bit = char_lb
     
     def add_ie(self, ie_name, val=None):
         """add the IE with the given identifier `ie_name` and sets the value `val` 
