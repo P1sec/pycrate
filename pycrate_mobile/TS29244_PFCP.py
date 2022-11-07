@@ -5456,7 +5456,7 @@ class PFCPHdr(Envelope):
     """PFCP Header
     """
     _GEN = (
-        Uint('Vers', val=1, bl=3),
+        Uint('Version', val=1, bl=3),
         Uint('spare', bl=2),
         Uint('FO', bl=1, dic={0: 'no Follow-On message', 1: 'Follow-On message'}),
         Uint('MP', bl=1),
@@ -5464,7 +5464,7 @@ class PFCPHdr(Envelope):
         Uint8('Type', dic=PFCPMsgType_dict),
         Uint16('Len'),
         Uint64('SEID', rep=REPR_HEX),
-        Uint24('Seqn'),
+        Uint24('SeqNum'),
         Alt('MPSel', GEN={
             0 : Uint8('spare'),
             1 : Envelope('MP', GEN=(
