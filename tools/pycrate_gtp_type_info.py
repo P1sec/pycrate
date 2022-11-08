@@ -31,9 +31,23 @@
 import sys
 import argparse
 
-from pycrate_mobile.TS29060_GTP     import * # GTPv1-C
-from pycrate_mobile.TS29274_GTPC    import * # GTPv2-C
-from pycrate_mobile.TS29281_GTPU    import * # GTP-U
+from pycrate_mobile.TS0960_GTPv0    import (
+    GTPv0Dispatcher,
+    GTPv0ReqResp
+    )
+from pycrate_mobile.TS29060_GTP     import (
+    GTPDispatcherSGSN,
+    GTPDispatcherGGSN,
+    GTPReqResp
+    )
+from pycrate_mobile.TS29274_GTPC    import (
+    GTPCDispatcher,
+    GTPCReqResp,
+    GTPC_IF_ALL
+    )
+from pycrate_mobile.TS29281_GTPU    import (
+    GTPUDispatcher,
+    )
 
 
 def _print_msgtype_info(cls):
@@ -42,14 +56,14 @@ def _print_msgtype_info(cls):
     print('  ' + Msg.show().replace('\n', '\n  '))
     #
     if isinstance(Msg[1].MAND, set):
-        # GTPv1-C
+        # GTP-C v0 and v1
         print('\n  mandatory IE(s): %s' % ', '.join(Msg[1].MAND))
     else:
-        # GTPv2-C
+        # GTP-C v2
         print('\n  mandatory IE(s): %s' % ', '.join(['%s (%i, %i)' % (v[1], k[0], k[1]) for k, v in Msg[1].MAND.items()]))
 
 
-GTPv1CCtxt = {
+GTPv0v1CCtxt = {
     'Path'  : 'path management',
     'Tun'   : 'tunnel management',
     'Loc'   : 'location management',
@@ -63,7 +77,10 @@ GTPv1CCtxt = {
 
 def _print_msgctxt_info(vers, typ):
     prot, inf = [], []
-    if vers == 1:
+    if vers == 0:
+        if typ in GTPv0Dispatcher:
+            prot.append('GTPv0')
+    elif vers == 1:
         if typ in GTPDispatcherSGSN:
             prot.append('GTPv1-C')
         if typ in GTPUDispatcher:
@@ -75,7 +92,23 @@ def _print_msgctxt_info(vers, typ):
             prot.append('GTP-U')
     print('  Message used in %s' % ' and '.join(prot))
     #
-    if 'GTPv1-C' in prot:
+    if 'GTPv0' in prot:
+        # transactional ctxt
+        disp = GTPv0Dispatcher
+        for ctxt, ctxt_dict in GTPv0ReqResp.items():
+            for ini, dst in ctxt_dict.items():
+                if ini[0] == typ:
+                    inf.append('%s (type %i) initiated by %s, sent to %s and responded with %s (type %s), used for %s' % (
+                               disp[ini[0]].__name__, ini[0], ini[1],
+                               dst[1], disp[dst[0]].__name__ if dst[0] else 'None', dst[0],
+                               GTPv0v1CCtxt[ctxt]))
+                elif dst[0] == typ:
+                    inf.append('%s (type %i) initiated by %s, sent to %s in response to %s (type %s), used for %s' % (
+                               disp[dst[0]].__name__, dst[0], dst[1],
+                               ini[1], disp[ini[0]].__name__, ini[0],
+                               GTPv0v1CCtxt[ctxt]))
+    #
+    elif 'GTPv1-C' in prot:
         # transactional ctxt
         for ctxt, ctxt_dict in GTPReqResp.items():
             for ini, dst in ctxt_dict.items():
@@ -84,15 +117,19 @@ def _print_msgctxt_info(vers, typ):
                         disp_ini, disp_resp = GTPDispatcherGGSN, GTPDispatcherSGSN
                     else:
                         disp_ini, disp_resp = GTPDispatcherSGSN, GTPDispatcherGGSN
-                    inf.append('%s (type %i) initiated by %s, sent to %s and responded with %s (type %s), used for %s'\
-                        % (disp_ini[ini[0]].__name__, ini[0], ini[1], dst[1], disp_resp[dst[0]].__name__ if dst[0] else 'None', dst[0], GTPv1CCtxt[ctxt]))
+                    inf.append('%s (type %i) initiated by %s, sent to %s and responded with %s (type %s), used for %s' % (
+                               disp_ini[ini[0]].__name__, ini[0], ini[1],
+                               dst[1], disp_resp[dst[0]].__name__ if dst[0] else 'None', dst[0],
+                               GTPv0v1CCtxt[ctxt]))
                 elif dst[0] == typ:
                     if dst[1] == 'SGSN':
                         disp_ini, disp_resp = GTPDispatcherSGSN, GTPDispatcherGGSN
                     else:
                         disp_ini, disp_resp = GTPDispatcherGGSN, GTPDispatcherSGSN
-                    inf.append('%s (type %i) initiated by %s, sent to %s in response to %s (type %s), used for %s'\
-                        % (disp_ini[dst[0]].__name__, dst[0], dst[1], ini[1], disp_resp[ini[0]].__name__, ini[0], GTPv1CCtxt[ctxt]))
+                    inf.append('%s (type %i) initiated by %s, sent to %s in response to %s (type %s), used for %s' % (
+                               disp_ini[dst[0]].__name__, dst[0], dst[1],
+                               ini[1], disp_resp[ini[0]].__name__, ini[0],
+                               GTPv0v1CCtxt[ctxt]))
         if inf:
             print('  - ' + '\n  - '.join(inf))
     #
@@ -128,9 +165,26 @@ def _print_msgctxt_info(vers, typ):
 # the entry for the app is the protocol version (V1 or V2) and the message type
 
 def print_msgtype_infos(vers, typ):
-    if vers == 1:
+    if vers == 0:
         if typ is None:
-            # list all GTPv1-C messages
+            # list all GTP-C v0 messages
+            for t in GTPv0Dispatcher:
+                print('- %3i: %s' % (t, GTPv0Dispatcher[t].__name__))
+        else:
+            for t in typ:
+                if t not in GTPv0Dispatcher:
+                    print('- %3i: type does not exist for GTPv0\n' % t)
+                else:
+                    # get the msg
+                    cls = GTPv0Dispatcher[t]
+                    print('- %3i: %s\n' % (t, cls.__name__))
+                    _print_msgctxt_info(vers, t)
+                    print('')
+                    _print_msgtype_info(cls)
+                    print('')
+    elif vers == 1:
+        if typ is None:
+            # list all GTP-C v1 messages
             for t in GTPDispatcherSGSN:
                 if t in {18, 19}:
                     print('- %3i: %s' % (t, GTPDispatcherSGSN[t].__name__))
@@ -174,7 +228,7 @@ def print_msgtype_infos(vers, typ):
     #
     elif vers == 2:
         if typ is None:
-            # list all GTPv2-C messages
+            # list all GTP-C v2 messages
             for t in GTPCDispatcher:
                 print('- %3i: %s' % (t, GTPCDispatcher[t].__name__))
         else:
@@ -189,21 +243,21 @@ def print_msgtype_infos(vers, typ):
                     print('')
                     _print_msgtype_info(cls)
                     print('')
+    #
+    else:
+        print('GTP version %i unknown' % vers)
 
 
 def main():
     parser = argparse.ArgumentParser(description='print information related to GTP-C '\
         'messages structure and context')
-    parser.add_argument('-v2', action='store_true', help='GTPv2 (TS 29.274, 29.276 and 29.280) instead of GTPv1 (TS 29.060 and TS 32.295)')
-    parser.add_argument('-t', type=int, nargs='+', help='GTP-C message type (0..255)')
+    parser.add_argument('-v', type=int, default=1,
+        help='GTPv0 (TS 09.60 and 12.15), GTPv1 (TS 29.060 and 32.295), GTPv2 (TS 29.274, 29.276 and 29.280), default to GTPv1')
+    parser.add_argument('-t', type=int, nargs='+',
+        help='GTP-C message type (0..255)')
     args = parser.parse_args()
     #
-    if args.v2:
-        vers = 2
-    else:
-        vers = 1
-    #
-    print_msgtype_infos(vers, args.t)
+    print_msgtype_infos(args.v, args.t)
     #
     return 0
 
