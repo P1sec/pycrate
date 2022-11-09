@@ -4150,21 +4150,9 @@ class GTPCMsg(Envelope):
         GTPCIEs(hier=1),
         )
     
-    def _from_char(self, char):
-        if self.get_trans():
-            return
-        # decode msg header
-        self[0]._from_char(char)
-        # truncate char according to Len
-        len_ies = self[0][6].get_val() - 4
-        if self[0][2].get_val():
-            len_ies -= 4
-        char_lb = char._len_bit
-        char._lb = char._cur + 8 * len_ies
-        # decode all IEs
-        self[1]._from_char(char)
-        # restore original char length
-        char._len_bit = char_lb
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[1].set_blauto(lambda: (self[0]['Len'].get_val() - (8 if self[0]['T'].get_val() else 4)) << 3)
 
 
 # Table 7.1.1-1: Information Elements in Echo Request
@@ -4204,9 +4192,18 @@ class EchoResp(GTPCMsg):
 
 
 # 7.1.3: Version Not Supported
+# the spec does not indicate any IEs for this msg, we stay conservative here however
+class VersionNotSupportedIndIEs(GTPCIEs):
+    MAND = {}
+    OPT  = {
+        255      : (PrivateExtension, 'PrivateExtension')
+        }
+
+
 class VersionNotSupportedInd(GTPCMsg):
     _GEN = (
         GTPCHdr(val={'Type': 3, 'T': 0}),
+        VersionNotSupportedIndIEs()
         )
 
 
