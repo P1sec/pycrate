@@ -4206,7 +4206,7 @@ class EchoResp(GTPCMsg):
 # 7.1.3: Version Not Supported
 class VersionNotSupportedInd(GTPCMsg):
     _GEN = (
-        GTPCHdr(val={'Type': 3, 'T': 0})
+        GTPCHdr(val={'Type': 3, 'T': 0}),
         )
 
 
