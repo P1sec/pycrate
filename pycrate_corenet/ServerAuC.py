@@ -135,12 +135,12 @@ class AuC:
         # X25519 example keypair (WARNING: use one you generated yourself):
         # pubkey: 5a8d38864820197c3394b92613b20b91633cbd897119273bf8e4a6f4eec0a650
         # privkey:
-        0 : ('A', unhexlify('c53c22208b61860b06c62e5406a7b330c2b577aa5558981510d128247d38bd1d')),
+        #0 : ('A', unhexlify('c53c22208b61860b06c62e5406a7b330c2b577aa5558981510d128247d38bd1d')),
         #
         # secp256r1 example keypair (WARNING: use one you generated yourself):
         # pubkey: 0272DA71976234CE833A6907425867B82E074D44EF907DFB4B3E21C1C2256EBCD1
         # privkey:
-        1 : ('B', unhexlify('F1AB1074477EBCC7F554EA1C5FC368B1616730155E0041AC447D6301975FECDA'))
+        #1 : ('B', unhexlify('F1AB1074477EBCC7F554EA1C5FC368B1616730155E0041AC447D6301975FECDA'))
         }
     
     def __init__(self):
@@ -607,8 +607,12 @@ class AuC:
             self._log('ERR', '[sidf_unconceal] EC processing error: %s' % err)
             return None
         else:
-            self._log('DBG', '[sidf_unconceal] SUCI ciphertext %s decrypted to %s'\
-                      % (hexlify(cipht).decode('ascii'), hexlify(cleart).decode('ascii')))
+            if cleart is not None:
+                self._log('DBG', '[sidf_unconceal] SUCI ciphertext %s decrypted to %s'\
+                          % (hexlify(cipht).decode('ascii'), hexlify(cleart).decode('ascii')))
+            else:
+                self._log('INF', '[sidf_unconceal] SUCI MAC %s verification failed'\
+                          % hexlify(mac).decode('ascii'))
             return cleart
 
 
@@ -716,14 +720,20 @@ def test():
             )
     #
     # SIDF
-    # set a HN private key for profile A
-    AuC.SIDF_ECIES_K[0] = ('A', b'0\xfd\xa5\x0321y\xbe\xb2#\x8d\xbb\x85\x84\xe4\xb3\xffb\xb9\xdd\x85\xf3\x18N\x89!7\x15\xd3\x7f2X')
+    # set a HN private key for profile A and profile B
+    AuC.SIDF_ECIES_K[0] = ('A', unhexlify('c53c22208b61860b06c62e5406a7b330c2b577aa5558981510d128247d38bd1d'))
+    AuC.SIDF_ECIES_K[1] = ('B', unhexlify('F1AB1074477EBCC7F554EA1C5FC368B1616730155E0041AC447D6301975FECDA'))
     auc = AuC()
     assert(
         auc.sidf_unconceal(
             0,
-            b'\x82\xcb\xb7\xb5\x00u\xc5/\xbd\xd8\xa4.\xbc|\x9ad,\x17\xa8(\xfdu\xd1\x7f\x01[::\xea\x97\xfay',
-            b'\xb8\xc3c{\xe4',
-            b'\xac\xeeXw\xca!\x04\xc6') == b'\x00\x00\x00\x00\x10'
+            unhexlify('b2e92f836055a255837debf850b528997ce0201cb82adfe4be1f587d07d8457d'),
+            unhexlify('cb02352410'),
+            unhexlify('cddd9e730ef3fa87')) == unhexlify('00012080f6') and \
+        auc.sidf_unconceal(
+            1,
+            unhexlify('039AAB8376597021E855679A9778EA0B67396E68C66DF32C0F41E9ACCA2DA9B9D1'),
+            unhexlify('46A33FC271'),
+            unhexlify('6AC7DAE96AA30A4D')) == unhexlify('00012080f6')
             )
 
