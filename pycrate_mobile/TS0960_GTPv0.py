@@ -584,7 +584,11 @@ class TID(Envelope):
         return self[0].decode() + str(self[2].get_val()), self[1].get_val()
     
     def set_val(self, vals):
-        if isinstance(vals, dict):
+        if isinstance(vals, (tuple, list)) and len(vals) in (1, 2) \
+        and isinstance(vals[0], str_types):
+            self.encode(*vals)
+            return
+        elif isinstance(vals, dict):
             if 'IMSI' in vals:
                 if 'NSAPI' in vals:
                     self.encode(vals['IMSI'], vals['NSAPI'])
