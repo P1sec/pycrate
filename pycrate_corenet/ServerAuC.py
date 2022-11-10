@@ -133,16 +133,14 @@ class AuC:
     SIDF_ECIES_K = {
         #
         # X25519 example keypair (WARNING: use one you generated yourself):
-        # pubkey: d6797fcf69c55e889e5bdf9fc4d300eff2aa5b539bb9e97efe14ca244727b029
-        #0 : ('A', unhexlify('38859b29cbbdee43fda218968f8b96bb9a7326ec05b43343939220fa2ac1ec56')),
+        # pubkey: 5a8d38864820197c3394b92613b20b91633cbd897119273bf8e4a6f4eec0a650
+        # privkey:
+        0 : ('A', unhexlify('c53c22208b61860b06c62e5406a7b330c2b577aa5558981510d128247d38bd1d')),
         #
         # secp256r1 example keypair (WARNING: use one you generated yourself):
-        # pubkey: 02519c4707c3535eb5a86a66d056696a45537d4d76e8997375dcd7d30b1f37c6c5
-        #1 : ('B', unhexlify('308187020100301306072a8648ce3d020106082a8648ce3d030107046d306b02'\
-        #                    '01010420d633fa02b1808226c0a27ddf093e332751f10cb002e8236d3723bb44'\
-        #                    '33a55d41a14403420004519c4707c3535eb5a86a66d056696a45537d4d76e899'\
-        #                    '7375dcd7d30b1f37c6c50fb946aec017a332ff00e3993f35b54992004894f7d2'\
-        #                    'fc1ee0df47fde0c91cf8')
+        # pubkey: 0272DA71976234CE833A6907425867B82E074D44EF907DFB4B3E21C1C2256EBCD1
+        # privkey:
+        1 : ('B', unhexlify('F1AB1074477EBCC7F554EA1C5FC368B1616730155E0041AC447D6301975FECDA'))
         }
     
     def __init__(self):
