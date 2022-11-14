@@ -2249,10 +2249,12 @@ class GTPIEs(Envelope):
                     # otherwise we go to the next IE
                     i += 1
         #
-        if i < len_cont-1 and self.VERIF_MAND:
+        if i < len_cont-1:
             # verify if some trailing mandatory IE have been ignored
             for ie in self._content[i:]:
-                if ie._name in self.MAND:
+                if not ie.get_trans():
+                    ie.set_trans(True)
+                if ie._name in self.MAND and self.VERIF_MAND:
                     raise(GTPDecErr('Missing mandatory GTP IE %s, type %i' % (ie._name, ie.get_type())))
         #
         # additional decoding for more undefined GTPIETLV 
