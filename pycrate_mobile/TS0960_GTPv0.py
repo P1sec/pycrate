@@ -800,12 +800,14 @@ class CreatePDPCtxtReqIEs(GTPv0IEs):
         'MSISDN',
         }
     OPT  = {
+        'RAI',
         'Recovery',
         'PCO',
         'PrivateExt'
         }
     
     _GEN = (
+        GTPv0IETV('RAI', val={'Type': GTPv0IEType.RAI.value}, bl={'Data': 48}, trans=True),
         GTPv0IETV('QoSProfile', val={'Type': GTPv0IEType.QoSProfile.value}, bl={'Data': 24}),
         GTPv0IETV('Recovery', val={'Type': GTPv0IEType.Recovery.value}, bl={'Data': 8}, trans=True),
         GTPv0IETV('SelectionMode', val={'Type': GTPv0IEType.SelectionMode.value}, bl={'Data': 8}),
@@ -886,11 +888,13 @@ class UpdatePDPCtxtReqIEs(GTPv0IEs):
         'SGSNAddrForUserTraffic',
         }
     OPT  = {
+        'RAI',
         'Recovery',
         'PrivateExt'
         }
     
     _GEN = (
+        GTPv0IETV('RAI', val={'Type': GTPv0IEType.RAI.value}, bl={'Data': 48}, trans=True),
         GTPv0IETV('QoSProfile', val={'Type': GTPv0IEType.QoSProfile.value}, bl={'Data': 24}),
         GTPv0IETV('Recovery', val={'Type': GTPv0IEType.Recovery.value}, bl={'Data': 8}, trans=True),
         GTPv0IETV('FlowLabelDataI', val={'Type': GTPv0IEType.FlowLabelDataI.value}, bl={'Data': 16}),
