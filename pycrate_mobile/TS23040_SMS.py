@@ -59,13 +59,12 @@ __all__ = [
 #------------------------------------------------------------------------------#
 
 from time import struct_time
-from math import ceil
 
 from pycrate_core.utils import *
 from pycrate_core.elt   import *
 from pycrate_core.base  import *
 
-from .TS24008_IE import BufBCD, _BCDType_dict, _NumPlan_dict
+from .TS24008_IE import BufBCD, _BCDType_dict, _NumPlan_dict, TimeZone
 from .TS24007    import *
 from .TS23038    import *
 
@@ -367,39 +366,8 @@ class _TP_SCTS_Comp(Envelope):
     __repr__ = repr
 
 
-class _TP_SCTS_TZ(Envelope):
-    _Sign_dict = {0: '+', 1: '-'}
-    _GEN = (
-        Uint('TZ1', bl=4),
-        Uint('TZS', bl=1, dic=_Sign_dict),
-        Uint('TZ0', bl=3)
-        )
-    
-    def set_val(self, vals):
-        if isinstance(vals, float):
-            self.encode(vals)
-        else:
-            Envelope.set_val(self, vals)
-    
-    def encode(self, val):
-        if val < 0:
-            self[1].set_val(1)
-            val = -val
-        else:
-            self[1].set_val(0)
-        if val != 0:
-            quart = ceil((val*4) % 128)
-            self[0].set_val( quart%16 )
-            self[2].set_val( quart>>4 )
-        else:
-            self[0].set_val(0)
-            self[2].set_val(0)
-    
-    def decode(self):
-        if self[1]() == 1:
-            return -0.25 * ((self[2]()<<4) + self[0]())
-        else:
-            return 0.25 * ((self[2]()<<4) + self[0]())
+# same as the TimeZone structure from 24.008 IE in section 10.5.3.8
+class _TP_SCTS_TZ(TimeZone):
     
     def repr(self):
         return '<TZ: %s%.2f>' % (self._Sign_dict[self[1]()], 0.25 * (self[0]() + (self[2]()<<4)))

@@ -34,6 +34,7 @@
 
 from binascii import hexlify, unhexlify
 from time     import struct_time
+from math     import ceil
 
 from pycrate_core.utils  import *
 from pycrate_core.elt    import (
