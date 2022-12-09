@@ -169,19 +169,23 @@ class LinkSigProc(SigProc):
     
     #--------------------------------------------------------------------------#
     
-    def decode_pdu(self, pdu, ret):
-        """decode the pdu and populate ret (dict) with the collected values
+    def decode_pdu(self, pdu, ret, ie_ident_int=False):
+        """decodes the pdu and populate `ret' (dict) with the collected IE names and
+        values
         
-        select the expected content in self.Cont, according to the pdu type
-        select the potential decoders in self.Decod
-        raise Exception if an error requiring procedure rejection is found
+        selects the expected content in self.Cont, according to the `pdu' type
+        selects the potential decoders in self.Decod
+        can raise an Exception if an error requiring procedure rejection is found
         
-        when unknown identifiers are encountered:
-        IE buffer value is set with key 'id_%id',
-        Extension buffer value is wet with key 'idext_%id'
-        
-        this enables to collect also IE and Extension that are not part of the
+        When unknown identifiers are encountered:
+        - IE buffer value is set with key 'id_%id',
+        - Extension buffer value is wet with key 'idext_%id'
+        This enables to collect also IE and Extension that are not part of the
         original ASN.1 specification
+        
+        If ie_ident_int is True, the IE integer identifier is used as key in `ret'
+        instead of the IE name. This may be required as some protocol may reuse the
+        same naming for different IE identifiers.
         """
         # 1) select the correct PDU and content
         ptype = pdu[0][:3]
@@ -221,7 +225,10 @@ class LinkSigProc(SigProc):
                 except Exception:
                     # unknown IE, c'est pas grave...
                     self._log('INF', 'decode_pdu: unknown IE ident in PDU, %r' % ie)
-                    ret['id_%i' % ident] = ie['value']
+                    if ie_ident_int:
+                        ret[ident] = ie['value']
+                    else:
+                        ret['id_%i' % ident] = ie['value']
                 else:
                     name = IE['Value']._tr._name
                     # check the ie criticality
@@ -234,9 +241,13 @@ class LinkSigProc(SigProc):
                         raise(CorenetErr('invalid IE value in PDU, id %i' % ident))
                     # collect and eventually transform the ie value
                     if ident in Decod[0]:
-                        ret[pythonize_name(name)] = Decod[0][ident](ie['value'][1])
+                        ie_val = Decod[0][ident](ie['value'][1])
                     else:
-                        ret[pythonize_name(name)] = ie['value'][1]
+                        ie_val = ie['value'][1]
+                    if ie_ident_int:
+                        ret[ident] = ie_val
+                    else:
+                        ret[pythonize_name(name)] = ie_val
                     # remove the value identifier from the list of mandatory values
                     if ident in mand:
                         mand.remove(ident)
@@ -251,7 +262,10 @@ class LinkSigProc(SigProc):
                 except Exception:
                     # unknown Extension, c'est pas grave non plus...
                     self._log('INF', 'decode_pdu: unknown Ext ident in PDU, %r' % ie)
-                    ret['idext_%i' % ident] = ie['extensionValue']
+                    if ie_ident_int:
+                        ret[ident] = ie['extensionValue']
+                    else:
+                        ret['idext_%i' % ident] = ie['extensionValue']
                 else:
                     name = IE['Extension']._tr._name
                     # check the ie criticality
@@ -264,9 +278,13 @@ class LinkSigProc(SigProc):
                         raise(CorenetErr('invalid Extension value in PDU, id %i' % ident))
                     # collect and eventually transform the ie value
                     if ident in Decod[1]:
-                        ret[pythonize_name(name)] = Decod[1][ident](ie['extensionValue'][1])
+                        ie_val = Decod[1][ident](ie['extensionValue'][1])
                     else:
-                        ret[pythonize_name(name)] = ie['extensionValue'][1]
+                        ie_val = ie['extensionValue'][1]
+                    if ie_ident_int:
+                        ret[ident] = ie_val
+                    else:
+                        ret[pythonize_name(name)] = ie_val
                     # remove the value identifier from the list of mandatory values
                     if ident in mand:
                         mand.remove(ident)
