@@ -784,6 +784,9 @@ class PriorityLevel(Envelope):
 
 class PLMNList(Array):
     _GEN = PLMN()
+    
+    def decode(self):
+        return [plmn.decode() for plmn in self]
 
 
 #------------------------------------------------------------------------------#
