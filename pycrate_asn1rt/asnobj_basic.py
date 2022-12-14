@@ -100,9 +100,9 @@ Single value: int 0
         if not isinstance(vbnd, tuple):
             raise(ASN1BERDecodeErr('{0}: invalid NULL constructed structure'\
                   .format(self.fullname())))
-        if vbnd[1] != vbnd[0]:
+        elif vbnd[1] != vbnd[0]:
             raise(ASN1BERDecodeErr('{0}: invalid NULL length, {1!r}'\
-                  .format(self.fullname(), lval)))
+                  .format(self.fullname(), vbnd)))
         self._val = 0
         return Buf('V', val=b'', bl=0)
     
@@ -110,9 +110,9 @@ Single value: int 0
         if not isinstance(vbnd, tuple):
             raise(ASN1BERDecodeErr('{0}: invalid NULL constructed structure'\
                   .format(self.fullname())))
-        if vbnd[1] != vbnd[0]:
+        elif vbnd[1] != vbnd[0]:
             raise(ASN1BERDecodeErr('{0}: invalid NULL length, {1!r}'\
-                  .format(self.fullname(), lval)))
+                  .format(self.fullname(), vbnd)))
         self._val = 0
     
     def _encode_ber_cont_ws(self):
