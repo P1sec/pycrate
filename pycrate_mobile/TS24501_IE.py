@@ -2553,8 +2553,8 @@ class QoSRule(Envelope):
         Uint8('Precedence', trans=True), # optional
         Envelope('Flow', GEN=(
             Uint('spare', bl=1),
-            Uint('Segregation', bl=2),
-            Uint('QFI', bl=5)),
+            Uint('Segregation', bl=1),
+            Uint('QFI', bl=6)),
             trans=True) # optional
         )
     
