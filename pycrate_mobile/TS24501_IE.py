@@ -27,6 +27,10 @@
 # *--------------------------------------------------------
 #*/
 
+import re
+from enum       import IntEnum
+from binascii   import unhexlify
+
 #------------------------------------------------------------------------------#
 # 3GPP TS 24.501: NAS protocol for 5G
 # release 16 (g20)
@@ -435,6 +439,13 @@ class FGSIDType(Envelope):
 # TS 24.501, 9.11.3.4
 #------------------------------------------------------------------------------#
 
+class FGSIDFMT(IntEnum):
+    IMSI    = 0
+    NSI     = 1
+    GCI     = 2
+    GLI     = 3
+
+# this is for backward compat, but should be removed at some time
 FGSIDFMT_IMSI    = 0
 FGSIDFMT_NSI     = 1
 FGSIDFMT_GCI     = 2
@@ -447,6 +458,29 @@ FGSIDFmt_dict    = {
     3 : 'GLI'   # NAI: username@domainname
     }
 
+# regexps for the NAI format
+# prefix for all kinds of NAI 
+_NAI_PREF = re.compile(r'type([0-3]{1})\.rid([0-9]{1,4})\.schid([0-9]{1,2})\.')
+# NULL, ECC and proprietary protection scheme
+_NAI_NULL = re.compile(r'userid([^@]*)@')
+_NAI_ECC  = re.compile(r'hnkey([0-9]{1,3})\.ecckey([0-9a-fA-F]{64,66})\.cip([0-9a-fA-F]{2,})\.mac([0-9a-fA-F]{16})@')
+_NAI_PROP = re.compile(r'hnkey([0-9]{1,3})\.out([0-9a-fA-F]{0,})@')
+# genric realm and 3GPP-specific one
+_NAI_REA  = re.compile(r'(.*)$')
+_NAI_REA_3GPP = re.compile(r'5gc\.mnc([0-9]{2,3})\.mcc([0-9]{3})\.3gppnetwork.org$')
+
+
+class FGSIDTYPE(IntEnum):
+    NO      = 0
+    SUPI    = 1
+    GUTI    = 2
+    IMEI    = 3
+    STMSI   = 4
+    IMEISV  = 5
+    MAC     = 6
+    EUI64   = 7
+
+# this is for backward compat, but should be removed at some time
 FGSIDTYPE_NO     = 0
 FGSIDTYPE_SUPI   = 1
 FGSIDTYPE_GUTI   = 2
@@ -466,6 +500,7 @@ FGSIDType_dict   = {
     6 : 'MAC address',
     7 : 'EUI-64'
     }
+
 
 _ProtSchemeID_dict = {
     0 : 'Null scheme',
@@ -487,7 +522,7 @@ _ProtSchemeID_dict = {
     }
 
 
-class SUCI_ECIESProfA(Envelope):
+class _SUCI_ECIESProfA(Envelope):
     # Curve25519
     _GEN = (
         Buf('ECCEphemPK', bl=256, rep=REPR_HEX),
@@ -507,7 +542,7 @@ class SUCI_ECIESProfA(Envelope):
         self[2]._from_char(char)
 
 
-class SUCI_ECIESProfB(Envelope):
+class _SUCI_ECIESProfB(Envelope):
     # secp256r1
     _GEN = (
         Buf('ECCEphemPK', bl=264, rep=REPR_HEX),
@@ -527,7 +562,7 @@ class SUCI_ECIESProfB(Envelope):
         self[2]._from_char(char)
 
 
-class SUCI_IMSI(Envelope):
+class _SUCI_IMSI(Envelope):
     _GEN = (
         PLMN(),
         BufBCD('RoutingInd', bl=16),
@@ -536,34 +571,310 @@ class SUCI_IMSI(Envelope):
         Uint8('HNPKID'),
         Alt('Output', GEN={
             0 : BufBCD('MSIN'),
-            1 : SUCI_ECIESProfA(),
-            2 : SUCI_ECIESProfB()
+            1 : _SUCI_ECIESProfA(),
+            2 : _SUCI_ECIESProfB()
             },
             DEFAULT=Buf('SUCI_UnkProf', rep=REPR_HEX),
             sel=lambda self: self.get_env()[3].get_val()) 
         )
+    
+    # TS 29.503, annex C, SBA representation
+    def from_sba(self, val):
+        try:
+            fmt, mcc, mnc, rind, scid, hnkid, outp = val.split('-')
+        except ValueError as err:
+            raise(PycrateErr('Invalid SUCI-IMSI SBA value: %s' % val))
+        if fmt != 0:
+            raise(PycrateErr('Invalid SUCI-IMSI SBA format value: %s' % fmt))
+        self[0].encode(mcc+mnc)
+        self[1].encode(rind)
+        self[3].set_val(int(scid, 16))
+        self[4].set_val(int(hnkid))
+        if self.get_env()[3].get_val() == 0:
+            # clear-text MSIN
+            self[5].get_alt().encode(outp)
+        else:
+            self[5].get_alt().from_bytes(unhexlify(outp))
+    
+    def to_sba(self):
+        plmn = self[0].decode()
+        rind = self[1].decode()
+        if self.get_env()[3].get_val() == 0:
+            # null-scheme
+            outp = self[5].get_alt().decode()
+        else:
+            # encrypted scheme
+            outp = self[5].get_alt().hex()
+        return '0-%s-%s-%s-%s-%s-%s' % (
+               plmn[:3],            # MCC
+               plmn[3:],            # MNC
+               rind,                # RoutingInd
+               self[3].hex(),       # ProtSchemeID
+               self[4].get_val(),   # HNPKID
+               outp                 # Output
+               )
+    
+    # TS 23.003, 28.7.3, NAI representation
+    def from_nai(self, val):
+        try:
+            m = _NAI_PREF.match(val)
+            if int(m.group(1)) != 0:
+                # Invalid format (must be 0 for IMSI)
+                raise(PycrateErr('Invalid SUCI-IMSI NAI format value: %i' % int(m.group(1)))) 
+            schid = int(m.group(3))
+            self[1].set_val(m.group(2))
+            self[3].set_val(schid)
+            valr = val[m.end():]
+            if schid == 0:
+                m = _NAI_NULL.match(valr)
+                self['Output'].get_alt().set_val(m.group(1))
+            elif schid in {1, 2}:
+                m = _NAI_ECC.match(valr)
+                self[4].set_val(m.group(1))
+                ecies = self['Output'].get_alt()
+                ecies[0].set_val(unhexlify(m.group(2)))
+                ecies[1].set_val(unhexlify(m.group(3)))
+                ecies[2].set_val(unhexlify(m.group(4)))
+            else:
+                m = _NAI_PROP.match(valr)
+                self[4].set_val(m.group(1))
+                self['Output'].get_alt().set_val(unhexlify(m.group(2)))
+            valr = valr[m.end():]
+            m = _NAI_REA_3GPP.match(valr)
+            self[0].set_val(m.group(2) + m.group(1))
+        except Exception as err:
+            raise(PycrateErr('Invalid SUCI-IMSI NAI value: %s (%r)' % (val, err)))
+    
+    def to_nai(self):
+        # utf8string: username@realm
+        schid = self['ProtSchemeID'].get_val()
+        if schid == 0:
+            # null-scheme
+            username = 'type0.rid%s.schid0.userid%s' % (
+                self[1].decode(),
+                self[5].get_alt().decode())
+        elif schid in {1, 2}:
+            # ECC
+            ecc = self[5].get_alt()
+            username = 'type0.rid%s.schid%i.hnkey%i.ecckey%s.cip%s.mac%s' % (
+                self[1].decode(),
+                schid,
+                self[4].get_val(),
+                ecc['ECCEphemPK'].hex(),
+                ecc['CipherText'].hex(),
+                ecc['MAC'].hex()
+                )
+        else:
+            # unknown / proprietary
+            username = 'type0.rid%s.schid%i.hnkey%i.out%s' % (
+                self[1].decode(),
+                schid,
+                self[4].get_val(),
+                self[5].get_alt().hex()
+                )
+        plmn  = self[0].decode()
+        return '%s@5gc.mnc%s.mcc%s.3gppnetwork.org' % (username, plmn[3:], plmn[:3])
 
 
-class SUCI_NAI(UTF8String):
-    pass
+class _SUCI_NAI(UTF8String):
+    # See TS 23.003, section 28.7.3
+    # SUPI NAI / SUCI NAI have both the form: username@realm
+    # In both cases, the realm is the same
+    
+    def __init__(self, *args, **kwargs):
+        UTF8String.__init__(self, *args, **kwargs)
+        self._cont = {
+            'rid'   : '',
+            'schid' : 0,
+            'hnkey' : 0,
+            'userid': '',
+            'ecckey': b'',
+            'cip'   : b'',
+            'mac'   : b'',
+            'out'   : b'',
+            'realm' : ''
+            }
+    
+    def clone(self):
+        clo = UTF8String.clone(self)
+        clo._cont = dict(self._cont)
+        return clo
+    
+    # this enables to set the value obtained from get_val_d() back
+    def set_val(self, val):
+        if isinstance(val, dict):
+            self._cont['realm'] = val.get('Realm', '')
+            self._cont['rid']   = val.get('RoutingInd', '')
+            self._cont['schid'] = val.get('ProtSchemeID', 0)
+            self._cont['hnkey'] = val.get('HNPKID', 0)
+            if self._cont['hnkey'] == 0:
+                self._cont['userid'] = val.get('UserID', '')
+            elif self._cont['hnkey'] in {1, 2}:
+                self._cont['ecckey'] = val.get('ECCEphemPK', b'')
+                self._cont['cip']    = val.get('CipherText', b'')
+                self._cont['mac']    = val.get('MAC', b'')
+            else:
+                self._cont['out']    = val.get('Output', b'')
+        else:
+            UTF8String.set_val(self, val)
+    
+    # this returns a dict similar to the format from a SUP-SUCI of fmt IMSI
+    def get_val_d(self):
+        ret = {
+            'Realm': self._cont['realm'],
+            'RoutingInd': self._cont['rid'],
+            'ProtSchemeID': self._cont['schid'],
+            'HNPKID': self._cont['hnkey'],
+            }
+        if self._cont['schid'] == 0:
+            ret['UserID']     = self._cont['userid']
+        elif self._cont['schid'] in {1, 2}:
+            ret['ECCEphemPK'] = self._cont['ecckey']
+            ret['CipherText'] = self._cont['cip']
+            ret['MAC']        = self._cont['mac']
+        else:
+            ret['Output']     = self._cont['out']
+        return ret
+     
+    # this enables to verify the format according to the NAI regexp and to 
+    # populate the specific attributes
+    def _from_char(self, char):
+        if self.get_trans():
+            return
+        try:
+            ustr = char.to_bytes().decode('utf-8')
+        except Exception as err:
+            raise(PycrateErr('Invalid SUCI-NAI buffer: %r' % err))
+        else:
+            self.from_nai(ustr)
+    
+    # TS 29.503, annex C, SBA representation
+    def from_sba(self, val):
+        # TODO
+        # because of null-scheme SUCI, this is however quite difficult and uncertain here
+        # as both username and realm can contain "-"
+        raise(PycrateErr('NotImplemented'))
+    
+    def to_sba(self):
+        ret = '%i-%s-%s-%i-%i-' % (
+            self.get_env()['Fmt'].get_val(), # Type
+            self._cont['realm'],
+            self._cont['rind'],
+            self._cont['schid'],
+            self._cont['hnkey'])
+        if self._schid == 0:
+            ret += self._cont['userid']
+        elif self._cont['schid'] in {1, 2}:
+            ret += hexlify(self._cont['ecckey'] + self._cont['cip'] + self._cont['mac'])
+        else:
+            ret += hexlify(self._cont['out'])
+    
+    # TS 23.003, 28.7.3, NAI representation
+    def from_nai(self, val):
+        try:
+            m = _NAI_PREF.match(val)
+            if int(m.group(1)) == 0:
+                # Invalid fmt (0 is for IMSI)
+                raise(Exception('Invalid SUCI-NAI format value: 0'))
+            self._cont['rid']   = m.group(2)
+            self._cont['schid'] = int(m.group(3))
+            if self._cont['schid'] > 15:
+                # Invalid ProtSchemeID
+                raise(Exception('Invalid SUCI-NAI scheme ID value: %i' % self._cont['schid']))
+            valr = val[m.end():]
+            if self._cont['schid'] == 0:
+                m = _NAI_NULL.match(valr)
+                self._cont['userid'] = m.group(1)
+            elif self._cont['schid'] in {1, 2}:
+                m = _NAI_ECC.match(valr)
+                self._cont['hnkey'] = int(m.group(1))
+                if self._cont['hnkey'] > 255:
+                    # Invalid HNPKID
+                    raise(Exception('Invalid SUCI-NAI HNPKID value: %i' % self._cont['hnkey']))
+                self._cont['ecckey'] = unhexlify(m.group(2))
+                self._cont['cip']    = unhexlify(m.group(3))
+                self._cont['mac']    = unhexlify(m.group(4))
+            else:
+                m = _NAI_PROP.match(valr)
+                self._cont['hnkey'] = int(m.group(1))
+                if self._cont['hnkey'] > 255:
+                    # Invalid HNPKID
+                    raise(Exception('Invalid SUCI-NAI HNPKID value: %i' % self._cont['hnkey']))
+                self._cont['out'] = unhexlify(m.group(2))
+            valr = valr[m.end():]
+            self._cont['realm'] = _NAI_REA.match(valr).group(1)
+        except Exception as err:
+            raise(PycrateErr('Invalid SUCI-NAI value: %s (%r)' % (val, err)))
+        else:
+            self.set_val(val)
+    
+    def to_nai(self):
+        return self.get_val()
 
 
 class FGSIDSUPI(Envelope):
     _name = '5GSIDSUPI'
     _GEN = (
         Uint('spare', bl=1),
-        Uint('Fmt', val=FGSIDFMT_IMSI, bl=3, dic=FGSIDFmt_dict),
+        Uint('Fmt', val=FGSIDFMT.IMSI, bl=3, dic=FGSIDFmt_dict),
         Uint('spare', bl=1),
-        Uint('Type', val=FGSIDTYPE_SUPI, bl=3, dic=FGSIDType_dict),
+        Uint('Type', val=FGSIDTYPE.SUPI, bl=3, dic=FGSIDType_dict),
         Alt('Value', GEN={
-            0: SUCI_IMSI(),
-            1: SUCI_NAI(),
-            2: SUCI_NAI(),
-            3: SUCI_NAI()},
+            0: _SUCI_IMSI('SUCI_IMSI'),
+            1: _SUCI_NAI('SUCI_NAI'),
+            2: _SUCI_NAI('SUCI_NAI'),
+            3: _SUCI_NAI('SUCI_NAI')},
             DEFAULT=Buf('SUPI_Unk', rep=REPR_HEX),
             sel=lambda self: self.get_env()[1].get_val()),
         )
-# see TS 29.503, annex C, for a human-readable representation of SUPI
+    
+    def set_val(self, vals):
+        if isinstance(vals, str_types):
+            FGSIDSUPI.from_nai(self, vals)
+        else:
+            Envelope.set_val(self, vals)
+    
+    # see TS 29.503, annex C, for the human-readable encoding
+    def from_sba(self, val):
+        """encode a str `val', as defined in TS 29.503, annex C
+        """
+        try:
+            self['Fmt'].set_val( int(val.split('-')[0]) )
+        except Exception as err:
+            raise(PycrateErr('Invalid 5GSID format value: %s' % val))
+        if fmt in {0, 1, 2, 3}:
+            self['Value'].get_alt().from_sba(val)
+        else:
+            raise(PyrateErr('Undefined 5GSID format value: %i' % self['Fmt'].get_val()))
+    
+    def to_sba(self):
+        """decode the value set to a str, as defined in TS 29.503, annex C
+        """
+        try:
+            return self['Value'].get_alt().to_sba()
+        except Exception as err:
+            raise(PycrateErr('Unknown 5GSID format value: %i (%r)' % (self['Fmt'].get_val(), err)))
+    
+    def from_nai(self, val):
+        """encode a str `val', as defined in TS 23.003, 28.7.3
+        """
+        try:
+            fmt = int(val[4:5])
+            self['Fmt'].set_val(fmt)
+        except Exception as err:
+            raise(PycrateErr('Invalid 5GSID format value: %s' % val))
+        if fmt in {0, 1, 2, 3}:
+            self['Value'].get_alt().from_nai(val)
+        else:
+            raise(PycrateErr('Undefined 5GSID format value: %i' % self['Fmt'].get_val()))
+    
+    def to_nai(self):
+        """decode the value set to a str, as defined in TS 23.003, 28.7.3
+        """
+        try:
+            return self['Value'].get_alt().to_nai()
+        except Exception as err:
+            raise(PycrateErr('Unknown 5GSID format value: %i (%r)' % (self['Fmt'].get_val(), err)))
 
 
 class FGSIDGUTI(Envelope):
@@ -571,7 +882,7 @@ class FGSIDGUTI(Envelope):
     _GEN = (
         Uint('ind', val=0xf, bl=4, rep=REPR_HEX),
         Uint('spare', bl=1),
-        Uint('Type', val=FGSIDTYPE_GUTI, bl=3, dic=FGSIDType_dict),
+        Uint('Type', val=FGSIDTYPE.GUTI, bl=3, dic=FGSIDType_dict),
         PLMN(),
         Uint8('AMFRegionID'),
         Uint('AMFSetID', bl=10),
@@ -585,9 +896,31 @@ class FGSIDDigit(Envelope):
     _GEN = (
         Uint('Digit1', bl=4),
         Uint('Odd', bl=1),
-        Uint('Type', val=FGSIDTYPE_IMEI, bl=3, dic=FGSIDType_dict),
+        Uint('Type', val=FGSIDTYPE.IMEI, bl=3, dic=FGSIDType_dict),
         BufBCD('Digits', val='')
         )
+    
+    def set_val(self, vals):
+        if isinstance(vals, str_types):
+            FGSIDDigit.encode(self, vals)
+        elif isinstance(vals, dict) and len(vals) == 1 and 'Digits' in vals:
+            # enable to set the whole BCD string, without setting explicitely Digit1
+            FGSIDDigit.encode(self, vals['Digits'])
+        else:
+            Envelope.set_val(self, vals)
+    
+    def encode(self, val):
+        """encode a digit-string provided in `val' 
+        """
+        self[0].set_val(int(val[0:1]))
+        if len(val) % 2:
+            self[1].set_val(1)
+        self[3].encode(val[1:])
+    
+    def decode(self):
+        """return a digit-string
+        """
+        return str(self[0].get_val()) + self['Digits'].decode()
 
 
 class FGSIDSTMSI(Envelope):
@@ -595,7 +928,7 @@ class FGSIDSTMSI(Envelope):
     _GEN = (
         Uint('ind', val=0xf, bl=4, rep=REPR_HEX),
         Uint('spare', bl=1),
-        Uint('Type', val=FGSIDTYPE_STMSI, bl=3, dic=FGSIDType_dict),
+        Uint('Type', val=FGSIDTYPE.STMSI, bl=3, dic=FGSIDType_dict),
         Uint('AMFSetID', bl=10),
         Uint('AMFPtr', bl=6),
         Uint32('5GTMSI', rep=REPR_HEX)
@@ -606,7 +939,7 @@ class FGSIDNone(Envelope):
     _name = '5GSIDNone'
     _GEN = (
         Uint('spare', bl=5, rep=REPR_HEX),
-        Uint('Type', val=FGSIDTYPE_NO, bl=3, dic=FGSIDType_dict)
+        Uint('Type', val=FGSIDTYPE.NO, bl=3, dic=FGSIDType_dict)
         )
 
 
@@ -615,7 +948,7 @@ class FGSIDMAC(Envelope):
     _GEN = (
         Uint('spare', bl=4, rep=REPR_HEX),
         Uint('MAURI', bl=1),
-        Uint('Type', val=FGSIDTYPE_MAC, bl=3, dic=FGSIDType_dict),
+        Uint('Type', val=FGSIDTYPE.MAC, bl=3, dic=FGSIDType_dict),
         Buf('MAC', bl=48, rep=REPR_HEX)
         )
 
@@ -624,7 +957,7 @@ class FGSIDEUI64(Envelope):
     _name = '5GSIDEUI64'
     _GEN = (
         Uint('spare', bl=5, rep=REPR_HEX),
-        Uint('Type', val=FGSIDTYPE_EUI64, bl=3, dic=FGSIDType_dict),
+        Uint('Type', val=FGSIDTYPE.EUI64, bl=3, dic=FGSIDType_dict),
         Buf('EUI64', bl=64, rep=REPR_HEX)
         )
 
@@ -633,79 +966,113 @@ class FGSID(Envelope):
     _name = '5GSID'
     
     _ID_LUT = {
-        FGSIDTYPE_NO     : FGSIDNone(),
-        FGSIDTYPE_SUPI   : FGSIDSUPI(),
-        FGSIDTYPE_GUTI   : FGSIDGUTI(),
-        FGSIDTYPE_IMEI   : FGSIDDigit('5GSIDIMEI'),
-        FGSIDTYPE_STMSI  : FGSIDSTMSI(),
-        FGSIDTYPE_IMEISV : FGSIDDigit('5GSIDIMEISV', val={'Type': FGSIDTYPE_IMEISV}),
-        FGSIDTYPE_MAC    : FGSIDMAC(),
-        FGSIDTYPE_EUI64  : FGSIDEUI64()
+        FGSIDTYPE.NO     : FGSIDNone(),
+        FGSIDTYPE.SUPI   : FGSIDSUPI(),
+        FGSIDTYPE.GUTI   : FGSIDGUTI(),
+        FGSIDTYPE.IMEI   : FGSIDDigit('5GSIDIMEI'),
+        FGSIDTYPE.STMSI  : FGSIDSTMSI(),
+        FGSIDTYPE.IMEISV : FGSIDDigit('5GSIDIMEISV', val={'Type': FGSIDTYPE.IMEISV}),
+        FGSIDTYPE.MAC    : FGSIDMAC(),
+        FGSIDTYPE.EUI64  : FGSIDEUI64()
         }
     
     def set_val(self, vals):
-        if isinstance(vals, dict) and 'Type' in vals:
-            type = vals['Type']
-            del vals['Type']
-            self.encode(type, **vals)
+        if isinstance(vals, NoneType):
+            # set 5GSID to No, explicitely
+            self._set_content(0)
+        elif isinstance(vals, dict) and 'Type' in vals:
+            typ = vals['Type']
+            self._set_content(typ)
+            self._ID_LUT[typ].__class__.set_val(self, vals)
         elif isinstance(vals, (tuple, list)):
-            if len(vals) >= 4 and vals[3] == FGSIDTYPE_SUPI:
-                self.encode(vals[3])
-            elif len(vals) >= 3 and vals[2] in (
-                FGSIDTYPE_GUTI,
-                FGSIDTYPE_IMEI,
-                FGSIDTYPE_IMEISV,
-                FGSIDTYPE_STMSI,
-                FGSIDTYPE_MAC):
-                self.encode(vals[2])
-            elif len(vals) >= 2 and vals[1] in (FGSIDTYPE_EUI64, FGSIDTYPE_NO):
-                self.encode(vals[1])
-            Envelope.set_val(self, vals)
+            # FGSIDNone: 2 elt (2)
+            # FGSIDSUPI: 5 elt (4)
+            # FGSIDGUTI: 8 elt (3)
+            # FGSIDDigit: 4 elt (3)
+            # FGSIDSTMSI: 6 elt (3)
+            # FGSIDMAC: 4 elt (3)
+            # FGSIDEUI64: 3 elt (2)
+            if len(vals) in {2, 3}:
+                typ = vals[1]
+            elif len(vals) == 5:
+                typ = vals[3]
+            elif len(vals) > 3:
+                typ = vals[2]
+            else:
+                typ = FGSIDTYPE.NO
+            self._set_content(typ)
+            self._ID_LUT[typ].__class__.set_val(self, vals)
         else:
             Envelope.set_val(self, vals)
     
-    def _set_content(self, type):
+    def _set_content(self, typ):
+        if not isinstance(typ, integer_types) or not 0 <= typ <= 7:
+            raise(PycrateErr('Invalid 5GSID type: %r' % typ))
+        #
         if 'Type' not in self._by_name:
             # need to create the appropriate content
-            for elt in self._ID_LUT[type]:
+            for elt in self._ID_LUT[typ]._content:
                 self.append(elt.clone())
-        elif self['Type'].get_val() != type:
+        elif self['Type'].get_val() != typ:
             # need to restructure the content
             self._content.clear()
             self._by_id.clear()
             self._by_name.clear()
-            for elt in self._ID_LUT[type]:
+            for elt in self._ID_LUT[typ]._content:
                 self.append(elt.clone())
     
-    def encode(self, type, **kwargs):
+    def encode(self, typ, val):
         """sets the 5GS mobile identity with given type
         
         The given types correspond to the following classes:
-        FGSIDTYPE_NO (0)     -> FGSIDNone
-        FGSIDTYPE_SUPI (1)   -> FGSIDSUPI
-        FGSIDTYPE_GUTI (2)   -> FGSIDGUTI
-        FGSIDTYPE_IMEI (3)   -> FGSIDDigit
-        FGSIDTYPE_STMSI (4)  -> FGSIDSTMSI
-        FGSIDTYPE_IMEISV (5) -> FGSIDDigit
-        FGSIDTYPE_MAC (6)    -> FGSIDMAC
-        FGSIDTYPE_EUI64 (7)  -> FGSIDEUI64
+        FGSIDTYPE.NO (0)     -> FGSIDNone
+        FGSIDTYPE.SUPI (1)   -> FGSIDSUPI, expecting a SUPI-SUCI envelope value or NAI string
+        FGSIDTYPE.GUTI (2)   -> FGSIDGUTI, expecting a GUTI envelope value
+        FGSIDTYPE.IMEI (3)   -> FGSIDDigit, expecting an IMEI envelope value or digit string
+        FGSIDTYPE.STMSI (4)  -> FGSIDSTMSI, expecting an STMSI envelope value
+        FGSIDTYPE.IMEISV (5) -> FGSIDDigit, expecting an IMEISV envelope value or digit string
+        FGSIDTYPE.MAC (6)    -> FGSIDMAC, expecting a MAC envelope value
+        FGSIDTYPE.EUI64 (7)  -> FGSIDEUI64, expecting a EUI64 envelope value
         """
-        if not isinstance(type, integer_types) or not 0 <= type <= 7:
-            raise(PycrateErr('invalid 5GS identity type: %r' % type))
         # set the appropriate content
-        self._set_content(type)
-        # pass the value to encode
-        Envelope.set_val(self, kwargs)
+        self._set_content(typ)
+        self._ID_LUT[typ].__class__.set_val(self, val)
+    
+    def decode(self):
+        """returns the mobile identity type and value
+        
+        FGSIDTYPE.NO (0), None
+        FGSIDTYPE.SUPI (1), SUPI-SUCI NAI string
+        FGSIDTYPE.GUTI (2), FGSIDGUTI envelope value
+        FGSIDTYPE.IMEI (3), IMEI digit string
+        FGSIDTYPE.STMSI (4), FGSIDSTMSI envelope value
+        FGSIDTYPE.IMEISV (5), IMEISV digit string
+        FGSIDTYPE.MAC (6), FGSIDMAC envelope value
+        FGSIDTYPE.EUI64 (7), FGSIDEUI64 envelope value
+        """
+        if 'Type' not in self._by_name:
+            return FGSIDTYPE.NO, None
+        typ = self['Type'].get_val()
+        if typ == FGSIDTYPE.NO:
+            return FGSIDTYPE.NO, None
+        elif typ == FGSIDTYPE.SUPI:
+            return FGSIDTYPE.SUPI, FGSIDSUPI.to_nai(self)
+        elif typ in {FGSIDTYPE.GUTI, FGSIDTYPE.STMSI}:
+            return typ, self[3:].get_val_d()
+        elif typ in {FGSIDTYPE.IMEI, FGSIDTYPE.IMEISV}:
+            return typ, FGSIDDigit.decode(self)
+        elif typ == FGSIDTYPE.MAC:
+            return FGSIDTYPE.MAC, {'MAURI': self[1].get_val(), 'MAC': self[3].get_val()}
+        elif typ == FGSIDTYPE.EUI64:
+            return FGSIDTYPE.EUI64, {'EUI64': self[2].get_val()}
     
     def _from_char(self, char):
         if self.get_trans():
             return
         # get the type and set the appropriate content
-        type = char.to_uint(8) & 0x7
-        self._set_content(type)
+        typ = char.to_uint(8) & 0x7
+        self._set_content(typ)
         Envelope._from_char(self, char)
-
-# TODO: implement encode(), decode() and repr() as in TS24008_IE.ID()
 
 
 #------------------------------------------------------------------------------#
@@ -824,11 +1191,17 @@ _FGSRegType_dict = {
     7 : _str_reserved
     }
 
+class FGSReg(IntEnum):
+    Initial     = 1
+    MobilityUpd = 2
+    PeriodicUpd = 3
+    Emergency   = 4
+
 class FGSRegType(Envelope):
     _name = '5GSRegType'
     _GEN = (
-        Uint('FOR', bl=1, dic=_FOR_dict),
-        Uint('Value', bl=3, dic=_FGSRegType_dict)
+        Uint('FOR', val=0, bl=1, dic=_FOR_dict),
+        Uint('Value', val=FGSReg.Initial,  bl=3, dic=_FGSRegType_dict)
         )
 
 
@@ -1175,11 +1548,16 @@ _DeregAccessType_dict = {
     3 : '3GPP access and non-3GPP access'
     }
 
+class FGSDereg(IntEnum):
+    TGPP            = 1
+    NonTGPP         = 2
+    TGPPAndNonTGPP  = 3
+
 class DeregistrationType(Envelope):
     _GEN = (
-        Uint('SwitchOff', bl=1, dic={0:'normal de-registration', 1:'switch off'}),
-        Uint('ReregistrationRequired', bl=1),
-        Uint('AccessType', val=1, bl=2, dic=_DeregAccessType_dict)
+        Uint('SwitchOff', val=0, bl=1, dic={0:'normal de-registration', 1:'switch off'}),
+        Uint('ReregistrationRequired', val=0, bl=1),
+        Uint('AccessType', val=FGSDereg.TGPP, bl=2, dic=_DeregAccessType_dict)
         )
 
 
