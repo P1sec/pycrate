@@ -34,18 +34,8 @@ from .ProcCNFGSM import *
 from .HdlrUESMS  import *
 
 from pycrate_mobile.TS24501_IE      import (
-    FGSIDTYPE_NO, # 0
-    FGSIDTYPE_SUPI,
-    FGSIDTYPE_GUTI,
-    FGSIDTYPE_IMEI,
-    FGSIDTYPE_STMSI,
-    FGSIDTYPE_IMEISV,
-    FGSIDTYPE_MAC,
-    FGSIDTYPE_EUI64, # 7
-    FGSIDFMT_IMSI, # 0
-    FGSIDFMT_NSI,
-    FGSIDFMT_GCI,
-    FGSIDFMT_GLI, # 3
+    FGSIDTYPE,
+    FGSIDFMT,
     UESecCap as FGSUESecCap
     )
 
@@ -428,10 +418,10 @@ class UENGd(SigStack):
     #
     # Identity type allowed in clear-text IdentityResponse
     SECNAS_RX_CT_IDTYPE = {
-        FGSIDTYPE_NO,
-        FGSIDTYPE_SUPI,
-        #FGSIDTYPE_GUTI,
-        #FGSIDTYPE_STMSI
+        FGSIDTYPE.NO,
+        FGSIDTYPE.SUPI,
+        #FGSIDTYPE.GUTI,
+        #FGSIDTYPE.STMSI
         }
     #
     # dropping invalid Rx message is the default behaviour

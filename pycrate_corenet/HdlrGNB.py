@@ -31,18 +31,8 @@ from .utils                     import *
 from .ProcCNNgap                import *
 
 from pycrate_mobile.TS24501_IE  import (
-    FGSIDTYPE_NO, # 0
-    FGSIDTYPE_SUPI,
-    FGSIDTYPE_GUTI,
-    FGSIDTYPE_IMEI,
-    FGSIDTYPE_STMSI,
-    FGSIDTYPE_IMEISV,
-    FGSIDTYPE_MAC,
-    FGSIDTYPE_EUI64, # 7
-    FGSIDFMT_IMSI, # 0
-    FGSIDFMT_NSI,
-    FGSIDFMT_GCI,
-    FGSIDFMT_GLI, # 3
+    FGSIDTYPE,
+    FGSIDFMT,
     )
 
 
@@ -343,7 +333,7 @@ class GNBd(object):
                 FgsId = NAS.FGSID()
                 FgsId.from_bytes(fgsid)
                 FgsIdType = FgsId['Type'].get_val()
-                if FgsIdType == FGSIDTYPE_SUPI and FgsId['Fmt'].get_val() == FGSIDFMT_IMSI:
+                if FgsIdType == FGSIDTYPE.SUPI and FgsId['Fmt'].get_val() == FGSIDFMT.IMSI:
                     psid = FgsId['Value']['ProtSchemeID'].get_val()
                     if psid == 0:
                         # clear-text IMSI
@@ -364,7 +354,7 @@ class GNBd(object):
                             return self.Server.get_ued(imsi=imsi), ran_ue_id
                     else:
                         return None, ran_ue_id
-                elif FgsIdType == FGSIDTYPE_GUTI:
+                elif FgsIdType == FGSIDTYPE.GUTI:
                     # TODO: should ensure PLMN and AMF identifiers correspond
                     return self.Server.get_ued(fgtmsi=FgsId['5GTMSI'].get_val()), ran_ue_id 
                 else:
