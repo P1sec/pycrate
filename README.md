@@ -35,14 +35,15 @@ Installation
 Operating systems and Python version
 ------------------------------------
 
-The library is designed to work with both Python 2 (2.7) and Python 3 (3.4, 3.5 and greater), 
-from the official Python implementation [CPython](https://www.python.org/).
-It is also supporting alternative Python engine such as [pypy](http://pypy.org/),
-[nuitka](http://nuitka.net/) or [Cython](https://cython.org/).
-It is regularly tested both on Linux and Windows, and should actually work on any
-operating system which has [r|d]ecent Python support (as in 2017, 2018 and more...).
+The library is designed to work with Python 3 (3.5 and greater), from the official Python 
+implementation [CPython](https://www.python.org/), and is systematically tested both on
+Linux, MacOS and Windows. It should also support alternative Python engine such as 
+[pypy](http://pypy.org/), [nuitka](http://nuitka.net/) or [Cython](https://cython.org/) ; 
+this is however not regularly tested. It should also support any other operating systems which
+has a decent Python 3 support.
 
-Starting from 2022, full Python2 support will not be abandonned slowly but progressively.
+Python2 support is entirely abandonned end of 2022, and hence release 0.5.5 is the last one with
+full support of Python 2.7.
 
 
 Dependencies
@@ -69,7 +70,7 @@ The _pycrate\_diameter/parse\_iana\_diameter\_xml.py_ file uses
 dictionnaries ; this is however not required for standard runtime.
 
 The _pycrate\_osmo/SEDebugMux.py_ module relies on the [crcmod](https://pypi.org/project/crcmod/)
-to compute CRC in the frame format.
+to compute custom CRC in the frame format.
 
 
 Automatic installation
@@ -335,8 +336,10 @@ This subdirectory implements most of the 3GPP NAS protocol formats:
 * *TS29002_MAPAppCtx*: functions that relies on the Pycrate_TCAP_MAPv2v3 ASN.1 module, dealing mostly with MAP application-contexts
 * *TS29002_MAPIE*: structure for the MAP AddressString object from TS 29.002
 * *TS29244_PFCP*: structure for PFCP messages from TS 29.244
-* *TS29274_GTPC*: structures for LTE/EPC GTP-C messages from TS 29.274
-* *TS29281_GTPU*: structures for LTE/EPC GTP-U messages from TS 29.281
+* *TS0960_GTPv0*: structures for 2G GTP version 0 from TS 09.60
+* *TS29060_GTP*: structures for 2G/3G GTP-C version 1 from TS 29.060
+* *TS29274_GTPC*: structures for 4G GTP-C version 2 from TS 29.274
+* *TS29281_GTPU*: structures for 2G/3G/4G/5G GTP-U from TS 29.281
 * *TS31111_SAT*: basic structures and dict for the SIM application toolkit from TS 31.111
 * *TS31115*: structures for SIM card's Secured Packets over SMS from TS 31.115
 * *TS38415_PDUSess*: structure used in 5G user-place traffic (i.e. GTP-U) from TS 38.415
