@@ -47,6 +47,11 @@ from pycrate_mobile.TS29244_PFCP    import parse_PFCP
 from pycrate_diameter.Diameter      import DiameterGeneric
 from pycrate_diameter.DiameterIETF  import DiameterIETF
 from pycrate_diameter.Diameter3GPP  import Diameter3GPP
+from pycrate_mobile.TS24501_IE      import (
+    FGSID,
+    FGSIDTYPE,
+    FGSIDFMT,
+    )
 #
 from pycrate_core.elt               import _with_json
 
@@ -308,6 +313,34 @@ def test_nas_5g(nas_pdu=nas_5g_pdu):
             assert( m.get_val() == v )
 
 
+fgsid_vals = (
+    {'Type': FGSIDTYPE.NO},
+    {'Type': FGSIDTYPE.SUPI, 'Fmt': FGSIDFMT.IMSI, 'Value': {'PLMN': '20869', 'RoutingInd': '1234', 'Output': '1234567890'}},
+    {'Type': FGSIDTYPE.SUPI, 'Fmt': FGSIDFMT.NSI, 'Value': 'type1.rid1234.schid0.useridusername@realm'},
+    {'Type': FGSIDTYPE.GUTI, 'PLMN': '20869', 'AMFRegionID': 0xaa, 'AMFSetID': 0x200, 'AMFPtr': 0x1f, '5GTMSI': 0x11223344},
+    {'Type': FGSIDTYPE.IMEI, 'Digits': '012345678901234'},
+    {'Type': FGSIDTYPE.STMSI, 'AMFSetID': 0x200, 'AMFPtr': 0x1f, '5GTMSI': 0x11223344},
+    {'Type': FGSIDTYPE.IMEISV, 'Digits': '01234567890123401'},
+    {'Type': FGSIDTYPE.MAC, 'MAURI': 0, 'MAC': b'\x0a\x00\x27\x00\x00\x00'},
+    {'Type': FGSIDTYPE.EUI64, 'EUI64': 8*b'\xaa'}
+    )
+
+def test_5gsid(vals=fgsid_vals):
+    for val in vals:
+        ident = FGSID(val=val)
+        buf = ident.to_bytes()
+        val = ident.get_val()
+        typ, dec = ident.decode()
+        ident = FGSID()
+        ident.from_bytes(buf)
+        assert(ident.decode() == (typ, dec))
+        ident = FGSID()
+        ident.encode(typ, dec)
+        assert(ident.to_bytes() == buf)
+        ident = FGSID(val=val)
+        assert(ident.to_bytes() == buf)
+
+
 def test_sigtran(sigtran_pdu=sigtran_pdu):
     for pdu in sigtran_pdu:
         S = SIGTRAN()
@@ -469,16 +502,20 @@ def test_pfcp(pfcp_pdu=pfcp_pdu):
 def test_perf_mobile():
     
     print('[+] NAS MO decoding and re-encoding')
-    Ta = timeit(test_nas_mo, number=15)
+    Ta = timeit(test_nas_mo, number=20)
     print('test_nas_mo: {0:.4f}'.format(Ta))
     
     print('[+] NAS MT decoding and re-encoding')
-    Tb = timeit(test_nas_mt, number=25)
+    Tb = timeit(test_nas_mt, number=30)
     print('test_nas_mt: {0:.4f}'.format(Tb))
     
     print('[+] NAS 5G decoding and re-encoding')
-    Tc = timeit(test_nas_5g, number=30)
+    Tc = timeit(test_nas_5g, number=40)
     print('test_nas_5g: {0:.4f}'.format(Tc))
+    
+    print('[+] 5GSID decoding and re-encoding')
+    Tl = timeit(test_5gsid, number=300)
+    print('test_5gsid: {0:.4f}'.format(Tl))
     
     print('[+] SIGTRAN decoding and re-encoding')
     Td = timeit(test_sigtran, number=500)
@@ -516,7 +553,7 @@ def test_perf_mobile():
     Ti = timeit(test_pfcp, number=50)
     print('test_pfcp: {0:.4f}'.format(Ti))
     
-    print('[+] test_mobile total time: {0:.4f}'.format(Ta+Tb+Tc+Td+Te+Tf+Tg+Th+Ti+Tj+Tk))
+    print('[+] test_mobile total time: {0:.4f}'.format(Ta+Tb+Tc+Td+Te+Tf+Tg+Th+Ti+Tj+Tk+Tl))
 
 
 if __name__ == '__main__':
