@@ -2,6 +2,7 @@
 
 from pycrate_asn1dir    import TCAP_MAPv2v3
 from pycrate_asn1dir    import S1AP
+from pycrate_asn1dir    import X2AP
 #
 from pycrate_core       import utils
 from pycrate_core       import charpy
@@ -25,6 +26,7 @@ def fuzz_tcap_map(buf):
 
 
 SP = S1AP.S1AP_PDU_Descriptions.S1AP_PDU
+X2 = X2AP.X2AP_PDU_Descriptions.X2AP_PDU
 
 @PythonFuzz
 def fuzz_s1ap(buf):
@@ -35,8 +37,18 @@ def fuzz_s1ap(buf):
     except utils.PycrateErr:
         pass
 
+@PythonFuzz
+def fuzz_x2ap(buf):
+    buf = bytes(buf)
+    try:
+        X2.from_aper(buf)
+        r = X2.to_aper()
+    except utils.PycrateErr:
+        pass
+
 
 if __name__ == '__main__':
     fuzz_tcap_map()
-    fuzz_s1ap()
+    #fuzz_s1ap()
+    fuzz_x2ap()
 
