@@ -459,6 +459,11 @@ Params_dict = {
 # works for both M2UA (RFC 3331) and M3UA (RFC 4666)
 
 class Param(Envelope):
+    """SIGTRAN parameter generic structure
+    
+    Supports both M3UA parameters (RFC 4666, section 3.2) and M2UA parameters (RFC 3331, 
+    section 3.1.6)
+    """
     _pad = b'\0'
     _GEN = (
         Uint16('Tag', dic=Params_dict),
@@ -470,25 +475,44 @@ class Param(Envelope):
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[1].set_valauto(lambda: 4+self[2].get_len())
-        self[2].set_blauto(lambda:  8*max(0, self[1].get_val()-4))
-        self[3].set_valauto(lambda: (-self[2].get_len()%4) * self._pad)
-        self[3].set_blauto(lambda:  8*(-self[2].get_len()%4))
+        self[2].set_blauto( lambda: 8*max(0, self[1].get_val()-4))
+        self[3].set_valauto(lambda: (-self[1].get_val()%4) * self._pad)
+        self[3].set_blauto( lambda: 8*(-self[1].get_val()%4))
     
     def _from_char(self, char):
+        if self.get_trans():
+            return
         self[0]._from_char(char)
         self[1]._from_char(char)
         self[2]._from_char(char)
         # this is to enable the decoding of some SIGTRAN implementations
         # were padding of the last parameter is omitted
-        if not char.len_bit():
+        if char.len_bit():
+            self[3]._from_char(char)
+        elif self[3].get_len():
             self[3].set_trans(True)
 
 
-class SIGTRAN(Envelope):
+class Params(Sequence):
+    """Sequence of SIGTRAN parameter generic structure
+    
+    Supports both M3UA parameters (RFC 4666, section 3.2) and M2UA parameters (RFC 3331, 
+    section 3.1.6)
+    """
+    _GEN = Param()
 
-    # warning RFC 4666: the length must take padding into account, 
+
+class SIGTRAN(Envelope):
+    """SIGTRAN message generic structure, including the common message header
+    and the sequence of parameters
+    
+    Supports both M3UA format (RFC 4666, section 3) and M2UA format (RFC 3331, section 3)
+    """
+    
+    # Warning RFC 4666: the length must take padding into account, 
     # otherwise there will be a mismatch with `Len' fields in the sequence of
     # parameters
+    
     # this class attribute enforces the Length field in the Header at decoding
     _LEN_ENFORCE = True
     
@@ -518,7 +542,7 @@ class SIGTRAN(Envelope):
             Uint8('Type'),
             Uint32('Len')
             ), hier=0),
-        Sequence('Params', GEN=Param(), hier=1)
+        Params(hier=1)
         )
     
     def __init__(self, *args, **kwargs):
@@ -538,6 +562,9 @@ class SIGTRAN(Envelope):
 
 
 class M2PA(Envelope):
+    """M2PA message structure, including the common message header, the M2PA header
+    and user data, as defined in RFC 4165, section 2
+    """
     # RFC 4165
     
     _GEN = (
@@ -608,6 +635,9 @@ MTP3ServInd_dict = {
 
 
 class MTP3(Envelope):
+    """MTP3, European variant, with 14 bits Point Code
+    Use `OPC` and `DPC` fields to access the complete Point Code values
+    """
     # ITU-T Q.2210, peer-to-peer info of user parts
     
     _GEN = (
@@ -651,6 +681,8 @@ class MTP3(Envelope):
 
 
 class MTP3_JPN(Envelope):
+    """MTP3, Japanese variant, with 16 bits Point Code
+    """
     # MTP3 Japanese variant : DPC / OPC are on 16 bits and SLS is on 8 bits
     
     _GEN = (
@@ -668,6 +700,8 @@ class MTP3_JPN(Envelope):
 
 
 class MTP3_ANSI(Envelope):
+    """MTP3, American variant, with 24 bits Point Code
+    """
     # MTP3 ANSI T1.111.1 variant
     # Seems Chinese variant format has the same layout (with priority being spare)
     
