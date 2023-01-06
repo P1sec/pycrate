@@ -37,6 +37,7 @@ from timeit     import timeit
 from pycrate_mobile.GSMTAP          import *
 from pycrate_mobile.NAS             import parse_NAS_MO, parse_NAS_MT, parse_NAS5G
 from pycrate_mobile.SIGTRAN         import SIGTRAN
+from pycrate_mobile.M3UA            import parse_M3UA
 from pycrate_mobile.SCCP            import parse_SCCP
 from pycrate_mobile.ISUP            import parse_ISUP
 from pycrate_mobile.TS0960_GTPv0    import parse_GTPv0
@@ -166,6 +167,14 @@ nas_5g_pdu = tuple(map(unhexlify, (
 # SIGTRAN messages
 sigtran_pdu = tuple(map(unhexlify, (
     '01000701000000d4000600080000000c011500080000000101020018000200008002000800000001800300080000000101160008000000010101000800000001011300080000000101140008000000010013000800000001011700080000000c010b0072626a4804000000106c62a16002010102012e3058840791198996909949820791198996000033044411330a8189961083993100a73ee8329bfd6681e8e8f41c949e83d4f5391d1406b1dfee73590ea297e774d03d4d4783e2f534bd0c0a83cce53be8fe9693e7a0b41b94a60300000000',
+    )))
+
+# M3UA messages (SIGTRAN supports them)
+m3ua_pdu = tuple(map(unhexlify, (
+    '01000301000000100011000800000001',
+    '0100030400000008',
+    '010004010000001c000b0008000000020006000c0000000100000002',
+    '010004030000001c000b0008000000020006000c0000000100000002',
     '01000101000000740210006a0000012d000001360302000a0100003502020604c336018e0f4b001340470000060003400100000f40060062f2570001003a40080062f25700010001001040151405081162f25700013005f412f000003303301821004f40033500000056400562f2570001000000',
     '010001010000003402100023000000b9000000bb03000000090003070b0443bb00fe0443b900fe03000131000006000800000006',
     )))
@@ -342,7 +351,7 @@ def test_5gsid(vals=fgsid_vals):
         assert(ident.to_bytes() == buf)
 
 
-def test_sigtran(sigtran_pdu=sigtran_pdu):
+def test_sigtran(sigtran_pdu=sigtran_pdu + m3ua_pdu):
     for pdu in sigtran_pdu:
         S = SIGTRAN()
         S.from_bytes(pdu)
@@ -357,6 +366,23 @@ def test_sigtran(sigtran_pdu=sigtran_pdu):
             t = S.to_json()
             S.from_json(t)
             assert( S.get_val() == v )
+
+
+def test_m3ua(m3ua_pdu=m3ua_pdu):
+    for pdu in m3ua_pdu:
+        m, e = parse_M3UA(pdu)
+        assert( e == 0 )
+        v = m.get_val()
+        m.reautomate()
+        assert( m.get_val() == v )
+        m.__init__()
+        m.set_val(v)
+        assert( m.to_bytes() == pdu )
+        #
+        if _with_json:
+            t = m.to_json()
+            m.from_json(t)
+            assert( m.get_val() == v )
 
 
 def test_sccp(sccp_pdu=sccp_pdu):
@@ -519,8 +545,12 @@ def test_perf_mobile():
     print('test_5gsid: {0:.4f}'.format(Tl))
     
     print('[+] SIGTRAN decoding and re-encoding')
-    Td = timeit(test_sigtran, number=400)
+    Td = timeit(test_sigtran, number=250)
     print('test_sigtran: {0:.4f}'.format(Td))
+    
+    print('[+] M3UA decoding and re-encoding')
+    Tm = timeit(test_m3ua, number=250)
+    print('test_m3ua: {0:.4f}'.format(Tm))
     
     print('[+] SCCP decoding and re-encoding')
     Te = timeit(test_sccp, number=150)
@@ -554,7 +584,7 @@ def test_perf_mobile():
     Ti = timeit(test_pfcp, number=50)
     print('test_pfcp: {0:.4f}'.format(Ti))
     
-    print('[+] test_mobile total time: {0:.4f}'.format(Ta+Tb+Tc+Td+Te+Tf+Tg+Th+Ti+Tj+Tk+Tl))
+    print('[+] test_mobile total time: {0:.4f}'.format(Ta+Tb+Tc+Td+Te+Tf+Tg+Th+Ti+Tj+Tk+Tl+Tm))
 
 
 if __name__ == '__main__':

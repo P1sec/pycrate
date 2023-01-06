@@ -459,7 +459,7 @@ Params_dict = {
 # works for both M2UA (RFC 3331) and M3UA (RFC 4666)
 
 class Param(Envelope):
-    """SIGTRAN parameter generic structure
+    """SIGTRAN parameter's generic structure
     
     Supports both M3UA parameters (RFC 4666, section 3.2) and M2UA parameters (RFC 3331, 
     section 3.1.6)
@@ -491,15 +491,55 @@ class Param(Envelope):
             self[3]._from_char(char)
         elif self[3].get_len():
             self[3].set_trans(True)
+    
+    def reautomate(self):
+        Envelope.reautomate(self)
+        self[3]._trans = False
 
 
 class Params(Sequence):
-    """Sequence of SIGTRAN parameter generic structure
+    """Sequence of SIGTRAN parameter's generic structure
     
     Supports both M3UA parameters (RFC 4666, section 3.2) and M2UA parameters (RFC 3331, 
     section 3.1.6)
     """
     _GEN = Param()
+
+
+# dictionnaries for all SIGTRAN message types, depending on the message class
+_SIGTRANType_dict = {
+    MGMT  : TypeMGMT_dict,
+    TRANS : TypeTRANS_dict,
+    SSNM  : TypeSSNM_dict,
+    ASPSM : TypeASPSM_dict,
+    ASPTM : TypeASPTM_dict,
+    QPTM  : TypeQPTM_dict,
+    MAUP  : TypeMAUP_dict,
+    CONLESS : TypeCONLESS_dict,
+    CONOR : TypeCONOR_dict,
+    RKM   : TypeRKM_dict,
+    IIM   : TypeIIM_dict,
+    M2PA  : TypeM2PA_dict,
+    SEC   : TypeSEC_dict,
+    BPT   : TypeBPT_dict,
+    V5PTM : TypeV5PTM_dict
+    }
+
+
+class Header(Envelope):
+    """SIGTRAN common header structure
+    
+    Supports both M3UA format (RFC 4666, section 3.1), M2UA format (RFC 3331, section 3.1)
+    and M2PA format (RFC 4165, section 2.1)
+    """
+    
+    _GEN = (
+        Uint8('Version', val=1),
+        Uint8('spare'),
+        Uint8('Class', val=TRANS, dic=Class_dict),
+        Uint8('Type'),
+        Uint32('Len', val=8)
+        )
 
 
 class SIGTRAN(Envelope):
@@ -509,52 +549,24 @@ class SIGTRAN(Envelope):
     Supports both M3UA format (RFC 4666, section 3) and M2UA format (RFC 3331, section 3)
     """
     
-    # Warning RFC 4666: the length must take padding into account, 
-    # otherwise there will be a mismatch with `Len' fields in the sequence of
-    # parameters
-    
     # this class attribute enforces the Length field in the Header at decoding
     _LEN_ENFORCE = True
     
-    _TypeUndef_dict = {}
-    _Type_dict = {
-        MGMT  : TypeMGMT_dict,
-        TRANS : TypeTRANS_dict,
-        SSNM  : TypeSSNM_dict,
-        ASPSM : TypeASPSM_dict,
-        ASPTM : TypeASPTM_dict,
-        QPTM  : TypeQPTM_dict,
-        MAUP  : TypeMAUP_dict,
-        CONLESS : TypeCONLESS_dict,
-        CONOR : TypeCONOR_dict,
-        RKM   : TypeRKM_dict,
-        IIM   : TypeIIM_dict,
-        M2PA  : TypeM2PA_dict,
-        SEC   : TypeSEC_dict,
-        BPT   : TypeBPT_dict,
-        V5PTM : TypeV5PTM_dict
-        }
     _GEN = (
-        Envelope('Header', GEN=(
-            Uint8('Version', val=1),
-            Uint8('spare'),
-            Uint8('Class', val=TRANS, dic=Class_dict),
-            Uint8('Type'),
-            Uint32('Len')
-            ), hier=0),
+        Header(),
         Params(hier=1)
         )
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        self[0][3].set_dicauto(lambda: self._Type_dict.get(self[0][2].get_val(), self._TypeUndef_dict))
-        self[0][4].set_valauto(lambda: 8+self[1].get_len())
+        self[0][3].set_dicauto(lambda: _SIGTRANType_dict.get(self[0][2].get_val(), {}))
+        self[0][4].set_valauto(lambda: 8 + self[1].get_len())
     
     def _from_char(self, char):
         self[0]._from_char(char)
         if self._LEN_ENFORCE:
             clen = char._len_bit
-            char._len_bit = char._cur + 8*(max(0, self[0][4].get_val()-8))
+            char._len_bit = char._cur + 8*(max(0, min(self[0][4].get_val()-8, char.len_byte())))
             self[1]._from_char(char)
             char._len_bit = clen
         else:
@@ -565,16 +577,9 @@ class M2PA(Envelope):
     """M2PA message structure, including the common message header, the M2PA header
     and user data, as defined in RFC 4165, section 2
     """
-    # RFC 4165
     
     _GEN = (
-        Envelope('Header', GEN=(
-            Uint8('Version', val=1),
-            Uint8('spare'),
-            Uint8('Class', val=11, dic=Class_dict),
-            Uint8('Type', val=1, dic={1:'User Data', 2:'Link Status'}),
-            Uint32('Len')),
-            hier=0),
+        Header(val={'Class': 11, 'Type': 1}),
         Envelope('M2PAHeader', GEN=(
             Uint8('unused'),
             Uint24('BSN'),
@@ -597,6 +602,8 @@ class M2PA(Envelope):
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
+        self[0][3]._dicauto = None
+        self[0][3]._dic = {1:'User Data', 2:'Link Status'}
         self[0][4].set_valauto(lambda: 16 + self[2].get_len() if not self[2].get_trans() else 16)
         self[2]._GEN[1][2].set_blauto(lambda: 8*(self[0][4].get_val()-18))
         self[2]._GEN[2][1].set_blauto(lambda: 8*(self[0][4].get_val()-17))
@@ -612,14 +619,14 @@ class M2PA(Envelope):
             self[2].set_trans(True)
 
 
-MTP3SubServInd_dict = {
+_MTP3SubServInd_dict = {
     0 : 'international network',
     1 : 'spare',
     2 : 'national network',
     3 : 'reserved for national use'
     }
 
-MTP3ServInd_dict = {
+_MTP3ServInd_dict = {
     0 : 'Signalling network management messages',
     1 : 'Signalling network testing and maintenance messages',
     2 : 'Signaling Network Testing and Maintenance Special Messages (ANSI)',
@@ -641,9 +648,9 @@ class MTP3(Envelope):
     # ITU-T Q.2210, peer-to-peer info of user parts
     
     _GEN = (
-        Uint('SubServiceInd', bl=2, dic=MTP3SubServInd_dict),
+        Uint('SubServiceInd', bl=2, dic=_MTP3SubServInd_dict),
         Uint('SubServiceSpare', bl=2),
-        Uint('ServiceInd', bl=4, dic=MTP3ServInd_dict),
+        Uint('ServiceInd', bl=4, dic=_MTP3ServInd_dict),
         Uint8('DPC_LSB'),
         Uint('OPC_LSB', bl=2),
         Uint('DPC_MSB', bl=6),
@@ -686,9 +693,9 @@ class MTP3_JPN(Envelope):
     # MTP3 Japanese variant : DPC / OPC are on 16 bits and SLS is on 8 bits
     
     _GEN = (
-        Uint('SubServiceInd', bl=2, dic=MTP3SubServInd_dict),
+        Uint('SubServiceInd', bl=2, dic=_MTP3SubServInd_dict),
         Uint('SubServiceSpare', bl=2),
-        Uint('ServiceInd', bl=4, dic=MTP3ServInd_dict),
+        Uint('ServiceInd', bl=4, dic=_MTP3ServInd_dict),
         Uint16LE('DPC'),
         Uint16LE('OPC'),
         Uint('SLSSpare', bl=4),
@@ -706,9 +713,9 @@ class MTP3_ANSI(Envelope):
     # Seems Chinese variant format has the same layout (with priority being spare)
     
     _GEN = (
-        Uint('SubServiceInd', bl=2, dic=MTP3SubServInd_dict),
+        Uint('SubServiceInd', bl=2, dic=_MTP3SubServInd_dict),
         Uint('SubServicePriority', bl=2),
-        Uint('ServiceInd', bl=4, dic=MTP3ServInd_dict),
+        Uint('ServiceInd', bl=4, dic=_MTP3ServInd_dict),
         Uint24('DPC'),
         Uint24('OPC'),
         Uint8('SLS')
