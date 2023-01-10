@@ -599,6 +599,7 @@ class ASN1CodecPER(ASN1Codec):
     @classmethod
     def decode_fragcharstr_ws(cla, char, ldet, cdyn, arr=False):
         # check how much fragments are required
+        # arr = True is for array of uint, otherwise a bytes value is expected
         frags, rem = factor_perfrag(ldet)
         GEN, V, L = [], [], 0
         while ldet in (65536, 49152, 32768, 16384):
@@ -631,14 +632,15 @@ class ASN1CodecPER(ASN1Codec):
             V.extend( F() )
         else:
             V.append( F() )
-            V = ''.join(V)
+            V = b''.join(V)
         return V, GEN
     
     @classmethod
     def decode_fragcharstr(cla, char, ldet, cdyn, arr=False):
         # check how much fragments are required
+        # arr = True is for array of uint, otherwise a bytes value is expected
         frags, rem = factor_perfrag(ldet)
-        V = []
+        V, L = [], 0
         while ldet in (65536, 49152, 32768, 16384):
             if arr:
                 V.extend( [char.get_uint(cdyn) for i in range(ldet)] )
@@ -657,7 +659,7 @@ class ASN1CodecPER(ASN1Codec):
         if cla.ALIGNED:
             cla._off[-1] += ldet*cdyn
         if not arr:
-            V = ''.join(V)
+            V = b''.join(V)
         return V
     
     @classmethod
@@ -666,38 +668,43 @@ class ASN1CodecPER(ASN1Codec):
         frags, rem = factor_perfrag(ldet)
         GEN, off = [], 0
         if isinstance(val, bytes_types):
-            # utf-16 or utf-32 characters
-            isbytes, codyn = True, cdyn>>8
+            # ascii/utf-encoded bytes
+            isbytes = True
+            assert( cdyn % 8 == 0 )
         else:
+            # list of chars offset (uint)
             isbytes = False
         if cla.ALIGNED and cla._off[-1] % 8:
-            GEN.extend( cla.encode_pad() )
+            GEN.extend( cla.encode_pad_ws() )
         # encode all fragments
         for (fs, fn) in frags:
+            # going from the largest fragments (64k) to the shortest ones (16k)
+            # fs: frag sz, fn: frag number
+            if not fn:
+                continue
             for i in range(fn):
                 GEN.extend( cla.encode_count_ws(fs) )
                 if isbytes:
-                    l = fs*codyn
-                    GEN.append( Buf('F_%r' % fs, val=val[off:off+l], bl=l) )
-                    off += l
+                    bl = fs*cdyn
+                    ol = bl>>3
+                    GEN.append( Buf('F_%r' % fs, val=val[off:off+ol], bl=bl) )
+                    off += ol
                     if cla.ALIGNED:
-                        cla._off[-1] += 8*l
+                        cla._off[-1] += bl
                 else:
                     GEN.append( Array('F_%r' % fs, val=val[off:off+fs], GEN=Uint('char', bl=cdyn)) )
                     off += fs
                     if cla.ALIGNED:
                         cla._off[-1] += fs*cdyn
         # encode the remainder
-        GEN.extend( cla.encode_count(rem) )
+        GEN.extend( cla.encode_count_ws(rem) )
         if isbytes:
-            l = rem*codyn
-            GEN.append( Buf('F_%r' % fs, val=val[off:off+l], bl=l) )
-            off += l
+            bl = rem*cdyn
+            GEN.append( Buf('F_%r' % fs, val=val[off:off+(bl>>3)], bl=bl) )
             if cla.ALIGNED:
-                cla._off[-1] += 8*l
+                cla._off[-1] += bl
         else:
             GEN.append( Array('F_%r' % fs, val=val[off:off+rem], GEN=Uint('char', bl=cdyn)) )
-            off += rem
             if cla.ALIGNED:
                 cla._off[-1] += rem*cdyn
         return GEN
@@ -708,22 +715,29 @@ class ASN1CodecPER(ASN1Codec):
         frags, rem = factor_perfrag(len(val))
         GEN, off = [], 0
         if isinstance(val, bytes_types):
-            # utf-16 or utf-32 characters
-            isbytes, codyn = True, cdyn>>8
+            # ascii/utf-encoded bytes
+            isbytes = True
+            assert( cdyn % 8 == 0 )
         else:
+            # list of chars offset (uint)
             isbytes = False
         if cla.ALIGNED and cla._off[-1] % 8:
             GEN.extend( cla.encode_pad() )
         # encode all fragments
         for (fs, fn) in frags:
+            # going from the largest fragments (64k) to the shortest ones (16k)
+            # fs: frag sz, fn: frag number
+            if not fn:
+                continue
             for i in range(fn):
                 GEN.extend( cla.encode_count(fs) )
                 if isbytes:
-                    l = fs*codyn
-                    GEN.append( (T_BYTES, val[off:off+l], 8*l) )
-                    off += l
+                    bl = fs*cdyn
+                    ol = bl>>3
+                    GEN.append( (T_BYTES, val[off:off+ol], bl) )
+                    off += ol
                     if cla.ALIGNED:
-                        cla._off[-1] += 8*l
+                        cla._off[-1] += bl
                 else:
                     GEN.extend( [(T_UINT, v, cdyn) for v in val[off:off+fs]] )
                     off += fs
@@ -732,14 +746,12 @@ class ASN1CodecPER(ASN1Codec):
         # encode the remainder
         GEN.extend( cla.encode_count(rem) )
         if isbytes:
-            l = rem*codyn
-            GEN.append( (T_BYTES, val[off:off+l], 8*l) )
-            off += l
+            bl = rem*cdyn
+            GEN.append( (T_BYTES, val[off:off+(bl>>3)], bl) )
             if cla.ALIGNED:
-                cla._off[-1] += 8*l
+                cla._off[-1] += bl
         else:
             GEN.extend( [(T_UINT, v, cdyn) for v in val[off:off+rem]] )
-            off += rem
             if cla.ALIGNED:
                 cla._off[-1] += rem*cdyn
         return GEN

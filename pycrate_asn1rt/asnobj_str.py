@@ -1984,12 +1984,16 @@ Virtual parent for any ASN.1 *String object
                 # extensible alphabet constraint
                 cdyn = self._clen
             else:
-                cdyn = self._const_alpha.rdyn
+                cdyn = self._const_alpha.rdyn   
         else:
             cdyn = self._clen
         if ASN1CodecPER.ALIGNED and cdyn is not None:
+            # "the smallest number of bits that is a power of two and that can encode the value N – 1"
+            # for N possible characters in the permitted alphabet
             return round_p2(cdyn)
         else:
+            # "the smallest number of bits that can encode the value N – 1 as a non-negative binary integer"
+            # for N possible characters in the permitted alphabet
             return cdyn
     
     def _safechk_val(self, val):
@@ -2444,7 +2448,7 @@ Virtual parent for any ASN.1 *String object
             # ldet is the length in number of chars, each encoded in $cdyn bits
             ldet = len(self._val)
             if cdyn < self._clen:
-                # character remapping required
+                # alphabet constraint: character remapping required
                 try:
                     val = [self._const_alpha.root.index(c) for c in self._val]
                 except Exception:
@@ -2458,14 +2462,14 @@ Virtual parent for any ASN.1 *String object
                     raise(ASN1PEREncodeErr('{0}: character out of alphabet, {1!r}'\
                           .format(self.fullname(), self._val)))
             elif cdyn == 7:
-                # ascii encoding
+                # ascii encoding in UPER
                 try:
                     val = list(map(ord, self._val))
                 except Exception:
                     raise(ASN1PEREncodeErr('{0}: character out of alphabet, {1!r}'\
                           .format(self.fullname(), self._val)))
             else:
-                # builtin Python encoding, utf-16 or utf-32
+                # ascii encoding in APER, utf-8, utf-16 or utf-32
                 assert(cdyn % 8 == 0)
                 if self._codec is None:
                     raise(ASN1NotSuppErr('{0}: ISO 2022 codec not supported'\
@@ -2488,7 +2492,7 @@ Virtual parent for any ASN.1 *String object
                 # bytes fragmentation
                 GEN.extend( ASN1CodecPER.encode_fragbytes_ws(val) )
             else:
-                # int list or utf-16/32 bytes fragmentation
+                # int list or ascii/utf-encoded bytes fragmentation
                 GEN.extend( ASN1CodecPER.encode_fragcharstr_ws(val, cdyn, ldet) )
             self._struct = Envelope(self._name, GEN=tuple(GEN))
         else:
@@ -2570,7 +2574,7 @@ Virtual parent for any ASN.1 *String object
                 # bytes fragmentation
                 GEN.extend( ASN1CodecPER.encode_fragbytes(val) )
             else:
-                # int list or utf-16/32 bytes fragmentation
+                # int list or ascii/utf-encoded bytes fragmentation
                 GEN.extend( ASN1CodecPER.encode_fragcharstr(val, cdyn, ldet) )
         else:
             GEN.extend( ASN1CodecPER.encode_count(ldet) )
@@ -2867,7 +2871,7 @@ Virtual parent for any ASN.1 *String object
 # Python does not provide a complete support for ISO2022 encoding
 # so here, we use iso2022_jp_2004
 _ISO2022_CODEC = 'iso2022_jp_2004'
-# If you want to disable support for ISO2022 entirely, just set this to None
+# If we want to disable support for ISO2022 entirely, just set this to None
 #_ISO2022_CODEC = None
 
 
