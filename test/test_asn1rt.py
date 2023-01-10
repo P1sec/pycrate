@@ -1604,6 +1604,51 @@ def _test_rt_base():
     Prs01.from_coer_ws(b'\tambiguite')
     assert( Prs01._val == 'ambiguite' )
     
+    # fragmented PrintableString
+    # this test only exercises the code paths for fragmentation, but resulting
+    # encodings have not been tested against other implementations
+    lstr = 400000*"A"
+    Prs01.set_val(lstr)
+    # encoding
+    assert( Prs01.to_aper() == Prs01.to_aper_ws() )
+    assert( Prs01.to_uper() == Prs01.to_uper_ws() )
+    assert( Prs01.to_ber() == Prs01.to_ber_ws() )
+    assert( Prs01.to_cer() == Prs01.to_cer_ws() )
+    assert( Prs01.to_der() == Prs01.to_der_ws() )
+    assert( Prs01.to_oer() == Prs01.to_oer_ws() )
+    assert( Prs01.to_coer() == Prs01.to_coer_ws() )
+    # In APER, PrintableString chars are encoded on 8 bits
+    b_aper = Prs01.to_aper()
+    assert( len(b_aper) > len(lstr) )
+    # While in UPER, they are encoded on 7 bits
+    b_uper = Prs01.to_uper()
+    assert( len(b_uper) < len(lstr) )
+    b_ber  = Prs01.to_ber()
+    assert( len(b_ber) > len(lstr) )
+    b_cer  = Prs01.to_cer()
+    assert( len(b_cer) > len(lstr) )
+    b_der  = Prs01.to_der()
+    assert( len(b_der) > len(lstr) )
+    b_oer  = Prs01.to_oer()
+    assert( len(b_oer) > len(lstr) )
+    b_coer = Prs01.to_coer()
+    assert( len(b_coer) > len(lstr) )
+    # decoding
+    Prs01.from_aper(b_aper)
+    assert( Prs01._val == lstr )
+    Prs01.from_uper(b_uper)
+    assert( Prs01._val == lstr )
+    Prs01.from_ber(b_ber)
+    assert( Prs01._val == lstr )
+    Prs01.from_cer(b_cer)
+    assert( Prs01._val == lstr )
+    Prs01.from_der(b_der)
+    assert( Prs01._val == lstr )
+    Prs01.from_oer(b_oer)
+    assert( Prs01._val == lstr )
+    Prs01.from_coer(b_coer)
+    assert( Prs01._val == lstr )
+    
     # Prs02 ::= PrintableString (FROM ("ATCG"))
     Prs02 = Mod['Prs02']
     Prs02.from_asn1('"ATCGATTGAGCTCTAGCG"')
