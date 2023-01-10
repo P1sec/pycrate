@@ -284,6 +284,23 @@ class Params(SIGTRANParams):
                 if isinstance(self[-1], Params):
                     self[-1].init_prms(wopt)
     
+    def get_prm_first(self, tag):
+        """return the first parameter corresponding to the provided `tag', or None
+        """
+        for prm in self._content:
+            if prm[2]._Tag == tag:
+                return prm[2]
+        return None
+    
+    def get_prm_list(self, tag):
+        """return the list of parameter(s) corresponding to the provided `tag' 
+        """
+        ret = []
+        for prm in self._content:
+            if prm[2]._Tag == tag:
+                ret.append(prm[2])
+        return ret
+    
     def chk_comp(self):
         """check the compliance of the sequence of parameters against the list of mandatory
         parameters and the potential presence of unexpected ones
