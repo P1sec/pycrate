@@ -1105,7 +1105,7 @@ class ASN1CodecBER(ASN1Codec):
     # every ENC_BSTR_FRAG / ENC_OSTR_FRAG bytes
     # ENC_[BO]STR_FRAG = 0 disables the fragmentation
     # DER requires ENC_[BO]STR_FRAG = 0
-    # CER rquires ENC_[B0]STR_FRAG = 1000
+    # CER requires ENC_[B0]STR_FRAG = 1000
     ENC_BSTR_FRAG = 0
     ENC_OSTR_FRAG = 0
     

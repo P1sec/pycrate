@@ -1632,11 +1632,20 @@ class ASN1Obj(Element):
             # we only have the inner encoding
             ret = V
         else:
-            TLV = ASN1CodecBER.encode_tag(self._tagc[-1][0], pc, self._tagc[-1][1])
-            TLV.extend( ASN1CodecBER.encode_len(lval) )
-            TLV.extend( V )
-            if lval == -1:
+            if pc == 1 and ASN1CodecBER.ENC_LUNDEF:
+                # fragmented String
+                TLV = ASN1CodecBER.encode_tag(self._tagc[-1][0], pc, self._tagc[-1][1])
+                TLV.extend( ASN1CodecBER.encode_len(-1) )
+                TLV.extend( V )
                 TLV.append( (T_BYTES, b'\0\0', 16) )
+            else:
+                TLV = ASN1CodecBER.encode_tag(self._tagc[-1][0], pc, self._tagc[-1][1])
+                TLV.extend( ASN1CodecBER.encode_len(lval) )
+                TLV.extend( V )
+                if lval == -1:
+                    # append an EOC marker after the value
+                    TLV.append( (T_BYTES, b'\0\0', 16) )
+            #
             # 2) encode the outer part of the object, i.e. the rest of the tag chain
             if len(self._tagc) > 1:
                 GEN = [TLV]
@@ -1763,6 +1772,12 @@ class ASN1Obj(Element):
                         ASN1CodecBER.encode_tag_ws(self._tagc[-1][0], pc, self._tagc[-1][1]),
                         ASN1CodecBER.encode_len_ws(lval),
                         V))
+                if lval == -1:
+                    # append an EOC marker after the value
+                    TLV.extend((
+                        ASN1CodecBER.encode_tag_ws(0, 0, 0),
+                        ASN1CodecBER.encode_len_ws(0)
+                        ))
             # 2) encode the outer part of the object, i.e. the rest of the tag chain
             if len(self._tagc) > 1:
                 if ASN1CodecBER.ENC_LUNDEF:

@@ -2608,7 +2608,12 @@ Virtual parent for any ASN.1 *String object
             Frag, sfrag = [], []
             for tlv in vs:
                 Tag, cl, pc, tval, Len, lval = tlv[0:6]
-                if cl != 0:
+                if (tval, lval) == (0, 0):
+                    # EOC marker
+                    if tlv != vs[-1]:
+                        raise(ASN1BERDecodeErr('{0}: invalid EOC within String fragments'))
+                    Frag.append( Envelope('EOC', GEN=(Tag, Len)) )
+                elif cl != 0:
                     raise(ASN1BERDecodeErr('{0}: invalid String fragment tag class, {1!r}'\
                           .format(self.fullname(), cl)))
                 elif tval != self.TAG:
@@ -2618,11 +2623,6 @@ Virtual parent for any ASN.1 *String object
                     # fragmenting the fragment... damned BER recursivity !
                     raise(ASN1NotSuppErr('{0}: String fragments within fragments'\
                           .format(self.fullname())))
-                elif (tval, lval) == (0, 0):
-                    # EOC marker
-                    if tlv != vs[-1]:
-                        raise(ASN1BERDecodeErr('{0}: invalid EOC within String fragments'))
-                    Frag.append( Envelope('EOC', GEN=(Tag, Len)) )
                 else:
                     char._cur, char._len_bit = tlv[6][0], tlv[6][1]
                     Val = Buf('V', bl=tlv[6][1]-tlv[6][0])
@@ -2664,7 +2664,11 @@ Virtual parent for any ASN.1 *String object
             sfrag = []
             for tlv in vs:
                 cl, pc, tval, lval = tlv[0:4]
-                if cl != 0:
+                if (tval, lval) == (0, 0):
+                    # EOC marker
+                    if tlv != vs[-1]:
+                        raise(ASN1BERDecodeErr('{0}: invalid EOC within String fragments'))
+                elif cl != 0:
                     raise(ASN1BERDecodeErr('{0}: invalid String fragment tag class, {1!r}'\
                           .format(self.fullname(), cl)))
                 elif tval != self.TAG:
@@ -2674,10 +2678,6 @@ Virtual parent for any ASN.1 *String object
                     # fragmenting the fragment... damned BER recursivity !
                     raise(ASN1NotSuppErr('{0}: String fragments of fragments'\
                           .format(self.fullname())))
-                elif (tval, lval) == (0, 0):
-                    # EOC marker
-                    if tlv != vs[-1]:
-                        raise(ASN1BERDecodeErr('{0}: invalid EOC within String fragments'))
                 else:
                     char._cur, char._len_bit = tlv[4][0], tlv[4][1]
                     sfrag.append( char.get_bytes() )
