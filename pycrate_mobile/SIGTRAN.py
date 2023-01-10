@@ -538,8 +538,17 @@ class Header(Envelope):
         Uint8('spare'),
         Uint8('Class', val=TRANS, dic=Class_dict),
         Uint8('Type'),
-        Uint32('Len', val=8)
+        Uint32('Len')
         )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[3].set_dicauto(lambda: _SIGTRANType_dict.get(self[2].get_val(), {}))
+        self[4].set_valauto(lambda: self._get_len())
+    
+    def _get_len(self):
+        pay = self.get_payload()
+        return 8 if not pay else 8 + pay.get_len()
 
 
 class SIGTRAN(Envelope):
@@ -556,11 +565,6 @@ class SIGTRAN(Envelope):
         Header(),
         Params(hier=1)
         )
-    
-    def __init__(self, *args, **kwargs):
-        Envelope.__init__(self, *args, **kwargs)
-        self[0][3].set_dicauto(lambda: _SIGTRANType_dict.get(self[0][2].get_val(), {}))
-        self[0][4].set_valauto(lambda: 8 + self[1].get_len())
     
     def _from_char(self, char):
         self[0]._from_char(char)
