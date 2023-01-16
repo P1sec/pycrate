@@ -163,9 +163,9 @@ class Param(SIGTRANParam):
                     self._set_tag_val(None, val['Val'])
                 del val['Val']
                 if val:
-                    Envelope.set_val(val)
+                    Envelope.set_val(self, val)
             else:
-                Envelope.set_val(val)
+                Envelope.set_val(self, val)
                 self._set_val_cls()
         else:
             Envelope.set_val(self, val)
@@ -185,7 +185,7 @@ class Param(SIGTRANParam):
         except PycrateErr:
             # 2nd try decoding as raw Data
             char._cur = char_cur
-            self._set_data_raw()
+            self._set_val_raw()
             self[2]._from_char(char)
         # this is to enable the decoding of some SIGTRAN implementations
         # were padding of the last parameter is omitted
