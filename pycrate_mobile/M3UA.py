@@ -288,7 +288,7 @@ class Params(SIGTRANParams):
         """return the first parameter corresponding to the provided `tag', or None
         """
         for prm in self._content:
-            if prm[2]._Tag == tag:
+            if prm[0].get_val() == tag:
                 return prm[2]
         return None
     
@@ -297,7 +297,7 @@ class Params(SIGTRANParams):
         """
         ret = []
         for prm in self._content:
-            if prm[2]._Tag == tag:
+            if prm[0].get_val() == tag:
                 ret.append(prm[2])
         return ret
     
