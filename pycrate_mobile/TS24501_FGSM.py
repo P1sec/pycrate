@@ -48,6 +48,7 @@ from .TS24301_IE        import (
     )
 from .TS24501_IE        import *
 from .TS24193_ATSSS     import *
+from pycrate_crypto.EAP import EAP
 
 
 #------------------------------------------------------------------------------#
@@ -135,7 +136,7 @@ class FGSMPDUSessionEstabAccept(Layer3E):
         Type4TLV('SNSSAI', val={'T':0x22, 'V':b'\0'}, IE=SNSSAI()),
         Type1TV('AlwaysOnPDUSessInd', val={'T':0x8, 'V':0}, IE=AlwaysOnPDUSessInd()),
         Type6TLVE('MappedEPSBearerCtxt', val={'T':0x75, 'V':b'\0\0\0\0'}, IE=MappedEPSBearerCtxt()),
-        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}),
+        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}, IE=EAP()),
         Type6TLVE('QoSFlowDesc', val={'T':0x79, 'V':b'\0\0\0'}, IE=QoSFlowDesc()),
         Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig()),
         Type4TLV('DNN', val={'T':0x25, 'V':b'\0'}, IE=APN('DNN')),
@@ -160,7 +161,7 @@ class FGSMPDUSessionEstabReject(Layer3E):
         Type3V('5GSMCause', val={'V':b'\x1a'}, bl={'V':8}, IE=FGSMCause()),
         Type4TLV('BackOffTimer', val={'T':0x37, 'V':b'\0'}, IE=GPRSTimer3()),
         Type1TV('AllowedSSCMode', val={'T':0xF, 'V':0}, IE=AllowedSSCMode()),
-        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}),
+        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}, IE=EAP()),
         Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig()),
         Type4TLV('ReattemptInd', val={'V':0x1D, 'V':b'\0'}, IE=ReattemptInd()),
         Type4TLV('CongestReattemptInd', val={'T':0x61, 'V':b'\0'}, IE=CongestReattemptInd())
@@ -176,7 +177,7 @@ class FGSMPDUSessionAuthentCommand(Layer3E):
     _name = '5GSMPDUSessionAuthentCommand'
     _GEN = (
         FGSMHeader(val={'Type':197}),
-        Type6LVE('EAPMsg', val={'V':b'\0\0\0\0\0'}),
+        Type6LVE('EAPMsg', val={'V':b'\0\0\0\0\0'}, IE=EAP()),
         Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig())
         )
 
@@ -190,7 +191,7 @@ class FGSMPDUSessionAuthentComplete(Layer3E):
     _name = '5GSMPDUSessionAuthentComplete'
     _GEN = (
         FGSMHeader(val={'Type':198}),
-        Type6LVE('EAPMsg', val={'V':b'\0\0\0\0\0'}),
+        Type6LVE('EAPMsg', val={'V':b'\0\0\0\0\0'}, IE=EAP()),
         Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig())
         )
 
@@ -204,7 +205,7 @@ class FGSMPDUSessionAuthentResult(Layer3E):
     _name = '5GSMPDUSessionAuthentResult'
     _GEN = (
         FGSMHeader(val={'Type':199}),
-        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}),
+        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}, IE=EAP()),
         Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig())
         )
 
@@ -342,7 +343,7 @@ class FGSMPDUSessionReleaseCommand(Layer3E):
         FGSMHeader(val={'Type':211}),
         Type3V('5GSMCause', val={'V':b'\x1a'}, bl={'V':8}, IE=FGSMCause()),
         Type4TLV('BackOffTimer', val={'T':0x37, 'V':b'\0'}, IE=GPRSTimer3()),
-        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}),
+        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}, IE=EAP()),
         Type4TLV('CongestReattemptInd', val={'T':0x61, 'V':b'\0'}, IE=CongestReattemptInd()),
         Type6TLVE('ExtProtConfig', val={'T':0x7B, 'V':b'\0'}, IE=ProtConfig()),
         Type1TV('AccessType', val={'T':0xD, 'V':1}, IE=AccessType())

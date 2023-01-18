@@ -77,18 +77,19 @@ from pycrate_core.utils import *
 from pycrate_core.elt   import *
 from pycrate_core.base  import *
 
-from .TS24007       import *
-from .TS24008_IE    import (
+from .TS24007           import *
+from .TS24008_IE        import (
     AUTN, MSCm2, SuppCodecList, ExtDRXParam, PLMNList, GPRSTimer, GPRSTimer3,
     EmergNumList, Non3GPPNWProvPol, ExtDRXParam, APN, NetworkName, TimeZone,
     TimeZoneTime, DLSavingTime, IMEISVReq, 
     )
-from .TS24301_IE    import (
+from .TS24301_IE        import (
     NAS_KSI, EPSBearerCtxtStat, UENetCap as EPSUENetCap, ExtEmergNumList, 
     EPSBearerCtxtStat, NASSecAlgo as EPSNASSecAlgo, UESecCap as S1UESecCap, 
     ReleaseAssistInd, 
     )
-from .TS24501_IE    import *
+from .TS24501_IE        import *
+from pycrate_crypto.EAP import EAP
 #from .TS24501_FGSM  import FGSMTypeClasses
 
 try:
@@ -200,7 +201,7 @@ class FGMMAuthenticationRequest(Layer3E):
         Type4LV('ABBA', val={'V':b'\0\0'}),
         Type3TV('RAND', val={'T':0x21, 'V':16*b'\0'}, bl={'V':128}),
         Type4TLV('AUTN', val={'T':0x20, 'V':16*b'\0'}, IE=AUTN()),
-        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'})
+        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}, IE=EAP())
         )
 
 
@@ -214,7 +215,7 @@ class FGMMAuthenticationResponse(Layer3E):
     _GEN = (
         FGMMHeader(val={'Type':87}),
         Type4TLV('RES', val={'T':0x2D, 'V':16*b'\0'}),
-        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'})
+        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}, IE=EAP())
         )
 
 
@@ -229,7 +230,7 @@ class FGMMAuthenticationResult(Layer3E):
         FGMMHeader(val={'Type':90}),
         Uint('spare', bl=4, rep=REPR_HEX),
         Type1V('NAS_KSI', val={'V':7}, IE=NAS_KSI()),
-        Type6LVE('EAPMsg', val={'V':b'\0\0\0\0\0'}),
+        Type6LVE('EAPMsg', val={'V':b'\0\0\0\0\0'}, IE=EAP()),
         Type4TLV('ABBA', val={'T':0x38, 'V':b'\0\0'})
         )
 
@@ -257,7 +258,7 @@ class FGMMAuthenticationReject(Layer3E):
     _name = '5GMMAuthenticationReject'
     _GEN = (
         FGMMHeader(val={'Type':88}),
-        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'})
+        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}, IE=EAP())
         )
 
 
@@ -350,7 +351,7 @@ class FGMMRegistrationAccept(Layer3E):
         Type4TLV('EmergNumList', val={'T':0x34, 'V':b'\x02\x01\0'}, IE=EmergNumList()),
         Type6TLVE('ExtEmergNumList', val={'T':0x7A, 'V':b'\0\0\0\0'}, IE=ExtEmergNumList()),
         Type6TLVE('SORTransContainer', val={'T':0x73, 'V':17*b'\0'}, IE=SORTransContainer()),
-        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}),
+        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}, IE=EAP()),
         Type1TV('NSSAIInclMode', val={'T':0xA, 'V':0}, IE=NSSAIInclMode()),
         Type6TLVE('OperatorAccessCatDefs', val={'T':0x76, 'V':b''}, IE=OperatorAccessCatDefs()),
         Type4TLV('5GSDRXParam', val={'T':0x51, 'V':b'\0'}, IE=FGSDRXParam()),
@@ -395,7 +396,7 @@ class FGMMRegistrationReject(Layer3E):
         Type3V('5GMMCause', val={'V':b'\x16'}, bl={'V':8}, IE=FGMMCause()),
         Type4TLV('T3346', val={'T':0x5F, 'V':b'\0'}, IE=GPRSTimer()),
         Type4TLV('T3502', val={'T':0x16, 'V':b'\0'}, IE=GPRSTimer()),
-        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}),
+        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}, IE=EAP()),
         Type4TLV('RejectedNSSAI', val={'T':0x69, 'V':b'\x10\x01'}, IE=RejectedNSSAI()),
         Type6TLVE('CAGInfoList', val={'T':0x75, 'V':b''}, IE=CAGInfoList())
         )
@@ -538,7 +539,7 @@ class FGMMServiceAccept(Layer3E):
         Type4TLV('PDUSessStat', val={'T':0x50, 'V':b'\0\0'}, IE=PDUSessStat()),
         Type4TLV('PDUSessReactResult', val={'T':0x26, 'V':b'\0\0'}, IE=PDUSessStat()),
         Type6TLVE('PDUSessReactResultErr', val={'T':0x72, 'V':b'\0\0'}, IE=PDUSessReactResultErr()),
-        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}),
+        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}, IE=EAP()),
         Type4TLV('T3448', val={'T':0x6B, 'V':b'\0'}, IE=GPRSTimer())
         )
 
@@ -555,7 +556,7 @@ class FGMMServiceReject(Layer3E):
         Type3V('5GMMCause', val={'V':b'\x16'}, bl={'V':8}, IE=FGMMCause()),
         Type4TLV('PDUSessStat', val={'T':0x50, 'V':b'\0\0'}, IE=PDUSessStat()),
         Type4TLV('T3346', val={'T':0x5F, 'V':b'\0'}, IE=GPRSTimer()),
-        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}),
+        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}, IE=EAP()),
         Type4TLV('T3448', val={'T':0x6B, 'V':b'\0'}, IE=GPRSTimer()),
         Type6TLVE('CAGInfoList', val={'T':0x75, 'V':b''}, IE=CAGInfoList())
         )
@@ -679,7 +680,7 @@ class FGMMSecurityModeCommand(Layer3E):
         Type1TV('IMEISVReq', val={'T':0xE, 'V':0}, IE=IMEISVReq()),
         Type3TV('EPSNASSecAlgo', val={'T':0x57, 'V':b'\x11'}, bl={'V':8}, IE=EPSNASSecAlgo()),
         Type4TLV('Add5GSecInfo', val={'T':0x36, 'V':b'\0'}, IE=Add5GSecInfo()),
-        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}),
+        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}, IE=EAP()),
         Type4TLV('ABBA', val={'T':0x38, 'V':b'\0\0'}),
         Type4TLV('S1UESecCap', val={'T':0x19, 'V':b'\0\0'}, IE=S1UESecCap())
         )
@@ -922,7 +923,7 @@ class FGMMNetworkSliceSpecAuthCommand(Layer3E):
     _GEN = (
         FGMMHeader(val={'Type':80}),
         Type4LV('SNSSAI', val={'V':b'\x01'}, IE=SNSSAI()),
-        Type6LVE('EAPMsg', val={'V':b'\0\0\0\0\0'})
+        Type6LVE('EAPMsg', val={'V':b'\0\0\0\0\0'}, IE=EAP())
         )
 
 
@@ -936,7 +937,7 @@ class FGMMNetworkSliceSpecAuthComplete(Layer3E):
     _GEN = (
         FGMMHeader(val={'Type':81}),
         Type4LV('SNSSAI', val={'V':b'\x01'}, IE=SNSSAI()),
-        Type6LVE('EAPMsg', val={'V':b'\0\0\0\0\0'})
+        Type6LVE('EAPMsg', val={'V':b'\0\0\0\0\0'}, IE=EAP())
         )
 
 
@@ -950,7 +951,7 @@ class FGMMNetworkSliceSpecAuthResult(Layer3E):
     _GEN = (
         FGMMHeader(val={'Type':82}),
         Type4LV('SNSSAI', val={'V':b'\x01'}, IE=SNSSAI()),
-        Type6LVE('EAPMsg', val={'V':b'\0\0\0\0\0'})
+        Type6LVE('EAPMsg', val={'V':b'\0\0\0\0\0'}, IE=EAP())
         )
 
 
