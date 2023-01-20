@@ -903,9 +903,14 @@ class FGSIDDigit(Envelope):
     def set_val(self, vals):
         if isinstance(vals, str_types):
             FGSIDDigit.encode(self, vals)
-        elif isinstance(vals, dict) and len(vals) == 1 and 'Digits' in vals:
-            # enable to set the whole BCD string, without setting explicitely Digit1
-            FGSIDDigit.encode(self, vals['Digits'])
+        elif isinstance(vals, dict):
+            vals = dict(vals)
+            if 'Digits' in vals and 'Digit1' not in vals:
+                # enable to set the whole BCD string, without setting explicitely Digit1
+                FGSIDDigit.encode(self, vals['Digits'])
+                del vals['Digits']
+            if vals:
+                Envelope.set_val(self, vals)
         else:
             Envelope.set_val(self, vals)
     
@@ -1994,6 +1999,16 @@ class SAList(Sequence):
 # Service type
 # TS 24.501, 9.11.3.50
 #------------------------------------------------------------------------------#
+
+class FGSServ(IntEnum):
+    Signalling      = 0
+    Data            = 1
+    MTServ          = 2
+    EmergServ       = 3
+    EmergServFB     = 4
+    HighPrioAccess  = 5
+    ElevatedSig     = 6
+
 
 ServiceType_dict = {
     0 : 'signalling',
