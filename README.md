@@ -2,9 +2,10 @@ What is pycrate
 ===============
 
 Pycrate is a french word for qualifying bad wine (when it's close to vinegar !).
-The present software library has nothing to do with wine (except it is developped in France), 
+The present software library has nothing to do with wine (except it is developed in France), 
 it is simply a Python library for manipulating various digital formats in an easy way,
-with a funny name.
+with a funny name. Most of the format supported are related in one way or another
+to cellular network's signalling.
 It is the glorious successor of [libmich](https://github.com/mitshell/libmich), 
 which was started back in 2009, served well and retired in 2017.
 
@@ -37,7 +38,7 @@ Operating systems and Python version
 
 The library is designed to work with Python 3 (3.5 and greater), from the official Python 
 implementation [CPython](https://www.python.org/), and is systematically tested both on
-Linux, MacOS and Windows. It should also support alternative Python engine such as 
+Linux, MacOS and Windows. It should also support alternative Python engines such as 
 [pypy](http://pypy.org/), [nuitka](http://nuitka.net/) or [Cython](https://cython.org/) ; 
 this is however not regularly tested. It should also support any other operating systems which
 has a decent Python 3 support.
@@ -123,7 +124,7 @@ pip install pycrate
 ```
 
 The install package is available on [pypi](https://pypi.org/project/pycrate/).
-It contains the library from the last tagged release on github.
+It contains the library from the last tagged release on github (which may be months old).
 
 
 Contributing
@@ -133,9 +134,10 @@ Contact and support
 -------------------
 
 This library is free software, and you are free to use it (or not to use it). 
-In case you encounter a problem with it, first read this readme completely and 
-check the wiki ; moreover many classes, methods and functions are documented with 
-docstrings, and finally you can have a look at the source code.
+In case you encounter a problem with it, first read this README completely and then
+check the [Wiki](https://github.com/p1sec/pycrate/wiki/The-pycrate-wiki) ; moreover many classes, 
+methods and functions are documented with docstrings, and finally you can have a look 
+at the source code (it won't bite you).
 
 If after all those steps, you still have a question or you think you found a bug,
 please open an issue (see below). Specific support requires time and may not be always 
@@ -143,8 +145,9 @@ possible. In case you require such support, please consider also contributing in
 way or another (see below, too).
 
 In case you are using this library in any of your project and you find it useful,
-do not hesitate to send me an email. It is always a pleasure to know where 
-code provided on the Internet can end up...
+do not hesitate to send me an email. It is always a pleasure to know where code provided 
+on the Internet can end up... (I am personally aware of some dark places where a pycrate's
+fork lies).
 
 
 Filling an issue
@@ -152,17 +155,14 @@ Filling an issue
 
 When filling an issue, please provide precise and contextual information about 
 your case and the error you potentially encounter:
-- indicate the version (or commit-level) of pycrate your are using, together with 
-the version of Python.
-- provide a code snippet that leads to the error you are facing, so that it can be
-reproduced.
+- indicate the version (or commit-level) of pycrate you are using, together with the version of Python.
+- provide a code snippet that leads to the error you are facing, so that it can be reproduced.
 - provide the eventual stacktrace you are getting from Python
-- provide additional and contextual information as needed (e.g. a specific ASN.1 
-specification being used...)
+- provide additional and contextual information as needed (e.g. a specific ASN.1 specification being used...)
 
 This is the bare minimum if you want to get help.
-And when you consider your issue has been addressed, please close it: "A good issue
-is a closed one !" as would have said my great grandmother.
+And when you consider your issue has been addressed, please close it: "A good issue is a closed one !"
+as would have said my great grandmother.
 
 
 Extending the library
@@ -311,9 +311,12 @@ This subdirectory implements most of the 3GPP NAS protocol formats:
 * *NAS*: provides two functions to parse any uplink and downlink mobile NAS messages
 * *NASLTE*: provides two functions to parse LTE uplink and downlink NAS messages
 * *NAS5G*: provides one function to parse 5G uplink and downlink mobile NAS messages
-* *PPP*: structures for NCP and LCP protocols used for PPP connection estabishment
-* *SCCP*: structures for SCCP user-data and management messages
-* *SIGTRAN*: structures for SIGTRAN (mostly M2PA and M3UA) messages
+* *PPP*: structures for NCP and LCP protocols used for PPP connection estabishment, 
+   as defined in RFC 1661, 1332 and 1334
+* *SCCP*: structures for SCCP user-data and management messages as defined in ITU-T Q.713
+* *ISUP*: structures for ISUP messages as defined in ITU-T Q.763
+* *SIGTRAN*: generic structures for SIGTRAN (i.e. M2UA, M2PA, MTP3 and M3UA) messages
+* *M3UA*: structures dedicated to the M3UA format from RFC 4666
 * *TS102225*: structures for SIM card's Secured Packets from ETSI TS 102.225
 * *TS23038*: structures and routines for SMS encoding from TS 23.038
 * *TS23040_SMS*: structures for the SMS transport protocol from TS 23.040
@@ -325,15 +328,18 @@ This subdirectory implements most of the 3GPP NAS protocol formats:
 * *TS24008_MM*: structures for mobility management messages from TS 24.008
 * *TS24008_SM*: structures for GPRS session management messages from TS 24.008
 * *TS24011_PPSMS*: structures for the SMS point-to-point protocol from TS 24.011
-* *TS24080_SS*: structures for the Supplementary Services protocol from TS 24.080, wrapping some MAP ASN.1 objects
+* *TS24080_SS*: structures for the Supplementary Services protocol from TS 24.080, 
+   wrapping some MAP ASN.1 objects
 * *TS24301_EMM*: structures for the EPS mobility management messages from TS 24.301
 * *TS24301_ESM*: structures for the EPS session management messages from TS 24.301
 * *TS24301_IE*: structures for many information elements from TS 24.301
 * *TS24501_FGMM*: structures for the 5G mobility management messages from TS 24.501
 * *TS24501_FGSM*: structures for the 5G session management messages from TS 24.501
 * *TS24501_IE*: structures for many information elements from TS 24.501
-* *TS24501_UEPOL*, *TS24526_UEPOL* and *TS24588_UEPOL*: structures for the 5G UE policy protocol from TS 24.501, 526 and 588
-* *TS29002_MAPAppCtx*: functions that relies on the Pycrate_TCAP_MAPv2v3 ASN.1 module, dealing mostly with MAP application-contexts
+* *TS24501_UEPOL*, *TS24526_UEPOL* and *TS24588_UEPOL*: structures for the 5G UE policy protocol 
+   from TS 24.501, 526 and 588
+* *TS29002_MAPAppCtx*: functions that relies on the Pycrate_TCAP_MAPv2v3 ASN.1 module, 
+   dealing mostly with MAP application-contexts
 * *TS29002_MAPIE*: structure for the MAP AddressString object from TS 29.002
 * *TS29244_PFCP*: structure for PFCP messages from TS 29.244
 * *TS0960_GTPv0*: structures for 2G GTP version 0 from TS 09.60
@@ -346,6 +352,7 @@ This subdirectory implements most of the 3GPP NAS protocol formats:
 * *TS44018_GTTP*: structure for the single GSM GTTP message from TS 44.018
 * *TS44018_IE*: structures for many information elements from TS 44.018
 * *TS44018_RR*: structures for the GSM and GPRS radio ressources messages from TS 44.018
+* *TS48058_Abis*: few IE structures for the GSM Abis protocol from TS 48.058
 
 
 pycrate_diameter
@@ -363,8 +370,10 @@ pycrate_osmo
 ------------
 
 This subdirectory contains the following modules:
-* *L1CTL*: structures used by osmocom-bb to communicate with the embedded stack from the host
+* *L1CTL*: structures to control the osmocom-bb GSM embedded stack from the host
 * *SEDebugMux*: structure used by Sony-Ericsson SoC and basebands to wrap logs
+* *RRCTL*: structures to interact with the RRC layer of the UE emulator from this 
+   [fork](https://gitea.osmocom.org/vyanitskiy/srsRAN/src/branch/extnas/release_20_10) of srs-lte
 
 
 pycrate_corenet
@@ -395,11 +404,11 @@ Finally, the code provided in the *test/* subdirectory is also representative on
 how to use the different modules.
 
 Basically, a pycrate's object exposes the following methods:
-* set_val() / get_val(), which sets and gets a value into the object
-* from_bytes() / to_bytes(), which converts a buffer into values according to the internal structure of the object, and back
-* from_json() / to_json(), for working with JSON-encoded values
-* hex() / bin(), for getting hexadecimal and binary representation of the serialized obect's value
-* repr() / show(), for providing nice python's internal representation, and printable representation of the object's value
+* `set_val()` / `get_val()` / `get_val_d()`, which sets value into and gets value from the object
+* `from_bytes()` / `to_bytes()`, which converts a buffer into values according to the internal structure of the object, and back
+* `from_json()` / `to_json()`, for working with JSON-encoded values
+* `hex()` / `bin()`, for getting hexadecimal and binary representation of the serialized obect's value
+* `repr()` / `show()`, for providing nice python's internal representation, and printable representation of the object's value
 
 
 ASN.1 usage
@@ -408,15 +417,17 @@ ASN.1 usage
 When a Python module from *pycrate_asn1dir/* is loaded, it creates Python classes
 corresponding to ASN.1 modules (all dash characters are converted to underscore).
 Each ASN.1 object has a corresponding Python instance, exposing the following methods:
-* from_asn1() / to_asn1(), which converts ASN.1 textual value to Python value and back
-* from_aper() / to_aper(), which converts aligned PER encoded value to Python value and back
-* from_uper() / to_uper(), which converts unaligned PER
-* from_ber() / to_ber(), which converts BER
-* from_cer() / to_cer(), which converts CER
-* from_der() / to_der(), which converts DER
-* from_jer() / to_jer(), which converts JER
-* set_val() / get_val(), to set and get Python's values into the ASN.1 object
-* get_proto(), to return to internal structure of the ASN.1 object
+* `from_asn1()` / `to_asn1()`, which converts ASN.1 textual value to Python value and back
+* `from_aper()` / `to_aper()`, which converts aligned PER encoded value to Python value and back
+* `from_uper()` / `to_uper()`, which converts unaligned PER
+* `from_ber()` / `to_ber()`, which converts BER
+* `from_cer()` / `to_cer()`, which converts CER
+* `from_der()` / `to_der()`, which converts DER
+* `from_jer()` / `to_jer()`, which converts JER
+* `from_oer()` / `to_oer()`, which converts OER
+* `from_coer()` / `to_coer()`, which converts canonical OER
+* `set_val()` / `get_val()` to set and get Python's values into the ASN.1 object
+* `get_proto()` to return to internal structure of the ASN.1 object
 
 All the methods useful for working with ASN.1 objects at runtime can be found in 
 the file *pycrate_asn1rt/asnobj.py*.
@@ -436,6 +447,8 @@ Four different tools are provided (yet):
    objects and prints the corresponding structure.
 * *pycrate_map_op_info.py* prints prototypes and various information related to
    TCAP-MAP (Mobile Application Part) and CAMEL operations and application-contexts.
+* *pycrate_gtp_type_info.py* prints prototypes and various information related to
+   GTP messages and transactions as in version 0, 1 or 2
 
 
 Examples
@@ -645,4 +658,5 @@ True
 
 For more information about the API exposed for each ASN.1 object, you can check
 the docstrings of all ASN.1 objects, and also read the source file *pycrate_asn1rt/asnobj.py*.
-Do not forget to have a look at the [wiki](https://github.com/p1sec/pycrate/wiki/The-pycrate-wiki), too!
+Do not forget to have a look at the [Wiki](https://github.com/p1sec/pycrate/wiki/The-pycrate-wiki), too!
+
