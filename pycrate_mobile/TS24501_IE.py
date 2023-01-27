@@ -302,6 +302,22 @@ class FGMMCap(Envelope):
         Uint('MultipleUP', bl=1),
         Uint('WUSA', bl=1),
         Uint('CAG', bl=1), # end of octet 3
+        Uint('PR', bl=1),
+        Uint('RPR', bl=1),
+        Uint('PIV', bl=1),
+        Uint('NCR', bl=1),
+        Uint('NR-PSSI', bl=1),
+        Uint('5G-ProSe-l3rmt', bl=1),
+        Uint('5G-ProSe-l2rmt', bl=1),
+        Uint('5G-ProSe-l3relay', bl=1), # end of octet 4
+        Uint('spare', bl=1),
+        Uint('UAS', bl=1),
+        Uint('NSAG', bl=1),
+        Uint('Ex-CAG', bl=1),
+        Uint('SSNPNSI', bl=1),
+        Uint('EventNotification', bl=1),
+        Uint('MINT', bl=1),
+        Uint('NSSRG', bl=1), # end of octet 5
         Buf('spare', val=b'', rep=REPR_HEX)
         )
     
@@ -313,9 +329,13 @@ class FGMMCap(Envelope):
             self.disable_from(8)
         elif l <= 16:
             self.disable_from(16)
-        elif l > 24:
+        elif l <= 24:
+            self.disable_from(24)
+        elif l <= 32:
+            self.disable_from(32)
+        elif l > 40:
             # enables some spare bits at the end
-            self[-1]._bl = l-24
+            self[-1]._bl = l-40
         Envelope._from_char(self, char)
     
     def disable_from(self, ind):
@@ -1524,16 +1544,25 @@ class CipheringKeyData(Sequence):
 # TS 24.501, 9.11.3.18D
 #------------------------------------------------------------------------------#
 
+class FGSCtrlPlaneServ(IntEnum):
+    MOReq       = 0
+    MTReq       = 1
+    EmergServ   = 3
+    EmergServFB = 4
+
+
 _CtrlPlaneServType_dict = {
     0 : 'mobile originating request',
     1 : 'mobile terminating request',
-    2 : 'data',
+    2 : 'emergency services',
+    3 : 'emergency services fallback',
     3 : 'unused - mobile originating request',
     4 : 'unused - mobile originating request',
     5 : 'unused - mobile originating request',
     6 : 'unused - mobile originating request',
     7 : 'unused - mobile originating request'
     }
+
 
 class CtrlPlaneServiceType(Envelope):
     _GEN = (
@@ -1790,6 +1819,20 @@ class OperatorAccessCatDefs(Sequence):
 # TS 24.501, 9.11.3.40
 #------------------------------------------------------------------------------#
 
+class FGSMMContType(IntEnum):
+    N1SM    = 1
+    SMS     = 2
+    LPP     = 3
+    SOR     = 4
+    UEPOL   = 5
+    UEPRMUP = 6
+    LCS     = 7
+    CIOTUD  = 8
+    SLAA    = 9
+    EVNOT   = 10
+    MULT    = 15   
+
+
 PayloadContainerType_dict = {
     1 : 'N1 SM information',
     2 : 'SMS',
@@ -1799,6 +1842,8 @@ PayloadContainerType_dict = {
     6 : 'UE parameters update transparent container',
     7 : 'Location services message container',
     8 : 'CIoT user data container',
+    9 : 'Service-level-AA container',
+    10: 'Event notification',
     15: 'Multiple payloads'
     }
 
