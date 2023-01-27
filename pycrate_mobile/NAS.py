@@ -90,11 +90,13 @@ NASMTDispatcher = {
     }
 
 
-def parse_NAS_MO(buf):
+def parse_NAS_MO(buf, inner=True):
     """Parses a Mobile Originated NAS message bytes' buffer
     
     Args:
         buf: uplink NAS message bytes' buffer
+        inner: bool, parse any embedded NAS messages wrapped into the outer NAS message 
+               (for LTE and 5G)
     
     Returns:
         element, err: 2-tuple
@@ -119,9 +121,9 @@ def parse_NAS_MO(buf):
     if pd in (3, 5, 11):
         type &= 0x3f
     elif pd in (2, 7):
-        return parse_NASLTE_MO(buf, inner=True)
+        return parse_NASLTE_MO(buf, inner=inner, sec_hdr=True)
     elif pd in (46, 126):
-        return parse_NAS5G(buf, inner=True)
+        return parse_NAS5G(buf, inner=inner, sec_hdr=True)
     #
     try:
         Msg = NASMODispatcher[pd][type]()
@@ -138,11 +140,13 @@ def parse_NAS_MO(buf):
     return Msg, 0
 
 
-def parse_NAS_MT(buf, wl2=False):
+def parse_NAS_MT(buf, inner=True, wl2=False):
     """Parses a Mobile Terminated NAS message bytes' buffer
     
     Args:
         buf: downlink NAS message bytes' buffer
+        inner: bool, parse any embedded NAS messages wrapped into the outer NAS message 
+               (for LTE and 5G)
         wl2: bool, True if the signalling message is a GSM RR with a 
              L2PseudoLength prefix
     
@@ -175,9 +179,9 @@ def parse_NAS_MT(buf, wl2=False):
     if pd in (3, 5, 11):
         type &= 0x3f
     elif pd in (2, 7):
-        return parse_NASLTE_MT(buf, inner=True)
+        return parse_NASLTE_MT(buf, inner=inner, sec_hdr=True)
     elif pd in (46, 126):
-        return parse_NAS5G(buf, inner=True)
+        return parse_NAS5G(buf, inner=inner, sec_hdr=True)
     #
     try:
         Msg = NASMTDispatcher[pd][type]()

@@ -41,10 +41,11 @@ def parse_NAS5G(buf, inner=True, sec_hdr=True):
     
     Args:
         buf: 5G NAS message bytes' buffer
-        inner: if True, decode NASMessage within security header if possible
-                        decode ?
+        inner: if True, decode NASMessage within the security header, PayloadContainer
+               and PortMgmtInfoContainer if possible
+               otherwise, keep those field as plain bytes buffer (e.g. for later decoding)
                         
-        sec_hdr: if True, handle the 5GMM security header
+        sec_hdr: if True, consider the 5GMM security header with potential encryption
                  otherwise, just consider the NAS message is in plain text
     
     Returns:
