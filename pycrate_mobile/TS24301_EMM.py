@@ -592,7 +592,12 @@ if _with_cm:
                 except KeyError:
                     raise(PycrateErr('EMMSecProtNASMessage.mac_verify(): invalid EIA identifier, {0}'\
                           .format(eia)))
-                mac = EIA(key, seqnoff + self[2].get_val(), 0, dir, self[2].to_bytes() + self[3].get_val())
+                nasmsg = self[-1]
+                if isinstance(nasmsg, Buf):
+                    nasbuf = nasmsg.get_val()
+                else:
+                    nasbuf = nasmsg.to_bytes()
+                mac = EIA(key, seqnoff + self[2].get_val(), 0, dir, self[2].to_bytes() + nasbuf)
                 return mac == self[1].get_val()
             else:
                 raise(PycrateErr('EMMSecProtNASMessage.mac_verify(): invalid sec hdr value, {0}'\
@@ -623,7 +628,12 @@ if _with_cm:
                 except KeyError:
                     raise(PycrateErr('EMMSecProtNASMessage.mac_compute(): invalid EIA identifier, {0}'\
                           .format(eia)))
-                mac = EIA(key, seqnoff + self[2].get_val(), 0, dir, self[2].to_bytes() + self[3].get_val())
+                nasmsg = self[-1]
+                if isinstance(nasmsg, Buf):
+                    nasbuf = nasmsg.get_val()
+                else:
+                    nasbuf = nasmsg.to_bytes()
+                mac = EIA(key, seqnoff + self[2].get_val(), 0, dir, self[2].to_bytes() + nasbuf)
                 self[1].set_val(mac)
             else:
                 raise(PycrateErr('EMMSecProtNASMessage.mac_compute(): invalid sec hdr value, {0}'\
@@ -653,9 +663,13 @@ if _with_cm:
                 except KeyError:
                     raise(PycrateErr('EMMSecProtNASMessage.encrypt(): invalid EEA identifier, {0}'\
                           .format(eea)))
-                self._dec_msg = self[3].to_bytes()
+                nasmsg = self[-1]
+                if isinstance(nasmsg, Buf):
+                    self._dec_msg = nasmsg.get_val()
+                else:
+                    self._dec_msg = nasmsg.to_bytes()
                 self._enc_msg = EEA(key, seqnoff + self[2].get_val(), 0, dir, self._dec_msg)
-                self[3].set_val(self._enc_msg)
+                self[-1].set_val(self._enc_msg)
             else:
                 raise(PycrateErr('EMMSecProtNASMessage.encrypt(): invalid sec hdr value, {0}'\
                       .format(shdr)))
@@ -684,9 +698,13 @@ if _with_cm:
                 except KeyError:
                     raise(PycrateErr('EMMSecProtNASMessage.decrypt(): invalid EEA identifier, {0}'\
                           .format(eea)))
-                self._enc_msg = self[3].to_bytes()
+                nasmsg = self[-1]
+                if isinstance(nasmsg, Buf):
+                    self._enc_msg = nasmsg.get_val()
+                else:
+                    self._enc_msg = nasmsg.to_bytes()
                 self._dec_msg = EEA(key, seqnoff + self[2].get_val(), 0, dir, self._enc_msg)
-                self[3].set_val(self._dec_msg)
+                self[-1].set_val(self._dec_msg)
             else:
                 raise(PycrateErr('EMMSecProtNASMessage.decrypt(): invalid sec hdr value, {0}'\
                       .format(shdr)))
@@ -755,10 +773,7 @@ if _with_cm:
                           .format(eia)))
                 msg = self.to_bytes()
                 mac = EIA(key, seqnoff + self[2].get_val(), 0, dir, msg[:2])
-                if mac[2:4] != msg[2:4]:
-                    return False
-                else:
-                    return True
+                return mac[2:4] == msg[2:4]
         
         def mac_compute(self, key=16*b'\0', dir=0, eia=0, seqnoff=0):
             """compute the MAC of the EMMServiceRequest using SeqnShort plus seqnoff, 
@@ -774,7 +789,7 @@ if _with_cm:
                 None
             """
             if eia == 0:
-                self[4].set_val(b'\0\0')
+                self[-1].set_val(b'\0\0')
             else:
                 try:
                     EIA = _EIA[eia]
@@ -783,7 +798,7 @@ if _with_cm:
                           .format(eia)))
                 msg = self.to_bytes()
                 mac = EIA(key, seqnoff + self[2].get_val(), 0, dir, msg[:2])
-                self[4].set_val(mac[2:4])
+                self[-1].set_val(mac[2:4])
 
 else:
     

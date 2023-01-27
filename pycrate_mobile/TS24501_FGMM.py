@@ -755,12 +755,16 @@ if _with_cm:
                 except KeyError:
                     raise(PycrateErr('5GMMSecProtNASMessage.mac_verify(): invalid 5G-IA identifier, {0}'\
                           .format(fgia)))
-                mac = FGIA(key, seqnoff + self[2].get_val(), bearer, dir, self[2].to_bytes() + self[3].get_val())
+                nasmsg = self[-1]
+                if isinstance(nasmsg, Buf):
+                    nasbuf = nasmsg.get_val()
+                else:
+                    nasbuf = nasmsg.to_bytes()
+                mac = FGIA(key, seqnoff + self[2].get_val(), bearer, dir, self[2].to_bytes() + nasbuf)
                 return mac == self[1].get_val()
             else:
                 raise(PycrateErr('5GMMSecProtNASMessage.mac_verify(): invalid sec hdr value, {0}'\
                       .format(shdr)))
-                #return False
         
         def mac_compute(self, key=16*b'\0', dir=0, fgia=0, seqnoff=0, bearer=1):
             """compute the MAC of the NASMessage using Seqn plus seqnoff, key, 
@@ -788,7 +792,12 @@ if _with_cm:
                 except KeyError:
                     raise(PycrateErr('5GMMSecProtNASMessage.mac_compute(): invalid 5G-IA identifier, {0}'\
                           .format(fgia)))
-                mac = FGIA(key, seqnoff + self[2].get_val(), bearer, dir, self[2].to_bytes() + self[3].get_val())
+                nasmsg = self[-1]
+                if isinstance(nasmsg, Buf):
+                    nasbuf = nasmsg.get_val()
+                else:
+                    nasbuf = nasmsg.to_bytes()
+                mac = FGIA(key, seqnoff + self[2].get_val(), bearer, dir, self[2].to_bytes() + nasbuf)
                 self[1].set_val(mac)
             else:
                 raise(PycrateErr('5GMMSecProtNASMessage.mac_compute(): invalid sec hdr value, {0}'\
@@ -819,9 +828,13 @@ if _with_cm:
                 except KeyError:
                     raise(PycrateErr('5GMMSecProtNASMessage.encrypt(): invalid 5G-EA identifier, {0}'\
                           .format(fgea)))
-                self._dec_msg = self[3].to_bytes()
+                nasmsg = self[-1]
+                if isinstance(nasmsg, Buf):
+                    self._dec_msg = nasmsg.get_val()
+                else:
+                    self._dec_msg = nasmsg.to_bytes()
                 self._enc_msg = FGEA(key, seqnoff + self[2].get_val(), bearer, dir, self._dec_msg)
-                self[3].set_val(self._enc_msg)
+                self[-1].set_val(self._enc_msg)
             else:
                 raise(PycrateErr('5GMMSecProtNASMessage.encrypt(): invalid sec hdr value, {0}'\
                       .format(shdr)))
@@ -851,9 +864,13 @@ if _with_cm:
                 except KeyError:
                     raise(PycrateErr('5GMMSecProtNASMessage.decrypt(): invalid 5G-EA identifier, {0}'\
                           .format(fgea)))
-                self._enc_msg = self[3].to_bytes()
+                nasmsg = self[-1]
+                if isinstance(nasmsg, Buf):
+                    self._enc_msg = nasmsg.get_val()
+                else:
+                    self._enc_msg = nasmsg.to_bytes()
                 self._dec_msg = FGEA(key, seqnoff + self[2].get_val(), bearer, dir, self._enc_msg)
-                self[3].set_val(self._dec_msg)
+                self[-1].set_val(self._dec_msg)
             else:
                 raise(PycrateErr('5GMMSecProtNASMessage.decrypt(): invalid sec hdr value, {0}'\
                       .format(shdr)))
