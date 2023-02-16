@@ -38,7 +38,7 @@ from time     import struct_time
 
 from pycrate_core.utils  import *
 from pycrate_core.elt    import (
-    Envelope, Sequence, Array,
+    Envelope, Sequence, Array, Alt,
     REPR_RAW, REPR_HEX, REPR_BIN, REPR_HD, REPR_HUM
     )
 from pycrate_core.base   import *
@@ -1549,7 +1549,31 @@ class UERadioCapIDReq(Envelope):
 # WUS assistance information
 # TS 24.301, 9.9.3.62
 #------------------------------------------------------------------------------#
-# unclear description
+
+class WUSAssistInfo(Envelope):
+    _GEN = (
+        Uint('Type', bl=3, dic={0: 'UE paging probability'}),
+        Alt('Info', GEN={
+            0 : Uint('Val', bl=5),
+            },
+            DEFAULT=Uint('spare', bl=5, rep=REPR_HEX),
+            sel=lambda self: self.get_env()['Type'].get_val())
+        )
+
+
+#------------------------------------------------------------------------------#
+# UE request type
+# TS 24.301, 9.9.3.65
+#------------------------------------------------------------------------------#
+
+class UEReqType(Envelope):
+    _GEN = (
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('Val', bl=4, dic={
+            0 : 'reserved',
+            1 : 'NAS signalling connection release',
+            2 : 'Rejection of paging'})
+        )
 
 
 #------------------------------------------------------------------------------#

@@ -86,7 +86,7 @@ from .TS24008_IE        import (
 from .TS24301_IE        import (
     NAS_KSI, EPSBearerCtxtStat, UENetCap as EPSUENetCap, ExtEmergNumList, 
     EPSBearerCtxtStat, NASSecAlgo as EPSNASSecAlgo, UESecCap as S1UESecCap, 
-    ReleaseAssistInd, 
+    ReleaseAssistInd, WUSAssistInfo, UEReqType,
     )
 from .TS24501_IE        import *
 from pycrate_crypto.EAP import EAP
@@ -170,7 +170,7 @@ _FGMM_dict = {
 
 class FGMMHeader(Envelope):
     _name = '5GMMHeader'
-    _GEN = (
+    _GEN  = (
         Uint8('EPD', val=126, dic=ProtDisc_dict),
         Uint('spare', bl=4, rep=REPR_HEX),
         Uint('SecHdr', bl=4, dic=SecHdrType_dict),
@@ -180,7 +180,7 @@ class FGMMHeader(Envelope):
 
 class FGMMHeaderSec(Envelope):
     _name = '5GMMHeaderSec'
-    _GEN = (
+    _GEN  = (
         Uint8('EPD', val=126, dic=ProtDisc_dict),
         Uint('spare', bl=4, rep=REPR_HEX),
         Uint('SecHdr', bl=4, dic=SecHdrType_dict)
@@ -194,7 +194,7 @@ class FGMMHeaderSec(Envelope):
 
 class FGMMAuthenticationRequest(Layer3E):
     _name = '5GMMAuthenticationRequest'
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':86}),
         Uint('spare', bl=4, rep=REPR_HEX),
         Type1V('NAS_KSI', val={'V': 7}, IE=NAS_KSI()),
@@ -212,7 +212,7 @@ class FGMMAuthenticationRequest(Layer3E):
 
 class FGMMAuthenticationResponse(Layer3E):
     _name = '5GMMAuthenticationResponse'
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':87}),
         Type4TLV('RES', val={'T':0x2D, 'V':16*b'\0'}),
         Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}, IE=EAP())
@@ -226,7 +226,7 @@ class FGMMAuthenticationResponse(Layer3E):
 
 class FGMMAuthenticationResult(Layer3E):
     _name = '5GMMAuthenticationResult'
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':90}),
         Uint('spare', bl=4, rep=REPR_HEX),
         Type1V('NAS_KSI', val={'V':7}, IE=NAS_KSI()),
@@ -242,7 +242,7 @@ class FGMMAuthenticationResult(Layer3E):
 
 class FGMMAuthenticationFailure(Layer3E):
     _name = '5GMMAuthenticationFailure'
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':89}),
         Type3V('5GMMCause', val={'V':b'\x16'}, bl={'V':8}, IE=FGMMCause()),
         Type4TLV('AUTS', val={'T':0x30, 'V':14*b'\0'})
@@ -256,7 +256,7 @@ class FGMMAuthenticationFailure(Layer3E):
 
 class FGMMAuthenticationReject(Layer3E):
     _name = '5GMMAuthenticationReject'
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':88}),
         Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}, IE=EAP())
         )
@@ -281,7 +281,7 @@ class FGMMRegistrationRequest(Layer3E):
     #
     _name = '5GMMRegistrationRequest'
     #
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':65}),
         Type1V('NAS_KSI', val={'V':7}, IE=NAS_KSI()),
         Type1V('5GSRegType', IE=FGSRegType()),
@@ -315,9 +315,16 @@ class FGMMRegistrationRequest(Layer3E):
         Type4TLV('UERadioCapID', val={'T':0x67, 'V':b'\0'}, IE=UERadioCapID()),
         Type4TLV('MappedNSSAI', val={'T':0x35, 'V':b'\0'}, IE=NSSAI('MappedNSSAI')),
         Type4TLV('AddInfoReq', val={'T':0x48, 'V':b'\0'}, IE=AddInfoReq()),
-        Type4TLV('WUSAssistInfo', val={'T':0x1A, 'V':b'\0'}),
+        Type4TLV('WUSAssistInfo', val={'T':0x1A, 'V':b'\0'}, IE=WUSAssistInfo()),
         Type2('N5GCInd', val={'T':0xA}),
-        Type4TLV('NBN1ModeDRXParam', val={'T':0x30, 'V':b'\0'}, IE=NBN1ModeDRXParam())
+        Type4TLV('NBN1ModeDRXParam', val={'T':0x30, 'V':b'\0'}, IE=NBN1ModeDRXParam()),
+        Type4TLV('UEReqType', val={'T':0x29, 'V':b'\0'}, IE=UEReqType()),
+        Type4TLV('PagingRestriction', val={'T':0x28, 'V':b'\0'}, IE=PagingRestriction()),
+        Type6TLVE('ServiceLevelAAContainer', val={'T':0x72, 'V':b'\0\0\0\0'}, IE=ServiceLevelAAContainer()),
+        Type4TLV('NID', val={'T':0x32, 'V':b'\0\0\0\0\0\0'}, IE=NID()),
+        Type4TLV('MSDetPLMNDistasterCond', val={'T':0x16, 'V':b'\0\0\0'}, IE=PLMN('MSDetPLMNDisasterCond')),
+        Type4TLV('PEIPSAssistInfo', val={'T':0x2A, 'V':b'\0'}, IE=PEIPSAssistInfo()),
+        Type4TLV('T3512', val={'T':0x3B, 'V':b'\0'}, IE=GPRSTimer3()),
         )
 
 
@@ -328,7 +335,7 @@ class FGMMRegistrationRequest(Layer3E):
 
 class FGMMRegistrationAccept(Layer3E):
     _name = '5GMMRegistrationAccept'
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':66}),
         Type4LV('5GSRegResult', val={'V':b'\0'}, IE=FGSRegResult()),
         Type6TLVE('GUTI', val={'T': 0x77, 'V':b'\0\0\0\0'}, IE=FGSID()),
@@ -362,12 +369,25 @@ class FGMMRegistrationAccept(Layer3E):
         Type4TLV('T3448', val={'T':0x6B, 'V':b'\0'}, IE=GPRSTimer()),
         Type4TLV('T3324', val={'T':0x6A, 'V':b'\0'}, IE=GPRSTimer()),
         Type4TLV('UERadioCapID', val={'T':0x67, 'V':b'\0'}, IE=UERadioCapID()),
+        Type1TV('UERadioCapIDDelInd', val={'T':0xE, 'V':0}, IE=UERadioCapIDDelInd()),
         Type4TLV('PendingNSSAI', val={'T':0x39, 'V':b'\x01\x01'}, IE=NSSAI()),
         Type6TLVE('CipheringKeyData', val={'T':0x74, 'V':31*b'\0'}, IE=CipheringKeyData()),
         Type6TLVE('CAGInfoList', val={'T':0x75, 'V':b''}, IE=CAGInfoList()),
         Type4TLV('Trunc5GSTMSIConfig', val={'T':0x1B, 'V':b'\0'}, IE=Trunc5GSTMSIConfig()),
-        Type4TLV('WUSAssistInfo', val={'T':0x1A, 'V':b'\0'}),
-        Type4TLV('NBN1ModeDRXParam', val={'T':0x29, 'V':b'\0'}, IE=NBN1ModeDRXParam())
+        Type4TLV('WUSAssistInfo', val={'T':0x1A, 'V':b'\0'}, IE=WUSAssistInfo()),
+        Type4TLV('NBN1ModeDRXParam', val={'T':0x29, 'V':b'\0'}, IE=NBN1ModeDRXParam()),
+        Type4TLV('ExtRejectedNSSAI', val={'T':0x68, 'V':b'\0\0\0'}, IE=ExtRejectedNSSAI()),
+        Type6TLVE('ServiceLevelAAContainer', val={'T':0x7B, 'V':b'\0\0\0\0'}, IE=ServiceLevelAAContainer()),
+        Type4TLV('PEIPSAssistInfo', val={'T':0x2A, 'V':b'\0'}, IE=PEIPSAssistInfo()),
+        Type4TLV('5GSAddReqResult', val={'T':0x34, 'V':b'\0'}, IE=FGSAddReqResult()),
+        Type6TLVE('NSSRGInfo', val={'T':0x70, 'V':b'\0\0\0\0\0'}, IE=NSSRGInfo()),
+        Type4TLV('DisasterRoamingWaitRange', val={'T':0x14, 'V':b'\0\0'}, IE=RegistrationWaitRange()),
+        Type4TLV('DisasterReturnWaitRange', val={'T':0x2C, 'V':b'\0\0'}, IE=RegistrationWaitRange()),
+        Type4TLV('DisasterPLMNList', val={'T':0x13, 'V':b''}, IE=PLMNList()),
+        Type4TLV('ForbiddenTAIListRoaming', val={'T':0x1D, 'V':b'\0\0\0\0\0\0\0'}, IE=FGSTAIList()),
+        Type4TLV('ForbiddenTAIListRegional', val={'T':0x1E, 'V':b'\0\0\0\0\0\0\0'}, IE=FGSTAIList()),
+        Type6TLVE('ExtCAGInfoList', val={'T':0x71, 'V':b'\0'}, IE=ExtCAGInfoList()),
+        Type6TLVE('NSAGInfo', val={'T':0x7C, 'V':b'\0\0\0\0\0\0\0'}, IE=NSAGInfo()),
         )
 
 
@@ -378,9 +398,9 @@ class FGMMRegistrationAccept(Layer3E):
 
 class FGMMRegistrationComplete(Layer3E):
     _name = '5GMMRegistrationComplete'
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':67}),
-        Type6TLVE('SORTransContainer', val={'T':0x73, 'V':17*b'\0'}, IE=SORTransContainer())
+        Type6TLVE('SORTransContainer', val={'T':0x73, 'V':17*b'\0'}, IE=SORTransContainer()),
         )
 
 
@@ -391,14 +411,20 @@ class FGMMRegistrationComplete(Layer3E):
 
 class FGMMRegistrationReject(Layer3E):
     _name = '5GMMRegistrationReject'
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':68}),
         Type3V('5GMMCause', val={'V':b'\x16'}, bl={'V':8}, IE=FGMMCause()),
         Type4TLV('T3346', val={'T':0x5F, 'V':b'\0'}, IE=GPRSTimer()),
         Type4TLV('T3502', val={'T':0x16, 'V':b'\0'}, IE=GPRSTimer()),
         Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}, IE=EAP()),
         Type4TLV('RejectedNSSAI', val={'T':0x69, 'V':b'\x10\x01'}, IE=RejectedNSSAI()),
-        Type6TLVE('CAGInfoList', val={'T':0x75, 'V':b''}, IE=CAGInfoList())
+        Type6TLVE('CAGInfoList', val={'T':0x75, 'V':b''}, IE=CAGInfoList()),
+        Type4TLV('ExtRejectedNSSAI', val={'T':0x68, 'V':b'\0\0\0'}, IE=ExtRejectedNSSAI()),
+        Type4TLV('DisasterReturnWaitRange', val={'T':0x2C, 'V':b'\0\0'}, IE=RegistrationWaitRange()),
+        Type6TLVE('ExtCAGInfoList', val={'T':0x71, 'V':b'\0'}, IE=ExtCAGInfoList()),
+        Type4TLV('LowerBoundTimer', val={'T':0x3A, 'V':b'\0'}, IE=GPRSTimer3()),
+        Type4TLV('ForbiddenTAIListRoaming', val={'T':0x1D, 'V':b'\0\0\0\0\0\0\0'}, IE=FGSTAIList()),
+        Type4TLV('ForbiddenTAIListRegional', val={'T':0x1E, 'V':b'\0\0\0\0\0\0\0'}, IE=FGSTAIList()),
         )
 
 
@@ -409,7 +435,7 @@ class FGMMRegistrationReject(Layer3E):
 
 class FGMMULNASTransport(Layer3E):
     _name = '5GMMULNASTransport'
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':103}),
         Uint('spare', bl=4, rep=REPR_HEX),
         Type1V('PayloadContainerType', val={'V':1}, dic=PayloadContainerType_dict),
@@ -432,7 +458,7 @@ class FGMMULNASTransport(Layer3E):
 
 class FGMMDLNASTransport(Layer3E):
     _name = '5GMMDLNASTransport'
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':104}),
         Uint('spare', bl=4, rep=REPR_HEX),
         Type1V('PayloadContainerType', val={'V':1}, dic=PayloadContainerType_dict),
@@ -440,7 +466,8 @@ class FGMMDLNASTransport(Layer3E):
         Type3TV('PDUSessID', val={'T':0x12, 'V':b'\0'}, bl={'V':8}, IE=PDUSessID()),
         Type4TLV('AddInfo', val={'T':0x24, 'V':b'\0'}),
         Type3TV('5GMMCause', val={'T':0x58, 'V':b'\x16'}, bl={'V':8}, IE=FGMMCause()),
-        Type4TLV('BackOffTimer', val={'T':0x37, 'V':b'\0'}, IE=GPRSTimer3())
+        Type4TLV('BackOffTimer', val={'T':0x37, 'V':b'\0'}, IE=GPRSTimer3()),
+        Type4TLV('LowerBoundTimer', val={'T':0x3A, 'V':b'\0'}, IE=GPRSTimer3()),
         )
 
 
@@ -451,7 +478,7 @@ class FGMMDLNASTransport(Layer3E):
 
 class FGMMMODeregistrationRequest(Layer3E):
     _name = '5GMMMODeregistrationRequest'
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':69}),
         Type1V('NAS_KSI', val={'V':7}, IE=NAS_KSI()),
         Type1V('DeregistrationType', val={'V':1}, IE=DeregistrationType()),
@@ -466,7 +493,7 @@ class FGMMMODeregistrationRequest(Layer3E):
 
 class FGMMMODeregistrationAccept(Layer3E):
     _name = '5GMMMODeregistrationAccept'
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':70}),
         )
 
@@ -478,13 +505,20 @@ class FGMMMODeregistrationAccept(Layer3E):
 
 class FGMMMTDeregistrationRequest(Layer3E):
     _name = '5GMMMTDeregistrationRequest'
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':71}),
         Uint('spare', bl=4, rep=REPR_HEX),
         Type1V('DeregistrationType', val={'V':1}, IE=DeregistrationType()),
         Type3TV('5GMMCause', val={'T':0x58, 'V':b'\x16'}, bl={'V':8}, IE=FGMMCause()),
         Type4TLV('T3346', val={'T':0x5F, 'V':b'\0'}, IE=GPRSTimer()),
-        Type4TLV('RejectedNSSAI', val={'T':0x6D, 'V':b'\x10\x01'}, IE=RejectedNSSAI())
+        Type4TLV('RejectedNSSAI', val={'T':0x6D, 'V':b'\x10\x01'}, IE=RejectedNSSAI()),
+        Type6TLVE('CAGInfoList', val={'T':0x75, 'V':b''}, IE=CAGInfoList()),
+        Type4TLV('ExtRejectedNSSAI', val={'T':0x68, 'V':b'\0\0\0'}, IE=ExtRejectedNSSAI()),
+        Type4TLV('DisasterReturnWaitRange', val={'T':0x2C, 'V':b'\0\0'}, IE=RegistrationWaitRange()),
+        Type6TLVE('ExtCAGInfoList', val={'T':0x71, 'V':b'\0'}, IE=ExtCAGInfoList()),
+        Type4TLV('LowerBoundTimer', val={'T':0x3A, 'V':b'\0'}, IE=GPRSTimer3()),
+        Type4TLV('ForbiddenTAIListRoaming', val={'T':0x1D, 'V':b'\0\0\0\0\0\0\0'}, IE=FGSTAIList()),
+        Type4TLV('ForbiddenTAIListRegional', val={'T':0x1E, 'V':b'\0\0\0\0\0\0\0'}, IE=FGSTAIList()),
         )
 
 
@@ -495,7 +529,7 @@ class FGMMMTDeregistrationRequest(Layer3E):
 
 class FGMMMTDeregistrationAccept(Layer3E):
     _name = '5GMMMTDeregistrationAccept'
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':71}),
         )
 
@@ -515,7 +549,7 @@ class FGMMServiceRequest(Layer3E):
     #
     _name = '5GMMServiceRequest'
     #
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':76}),
         Type1V('ServiceType', val={'V':0}, dic=ServiceType_dict),
         Type1V('NAS_KSI', val={'V':7}, IE=NAS_KSI()),
@@ -523,7 +557,9 @@ class FGMMServiceRequest(Layer3E):
         Type4TLV('ULDataStat', val={'T':0x40, 'V':b'\0\0'}, IE=ULDataStat()),
         Type4TLV('PDUSessStat', val={'T':0x50, 'V':b'\0\0'}, IE=PDUSessStat()),
         Type4TLV('AllowedPDUSessStat', val={'T':0x25, 'V':b'\0\0'}, IE=PDUSessStat()),
-        Type6TLVE('NASContainer', val={'T':0x71, 'V':b'\0\0'})
+        Type6TLVE('NASContainer', val={'T':0x71, 'V':b'\0\0'}),
+        Type4TLV('UEReqType', val={'T':0x29, 'V':b'\0'}, IE=UEReqType()),
+        Type4TLV('PagingRestriction', val={'T':0x28, 'V':b'\0'}, IE=PagingRestriction()),
         )
 
 
@@ -534,13 +570,16 @@ class FGMMServiceRequest(Layer3E):
 
 class FGMMServiceAccept(Layer3E):
     _name = '5GMMServiceAccept'
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':78}),
         Type4TLV('PDUSessStat', val={'T':0x50, 'V':b'\0\0'}, IE=PDUSessStat()),
         Type4TLV('PDUSessReactResult', val={'T':0x26, 'V':b'\0\0'}, IE=PDUSessStat()),
         Type6TLVE('PDUSessReactResultErr', val={'T':0x72, 'V':b'\0\0'}, IE=PDUSessReactResultErr()),
         Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}, IE=EAP()),
-        Type4TLV('T3448', val={'T':0x6B, 'V':b'\0'}, IE=GPRSTimer())
+        Type4TLV('T3448', val={'T':0x6B, 'V':b'\0'}, IE=GPRSTimer()),
+        Type4TLV('5GSAddReqResult', val={'T':0x34, 'V':b'\0'}, IE=FGSAddReqResult()),
+        Type4TLV('ForbiddenTAIListRoaming', val={'T':0x1D, 'V':b'\0\0\0\0\0\0\0'}, IE=FGSTAIList()),
+        Type4TLV('ForbiddenTAIListRegional', val={'T':0x1E, 'V':b'\0\0\0\0\0\0\0'}, IE=FGSTAIList()),
         )
 
 
@@ -551,14 +590,19 @@ class FGMMServiceAccept(Layer3E):
 
 class FGMMServiceReject(Layer3E):
     _name = '5GMMServiceReject'
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':77}),
         Type3V('5GMMCause', val={'V':b'\x16'}, bl={'V':8}, IE=FGMMCause()),
         Type4TLV('PDUSessStat', val={'T':0x50, 'V':b'\0\0'}, IE=PDUSessStat()),
         Type4TLV('T3346', val={'T':0x5F, 'V':b'\0'}, IE=GPRSTimer()),
         Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}, IE=EAP()),
         Type4TLV('T3448', val={'T':0x6B, 'V':b'\0'}, IE=GPRSTimer()),
-        Type6TLVE('CAGInfoList', val={'T':0x75, 'V':b''}, IE=CAGInfoList())
+        Type6TLVE('CAGInfoList', val={'T':0x75, 'V':b''}, IE=CAGInfoList()),
+        Type4TLV('DisasterReturnWaitRange', val={'T':0x2C, 'V':b'\0\0'}, IE=RegistrationWaitRange()),
+        Type6TLVE('ExtCAGInfoList', val={'T':0x71, 'V':b'\0'}, IE=ExtCAGInfoList()),
+        Type4TLV('LowerBoundTimer', val={'T':0x3A, 'V':b'\0'}, IE=GPRSTimer3()),
+        Type4TLV('ForbiddenTAIListRoaming', val={'T':0x1D, 'V':b'\0\0\0\0\0\0\0'}, IE=FGSTAIList()),
+        Type4TLV('ForbiddenTAIListRegional', val={'T':0x1E, 'V':b'\0\0\0\0\0\0\0'}, IE=FGSTAIList()),
         )
 
 
@@ -569,7 +613,7 @@ class FGMMServiceReject(Layer3E):
 
 class FGMMConfigurationUpdateCommand(Layer3E):
     _name = '5GMMConfigurationUpdateCommand'
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':84}),
         Type1TV('ConfigUpdateInd', val={'T':0xD, 'V':0}, IE=ConfigUpdateInd()),
         Type6TLVE('GUTI', val={'T':0x77, 'V':b'\0\0\0\0'}, IE=FGSID()),
@@ -594,7 +638,17 @@ class FGMMConfigurationUpdateCommand(Layer3E):
         Type1TV('UERadioCapIDDelInd', val={'T':0xA, 'V':0}, IE=UERadioCapIDDelInd()),
         Type4TLV('5GSRegResult', val={'T':0x44, 'V':b'\0'}, IE=FGSRegResult()),
         Type4TLV('Trunc5GSTMSIConfig', val={'T':0x1B, 'V':b'\0'}, IE=Trunc5GSTMSIConfig()),
-        Type1TV('AddConfigInd', val={'T':0xC, 'V':0}, IE=AddConfigInd())
+        Type1TV('AddConfigInd', val={'T':0xC, 'V':0}, IE=AddConfigInd()),
+        Type4TLV('ExtRejectedNSSAI', val={'T':0x68, 'V':b'\0\0\0'}, IE=ExtRejectedNSSAI()),
+        Type6TLVE('ServiceLevelAAContainer', val={'T':0x72, 'V':b'\0\0\0\0'}, IE=ServiceLevelAAContainer()),
+        Type6TLVE('NSSRGInfo', val={'T':0x70, 'V':b'\0\0\0\0\0'}, IE=NSSRGInfo()),
+        Type4TLV('DisasterRoamingWaitRange', val={'T':0x14, 'V':b'\0\0'}, IE=RegistrationWaitRange()),
+        Type4TLV('DisasterReturnWaitRange', val={'T':0x2C, 'V':b'\0\0'}, IE=RegistrationWaitRange()),
+        Type4TLV('DisasterPLMNList', val={'T':0x13, 'V':b''}, IE=PLMNList()),
+        Type6TLVE('ExtCAGInfoList', val={'T':0x71, 'V':b'\0'}, IE=ExtCAGInfoList()),
+        Type4TLV('PEIPSAssistInfo', val={'T':0x1F, 'V':b'\0'}, IE=PEIPSAssistInfo()),
+        Type6TLVE('NSAGInfo', val={'T':0x73, 'V':b'\0\0\0\0\0\0\0'}, IE=NSAGInfo()),
+        Type1TV('PriorityInd', val={'T':0xE, 'V':0}, IE=PriorityInd()),
         )
 
 
@@ -605,7 +659,7 @@ class FGMMConfigurationUpdateCommand(Layer3E):
 
 class FGMMConfigurationUpdateComplete(Layer3E):
     _name = '5GMMConfigurationUpdateComplete'
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':85}),
         )
 
@@ -617,7 +671,7 @@ class FGMMConfigurationUpdateComplete(Layer3E):
 
 class FGMMIdentityRequest(Layer3E):
     _name = '5GMMIdentityRequest'
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':91}),
         Uint('spare', bl=4, rep=REPR_HEX),
         Type1V('5GSIDType', val={'V':1}, IE=FGSIDType())
@@ -631,7 +685,7 @@ class FGMMIdentityRequest(Layer3E):
 
 class FGMMIdentityResponse(Layer3E):
     _name = '5GMMIdentityResponse'
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':92}),
         Type6LVE('5GSID', val={'V':b'\0'}, IE=FGSID())
         )
@@ -644,7 +698,7 @@ class FGMMIdentityResponse(Layer3E):
 
 class FGMMNotification(Layer3E):
     _name = '5GMMNotification'
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':101}),
         Uint('spare', bl=4, rep=REPR_HEX),
         Type1V('AccessType', val={'V':1}, IE=AccessType())
@@ -658,7 +712,7 @@ class FGMMNotification(Layer3E):
 
 class FGMMNotificationResponse(Layer3E):
     _name = '5GMMNotificationResponse'
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':102}),
         Type4TLV('PDUSessStat', val={'T':0x50, 'V':b'\0\0'}, IE=PDUSessStat())
         )
@@ -671,7 +725,7 @@ class FGMMNotificationResponse(Layer3E):
 
 class FGMMSecurityModeCommand(Layer3E):
     _name = '5GMMSecurityModeCommand'
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':93}),
         Type3V('NASSecAlgo', val={'V':b'\x11'}, bl={'V':8}, IE=NASSecAlgo()),
         Uint('spare', bl=4, rep=REPR_HEX),
@@ -693,7 +747,7 @@ class FGMMSecurityModeCommand(Layer3E):
 
 class FGMMSecurityModeComplete(Layer3E):
     _name = '5GMMSecurityModeComplete'
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':94}),
         Type6TLVE('IMEISV', val={'T':0x77, 'V':9*b'\0'}, IE=FGSID()), # IMEISV
         Type6TLVE('NASContainer', val={'T':0x71, 'V':b'\0\0'}),
@@ -708,7 +762,7 @@ class FGMMSecurityModeComplete(Layer3E):
 
 class FGMMSecurityModeReject(Layer3E):
     _name = '5GMMSecurityModeReject'
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':95}),
         Type3V('5GMMCause', val={'V':b'\x18'}, bl={'V':8}, IE=FGMMCause())
         )
@@ -723,7 +777,7 @@ if _with_cm:
     
     class FGMMSecProtNASMessage(Layer3E):
         _name = '5GMMSecProtNASMessage'
-        _GEN = (
+        _GEN  = (
             FGMMHeaderSec(),
             Buf('MAC', val=b'\0\0\0\0', bl=32, rep=REPR_HEX),
             Uint8('Seqn'),
@@ -879,7 +933,7 @@ else:
     
     class FGMMSecProtNASMessage(Layer3E):
         _name = '5GMMSecProtNASMessage'
-        _GEN = (
+        _GEN  = (
             FGMMHeaderSec(),
             Buf('MAC', val=b'\0\0\0\0', bl=32, rep=REPR_HEX),
             Uint8('Seqn'),
@@ -894,7 +948,7 @@ else:
 
 class FGMMStatus(Layer3E):
     _name = '5GMMStatus'
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':100}),
         Type3V('5GMMCause', val={'V':b'\x18'}, bl={'V':8}, IE=FGMMCause())
         )
@@ -914,7 +968,7 @@ class FGMMControlPlaneServiceRequest(Layer3E):
     #
     _name = '5GMMControlPlaneServiceRequest'
     #
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':79}),
         Type1V('NAS_KSI', val={'V':7}, IE=NAS_KSI()),
         Type1V('CtrlPlaneServiceType', val={'V':0}, IE=CtrlPlaneServiceType()),
@@ -927,6 +981,9 @@ class FGMMControlPlaneServiceRequest(Layer3E):
         Type4TLV('ULDataStat', val={'T':0x40, 'V':b'\0\0'}, IE=ULDataStat()),
         Type6TLVE('NASContainer', val={'T':0x71, 'V':b'\0\0'}),
         Type4TLV('AddInfo', val={'T':0x24, 'V':b'\0'}),
+        Type4TLV('AllowedPDUSessStat', val={'T':0x25, 'V':b'\0\0'}, IE=PDUSessStat()),
+        Type4TLV('UEReqType', val={'T':0x29, 'V':b'\0'}, IE=UEReqType()),
+        Type4TLV('PagingRestriction', val={'T':0x28, 'V':b'\0'}, IE=PagingRestriction()),
         )
 
 
@@ -937,7 +994,7 @@ class FGMMControlPlaneServiceRequest(Layer3E):
 
 class FGMMNetworkSliceSpecAuthCommand(Layer3E):
     _name = '5GMMNetworkSliceSpecAuthCommand'
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':80}),
         Type4LV('SNSSAI', val={'V':b'\x01'}, IE=SNSSAI()),
         Type6LVE('EAPMsg', val={'V':b'\0\0\0\0\0'}, IE=EAP())
@@ -946,12 +1003,12 @@ class FGMMNetworkSliceSpecAuthCommand(Layer3E):
 
 #------------------------------------------------------------------------------#
 # Network slice-specific authentication complete
-# TS 24.501, section 8.2.31
+# TS 24.501, section 8.2.32
 #------------------------------------------------------------------------------#
 
 class FGMMNetworkSliceSpecAuthComplete(Layer3E):
     _name = '5GMMNetworkSliceSpecAuthComplete'
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':81}),
         Type4LV('SNSSAI', val={'V':b'\x01'}, IE=SNSSAI()),
         Type6LVE('EAPMsg', val={'V':b'\0\0\0\0\0'}, IE=EAP())
@@ -960,15 +1017,86 @@ class FGMMNetworkSliceSpecAuthComplete(Layer3E):
 
 #------------------------------------------------------------------------------#
 # Network slice-specific authentication result
-# TS 24.501, section 8.2.31
+# TS 24.501, section 8.2.33
 #------------------------------------------------------------------------------#
 
 class FGMMNetworkSliceSpecAuthResult(Layer3E):
     _name = '5GMMNetworkSliceSpecAuthResult'
-    _GEN = (
+    _GEN  = (
         FGMMHeader(val={'Type':82}),
         Type4LV('SNSSAI', val={'V':b'\x01'}, IE=SNSSAI()),
         Type6LVE('EAPMsg', val={'V':b'\0\0\0\0\0'}, IE=EAP())
+        )
+
+
+#------------------------------------------------------------------------------#
+# Relay key request
+# TS 24.501, section 8.2.34
+#------------------------------------------------------------------------------#
+
+class FGMMRelayKeyRequest(Layer3E):
+    _name = '5GMMRelayKeyRequest'
+    _GEN  = (
+        FGMMHeader(val={'Type':105}),
+        Type3V('PRTI', val={'V':b'\0'}, bl={'V':8}, IE=PRTI()),
+        Type6LVE('RelayKeyReqPrm', val={'V':19*b'\0'+b'\1'}, IE=RelayKeyReqPrm())
+        )
+
+
+#------------------------------------------------------------------------------#
+# Relay key accept
+# TS 24.501, section 8.2.35
+#------------------------------------------------------------------------------#
+
+class FGMMRelayKeyAccept(Layer3E):
+    _name = '5GMMRelayKeyAccept'
+    _GEN  = (
+        FGMMHeader(val={'Type':106}),
+        Type3V('PRTI', val={'V':b'\0'}, bl={'V':8}, IE=PRTI()),
+        Type6LVE('RelayKeyRespPrm', val={'V':48*b'\0'}, IE=RelayKeyRespPrm()),
+        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}, IE=EAP()),
+        )
+
+
+#------------------------------------------------------------------------------#
+# Relay key reject
+# TS 24.501, section 8.2.36
+#------------------------------------------------------------------------------#
+
+class FGMMRelayKeyReject(Layer3E):
+    _name = '5GMMRelayKeyReject'
+    _GEN  = (
+        FGMMHeader(val={'Type':107}),
+        Type3V('PRTI', val={'V':b'\0'}, bl={'V':8}, IE=PRTI()),
+        Type6TLVE('EAPMsg', val={'T':0x78, 'V':b'\0\0\0\0\0'}, IE=EAP()),
+        )
+
+
+#------------------------------------------------------------------------------#
+# Relay authentication request
+# TS 24.501, section 8.2.37
+#------------------------------------------------------------------------------#
+
+class FGMMRelayAuthentRequest(Layer3E):
+    _name = '5GMMRelayAuthentRequest'
+    _GEN  = (
+        FGMMHeader(val={'Type':108}),
+        Type3V('PRTI', val={'V':b'\0'}, bl={'V':8}, IE=PRTI()),
+        Type6LVE('EAPMsg', val={'V':b'\0\0\0\0\0'}, IE=EAP()),
+        )
+
+
+#------------------------------------------------------------------------------#
+# Relay authentication response
+# TS 24.501, section 8.2.38
+#------------------------------------------------------------------------------#
+
+class FGMMRelayAuthentResponse(Layer3E):
+    _name = '5GMMRelayAuthentResponse'
+    _GEN  = (
+        FGMMHeader(val={'Type':109}),
+        Type3V('PRTI', val={'V':b'\0'}, bl={'V':8}, IE=PRTI()),
+        Type6LVE('EAPMsg', val={'V':b'\0\0\0\0\0'}, IE=EAP()),
         )
 
 
@@ -1009,7 +1137,12 @@ FGMMTypeClasses = {
     101 : FGMMNotification,
     102 : FGMMNotificationResponse,
     103 : FGMMULNASTransport,
-    104 : FGMMDLNASTransport
+    104 : FGMMDLNASTransport,
+    105 : FGMMRelayKeyRequest,
+    106 : FGMMRelayKeyAccept,
+    107 : FGMMRelayKeyReject,
+    108 : FGMMRelayAuthentRequest,
+    109 : FGMMRelayAuthentResponse,
     }
 
 def get_5gmm_msg_instances():

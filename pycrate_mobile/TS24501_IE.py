@@ -45,16 +45,18 @@ from pycrate_core.base   import *
 from pycrate_core.repr   import *
 from pycrate_core.charpy import Charpy
 
-from pycrate_ether.Ethernet     import EtherType_dict
-from pycrate_ether.IP           import IPProt_dict
-from pycrate_mobile.TS24008_IE  import (
-    BufBCD, PLMN, GPRSTimer3, APN, TFT, TimeZoneTime,
+from pycrate_ether.Ethernet         import EtherType_dict
+from pycrate_ether.IP               import IPProt_dict
+from pycrate_mobile.TS24008_IE      import (
+    BufBCD, PLMN, GPRSTimer, GPRSTimer3, APN, TFT, TimeZoneTime,
+    PLMNList,
     )
-from pycrate_mobile.TS24301_IE  import (
+from pycrate_mobile.TS24301_IE      import (
     EPSQoS, ExtEPSQoS, APN_AMBR, ExtAPN_AMBR, NAS_KSI,
     _DDX_dict as RelAssist_DDXDict,
     )
-from pycrate_mobile.TS31115     import PacketCmdSMSPP
+from pycrate_mobile.TS31115         import PacketCmdSMSPP
+from pycrate_mobile.TS29244_PFCP    import FQDN
 
 _str_reserved = 'reserved'
 _str_mnospec  = 'operator-specific'
@@ -268,6 +270,148 @@ class S1ModeN1ModeNASTransContainer(Envelope):
         NAS_KSI(),
         Buf('spare', bl=16),
         )
+
+
+#------------------------------------------------------------------------------#
+# Service-level-AA container, parameters and IEs
+# TS 24.501, 9.11.2.10 to 18
+#------------------------------------------------------------------------------#
+# this seems to be used to exchange messages between a 5GC AF and the UE
+# through the AMF or SMF
+
+# 9.2.11.11
+class _ServiceLevelDeviceID(Envelope):
+    _GEN = (
+        Uint('spare', val=0, bl=4, rep=REPR_HEX),
+        Uint8('Len'),
+        UTF8String('Val')
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[1].set_valauto(lambda: self[2].get_len())
+        self[2].set_blauto(lambda: self[1].get_val()<<3)
+
+
+# 9.2.11.12
+class _ServiceLevelAAServerAddr(Envelope):
+    _GEN = (
+        Uint('spare', val=0, bl=4, rep=REPR_HEX),
+        Uint8('Len'),
+        Uint8('Type', val=1, dic={1:'IPv4', 2:'IPv6', 3:'IPv4v6', 4:'FQDN'}),
+        Alt('Val', GEN={
+            1 : Buf('IPv4', bl=32, rep=REPR_HEX),
+            2 : Buf('IPv6', bl=128, rep=REPR_HEX),
+            3 : Envelope('IPv4v6', GEN=(
+                    Buf('IPv4', bl=32, rep=REPR_HEX),
+                    Buf('IPv6', bl=128, rep=REPR_HEX))),
+            4 : FQDN()},
+            DEFAULT=Buf('unk', rep=REPR_HEX),
+            sel=lambda self: self.get_env()[1].get_val()
+            )
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[1].set_valauto(lambda: 1+self[3].get_len())
+        self[3].set_blauto(lambda: (self[1].get_val()-1)<<3)
+
+
+# 9.11.2.13
+class _ServiceLevelAAPayload(Envelope):
+    _GEN = (
+        Uint('spare', val=0, bl=4, rep=REPR_HEX),
+        Uint16('Len'),
+        Buf('Val', val=b'', rep=REPR_HEX)
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[1].set_valauto(lambda: self[2].get_len())
+        self[2].set_blauto(lambda: self[1].get_val()<<3)
+
+
+# 9.11.2.14
+class _ServiceLevelAAResponse(Envelope):
+    _GEN = (
+        Uint('spare', val=0, bl=4, rep=REPR_HEX),
+        Uint8('Len', val=1),
+        Uint('spare', val=0, bl=4, rep=REPR_HEX),
+        Uint('C2AR', val=0, bl=2, dic={
+            0 : 'no information',
+            1 : 'C2 author success',
+            2 : 'C2 author unsuccess or revoked',
+            3 : _str_reserved}),
+        Uint('SLAR', val=0, bl=2, dic={
+            0 : 'no information',
+            1 : 'service level authent and author success',
+            2 : 'service level authent and author unsuccess, or author revoked',
+            3 : _str_reserved})
+        )
+
+
+# 9.11.2.15
+class _ServiceLevelAAPayloadType(Envelope):
+    _GEN = (
+        Uint('spare', val=0, bl=4, rep=REPR_HEX),
+        Uint8('Len', val=1),
+        Uint8('Val', val=1, dic={
+            1 : 'UUAA',
+            2 : 'C2 authorization'})
+        )
+
+
+# 9.11.2.17
+class _ServiceLevelAAPendingInd(Envelope):
+    _GEN = (
+        Uint('spare', val=0, bl=3),
+        Uint('SLAPI', val=0, bl=1)
+        )
+
+
+# 9.11.2.18
+class _ServiceLevelAAStatusInd(Envelope):
+    _GEN = (
+        Uint('spare', val=0, bl=4, rep=REPR_HEX),
+        Uint8('Len', val=1),
+        Uint('spare', val=0, bl=7, rep=REPR_HEX),
+        Uint('UAS', bl=1)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Service-level-AA container
+# TS 24.501, 9.11.2.10
+#------------------------------------------------------------------------------#
+
+_ServiceLevelAAType_dict = {
+    0x1 : 'device ID',
+    0x2 : 'server address',
+    0x3 : 'response',
+    0x4 : 'payload',
+    0xA : 'pending indication',
+    0xB : 'service status indication'
+    }
+
+
+class ServiceLevelAAParam(Envelope):
+    _GEN = (
+        Uint('Type', bl=4, dic=_ServiceLevelAAType_dict),
+        Alt('Param', GEN={
+            0x1 : _ServiceLevelDeviceID('DeviceID'),
+            0x2 : _ServiceLevelAAServerAddr('ServerAddr'),
+            0x3 : _ServiceLevelAAResponse('Response'),
+            0x4 : _ServiceLevelAAPayloadType('PayloadType'),
+            0x7 : _ServiceLevelAAPayload('Payload'),
+            0xA : _ServiceLevelAAPendingInd('PendingInd'),
+            0xB : _ServiceLevelAAStatusInd('StatusInd')},
+            DEFAULT=Buf('unk', val=b'', rep=REPR_HEX),
+            sel=lambda self: self.get_env()['Type'].get_val())
+        )
+
+
+class ServiceLevelAAContainer(Sequence):
+    _GEN = ServiceLevelAAParam('SLParam')
 
 
 #------------------------------------------------------------------------------#
@@ -1437,7 +1581,7 @@ class CAGInfoList(Sequence):
     _GEN = CAGInfo()
     
     def decode(self):
-        return [caginfo.decode() for caginfo in self]
+        return [caginfo.decode() for caginfo in self._content]
 
 
 #------------------------------------------------------------------------------#
@@ -1938,7 +2082,7 @@ _RejectedSNSSAICause_dict = {
 class RejectedSNSSAI(Envelope):
     _GEN = (
         Uint('Len', bl=4),
-        Uint('Cause', bl=4, dic=_RejectedSNSSAICause_dict),
+        Uint('Cause', val=0, bl=4, dic=_RejectedSNSSAICause_dict),
         SNSSAI()
         )
     
@@ -2409,6 +2553,278 @@ class AddConfigInd(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# Extended rejected NSSAI
+# TS 24.501, 9.11.3.75
+#------------------------------------------------------------------------------#
+
+class _PartialExtRejectedNSSAI(Envelope):
+    _GEN = (
+        Uint('spare', bl=1),
+        Uint('Type', val=0, bl=3, dic={0:'no timer', 1:'timer'}),
+        GPRSTimer3('BackOffTimer'),
+        Uint('Num', bl=4),
+        RejectedNSSAI(val=[{}])
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[2].set_transauto(lambda: False if self[1].get_val() == 1 else True)
+        self[3].set_valauto(lambda: self[4].get_num()-1)
+        self[4].set_numauto(lambda: self[3].get_val()+1)
+
+
+class ExtRejectedNSSAI(Sequence):
+    _GEN = _PartialExtRejectedNSSAI('PartialExtRejectedNSSAI')
+
+
+#------------------------------------------------------------------------------#
+# Paging restriction
+# TS 24.501, 9.11.3.77
+#------------------------------------------------------------------------------#
+
+class PagingRestriction(Envelope):
+    _GEN = (
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('Type', bl=4, dic={
+            0 : _str_reserved,
+            1 : 'All paging restricted',
+            2 : 'All paging restricted except voice service',
+            3 : 'All paging restricted except specified PDU session',
+            4 : 'All paging restricted except voice service and specified PDU session'}),
+        Alt('', GEN={
+            1 : Buf('none', bl=0),
+            2 : Buf('none', bl=0),
+            3 : PDUSessStat(),
+            4 : PDUSessStat()},
+            DEFAULT=Buf('none', bl=0),
+            sel=lambda self: self.get_env()['Type'].get_val())
+        )
+
+
+#------------------------------------------------------------------------------#
+# NID (SNPN Network ID)
+# TS 24.501, 9.11.3.79 (see TS 23.003, 12.7 and TS 24.502, 9.2.7)
+#------------------------------------------------------------------------------#
+
+class NID(Envelope):
+    _GEN = (
+        Uint('Digit1', val=0, bl=4),
+        Uint('AssignMode', val=0, bl=4, dic={0:'option 1', 2:'option 2'}),
+        BufBCD('Digits', val='000000000', bl=40),
+        )
+    
+    def set_val(self, vals):
+        if isinstance(vals, str_types):
+            self.encode(vals)
+        else:
+            Envelope.set_val(self, vals)
+    
+    def encode(self, digstr):
+        """encode a digit-string provided in `digstr` with 1 digit as assignment
+        mode and then 10 digits as Network ID
+        """
+        self[0].set_val(int(digstr[1:2]))
+        self[1].set_val(int(digstr[0:1]))
+        self[2].encode(digstr[2:])
+    
+    def decode(self):
+        """returns the digit-string with 1st digit corresponding to the assignment
+        mode and then 10 digits to the Network ID
+        """
+        return '%i%i%s' % (self[1].get_val(), self[0].get_val(), self[2].decode())
+
+
+#------------------------------------------------------------------------------#
+# PEIPS assistance information
+# TS 24.501, 9.11.3.80
+#------------------------------------------------------------------------------#
+
+
+class PEIPSAssistInfo(Sequence):
+    _GEN = Envelope('Info', GEN=(
+        Uint('Type', val=0, bl=3, dic={
+            0 : 'Paging subgroup ID',
+            1 : 'UE paging probability'
+            }),
+        Uint('Val', bl=5))
+        )
+
+
+#------------------------------------------------------------------------------#
+# 5GS additional request result
+# TS 24.501, 9.11.3.81
+#------------------------------------------------------------------------------#
+
+class FGSAddReqResult(Envelope):
+    _GEN = (
+        Uint('spare', bl=6, rep=REPR_HEX),
+        Uint('PRD', val=0, bl=2, dic={
+            0 : 'no additional info',
+            1 : 'paging restriction is accepted',
+            2 : 'paging restriction is rejected'})
+        )
+
+
+#------------------------------------------------------------------------------#
+# 5GS additional request result
+# TS 24.501, 9.11.3.81
+#------------------------------------------------------------------------------#
+
+class _NSSRGVals(Envelope):
+    _GEN = (
+        Uint8('Len'),
+        L_SNSSAI('SNSSAI'),
+        Array('Vals', GEN=Uint8('Val'))
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: self[1][0].get_val() + self[2].get_num())
+        self[2].set_numauto(lambda: self[0].get_val()-self[1][0].get_val())
+
+
+class NSSRGInfo(Sequence):
+    _GEN = _NSSRGVals('NSSRGVals')
+
+
+#------------------------------------------------------------------------------#
+# Registration wait range
+# TS 24.501, 9.11.3.84
+#------------------------------------------------------------------------------#
+
+class RegistrationWaitRange(Envelope):
+    _GEN = (
+        GPRSTimer('MinTime'),
+        GPRSTimer('MaxTime')
+        )
+
+
+
+
+#------------------------------------------------------------------------------#
+# Extended CAG information list
+# TS 24.501, 9.11.3.86
+#------------------------------------------------------------------------------#
+
+class CAGInfo(Envelope):
+    _GEN = (
+        Uint8('Len'),
+        PLMN(),
+        Uint('spare', bl=7, rep=REPR_HEX),
+        Uint('CAGOnly', val=0, bl=1, dic={
+            0 : 'UE allowed to access 5GS via non-CAG cells',
+            1 : 'UE not allowed to access 5GS via non-CAG cells'}),
+        Array('CAGIDList', GEN=Uint32('CAGID', rep=REPR_HEX))
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: 4 + self[4].get_len())
+        self[4].set_blauto(lambda: (self[0].get_val()-4)<<3)
+    
+    def decode(self):
+        return {
+            'PLMN'      : self['PLMN'].decode(),
+            'CAGOnly'   : self['CAGOnly'].get_val(),
+            'CAGIDList' : self['CAGIDList'].get_val()
+            }
+
+
+class ExtCAGInfoList(Sequence):
+    _GEN = CAGInfo()
+    
+    def decode(self):
+        return [caginfo.decode() for caginfo in self._content]
+
+
+#------------------------------------------------------------------------------#
+# NSAG information
+# TS 24.501, 9.11.3.87
+#------------------------------------------------------------------------------#
+
+class NSAG(Envelope):
+    _GEN = (
+        Uint16('Len'),
+        Uint8('ID', rep=REPR_HEX),
+        NSSAI(),
+        Uint8('Priority'),
+        FGSTAIList()
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: 2 + self[2][0].get_val() + self[4].get_len())
+        self[4].set_blauto(lambda: (self[0].get_val() - self[2][0].get_val() - 2)<<3)
+
+
+class NSAGInfo(Sequence):
+    _GEN = NSAG()
+
+
+#------------------------------------------------------------------------------#
+# ProSe relay transaction identity
+# TS 24.501, 9.11.3.88
+#------------------------------------------------------------------------------#
+
+class PRTI(Uint8):
+    _dic = {
+        0    : 'no ProSe relay transaction identity assigned',
+        0xff : _str_reserved, 
+        }
+
+
+#------------------------------------------------------------------------------#
+# Relay key request parameters
+# TS 24.501, 9.11.3.89
+#------------------------------------------------------------------------------#
+
+class RemoteUEID(Envelope):
+    _GEN = (
+        Uint('spare', bl=7, rep=REPR_HEX),
+        Uint('RUIT', val=0, bl=1, dic={0:'SUCI', 1:'PRUK ID'}),
+        Alt('Val', GEN={
+            0 : FGSID(val={'Type':FGSIDTYPE.SUPI}),
+            1 : Buf('PRUKID', val=b'', rep=REPR_HEX)},
+            sel=lambda self: self.get_env()['RUIT'].get_val())
+        )
+
+
+class RelayKeyReqPrm(Envelope):
+    _GEN = (
+        Uint24('RelayServiceCode', rep=REPR_HEX),
+        Buf('Nonce_1', bl=128, rep=REPR_HEX),
+        RemoteUEID(),
+        )
+
+
+#------------------------------------------------------------------------------#
+# Relay key response parameters
+# TS 24.501, 9.11.3.90
+#------------------------------------------------------------------------------#
+
+class RelayKeyRespPrm(Envelope):
+    _GEN = (
+        Buf('K_NR_ProSe', bl=256, rep=REPR_HEX),
+        Buf('Nonce_2', bl=128, rep=REPR_HEX),
+        Buf('CP_PRUKID', val=b'', rep=REPR_HEX)
+        )
+
+
+#------------------------------------------------------------------------------#
+# Priority indicator
+# TS 24.501, 9.11.3.91
+#------------------------------------------------------------------------------#
+
+class PriorityInd(Envelope):
+    _GEN = (
+        Uint('spare', bl=3),
+        Uint('MPSI', bl=1, dic={
+            0 : 'Access identity 1 not valid',
+            1 : 'Access identity 1 valid'})
+        )
+
+
+#------------------------------------------------------------------------------#
 # 5GSM capability
 # TS 24.501, 9.11.4.1
 #------------------------------------------------------------------------------#
@@ -2423,12 +2839,22 @@ class FGSMCap(Envelope):
         Uint('ATSSS-ST', bl=4),
         Uint('EPT-S1', bl=1),
         Uint('MH6-PDU', bl=1),
-        Uint('RQoS', bl=1),
+        Uint('RQoS', bl=1), # end of octet 1
+        Uint('spare', bl=7),
+        Uint('APMQF', bl=1), # end of octet 2
         Buf('spare', val=b'', rep=REPR_HEX)
         )
     
-    #def _from_char(self, char):
-    #    Envelope._from_char(self, char)
+    def _from_char(self, char):
+        if self.get_trans():
+            return
+        l = char.len_bit()
+        if l <= 8:
+            self.disable_from(5)
+        elif l > 16:
+            # enables some spare bits at the end
+            self[-1]._bl = l-16
+        Envelope._from_char(self, char)
     
     def disable_from(self, ind):
         """disables all elements from index `ind' excluded (integer -bit offset- 
@@ -2691,7 +3117,7 @@ _PDUSessType_dict = {
 class PDUSessType(Envelope):
     _GEN = (
         Uint('spare', bl=1),
-        Uint('Value', bl=3, dic=_PDUSessType_dict)
+        Uint('Value', bl=3, val=1, dic=_PDUSessType_dict)
         )
 
 
