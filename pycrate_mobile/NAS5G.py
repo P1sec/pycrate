@@ -35,6 +35,8 @@ from .TS24501_UEPOL import FGUEPOLTypeClasses
 from .TS24519_TSNAF import FGTSNAFEthPortTypeClasses, FGTSNAFBridgeTypeClasses
 from .TS24011_PPSMS import PPSMSCPTypeClasses
 
+# TODO: migrate TS24519_TSNAF to the new TS24539 spec
+
 
 def parse_NAS5G(buf, inner=True, sec_hdr=True):
     """Parses a 5G NAS message bytes' buffer

@@ -49,7 +49,7 @@ from pycrate_ether.Ethernet         import EtherType_dict
 from pycrate_ether.IP               import IPProt_dict
 from pycrate_mobile.TS24008_IE      import (
     BufBCD, PLMN, GPRSTimer, GPRSTimer3, APN, TFT, TimeZoneTime,
-    PLMNList,
+    PLMNList, TMGI,
     )
 from pycrate_mobile.TS24301_IE      import (
     EPSQoS, ExtEPSQoS, APN_AMBR, ExtAPN_AMBR, NAS_KSI,
@@ -1944,7 +1944,7 @@ class OperatorAccessCatDef(Envelope):
                                    else 4 + self['LenCriteria'].get_val())
         self['LenCriteria'].set_valauto(lambda: self['Criteria'].get_len())
         self['Criteria'].set_blauto(lambda: self['LenCriteria'].get_val()<<3)
-        self['StdAccessCat'].set_transauto(lambda: False if self['PSAC'].get_val() else True)
+        self['StdAccessCat'].set_transauto(lambda: not self['PSAC'].get_val())
 
 
 class OperatorAccessCatDefs(Sequence):
@@ -3580,6 +3580,25 @@ class CtrlPlaneOnlyInd(Envelope):
 
 
 #------------------------------------------------------------------------------#
+# DS-TT Ethernet port MAC address
+# TS 24.501, 9.11.4.25
+#------------------------------------------------------------------------------#
+
+class DSTTMACAddr(Buf):
+    _bl  = 48
+    _rep = REPR_HEX
+
+
+#------------------------------------------------------------------------------#
+# UE-DS-TT residence time
+# TS 24.501, 9.11.4.26
+#------------------------------------------------------------------------------#
+
+class UEDSTTResidenceTime(Uint64):
+    _rep = REPR_HEX
+
+
+#------------------------------------------------------------------------------#
 # Ethernet header compression configuration
 # TS 24.501, 9.11.4.28
 #------------------------------------------------------------------------------#
@@ -3592,6 +3611,237 @@ class EthHdrCompConfig(Envelope):
             1:'7 bits',
             2:'15 bits'})
         )
+
+
+#------------------------------------------------------------------------------#
+# Remote UE context list
+# TS 24.501, 9.11.4.29
+#------------------------------------------------------------------------------#
+
+class PortRange(Envelope):
+    _GEN = (
+        Uint16('Low'),
+        Uint16('High')
+        )
+
+
+class RemoteUECtxt(Envelope):
+    _GEN = (
+        Uint8('Len'),
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('UEIDFmt', val=0, bl=1, dic={0:'NAI', 1:'64-bit string'}),
+        Uint('UEIDType', val=1, bl=3, dic={1:'UP-PRUK ID', 2:'CP-PRUK ID'}),
+        Uint8('UEIDLen'),
+        Alt('UEID', GEN={
+            0 : UTF8String('NAI'),
+            1 : Buf('64BitStr', bl=64, rep=REPR_HEX)},
+            sel=lambda self: self.get_env()['UEIDFmt'].get_val()),
+        Uint('UPRI4Ind', val=0, bl=1),
+        Uint('TPRI4Ind', val=0, bl=1),
+        Uint('ProtocolUsed', val=1, bl=3, dic={
+            0 : 'No IP info',
+            1 : 'IPv4',
+            2 : 'IPv6',
+            4 : 'Unstructured',
+            5 : 'Ethernet'}),
+        Alt('AddressInfo', GEN={
+            0 : Buf('none', bl=0),
+            1 : Buf('IPv4', bl=32, rep=REPR_HEX),
+            2 : Buf('IPv6Pref', bl=64, rep=REPR_HEX),
+            4 : Buf('none', bl=0),
+            5 : Buf('MAC', bl=48, rep=REPR_HEX)},
+            DEFAULT=Buf('unk', val=b'', rep=REPR_HEX),
+            sel=lambda self: self.get_env()['ProtocolUsed'].get_val()),
+        PortRange('UDPRange'),
+        PortRange('TCPRange'),
+        PLMN('HPLMNID'),
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['Len'].set_valauto(lambda: 4 + self['UEID'].get_len() \
+                                          + self['AddressInfo'].get_len() \
+                                          + self['UDPRange'].get_len() \
+                                          + self['TCPRange'].get_len() \
+                                          + self['HPLMNID'].get_len())
+        self['UEIDLen'].set_valauto(lambda: self['UEID'].get_len())
+        self['UEID'].set_blauto(lambda: self['UEIDLen'].get_val()<<3)
+        self['UDPRange'].set_transauto(lambda: not self['UPRI4Ind'].get_val())
+        self['TCPRange'].set_transauto(lambda: not self['TPRI4Ind'].get_val())
+        self['HPLMNID'].set_transauto(lambda: not \
+            (self['UEIDFmt'].get_val() == 1 and self['UEIDType'].get_val() == 1))
+
+
+class RemoteUECtxtList(Envelope):
+    _GEN = (
+        Uint8('Num'),
+        Sequence('RemoteUECtxts', GEN=RemoteUECtxt())
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: self[1].get_num())
+        self[1].set_numauto(lambda: self[0].get_val())
+
+
+#------------------------------------------------------------------------------#
+# Requested MBS container
+# TS 24.501, 9.11.4.30
+#------------------------------------------------------------------------------#
+    
+class _ReqMBSInfo(Envelope):
+    _GEN = (
+        Uint('spare', bl=4, rep=REPR_HEX),
+        Uint('MBSOp', val=1, bl=2, dic={1:'join MBS', 2:'leave MBS'}),
+        Uint('SessIDType', val=0, bl=2, dic={0:'TMGI', 1:'multicast IPv4', 3:'multicast IPv6'}),
+        Alt('SessID', GEN={
+            0 : TMGI(),
+            1 : Envelope('IPv4', GEN=(Buf('Src', bl=32, rep=REPR_HEX), Buf('Dst', bl=32, rep=REPR_HEX))),
+            2 : Envelope('IPv6', GEN=(Buf('Src', bl=128, rep=REPR_HEX), Buf('Dst', bl=128, rep=REPR_HEX)))},
+            DEFAULT=Buf('unk', val=b'', rep=REPR_HEX),
+            sel=lambda self: self.get_env()['SessIDType'].get_val())
+        )
+
+
+class RequestedMBSContainer(Sequence):
+    _GEN = _ReqMBSInfo('ReqMBSInfo')
+
+
+#------------------------------------------------------------------------------#
+# Received MBS container
+# TS 24.501, 9.11.4.31
+#------------------------------------------------------------------------------#
+
+_MBSRejectCause_dict = {
+    0 : 'No additional information provided',
+    1 : 'Insufficient resources',
+    2 : 'User is not authorized to use MBS service',
+    3 : 'Multicast MBS session has not started or will not start soon',
+    4 : 'User is outside of local MBS service area',
+    5 : 'Session context not found',
+    6 : 'Multicast MBS session is released'
+    }
+
+_MBSDecision_dict = {
+    1 : 'MBS service area update',
+    2 : 'MBS join is accepted',
+    3 : 'MBS join is rejected',
+    4 : 'Remove UE from multicast MBS session',
+    5 : 'MBS security information update'
+    }
+
+_MBSServArea_dict = {
+    0 : 'MBS service area not included',
+    1 : 'MBS service area included as MBS TAI list',
+    2 : 'MBS service area included as NR CGI list',
+    3 : 'MBS service area included as MBS TAI list and NR CGI list'
+    }
+
+
+class NRCGIList(Sequence):
+    _GEN = Envelope('NRCGI', GEN=(
+        Uint('NRCellID', bl=36, rep=REPR_HEX),
+        Uint('spare', bl=4, rep=REPR_HEX),
+        PLMN()
+        ))
+
+
+class _FGSTAIListAndNRCGIList(Envelope):
+    _name = '5GSTAIListAndNRCGIList'
+    _GEN = (
+        FGSTAIList(),
+        NRCGIList()
+        )
+
+
+class _MBSSecurityKeySet(Envelope):
+    _GEN = (
+        Uint('spare', bl=7, rep=REPR_HEX),
+        Uint('MTKInd', val=0, bl=1, dic={0:'MTK not included', 1:'MTK included'}),
+        Uint24('DomainID', rep=REPR_HEX),
+        Uint32('MSKID', rep=REPR_HEX),
+        Buf('MSK', bl=128, rep=REPR_HEX),
+        Envelope('MTK', GEN=(
+            Uint16('MTKID'),
+            Buf('EncMTK', bl=128, rep=REPR_HEX)))
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['MTK'].set_transauto(lambda: not self['MTKInd'].get_val())
+
+
+class _MBSSecurityContainer(Envelope):
+    _GEN = (
+        Uint8('Num'),
+        Sequence('KeySets', GEN=_MBSSecurityKeySet('MBSSecurityKeySet'))
+        )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self[0].set_valauto(lambda: self[1].get_num())
+        self[1].set_numauto(lambda: self[0].get_val())
+
+
+class _RecvMBSInfo(Envelope):
+    _GEN = (
+        Uint('RejectionCause', val=0, bl=3, dic=_MBSRejectCause_dict),
+        Uint('MSAI', bl=2, dic=_MBSServArea_dict),
+        Uint('MD', val=1, bl=3, dic=_MBSDecision_dict),
+        Uint('spare', bl=3, rep=REPR_HEX),
+        Uint('IPAddrType', val=0, bl=1, dic={0:'IPv4', 1:'IPv6'}),
+        Uint('MBSSecContInd', val=0, bl=1),
+        Uint('MBSTimersInd', val=0, bl=2, dic={
+            0:'No MBS timers included',
+            1:'MBS start time included',
+            2:'MBS back-off timer included'}),
+        Uint('IPAddrInd', val=0, bl=1),
+        TMGI(),
+        Alt('IPAddr', GEN={
+            0 : Envelope('IPv4', GEN=(Buf('Src', bl=32, rep=REPR_HEX), Buf('Dst', bl=32, rep=REPR_HEX))),
+            1 : Envelope('IPv6', GEN=(Buf('Src', bl=128, rep=REPR_HEX), Buf('Dst', bl=128, rep=REPR_HEX)))},
+            sel=lambda self: self.get_env()['IPAddrType'].get_val()),
+        Alt('MBSServiceArea', GEN={
+            0 : Buf('none', bl=0),
+            1 : FGSTAIList(),
+            2 : NRCGIList(),
+            3 : _FGSTAIListAndNRCGIList()},
+            sel=lambda self: self.get_env()['MSAI'].get_val()),
+        Alt('MBSTimers', GEN={
+            0 : Buf('none', bl=0),
+            1 : Uint48('MBSStartTime', rep=REPR_HEX),
+            2 : Uint8('BackOffTimer', rep=REPR_HEX)},
+            DEFAULT=Buf('unk', val=b'', rep=REPR_HEX),
+            sel=lambda self: self.get_env()['MBSTimersInd'].get_val()),
+        _MBSSecurityContainer('MBSSecurityContainer')
+        )
+        
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['IPAddr'].set_transauto(lambda: not self['IPAddrInd'].get_val())
+        self['MBSSecurityContainer'].set_transauto(lambda: not self['MBSSecContInd'].get_val())
+
+
+class ReceivedMBSContainer(Sequence):
+    _GEN = _RecvMBSInfo('RecvMBSInfo')
+
+
+#------------------------------------------------------------------------------#
+# PDU session pair ID
+# TS 24.501, 9.11.4.32
+#------------------------------------------------------------------------------#
+
+class PDUSessionPairID(Uint8):
+    pass
+
+
+#------------------------------------------------------------------------------#
+# RSN
+# TS 24.501, 9.11.4.33
+#------------------------------------------------------------------------------#
+
+class RSN(Uint8):
+    _dic = {0 : 'V1', 1 : 'V2'} 
 
 
 #------------------------------------------------------------------------------#
