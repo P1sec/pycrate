@@ -48,6 +48,8 @@ from pycrate_mobile.TS29244_PFCP    import parse_PFCP
 from pycrate_diameter.Diameter      import DiameterGeneric
 from pycrate_diameter.DiameterIETF  import DiameterIETF
 from pycrate_diameter.Diameter3GPP  import Diameter3GPP
+from pycrate_mobile.TS48006_BSSAP   import BSSAP
+from pycrate_mobile.TS48008_BSSMAP  import BSSMAP
 from pycrate_mobile.TS24501_IE      import (
     FGSID,
     FGSIDTYPE,
@@ -274,6 +276,18 @@ pfcp_pdu = tuple(map(unhexlify, (
     '21350032000000000000000100000300001300010100080006003800020005000800130038000200060015000901000000067f000007'
     )))
 
+# BSSAP and BSSMAP
+bssap_pdu = tuple(map(unhexlify, (
+    '000430040120', # BSSAP Mgmt / BSSMAP Reset
+    '000131', # BSSAP Mgmt / BSSMAP Reset Ack
+    '01033009012d010007914477581006500021400491832000002221919012254014050003070101dc69771130380402eeb43b0d', # BSSAP DT / SMS
+    # from #osmocom
+    '001f5705080052f010184c1c19170f05081052f010184e5305f4506613c97d0180', # BSSAP Mgmt / BSSMAP LUR
+    '01000e050252f010184c1705f433c765f6', # BSSAP Mgmt / BSSMAP LUA
+    '010003051803', # BSSAP DT / NAS
+    '000420040109', # BSSAP Mgmt / BSSMAP Clear cmd
+    '000121', # BSSAP Mgmt / BSSMAP Clear compl
+    )))
 
 def test_nas_mo(nas_pdu=nas_pdu_mo):
     for pdu in nas_pdu:
@@ -526,6 +540,44 @@ def test_pfcp(pfcp_pdu=pfcp_pdu):
             assert( m.get_val() == v )
 
 
+def test_bssap(bssap_pdu=bssap_pdu):
+    
+    bm = BSSMAP()
+    for pdu in bssap_pdu:
+        B = BSSAP()
+        B.from_bytes(pdu)
+        v = B.get_val()
+        B.reautomate()
+        assert( B.get_val() == v )
+        print(B.show())
+        B.__init__()
+        B.set_val(v)
+        assert( B.to_bytes() == pdu )
+        #
+        if _with_json:
+            t = B.to_json()
+            B.from_json(t)
+            assert( B.get_val() == v )
+        #
+        if B['DistributionUnit']['Discrimination'].get_val() == 0:
+            # BSSMAP
+            pdu = B['L3'].get_val()
+            BM = BSSMAP()
+            BM.from_bytes(pdu)
+            v = BM.get_val()
+            BM.reautomate()
+            assert( BM.get_val() == v )
+            print(BM.show())
+            BM.__init__()
+            BM.set_val(v)
+            assert( BM.to_bytes() == pdu )
+            #
+            if _with_json:
+                t = BM.to_json()
+                BM.from_json(t)
+                assert( BM.get_val() == v )
+
+
 def test_perf_mobile():
     
     print('[+] NAS MO decoding and re-encoding')
@@ -584,7 +636,11 @@ def test_perf_mobile():
     Ti = timeit(test_pfcp, number=50)
     print('test_pfcp: {0:.4f}'.format(Ti))
     
-    print('[+] test_mobile total time: {0:.4f}'.format(Ta+Tb+Tc+Td+Te+Tf+Tg+Th+Ti+Tj+Tk+Tl+Tm))
+    print('[+] BSSAP / BSSMAP decoding / re-encoding')
+    Tn = timeit(test_bssap, number=200)
+    print('test_bssap: {0:.4f}'.format(Tn))
+    
+    print('[+] test_mobile total time: {0:.4f}'.format(Ta+Tb+Tc+Td+Te+Tf+Tg+Th+Ti+Tj+Tk+Tl+Tm+Tn))
 
 
 if __name__ == '__main__':

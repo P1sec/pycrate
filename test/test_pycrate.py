@@ -176,6 +176,7 @@ class TestPycrate(unittest.TestCase):
         test_gtpc()
         test_diameter()
         test_pfcp()
+        test_bssap()
     
     # mobile / GSM RR
     def test_gsmrr(self):
