@@ -35,6 +35,7 @@
 from binascii import hexlify, unhexlify
 from time     import struct_time
 from math     import ceil
+from enum     import IntEnum
 
 from pycrate_core.utils  import *
 from pycrate_core.elt    import (
@@ -2755,39 +2756,128 @@ class NSAPI(Envelope):
 # TS 24.008, 10.5.6.3
 #------------------------------------------------------------------------------#
 
-_ProtConfig_dict = {
-    # 3GPP additional parameters
-    0x0001 : 'P-CSCF IPv6 Address Request',
-    0x0002 : 'IM CN Subsystem Signaling Flag',
-    0x0003 : 'DNS Server IPv6 Address Request',
-    0x0004 : 'Policy Control rejection code',
-    0x0005 : 'Selected Bearer Control Mode',
-    0x0006 : 'Reserved',
-    0x0007 : 'DSMIPv6 Home Agent Address',
-    0x0008 : 'DSMIPv6 Home Network Prefix',
-    0x0009 : 'DSMIPv6 IPv4 Home Agent Address',
-    0x000A : 'IP address allocation via NAS signalling',
-    0x000B : 'Reserved',
-    0x000C : 'P-CSCF IPv4 Address',
-    0x000D : 'DNS server IPv4 address request',
-    0x000E : 'MSISDN Request',
-    0x000F : 'IFOM-Support-Request',
-    0x0010 : 'IPv4 Link MTU Request',
-    0x0011 : 'Support of Local address in TFT indicator',
-    0x0012 : 'P-CSCF Re-selection support',
-    0x0013 : 'NBIFOM request indicator',
-    0x0014 : 'NBIFOM mode',
-    0x0015 : 'Non-IP Link MTU Request',
-    0x0016 : 'APN rate control support indicator',
-    
-    # ETSI / IETF protocol identifiers
-    0x8021 : 'IPCP',
-    0xC021 : 'LCP',
-    0xC023 : 'PAP',
-    0xC223 : 'CHAP'
-    }
+# declare all MS and Net-initiated parameters as Enum
+class PCOMS(IntEnum):
+    # Additional parameters
+    PCSCFIPv6AddrReq                                             = 0x0001
+    IMCNSubsystemSignalingFlag                                   = 0x0002
+    DNSServerIPv6AddrReq                                         = 0x0003
+    MSSupportOfNetworkReqedBearerControlInd                      = 0x0005
+    DSMIPv6HomeAgentAddrReq                                      = 0x0007
+    DSMIPv6HomeNetworkPrefixReq                                  = 0x0008
+    DSMIPv6IPv4HomeAgentAddrReq                                  = 0x0009
+    IPAddrallocationViaNASsignalling                             = 0x000a
+    IPv4AddrallocationViaDHCPv4                                  = 0x000b
+    PCSCFIPv4AddrReq                                             = 0x000c
+    DNSServerIPv4AddrReq                                         = 0x000d
+    MSISDNReq                                                    = 0x000e
+    IFOMSupportReq                                               = 0x000f
+    IPv4LinkMTUReq                                               = 0x0010
+    MSSupportOfLocalAddrInTFTInd                                 = 0x0011
+    PCSCFReselectionSupport                                      = 0x0012
+    NBIFOMReqInd                                                 = 0x0013
+    NBIFOMMode                                                   = 0x0014
+    NonIPLinkMTUReq                                              = 0x0015
+    APNRateControlSupportInd                                     = 0x0016
+    TGPPPSDataOffUEStatus                                        = 0x0017
+    ReliableDataServiceReqInd                                    = 0x0018
+    AdditionalAPNRateControlForExceptionDataSupportInd           = 0x0019
+    PDUSessionID                                                 = 0x001a
+    EthernetFramePayloadMTUReq                                   = 0x0020
+    UnstructuredLinkMTUReq                                       = 0x0021
+    FGSMCauseValue                                               = 0x0022
+    QoSRulesWithLengthOf2SupportInd                              = 0x0023
+    QoSFlowDescWithLengthOf2SupportInd                           = 0x0024
+    ACSInformationReq                                            = 0x0027
+    ATSSSReq                                                     = 0x0030
+    DNSServerSecurityInformationInd                              = 0x0031
+    ECSConfigInformationProvisioningSupportInd                   = 0x0032
+    PVSInformationReq                                            = 0x0036
+    DNSServerSecurityProtocolSupport                             = 0x0039
+    EASRediscoverySupportInd                                     = 0x003a
+    ServiceLevelAAContainerWithLengthOf2                         = 0x0041 # 2-bytes length prefix
+    EDCSupportInd                                                = 0x0047
+    MSSupportOfMACAddrRangeIn5GSInd                              = 0x004a
+    # Configuration protocol options
+    IPCP                                                         = 0x8021
+    LCP                                                          = 0xc021
+    PAP                                                          = 0xc023
+    CHAP                                                         = 0xc223
+
+class PCONet(IntEnum):
+    # Additional parameters
+    PCSCFIPv6Addr                                                = 0x0001
+    IMCNSubsystemSignalingFlag                                   = 0x0002
+    DNSServerIPv6Addr                                            = 0x0003
+    PolicyControlRejectionCode                                   = 0x0004
+    SelectedBearerControlMode                                    = 0x0005
+    DSMIPv6HomeAgentAddr                                         = 0x0007
+    DSMIPv6HomeNetworkPrefix                                     = 0x0008
+    DSMIPv6IPv4HomeAgentAddr                                     = 0x0009
+    PCSCFIPv4Addr                                                = 0x000c
+    DNSServerIPv4Addr                                            = 0x000d
+    MSISDN                                                       = 0x000e
+    IFOMSupport                                                  = 0x000f
+    IPv4LinkMTU                                                  = 0x0010
+    NetworkSupportOfLocalAddrInTFTInd                            = 0x0011
+    NBIFOMAcceptedInd                                            = 0x0013
+    NBIFOMmode                                                   = 0x0014
+    NonIPLinkMTU                                                 = 0x0015
+    APNRateControlPrms                                           = 0x0016
+    TGPPPSDataOffSupportInd                                      = 0x0017
+    ReliableDataServiceAcceptedInd                               = 0x0018
+    AdditionalAPNRateControlForExceptionDataPrms                 = 0x0019
+    SNSSAI                                                       = 0x001b
+    QoSRules                                                     = 0x001c
+    SessionAMBR                                                  = 0x001d
+    PDUSessionAddrLifetime                                       = 0x001e
+    QoSFlowDesc                                                  = 0x001f
+    EthernetFramePayloadMTU                                      = 0x0020
+    UnstructuredLinkMTU                                          = 0x0021
+    QoSRulesWithLengthOf2                                        = 0x0023 # 2-bytes length prefix
+    QoSFlowDescWithLengthOf2                                     = 0x0024 # 2-bytes length prefix
+    SmallDataRateControlPrms                                     = 0x0025
+    AdditionalSmallDataRateControlForExceptionDataPrms           = 0x0026
+    ACSInformation                                               = 0x0027
+    InitialSmallDataRateControlPrms                              = 0x0028
+    InitialAdditionalSmallDataRateControlForExceptionDataPrms    = 0x0029
+    InitialAPNRateControlPrms                                    = 0x002a
+    InitialAdditionalAPNRateControlForExceptionDataPrms          = 0x002b
+    ATSSSResponseWithLengthOf2                                   = 0x0030 # 2-bytes length prefix
+    DNSServerSecurityInformationWithLengthOf2                    = 0x0031 # 2-bytes length prefix
+    ECSAddrWithLengthOf2                                         = 0x0032 # 2-bytes length prefix
+    ECSPIdentifier                                               = 0x0035
+    PVSIPv4Addr                                                  = 0x0036
+    PVSIPv6Addr                                                  = 0x0037
+    PVSName                                                      = 0x0038
+    EASRediscoveryIndWithoutIndicatedImpact                      = 0x003a
+    EASRediscoveryIndWithImpactedEASIPv4AddrRange                = 0x003b
+    EASRediscoveryIndWithImpactedEASIPv6AddrRange                = 0x003c
+    EASRediscoveryIndWithImpactedEASFQDN                         = 0x003d
+    UplinkDataNotAllowed                                         = 0x003e
+    UplinkDataAllowed                                            = 0x003f
+    UASServicesNotAllowedInd                                     = 0x0040
+    ServiceLevelAAContainerWithLengthOf2                         = 0x0041 # 2-bytes length prefix
+    EDCUsageAllowedInd                                           = 0x0048
+    EDCUsageRequiredInd                                          = 0x0049
+    NetworkSupportOfMACAddrRangeIn5GSInd                         = 0x004a
+    # Configuration protocol options
+    IPCP                                                         = 0x8021
+    LCP                                                          = 0xc021
+    PAP                                                          = 0xc023
+    CHAP                                                         = 0xc223
+
+# build the dict of options with Network-initiated parameters 1st, then completed with MS-initiated
+_ProtConfig_dict = {}
+for e in PCONet:
+    _ProtConfig_dict[e.value] = e.name
+for e in PCOMS:
+    if e.value not in _ProtConfig_dict:
+        _ProtConfig_dict[e.value] = e.name
+
 
 class ProtConfigElt(Envelope):
+    
     # when set to True, will decode the content into NCP / LCP / PAP / CHAP
     DECODE_INNER = True
     _ContLUT = {
@@ -2796,6 +2886,12 @@ class ProtConfigElt(Envelope):
         0xC023 : PAP,
         0xC223 : CHAP
         }
+    
+    # TODO: starting with 3GPP rel.15, length prefix has to be extended to 2 bytes for ID:
+    # 0x23, 0x24, 0x30, 0x31, 0x32, 0x41 in Net->MS
+    # 0x41 in MS->Net (but not 0x23, 0x24, 0x30, 0x31, 0x32)
+    # This will require to define 2 distinct ProtConfigElt classes, and associate them
+    # properly into the UL / DL NAS messages
     
     _GEN = (
         Uint16('ID', val=0x8021, dic=_ProtConfig_dict),
