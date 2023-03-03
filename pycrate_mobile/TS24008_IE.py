@@ -2762,11 +2762,11 @@ class PCOMS(IntEnum):
     PCSCFIPv6AddrReq                                             = 0x0001
     IMCNSubsystemSignalingFlag                                   = 0x0002
     DNSServerIPv6AddrReq                                         = 0x0003
-    MSSupportOfNetworkReqedBearerControlInd                      = 0x0005
+    MSSupportOfNetworkReqBearerControlInd                        = 0x0005
     DSMIPv6HomeAgentAddrReq                                      = 0x0007
     DSMIPv6HomeNetworkPrefixReq                                  = 0x0008
     DSMIPv6IPv4HomeAgentAddrReq                                  = 0x0009
-    IPAddrallocationViaNASsignalling                             = 0x000a
+    IPAddrAllocationViaNASSignalling                             = 0x000a
     IPv4AddrallocationViaDHCPv4                                  = 0x000b
     PCSCFIPv4AddrReq                                             = 0x000c
     DNSServerIPv4AddrReq                                         = 0x000d
@@ -2944,7 +2944,7 @@ class ProtConfig(Envelope):
     _GEN = (
         Uint('Ext', val=1, bl=1),
         Uint('spare', bl=4),
-        Uint('Prot', bl=3, dic={0:'PPP with IP PDP'}),
+        Uint('Prot', val=0, bl=3, dic={0:'PPP with IP PDP'}),
         Sequence('Config', GEN=ProtConfigElt())
         )
 

@@ -27,6 +27,8 @@
 # *--------------------------------------------------------
 #*/
 
+from enum import IntEnum
+
 from pycrate_core.utils import *
 from pycrate_core.elt   import *
 from pycrate_core.base  import *
@@ -36,7 +38,7 @@ from pycrate_core.base  import *
 # section 5: LCP packet format
 #------------------------------------------------------------------------------#
 
-# for LCP Code Configure-*         
+# for LCP Code Configure-*
 _LCPOptType_dict = {
     1 : 'Maximum-Receive-Unit',
     2 : 'Async-Control-Character-Map',
@@ -85,6 +87,19 @@ class LCPDataEcho(Envelope):
 
 
 # global LCP format
+class LCPCODE(IntEnum):
+    CONFIG_REQ  = 1
+    CONFIG_ACK  = 2
+    CONFIG_NAK  = 3
+    CONFIG_REJ  = 4
+    TERM_REQ    = 5
+    TERM_ACK    = 6
+    CODE_REJ    = 7
+    PROT_REJ    = 8
+    ECHO_REQ    = 9
+    ECHO_REP    = 10
+    DISCARD_REQ = 11
+
 _LCPCode_dict = {
     1 : 'Configure-Request',
     2 : 'Configure-Ack',
@@ -158,7 +173,17 @@ class LCP(Envelope):
 #------------------------------------------------------------------------------#
 # + RFC1877 (DNS@, NBNS@), RFC3241 (ROHC)
 
-# for NCP Code Configure-*         
+# for NCP Code Configure-*   
+class NCPOPTTYPE(IntEnum):
+    IPADDRESSES = 1
+    IPCOMPRESS  = 2
+    IPADDRESS   = 3
+    MOBILEIPV4  = 4
+    PRIM_DNS    = 129
+    PRIM_NBNS   = 130
+    SEC_DNS     = 131
+    SEC_NBNS    = 132
+
 _NCPOptType_dict = {
     1   : 'IP-Addresses',
     2   : 'IP-Compression-Protocol',
@@ -186,6 +211,15 @@ class NCPDataConf(Sequence):
 
 
 # global NCP format
+class NCPCODE(IntEnum):
+    CONFIG_REQ  = 1
+    CONFIG_ACK  = 2
+    CONFIG_NAK  = 3
+    CONFIG_REJ  = 4
+    TERM_REQ    = 5
+    TERM_ACK    = 6
+    CODE_REJ    = 7
+
 _NCPCode_dict = {
     1 : 'Configure-Request',
     2 : 'Configure-Ack',
@@ -196,10 +230,11 @@ _NCPCode_dict = {
     7 : 'Code-Reject'
     }
 
+
 class NCP(Envelope):
     ENV_SEL_TRANS = False
     _GEN = (
-        Uint8('Code', val=1, dic=_NCPCode_dict),
+        Uint8('Code', val=NCPCODE.CONFIG_REQ, dic=_NCPCode_dict),
         Uint8('Id'),
         Uint16('Len'),
         Buf('Data')
@@ -242,6 +277,7 @@ class NCP(Envelope):
 
 #------------------------------------------------------------------------------#
 # IETF RFC 1334: PPP Authentication Protocols (PAP and CHAP)
+# PAP
 #------------------------------------------------------------------------------#
 
 # PAP Authenticate-Request
@@ -279,11 +315,17 @@ class PAPAuthNak(_PAPAuthMsg):
 
 
 # global PAP format
+class PAPCODE(IntEnum):
+    AUTH_REQ    = 1
+    AUTH_ACK    = 2
+    AUTH_NAK    = 3
+
 _PAPCode_dict = {
     1 : 'Authenticate-Request',
     2 : 'Authenticate-Ack',
     3 : 'Authenticate-Nak',
     }
+
 
 class PAP(Envelope):
     _GEN = (
@@ -333,6 +375,10 @@ class PAP(Envelope):
         self[3]._from_char(char)
 
 
+#------------------------------------------------------------------------------#
+# CHAP
+#------------------------------------------------------------------------------#
+
 # CHAP Challenge / Response
 class _CHAPValue(Envelope):
     _GEN = (
@@ -354,6 +400,12 @@ class CHAPResponse(_CHAPValue):
 
 
 # global CHAP format
+class CHAPCODE(IntEnum):
+    CHALLENGE   = 1
+    RESPONSE    = 2
+    SUCCESS     = 3
+    FAILURE     = 4
+
 _CHAPCode_dict = {
     1 : 'Challenge',
     2 : 'Response',
@@ -361,9 +413,10 @@ _CHAPCode_dict = {
     4 : 'Failure'
     }
 
+
 class CHAP(Envelope):
     _GEN = (
-        Uint8('Code', val=1, dic=_PAPCode_dict),
+        Uint8('Code', val=CHAPCODE.CHALLENGE, dic=_PAPCode_dict),
         Uint8('Id'),
         Uint16('Len'),
         Buf('Data')

@@ -2116,6 +2116,14 @@ class RejectedNSSAI(Sequence):
 # TS 24.501, 9.11.3.47
 #------------------------------------------------------------------------------#
 
+class REQTYPE(IntEnum):
+    INITIAL                 = 1
+    EXISTING_PDUSESS        = 2
+    INITIAL_EMERG           = 3
+    EXISTING_EMERG_PDUSESS  = 4
+    MODIF                   = 5
+    MA_PDU                  = 6
+
 _RequestType_dict = {
     1 : 'initial request',
     2 : 'existing PDU session',
@@ -2126,10 +2134,11 @@ _RequestType_dict = {
     7 : _str_reserved
     }
 
+
 class RequestType(Envelope):
     _GEN = (
         Uint('spare', bl=1),
-        Uint('Value', bl=3, dic=_RequestType_dict)
+        Uint('Value', val=REQTYPE.INITIAL, bl=3, dic=_RequestType_dict)
         )
 
 
@@ -2936,7 +2945,7 @@ class FGSMCause(Uint8):
 # TS 24.501, 9.11.4.3
 #------------------------------------------------------------------------------#
 
-class AlwaysOnPDUSessInd(Envelope):
+class AlwaysOnPDUSess(Envelope):
     _GEN = (
         Uint('spare', bl=3),
         Uint('Value', bl=1)
@@ -2947,12 +2956,7 @@ class AlwaysOnPDUSessInd(Envelope):
 # Always-on PDU session requested
 # TS 24.501, 9.11.4.4
 #------------------------------------------------------------------------------#
-
-class AlwaysOnPDUSessReq(Envelope):
-    _GEN = (
-        Uint('spare', bl=3),
-        Uint('Value', bl=1)
-        )
+# same struct as 9.11.4.3
 
 
 #------------------------------------------------------------------------------#
@@ -2974,16 +2978,22 @@ class AllowedSSCMode(Envelope):
 # TS 24.501, 9.11.4.7
 #------------------------------------------------------------------------------#
 
+class INTEGRITY_MAXDR(IntEnum):
+    KBPS64  = 0
+    NULL    = 1
+    FULL    = 0xff
+
 _IntegrityProtMaxDataRate_dict = {
     0    : '64 kbps',
     1    : 'NULL',
     0xff : 'full data rate'
     }
 
+
 class IntegrityProtMaxDataRate(Envelope):
     _GEN = (
-        Uint8('UPUL', dic=_IntegrityProtMaxDataRate_dict),
-        Uint8('UPDL', dic=_IntegrityProtMaxDataRate_dict)
+        Uint8('UPUL', val=INTEGRITY_MAXDR.FULL, dic=_IntegrityProtMaxDataRate_dict),
+        Uint8('UPDL', val=INTEGRITY_MAXDR.FULL, dic=_IntegrityProtMaxDataRate_dict)
         )
 
 
@@ -3105,6 +3115,13 @@ class PDUAddress(Envelope):
 # TS 24.501, 9.11.4.11
 #------------------------------------------------------------------------------#
 
+class PDUSESSTYPE(IntEnum):
+    IPV4            = 1
+    IPV6            = 2
+    IPV4V6          = 3
+    UNSTRUCTURED    = 4
+    ETHERNET        = 5
+
 _PDUSessType_dict = {
     1 : 'IPv4',
     2 : 'IPv6',
@@ -3114,10 +3131,11 @@ _PDUSessType_dict = {
     7 : _str_reserved
     }
 
+
 class PDUSessType(Envelope):
     _GEN = (
         Uint('spare', bl=1),
-        Uint('Value', bl=3, val=1, dic=_PDUSessType_dict)
+        Uint('Value', val=PDUSESSTYPE.IPV4, bl=3, dic=_PDUSessType_dict)
         )
 
 
