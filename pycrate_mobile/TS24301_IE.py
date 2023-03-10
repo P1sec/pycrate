@@ -992,27 +992,43 @@ class UENetCap(Envelope):
         Uint('CP_CIoT', bl=1),
         Uint('ProSe_relay', bl=1),
         Uint('ProSe_dc', bl=1), # end of octet 6
-        Uint('spare', bl=1),
-        Uint('spare', bl=1),
-        Uint('spare', bl=1),
-        Uint('spare', bl=1),
-        Uint('spare', bl=1),
-        Uint('spare', bl=1),
-        Uint('spare', bl=1),
+        Uint('FTBearers', bl=1),
+        Uint('SGC', bl=1),
+        Uint('N1Mode', bl=1),
+        Uint('DCNR', bl=1),
+        Uint('CPBackOff', bl=1),
+        Uint('RestrictEC', bl=1),
+        Uint('V2X_PC5', bl=1),
         Uint('MultiDRB', bl=1), # end of octet 7
-        Buf('spare', val=b'', rep=REPR_HEX) # from 0 to 6 bytes
+        Uint('RPR', bl=1),
+        Uint('PIV', bl=1),
+        Uint('NCR', bl=1),
+        Uint('V2X_NRPC5', bl=1),
+        Uint('UP_MT_EDT', bl=1),
+        Uint('CP_MT_EDT', bl=1),
+        Uint('WUSA', bl=1),
+        Uint('RACS', bl=1), # end of octet 8
+        Uint('spare', bl=1),
+        Uint('spare', bl=1),
+        Uint('spare', bl=1),
+        Uint('spare', bl=1),
+        Uint('spare', bl=1),
+        Uint('spare', bl=1),
+        Uint('PTCC', bl=1),
+        Uint('PR', bl=1), # end of octet 9
+        Buf('spare', val=b'', rep=REPR_HEX) # from 0 to 4 bytes
         )
     
     def _from_char(self, char):
         if self.get_trans():
             return
         l = char.len_bit()
-        if l <= 56:
+        if l <= 72:
             # disable all elements after bit l
             self.disable_from(l)
-        elif l > 56:
+        elif l > 72:
             # enables some spare bits at the end
-            self[-1]._bl = l-56
+            self[-1]._bl = l-72
         Envelope._from_char(self, char)
     
     def disable_from(self, ind):
