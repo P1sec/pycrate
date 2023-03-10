@@ -84,7 +84,7 @@ from .TS24008_IE        import (
     TimeZoneTime, DLSavingTime, IMEISVReq, 
     )
 from .TS24301_IE        import (
-    NAS_KSI, EPSBearerCtxtStat, UENetCap as EPSUENetCap, ExtEmergNumList, 
+    NAS_KSI, EPSBearerCtxtStat, UENetCap as S1UENetCap, ExtEmergNumList, 
     EPSBearerCtxtStat, NASSecAlgo as EPSNASSecAlgo, UESecCap as S1UESecCap, 
     ReleaseAssistInd, WUSAssistInfo, UEReqType,
     )
@@ -291,7 +291,7 @@ class FGMMRegistrationRequest(Layer3E):
         Type4TLV('UESecCap', val={'T':0x2E, 'V':b'\0\0'}, IE=UESecCap()),
         Type4TLV('NSSAI', val={'T':0x2F, 'V':b'\x01\x01'}, IE=NSSAI()),
         Type3TV('TAI', val={'T':0x52, 'V':6*b'\0'}, bl={'V':48}, IE=FGSTAI()),
-        Type4TLV('EPSUENetCap', val={'T':0x17, 'V':b'\0\0'}, IE=EPSUENetCap()),
+        Type4TLV('S1UENetCap', val={'T':0x17, 'V':b'\0\0'}, IE=S1UENetCap()),
         Type4TLV('ULDataStat', val={'T':0x40, 'V':b'\0\0'}, IE=ULDataStat()),
         Type4TLV('PDUSessStat', val={'T':0x50, 'V':b'\0\0'}, IE=PDUSessStat()),
         Type1TV('MICOInd', val={'T':0xB, 'V':0}, IE=MICOInd()),
