@@ -2937,6 +2937,7 @@ _FGSMCause_dict = {
 
 class FGSMCause(Uint8):
     _name = '5GSMCause'
+    _val  = 26
     _dic  = _FGSMCause_dict
 
 
@@ -3096,18 +3097,26 @@ class MaxPktFilters(Envelope):
 
 class PDUAddress(Envelope):
     _GEN = (
-        Uint('spare', bl=6, rep=REPR_HEX),
-        Uint('Type', bl=2, dic={1:'IPv4', 2:'IPv6', 3:'IPv4v6'}),
+        Uint('spare', bl=5, rep=REPR_HEX),
+        Uint('SI6LLA', val=0, bl=1, dic={
+            0 : 'SMF\'s IPv6 link local address absent',
+            1 : 'SMF\'s IPv6 link local address present'}),
+        Uint('Type', val=1, bl=2, dic={1:'IPv4', 2:'IPv6', 3:'IPv4v6'}),
         Alt('Addr', GEN={
             1 : Buf('IPv4', bl=32, rep=REPR_HEX),
-            2 : Buf('IPv6', bl=128, rep=REPR_HEX),
+            2 : Buf('IPv6IfId', bl=64, rep=REPR_HEX),
             3 : Envelope('IPv4v6', GEN=(
-                    Buf('IPv4', bl=32, rep=REPR_HEX),
-                    Buf('IPv6', bl=128, rep=REPR_HEX)))},
+                    Buf('IPv6IfId', bl=64, rep=REPR_HEX),
+                    Buf('IPv4', bl=32, rep=REPR_HEX)))},
             DEFAULT=Buf('unk', rep=REPR_HEX),
-            sel=lambda self: self.get_env()[1].get_val()
-            )
+            sel=lambda self: self.get_env()[2].get_val()
+            ),
+        Buf('SMFIPv6LinkLocalAddr', bl=128, rep=REPR_HEX)
         )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['SMFIPv6LinkLocalAddr'].set_transauto(lambda: self['SI6LLA'].get_val() == 0)
 
 
 #------------------------------------------------------------------------------#
