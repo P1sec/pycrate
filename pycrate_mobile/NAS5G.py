@@ -30,10 +30,12 @@
 from pycrate_core.utils import *
 
 from .TS24501_FGMM  import FGMMTypeClasses, FGMMSecProtNASMessage
+from .TS24501_IE    import FGSMMContType
 from .TS24501_FGSM  import FGSMTypeClasses
 from .TS24501_UEPOL import FGUEPOLTypeClasses
 from .TS24519_TSNAF import FGTSNAFEthPortTypeClasses, FGTSNAFBridgeTypeClasses
 from .TS24011_PPSMS import PPSMSCPTypeClasses
+
 
 # TODO: migrate TS24519_TSNAF to the new TS24539 spec
 
@@ -148,11 +150,11 @@ def parse_NAS5G(buf, inner=True, sec_hdr=True):
 
 def parse_PayCont(conttype, buf):
     
-    if conttype == 1 and len(buf) >= 2:
+    if conttype == FGSMMContType.N1SM and len(buf) >= 2:
         # 5GSM
         return parse_NAS5G(buf, inner=True)
     
-    elif conttype == 2 and len(buf) >= 2:
+    elif conttype == FGSMMContType.SMS and len(buf) >= 2:
         # SMS PP
         pd, typ = unpack('>BB', buf[:2])
         pd &= 0xF
@@ -169,11 +171,11 @@ def parse_PayCont(conttype, buf):
             # error 97, Message type non-existent or not implemented
             return None, 97
     
-    elif conttype == 3:
+    elif conttype == FGSMMContType.LPP:
         # LPP, TODO
         pass
     
-    elif conttype == 4 and len(buf) >= 17:
+    elif conttype == FGSMMContType.SOR and len(buf) >= 17:
         # SOR
         Cont = SORTransContainer()
         try:
@@ -184,7 +186,7 @@ def parse_PayCont(conttype, buf):
         else:
             return Cont, 0
     
-    elif conttype == 5 and len(buf) >= 2:
+    elif conttype == FGSMMContType.UEPOL and len(buf) >= 2:
         # UE policy
         _, typ = unpack('>BB', buf[:2])
         if 1 <= typ <= 4:
@@ -200,7 +202,7 @@ def parse_PayCont(conttype, buf):
             # error 97, Message type non-existent or not implemented
             return None, 97
     
-    elif conttype == 6 and len(buf) >= 17:
+    elif conttype == FGSMMContType.UPPRMUP and len(buf) >= 17:
         # UPU
         Cont = UPUTransContainer()
         try:
@@ -211,11 +213,11 @@ def parse_PayCont(conttype, buf):
         else:
             return Cont, 0
     
-    elif conttype == 7:
+    elif conttype == FGSMMContType.LCS:
         # LCS, TODO
         pass
     
-    elif conttype == 8 and len(buf) >= 1:
+    elif conttype == FGSMMContType.CIOTUD and len(buf) >= 1:
         # CIoT
         Cont = CIoTSmallDataContainer()
         try:
@@ -226,15 +228,15 @@ def parse_PayCont(conttype, buf):
         else:
             return Cont, 0
     
-    elif conttype == 9:
+    elif conttype == FGSMMContType.SLAA:
         # Service-level-AA, TODO
         pass
     
-    elif conttype == 10:
+    elif conttype == FGSMMContType.EVNOT:
         # Event notification, TODO
         pass
     
-    elif conttype == 15 and len(buf) >= 1:
+    elif conttype == FGSMMContType.MULT and len(buf) >= 1:
         # multi
         Cont = PayloadContainerMult()
         try:
