@@ -65,7 +65,7 @@ def parse_NASLTE_MO(buf, inner=True, sec_hdr=True):
     shdr = pd>>4
     pd  &= 0xf
         
-    if sec_hdr and shdr in (1, 2, 3, 4):
+    if sec_hdr and shdr in {1, 2, 3, 4}:
         # EMM security protected NAS message
         Msg = EMMSecProtNASMessage()
         try:
@@ -74,7 +74,7 @@ def parse_NASLTE_MO(buf, inner=True, sec_hdr=True):
             # error 96, invalid mandatory info
             return None, 96
         #
-        if inner and shdr in (1, 3):
+        if inner and shdr in {1, 3}:
             # parse clear-text NAS message container
             cont, err = parse_NASLTE_MO(Msg[3].get_val(), inner=inner)
             if cont is not None:
@@ -138,17 +138,27 @@ def parse_NASLTE_MO(buf, inner=True, sec_hdr=True):
             # error 96, invalid mandatory info
             return None, 96
         #
+        err = 0
         if inner and pd == 7:
-            if typ in (65, 66, 67, 68, 77):
+            if typ in {65, 66, 67, 68, 77}:
                 esmc = Msg['ESMContainer']
                 if not esmc.get_trans():
                     # ESM Container present in Msg
-                    cont, err = parse_NASLTE_MO(esmc[-1].get_val(), inner=inner)
-                    if err:
-                        return Msg, err
-                    else:
+                    cont, _err = parse_NASLTE_MO(esmc[-1].get_val(), inner=inner)
+                    if cont is not None:
                         esmc.replace(esmc[-1], cont)
-            elif typ in (98, 99):
+                    if not err and _err:
+                        err = _err
+                if typ == 77:
+                    nasc = Msg['NASContainer']
+                    if not nasc.get_trans():
+                        # NAS Container present in Msg
+                        cont, _err = parse_NASLTE_MO(nasc[-1].get_val(), inner=inner)
+                        if cont is not None:
+                            nasc.replace(nasc[-1], cont)
+                        if not err and _err:
+                            err = _err
+            elif typ in {98, 99}:
                 # PP-SMS
                 nasc   = Msg['NASContainer']
                 ppsmsb = nasc[1].get_val()
@@ -157,7 +167,7 @@ def parse_NASLTE_MO(buf, inner=True, sec_hdr=True):
                 except Exception:
                     return Msg, 111
                 pd &= 0xF
-                if pd == 9 and typ in (1, 4, 16):
+                if pd == 9 and typ in {1, 4, 16}:
                     cont = PPSMSCPTypeClasses[typ]()
                     try:
                         cont.from_bytes(ppsmsb)
@@ -165,7 +175,7 @@ def parse_NASLTE_MO(buf, inner=True, sec_hdr=True):
                         return Msg, 96
                     nasc.replace(nasc[1], cont)
         #
-        return Msg, 0
+        return Msg, err
 
 
 def parse_NASLTE_MT(buf, inner=True, sec_hdr=True):
@@ -198,7 +208,7 @@ def parse_NASLTE_MT(buf, inner=True, sec_hdr=True):
     shdr = pd>>4
     pd  &= 0xf
         
-    if sec_hdr and shdr in (1, 2, 3, 4):
+    if sec_hdr and shdr in {1, 2, 3, 4}:
         # EMM security protected NAS message
         Msg = EMMSecProtNASMessage()
         try:
@@ -207,7 +217,7 @@ def parse_NASLTE_MT(buf, inner=True, sec_hdr=True):
             # error 96, invalid mandatory info
             return None, 96
         #
-        if inner and shdr in (1, 3):
+        if inner and shdr in {1, 3}:
             # parse clear-text NAS message container
             cont, err = parse_NASLTE_MT(Msg[3].get_val(), inner=inner)
             if cont is not None:
@@ -271,19 +281,28 @@ def parse_NASLTE_MT(buf, inner=True, sec_hdr=True):
             # error 96, invalid mandatory info
             return None, 96
         #
+        err = 0
         if inner and pd == 7:
-            if typ in (65, 66, 67, 68, 77):
+            if typ in {65, 66, 67, 68, 77}:
                 # ESM Container
                 esmc = Msg['ESMContainer']
                 if not esmc.get_trans():
                     # ESM Container present in Msg
-                    cont, err = parse_NASLTE_MO(esmc[-1].get_val(), inner=inner)
-                    if err:
-                        return Msg, err
-                    else:
+                    cont, _err = parse_NASLTE_MT(esmc[-1].get_val(), inner=inner)
+                    if cont is not None:
                         esmc.replace(esmc[-1], cont)
-                        #esmc[-2].set_valauto(cont.get_len)
-            elif typ in (98, 99):
+                    if not err and _err:
+                        err = _err
+                if typ == 77:
+                    nasc = Msg['NASContainer']
+                    if not nasc.get_trans():
+                        # NAS Container present in Msg
+                        cont, _err = parse_NASLTE_MO(nasc[-1].get_val(), inner=inner)
+                        if cont is not None:
+                            nasc.replace(nasc[-1], cont)
+                        if not err and _err:
+                            err = _err
+            elif typ in {98, 99}:
                 # PP-SMS
                 nasc   = Msg['NASContainer']
                 ppsmsb = nasc[1].get_val()
@@ -292,7 +311,7 @@ def parse_NASLTE_MT(buf, inner=True, sec_hdr=True):
                 except Exception:
                     return Msg, 111
                 pd &= 0xF
-                if pd == 9 and typ in (1, 4, 16):
+                if pd == 9 and typ in {1, 4, 16}:
                     cont = PPSMSCPTypeClasses[typ]()
                     try:
                         cont.from_bytes(ppsmsb)
@@ -300,7 +319,7 @@ def parse_NASLTE_MT(buf, inner=True, sec_hdr=True):
                         return Msg, 96
                     nasc.replace(nasc[1], cont)
         #
-        return Msg, 0
+        return Msg, err
 
 # TODO: handle decoding of NAS Generic Container (for LCS or LPP)
 # see 24.301, 9.9.3.42 and 43
