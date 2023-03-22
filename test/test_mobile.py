@@ -97,7 +97,8 @@ nas_pdu_mo = tuple(map(unhexlify, (
     '074c6005f4c2e65e9a57022000', # EMM Ext Serv Request
     '074a', # EMM TAU Complete
     '07632009011d00010007913386094000f01101830a816000000000000005d4f29cae00', # EMM NAS transport + SMS CP-DATA
-    '0745630bf602f8108003c8c2e65e9a' # EMM Detach Request MO
+    '0745630bf602f8108003c8c2e65e9a', # EMM Detach Request MO
+    '074d707800040200e86f6703091011570233c9d1' # EMM CP Service Request
     )))
 
 # downlink messages

@@ -144,36 +144,26 @@ def parse_NASLTE_MO(buf, inner=True, sec_hdr=True):
                 esmc = Msg['ESMContainer']
                 if not esmc.get_trans():
                     # ESM Container present in Msg
-                    cont, _err = parse_NASLTE_MO(esmc[-1].get_val(), inner=inner)
+                    cont, err = parse_NASLTE_MO(esmc[-1].get_val(), inner=inner)
                     if cont is not None:
                         esmc.replace(esmc[-1], cont)
-                    if not err and _err:
-                        err = _err
-                if typ == 77:
-                    nasc = Msg['NASContainer']
-                    if not nasc.get_trans():
-                        # NAS Container present in Msg
-                        cont, _err = parse_NASLTE_MO(nasc[-1].get_val(), inner=inner)
-                        if cont is not None:
-                            nasc.replace(nasc[-1], cont)
-                        if not err and _err:
-                            err = _err
-            elif typ in {98, 99}:
-                # PP-SMS
+            if typ in {77, 98, 99}:
                 nasc   = Msg['NASContainer']
-                ppsmsb = nasc[1].get_val()
-                try:
-                    pd, typ = unpack('>BB', ppsmsb[:2])
-                except Exception:
-                    return Msg, 111
-                pd &= 0xF
-                if pd == 9 and typ in {1, 4, 16}:
-                    cont = PPSMSCPTypeClasses[typ]()
+                if not nasc.get_trans():
+                    # NAS Container with PP-SMS present in Msg
+                    ppsmsb = nasc[-1].get_val()
                     try:
-                        cont.from_bytes(ppsmsb)
+                        pd, typ = unpack('>BB', ppsmsb[:2])
                     except Exception:
-                        return Msg, 96
-                    nasc.replace(nasc[1], cont)
+                        return Msg, 111
+                    pd &= 0xF
+                    if pd == 9 and typ in {1, 4, 16}:
+                        cont = PPSMSCPTypeClasses[typ]()
+                        try:
+                            cont.from_bytes(ppsmsb)
+                        except Exception:
+                            return Msg, 96
+                        nasc.replace(nasc[-1], cont)
         #
         return Msg, err
 
@@ -288,36 +278,26 @@ def parse_NASLTE_MT(buf, inner=True, sec_hdr=True):
                 esmc = Msg['ESMContainer']
                 if not esmc.get_trans():
                     # ESM Container present in Msg
-                    cont, _err = parse_NASLTE_MT(esmc[-1].get_val(), inner=inner)
+                    cont, err = parse_NASLTE_MT(esmc[-1].get_val(), inner=inner)
                     if cont is not None:
                         esmc.replace(esmc[-1], cont)
-                    if not err and _err:
-                        err = _err
-                if typ == 77:
-                    nasc = Msg['NASContainer']
-                    if not nasc.get_trans():
-                        # NAS Container present in Msg
-                        cont, _err = parse_NASLTE_MO(nasc[-1].get_val(), inner=inner)
-                        if cont is not None:
-                            nasc.replace(nasc[-1], cont)
-                        if not err and _err:
-                            err = _err
-            elif typ in {98, 99}:
-                # PP-SMS
+            if typ in {77, 98, 99}:
                 nasc   = Msg['NASContainer']
-                ppsmsb = nasc[1].get_val()
-                try:
-                    pd, typ = unpack('>BB', ppsmsb[:2])
-                except Exception:
-                    return Msg, 111
-                pd &= 0xF
-                if pd == 9 and typ in {1, 4, 16}:
-                    cont = PPSMSCPTypeClasses[typ]()
+                if not nasc.get_trans():
+                    # NAS Container with PP-SMS present in Msg
+                    ppsmsb = nasc[-1].get_val()
                     try:
-                        cont.from_bytes(ppsmsb)
+                        pd, typ = unpack('>BB', ppsmsb[:2])
                     except Exception:
-                        return Msg, 96
-                    nasc.replace(nasc[1], cont)
+                        return Msg, 111
+                    pd &= 0xF
+                    if pd == 9 and typ in {1, 4, 16}:
+                        cont = PPSMSCPTypeClasses[typ]()
+                        try:
+                            cont.from_bytes(ppsmsb)
+                        except Exception:
+                            return Msg, 96
+                        nasc.replace(nasc[-1], cont)
         #
         return Msg, err
 
