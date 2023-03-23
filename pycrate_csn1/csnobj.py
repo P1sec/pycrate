@@ -393,6 +393,18 @@ class CSN1Obj(Element):
         else:
             return sum([p[2] for p in self._to_pack()])
     
+    def get_len(self):
+        if self._val is None:
+            return 0
+        else:
+            bl = self.get_bl()
+            if bl % 8 == 0:
+                # byte-aligned
+                return bl >> 3
+            else:
+                # byte-unaligned
+                return 1 + (bl >> 3)
+    
     def from_bytes(self, buf):
         if isinstance(buf, bytes_types):
             char = Charpy(buf)
