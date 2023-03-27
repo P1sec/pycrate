@@ -1471,7 +1471,7 @@ class _CipherDataSet(Envelope):
         Uint16('CipherSetID'),
         Buf('CipherKey', bl=128, rep=REPR_HEX),
         Uint('spare', bl=3),
-        Uint('C0Len', bl=5),
+        Uint('C0Len', val=0, bl=5),
         Buf('C0', rep=REPR_HEX),
         Uint('PosSIBType11', bl=1),
         Uint('PosSIBType12', bl=1),
@@ -1505,10 +1505,15 @@ class _CipherDataSet(Envelope):
         Uint16('ValidityDuration'),
         TAIList()
         )
+    
+    def __init__(self, *args, **kwargs):
+        Envelope.__init__(self, *args, **kwargs)
+        self['C0Len'].set_valauto(lambda: self['C0'].get_len())
+        self['C0'].set_blauto(lambda: self['C0Len'].get_val()<<3)
 
 
 class CipherKeyData(Sequence):
-    _GEN = _CipherDataSet()
+    _GEN = _CipherDataSet('CipherDataSet')
 
 
 #------------------------------------------------------------------------------#
