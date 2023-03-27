@@ -998,6 +998,7 @@ class EMMServiceAccept(Layer3E):
 EMMTypeMOClasses = {
     65 : EMMAttachRequest,
     67 : EMMAttachComplete,
+    69 : EMMDetachRequestMO,
     72 : EMMTrackingAreaUpdateRequest,
     74 : EMMTrackingAreaUpdateComplete,
     76 : EMMExtServiceRequest,
