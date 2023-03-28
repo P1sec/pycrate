@@ -109,7 +109,9 @@ Single value: Python 2-tuple
             if ref in const_tr:
                 return const_tr[ref]
             elif ref in _ASN1ObjBasicLUT:
-                return _ASN1ObjBasicLUT[ref]()
+                obj = _ASN1ObjBasicLUT[ref]()
+                obj._tagc = [(0, obj.TAG)]
+                return obj
             else:
                 raise(ASN1ObjErr('{0}: invalid object reference, {1!r}'\
                       .format(self.fullname(), ref)))
