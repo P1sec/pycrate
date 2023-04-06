@@ -530,7 +530,7 @@ class FGMMMTDeregistrationRequest(Layer3E):
 class FGMMMTDeregistrationAccept(Layer3E):
     _name = '5GMMMTDeregistrationAccept'
     _GEN  = (
-        FGMMHeader(val={'Type':71}),
+        FGMMHeader(val={'Type':72}),
         )
 
 
