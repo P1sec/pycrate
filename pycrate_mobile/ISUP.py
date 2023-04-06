@@ -3987,16 +3987,10 @@ def parse_ISUP(buf):
     """
     if len(buf) < 3:
         return None, 1
-    if python_version < 3:
-        try:
-            Msg = ISUPTypeClasses[ord(buf[2])]()
-        except:
-            return None, 1
-    else:
-        try:
-            Msg = ISUPTypeClasses[buf[2]]()
-        except:
-            return None, 1
+    try:
+        Msg = ISUPTypeClasses[buf[2]]()
+    except:
+        return None, 1
     try:
         Msg.from_bytes(buf)
     except:

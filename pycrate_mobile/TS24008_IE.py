@@ -80,8 +80,6 @@ def encode_bcd(dig):
 
 
 def decode_bcd(buf):
-    if python_version < 3:
-        buf = [ord(c) for c in buf]
     ret = []
     for o in buf:
         msb, lsb = o>>4, o&0xf
@@ -162,10 +160,7 @@ class BufBCD(Buf):
     def decode(self):
         """returns the encoded string of digits
         """
-        if python_version < 3:
-            num = [ord(c) for c in self.get_val()]
-        else:
-            num = self.get_val()
+        num = self.get_val()
         ret = []
         for o in num:
             msb, lsb = o>>4, o&0xf
@@ -192,10 +187,7 @@ class BufBCD(Buf):
         if len(ret) % 2:
             ret.append( self._filler )
         #
-        if python_version < 3:
-            self._val = ''.join([chr(c) for c in map(lambda x,y:x+(y<<4), ret[::2], ret[1::2])])
-        else:
-            self._val = bytes(map(lambda x,y:x+(y<<4), ret[::2], ret[1::2]))
+        self._val = bytes(map(lambda x,y:x+(y<<4), ret[::2], ret[1::2]))
     
     def repr(self):
         # special hexdump representation
@@ -288,33 +280,18 @@ class PLMN(Buf):
         """returns the encoded string of digits
         """
         plmn = []
-        if python_version < 3:
-            for c in self.get_val():
-                b = ord(c)
-                plmn.append(b>>4)
-                plmn.append(b&0xf)
-            try:
-                if plmn[2] == 0xf:
-                    return u'%i%i%i%i%i' % (plmn[1], plmn[0], plmn[3], plmn[5], plmn[4])
-                else:
-                    return u'%i%i%i%i%i%i' % (plmn[1], plmn[0], plmn[3], plmn[5], plmn[4], plmn[2])
-            except IndexError:
-                # an invalid value has been set, _SAFE_STAT / DYN is probably disabled
-                # for e.g. fuzzing purpose, but there is still need to not break here
-                return '0x%s' % hexlify(self.to_bytes()).decode('ascii')
-        else:
-            for b in self.get_val():
-                plmn.append(b>>4)
-                plmn.append(b&0xf)
-            try:
-                if plmn[2] == 0xf:
-                    return '%i%i%i%i%i' % (plmn[1], plmn[0], plmn[3], plmn[5], plmn[4])
-                else:
-                    return '%i%i%i%i%i%i' % (plmn[1], plmn[0], plmn[3], plmn[5], plmn[4], plmn[2])
-            except IndexError:
-                # an invalid value has been set, _SAFE_STAT / DYN is probably disabled
-                # for e.g. fuzzing purpose, but there is still need to not break here
-                return '0x%s' % hexlify(self.to_bytes()).decode('ascii')
+        for b in self.get_val():
+            plmn.append(b>>4)
+            plmn.append(b&0xf)
+        try:
+            if plmn[2] == 0xf:
+                return '%i%i%i%i%i' % (plmn[1], plmn[0], plmn[3], plmn[5], plmn[4])
+            else:
+                return '%i%i%i%i%i%i' % (plmn[1], plmn[0], plmn[3], plmn[5], plmn[4], plmn[2])
+        except IndexError:
+            # an invalid value has been set, _SAFE_STAT / DYN is probably disabled
+            # for e.g. fuzzing purpose, but there is still need to not break here
+            return '0x%s' % hexlify(self.to_bytes()).decode('ascii')
     
     def encode(self, plmn=u'00101'):
         """encode the given PLMN string and store the resulting buffer in 

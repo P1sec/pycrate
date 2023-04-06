@@ -1568,16 +1568,10 @@ def parse_SCCP(buf, w_scmg=True):
     """
     if not buf:
         return None, 1
-    if python_version < 3:
-        try:
-            Msg = SCCPTypeClasses[ord(buf[0])]()
-        except:
-            return None, 1
-    else:
-        try:
-            Msg = SCCPTypeClasses[buf[0]]()
-        except:
-            return None, 1
+    try:
+        Msg = SCCPTypeClasses[buf[0]]()
+    except:
+        return None, 1
     try:
         Msg.from_bytes(buf)
     except:
@@ -1614,16 +1608,10 @@ def parse_SCMG(buf):
     """
     if not buf:
         return None, 1
-    if python_version < 3:
-        try:
-            Msg = SCMGTypeClasses[ord(buf[0])]()
-        except:
-            return None, 1
-    else:
-        try:
-            Msg = SCMGTypeClasses[buf[0]]()
-        except:
-            return None, 1
+    try:
+        Msg = SCMGTypeClasses[buf[0]]()
+    except:
+        return None, 1
     try:
         Msg.from_bytes(buf)
     except:

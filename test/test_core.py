@@ -387,10 +387,7 @@ def test_elt_2():
     t['res'].set_val(0)
     t['L'].set_val(t['V'].get_bl())
     
-    if python_version < 3:
-        assert( repr(t) == "<TestTLV : <T [Tag] : 0b00000010 (Tag2)><F1 [Flag1] : 1><F2 [Flag2] : 1><res [Reserved] : 0><L [Length] : 104><V [Value] : 'default value'>>" )
-    else:
-        assert( repr(t) == "<TestTLV : <T [Tag] : 0b00000010 (Tag2)><F1 [Flag1] : 1><F2 [Flag2] : 1><res [Reserved] : 0><L [Length] : 104><V [Value] : b'default value'>>" )
+    assert( repr(t) == "<TestTLV : <T [Tag] : 0b00000010 (Tag2)><F1 [Flag1] : 1><F2 [Flag2] : 1><res [Reserved] : 0><L [Length] : 104><V [Value] : b'default value'>>" )
     
     if _with_json:
         jv  = t._to_jval()
@@ -400,10 +397,7 @@ def test_elt_2():
         t.from_json(jso)
         assert( t._to_jval() == jv )
     
-    if python_version < 3:
-        assert( repr(t) == "<TestTLV : <T [Tag] : 0b00000010 (Tag2)><F1 [Flag1] : 1><F2 [Flag2] : 1><res [Reserved] : 0><L [Length] : 104><V [Value] : 'default value'>>" )
-    else:
-        assert( repr(t) == "<TestTLV : <T [Tag] : 0b00000010 (Tag2)><F1 [Flag1] : 1><F2 [Flag2] : 1><res [Reserved] : 0><L [Length] : 104><V [Value] : b'default value'>>" )
+    assert( repr(t) == "<TestTLV : <T [Tag] : 0b00000010 (Tag2)><F1 [Flag1] : 1><F2 [Flag2] : 1><res [Reserved] : 0><L [Length] : 104><V [Value] : b'default value'>>" )
     
     
     class TestTLV2(Envelope):

@@ -39,7 +39,7 @@ from .err                import *
 from pycrate_asn1c.utils import clean_text
 
 # pycrate_core is used for basic library-wide functions / variables
-# (i.e. log(), python_version, integer_types, bytes_types, str_types)
+# (i.e. log(), integer_types, bytes_types, str_types)
 # and for encoding / decoding routines
 from pycrate_core.utils  import *
 from pycrate_core.utils  import TYPE_BYTES   as T_BYTES

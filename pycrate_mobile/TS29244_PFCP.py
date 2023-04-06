@@ -6073,10 +6073,7 @@ def parse_PFCP(buf):
     """
     if len(buf) < 8:
         return None, ERR_PFCP_BUF_TOO_SHORT
-    if python_version < 3:
-        typ = ord(buf[1])
-    else:
-        typ = buf[1]
+    typ = buf[1]
     try:
         Msg = PFCPDispatcher[typ]()
     except KeyError:

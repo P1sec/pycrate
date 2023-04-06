@@ -416,12 +416,9 @@ def parse_GTPU(buf):
     """
     if len(buf) < 8:
         return None, ERR_GTPU_BUF_TOO_SHORT
-    if python_version < 3:
-        type = ord(buf[1])
-    else:
-        type = buf[1]
+    typ = buf[1]
     try:
-        Msg = GTPUDispatcher[type]()
+        Msg = GTPUDispatcher[typ]()
     except KeyError:
         return None, ERR_GTPU_TYPE_NONEXIST
     try:

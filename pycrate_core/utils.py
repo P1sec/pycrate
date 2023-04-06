@@ -28,12 +28,8 @@
 #*/
 
 import sys
+from .utils_py3 import *
 
-if sys.version_info[0] < 3:
-    from .utils_py2 import *
-else:
-    from .utils_py3 import *
-#
 # configure max recursion
 #sys.setrecursionlimit(200)
 

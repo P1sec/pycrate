@@ -30,11 +30,8 @@
 __all__ = ['SMSd']
 
 from time   import localtime
+from queue  import Queue, Empty, Full
 from .utils import *
-if python_version < 3:
-    from Queue import Queue, Empty, Full
-else:
-    from queue import Queue, Empty, Full
 
 
 class SMSd(object):

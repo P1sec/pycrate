@@ -1880,10 +1880,7 @@ def parse_GTPv0(buf):
     """
     if len(buf) < 20:
         return None, ERR_GTP_BUF_TOO_SHORT
-    if python_version < 3:
-        typ = ord(buf[1])
-    else:
-        typ = buf[1]
+    typ = buf[1]
     try:
         Msg = GTPv0Dispatcher[typ]()
     except KeyError:

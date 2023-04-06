@@ -5449,10 +5449,7 @@ def parse_GTP_SGSN(buf):
     """
     if len(buf) < 8:
         return None, ERR_GTP_BUF_TOO_SHORT
-    if python_version < 3:
-        typ = ord(buf[1])
-    else:
-        typ = buf[1]
+    typ = buf[1]
     try:
         Msg = GTPDispatcherSGSN[typ]()
     except KeyError:
@@ -5484,10 +5481,7 @@ def parse_GTP_GGSN(buf):
     """
     if len(buf) < 8:
         return None, ERR_GTP_BUF_TOO_SHORT
-    if python_version < 3:
-        typ = ord(buf[1])
-    else:
-        typ = buf[1]
+    typ = buf[1]
     try:
         Msg = GTPDispatcherGGSN[typ]()
     except KeyError:

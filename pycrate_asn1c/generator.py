@@ -155,10 +155,7 @@ def value_to_defin(v, Obj=None, Gen=None, ind=None):
         return '(%s, %s)' % (vv, vl)
     elif Obj.TYPE == TYPE_OCT_STR:
         # byte-string
-        if python_version > 2:
-            return repr(v)
-        else:
-            return 'b%s' % repr(v)
+        return repr(v)
     elif Obj.TYPE == TYPE_OID:
         # list of int -> convert to tuple
         return repr(tuple(v))

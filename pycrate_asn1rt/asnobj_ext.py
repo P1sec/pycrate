@@ -232,10 +232,7 @@ Single value: Python 2-tuple
         if isinstance(self._val[0], str_types):
             if self._val[0][:5] == '_unk_':
                 # HSTRING
-                if python_version >= 3:
-                    return '\'%s\'H' % hexlify(self._val[1]).decode('ascii').upper()
-                else:
-                    return '\'%s\'H' % hexlify(self._val[1]).upper()
+                return '\'%s\'H' % hexlify(self._val[1]).decode('ascii').upper()
             else:
                 ident = self._val[0]
                 Obj   = self._get_val_obj(self._val[0])

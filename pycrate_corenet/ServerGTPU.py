@@ -942,22 +942,9 @@ class _DPI(object):
         """return the port TCP / UDP number
         """
         return unpack('!H', pay[2:4])[0]
-        
-    @staticmethod
-    def __get_dn_req_py2(req):
-        """return the DNS name requested
-        """
-        # remove fixed DNS header and Type / Class
-        s = req[12:-4]
-        n = []
-        while len(s) > 1:
-            l = ord(s[0])
-            n.append( s[1:1+l] )
-            s = s[1+l:]
-        return b'.'.join(n)
     
     @staticmethod
-    def __get_dn_req_py3(req):
+    def __get_dn_req(req):
         """return the DNS name requested
         """
         # remove fixed DNS header and Type / Class
@@ -968,31 +955,12 @@ class _DPI(object):
             n.append( s[1:1+l] )
             s = s[1+l:]
         return b'.'.join(n)
-    
-    if python_version < 3:
-        get_dn_req = __get_dn_req_py2
-    else:
-        get_dn_req = __get_dn_req_py3
 
 
 class DPIv4(_DPI):
     
     @staticmethod
-    def __get_ip_info_py2(ipbuf):
-        """return a 3-tuple: ipdst (asc), protocol (uint), payload (bytes)
-        """
-        # returns a 3-tuple: dst IP, protocol, payload buffer
-        # get IP header length
-        l = (ord(ipbuf[0]) & 0x0F) * 4
-        # get dst IP
-        dst = inet_ntoa(ipbuf[16:20])
-        # get protocol
-        prot = ord(ipbuf[9])
-        #
-        return (dst, prot, ipbuf[l:])
-    
-    @staticmethod
-    def __get_ip_info_py3(ipbuf):
+    def __get_ip_info(ipbuf):
         """return a 3-tuple: ipdst (asc), protocol (uint), payload (bytes)
         """
         # returns a 3-tuple: dst IP, protocol, payload buffer
@@ -1004,32 +972,12 @@ class DPIv4(_DPI):
         prot = ipbuf[9]
         #
         return (dst, prot, ipbuf[l:])
-    
-    if python_version < 3:
-        get_ip_info = __get_ip_info_py2
-    else:
-        get_ip_info = __get_ip_info_py3
 
 
 class DPIv6(_DPI):
     
     @staticmethod
-    def __get_ip_info_py2(ipbuf):
-        """return a 3-tuple: ipdst (asc), protocol (uint), payload (bytes)
-        """
-        # returns a 3-tuple: dst IP, protocol, payload buffer
-        # get payload length
-        pl = unpack('>H', ipbuf[4:6])[0]
-        # get dst IP
-        dst = inet_ntop(AF_INET6, ipbuf[24:40])
-        # get protocol
-        # TODO: unstack IPv6 opts
-        prot = ord(ipbuf[6])
-        #
-        return (dst, prot, ipbuf[-pl:])
-    
-    @staticmethod
-    def __get_ip_info_py3(ipbuf):
+    def __get_ip_info(ipbuf):
         """return a 3-tuple: ipdst (asc), protocol (uint), payload (bytes)
         """
         # returns a 3-tuple: dst IP, protocol, payload buffer
@@ -1042,11 +990,6 @@ class DPIv6(_DPI):
         prot = ipbuf[6]
         #
         return (dst, prot, ipbuf[-pl:])
-    
-    if python_version < 3:
-        get_ip_info = __get_ip_info_py2
-    else:
-        get_ip_info = __get_ip_info_py3
 
 
 class MOD(object):

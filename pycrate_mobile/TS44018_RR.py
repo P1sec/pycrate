@@ -737,10 +737,7 @@ class RRHandoverFailure(Layer3):
 def get_tbf(l3msg):
     v = l3msg[2][0].get_val()
     if isinstance(v, str_types):
-        if python_version:
-            return v[0] & 1
-        else:
-            return ord(v[0]) & 1
+        return v[0] & 1
     elif isinstance(v, list):
         return v[-1]
     else:

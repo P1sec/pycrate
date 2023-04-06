@@ -44,7 +44,7 @@ __all__ = [
 # release 13 (d00)
 #------------------------------------------------------------------------------#
 
-from pycrate_core.utils  import python_version, pack_val, TYPE_UINT, PycrateErr
+from pycrate_core.utils  import pack_val, TYPE_UINT, PycrateErr
 from pycrate_core.charpy import Charpy
 from pycrate_core.elt    import Envelope
 from pycrate_core.base   import Uint
@@ -574,10 +574,7 @@ def encode_7b(txt, off=0):
     # check the length in bits and add padding bits
     pad = ((8-(7*len(arr)+off)%8)%8)
     arr.insert(0, (TYPE_UINT, 0, pad))
-    if python_version < 3:
-        return ''.join(reversed(pack_val(*arr)[0])), cnt
-    else:
-        return bytes(reversed(pack_val(*arr)[0])), cnt
+    return bytes(reversed(pack_val(*arr)[0])), cnt
 
 
 def decode_7b(buf, off=0):
@@ -590,10 +587,7 @@ def decode_7b(buf, off=0):
     Returns:
         decoded text string (utf8 str)
     """
-    if python_version < 3:
-        char = Charpy(''.join(reversed(buf)))
-    else:
-        char = Charpy(bytes(reversed(buf)))
+    char = Charpy(bytes(reversed(buf)))
     # jump over the padding bits
     # WNG: in case of 7 bits padding, we will have an @ at the end 
     chars_num = (8*len(buf)-off) // 7

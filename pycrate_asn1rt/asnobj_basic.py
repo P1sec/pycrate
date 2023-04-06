@@ -786,10 +786,7 @@ Specific attribute:
                 # base 10: character string encoding
                 if B0 == 1:
                     # NR1 encoding, simple whole numbers
-                    if python_version < 3:
-                        m = self._NR1_RE.match( bytes[1:] )
-                    else:
-                        m = self._NR1_RE.match( str(bytes[1:], 'ascii') )
+                    m = self._NR1_RE.match( str(bytes[1:], 'ascii') )
                     if not m:
                         raise(ASN1BERDecodeErr('{0}: invalid REAL base 10 NR1 encoding, {1!r}'\
                               .format(self.fullname(), bytes[1:])))
@@ -797,10 +794,7 @@ Specific attribute:
                     self._val = (mant, 10, 0)
                 elif B0 == 2:
                     # NR2 encoding, requires a decimal mark
-                    if python_version < 3:
-                        m = self._NR2_RE.match( bytes[1:] )
-                    else:
-                        m = self._NR2_RE.match( str(bytes[1:], 'ascii') )
+                    m = self._NR2_RE.match( str(bytes[1:], 'ascii') )
                     if not m:
                         raise(ASN1BERDecodeErr('{0}: invalid REAL base 10 NR2 encoding, {1!r}'\
                               .format(self.fullname(), bytes[1:])))
@@ -812,10 +806,7 @@ Specific attribute:
                     self._val = (int(i+d), 10, e)
                 elif B0 == 3:
                     # NR3 encoding, requires the exponent notation
-                    if python_version < 3:
-                        m = self._NR3_RE.match( bytes[1:] )
-                    else:
-                        m = self._NR3_RE.match( str(bytes[1:], 'ascii') )
+                    m = self._NR3_RE.match( str(bytes[1:], 'ascii') )
                     if not m:
                         raise(ASN1BERDecodeErr('{0}: invalid REAL base 10 NR3 encoding, {1!r}'\
                               .format(self.fullname(), bytes[1:])))
@@ -890,21 +881,12 @@ Specific attribute:
                     raise(ASN1BEREncodeErr('{0}: invalid REAL base 10 encoding NR1 for decimal value'\
                           .format(self.fullname())))
                 i = self._val[0] * (10**self._val[2])
-                if python_version < 3:
-                    return '\x01' + \
-                           ASN1CodecBER.ENC_REALNR1_SPA * ' ' + \
-                           ASN1CodecBER.ENC_REALNR1_ZER * '0' + \
-                           str(i)
-                else:
-                    return b'\x01' + \
-                           ASN1CodecBER.ENC_REALNR1_SPA * b' ' + \
-                           ASN1CodecBER.ENC_REALNR1_ZER * b'0' + \
-                           bytes(str(i), 'ascii')
+                return b'\x01' + \
+                       ASN1CodecBER.ENC_REALNR1_SPA * b' ' + \
+                       ASN1CodecBER.ENC_REALNR1_ZER * b'0' + \
+                       bytes(str(i), 'ascii')
             elif ASN1CodecBER.ENC_REALNR == 2:
-                if python_version < 3:
-                    i = bytes(self._val[0])
-                else:
-                    i = bytes(str(self._val[0]), 'ascii')
+                i = bytes(str(self._val[0]), 'ascii')
                 if self._val[2] >= 0:
                     # we need to add trailing zero
                     i += self._val[2] * b'0'
@@ -926,20 +908,14 @@ Specific attribute:
                        ASN1CodecBER.ENC_REALNR2_ZERTRAIL * b'0'
             else:
                 #ASN1CodecBER.ENC_REALNR == 3
-                if python_version < 3:
-                    i, e = bytes(self._val[0]), self._val[2]
-                else:
-                    i, e = bytes(str(self._val[0]), 'ascii'), self._val[2]
+                i, e = bytes(str(self._val[0]), 'ascii'), self._val[2]
                 # remove trailing zero
                 while i[-1:] == b'0':
                     i = i[:-1]
                     e += 1
                 if e == 0:
                     e = b'+0'
-                elif python_version < 3:
-                    e = bytes(e)
-                else:
-                    e = bytes(str(e), 'ascii')
+                e = bytes(str(e), 'ascii')
                 return b'\x03' + i + b'.E' + e
         else:
             # base 2, encoding the CER / DER way:
@@ -957,16 +933,10 @@ Specific attribute:
             LE = int_bytelen(E)
             E = int_to_bytes(E, 8*LE)
             N = uint_to_bytes(m, 8*uint_bytelen(m))
-            if python_version < 3:
-                if LE > 3:
-                    return chr(0x80 + (S<<6) + 3) + uint_to_bytes(LE) + E + N
-                else:
-                    return chr(0x80 + (S<<6) + LE-1) + E + N
+            if LE > 3:
+                return bytes((0x80 + (S<<6) + 3, )) + uint_to_bytes(LE) + E + N
             else:
-                if LE > 3:
-                    return bytes((0x80 + (S<<6) + 3, )) + uint_to_bytes(LE) + E + N
-                else:
-                    return bytes((0x80 + (S<<6) + LE-1, )) + E + N
+                return bytes((0x80 + (S<<6) + LE-1, )) + E + N
     
     def _decode_ber_cont_ws(self, char, vbnd):
         char._cur, char._len_bit = vbnd[0], vbnd[1]
@@ -1805,10 +1775,7 @@ Single value: Python tuple of int
             for f in fact[:-1]:
                 by.append( 0x80 + f )
             by.append( fact[-1] )
-        if python_version > 2:
-            return bytes(by)
-        else:
-            return ''.join(map(chr, by))    
+        return bytes(by)   
 
 
 class REL_OID(_OID):
@@ -1856,8 +1823,5 @@ Single value: Python tuple of int
             for f in fact[:-1]:
                 by.append( 0x80 + f )
             by.append( fact[-1] )
-        if python_version > 2:
-            return bytes(by)
-        else:
-            return ''.join(map(chr, by))    
+        return bytes(by)
 

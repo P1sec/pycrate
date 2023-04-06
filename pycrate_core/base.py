@@ -35,9 +35,6 @@ __all__ = ['Buf', 'BufAuto', 'NullTermStr',
            'IntLE', 'Int8LE', 'Int16LE', 'Int24LE', 'Int32LE', 'Int48LE', 'Int64LE']
 
 
-import sys
-python_version = sys.version_info[0]
-
 from .utils  import *
 from .charpy import Charpy, CharpyErr
 from .elt    import Atom, EltErr, REPR_RAW, REPR_HEX, REPR_BIN, REPR_HD, REPR_HUM
@@ -345,10 +342,7 @@ class String(Atom):
     # e.g. utf8, utf16, utf32...
     CODEC = 'utf8'
     
-    if python_version <= 2:
-        TYPES   = (unicode, )
-    else:
-        TYPES   = (str, )
+    TYPES       = (str, )
     TYPENAMES   = get_typenames(*TYPES)
     DEFAULT_VAL = u''
     DEFAULT_BL  = 0

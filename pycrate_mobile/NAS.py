@@ -28,8 +28,6 @@
 #*/
 
 from pycrate_core.utils import *
-if python_version < 3:
-    from struct import unpack
 
 from .TS24008_IE    import *
 from .TS24008_MM    import *
@@ -103,18 +101,11 @@ def parse_NAS_MO(buf, inner=True):
             element: Element instance, if err is null (no error)
             element: None, if err is not null (standard NAS error code)
     """
-    if python_version < 3:
-        try:
-            pd, type = unpack('>BB', buf[:2])
-        except Exception:
-            # error 111, unspecified protocol error
-            return None, 111
-    else:
-        try:
-            pd, type = buf[0], buf[1]
-        except Exception:
-            # error 111, unspecified protocol error
-            return None, 111
+    try:
+        pd, type = buf[0], buf[1]
+    except Exception:
+        # error 111, unspecified protocol error
+        return None, 111
     if pd & 0xf != 0xe:
         # 4-bit protocol discriminator
         pd &= 0xf
@@ -155,24 +146,14 @@ def parse_NAS_MT(buf, inner=True, wl2=False):
             element: Element instance, if err is null (no error)
             element: None, if err is not null (standard NAS error code)
     """
-    if python_version < 3:
-        try:
-            if wl2:
-                pd, type = unpack('>BB', buf[1:3])
-            else:
-                pd, type = unpack('>BB', buf[:2])
-        except Exception:
-            # error 111, unspecified protocol error
-            return None, 111
-    else:
-        try:
-            if wl2:
-                pd, type = buf[1], buf[2]
-            else:
-                pd, type = buf[0], buf[1]
-        except Exception:
-            # error 111, unspecified protocol error
-            return None, 111
+    try:
+        if wl2:
+            pd, type = buf[1], buf[2]
+        else:
+            pd, type = buf[0], buf[1]
+    except Exception:
+        # error 111, unspecified protocol error
+        return None, 111
     if pd & 0xf != 0xe:
         # 4-bit protocol discriminator
         pd &= 0xf

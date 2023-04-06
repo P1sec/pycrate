@@ -8,14 +8,6 @@ from setuptools import setup, find_packages
 VERSION = "0.5.5"
 
 
-# get dependencies according to the Python version
-if sys.version_info[0] == 2:
-    # Python2 requires enum34
-    install_reqs = ['enum34']
-else:
-    install_reqs = []
-
-
 # get long description from the README.md
 with open(os.path.join(os.path.dirname(__file__), "README.md")) as fd:
     long_description = fd.read()
@@ -56,7 +48,7 @@ setup(
         ],
     
     # potential dependencies
-    install_requires=install_reqs,
+    install_requires=[],
     
     # optional dependencies
     extras_require={

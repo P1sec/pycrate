@@ -281,10 +281,7 @@ Specific constraints attributes:
             elif self._ASN_WASC and self._val[1] % 8 == 0:
                 # eventually add printable repr
                 try:
-                    if python_version < 3:
-                        s = uint_to_bytes(self._val[0], self._val[1])
-                    else:
-                        s = uint_to_bytes(self._val[0], self._val[1]).decode('ascii')
+                    s = uint_to_bytes(self._val[0], self._val[1]).decode('ascii')
                     if is_printable(s):
                         return ret + ' -- %s --' % repr(s)[1:-1]
                     else:
@@ -1313,10 +1310,7 @@ Specific constraints attributes:
     def _to_asn1(self):
         if isinstance(self._val, bytes_types):
             # HSTRING
-            if python_version >= 3:
-                ret = '\'%s\'H' % hexlify(self._val).decode('ascii').upper()
-            else:
-                ret = '\'%s\'H' % hexlify(self._val).upper()
+            ret = '\'%s\'H' % hexlify(self._val).decode('ascii').upper()
             if self._ASN_WASC:
                 # eventually add printable repr
                 try:

@@ -94,10 +94,7 @@ def parse_NAS5G(buf, inner=True, sec_hdr=True):
     elif pd == 46:
         # 5GSM
         try:
-            if python_version < 3:
-                typ = ord(buf[3:4])
-            else:
-                typ = buf[3]
+            typ = buf[3]
         except:
             # error 111, unspecified protocol error
             return None, 111

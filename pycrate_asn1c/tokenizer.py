@@ -952,10 +952,7 @@ def test():
                 if fn[-4:] == '.asn':
                     fp = '%s%s/%s' % (p, S, fn)
                     print(fp)
-                    if python_version < 3:
-                        mods = tokenize_text(open(fp).read().decode('utf-8'))
-                    else:
-                        mods = tokenize_text(open(fp).read())
+                    mods = tokenize_text(open(fp).read())
                     for modname, moddict in mods.items():
                         M[modname] = moddict
     return M

@@ -150,14 +150,8 @@ class Charpy(object):
             # bytes buffer, default one
             r = self.to_bytes()
             if len(r) > self._REPR_MAX:
-                if python_version < 3:
-                    return 'charpy(b{0}...{1})'.format(
-                        repr(r[0:self._REPR_MAX])[:-1], repr(r[-2:])[1:])
-                else:
-                    return 'charpy({0}...{1})'.format(
-                        repr(r[0:self._REPR_MAX])[:-1], repr(r[-2:])[2:])
-            elif python_version < 3:
-                return 'charpy(b{0})'.format(repr(r))
+                return 'charpy({0}...{1})'.format(
+                    repr(r[0:self._REPR_MAX])[:-1], repr(r[-2:])[2:])
             else:
                 return 'charpy({0})'.format(repr(r))
         elif self._REPR == 'bytelist':
@@ -1323,13 +1317,10 @@ class Charpy(object):
     # Python built-ins override
     #--------------------------------------------------------------------------#
     
-    __len__ = len_bit
-    __repr__ = repr
+    __len__   = len_bit
+    __repr__  = repr
     __index__ = to_uint
-    if python_version < 3:
-        __str__ = to_bytes
-    else:
-        __bytes__ = to_bytes
+    __bytes__ = to_bytes
     
     def __bool__(self):
         if self.len_bit() == 0:

@@ -31,7 +31,7 @@ from socket import inet_aton, inet_ntoa, inet_pton, inet_ntop, AF_INET, AF_INET6
 from struct import pack
 from array import array
 
-from pycrate_core.utils import reverse_dict, log, python_version, str_types
+from pycrate_core.utils import reverse_dict, log, str_types
 from pycrate_core.elt   import Envelope, Sequence, REPR_RAW, REPR_HEX, REPR_BIN, REPR_HUM
 from pycrate_core.base  import *
 from pycrate_core.repr  import *
@@ -105,8 +105,7 @@ class IPAddr(Buf):
             return val
     
     def set_val(self, val):
-        if python_version == 2 and isinstance(val, unicode) \
-        or python_version > 2 and isinstance(val, str_types):
+        if isinstance(val, str_types):
             self.encode(val)
         else:
             Buf.set_val(self, val)

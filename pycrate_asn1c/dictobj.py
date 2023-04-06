@@ -27,8 +27,6 @@
 # *--------------------------------------------------------
 #*/
 
-from .utils import python_version
-
 #------------------------------------------------------------------------------#
 # ordered dictionnary
 #------------------------------------------------------------------------------#
@@ -108,27 +106,16 @@ class ASN1Dict(object):
         for key, val in other.items():
             self.__setitem__(key, val)
     
-    if python_version <= 2:
-        def keys(self):
-            return list(self._index)
-        
-        def items(self):
-            return [(k, self._dict[k]) for k in self._index]
-        
-        def values(self):
-            return [self._dict[k] for k in self._index]
+    def keys(self):
+        return self._index.__iter__()
     
-    else:
-        def keys(self):
-            return self._index.__iter__()
-        
-        def items(self):
-            # TODO: create a true iterator instead of a complete list over which we then iterate
-            return [(k, self._dict[k]) for k in self._index].__iter__()
-        
-        def values(self):
-            # TODO: create a true iterator instead of a complete list over which we then iterate
-            return [self._dict[k] for k in self._index].__iter__()
+    def items(self):
+        # TODO: create a true iterator instead of a complete list over which we then iterate
+        return [(k, self._dict[k]) for k in self._index].__iter__()
+    
+    def values(self):
+        # TODO: create a true iterator instead of a complete list over which we then iterate
+        return [self._dict[k] for k in self._index].__iter__()
     
     # custom pycrate_asn1 methods
     def copy(self):

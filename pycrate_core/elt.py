@@ -72,24 +72,14 @@ REPR_HUM = 4
 
 
 # for hexdump representation
-if python_version < 3:
-    def hview(buf, lw=16):
-        hv = []
-        for o in range(0, len(buf), lw):
-            l = buf[o:o+lw]
-            # create the hex fmt string for each iteration
-            hs = '%.2x ' * len(l) % tuple(map(ord, l))
-            hv.append( ' ' + hs + ' '*(3*lw-len(hs)) + '| %r' % l )
-        return hv
-else:
-    def hview(buf, lw=16):
-        hv = []
-        for o in range(0, len(buf), lw):
-            l = buf[o:o+lw]
-            # create the hex fmt string for each iteration
-            hs = '%.2x ' * len(l) % tuple(l)
-            hv.append( ' ' + hs + ' '*(3*lw-len(hs)) + '| %r' % l )
-        return hv
+def hview(buf, lw=16):
+    hv = []
+    for o in range(0, len(buf), lw):
+        l = buf[o:o+lw]
+        # create the hex fmt string for each iteration
+        hs = '%.2x ' * len(l) % tuple(l)
+        hv.append( ' ' + hs + ' '*(3*lw-len(hs)) + '| %r' % l )
+    return hv
 
 #------------------------------------------------------------------------------#
 # Element parent class
@@ -750,10 +740,7 @@ class Element(object):
             b = self.to_bytes()
             return bytes_to_int(b, len(b)<<3)
     
-    if python_version < 3:
-        __str__ = to_bytes
-    else:
-        __bytes__ = to_bytes
+    __bytes__ = to_bytes
     
     #--------------------------------------------------------------------------#
     # representation routines
@@ -2123,14 +2110,9 @@ class Envelope(Element):
         Returns:
             None
         """
-        if python_version < 3:
-            del self._content[:]
-            del self._by_id[:]
-            del self._by_name[:]
-        else:
-            self._content.clear()
-            self._by_id.clear()
-            self._by_name.clear()
+        self._content.clear()
+        self._by_id.clear()
+        self._by_name.clear()
     
     def __iter__(self):
         self._it_saved.append(self._it)
@@ -2155,9 +2137,6 @@ class Envelope(Element):
             else:
                 # transparent element, pass it and try the next one
                 return self.__next__()
-    
-    if python_version < 3:
-        next = __next__
     
     def __getitem__(self, key):
         if isinstance(key, str_types):
@@ -3041,10 +3020,7 @@ class Array(Element):
         Returns:
             None
         """
-        if python_version < 3:
-            del self._val[:]
-        else:
-            self._val.clear()
+        self._val.clear()
     
     def __iter__(self):
         self._it_saved.append(self._it)
@@ -3064,9 +3040,6 @@ class Array(Element):
             clone.set_val(self._val[it])
             clone._env = self
             return clone
-    
-    if python_version < 3:
-        next = __next__
     
     def __getitem__(self, key):
         if isinstance(key, integer_types):
@@ -3979,10 +3952,7 @@ class Sequence(Element):
         Returns:
             None
         """
-        if python_version < 3:
-            del self._content[:]
-        else:
-            self._content.clear()
+        self._content.clear()
     
     def __iter__(self):
         self._it_saved.append(self._it)
@@ -4007,9 +3977,6 @@ class Sequence(Element):
             else:
                 # transparent element, pass it and try the next one
                 return self.__next__()
-    
-    if python_version < 3:
-        next = __next__
     
     def __getitem__(self, key):
         if isinstance(key, integer_types):

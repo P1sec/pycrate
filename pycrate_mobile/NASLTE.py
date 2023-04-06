@@ -51,17 +51,10 @@ def parse_NASLTE_MO(buf, inner=True, sec_hdr=True):
             element: Element instance, if err is null (no error)
             element: None, if err is not null (standard LTE NAS error code)
     """
-    if python_version < 3:
-        try:
-            pd = ord(buf[:1])
-        except Exception:
-            # error 111, unspecified protocol error
-            return None, 111
-    else:
-        try:
-            pd = buf[0]
-        except Exception:
-            return None, 111
+    try:
+        pd = buf[0]
+    except Exception:
+        return None, 111
     shdr = pd>>4
     pd  &= 0xf
         
@@ -98,16 +91,10 @@ def parse_NASLTE_MO(buf, inner=True, sec_hdr=True):
         #
         if pd == 7:
             # EMM
-            if python_version < 3:
-                try:
-                    typ = ord(buf[1:2])
-                except Exception:
-                    return None, 111
-            else:
-                try:
-                    typ = buf[1]
-                except Exception:
-                    return None, 111
+            try:
+                typ = buf[1]
+            except Exception:
+                return None, 111
             try:
                 Msg = EMMTypeMOClasses[typ]()
             except KeyError:
@@ -115,16 +102,10 @@ def parse_NASLTE_MO(buf, inner=True, sec_hdr=True):
                 return None, 97
         elif pd == 2:
             # ESM
-            if python_version < 3:
-                try:
-                    typ = ord(buf[2:3])
-                except Exception:
-                    return None, 111
-            else:
-                try:
-                    typ = buf[2]
-                except Exception:
-                    return None, 111
+            try:
+                typ = buf[2]
+            except Exception:
+                return None, 111
             try:
                 Msg = ESMTypeClasses[typ]()
             except KeyError:
@@ -184,17 +165,10 @@ def parse_NASLTE_MT(buf, inner=True, sec_hdr=True):
             element: Element instance, if err is null (no error)
             element: None, if err is not null (standard LTE NAS error code)
     """
-    if python_version < 3:
-        try:
-            pd = ord(buf[0])
-        except Exception:
-            # error 111, unspecified protocol error
-            return None, 111
-    else:
-        try:
-            pd = buf[0]
-        except Exception:
-            return None, 111
+    try:
+        pd = buf[0]
+    except Exception:
+        return None, 111
     shdr = pd>>4
     pd  &= 0xf
         
@@ -231,16 +205,10 @@ def parse_NASLTE_MT(buf, inner=True, sec_hdr=True):
         #
         if pd == 7:
             # EMM
-            if python_version < 3:
-                try:
-                    typ = ord(buf[1])
-                except Exception:
-                    return None, 111
-            else:
-                try:
-                    typ = buf[1]
-                except Exception:
-                    return None, 111
+            try:
+                typ = buf[1]
+            except Exception:
+                return None, 111
             try:
                 Msg = EMMTypeMTClasses[typ]()
             except KeyError:
@@ -248,16 +216,10 @@ def parse_NASLTE_MT(buf, inner=True, sec_hdr=True):
                 return None, 97
         elif pd == 2:
             # ESM
-            if python_version < 3:
-                try:
-                    typ = ord(buf[2])
-                except Exception:
-                    return None, 111
-            else:
-                try:
-                    typ = buf[2]
-                except Exception:
-                    return None, 111
+            try:
+                typ = buf[2]
+            except Exception:
+                return None, 111
             try:
                 Msg = ESMTypeClasses[typ]()
             except KeyError:

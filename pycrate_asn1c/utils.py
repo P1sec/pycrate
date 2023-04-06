@@ -32,7 +32,7 @@ import pprint
 from keyword import iskeyword
 
 # pycrate_core is used only for basic library-wide functions / variables:
-# log(), python_version, integer_types, str_types
+# log(), integer_types, str_types
 from pycrate_core.utils import *
 from .err               import ASN1Err
 
@@ -42,7 +42,7 @@ from .err               import ASN1Err
 
 def asnlog(msg):
     """
-    customizable logging function for the whole asn1 part
+    customizable logging function for the whole asn1c part
     """
     log(msg)
 
