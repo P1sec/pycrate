@@ -5,7 +5,7 @@ import sys
 from setuptools import setup, find_packages
 
 # Pycrate Version
-VERSION = "0.5.5"
+VERSION = "0.6.0"
 
 
 # get long description from the README.md
@@ -81,7 +81,7 @@ setup(
     
     author="Benoit Michau",
     author_email="michau.benoit@gmail.com",
-    description="A software suite to handle various data formats",
+    description="A software suite to handle various data and protocol formats",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/P1sec/pycrate/",

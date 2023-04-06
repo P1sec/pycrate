@@ -14,9 +14,9 @@ jobs:
           - windows-latest
           - macos-latest
         python-version:
-          - 3.7
           - 3.8
           - 3.9
+          - '3.10'
           - '3.11'
         include:
           - os: ubuntu-20.04
