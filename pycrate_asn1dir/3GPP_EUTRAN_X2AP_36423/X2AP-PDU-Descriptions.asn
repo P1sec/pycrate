@@ -129,7 +129,9 @@ FROM X2AP-CommonDataTypes
 	CellTrafficTrace,
 	F1CTrafficTransfer,
 	UERadioCapabilityIDMappingRequest,
-	UERadioCapabilityIDMappingResponse
+	UERadioCapabilityIDMappingResponse,
+	AccessAndMobilityIndication,
+	CPC-cancel
 
 
 
@@ -194,7 +196,9 @@ FROM X2AP-PDU-Contents
 	id-endcresourceStatusReportingInitiation,
 	id-cellTrafficTrace,
 	id-f1CTrafficTransfer,
-	id-UERadioCapabilityIDMapping
+	id-UERadioCapabilityIDMapping,
+	id-accessAndMobilityIndication,
+	id-CPC-cancel
 
 
 
@@ -326,7 +330,9 @@ X2AP-ELEMENTARY-PROCEDURES-CLASS-2 X2AP-ELEMENTARY-PROCEDURE ::= {
 	conditionalHandoverCancel				|
 	endcresourceStatusReporting				|
 	cellTrafficTrace						|
-	f1CTrafficTransfer						,
+	f1CTrafficTransfer						|
+	accessAndMobilityIndication				|
+	cPC-cancel								,
 	...
 
 }
@@ -730,5 +736,19 @@ uERadioCapabilityIDMapping X2AP-ELEMENTARY-PROCEDURE ::= {
 	PROCEDURE CODE			id-UERadioCapabilityIDMapping
 	CRITICALITY				reject
 }
+
+accessAndMobilityIndication X2AP-ELEMENTARY-PROCEDURE ::={
+	INITIATING MESSAGE 		AccessAndMobilityIndication
+	PROCEDURE CODE			id-accessAndMobilityIndication
+	CRITICALITY 				ignore
+}
+
+
+cPC-cancel X2AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		CPC-cancel
+	PROCEDURE CODE			id-CPC-cancel
+	CRITICALITY				ignore
+}
+
 
 END

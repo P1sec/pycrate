@@ -35,6 +35,7 @@ FROM XnAP-CommonDataTypes
 	RANPaging,
 	RetrieveUEContextRequest,
 	RetrieveUEContextResponse,
+	RetrieveUEContextConfirm,
 	RetrieveUEContextFailure,
 	XnUAddressIndication,
 	SecondaryRATDataUsageReport,
@@ -91,7 +92,23 @@ FROM XnAP-CommonDataTypes
 	MobilityChangeRequest,
 	MobilityChangeAcknowledge,
 	MobilityChangeFailure,
-	AccessAndMobilityIndication
+	AccessAndMobilityIndication,
+	CellTrafficTrace,
+	RANMulticastGroupPaging,
+	ScgFailureInformationReport,
+	ScgFailureTransfer,
+	F1CTrafficTransfer,
+	IABTransportMigrationManagementRequest,
+	IABTransportMigrationManagementResponse,
+	IABTransportMigrationManagementReject,
+	IABTransportMigrationModificationRequest,
+	IABTransportMigrationModificationResponse,
+	IABResourceCoordinationRequest,
+	IABResourceCoordinationResponse,
+	CPCCancel,
+	PartialUEContextTransfer,
+	PartialUEContextTransferAcknowledge,
+	PartialUEContextTransferFailure
 
 
 FROM XnAP-PDU-Contents
@@ -133,7 +150,18 @@ FROM XnAP-PDU-Contents
 	id-resourceStatusReportingInitiation,
 	id-resourceStatusReporting,
 	id-mobilitySettingsChange,
-	id-accessAndMobilityIndication
+	id-accessAndMobilityIndication,
+	id-cellTrafficTrace,
+	id-RANMulticastGroupPaging,
+	id-scgFailureInformationReport,
+	id-scgFailureTransfer,
+	id-f1CTrafficTransfer,
+	id-iABTransportMigrationManagement,
+	id-iABTransportMigrationModification,
+	id-iABResourceCoordination,
+	id-retrieveUEContextConfirm,
+	id-cPCCancel,
+	id-partialUEContextTransfer
 
 FROM XnAP-Constants;
 
@@ -217,7 +245,11 @@ XNAP-ELEMENTARY-PROCEDURES-CLASS-1 XNAP-ELEMENTARY-PROCEDURE ::= {
 	cellActivation											|
 	reset													|
 	resourceStatusReportingInitiation						|
-	mobilitySettingsChange									,
+	mobilitySettingsChange									|
+	iABTransportMigrationManagement							|
+	iABTransportMigrationModification						|
+	iABResourceCoordination									|
+	partialUEContextTransfer								,
 	...
 }
 
@@ -243,7 +275,14 @@ XNAP-ELEMENTARY-PROCEDURES-CLASS-2 XNAP-ELEMENTARY-PROCEDURE ::= {
 	failureIndication						|
 	handoverReport							|
 	resourceStatusReporting					|
-	accessAndMobilityIndication				,
+	accessAndMobilityIndication				|
+	cellTrafficTrace							|
+	rANMulticastGroupPaging					|
+	scgFailureInformationReport				|
+	scgFailureTransfer						|
+	f1CTrafficTransfer						|
+	retrieveUEContextConfirm				|
+	cPCCancel								,
 	...
 
 }
@@ -407,6 +446,13 @@ nGRANnodeConfigurationUpdate	XNAP-ELEMENTARY-PROCEDURE ::= {
 	CRITICALITY				reject
 }
 
+partialUEContextTransfer	XNAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		PartialUEContextTransfer
+	SUCCESSFUL OUTCOME		PartialUEContextTransferAcknowledge
+	UNSUCCESSFUL OUTCOME	PartialUEContextTransferFailure
+	PROCEDURE CODE			id-partialUEContextTransfer
+	CRITICALITY				reject
+}
 
 e-UTRA-NR-CellResourceCoordination	XNAP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		E-UTRA-NR-CellResourceCoordinationRequest
@@ -526,7 +572,7 @@ mobilitySettingsChange	XNAP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE				MobilityChangeRequest
 	SUCCESSFUL OUTCOME				MobilityChangeAcknowledge
 	UNSUCCESSFUL OUTCOME			MobilityChangeFailure
-PROCEDURE CODE					id-mobilitySettingsChange
+	PROCEDURE CODE					id-mobilitySettingsChange
 	CRITICALITY						reject
 }
 
@@ -536,5 +582,70 @@ accessAndMobilityIndication XNAP-ELEMENTARY-PROCEDURE ::={
 	PROCEDURE CODE			id-accessAndMobilityIndication
 	CRITICALITY 				ignore
 }
+
+cellTrafficTrace XNAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		CellTrafficTrace
+	PROCEDURE CODE			id-cellTrafficTrace
+	CRITICALITY				ignore
+}
+
+rANMulticastGroupPaging 	XNAP-ELEMENTARY-PROCEDURE ::={
+	INITIATING MESSAGE 		RANMulticastGroupPaging
+	PROCEDURE CODE			id-RANMulticastGroupPaging
+	CRITICALITY 			reject
+}
+
+scgFailureInformationReport XNAP-ELEMENTARY-PROCEDURE ::={
+	INITIATING MESSAGE 		ScgFailureInformationReport
+	PROCEDURE CODE			id-scgFailureInformationReport
+	CRITICALITY 				ignore
+}
+
+scgFailureTransfer XNAP-ELEMENTARY-PROCEDURE ::={
+	INITIATING MESSAGE 		ScgFailureTransfer
+	PROCEDURE CODE			id-scgFailureTransfer
+	CRITICALITY 				ignore
+}
+
+f1CTrafficTransfer			XNAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		F1CTrafficTransfer
+	PROCEDURE CODE			id-f1CTrafficTransfer
+	CRITICALITY				reject
+}
+
+iABTransportMigrationManagement XNAP-ELEMENTARY-PROCEDURE ::={
+	INITIATING MESSAGE		IABTransportMigrationManagementRequest
+	SUCCESSFUL OUTCOME		IABTransportMigrationManagementResponse
+	UNSUCCESSFUL OUTCOME	IABTransportMigrationManagementReject
+	PROCEDURE CODE			id-iABTransportMigrationManagement
+	CRITICALITY				reject
+}
+
+iABTransportMigrationModification XNAP-ELEMENTARY-PROCEDURE ::={
+	INITIATING MESSAGE		IABTransportMigrationModificationRequest
+	SUCCESSFUL OUTCOME		IABTransportMigrationModificationResponse
+	PROCEDURE CODE			id-iABTransportMigrationModification
+	CRITICALITY				reject
+}
+
+iABResourceCoordination XNAP-ELEMENTARY-PROCEDURE ::={
+	INITIATING MESSAGE		IABResourceCoordinationRequest
+	SUCCESSFUL OUTCOME		IABResourceCoordinationResponse
+	PROCEDURE CODE			id-iABResourceCoordination
+	CRITICALITY				reject
+}
+
+retrieveUEContextConfirm	XNAP-ELEMENTARY-PROCEDURE ::={
+	INITIATING MESSAGE 		RetrieveUEContextConfirm
+	PROCEDURE CODE			id-retrieveUEContextConfirm
+	CRITICALITY 				ignore
+}
+
+cPCCancel XNAP-ELEMENTARY-PROCEDURE ::={
+	INITIATING MESSAGE 		CPCCancel
+	PROCEDURE CODE			id-cPCCancel
+	CRITICALITY 			ignore
+}
+
 
 END

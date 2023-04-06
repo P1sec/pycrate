@@ -274,7 +274,7 @@ WTStatusRequest ::= SEQUENCE {
 WTStatusRequest-IEs XWAP-PROTOCOL-IES ::= {
 	{ ID id-ENB-Measurement-ID		CRITICALITY reject	TYPE Measurement-ID				PRESENCE mandatory}|
 	{ ID id-WT-Measurement-ID		CRITICALITY ignore	TYPE Measurement-ID				PRESENCE conditional}|
--- The IE shall be present if the Registration Request IE is set to “Stop”--
+-- The IE shall be present if the Registration Request IE is set to "Stop"--
 	{ ID id-Registration-Request	CRITICALITY reject	TYPE Registration-Request		PRESENCE mandatory}|
 	{ ID id-ReportCharacteristics	CRITICALITY reject	TYPE ReportCharacteristics		PRESENCE optional}|
 	{ ID id-BSSToReport-List		CRITICALITY ignore	TYPE BSSToReport-List			PRESENCE mandatory}|

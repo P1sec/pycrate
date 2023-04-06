@@ -34,7 +34,7 @@ import argparse
 import pprint
 
 from binascii import unhexlify, hexlify
-from pycrate_core.utils    import python_version, str_types, bytes_types
+from pycrate_core.utils    import str_types, bytes_types
 from pycrate_core.charpy   import Charpy
 from pycrate_asn1rt.codecs import ASN1CodecBER
         

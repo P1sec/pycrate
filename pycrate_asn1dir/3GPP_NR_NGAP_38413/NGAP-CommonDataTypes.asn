@@ -28,6 +28,6 @@ ProtocolExtensionID	::= INTEGER (0..65535)
 
 ProtocolIE-ID		::= INTEGER (0..65535)
 
-TriggeringMessage	::= ENUMERATED { initiating-message, successful-outcome, unsuccessfull-outcome }
+TriggeringMessage	::= ENUMERATED { initiating-message, successful-outcome, unsuccessful-outcome }
 
 END

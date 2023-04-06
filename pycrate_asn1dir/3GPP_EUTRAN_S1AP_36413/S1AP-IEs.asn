@@ -1,3 +1,4 @@
+-- ASN1START
 -- **************************************************************
 --
 -- Information Element Definitions
@@ -83,9 +84,19 @@ IMPORTS
 	id-TraceCollectionEntityURI,
 	id-EmergencyIndicator,
 	id-SourceTransportLayerAddress,
+	id-lastVisitedPSCellList,
+	id-RACSIndication,
+	id-SecurityIndication,
+	id-E-RABSecurityResultItem,
+	id-E-RABSecurityResultList,
+	id-RAT-Restrictions,
+	id-UEContextReferenceatSourceeNB,
+	id-LTE-NTN-TAI-Information,
 	id-SourceNodeTransportLayerAddress,
 	id-SourceSNID,
 	id-Direct-Forwarding-Path-Availability,
+	id-LoggedMDTTrigger,
+	id-SensorMeasurementConfiguration,
 	maxnoofCSGs,
 	maxnoofE-RABs,
 	maxnoofErrors,
@@ -130,7 +141,10 @@ IMPORTS
 	maxnoofPC5QoSFlows,
 	maxnooffrequencies,
 	maxNARFCN,
-	maxRS-IndexCellQual
+	maxRS-IndexCellQual,
+	maxnoofPSCellsPerPrimaryCellinUEHistoryInfo,
+	maxnoofTACsInNTN,
+	maxnoofSensorName
 
 
 
@@ -422,7 +436,8 @@ CauseRadioNetwork ::= ENUMERATED {
 	release-due-to-pre-emption,
 	n26-interface-not-available,
 	insufficient-ue-capabilities,
-	maximum-bearer-pre-emption-rate-exceeded
+	maximum-bearer-pre-emption-rate-exceeded,
+	up-integrity-protection-not-possible
 
 }
 
@@ -438,7 +453,8 @@ CauseNas ::= ENUMERATED {
 	detach,
 	unspecified,
 	...,
-	csg-subscription-expiry
+	csg-subscription-expiry,
+	uE-not-in-PLMN-serving-area
 }
 
 CellAccessMode ::= ENUMERATED {
@@ -457,7 +473,6 @@ CellIdentifierAndCELevelForCECapableUEs-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
--- Coverage Enhancement level encoded according to TS 36.331 [16] --
 CELevel ::= OCTET STRING
 
 CE-mode-B-SupportIndicator ::= ENUMERATED {
@@ -1084,6 +1099,7 @@ E-RABInformationListItem ::= SEQUENCE {
 E-RABInformationListItem-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 	{ ID id-DAPSRequestInfo						CRITICALITY ignore	EXTENSION DAPSRequestInfo						PRESENCE optional }|
 	{ ID id-SourceTransportLayerAddress			CRITICALITY ignore	EXTENSION TransportLayerAddress				PRESENCE optional}|
+	{ ID id-SecurityIndication					CRITICALITY ignore	EXTENSION SecurityIndication					PRESENCE optional }|
 	{ ID id-SourceNodeTransportLayerAddress		CRITICALITY ignore	EXTENSION TransportLayerAddress				PRESENCE optional},
 	...
 }
@@ -1112,6 +1128,25 @@ E-RABLevelQoSParameters ::= SEQUENCE {
 	allocationRetentionPriority		AllocationAndRetentionPriority,
 	gbrQosInformation					GBR-QosInformation												OPTIONAL,
 	iE-Extensions						ProtocolExtensionContainer { {E-RABQoSParameters-ExtIEs} }	OPTIONAL,
+	...
+}
+
+
+E-RABSecurityResultList	::= SEQUENCE (SIZE (1.. maxnoofE-RABs)) OF ProtocolIE-SingleContainer { { E-RABSecurityResultListIEs } }
+
+E-RABSecurityResultListIEs S1AP-PROTOCOL-IES ::= {
+	{ ID id-E-RABSecurityResultItem			CRITICALITY ignore	TYPE E-RABSecurityResultItem			PRESENCE mandatory	},
+	...
+}
+
+E-RABSecurityResultItem ::= SEQUENCE {
+	e-RAB-ID						E-RAB-ID,
+	securityResult					SecurityResult,
+	iE-Extensions					ProtocolExtensionContainer { { E-RABSecurityResultItem-ExtIEs} }			OPTIONAL,
+	...
+}
+
+E-RABSecurityResultItem-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
@@ -1159,6 +1194,28 @@ EUTRAN-CGI-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 }
 
 EUTRANRoundTripDelayEstimationInfo ::= INTEGER (0..2047)
+
+EventL1LoggedMDTConfig ::= SEQUENCE {
+	l1Threshold					MeasurementThresholdL1LoggedMDT,
+	hysteresis					Hysteresis,
+	timeToTrigger				TimeToTrigger,
+	iE-Extensions				ProtocolExtensionContainer { { EventL1LoggedMDTConfig-ExtIEs} } OPTIONAL,
+	...
+}
+
+EventL1LoggedMDTConfig-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+EventTrigger::= CHOICE {
+	outOfCoverage				ENUMERATED {true, ...},
+	eventL1LoggedMDTConfig		EventL1LoggedMDTConfig,
+	choice-Extensions			ProtocolIE-SingleContainer { { EventTrigger-ExtIEs} }
+}
+
+EventTrigger-ExtIEs S1AP-PROTOCOL-IES ::= {
+	...
+}
 
 ExpectedUEBehaviour ::= SEQUENCE {
 	expectedActivity		ExpectedUEActivityBehaviour OPTIONAL,
@@ -1331,9 +1388,10 @@ HandoverRestrictionList ::= SEQUENCE {
 HandoverRestrictionList-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 	{ ID id-NRrestrictioninEPSasSecondaryRAT		CRITICALITY ignore	EXTENSION NRrestrictioninEPSasSecondaryRAT		PRESENCE optional}|
 	{ ID id-UnlicensedSpectrumRestriction		CRITICALITY ignore	EXTENSION UnlicensedSpectrumRestriction	PRESENCE optional}|
-	{ ID id-CNTypeRestrictions		CRITICALITY ignore	EXTENSION CNTypeRestrictions	PRESENCE optional}|
-	{ ID id-NRrestrictionin5GS		CRITICALITY ignore	EXTENSION NRrestrictionin5GS 	PRESENCE optional}|
-	{ ID id-LastNG-RANPLMNIdentity		CRITICALITY ignore	EXTENSION PLMNidentity			PRESENCE optional},
+	{ ID id-CNTypeRestrictions			CRITICALITY ignore	EXTENSION CNTypeRestrictions	PRESENCE optional}|
+	{ ID id-NRrestrictionin5GS			CRITICALITY ignore	EXTENSION NRrestrictionin5GS 	PRESENCE optional}|
+	{ ID id-LastNG-RANPLMNIdentity		CRITICALITY ignore	EXTENSION PLMNidentity			PRESENCE optional}|
+	{ ID id-RAT-Restrictions			CRITICALITY ignore	EXTENSION RAT-Restrictions		PRESENCE optional},
 	...
 }
 
@@ -1353,6 +1411,8 @@ HFN ::= INTEGER (0..1048575)
 HFNModified ::= INTEGER (0..131071)
 
 HFNforPDCP-SNlength18 ::= INTEGER (0..16383)
+
+Hysteresis ::= INTEGER (0..30)
 
 -- I
 
@@ -1377,7 +1437,8 @@ ImmediateMDT-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 	{ ID id-M6Configuration		CRITICALITY ignore	EXTENSION M6Configuration		PRESENCE conditional}|
 	{ ID id-M7Configuration		CRITICALITY ignore	EXTENSION M7Configuration		PRESENCE conditional}|
 	{ ID id-BluetoothMeasurementConfiguration		CRITICALITY ignore	EXTENSION BluetoothMeasurementConfiguration		PRESENCE optional}|
-	{ ID id-WLANMeasurementConfiguration		CRITICALITY ignore	EXTENSION WLANMeasurementConfiguration		PRESENCE optional},
+	{ ID id-WLANMeasurementConfiguration			CRITICALITY ignore	EXTENSION WLANMeasurementConfiguration			PRESENCE optional}|
+	{ ID id-SensorMeasurementConfiguration			CRITICALITY ignore	EXTENSION SensorMeasurementConfiguration			PRESENCE optional},
 	...
 }
 
@@ -1395,6 +1456,19 @@ InformationOnRecommendedCellsAndENBsForPaging-ExtIEs S1AP-PROTOCOL-EXTENSION ::=
 }
 
 IntegrityProtectionAlgorithms ::= BIT STRING (SIZE (16,...))
+
+IntegrityProtectionIndication ::= ENUMERATED {
+	required,
+	preferred,
+	not-needed,
+	...
+}
+
+IntegrityProtectionResult ::= ENUMERATED {
+	performed,
+	not-performed,
+	...
+}
 
 IntendedNumberOfPagingAttempts ::= INTEGER (1..16, ...)
 
@@ -1434,7 +1508,7 @@ InterSystemMeasurementItem ::= SEQUENCE {
 	sSBToMeasure				OCTET STRING						OPTIONAL,
 	sSRSSIMeasurement			OCTET STRING						OPTIONAL,
 	quantityConfigNR-R15		OCTET STRING						OPTIONAL,
-	blackCellsToAddModList		OCTET STRING						OPTIONAL,
+	excludedCellsToAddModList		OCTET STRING						OPTIONAL,
 	iE-Extensions				ProtocolExtensionContainer { { InterSystemMeasurementItem-ExtIEs} } OPTIONAL
 }
 
@@ -1503,7 +1577,22 @@ LastVisitedEUTRANCellInformation ::= SEQUENCE {
 LastVisitedEUTRANCellInformation-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 -- Extension for Rel-11 to support enhanced granularity for time UE stayed in cell --
 	{ ID id-Time-UE-StayedInCell-EnhancedGranularity	CRITICALITY ignore	EXTENSION Time-UE-StayedInCell-EnhancedGranularity	PRESENCE optional}|
-	{ ID id-HO-Cause									CRITICALITY ignore	EXTENSION Cause							PRESENCE optional},
+	{ ID id-HO-Cause									CRITICALITY ignore	EXTENSION Cause													PRESENCE optional}|
+	{ ID id-lastVisitedPSCellList						CRITICALITY ignore	EXTENSION	LastVisitedPSCellList							PRESENCE	optional},
+	...
+}
+
+LastVisitedPSCellList	::= SEQUENCE (SIZE(1.. maxnoofPSCellsPerPrimaryCellinUEHistoryInfo)) OF LastVisitedPSCellInformation
+
+
+LastVisitedPSCellInformation	::= SEQUENCE {
+	pSCellID							PSCellInformation     OPTIONAL,
+	timeStay		INTEGER (0..40950),
+	iE-Extensions		ProtocolExtensionContainer { { LastVisitedPSCellInformation-ExtIEs} }	OPTIONAL,
+	...
+}
+
+LastVisitedPSCellInformation-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
@@ -1545,11 +1634,13 @@ LoggedMDT ::= SEQUENCE {
 
 LoggedMDT-ExtIEs	S1AP-PROTOCOL-EXTENSION ::= {
 	{ ID id-BluetoothMeasurementConfiguration		CRITICALITY ignore	EXTENSION BluetoothMeasurementConfiguration		PRESENCE optional}|
-	{ ID id-WLANMeasurementConfiguration			CRITICALITY ignore	EXTENSION WLANMeasurementConfiguration				PRESENCE optional},
+	{ ID id-WLANMeasurementConfiguration			CRITICALITY ignore	EXTENSION WLANMeasurementConfiguration			PRESENCE optional}|
+	{ ID id-LoggedMDTTrigger						CRITICALITY ignore	EXTENSION LoggedMDTTrigger							PRESENCE optional}|
+	{ ID id-SensorMeasurementConfiguration			CRITICALITY ignore	EXTENSION SensorMeasurementConfiguration			PRESENCE optional},
 ...
 }
 
-LoggingInterval ::= ENUMERATED {ms128, ms256, ms512, ms1024, ms2048, ms3072, ms4096, ms6144}
+LoggingInterval ::= ENUMERATED {ms1280, ms2560, ms5120, ms10240, ms20480, ms30720, ms40960, ms61440}
 
 LoggingDuration ::= ENUMERATED {m10, m20, m40, m60, m90, m120}
 
@@ -1565,7 +1656,25 @@ LoggedMBSFNMDT-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
+LoggedMDTTrigger ::= CHOICE{
+	periodical		NULL,
+	eventTrigger	EventTrigger,
+	...
+}
+
 LTE-M-Indication ::= ENUMERATED {lte-m, ... }
+
+LTE-NTN-TAI-Information	::= SEQUENCE {
+	servingPLMN						PLMNidentity,
+	tACList-In-LTE-NTN				TACList-In-LTE-NTN,
+	uE-Location-Derived-TAC			TAC													OPTIONAL,
+	iE-Extensions		ProtocolExtensionContainer { {LTE-NTN-TAI-Information-ExtIEs} } OPTIONAL,
+	...
+}
+
+LTE-NTN-TAI-Information-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
+	...
+}
 
 -- M
 
@@ -1700,6 +1809,16 @@ MeasurementsToActivate ::= BIT STRING (SIZE (8))
 MeasurementThresholdA2 ::= CHOICE {
 	threshold-RSRP				Threshold-RSRP,
 	threshold-RSRQ				Threshold-RSRQ,
+	...
+}
+
+MeasurementThresholdL1LoggedMDT ::= CHOICE {
+	threshold-RSRP				Threshold-RSRP,
+	threshold-RSRQ				Threshold-RSRQ,
+	choice-Extensions		ProtocolIE-SingleContainer { { MeasurementThresholdL1LoggedMDT-ExtIEs} }
+}
+
+MeasurementThresholdL1LoggedMDT-ExtIEs S1AP-PROTOCOL-IES ::= {
 	...
 }
 
@@ -1935,6 +2054,8 @@ PagingPriority ::= ENUMERATED {
 
 PagingProbabilityInformation ::= ENUMERATED {p00, p05, p10, p15, p20, p25, p30, p35, p40, p45, p50, p55, p60, p65, p70, p75, p80, p85, p90, p95, p100, ...}
 
+PagingCause::= ENUMERATED {voice, ...}
+
 PC5QoSParameters ::= SEQUENCE {
 	pc5QoSFlowList				PC5QoSFlowList,
 	pc5LinkAggregatedBitRates	BitRate				OPTIONAL,
@@ -2072,6 +2193,8 @@ QCI						::= INTEGER (0..255)
 
 -- R
 
+RACSIndication ::= ENUMERATED {true, ...}
+
 RAN-UE-NGAP-ID ::= INTEGER (0..4294967295)
 
 Range ::= ENUMERATED {m50, m80, m180, m200, m350, m400, m500, m700, m1000, ...}
@@ -2146,9 +2269,30 @@ RelayNode-Indicator ::= ENUMERATED {
 
 RAC					::= OCTET STRING (SIZE (1))
 
+RAT-Restrictions ::= SEQUENCE (SIZE(1..maxnoofEPLMNsPlusOne)) OF RAT-RestrictionsItem
+
+RAT-RestrictionsItem ::= SEQUENCE {
+	pLMNidentity					PLMNidentity,
+	rAT-RestrictionInformation		BIT STRING (SIZE(8, ...)),
+	iE-Extensions					ProtocolExtensionContainer { { RAT-RestrictionsItem-ExtIEs} }	OPTIONAL,
+	...
+}
+
+RAT-RestrictionsItem-ExtIEs		S1AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
 RAT-Type ::= ENUMERATED {
 	nbiot,
-	...
+	...,
+	nbiot-leo,
+	nbiot-meo,
+	nbiot-geo,
+	nbiot-othersat,
+	eutran-leo,
+	eutran-meo,
+	eutran-geo,
+	eutran-othersat
 }
 
 ReportAmountMDT ::= ENUMERATED{r1, r2, r4, r8, r16, r32, r64, rinfinity}
@@ -2289,6 +2433,60 @@ SecondaryRATDataUsageReportItem-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
+SecurityIndication ::= SEQUENCE {
+	integrityProtectionIndication		IntegrityProtectionIndication,
+	iE-Extensions							ProtocolExtensionContainer { { SecurityIndication-ExtIEs } } OPTIONAL,
+	...
+}
+
+SecurityIndication-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+SecurityResult ::= SEQUENCE {
+	integrityProtectionResult			IntegrityProtectionResult,
+	iE-Extensions						ProtocolExtensionContainer { {SecurityResult-ExtIEs} }	OPTIONAL,
+	...
+}
+
+SecurityResult-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+SensorMeasConfig::= ENUMERATED {setup,...}
+
+SensorMeasConfigNameItem ::= SEQUENCE {
+	sensorNameConfig		SensorNameConfig,
+	iE-Extensions		ProtocolExtensionContainer { { SensorMeasConfigNameItem-ExtIEs } } 	OPTIONAL,
+	...
+}
+
+SensorMeasConfigNameItem-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+SensorMeasConfigNameList ::= SEQUENCE (SIZE(1..maxnoofSensorName)) OF SensorMeasConfigNameItem
+
+SensorMeasurementConfiguration ::=	SEQUENCE {
+	sensorMeasConfig			SensorMeasConfig,
+	sensorMeasConfigNameList	SensorMeasConfigNameList										OPTIONAL,
+	iE-Extensions		ProtocolExtensionContainer { {SensorMeasurementConfiguration-ExtIEs} } 	OPTIONAL,
+	...
+}
+
+SensorMeasurementConfiguration-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+SensorNameConfig ::= CHOICE {
+	uncompensatedBarometricConfig		ENUMERATED {true, ...},
+	choice-Extensions		ProtocolIE-SingleContainer { {SensorNameConfig-ExtIEs} }
+}
+
+SensorNameConfig-ExtIEs S1AP-PROTOCOL-IES ::= {
+	...
+}
+
 SerialNumber ::= BIT STRING (SIZE (16))
 
 ServiceType ::= ENUMERATED{
@@ -2422,16 +2620,17 @@ SourceeNB-ToTargeteNB-TransparentContainer		::= SEQUENCE {
 }
 
 SourceeNB-ToTargeteNB-TransparentContainer-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
-	{ID id-MobilityInformation					CRITICALITY ignore	EXTENSION MobilityInformation								PRESENCE optional}|
-	{ID id-uE-HistoryInformationFromTheUE		CRITICALITY ignore	EXTENSION UE-HistoryInformationFromTheUE				PRESENCE optional}|
-	{ID id-IMSvoiceEPSfallbackfrom5G			CRITICALITY ignore	EXTENSION IMSvoiceEPSfallbackfrom5G						PRESENCE optional}|
-	{ID id-AdditionalRRMPriorityIndex			CRITICALITY ignore	EXTENSION AdditionalRRMPriorityIndex					PRESENCE optional}|
-	{ID id-ContextatSource						CRITICALITY ignore	EXTENSION ContextatSource									PRESENCE optional}|
-	{ID id-IntersystemMeasurementConfiguration	CRITICALITY ignore	EXTENSION IntersystemMeasurementConfiguration		PRESENCE optional}|
-	{ID id-SourceNodeID							CRITICALITY ignore	EXTENSION SourceNodeID										PRESENCE optional}|
-	{ID id-EmergencyIndicator					CRITICALITY ignore	EXTENSION EmergencyIndicator								PRESENCE optional}|
-	{ID id-Direct-Forwarding-Path-Availability		CRITICALITY ignore	EXTENSION Direct-Forwarding-Path-Availability			PRESENCE optional}|
-	{ID id-SourceSNID							CRITICALITY ignore	EXTENSION Global-RAN-NODE-ID								PRESENCE optional},
+	{ID id-MobilityInformation					CRITICALITY ignore	EXTENSION MobilityInformation							PRESENCE optional}|
+	{ID id-uE-HistoryInformationFromTheUE		CRITICALITY ignore	EXTENSION UE-HistoryInformationFromTheUE			PRESENCE optional}|
+	{ID id-IMSvoiceEPSfallbackfrom5G			CRITICALITY ignore	EXTENSION IMSvoiceEPSfallbackfrom5G					PRESENCE optional}|
+	{ID id-AdditionalRRMPriorityIndex			CRITICALITY ignore	EXTENSION AdditionalRRMPriorityIndex				PRESENCE optional}|
+	{ID id-ContextatSource						CRITICALITY ignore	EXTENSION ContextatSource								PRESENCE optional}|
+	{ID id-IntersystemMeasurementConfiguration	CRITICALITY ignore	EXTENSION IntersystemMeasurementConfiguration	PRESENCE optional}|
+	{ID id-SourceNodeID							CRITICALITY ignore	EXTENSION SourceNodeID									PRESENCE optional}|
+	{ID id-EmergencyIndicator					CRITICALITY ignore	EXTENSION EmergencyIndicator							PRESENCE optional}|
+	{ID id-UEContextReferenceatSourceeNB		CRITICALITY ignore	EXTENSION ENB-UE-S1AP-ID								PRESENCE optional}|
+	{ID id-SourceSNID							CRITICALITY ignore	EXTENSION Global-RAN-NODE-ID							PRESENCE optional}|
+	{ID id-Direct-Forwarding-Path-Availability		CRITICALITY ignore	EXTENSION Direct-Forwarding-Path-Availability		PRESENCE optional},
 	...
 }
 
@@ -2547,6 +2746,8 @@ S-TMSI-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 -- T
 
 TAC ::= OCTET STRING (SIZE (2))
+
+TACList-In-LTE-NTN ::= SEQUENCE (SIZE(1..maxnoofTACsInNTN)) OF TAC
 
 TAIBasedMDT ::= SEQUENCE {
 	tAIListforMDT			TAIListforMDT,
@@ -2744,8 +2945,10 @@ TargeteNB-ToSourceeNB-TransparentContainer		::= SEQUENCE {
 }
 
 TargeteNB-ToSourceeNB-TransparentContainer-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
-	{ ID id-DAPSResponseInfoList					CRITICALITY ignore	EXTENSION DAPSResponseInfoList							PRESENCE optional}|
-	{ ID id-Direct-Forwarding-Path-Availability		CRITICALITY ignore	EXTENSION Direct-Forwarding-Path-Availability			PRESENCE optional},
+	{ ID id-DAPSResponseInfoList						CRITICALITY ignore	EXTENSION DAPSResponseInfoList							PRESENCE optional}|
+	{ ID id-RACSIndication								CRITICALITY ignore	EXTENSION RACSIndication									PRESENCE optional	}|
+	{ ID id-E-RABSecurityResultList						CRITICALITY ignore	EXTENSION E-RABSecurityResultList						PRESENCE optional}|
+	{ ID id-Direct-Forwarding-Path-Availability			CRITICALITY ignore	EXTENSION Direct-Forwarding-Path-Availability			PRESENCE optional	},
 	...
 }
 
@@ -2776,6 +2979,8 @@ Threshold-RSRP ::= INTEGER(0..97)
 
 Threshold-RSRQ ::= INTEGER(0..34)
 
+TimeToTrigger ::= ENUMERATED {ms0, ms40, ms64, ms80, ms100, ms128, ms160, ms256, ms320, ms480, ms512, ms640, ms1024, ms1280, ms2560, ms5120}
+
 TimeToWait ::= ENUMERATED {v1s, v2s, v5s, v10s, v20s, v60s, ...}
 
 Time-UE-StayedInCell ::= INTEGER (0..4095)
@@ -2804,7 +3009,7 @@ traceCollectionEntityIPAddress		TransportLayerAddress,
 TraceActivation-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 -- Extension for Rel-10 to support MDT --
 	{ ID id-MDTConfiguration	CRITICALITY ignore	EXTENSION MDT-Configuration		PRESENCE optional }|
--- Extension for Rel-15 to support QMC -
+-- Extension for Rel-15 to support QMC --
 	{ ID id-UEAppLayerMeasConfig	CRITICALITY ignore	EXTENSION UEAppLayerMeasConfig		PRESENCE optional }|
 	{ ID id-MDTConfigurationNR		CRITICALITY ignore	EXTENSION MDT-ConfigurationNR		PRESENCE optional }|
 	{ ID id-TraceCollectionEntityURI	CRITICALITY ignore	EXTENSION URI-Address			PRESENCE optional	},
@@ -2915,7 +3120,6 @@ UEIdentityIndexValue	::=	BIT STRING (SIZE (10))
 UE-HistoryInformation ::= SEQUENCE (SIZE(1..maxnoofCellsinUEHistoryInfo)) OF LastVisitedCell-Item
 
 UE-HistoryInformationFromTheUE ::= OCTET STRING
--- This IE is a transparent container and shall be encoded as the VisitedCellInfoList field contained in the UEInformationResponse message as defined in TS 36.331 [16]
 
 UEPagingID ::= CHOICE {
 	s-TMSI		S-TMSI,
@@ -2930,10 +3134,8 @@ UERadioCapabilityForPaging ::= OCTET STRING
 UERadioCapabilityID ::= OCTET STRING
 
 UE-RLF-Report-Container ::= OCTET STRING
--- This IE is a transparent container and shall be encoded as the rlf-Report-r9 field contained in the UEInformationResponse message as defined in TS 36.331 [16]
 
 UE-RLF-Report-Container-for-extended-bands ::= OCTET STRING
--- This IE is a transparent container and shall be encoded as the rlf-Report-v9e0 contained in the UEInformationResponse message as defined in TS 36.331 [16]
 
 UESecurityCapabilities ::= SEQUENCE {
 	encryptionAlgorithms			EncryptionAlgorithms,
@@ -2989,7 +3191,8 @@ UserLocationInformation ::= SEQUENCE {
 }
 
 UserLocationInformation-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
-	{ ID id-PSCellInformation	CRITICALITY ignore	EXTENSION PSCellInformation			PRESENCE optional},
+	{ ID id-PSCellInformation				CRITICALITY ignore	EXTENSION PSCellInformation			PRESENCE optional}|
+	{ ID id-LTE-NTN-TAI-Information			CRITICALITY ignore	EXTENSION LTE-NTN-TAI-Information	PRESENCE optional},
 	...
 }
 

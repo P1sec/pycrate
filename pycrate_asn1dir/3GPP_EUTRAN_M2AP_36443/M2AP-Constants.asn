@@ -112,5 +112,6 @@ id-SubframeAllocationExtended												ProtocolIE-ID ::= 50
 id-MCCHrelatedBCCH-ExtConfigPerMBSFNArea-Item 								ProtocolIE-ID ::= 51
 id-MCCHrelatedBCCH-ExtConfigPerMBSFNArea									ProtocolIE-ID ::= 52
 id-SubframeAllocationFurtherExtension										ProtocolIE-ID ::= 53
+id-AdditionalConfigParameters												ProtocolIE-ID ::= 54
 
 END

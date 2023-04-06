@@ -81,6 +81,7 @@ M2AP-Constants.id-SubframeAllocationExtended
 M2AP-Constants.id-MCCHrelatedBCCH-ExtConfigPerMBSFNArea-Item
 M2AP-Constants.id-MCCHrelatedBCCH-ExtConfigPerMBSFNArea
 M2AP-Constants.id-SubframeAllocationFurtherExtension
+M2AP-Constants.id-AdditionalConfigParameters
 M2AP-Containers.M2AP-PROTOCOL-IES
 M2AP-Containers.M2AP-PROTOCOL-IES-PAIR
 M2AP-Containers.M2AP-PROTOCOL-EXTENSION
@@ -89,6 +90,7 @@ M2AP-Containers.ProtocolIE-Field
 M2AP-Containers.ProtocolIE-FieldPair
 M2AP-Containers.ProtocolExtensionField
 M2AP-Containers.PrivateIE-Field
+M2AP-Ies.AdditionalConfigParameters-ExtIEs
 M2AP-Ies.AllocatedSubframesEnd
 M2AP-Ies.AllocationAndRetentionPriority-ExtIEs
 M2AP-Ies.BitRate
@@ -138,6 +140,7 @@ M2AP-Ies.MCH-Scheduling-PeriodExtended2
 M2AP-Ies.Modulation-Coding-Scheme2
 M2AP-Ies.Modification-PeriodExtended
 M2AP-Ies.PLMN-Identity
+M2AP-Ies.PMCH-Bandwidth
 M2AP-Ies.PMCH-Configuration-ExtIEs
 M2AP-Ies.Common-Subframe-Allocation-Period
 M2AP-Ies.Pre-emptionCapability
@@ -226,6 +229,7 @@ M2AP-Containers.ProtocolIE-ContainerList
 M2AP-Containers.ProtocolIE-ContainerPairList
 M2AP-Containers.ProtocolExtensionContainer
 M2AP-Containers.PrivateIE-Container
+M2AP-Ies.AdditionalConfigParameters
 M2AP-Ies.AllocationAndRetentionPriority
 M2AP-Ies.Cell-Information
 M2AP-Ies.CriticalityDiagnostics

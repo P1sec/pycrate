@@ -69,13 +69,14 @@ ASN_SPECS_5G = {
     'NGAP'      : '3GPP_NR_NGAP_38413',
     'XnAP'      : '3GPP_NR_XnAP_38423',
     'NRPPa'     : '3GPP_NR_NRPPa_38455',
-    'E1AP'      : '3GPP_NR_E1AP_38463',
+    #'E1AP'      : '3GPP_NR_E1AP_38463', # moved to 37483 starting with release 17
     'F1AP'      : '3GPP_NR_F1AP_38473'
     }
 
 # 3GPP multi-techno
 ASN_SPECS_MULT = {
     'LPP'       : '3GPP_MULT_LPP_37355',
+    'E1AP'      : '3GPP_MULT_E1AP_37483',
     }
 
 # ITU-T various recommendations

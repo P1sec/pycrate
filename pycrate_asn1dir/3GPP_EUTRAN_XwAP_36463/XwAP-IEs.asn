@@ -206,7 +206,7 @@ CauseTransport ::= ENUMERATED {
 	...
 }
 
-ChannelUtilization ::= INTEGER (0..255)
+ChannelUtilization ::= INTEGER (0..255)
 
 CompleteFailureCauseInformation-List ::= SEQUENCE (SIZE (1..maxnoofBSSs)) OF ProtocolIE-SingleContainer { {CompleteFailureCauseInformation-ItemIEs} }
 

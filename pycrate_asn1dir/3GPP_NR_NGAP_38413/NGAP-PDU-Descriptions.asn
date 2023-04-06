@@ -30,9 +30,23 @@ FROM NGAP-CommonDataTypes
 	AMFConfigurationUpdateFailure,
 	AMFCPRelocationIndication,
 	AMFStatusIndication,
+	BroadcastSessionModificationFailure,
+	BroadcastSessionModificationRequest,
+	BroadcastSessionModificationResponse,
+	BroadcastSessionReleaseRequest,
+	BroadcastSessionReleaseRequired,
+	BroadcastSessionReleaseResponse,
+	BroadcastSessionSetupFailure,
+	BroadcastSessionSetupRequest,
+	BroadcastSessionSetupResponse,
 	CellTrafficTrace,
 	ConnectionEstablishmentIndication,
 	DeactivateTrace,
+	DistributionReleaseRequest,
+	DistributionReleaseResponse,
+	DistributionSetupFailure,
+	DistributionSetupRequest,
+	DistributionSetupResponse,
 	DownlinkNASTransport,
 	DownlinkNonUEAssociatedNRPPaTransport,
 	DownlinkRANConfigurationTransfer,
@@ -57,6 +71,15 @@ FROM NGAP-CommonDataTypes
 	LocationReport,
 	LocationReportingControl,
 	LocationReportingFailureIndication,
+	MulticastSessionActivationFailure,
+	MulticastSessionActivationRequest,
+	MulticastSessionActivationResponse,
+	MulticastSessionDeactivationRequest,
+	MulticastSessionDeactivationResponse,
+	MulticastSessionUpdateFailure,
+	MulticastSessionUpdateRequest,
+	MulticastSessionUpdateResponse,
+	MulticastGroupPaging,
 	NASNonDeliveryIndication,
 	NGReset,
 	NGResetAcknowledge,
@@ -128,9 +151,15 @@ FROM NGAP-PDU-Contents
 	id-AMFConfigurationUpdate,
 	id-AMFCPRelocationIndication,
 	id-AMFStatusIndication,
+	id-BroadcastSessionModification,
+	id-BroadcastSessionRelease,
+	id-BroadcastSessionReleaseRequired,
+	id-BroadcastSessionSetup,
 	id-CellTrafficTrace,
 	id-ConnectionEstablishmentIndication,
 	id-DeactivateTrace,
+	id-DistributionSetup,
+	id-DistributionRelease,
 	id-DownlinkNASTransport,
 	id-DownlinkNonUEAssociatedNRPPaTransport,
 	id-DownlinkRANConfigurationTransfer,
@@ -148,6 +177,10 @@ FROM NGAP-PDU-Contents
 	id-LocationReport,
 	id-LocationReportingControl,
 	id-LocationReportingFailureIndication,
+	id-MulticastSessionActivation,
+	id-MulticastSessionDeactivation,
+	id-MulticastSessionUpdate,
+	id-MulticastGroupPaging,
 	id-NASNonDeliveryIndication,
 	id-NGReset,
 	id-NGSetup,
@@ -261,10 +294,18 @@ NGAP-ELEMENTARY-PROCEDURES NGAP-ELEMENTARY-PROCEDURE ::= {
 
 NGAP-ELEMENTARY-PROCEDURES-CLASS-1 NGAP-ELEMENTARY-PROCEDURE ::= {
 	aMFConfigurationUpdate			|
+	broadcastSessionModification	|
+	broadcastSessionRelease			|
+	broadcastSessionSetup			|
+	distributionSetup				|
+	distributionRelease				|
 	handoverCancel					|
 	handoverPreparation				|
 	handoverResourceAllocation		|
 	initialContextSetup				|
+	multicastSessionActivation					|
+	multicastSessionDeactivation				|
+	multicastSessionUpdate			|
 	nGReset							|
 	nGSetup							|
 	pathSwitchRequest				|
@@ -287,6 +328,7 @@ NGAP-ELEMENTARY-PROCEDURES-CLASS-1 NGAP-ELEMENTARY-PROCEDURE ::= {
 NGAP-ELEMENTARY-PROCEDURES-CLASS-2 NGAP-ELEMENTARY-PROCEDURE ::= {
 	aMFCPRelocationIndication		|
 	aMFStatusIndication				|
+	broadcastSessionReleaseRequired	|
 	cellTrafficTrace				|
 	connectionEstablishmentIndication	|
 	deactivateTrace					|
@@ -304,6 +346,7 @@ NGAP-ELEMENTARY-PROCEDURES-CLASS-2 NGAP-ELEMENTARY-PROCEDURE ::= {
 	locationReport					|
 	locationReportingControl		|
 	locationReportingFailureIndication	|
+	multicastGroupPaging			|
 	nASNonDeliveryIndication		|
 	overloadStart					|
 	overloadStop					|
@@ -360,6 +403,35 @@ aMFStatusIndication NGAP-ELEMENTARY-PROCEDURE ::={
 	CRITICALITY				ignore
 }
 
+broadcastSessionModification NGAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		BroadcastSessionModificationRequest
+	SUCCESSFUL OUTCOME		BroadcastSessionModificationResponse
+	UNSUCCESSFUL OUTCOME	BroadcastSessionModificationFailure
+	PROCEDURE CODE			id-BroadcastSessionModification
+	CRITICALITY				reject
+}
+
+broadcastSessionRelease NGAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		BroadcastSessionReleaseRequest
+	SUCCESSFUL OUTCOME		BroadcastSessionReleaseResponse
+	PROCEDURE CODE			id-BroadcastSessionRelease
+	CRITICALITY				reject
+}
+
+broadcastSessionReleaseRequired NGAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		BroadcastSessionReleaseRequired
+	PROCEDURE CODE			id-BroadcastSessionReleaseRequired
+	CRITICALITY				reject
+}
+
+broadcastSessionSetup NGAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		BroadcastSessionSetupRequest
+	SUCCESSFUL OUTCOME		BroadcastSessionSetupResponse
+	UNSUCCESSFUL OUTCOME	BroadcastSessionSetupFailure
+	PROCEDURE CODE			id-BroadcastSessionSetup
+	CRITICALITY				reject
+}
+
 cellTrafficTrace NGAP-ELEMENTARY-PROCEDURE ::={
 	INITIATING MESSAGE		CellTrafficTrace
 	PROCEDURE CODE			id-CellTrafficTrace
@@ -376,6 +448,21 @@ deactivateTrace NGAP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		DeactivateTrace
 	PROCEDURE CODE			id-DeactivateTrace
 	CRITICALITY				ignore
+}
+
+distributionSetup NGAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		DistributionSetupRequest
+	SUCCESSFUL OUTCOME		DistributionSetupResponse
+	UNSUCCESSFUL OUTCOME	DistributionSetupFailure
+	PROCEDURE CODE			id-DistributionSetup
+	CRITICALITY				reject
+}
+
+distributionRelease NGAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		DistributionReleaseRequest
+	SUCCESSFUL OUTCOME		DistributionReleaseResponse
+	PROCEDURE CODE			id-DistributionRelease
+	CRITICALITY				reject
 }
 
 downlinkNASTransport NGAP-ELEMENTARY-PROCEDURE ::= {
@@ -484,6 +571,35 @@ locationReportingControl NGAP-ELEMENTARY-PROCEDURE ::= {
 locationReportingFailureIndication NGAP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		LocationReportingFailureIndication
 	PROCEDURE CODE			id-LocationReportingFailureIndication
+	CRITICALITY				ignore
+}
+
+multicastSessionActivation NGAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		MulticastSessionActivationRequest
+	SUCCESSFUL OUTCOME		MulticastSessionActivationResponse
+	UNSUCCESSFUL OUTCOME	MulticastSessionActivationFailure
+	PROCEDURE CODE			id-MulticastSessionActivation
+	CRITICALITY				reject
+}
+
+multicastSessionDeactivation NGAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		MulticastSessionDeactivationRequest
+	SUCCESSFUL OUTCOME		MulticastSessionDeactivationResponse
+	PROCEDURE CODE			id-MulticastSessionDeactivation
+	CRITICALITY				reject
+}
+
+multicastSessionUpdate NGAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		MulticastSessionUpdateRequest
+	SUCCESSFUL OUTCOME		MulticastSessionUpdateResponse
+	UNSUCCESSFUL OUTCOME	MulticastSessionUpdateFailure
+	PROCEDURE CODE			id-MulticastSessionUpdate
+	CRITICALITY				reject
+}
+
+multicastGroupPaging 		NGAP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		MulticastGroupPaging
+	PROCEDURE CODE			id-MulticastGroupPaging
 	CRITICALITY				ignore
 }
 

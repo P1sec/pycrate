@@ -21,6 +21,7 @@ IMPORTS
 	id-Subcarrier-SpacingMBMS,
 	id-SubframeAllocationExtended,
 	id-SubframeAllocationFurtherExtension,
+	id-AdditionalConfigParameters,
 	maxnoofMBSFNareas,
 	maxnoofPMCHsperMBSFNarea,
 	maxnoofCells,
@@ -44,6 +45,16 @@ FROM M2AP-CommonDataTypes
 FROM M2AP-Containers;
 
 -- A
+
+AdditionalConfigParameters ::= SEQUENCE {
+	pmch-Bandwidth	PMCH-Bandwidth,
+	iE-Extensions				ProtocolExtensionContainer { {AdditionalConfigParameters-ExtIEs} } OPTIONAL
+}
+
+AdditionalConfigParameters-ExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
 
 AllocatedSubframesEnd ::= INTEGER (0..1535)
 
@@ -359,7 +370,7 @@ MCCHrelatedBCCH-ExtConfigPerMBSFNArea-Item ::= SEQUENCE {
 	modificationPeriodExpanded		ENUMERATED {rf1, rf2, rf4, rf8, rf16, rf32, rf64, rf128, rf256, rf512, rf1024, ...},
 	subframeAllocationInfoExpanded	BIT STRING (SIZE(10)),
 	modulationAndCodingScheme		ENUMERATED {n2, n7, n13, n19},
-	subcarrier-SpacingMBMSExpanded	ENUMERATED {khz-7dot5, khz-2dot5, khz-1dot25, khz-0dot37, ...},
+	subcarrier-SpacingMBMSExpanded	ENUMERATED {khz-7dot5, khz-2dot5, khz-1dot25, khz-0dot37, ..., kHz-15},
 	timeSeparation					ENUMERATED {sl2, sl4, ...}		OPTIONAL,
 	cellInformationList				Cell-Information-List			OPTIONAL,
 	iE-Extensions					ProtocolExtensionContainer { { MCCHrelatedBCCH-ExtConfigPerMBSFNArea-Item-ExtIEs} } OPTIONAL,
@@ -367,6 +378,8 @@ MCCHrelatedBCCH-ExtConfigPerMBSFNArea-Item ::= SEQUENCE {
 }
 
 MCCHrelatedBCCH-ExtConfigPerMBSFNArea-Item-ExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+	-- Extension for Rel-17 to support PMCH Bandwidth values --
+	{ID id-AdditionalConfigParameters	CRITICALITY reject	EXTENSION AdditionalConfigParameters	PRESENCE optional},
 	...
 }
 
@@ -393,6 +406,8 @@ Modification-PeriodExtended ::= ENUMERATED {rf1, rf2, rf4, rf8, rf16, rf32, rf64
 -- P
 
 PLMN-Identity ::= OCTET STRING (SIZE(3))
+
+PMCH-Bandwidth ::= ENUMERATED {n40, n35, n30, ...}
 
 PMCH-Configuration ::= SEQUENCE {
 	allocatedSubframesEnd			AllocatedSubframesEnd,

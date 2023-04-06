@@ -2202,17 +2202,17 @@ MBSFN subframe Configuration Value
 M
 
 ENUMERATED (n1, n2, n4, n8, n16, n32)
-Radio frame allocation period, ref TS 36.331 [10]
+Corresponds to information provided in radioFrameAllocationPeriod contained in the MBSFN-SubframeConfig IE as defined in TS 36.331 [10]
 >Radio Frame Allocation Offset
 M
 
 INTEGER (0..7)
-Radio frame allocation offset, ref TS 36.331 [10]
+Corresponds to information provided in radioFrameAllocationOffset contained in the MBSFN-SubframeConfig IE as defined in TS 36.331 [10]
 > CHOICE Subframe Allocation
 M
 
 
-Subframe allocation, ref TS 36.331 [10]
+Corresponds to information provided in subframeAllocation contained in the MBSFN-SubframeConfig IE as defined in TS 36.331 [10]
 >>oneFrame
 M
 
@@ -2227,7 +2227,7 @@ BIT STRING (SIZE(24))
 Range bound
 Explanation
 maxMBSFN-Allocations
-Maximum number of MBSFN frame allocations with different offset as defined in TS36.331 [10]. Value is 8.
+Maximum number of MBSFN frame allocations with different offset as defined in TS 36.331 [10]. Value is 8.
 
 9.2.15	WLAN Measurement Result
 The WLAN Measurement Result information element provides the WLAN measurement results.
@@ -2483,7 +2483,7 @@ Corresponds to the number of SI messages with posSIBs to be scheduled
 M
 
 ENUMERATED (ms80, ms160, ms320, ms640, ms1280, ms2560, ms5120, ...) 
-Broadcast Peiriodicity for the Pos SIBs, see TS 36.331 [10]
+Corresponds to information provided in posSI-Periodicity contained in the SystemInformationBlockType1 IE as defined in TS 36.331 [10]
 >>Pos SIBs
 
 1..<maxNrOfPosSIBs>
@@ -2534,7 +2534,7 @@ PosSIB Segments
 M
 
 OCTET STRING
-TS 36.355 [13]
+Includes the assistanceDataSIBElement IE as defined in TS 36.355 [13]
 
 Range bound
 Explanation
@@ -2553,20 +2553,20 @@ Encrypted
 O
 
 ENUMERATED (true, …)
-TS 36.331 [10]
+Corresponds to information provided in encrypted contained in the SystemInformationBlockType1 IE as defined in TS 36.331 [10]
 GNSS ID
 O
 
 ENUMERATED (gps, sbas, qzss, galileo, glonass, bds, ..., navic) 
-TS 36.331 [10]
+Corresponds to information provided in gnss-id contained in the SystemInformationBlockType1IE as defined in TS 36.331 [10]
 SBAS ID
 O
 
 ENUMERATED (waas, egnos, msas, gagan, ...) 
-TS 36.331 [10]
+Corresponds to to information provided in sbas-id contained in the SystemInformationBlockType1IE as defined in TS 36.331 [10]
 
 9.2.23	Positioning SIB Type
-This parameter defines a specific positioning SIB, as defined in TS 36.355 [13].
+This parameter defines a specific positioning SIB, as defined in TS 36.331 [10].
 IE/Group Name
 Presence
 Range
@@ -5054,4 +5054,20 @@ RP-201952
 F
 Addition of NR CGI in Inter-RAT measurement result of E-CID measurement over LPPa
 16.1.0
+2022-03
+SA#95-e
+
+
+
+
+Promotion to Release 17 without technical change
+17.0.0
+2023-03
+RAN#99
+RP-230592
+0118
+2
+F
+LPPA corrections of references to RRC
+17.1.0
 

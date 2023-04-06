@@ -126,7 +126,7 @@ HandoverPreparationInformation-r8-IEs ::= SEQUENCE {
 HandoverPreparationInformation-v920-IEs	::= SEQUENCE {
 	ue-ConfigRelease-r9					ENUMERATED {
 										rel9, rel10, rel11, rel12, v10j0, v11e0,
-										v1280, rel13, ..., rel14, rel15, rel16}		OPTIONAL,	-- Cond HO2
+										v1280, rel13, ..., rel14, rel15, rel16, rel17}		OPTIONAL,	-- Cond HO2
 	nonCriticalExtension				HandoverPreparationInformation-v9d0-IEs		OPTIONAL
 }
 
@@ -204,12 +204,17 @@ HandoverPreparationInformation-v1610-IEs ::= SEQUENCE {
 }
 
 HandoverPreparationInformation-v1620-IEs ::= SEQUENCE {
-	as-Context-v1620			AS-Context-v1620						OPTIONAL, 	--Cond HO2
+	as-Context-v1620			AS-Context-v1620						OPTIONAL,	--Cond HO2
 	nonCriticalExtension		HandoverPreparationInformation-v1630-IEs	OPTIONAL
 }
 
 HandoverPreparationInformation-v1630-IEs ::= SEQUENCE {
-	as-Context-v1630			AS-Context-v1630						OPTIONAL, 	--Cond HO2
+	as-Context-v1630			AS-Context-v1630						OPTIONAL,	--Cond HO2
+	nonCriticalExtension		HandoverPreparationInformation-v1700-IEs		OPTIONAL
+}
+
+HandoverPreparationInformation-v1700-IEs ::= SEQUENCE {
+	as-Config-v1700			AS-Config-v1700						OPTIONAL,	--Cond HO5
 	nonCriticalExtension		SEQUENCE {}								OPTIONAL
 }
 
@@ -238,7 +243,7 @@ SCG-Config-v12i0a-IEs ::=				SEQUENCE {
 }
 
 SCG-Config-v12i0b-IEs ::=				SEQUENCE {
-	scg-RadioConfig-v12i0				SCG-ConfigPartSCG-v12f0			OPTIONAL,	-- Need ON
+	scg-RadioConfig-v12i0				SCG-ConfigPartSCG-v12f0			OPTIONAL,
 	nonCriticalExtension				SEQUENCE {}						OPTIONAL
 }
 
@@ -520,6 +525,10 @@ AS-Config-v1550 ::=			SEQUENCE {
 
 AS-ConfigNR-v1620 ::=			SEQUENCE {
 	tdm-PatternConfig2-r16		TDM-PatternConfig-r15
+}
+
+AS-Config-v1700 ::=				SEQUENCE {
+	scg-State-r17					ENUMERATED { deactivated }		OPTIONAL
 }
 
 

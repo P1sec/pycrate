@@ -1,11 +1,11 @@
-﻿3GPP TS 36.413 V16.10.0 (2022-06)
+﻿3GPP TS 36.413 V17.4.0 (2023-03)
 Technical Specification
 3rd Generation Partnership Project;
 Technical Specification Group Radio Access Network;
 Evolved Universal Terrestrial Radio Access Network
 (E-UTRAN);
 S1 Application Protocol (S1AP)
-(Release 16)
+(Release 17)
 
 
 Keywords
@@ -25,7 +25,7 @@ Copyright Notification
 No part may be reproduced except as authorized by written permission.
 The copyright and the foregoing restriction extend to reproduction in all media.
 
-© 2022, 3GPP Organizational Partners (ARIB, ATIS, CCSA, ETSI, TSDSI, TTA, TTC).
+© 2023, 3GPP Organizational Partners (ARIB, ATIS, CCSA, ETSI, TSDSI, TTA, TTC).
 All rights reserved.
 
 UMTS™ is a Trade Mark of ETSI registered for the benefit of its members
@@ -48,58 +48,58 @@ Foreword	15
 7	Functions of S1AP	25
 8	S1AP Procedures	27
 8.1	List of S1AP Elementary procedures	27
-8.2	E-RAB Management procedures	30
-8.2.1	E-RAB Setup	30
-8.2.1.1	General	30
-8.2.1.2	Successful Operation	30
-8.2.1.3	Unsuccessful Operation	32
-8.2.1.4	Abnormal Conditions	32
-8.2.2	E-RAB Modify	32
-8.2.2.1	General	32
+8.2	E-RAB Management procedures	29
+8.2.1	E-RAB Setup	29
+8.2.1.1	General	29
+8.2.1.2	Successful Operation	29
+8.2.1.3	Unsuccessful Operation	31
+8.2.1.4	Abnormal Conditions	31
+8.2.2	E-RAB Modify	31
+8.2.2.1	General	31
 8.2.2.2	Successful Operation	32
 8.2.2.3	Unsuccessful Operation	33
-8.2.2.4	Abnormal Conditions	34
-8.2.3	E-RAB Release	34
-8.2.3.1	General	34
+8.2.2.4	Abnormal Conditions	33
+8.2.3	E-RAB Release	33
+8.2.3.1	General	33
 8.2.3.2	Successful Operation	34
 8.2.3.2.1	E-RAB Release – MME initiated	34
 8.2.3.2.2	E-RAB Release Indication – eNB initiated	35
-8.2.3.3	Abnormal Conditions	36
-8.2.4	E-RAB Modification Indication	36
-8.2.4.1	General	36
+8.2.3.3	Abnormal Conditions	35
+8.2.4	E-RAB Modification Indication	35
+8.2.4.1	General	35
 8.2.4.2	Successful Operation	36
 8.2.4.3	Unsuccessful Operation	37
 8.2.4.4	Abnormal Conditions	37
 8.3	Context Management procedures	37
 8.3.1	Initial Context Setup	37
 8.3.1.1	General	37
-8.3.1.2	Successful Operation	38
+8.3.1.2	Successful Operation	37
 8.3.1.3	Unsuccessful Operation	42
 8.3.1.4	Abnormal Conditions	42
-8.3.2	UE Context Release Request (eNB initiated)	43
-8.3.2.1	General	43
+8.3.2	UE Context Release Request (eNB initiated)	42
+8.3.2.1	General	42
 8.3.2.2	Successful Operation	43
-8.3.3	UE Context Release (MME initiated)	44
-8.3.3.1	General	44
-8.3.3.2	Successful Operation	44
-8.3.3.3	Abnormal Conditions	45
-8.3.4	UE Context Modification	45
-8.3.4.1	General	45
+8.3.3	UE Context Release (MME initiated)	43
+8.3.3.1	General	43
+8.3.3.2	Successful Operation	43
+8.3.3.3	Abnormal Conditions	44
+8.3.4	UE Context Modification	44
+8.3.4.1	General	44
 8.3.4.2	Successful Operation	45
-8.3.4.3	Unsuccessful Operation	48
-8.3.4.4	Abnormal Conditions	48
+8.3.4.3	Unsuccessful Operation	47
+8.3.4.4	Abnormal Conditions	47
 8.3.5	UE Radio Capability Match	48
 8.3.5.1	General	48
 8.3.5.2	Successful Operation	48
-8.3.5.3	Unsuccessful Operation	49
-8.3.5.4	Abnormal Conditions	49
-8.3.6	UE Context Modification Indication	49
-8.3.6.1	General	49
+8.3.5.3	Unsuccessful Operation	48
+8.3.5.4	Abnormal Conditions	48
+8.3.6	UE Context Modification Indication	48
+8.3.6.1	General	48
 8.3.6.2	Successful Operation	49
 8.3.6.3	Unsuccessful Operation	49
-8.3.6.4	Abnormal Conditions	50
-8.3.7	UE Context Suspend	50
-8.3.7.1	General	50
+8.3.6.4	Abnormal Conditions	49
+8.3.7	UE Context Suspend	49
+8.3.7.1	General	49
 8.3.7.2	Successful Operation	50
 8.3.8	UE Context Resume	50
 8.3.8.1	General	50
@@ -108,7 +108,7 @@ Foreword	15
 8.3.9	Connection Establishment Indication	52
 8.3.9.1	General	52
 8.3.9.2	Successful Operation	52
-8.3.9.3	Unsuccessful Operation	52
+8.3.9.3	Unsuccessful Operation	53
 8.3.9.4	Abnormal Conditions	53
 8.3.10	Retrieve UE Information	53
 8.3.10.1	General	53
@@ -139,593 +139,600 @@ Foreword	15
 8.4.2	Handover Resource Allocation	60
 8.4.2.1	General	60
 8.4.2.2	Successful Operation	61
-8.4.2.3	Unsuccessful Operation	65
+8.4.2.3	Unsuccessful Operation	66
 8.4.2.4	Abnormal Conditions	66
-8.4.3	Handover Notification	66
-8.4.3.1	General	66
-8.4.3.2	Successful Operation	66
+8.4.3	Handover Notification	67
+8.4.3.1	General	67
+8.4.3.2	Successful Operation	67
 8.4.3.3	Abnormal Conditions	67
 8.4.4	Path Switch Request	67
 8.4.4.1	General	67
-8.4.4.2	Successful Operation	67
-8.4.4.3	Unsuccessful Operation	70
-8.4.4.4	Abnormal Conditions	70
-8.4.5	Handover Cancellation	70
-8.4.5.1	General	70
+8.4.4.2	Successful Operation	68
+8.4.4.3	Unsuccessful Operation	71
+8.4.4.4	Abnormal Conditions	71
+8.4.5	Handover Cancellation	71
+8.4.5.1	General	71
 8.4.5.2	Successful Operation	71
-8.4.5.3	Unsuccessful Operation	71
-8.4.5.4	Abnormal Conditions	71
-8.4.6	eNB Status Transfer	71
-8.4.6.1	General	71
-8.4.6.2	Successful Operation	71
-8.4.6.3	Unsuccessful Operation	72
-8.4.6.4	Abnormal Conditions	72
-8.4.7	MME Status Transfer	72
-8.4.7.1	General	72
-8.4.7.2	Successful Operation	72
+8.4.5.3	Unsuccessful Operation	72
+8.4.5.4	Abnormal Conditions	72
+8.4.6	eNB Status Transfer	72
+8.4.6.1	General	72
+8.4.6.2	Successful Operation	72
+8.4.6.3	Unsuccessful Operation	73
+8.4.6.4	Abnormal Conditions	73
+8.4.7	MME Status Transfer	73
+8.4.7.1	General	73
+8.4.7.2	Successful Operation	73
 8.4.7.3	Unsuccessful Operation	73
-8.4.7.4	Abnormal Conditions	73
-8.4.8	Handover Success	73
-8.4.8.1	General	73
-8.4.8.2	Successful Operation	73
-8.4.8.3	Abnormal Conditions	73
-8.4.9	eNB Early Status Transfer	73
-8.4.9.1	General	73
+8.4.7.4	Abnormal Conditions	74
+8.4.8	Handover Success	74
+8.4.8.1	General	74
+8.4.8.2	Successful Operation	74
+8.4.8.3	Abnormal Conditions	74
+8.4.9	eNB Early Status Transfer	74
+8.4.9.1	General	74
 8.4.9.2	Successful Operation	74
-8.4.9.3	Unsuccessful Operation	74
-8.4.9.4	Abnormal Conditions	74
-8.4.10	MME Early Status Transfer	74
-8.4.10.1	General	74
-8.4.10.2	Successful Operation	74
+8.4.9.3	Unsuccessful Operation	75
+8.4.9.4	Abnormal Conditions	75
+8.4.10	MME Early Status Transfer	75
+8.4.10.1	General	75
+8.4.10.2	Successful Operation	75
 8.4.10.3	Unsuccessful Operation	75
 8.4.10.4	Abnormal Conditions	75
 8.5	Paging	75
 8.5.1	General	75
-8.5.2	Successful Operation	75
-8.5.3	Unsuccessful Operation	76
-8.5.4	Abnormal Conditions	76
-8.6	NAS transport	76
-8.6.1	General	76
+8.5.2	Successful Operation	76
+8.5.3	Unsuccessful Operation	77
+8.5.4	Abnormal Conditions	77
+8.6	NAS transport	77
+8.6.1	General	77
 8.6.2	Successful Operations	77
 8.6.2.1	Initial UE Message	77
-8.6.2.2	DOWNLINK NAS TRANSPORT	78
+8.6.2.2	DOWNLINK NAS TRANSPORT	79
 8.6.2.3	UPLINK NAS TRANSPORT	80
-8.6.2.4	NAS NON DELIVERY INDICATION	80
+8.6.2.4	NAS NON DELIVERY INDICATION	81
 8.6.2.4a	NAS DELIVERY INDICATION	81
-8.6.2.5	Reroute NAS Request	81
-8.6.3	Unsuccessful Operation	81
-8.6.4	Abnormal Conditions	81
+8.6.2.5	Reroute NAS Request	82
+8.6.3	Unsuccessful Operation	82
+8.6.4	Abnormal Conditions	82
 8.7	Management procedures	82
 8.7.1	Reset	82
 8.7.1.1	General	82
-8.7.1.2	Successful Operation	82
-8.7.1.2.1	Reset Procedure Initiated from the MME	82
-8.7.1.2.2	Reset Procedure Initiated from the E-UTRAN	83
+8.7.1.2	Successful Operation	83
+8.7.1.2.1	Reset Procedure Initiated from the MME	83
+8.7.1.2.2	Reset Procedure Initiated from the E-UTRAN	84
 8.7.1.3	Abnormal Conditions	84
 8.7.1.3.1	Abnormal Condition at the EPC	84
-8.7.1.3.2	Abnormal Condition at the E-UTRAN	84
-8.7.1.3.3	Crossing of Reset Messages	84
-8.7.2	Error Indication	84
-8.7.2.1	General	84
-8.7.2.2	Successful Operation	84
-8.7.2.3	Abnormal Conditions	85
-8.7.3	S1 Setup	85
-8.7.3.1	General	85
-8.7.3.2	Successful Operation	85
-8.7.3.3	Unsuccessful Operation	86
-8.7.3.4	Abnormal Conditions	86
-8.7.4	eNB Configuration Update	86
-8.7.4.1	General	86
+8.7.1.3.2	Abnormal Condition at the E-UTRAN	85
+8.7.1.3.3	Crossing of Reset Messages	85
+8.7.2	Error Indication	85
+8.7.2.1	General	85
+8.7.2.2	Successful Operation	85
+8.7.2.3	Abnormal Conditions	86
+8.7.3	S1 Setup	86
+8.7.3.1	General	86
+8.7.3.2	Successful Operation	86
+8.7.3.3	Unsuccessful Operation	87
+8.7.3.4	Abnormal Conditions	87
+8.7.4	eNB Configuration Update	87
+8.7.4.1	General	87
 8.7.4.2	Successful Operation	87
 8.7.4.3	Unsuccessful Operation	88
 8.7.4.4	Abnormal Conditions	88
-8.7.5	MME Configuration Update	88
-8.7.5.1	General	88
-8.7.5.2	Successful Operation	88
+8.7.5	MME Configuration Update	89
+8.7.5.1	General	89
+8.7.5.2	Successful Operation	89
 8.7.5.3	Unsuccessful Operation	89
-8.7.5.4	Abnormal Conditions	89
-8.7.6	Overload Start	89
-8.7.6.1	General	89
+8.7.5.4	Abnormal Conditions	90
+8.7.6	Overload Start	90
+8.7.6.1	General	90
 8.7.6.2	Successful Operation	90
 8.7.6.3	Unsuccessful Operation	91
 8.7.7	Overload Stop	91
 8.7.7.1	General	91
 8.7.7.2	Successful Operation	91
 8.7.7.3	Unsuccessful Operation	91
-8.8	S1 CDMA2000 Tunnelling Procedures	91
-8.8.1	General	91
+8.8	S1 CDMA2000 Tunnelling Procedures	92
+8.8.1	General	92
 8.8.2	Successful Operations	92
 8.8.2.1	Downlink S1 CDMA2000 Tunnelling	92
-8.8.2.2	Uplink S1 CDMA2000 Tunnelling	92
+8.8.2.2	Uplink S1 CDMA2000 Tunnelling	93
 8.8.3	Unsuccessful Operation	93
 8.8.4	Abnormal Conditions	93
-8.9	UE Capability Info Indication	93
-8.9.1	General	93
-8.9.2	Successful Operation	93
+8.9	UE Capability Info Indication	94
+8.9.1	General	94
+8.9.2	Successful Operation	94
 8.9.3	Abnormal Conditions	94
 8.10	Trace Procedures	94
 8.10.1	Trace Start	94
 8.10.1.1	General	94
-8.10.1.2	Successful Operation	94
-8.10.2	Trace Failure Indication	95
-8.10.2.1	General	95
-8.10.2.2	Successful Operation	95
-8.10.3	Deactivate Trace	95
-8.10.3.1	General	95
+8.10.1.2	Successful Operation	95
+8.10.2	Trace Failure Indication	96
+8.10.2.1	General	96
+8.10.2.2	Successful Operation	96
+8.10.3	Deactivate Trace	96
+8.10.3.1	General	96
 8.10.3.2	Successful Operation	96
-8.10.4	Cell Traffic Trace	96
-8.10.4.1	General	96
-8.10.4.2	Successful Operation	96
-8.11	Location Reporting Procedures	96
-8.11.1	Location Reporting Control	96
-8.11.1.1	General	96
+8.10.4	Cell Traffic Trace	97
+8.10.4.1	General	97
+8.10.4.2	Successful Operation	97
+8.11	Location Reporting Procedures	97
+8.11.1	Location Reporting Control	97
+8.11.1.1	General	97
 8.11.1.2	Successful Operation	97
-8.11.1.3	Abnormal Conditions	97
-8.11.2	Location Report Failure Indication	97
-8.11.2.1	General	97
-8.11.2.2	Successful Operation	97
+8.11.1.3	Abnormal Conditions	98
+8.11.2	Location Report Failure Indication	98
+8.11.2.1	General	98
+8.11.2.2	Successful Operation	98
 8.11.3	Location Report	98
 8.11.3.1	General	98
-8.11.3.2	Successful Operation	98
-8.11.3.3	Abnormal Conditions	98
-8.12	Warning Message Transmission Procedures	98
-8.12.1	Write-Replace Warning	98
-8.12.1.1	General	98
+8.11.3.2	Successful Operation	99
+8.11.3.3	Abnormal Conditions	99
+8.12	Warning Message Transmission Procedures	99
+8.12.1	Write-Replace Warning	99
+8.12.1.1	General	99
 8.12.1.2	Successful Operation	99
 8.12.1.3	Abnormal Conditions	100
-8.12.2	Kill	100
-8.12.2.1	General	100
-8.12.2.2	Successful Operation	100
+8.12.2	Kill	101
+8.12.2.1	General	101
+8.12.2.2	Successful Operation	101
 8.12.3	PWS Restart Indication	101
 8.12.3.1	General	101
-8.12.3.2	Successful Operation	101
-8.12.4	PWS Failure Indication	101
-8.12.4.1	General	101
-8.12.4.2	Successful Operation	101
+8.12.3.2	Successful Operation	102
+8.12.4	PWS Failure Indication	102
+8.12.4.1	General	102
+8.12.4.2	Successful Operation	102
 8.13	eNB Direct Information Transfer	102
 8.13.1	General	102
-8.13.2	Successful Operation	102
-8.13.2.1	eNB Direct Information Transfer	102
-8.13.3	Abnormal Conditions	102
-8.14	MME Direct Information Transfer	102
-8.14.1	General	102
+8.13.2	Successful Operation	103
+8.13.2.1	eNB Direct Information Transfer	103
+8.13.3	Abnormal Conditions	103
+8.14	MME Direct Information Transfer	103
+8.14.1	General	103
 8.14.2	Successful Operation	103
 8.14.2.1	MME Direct Information Transfer	103
-8.14.3	Abnormal Conditions	103
-8.15	eNB Configuration Transfer	103
-8.15.1	General	103
-8.15.2	Successful Operation	103
-8.15.2.1	eNB Configuration Transfer	103
+8.14.3	Abnormal Conditions	104
+8.15	eNB Configuration Transfer	104
+8.15.1	General	104
+8.15.2	Successful Operation	104
+8.15.2.1	eNB Configuration Transfer	104
 8.15.3	Abnormal Conditions	104
-8.16	MME Configuration Transfer	104
-8.16.1	General	104
-8.16.2	Successful Operation	104
-8.16.2.1	MME Configuration Transfer	104
-8.16.3	Abnormal Conditions	105
-8.17	LPPa transport	105
-8.17.1	General	105
+8.16	MME Configuration Transfer	105
+8.16.1	General	105
+8.16.2	Successful Operation	105
+8.16.2.1	MME Configuration Transfer	105
+8.16.3	Abnormal Conditions	106
+8.17	LPPa transport	106
+8.17.1	General	106
 8.17.2	Successful Operations	106
 8.17.2.1	DOWNLINK UE ASSOCIATED LPPA TRANSPORT	106
-8.17.2.2	UPLINK UE ASSOCIATED LPPA TRANSPORT	106
-8.17.2.3	DOWNLINK NON UE ASSOCIATED LPPA TRANSPORT	106
+8.17.2.2	UPLINK UE ASSOCIATED LPPA TRANSPORT	107
+8.17.2.3	DOWNLINK NON UE ASSOCIATED LPPA TRANSPORT	107
 8.17.2.4	UPLINK NON UE ASSOCIATED LPPA TRANSPORT	107
 8.17.3	Unsuccessful Operation	107
-8.17.4	Abnormal Conditions	107
-8.18	Secondary RAT Data Usage Report	107
-8.18.1	General	107
-8.18.2	Successful Operations	107
-8.18.2.1	SECONDARY RAT DATA USAGE REPORT	107
+8.17.4	Abnormal Conditions	108
+8.18	Secondary RAT Data Usage Report	108
+8.18.1	General	108
+8.18.2	Successful Operations	108
+8.18.2.1	SECONDARY RAT DATA USAGE REPORT	108
 8.18.3	Unsuccessful Operation	108
 8.18.4	Abnormal Conditions	108
 8.19	UE Radio Capability ID Mapping	108
 8.19.1	General	108
-8.19.2	Successful Operation	108
-8.19.3	Unsuccessful Operation	108
-8.19.4	Abnormal Conditions	108
-9	Elements for S1AP Communication	109
-9.1	Message Functional Definition and Content	109
-9.1.1	General	109
-9.1.2	Message Contents	109
-9.1.2.1	Presence	109
-9.1.2.2	Criticality	109
-9.1.2.3	Range	109
-9.1.2.4	Assigned Criticality	109
-9.1.3	E-RAB Management Messages	110
-9.1.3.1	E-RAB SETUP REQUEST	110
-9.1.3.2	E-RAB SETUP RESPONSE	111
-9.1.3.3	E-RAB MODIFY REQUEST	112
-9.1.3.4	E-RAB MODIFY RESPONSE	113
-9.1.3.5	E-RAB RELEASE COMMAND	113
-9.1.3.6	E-RAB RELEASE RESPONSE	114
-9.1.3.7	E-RAB RELEASE INDICATION	114
-9.1.3.8	E-RAB MODIFICATION INDICATION	115
-9.1.3.9	E-RAB MODIFICATION CONFIRM	116
-9.1.4	Context Management Messages	116
-9.1.4.1	INITIAL CONTEXT SETUP REQUEST	116
-9.1.4.2	Void	118
-9.1.4.3	INITIAL CONTEXT SETUP RESPONSE	118
-9.1.4.4	INITIAL CONTEXT SETUP FAILURE	119
-9.1.4.5	UE CONTEXT RELEASE REQUEST	119
-9.1.4.6	UE CONTEXT RELEASE COMMAND	119
-9.1.4.7	UE CONTEXT RELEASE COMPLETE	119
-9.1.4.8	UE CONTEXT MODIFICATION REQUEST	120
-9.1.4.9	UE CONTEXT MODIFICATION RESPONSE	121
-9.1.4.10	UE CONTEXT MODIFICATION FAILURE	122
-9.1.4.11	UE RADIO CAPABILITY MATCH REQUEST	122
-9.1.4.12	UE RADIO CAPABILITY MATCH RESPONSE	122
-9.1.4.13	UE CONTEXT MODIFICATION INDICATION	122
-9.1.4.14	UE CONTEXT MODIFICATION CONFIRM	123
-9.1.4.15	UE CONTEXT SUSPEND REQUEST	123
-9.1.4.16	UE CONTEXT SUSPEND RESPONSE	123
-9.1.4.17	UE CONTEXT RESUME REQUEST	124
-9.1.4.18	UE CONTEXT RESUME RESPONSE	124
-9.1.4.19	UE CONTEXT RESUME FAILURE	125
-9.1.4.20	CONNECTION ESTABLISHMENT INDICATION	125
-9.1.4.21	RETRIEVE UE INFORMATION	125
-9.1.4.22	UE INFORMATION TRANSFER	125
-9.1.4.23	eNB CP RELOCATION INDICATION	126
-9.1.4.24	MME CP RELOCATION INDICATION	126
-9.1.5	Handover Signalling Messages	127
-9.1.5.1	HANDOVER REQUIRED	127
-9.1.5.2	HANDOVER COMMAND	128
-9.1.5.3	HANDOVER PREPARATION FAILURE	129
-9.1.5.4	HANDOVER REQUEST	130
-9.1.5.5	HANDOVER REQUEST ACKNOWLEDGE	132
-9.1.5.6	HANDOVER FAILURE	132
-9.1.5.7	HANDOVER NOTIFY	133
-9.1.5.8	PATH SWITCH REQUEST	134
-9.1.5.9	PATH SWITCH REQUEST ACKNOWLEDGE	135
-9.1.5.10	PATH SWITCH REQUEST FAILURE	136
-9.1.5.11	HANDOVER CANCEL	136
-9.1.5.12	HANDOVER CANCEL ACKNOWLEDGE	136
-9.1.5.13	eNB STATUS TRANSFER	136
-9.1.5.14	MME STATUS TRANSFER	137
-9.1.5.15	HANDOVER SUCCESS	137
-9.1.5.16	eNB EARLY STATUS TRANSFER	137
-9.1.5.17	MME EARLY STATUS TRANSFER	137
-9.1.6	PAGING	138
-9.1.7	NAS Transport Messages	139
-9.1.7.1	INITIAL UE MESSAGE	139
-9.1.7.2	DOWNLINK NAS TRANSPORT	140
-9.1.7.3	UPLINK NAS TRANSPORT	140
-9.1.7.4	NAS NON DELIVERY INDICATION	141
-9.1.7.4a	NAS DELIVERY INDICATION	141
-9.1.7.5	REROUTE NAS REQUEST	142
-9.1.8	Management messages	142
-9.1.8.1	RESET	142
-9.1.8.2	RESET ACKNOWLEDGE	142
-9.1.8.3	ERROR INDICATION	143
-9.1.8.4	S1 SETUP REQUEST	143
-9.1.8.5	S1 SETUP RESPONSE	145
-9.1.8.6	S1 SETUP FAILURE	145
-9.1.8.7	ENB CONFIGURATION UPDATE	146
-9.1.8.8	ENB CONFIGURATION UPDATE ACKNOWLEDGE	148
-9.1.8.9	ENB CONFIGURATION UPDATE FAILURE	148
-9.1.8.10	MME CONFIGURATION UPDATE	148
-9.1.8.11	MME CONFIGURATION UPDATE ACKNOWLEDGE	149
-9.1.8.12	MME CONFIGURATION UPDATE FAILURE	149
-9.1.8.13	OVERLOAD START	150
-9.1.8.14	OVERLOAD STOP	150
-9.1.9	S1 CDMA2000 Tunnelling Messages	151
-9.1.9.1	DOWNLINK S1 CDMA2000 TUNNELLING	151
-9.1.9.2	UPLINK S1 CDMA2000 TUNNELLING	151
-9.1.10	UE CAPABILITY INFO INDICATION	151
-9.1.11	Trace Messages	152
-9.1.11.1	TRACE START	152
-9.1.11.2	TRACE FAILURE INDICATION	152
-9.1.11.3	DEACTIVATE TRACE	153
-9.1.12	Location Reporting Messages	153
-9.1.12.1	LOCATION REPORTING CONTROL	153
-9.1.12.2	LOCATION REPORT FAILURE INDICATION	153
-9.1.12.3	LOCATION REPORT	153
-9.1.13	Warning Message Transmission Messages	154
-9.1.13.1	WRITE-REPLACE WARNING REQUEST	154
-9.1.13.2	WRITE-REPLACE WARNING RESPONSE	154
-9.1.13.3	KILL REQUEST	154
-9.1.13.4	KILL RESPONSE	155
-9.1.13.5	PWS RESTART INDICATION	155
-9.1.13.6	PWS FAILURE INDICATION	156
-9.1.14	eNB DIRECT INFORMATION TRANSFER	156
-9.1.15	MME DIRECT INFORMATION TRANSFER	156
-9.1.16	eNB CONFIGURATION TRANSFER	156
-9.1.17	MME CONFIGURATION TRANSFER	157
-9.1.18	CELL TRAFFIC TRACE	157
-9.1.19	LPPa Transport Messages	158
-9.1.19.1	DOWNLINK UE ASSOCIATED LPPA TRANSPORT	158
-9.1.19.2	UPLINK UE ASSOCIATED LPPA TRANSPORT	158
-9.1.19.3	DOWNLINK NON UE ASSOCIATED LPPA TRANSPORT	159
-9.1.19.4	UPLINK NON UE ASSOCIATED LPPA TRANSPORT	159
-9.1.20	Secondary RAT Report Data Usage Messages	159
-9.1.20.1	SECONDARY RAT DATA USAGE REPORT	159
-9.1.21	UE Radio Capability ID Mapping Messages	159
-9.1.21.1	UE RADIO CAPABILITY ID MAPPING REQUEST	159
-9.1.21.2	UE RADIO CAPABILITY ID MAPPING RESPONSE	160
-9.2	Information Element Definitions	160
-9.2.0	General	160
-9.2.1	Radio Network Layer Related IEs	160
-9.2.1.1	Message Type	160
-9.2.1.2	E-RAB ID	160
-9.2.1.3	Cause	161
-9.2.1.3a	RRC Establishment Cause	165
-9.2.1.4	Trace Activation	165
-9.2.1.5	Source ID	166
-9.2.1.6	Target ID	166
-9.2.1.7	Source eNB to Target eNB Transparent Container	167
-9.2.1.8	Target eNB to Source eNB Transparent Container	169
-9.2.1.9	Source RNC to Target RNC Transparent Container	169
-9.2.1.10	Target RNC to Source RNC Transparent Container	170
-9.2.1.11	Source BSS to Target BSS Transparent Container	170
-9.2.1.12	Target BSS to Source BSS Transparent Container	170
-9.2.1.13	Handover Type	170
-9.2.1.14	Extended RNC-ID	170
-9.2.1.15	E-RAB Level QoS Parameters	170
-9.2.1.16	Paging DRX	171
-9.2.1.17	Paging Cause	171
-9.2.1.18	GBR QoS Information	171
-9.2.1.19	Bit Rate	172
-9.2.1.20	UE Aggregate Maximum Bit Rate	173
-9.2.1.21	Criticality Diagnostics	173
-9.2.1.22	Handover Restriction List	174
-9.2.1.23	CDMA2000-PDU	176
-9.2.1.24	CDMA2000 RAT Type	176
-9.2.1.25	CDMA2000 Sector ID	177
-9.2.1.26	Security Context	177
-9.2.1.27	UE Radio Capability	178
-9.2.1.28	CDMA2000 HO Status	178
-9.2.1.29	CDMA2000 HO Required Indication	178
-9.2.1.30	1xRTT MEID	178
-9.2.1.31	eNB Status Transfer Transparent Container	178
-9.2.1.32	COUNT Value	180
-9.2.1.33	CDMA2000 1xRTT RAND	180
-9.2.1.34	Request Type	181
-9.2.1.35	CDMA2000 1xRTT SRVCC Info	181
-9.2.1.36	E-RAB List	181
-9.2.1.37	Global eNB ID	182
-9.2.1.37a	Global en-gNB ID	182
-9.2.1.38	E-UTRAN CGI	182
-9.2.1.39	Subscriber Profile ID for RAT/Frequency priority	182
-9.2.1.39a	Additional RRM Policy Index	183
-9.2.1.40	UE Security Capabilities	183
-9.2.1.41	Security Key	183
-9.2.1.42	UE History Information	183
-9.2.1.43	Last Visited Cell Information	184
-9.2.1.43a	Last Visited E-UTRAN Cell Information	184
-9.2.1.43b	Last Visited GERAN Cell Information	185
-9.2.1.44	Message Identifier	185
-9.2.1.45	Serial Number	185
-9.2.1.46	Warning Area List	185
-9.2.1.47	Emergency Area ID	186
-9.2.1.48	Repetition Period	186
-9.2.1.49	Number of Broadcasts Requested	186
-9.2.1.50	Warning Type	186
-9.2.1.51	Warning Security Information	187
-9.2.1.52	Data Coding Scheme	187
-9.2.1.53	Warning Message Contents	187
-9.2.1.54	Broadcast Completed Area List	187
-9.2.1.55	Inter-system Information Transfer Type	188
-9.2.1.56	Source To Target Transparent Container	188
-9.2.1.57	Target To Source Transparent Container	189
-9.2.1.58	SRVCC Operation Possible	189
-9.2.1.59	SRVCC HO Indication	189
-9.2.1.60	Allocation and Retention Priority	189
-9.2.1.61	Time to wait	190
-9.2.1.62	CSG Id	190
-9.2.1.63	CSG Id List	190
-9.2.1.64	MS Classmark 2	191
-9.2.1.65	MS Classmark 3	191
-9.2.1.66	Cell Type	191
-9.2.1.67	Old BSS to New BSS Information	191
-9.2.1.68	Layer 3 Information	191
-9.2.1.69	E-UTRAN Round Trip Delay Estimation Info	191
-9.2.1.70	Broadcast Cancelled Area List	191
-9.2.1.71	Number of Broadcasts	192
-9.2.1.72	Concurrent Warning Message Indicator	192
-9.2.1.73	CSG Membership Status	193
-9.2.1.74	Cell Access Mode	193
-9.2.1.75	Extended Repetition Period	193
-9.2.1.76	Data Forwarding Not Possible	193
-9.2.1.77	PS Service Not Available	193
-9.2.1.78	Paging Priority	193
-9.2.1.79	Relay Node Indicator	194
-9.2.1.80	Correlation ID	194
-9.2.1.81	MDT Configuration	194
-9.2.1.82	MME Relay Support Indicator	197
-9.2.1.83	Management Based MDT Allowed	197
-9.2.1.84	GW Context Release Indication	198
-9.2.1.85	Voice Support Match Indicator	198
-9.2.1.86	M3 Configuration	198
-9.2.1.87	M4 Configuration	198
-9.2.1.88	M5 Configuration	198
-9.2.1.89	MDT PLMN List	199
-9.2.1.90	COUNT Value Extended	199
-9.2.1.91	Kill-all Warning Messages Indicator	199
-9.2.1.92	LHN ID	199
-9.2.1.93	User Location Information	199
-9.2.1.94	MBSFN-ResultToLog	200
-9.2.1.95	EARFCN	200
-9.2.1.96	Expected UE Behaviour	200
-9.2.1.97	Expected UE Activity Behaviour	201
-9.2.1.98	UE Radio Capability for Paging	201
-9.2.1.99	ProSe Authorized	201
-9.2.1.100	COUNT Value for PDCP SN Length 18	202
-9.2.1.101	M6 Configuration	202
-9.2.1.102	M7 Configuration	202
-9.2.1.103	Assistance Data for Paging	203
-9.2.1.104	Assistance Data for Recommended Cells	203
-9.2.1.105	Information on Recommended Cells and eNBs for Paging	203
-9.2.1.106	Recommended Cells for Paging	203
-9.2.1.107	Recommended eNBs for Paging	204
-9.2.1.108	Assistance Data for CE capable UEs	204
-9.2.1.109	Cell Identifier and Coverage Enhancement Level	205
-9.2.1.110	Paging Attempt Information	205
-9.2.1.111	Paging eDRX Information	205
-9.2.1.112	UE Retention Information	205
-9.2.1.113	UE User Plane CIoT Support Indicator	205
-9.2.1.114	NB-IoT Default Paging DRX	206
-9.2.1.115	NB-IoT Paging eDRX Information	206
-9.2.1.116	Bearer Type	206
-9.2.1.117	RAT Type	206
-9.2.1.118	CE-mode-B Support Indicator	206
-9.2.1.119	SRVCC Operation Not Possible	206
-9.2.1.120	V2X Services Authorized	207
-9.2.1.121	Served DCNs Items	207
-9.2.1.122	UE Sidelink Aggregate Maximum Bit Rate	207
-9.2.1.123	Enhanced Coverage Restricted	207
-9.2.1.124	Secondary RAT Usage Report List	208
-9.2.1.125	Handover Flag	209
-9.2.1.126	Extended Bit Rate	209
-9.2.1.127	NR UE Security Capabilities	209
-9.2.1.128	UE Application layer measurement configuration	209
-9.2.1.129	CE-mode-B Restricted	210
-9.2.1.130	Packet Loss Rate	211
-9.2.1.131 	Global RAN Node ID	211
-9.2.1.132	Global gNB ID	211
-9.2.1.133	Source NG-RAN Node To Target NG-RAN Node Transparent Container	211
-9.2.1.134	Target NG-RAN Node To Source NG-RAN Node Transparent Container	212
-9.2.1.135	LTE-M Indication	212
-9.2.1.136	Aerial UE subscription information	212
-9.2.1.137	Bluetooth Measurement Configuration	212
-9.2.1.138	WLAN Measurement Configuration	212
-9.2.1.139	Warning Area Coordinates	213
-9.2.1.140	Subscription Based UE Differentiation Information	213
-9.2.1.141	PSCell Information	214
-9.2.1.142	NR CGI	215
-9.2.1.143	Time Since Secondary Node Release	215
-9.2.1.144	UE Context Reference at Source	215
-9.2.1.145	RAN UE NGAP ID	215
-9.2.1.146	IAB Authorized	215
-9.2.1.147	Ethernet Type	216
-9.2.1.148	NR V2X Services Authorized	216
-9.2.1.149	NR UE Sidelink Aggregate Maximum Bit Rate	216
-9.2.1.150	PC5 QoS Parameters	216
-9.2.1.151	Inter System Measurement Configuration	217
-9.2.1.152	Source Node ID	219
-9.2.1.153	UE Radio Capability ID	219
-9.2.1.154	UE Radio Capability – NR Format	219
-9.2.1.155	DAPS Request Information	220
-9.2.1.156	DAPS Response Information	220
-9.2.1.157	eNB Early Status Transfer Transparent Container	220
-9.2.1.158	WUS Assistance Information	221
-9.2.1.159	NB-IoT Paging DRX	221
-9.2.1.160	UE Radio Capability for Paging – NR Format	221
-9.2.2	Transport Network Layer Related IEs	222
-9.2.2.1	Transport Layer Address	222
-9.2.2.2	GTP-TEID	222
-9.2.2.3	Tunnel Information	222
-9.2.2.4	URI	222
-9.2.3	NAS Related IEs	223
-9.2.3.1	LAI	223
-9.2.3.2	RAC	223
-9.2.3.3	MME UE S1AP ID	223
-9.2.3.4	eNB UE S1AP ID	223
-9.2.3.5	NAS-PDU	223
-9.2.3.6	S-TMSI	224
-9.2.3.7	TAC	224
-9.2.3.8	PLMN Identity	224
-9.2.3.9	GUMMEI	224
-9.2.3.10	UE Identity Index value	224
-9.2.3.11	IMSI	225
-9.2.3.12	MMEC	225
-9.2.3.13	UE Paging Identity	225
-9.2.3.14	DL Forwarding	225
-9.2.3.15	Direct Forwarding Path Availability	226
-9.2.3.16	TAI	226
-9.2.3.17	Relative MME Capacity	226
-9.2.3.18	UE S1AP ID pair	226
-9.2.3.19	Overload Response	226
-9.2.3.20	Overload Action	226
-9.2.3.21	CS Fallback Indicator	227
-9.2.3.22	CN Domain	227
-9.2.3.23	RIM Transfer	227
-9.2.3.24	RIM Information	227
-9.2.3.25	RIM Routing Address	227
-9.2.3.26	SON Configuration Transfer	228
-9.2.3.26a	EN-DC SON Configuration Transfer	229
-9.2.3.27	SON Information	229
-9.2.3.28	SON Information Reply	230
-9.2.3.29	X2 TNL Configuration Info	230
-9.2.3.30	NAS Security Parameters from E-UTRAN	231
-9.2.3.31	NAS Security Parameters to E-UTRAN	231
-9.2.3.32	LPPa-PDU	232
-9.2.3.33	Routing ID	232
-9.2.3.34	Time Synchronisation Info	232
-9.2.3.35	Void	232
-9.2.3.36	Traffic Load Reduction Indication	232
-9.2.3.37	Additional CS Fallback Indicator	233
-9.2.3.38	Masked IMEISV	233
-9.2.3.39	SON Information Report	233
-9.2.3.40	RLF Report Information	233
-9.2.3.41	Muting Pattern Information	234
-9.2.3.42	Synchronisation Information	234
-9.2.3.43	Listening Subframe Pattern	234
-9.2.3.44	MME Group ID	234
-9.2.3.45	Additional GUTI	235
-9.2.3.46	Extended UE Identity Index Value	235
-9.2.3.47	NB-IoT UE Identity Index Value	235
-9.2.3.48	DL NAS PDU Delivey Request	235
-9.2.3.49	DL CP Security Information	235
-9.2.3.50	UL CP Security Information	236
-9.2.3.51	UE Capability Info Request	236
-9.2.3.52	5GS TAI	236
-9.2.3.53	5GS TAC	236
-9.2.3.54	End Indication	236
-9.2.3.55	Pending Data Indication	236
-9.3	Message and Information Element Abstract Syntax (with ASN.1)	238
-9.3.0	General	238
-9.3.1	Usage of private message mechanism for non-standard use	238
-9.3.2	Elementary Procedure Definitions	239
-9.3.3	PDU Definitions	254
-9.3.4	Information Element Definitions	318
-9.3.5	Common Definitions	378
-9.3.6	Constant Definitions	378
-9.3.7	Container Definitions	388
-9.4	Message Transfer Syntax	392
-9.5	Timers	392
-10	Handling of Unknown, Unforeseen and Erroneous Protocol Data	393
-10.1	General	393
-10.2	Transfer Syntax Error	393
-10.3	Abstract Syntax Error	393
-10.3.1	General	393
-10.3.2	Criticality Information	394
-10.3.3	Presence Information	394
-10.3.4	Not comprehended IE/IE group	395
-10.3.4.1	Procedure Code	395
-10.3.4.1A	Type of Message	395
-10.3.4.2	IEs other than the Procedure Code and Type of Message	395
-10.3.5	Missing IE or IE group	396
-10.3.6	IEs or IE groups received in wrong order or with too many occurrences or erroneously present	397
-10.4	Logical Error	398
-10.5	Exceptions	398
-10.6	Handling of AP ID	399
-Annex A (informative): S1AP Transparent containers content	400
-Annex B (normative): IEs for SON Transfer	401
-B.1	Tabular definition	401
-B.1.1	SON Transfer Application Identity	401
-B.1.2	SON Transfer Request Container	401
-B.1.3	SON Transfer Response Container	402
-B.1.4	SON Transfer Cause	403
-B.1.5	Cell Load Reporting Response	405
-B.1.6	E-UTRAN Cell Load Reporting Response	405
-B.1.7	Multi-Cell Load Reporting Request	406
-B.1.8	IRAT Cell ID	406
-B.1.9	Multi-Cell Load Reporting Response	406
-B.1.10	Cell Load Reporting Cause	407
-B.1.11	Event-Triggered Cell Load Reporting Request	408
-B.1.12	Event-triggered Cell Load Reporting Response	408
-B.1.13	HO Report	408
-B.1.14	Cell Activation Request	409
-B.1.15	Cell Activation Response	410
-B.1.16	Cell State Indication	410
-B.1.17	Failure Event Report	410
-B.1.18	eHRPD Sector ID	411
-B.1.19	eHRPD Sector Load Reporting Response	411
-B.1.20	eHRPD Composite Available Capacity	411
-B.1.21	eHRPD Sector Capacity Class Value	412
-B.1.22	eHRPD Capacity Value	412
-B.1.23	Candidate PCI	412
-B.2	ASN.1 definition	412
-Annex C (informative): Processing of Transparent Containers at the MME	417
-Annex D (informative): Change history	418
+8.19.2	Successful Operation	109
+8.19.3	Unsuccessful Operation	109
+8.19.4	Abnormal Conditions	109
+9	Elements for S1AP Communication	110
+9.1	Message Functional Definition and Content	110
+9.1.1	General	110
+9.1.2	Message Contents	110
+9.1.2.1	Presence	110
+9.1.2.2	Criticality	110
+9.1.2.3	Range	110
+9.1.2.4	Assigned Criticality	110
+9.1.3	E-RAB Management Messages	111
+9.1.3.1	E-RAB SETUP REQUEST	111
+9.1.3.2	E-RAB SETUP RESPONSE	112
+9.1.3.3	E-RAB MODIFY REQUEST	113
+9.1.3.4	E-RAB MODIFY RESPONSE	114
+9.1.3.5	E-RAB RELEASE COMMAND	114
+9.1.3.6	E-RAB RELEASE RESPONSE	115
+9.1.3.7	E-RAB RELEASE INDICATION	115
+9.1.3.8	E-RAB MODIFICATION INDICATION	116
+9.1.3.9	E-RAB MODIFICATION CONFIRM	117
+9.1.4	Context Management Messages	117
+9.1.4.1	INITIAL CONTEXT SETUP REQUEST	117
+9.1.4.2	Void	119
+9.1.4.3	INITIAL CONTEXT SETUP RESPONSE	119
+9.1.4.4	INITIAL CONTEXT SETUP FAILURE	120
+9.1.4.5	UE CONTEXT RELEASE REQUEST	120
+9.1.4.6	UE CONTEXT RELEASE COMMAND	121
+9.1.4.7	UE CONTEXT RELEASE COMPLETE	121
+9.1.4.8	UE CONTEXT MODIFICATION REQUEST	121
+9.1.4.9	UE CONTEXT MODIFICATION RESPONSE	122
+9.1.4.10	UE CONTEXT MODIFICATION FAILURE	123
+9.1.4.11	UE RADIO CAPABILITY MATCH REQUEST	123
+9.1.4.12	UE RADIO CAPABILITY MATCH RESPONSE	123
+9.1.4.13	UE CONTEXT MODIFICATION INDICATION	123
+9.1.4.14	UE CONTEXT MODIFICATION CONFIRM	124
+9.1.4.15	UE CONTEXT SUSPEND REQUEST	124
+9.1.4.16	UE CONTEXT SUSPEND RESPONSE	124
+9.1.4.17	UE CONTEXT RESUME REQUEST	125
+9.1.4.18	UE CONTEXT RESUME RESPONSE	125
+9.1.4.19	UE CONTEXT RESUME FAILURE	126
+9.1.4.20	CONNECTION ESTABLISHMENT INDICATION	126
+9.1.4.21	RETRIEVE UE INFORMATION	126
+9.1.4.22	UE INFORMATION TRANSFER	126
+9.1.4.23	eNB CP RELOCATION INDICATION	127
+9.1.4.24	MME CP RELOCATION INDICATION	127
+9.1.5	Handover Signalling Messages	128
+9.1.5.1	HANDOVER REQUIRED	128
+9.1.5.2	HANDOVER COMMAND	129
+9.1.5.3	HANDOVER PREPARATION FAILURE	130
+9.1.5.4	HANDOVER REQUEST	131
+9.1.5.5	HANDOVER REQUEST ACKNOWLEDGE	133
+9.1.5.6	HANDOVER FAILURE	134
+9.1.5.7	HANDOVER NOTIFY	134
+9.1.5.8	PATH SWITCH REQUEST	135
+9.1.5.9	PATH SWITCH REQUEST ACKNOWLEDGE	136
+9.1.5.10	PATH SWITCH REQUEST FAILURE	138
+9.1.5.11	HANDOVER CANCEL	138
+9.1.5.12	HANDOVER CANCEL ACKNOWLEDGE	138
+9.1.5.13	eNB STATUS TRANSFER	138
+9.1.5.14	MME STATUS TRANSFER	139
+9.1.5.15	HANDOVER SUCCESS	139
+9.1.5.16	eNB EARLY STATUS TRANSFER	139
+9.1.5.17	MME EARLY STATUS TRANSFER	139
+9.1.6	PAGING	140
+9.1.7	NAS Transport Messages	141
+9.1.7.1	INITIAL UE MESSAGE	141
+9.1.7.2	DOWNLINK NAS TRANSPORT	143
+9.1.7.3	UPLINK NAS TRANSPORT	144
+9.1.7.4	NAS NON DELIVERY INDICATION	144
+9.1.7.4a	NAS DELIVERY INDICATION	144
+9.1.7.5	REROUTE NAS REQUEST	145
+9.1.8	Management messages	145
+9.1.8.1	RESET	145
+9.1.8.2	RESET ACKNOWLEDGE	145
+9.1.8.3	ERROR INDICATION	146
+9.1.8.4	S1 SETUP REQUEST	146
+9.1.8.5	S1 SETUP RESPONSE	148
+9.1.8.6	S1 SETUP FAILURE	148
+9.1.8.7	ENB CONFIGURATION UPDATE	149
+9.1.8.8	ENB CONFIGURATION UPDATE ACKNOWLEDGE	151
+9.1.8.9	ENB CONFIGURATION UPDATE FAILURE	151
+9.1.8.10	MME CONFIGURATION UPDATE	151
+9.1.8.11	MME CONFIGURATION UPDATE ACKNOWLEDGE	152
+9.1.8.12	MME CONFIGURATION UPDATE FAILURE	152
+9.1.8.13	OVERLOAD START	153
+9.1.8.14	OVERLOAD STOP	153
+9.1.9	S1 CDMA2000 Tunnelling Messages	154
+9.1.9.1	DOWNLINK S1 CDMA2000 TUNNELLING	154
+9.1.9.2	UPLINK S1 CDMA2000 TUNNELLING	154
+9.1.10	UE CAPABILITY INFO INDICATION	154
+9.1.11	Trace Messages	155
+9.1.11.1	TRACE START	155
+9.1.11.2	TRACE FAILURE INDICATION	155
+9.1.11.3	DEACTIVATE TRACE	156
+9.1.12	Location Reporting Messages	156
+9.1.12.1	LOCATION REPORTING CONTROL	156
+9.1.12.2	LOCATION REPORT FAILURE INDICATION	156
+9.1.12.3	LOCATION REPORT	156
+9.1.13	Warning Message Transmission Messages	157
+9.1.13.1	WRITE-REPLACE WARNING REQUEST	157
+9.1.13.2	WRITE-REPLACE WARNING RESPONSE	157
+9.1.13.3	KILL REQUEST	158
+9.1.13.4	KILL RESPONSE	158
+9.1.13.5	PWS RESTART INDICATION	158
+9.1.13.6	PWS FAILURE INDICATION	159
+9.1.14	eNB DIRECT INFORMATION TRANSFER	159
+9.1.15	MME DIRECT INFORMATION TRANSFER	159
+9.1.16	eNB CONFIGURATION TRANSFER	160
+9.1.17	MME CONFIGURATION TRANSFER	160
+9.1.18	CELL TRAFFIC TRACE	160
+9.1.19	LPPa Transport Messages	161
+9.1.19.1	DOWNLINK UE ASSOCIATED LPPA TRANSPORT	161
+9.1.19.2	UPLINK UE ASSOCIATED LPPA TRANSPORT	161
+9.1.19.3	DOWNLINK NON UE ASSOCIATED LPPA TRANSPORT	162
+9.1.19.4	UPLINK NON UE ASSOCIATED LPPA TRANSPORT	162
+9.1.20	Secondary RAT Report Data Usage Messages	162
+9.1.20.1	SECONDARY RAT DATA USAGE REPORT	162
+9.1.21	UE Radio Capability ID Mapping Messages	162
+9.1.21.1	UE RADIO CAPABILITY ID MAPPING REQUEST	162
+9.1.21.2	UE RADIO CAPABILITY ID MAPPING RESPONSE	163
+9.2	Information Element Definitions	163
+9.2.0	General	163
+9.2.1	Radio Network Layer Related IEs	163
+9.2.1.1	Message Type	163
+9.2.1.2	E-RAB ID	163
+9.2.1.3	Cause	164
+9.2.1.3a	RRC Establishment Cause	168
+9.2.1.4	Trace Activation	168
+9.2.1.5	Source ID	169
+9.2.1.6	Target ID	169
+9.2.1.7	Source eNB to Target eNB Transparent Container	170
+9.2.1.8	Target eNB to Source eNB Transparent Container	172
+9.2.1.9	Source RNC to Target RNC Transparent Container	173
+9.2.1.10	Target RNC to Source RNC Transparent Container	173
+9.2.1.11	Source BSS to Target BSS Transparent Container	173
+9.2.1.12	Target BSS to Source BSS Transparent Container	173
+9.2.1.13	Handover Type	173
+9.2.1.14	Extended RNC-ID	173
+9.2.1.15	E-RAB Level QoS Parameters	173
+9.2.1.16	Paging DRX	174
+9.2.1.17	Paging Cause	174
+9.2.1.18	GBR QoS Information	174
+9.2.1.19	Bit Rate	175
+9.2.1.20	UE Aggregate Maximum Bit Rate	176
+9.2.1.21	Criticality Diagnostics	176
+9.2.1.22	Handover Restriction List	177
+9.2.1.23	CDMA2000-PDU	179
+9.2.1.24	CDMA2000 RAT Type	179
+9.2.1.25	CDMA2000 Sector ID	180
+9.2.1.26	Security Context	180
+9.2.1.27	UE Radio Capability	181
+9.2.1.28	CDMA2000 HO Status	181
+9.2.1.29	CDMA2000 HO Required Indication	181
+9.2.1.30	1xRTT MEID	181
+9.2.1.31	eNB Status Transfer Transparent Container	181
+9.2.1.32	COUNT Value	183
+9.2.1.33	CDMA2000 1xRTT RAND	183
+9.2.1.34	Request Type	183
+9.2.1.35	CDMA2000 1xRTT SRVCC Info	184
+9.2.1.36	E-RAB List	184
+9.2.1.37	Global eNB ID	185
+9.2.1.37a	Global en-gNB ID	185
+9.2.1.38	E-UTRAN CGI	185
+9.2.1.39	Subscriber Profile ID for RAT/Frequency priority	185
+9.2.1.39a	Additional RRM Policy Index	186
+9.2.1.40	UE Security Capabilities	186
+9.2.1.41	Security Key	186
+9.2.1.42	UE History Information	187
+9.2.1.43	Last Visited Cell Information	187
+9.2.1.43a	Last Visited E-UTRAN Cell Information	187
+9.2.1.43b	Last Visited GERAN Cell Information	188
+9.2.1.44	Message Identifier	188
+9.2.1.45	Serial Number	189
+9.2.1.46	Warning Area List	189
+9.2.1.47	Emergency Area ID	189
+9.2.1.48	Repetition Period	189
+9.2.1.49	Number of Broadcasts Requested	190
+9.2.1.50	Warning Type	190
+9.2.1.51	Warning Security Information	190
+9.2.1.52	Data Coding Scheme	190
+9.2.1.53	Warning Message Contents	190
+9.2.1.54	Broadcast Completed Area List	190
+9.2.1.55	Inter-system Information Transfer Type	191
+9.2.1.56	Source To Target Transparent Container	191
+9.2.1.57	Target To Source Transparent Container	192
+9.2.1.58	SRVCC Operation Possible	193
+9.2.1.59	SRVCC HO Indication	193
+9.2.1.60	Allocation and Retention Priority	193
+9.2.1.61	Time to wait	194
+9.2.1.62	CSG Id	194
+9.2.1.63	CSG Id List	194
+9.2.1.64	MS Classmark 2	195
+9.2.1.65	MS Classmark 3	195
+9.2.1.66	Cell Type	195
+9.2.1.67	Old BSS to New BSS Information	195
+9.2.1.68	Layer 3 Information	195
+9.2.1.69	E-UTRAN Round Trip Delay Estimation Info	195
+9.2.1.70	Broadcast Cancelled Area List	195
+9.2.1.71	Number of Broadcasts	196
+9.2.1.72	Concurrent Warning Message Indicator	196
+9.2.1.73	CSG Membership Status	197
+9.2.1.74	Cell Access Mode	197
+9.2.1.75	Extended Repetition Period	197
+9.2.1.76	Data Forwarding Not Possible	197
+9.2.1.77	PS Service Not Available	197
+9.2.1.78	Paging Priority	197
+9.2.1.79	Relay Node Indicator	198
+9.2.1.80	Correlation ID	198
+9.2.1.81	MDT Configuration	198
+9.2.1.82	MME Relay Support Indicator	201
+9.2.1.83	Management Based MDT Allowed	201
+9.2.1.84	GW Context Release Indication	202
+9.2.1.85	Voice Support Match Indicator	202
+9.2.1.86	M3 Configuration	202
+9.2.1.87	M4 Configuration	202
+9.2.1.88	M5 Configuration	202
+9.2.1.89	MDT PLMN List	203
+9.2.1.90	COUNT Value Extended	203
+9.2.1.91	Kill-all Warning Messages Indicator	203
+9.2.1.92	LHN ID	203
+9.2.1.93	User Location Information	203
+9.2.1.94	MBSFN-ResultToLog	204
+9.2.1.95	EARFCN	204
+9.2.1.96	Expected UE Behaviour	205
+9.2.1.97	Expected UE Activity Behaviour	205
+9.2.1.98	UE Radio Capability for Paging	205
+9.2.1.99	ProSe Authorized	206
+9.2.1.100	COUNT Value for PDCP SN Length 18	206
+9.2.1.101	M6 Configuration	206
+9.2.1.102	M7 Configuration	206
+9.2.1.103	Assistance Data for Paging	207
+9.2.1.104	Assistance Data for Recommended Cells	207
+9.2.1.105	Information on Recommended Cells and eNBs for Paging	207
+9.2.1.106	Recommended Cells for Paging	207
+9.2.1.107	Recommended eNBs for Paging	208
+9.2.1.108	Assistance Data for CE capable UEs	208
+9.2.1.109	Cell Identifier and Coverage Enhancement Level	209
+9.2.1.110	Paging Attempt Information	209
+9.2.1.111	Paging eDRX Information	209
+9.2.1.112	UE Retention Information	209
+9.2.1.113	UE User Plane CIoT Support Indicator	209
+9.2.1.114	NB-IoT Default Paging DRX	210
+9.2.1.115	NB-IoT Paging eDRX Information	210
+9.2.1.116	Bearer Type	210
+9.2.1.117	RAT Type	210
+9.2.1.118	CE-mode-B Support Indicator	210
+9.2.1.119	SRVCC Operation Not Possible	211
+9.2.1.120	V2X Services Authorized	211
+9.2.1.121	Served DCNs Items	211
+9.2.1.122	UE Sidelink Aggregate Maximum Bit Rate	211
+9.2.1.123	Enhanced Coverage Restricted	211
+9.2.1.124	Secondary RAT Usage Report List	212
+9.2.1.125	Handover Flag	213
+9.2.1.126	Extended Bit Rate	213
+9.2.1.127	NR UE Security Capabilities	213
+9.2.1.128	UE Application layer measurement configuration	214
+9.2.1.129	CE-mode-B Restricted	215
+9.2.1.130	Packet Loss Rate	216
+9.2.1.131 	Global RAN Node ID	216
+9.2.1.132	Global gNB ID	216
+9.2.1.133	Source NG-RAN Node To Target NG-RAN Node Transparent Container	216
+9.2.1.134	Target NG-RAN Node To Source NG-RAN Node Transparent Container	217
+9.2.1.135	LTE-M Indication	217
+9.2.1.136	Aerial UE subscription information	217
+9.2.1.137	Bluetooth Measurement Configuration	217
+9.2.1.138	WLAN Measurement Configuration	217
+9.2.1.139	Warning Area Coordinates	218
+9.2.1.140	Subscription Based UE Differentiation Information	218
+9.2.1.141	PSCell Information	219
+9.2.1.142	NR CGI	220
+9.2.1.143	Time Since Secondary Node Release	220
+9.2.1.144	UE Context Reference at Source	220
+9.2.1.145	RAN UE NGAP ID	220
+9.2.1.146	IAB Authorized	220
+9.2.1.147	Ethernet Type	221
+9.2.1.148	NR V2X Services Authorized	221
+9.2.1.149	NR UE Sidelink Aggregate Maximum Bit Rate	221
+9.2.1.150	PC5 QoS Parameters	221
+9.2.1.151	Inter System Measurement Configuration	222
+9.2.1.152	Source Node ID	224
+9.2.1.153	UE Radio Capability ID	224
+9.2.1.154	UE Radio Capability – NR Format	224
+9.2.1.155	DAPS Request Information	225
+9.2.1.156	DAPS Response Information	225
+9.2.1.157	eNB Early Status Transfer Transparent Container	225
+9.2.1.158	WUS Assistance Information	226
+9.2.1.159	NB-IoT Paging DRX	226
+9.2.1.160	UE Radio Capability for Paging – NR Format	226
+9.2.1.161	Last Visited PSCell Information	226
+9.2.1.162	RACS Indication	226
+9.2.1.163	Security Indication	227
+9.2.1.164	Security Result	227
+9.2.1.165	Event Trigger Logged MDT Configuration	227
+9.2.1.166	Sensor Measurement Configuration	228
+9.2.2	Transport Network Layer Related IEs	229
+9.2.2.1	Transport Layer Address	229
+9.2.2.2	GTP-TEID	229
+9.2.2.3	Tunnel Information	229
+9.2.2.4	URI	229
+9.2.3	NAS Related IEs	230
+9.2.3.1	LAI	230
+9.2.3.2	RAC	230
+9.2.3.3	MME UE S1AP ID	230
+9.2.3.4	eNB UE S1AP ID	230
+9.2.3.5	NAS-PDU	230
+9.2.3.6	S-TMSI	231
+9.2.3.7	TAC	231
+9.2.3.8	PLMN Identity	231
+9.2.3.9	GUMMEI	231
+9.2.3.10	UE Identity Index value	231
+9.2.3.11	IMSI	232
+9.2.3.12	MMEC	232
+9.2.3.13	UE Paging Identity	232
+9.2.3.14	DL Forwarding	232
+9.2.3.15	Direct Forwarding Path Availability	233
+9.2.3.16	TAI	233
+9.2.3.17	Relative MME Capacity	233
+9.2.3.18	UE S1AP ID pair	233
+9.2.3.19	Overload Response	233
+9.2.3.20	Overload Action	233
+9.2.3.21	CS Fallback Indicator	234
+9.2.3.22	CN Domain	234
+9.2.3.23	RIM Transfer	234
+9.2.3.24	RIM Information	234
+9.2.3.25	RIM Routing Address	234
+9.2.3.26	SON Configuration Transfer	235
+9.2.3.26a	EN-DC SON Configuration Transfer	236
+9.2.3.27	SON Information	236
+9.2.3.28	SON Information Reply	237
+9.2.3.29	X2 TNL Configuration Info	237
+9.2.3.30	NAS Security Parameters from E-UTRAN	238
+9.2.3.31	NAS Security Parameters to E-UTRAN	238
+9.2.3.32	LPPa-PDU	239
+9.2.3.33	Routing ID	239
+9.2.3.34	Time Synchronisation Info	239
+9.2.3.35	Void	239
+9.2.3.36	Traffic Load Reduction Indication	239
+9.2.3.37	Additional CS Fallback Indicator	240
+9.2.3.38	Masked IMEISV	240
+9.2.3.39	SON Information Report	240
+9.2.3.40	RLF Report Information	240
+9.2.3.41	Muting Pattern Information	241
+9.2.3.42	Synchronisation Information	241
+9.2.3.43	Listening Subframe Pattern	241
+9.2.3.44	MME Group ID	241
+9.2.3.45	Additional GUTI	242
+9.2.3.46	Extended UE Identity Index Value	242
+9.2.3.47	NB-IoT UE Identity Index Value	242
+9.2.3.48	DL NAS PDU Delivey Request	242
+9.2.3.49	DL CP Security Information	242
+9.2.3.50	UL CP Security Information	243
+9.2.3.51	UE Capability Info Request	243
+9.2.3.52	5GS TAI	243
+9.2.3.53	5GS TAC	243
+9.2.3.54	End Indication	243
+9.2.3.55	Pending Data Indication	243
+9.2.3.56	LTE NTN TAI Information	244
+9.3	Message and Information Element Abstract Syntax (with ASN.1)	245
+9.3.0	General	245
+9.3.1	Usage of private message mechanism for non-standard use	245
+9.3.2	Elementary Procedure Definitions	246
+9.3.3	PDU Definitions	261
+9.3.4	Information Element Definitions	325
+9.3.5	Common Definitions	389
+9.3.6	Constant Definitions	389
+9.3.7	Container Definitions	399
+9.4	Message Transfer Syntax	404
+9.5	Timers	404
+10	Handling of Unknown, Unforeseen and Erroneous Protocol Data	405
+10.1	General	405
+10.2	Transfer Syntax Error	405
+10.3	Abstract Syntax Error	405
+10.3.1	General	405
+10.3.2	Criticality Information	406
+10.3.3	Presence Information	406
+10.3.4	Not comprehended IE/IE group	407
+10.3.4.1	Procedure Code	407
+10.3.4.1A	Type of Message	407
+10.3.4.2	IEs other than the Procedure Code and Type of Message	407
+10.3.5	Missing IE or IE group	408
+10.3.6	IEs or IE groups received in wrong order or with too many occurrences or erroneously present	409
+10.4	Logical Error	410
+10.5	Exceptions	410
+10.6	Handling of AP ID	411
+Annex A (informative): S1AP Transparent containers content	412
+Annex B (normative): IEs for SON Transfer	413
+B.1	Tabular definition	413
+B.1.1	SON Transfer Application Identity	413
+B.1.2	SON Transfer Request Container	413
+B.1.3	SON Transfer Response Container	414
+B.1.4	SON Transfer Cause	415
+B.1.5	Cell Load Reporting Response	417
+B.1.6	E-UTRAN Cell Load Reporting Response	417
+B.1.7	Multi-Cell Load Reporting Request	418
+B.1.8	IRAT Cell ID	418
+B.1.9	Multi-Cell Load Reporting Response	418
+B.1.10	Cell Load Reporting Cause	419
+B.1.11	Event-Triggered Cell Load Reporting Request	420
+B.1.12	Event-triggered Cell Load Reporting Response	420
+B.1.13	HO Report	420
+B.1.14	Cell Activation Request	421
+B.1.15	Cell Activation Response	422
+B.1.16	Cell State Indication	422
+B.1.17	Failure Event Report	422
+B.1.18	eHRPD Sector ID	423
+B.1.19	eHRPD Sector Load Reporting Response	423
+B.1.20	eHRPD Composite Available Capacity	423
+B.1.21	eHRPD Sector Capacity Class Value	424
+B.1.22	eHRPD Capacity Value	424
+B.1.23	Candidate PCI	424
+B.2	ASN.1 definition	424
+Annex C (informative): Processing of Transparent Containers at the MME	429
+Annex D (informative): Change history	430
 
 Foreword
 This Technical Specification has been produced by the 3rd Generation Partnership Project (3GPP).
@@ -882,14 +889,15 @@ MTSI	Multimedia Telephony Service for IMS
 NAS	Non Access Stratum
 NB-IoT	Narrowband IoT
 NNSF	NAS Node Selection Function 
+NTN	Non Terrestrial Networks
 OTDOA	Observed Time Difference of Arrival
-PS	Packet Switched
-PSCell	Primary SCell
-ProSe	Proximity Services
-PWS	Public Warning System
 PDCP	Packet Data Convergence Protocol
 PLMN	Public Land Mobile Network
+ProSe	Proximity Services
 PS	Packet Switched
+PSCell	Primary SCell
+PWS	Public Warning System
+RACS	Radio Capability Signalling optimization
 RRC	Radio Resource Control
 RIM	RAN Information Management
 QMC	QoE Measurement Collection
@@ -1211,6 +1219,10 @@ If the Correlation ID IE is included in the E-RAB SETUP REQUEST message towards 
 If the SIPTO Correlation ID IE is included in the E-RAB SETUP REQUEST message towards the eNB with L-GW function for SIPTO@LN operation, then the eNB shall use this information for SIPTO@LN operation for the concerned E-RAB. 
 If the Bearer Type IE is included in the E-RAB SETUP REQUEST message and is set to "non IP", then the eNB shall not perform IP header compression for the concerned E-RAB.
 If the Ethernet Type IE is included in the E-RAB SETUP REQUEST message and is set to "True", then the eNB shall, if supported, take this into account to perform header compression appropriately for the concerned E-RAB.
+For each E-RAB for which the Security Indication IE is included in the E-RAB To Be Setup Item IEs IE of the E-RAB SETUP REQUEST message:
+-	if the Integrity Protection Indication IE is set to "required", then the eNB shall, if supported by the eNB and the UE, perform user plane integrity protection for the concerned E-RAB as specified in TS 33.401 [15], and otherwise it shall reject the establishment of the concerned E-RAB with an appropriate cause value. 
+-	if the Integrity Protection Indication IE is set to "preferred", then the eNB should, if supported by the eNB and the UE, perform user plane integrity protection for the concerned E-RAB as specified in TS 33.401 [15].
+-	if the Integrity Protection Indication IE is set to "not needed", then the eNB shall not perform user plane integrity protection for the concerned E-RAB.
 The E-RAB SETUP REQUEST message may contain 
 -	the UE Aggregate Maximum Bit Rate IE. 
 If the UE Aggregate Maximum Bit Rate IE is included in the E-RAB SETUP REQUEST the eNB shall
@@ -1234,6 +1246,8 @@ The eNB shall report to the MME, in the E-RAB SETUP RESPONSE message, the result
 -	A list of E-RABs which failed to be established, if any, shall be included in the E-RAB Failed to Setup List IE. 
 In case of the establishment of an E-RAB the EPC must be prepared to receive user data before the E-RAB SETUP RESPONSE message has been received.
 When the eNB reports unsuccessful establishment of an E-RAB, the cause value should be precise enough to enable the MME to know the reason for an unsuccessful establishment, e.g., “Radio resources not available”, “Failure in the Radio Interface Procedure”.
+The eNB shall, if supported, report in the E-RAB SETUP RESPONSE message location information of the UE in the User Location Information IE. 
+If the User Location Information IE is included in the E-RAB SETUP RESPONSE message, the MME shall handle this information as specified in TS 23.401 [11].
 Interactions with Handover Preparation procedure:
 If a handover becomes necessary during E-RAB Setup, the eNB may interrupt the ongoing E-RAB Setup procedure and initiate the Handover Preparation procedure as follows:
 1.	The eNB shall send the E-RAB SETUP RESPONSE message in which the eNB shall indicate, if necessary 
@@ -1272,6 +1286,8 @@ The eNB shall report to the MME, in the E-RAB MODIFY RESPONSE message, the resul
 When the eNB reports unsuccessful modification of an E-RAB, the cause value should be precise enough to enable the MME to know the reason for an unsuccessful modification, e.g., “Radio resources not available”, “Failure in the Radio Interface Procedure”.
 In case of a modification of an E-RAB the EPC must be prepared to receive user data according to the modified E-RAB profile prior to the E-RAB MODIFY RESPONSE message.
 If the Secondary RAT Data Usage Request IE set to "requested" was included in the E-RAB MODIFY REQUEST message, and the eNB supports EN-DC, LAA, LWA or LWIP and has secondary RAT usage data to report, then the Secondary RAT Usage Report List IE shall be included in the E-RAB MODIFY RESPONSE message.
+The eNB shall, if supported, report in the E-RAB MODIFY RESPONSE message location information of the UE in the User Location Information IE.
+If the User Location Information IE is included in the E-RAB MODIFY RESPONSE message, the MME shall handle this information as specified in TS 23.401 [11].
 Interactions with Handover Preparation procedure:
 If a handover becomes necessary during E-RAB modify, the eNB may interrupt the ongoing E-RAB Modify procedure and initiate the Handover Preparation procedure as follows:
 1.	The eNB shall send the E-RAB MODIFY RESPONSE message in which the eNB shall indicate, if necessary 
@@ -1292,7 +1308,7 @@ The purpose of the E-RAB Release procedure is to enable the release of already e
 Figure 8.2.3.2.1-1: E-RAB Release procedure. Successful operation.
 The MME initiates the procedure by sending an E-RAB RELEASE COMMAND message. 
 The E-RAB RELEASE COMMAND message shall contain the information required by the eNB to release at least one E-RAB in the E-RAB To Be Released List IE. If a NAS-PDU IE is contained in the message, the eNB shall pass it to the UE.
-Upon reception of the E-RAB RELEASE COMMAND message the eNB shall execute the release of the requested E-RABs. For each E-RAB to be released the eNB shall release the corresponding Data Radio Bearer and release the allocated resources on Uu. The eNB shall pass the value contained in the E-RAB ID IE received for the E-RAB to the radio interface protocol for each Data Radio Bearer to be released. The eNB shall release allocated resources on S1 for the E-RABs requested to be released.
+Upon reception of the E-RAB RELEASE COMMAND message, the eNB shall execute the release of the requested E-RABs. For each E-RAB to be released the eNB shall release the corresponding Data Radio Bearer and release the allocated resources on Uu. The eNB shall pass the value contained in the E-RAB ID IE received for the E-RAB to the radio interface protocol for each Data Radio Bearer to be released. The eNB shall release allocated resources on S1 for the E-RABs requested to be released.
 The E-RAB RELEASE COMMAND message may contain 
 -	the UE Aggregate Maximum Bit Rate IE.
 If the UE Aggregate Maximum Bit Rate IE is included in the E-RAB RELEASE COMMAND the eNB shall
@@ -1366,6 +1382,7 @@ The E-RAB to be Setup Item IE may contain:
 -	the Correlation ID IE in case of LIPA operation,
 -	the SIPTO Correlation ID IE in case of SIPTO@LN operation,
 -	the Bearer Type IE.
+-	the Security Indication IE
 The INITIAL CONTEXT SETUP REQUEST message may contain
 -	the Trace Activation IE.
 -	the Handover Restriction List IE, which may contain roaming or access restrictions.
@@ -1399,9 +1416,10 @@ If the Correlation ID IE is included in the INITIAL CONTEXT SETUP REQUEST messag
 If the SIPTO Correlation ID IE is included in the INITIAL CONTEXT SETUP REQUEST message towards the eNB with L-GW function for SIPTO@LN operation, then the eNB shall use this information for SIPTO@LN operation for the concerned E-RAB.
 If the Bearer Type IE is included in the INITIAL CONTEXT SETUP REQUEST message and is set to "non IP", then the eNB shall not perform IP header compression for the concerned E-RAB.
 If the Ethernet Type IE is included in the INITIAL CONTEXT SETUP REQUEST message and is set to "True", then the eNB shall, if supported, take this into account to perform header compression appropriately for the concerned E-RAB.
+If the Security Indication IE is included in the INITIAL CONTEXT SETUP REQUEST message, the eNB shall, if supported, act as defined in the E-RAB Setup procedure for the concerned E-RAB.
 If the Masked IMEISV IE is contained in the INITIAL CONTEXT SETUP REQUEST the target eNB shall, if supported, use it to determine the characteristics of the UE for subsequent handling.
 If the Expected UE Behaviour IE is included in the INITIAL CONTEXT SETUP REQUEST message, the eNB shall, if supported, store this information and may use it to determine the RRC connection time.
-Upon receipt of the INITIAL CONTEXT SETUP REQUEST message the eNB shall
+Upon receipt of the INITIAL CONTEXT SETUP REQUEST message, the eNB shall
 -	attempt to execute the requested E-RAB configuration.
 -	store the UE Aggregate Maximum Bit Rate in the UE context, and use the received UE Aggregate Maximum Bit Rate for non-GBR Bearers for the concerned UE.
 -	pass the value contained in the E-RAB ID IE and the NAS-PDU IE received for the E-RAB for each established Data radio bearer to the radio interface protocol. The eNB shall not send the NAS PDUs associated to the failed Data radio bearers to the UE.
@@ -1418,7 +1436,7 @@ Upon receipt of the INITIAL CONTEXT SETUP REQUEST message the eNB shall
  -	store the received ProSe Authorization information, if supported, in the UE context.
 -	store the received V2X Services Authorization information, if supported, in the UE context.
 -	store the received UE Sidelink Aggregate Maximum Bit Rate, if supported, in the UE context, and use it for the concerned UE’s sidelink communication in network scheduled mode for V2X services.
--	store the received IAB Authorization Information, if supported, in the UE context.
+-	store the received IAB Authorization Information, if supported, in the UE context, and use it accordingly for the IAB-MT.
 -	store the received NR V2X Services Authorization information, if supported, in the UE context.
 -	store the received NR UE Sidelink Aggregate Maximum Bit Rate, if supported, in the UE context, and use it for the concerned UE’s sidelink communication in network scheduled mode for NR V2X services.
 -	store the received PC5 QoS Parameters, if supported, in the UE context, and use it for the concerned UE’s NR sidelink communication as specified in TS 23.285 [49].
@@ -1443,6 +1461,7 @@ If the Trace Activation IE is included in the INITIAL CONTEXT SETUP REQUEST mess
 -	if the Trace Activation IE includes the Bluetooth Measurement Configuration IE, within the MDT Configuration IE, take it into account for MDT Configuration as described in TS 37.320 [31].
 -	if the Trace Activation IE includes the WLAN Measurement Configuration IE, within the MDT Configuration IE, take it into account for MDT Configuration as described in TS 37.320 [31].
 -	if the Trace Activation IE includes the MDT Configuration NR IE, store and forward the MDT Configuration NR IE to the SgNB, if the eNB has configured EN-DC for the UE.
+-	if the Trace Activation IE includes the Sensor Measurement Configuration IE within the MDT Configuration IE, take it into account for MDT Configuration as described in TS 37.320 [31].
 If the CS Fallback Indicator IE is included in the INITIAL CONTEXT SETUP REQUEST message, it indicates that the UE Context to be set-up is subject to CS Fallback. The eNB shall reply with the INITIAL CONTEXT SETUP RESPONSE message and then act as defined in TS 23.272 [17].
 If the Registered LAI IE is included in the INITIAL CONTEXT SETUP REQUEST message, it indicates that the eNB may take the Registered LAI IE into account when selecting the target cell or frequency and then act as defined in TS 23.272 [17].
 If the UE Security Capabilities IE included in the INITIAL CONTEXT SETUP REQUEST message only contains the EIA0 algorithm as defined in TS 33.401 [15] and if this EIA0 algorithm is defined in the configured list of allowed integrity protection algorithms in the eNB (TS 33.401 [15]), the eNB shall take it into use and ignore the keys received in the Security Key IE.
@@ -1531,14 +1550,14 @@ The UE CONTEXT MODIFICATION REQUEST message may contain.
 -	the NR UE Sidelink Aggregate Maximum Bit Rate IE.
 -	the PC5 QoS Parameters IE.
 -	the UE Radio Capability ID IE.
-Upon receipt of the UE CONTEXT MODIFICATION REQUEST message the eNB shall
+Upon receipt of the UE CONTEXT MODIFICATION REQUEST message, the eNB shall
 -	store the received Security Key IE, take it into use and associate it with the initial value of NCC as defined in TS 33.401 [15]
 -	store the UE Security Capabilities IE and take them into use together with the received keys according to TS 33.401 [15].
 -	if supported, store the NR UE Security Capabilities IE and use it as defined in TS 33.401 [15]
 -	store the Subscriber Profile ID for RAT/Frequency priority IE and use it as defined in TS 36.300 [14].
 -	if supported, store the Additional RRM Policy Index IE and use it as defined in TS 36.300 [14].
--	store the received IAB Authorized IE, if supported, in the UE context.
-If the UE Aggregate Maximum Bit Rate IE is included in the UE CONTEXT MODIFICATION REQUEST message the eNB shall:
+-	store the received IAB Authorized IE, if supported, in the UE context. If the IAB Authorized IE is set to "not authorized" for an IAB-MT, the eNB shall, if supported, initiate actions to ensure that the IAB node will not serve any UE(s).
+If the UE Aggregate Maximum Bit Rate IE is included in the UE CONTEXT MODIFICATION REQUEST message, the eNB shall:
 -	replace the previously provided UE Aggregate Maximum Bit Rate by the received UE Aggregate Maximum Bit Rate in the UE context;
 -	use the received UE Aggregate Maximum Bit Rate for non-GBR Bearers for the concerned UE.
 If the CSG Membership Status IE is received in the UE CONTEXT MODIFICATION REQUEST message, the eNB shall take the following action:
@@ -1608,7 +1627,7 @@ The purpose of the UE Context Suspend procedure is to suspend the UE context, th
 Figure 8.3.7.2-1: UE Context Suspend procedure. Successful operation.
 The eNB initiates the procedure by sending the UE CONTEXT SUSPEND REQUEST message to the MME.
 Upon receipt of the UE CONTEXT SUSPEND REQUEST the MME shall act as defined in TS 23.401 [11].
-Upon receipt of the UE CONTEXT SUSPEND RESPONSE message the eNB shall suspend the UE context, the UE-associated logical S1-connection and the related bearer contexts and send the UE to RRC_IDLE.
+Upon receipt of the UE CONTEXT SUSPEND RESPONSE message, the eNB shall suspend the UE context, the UE-associated logical S1-connection and the related bearer contexts and send the UE to RRC_IDLE.
 If the Information on Recommended Cells and eNBs for Paging IE is included in the UE CONTEXT SUSPEND REQUEST message, the MME shall, if supported, store it and may use it for subsequent paging.
 If the Cell Identifier and Coverage Enhancement Level IE is included in the UE CONTEXT SUSPEND REQUEST message, the MME shall, if supported, store it and use it for subsequent paging.
 If the Secondary RAT Usage Report List IE is included in the UE CONTEXT SUSPEND REQUEST message, the MME shall handle this information as specified in TS 23.401 [11].
@@ -1629,7 +1648,7 @@ If the UE Context Resume procedure was initiated as a result of an EDT session a
 8.3.8.3	Unsuccessful Operation
 
 Figure 8.3.8.3-1: UE Context Resume procedure. Unsuccessful operation.
-If the MME is not able to resume a single E-RAB it releases the UE-associated logical S1-connection by sending the UE CONTEXT RESUME FAILURE message to the eNB. Upon reception of the UE CONTEXT RESUME FAILURE message the eNB shall release the RRC connection as specified in TS 36.331 [16] and release all related signalling and user data transport resources.
+If the MME is not able to resume a single E-RAB it releases the UE-associated logical S1-connection by sending the UE CONTEXT RESUME FAILURE message to the eNB. Upon reception of the UE CONTEXT RESUME FAILURE message, the eNB shall release the RRC connection as specified in TS 36.331 [16] and release all related signalling and user data transport resources.
 8.3.9	Connection Establishment Indication
 8.3.9.1	General
 The purpose of the Connection Establishment Indication procedure is to enable the MME to complete the establishment of the UE-associated logical S1-connection, and/or trigger the eNB to obtain and report UE Radio Capability. The procedure uses UE-associated signalling.
@@ -1646,6 +1665,7 @@ If the End Indication IE is included in the CONNECTION ESTABLISHMENT INDICATION 
 If the Subscription Based UE Differentiation Information IE is included in the CONNECTION ESTABLISHMENT INDICATION message, the eNB shall, if supported, store this information in the UE context for further use according to TS 23.401 [11].
 If the UE Level QoS Parameters IE is contained in the CONNECTION ESTABLISHMENT INDICATION message, the eNB shall, if supported, store this information in the UE context, and use it as specified in TS 23.401 [11].
 If the UE Radio Capability ID IE is contained in the CONNECTION ESTABLISHMENT INDICATION message, the eNB shall, if supported, use it as defined in TS 23.401 [11].
+If the Masked IMEISV IE is contained in the CONNECTION ESTABLISHMENT INDICATION message, the eNB shall, if supported, use it to determine the characteristics of the UE for subsequent handling. 
 8.3.9.3	Unsuccessful Operation
 Not applicable.
 8.3.9.4	Abnormal Conditions
@@ -1674,6 +1694,7 @@ If the UE Level QoS Parameters IE is contained in the UE INFORMATION TRANSFER me
 If the UE Radio Capability IE is contained in the UE INFORMATION TRANSFER message, the eNB shall store this information in the UE context, and use it as specified in TS 23.401 [11].
 If the Subscription Based UE Differentiation Information IE is included in the UE INFORMATION TRANSFER message, the eNB shall, if supported, store this information in the UE context for further use according to TS 23.401 [11].
 If the Pending Data Indication IE is contained in the UE INFORMATION TRANSFER message, the eNB shall store this information in the UE context, and use it as specified in TS 23.401 [11].
+If the Masked IMEISV IE is contained in the UE INFORMATION TRANSFER message, the eNB shall, if supported, use it to determine the characteristics of the UE for subsequent handling. 
 8.3.11.3	Unsuccessful Operation
 Not applicable.
 8.3.11.4	Abnormal Conditions
@@ -1721,6 +1742,8 @@ In case of intra-system handover, the information in the Target to Source Transp
 If the Direct Forwarding Path Availability IE is included in the Target NG-RAN Node to Source NG-RAN Node Transparent Container IE within the HANDOVER COMMAND message, the source eNB shall, if supported, use it for direct data forwarding between the source SN and the target NG-RAN node.
 If there are any E-RABs that could not be admitted in the target, they shall be indicated in the E-RABs to Release List IE.
 If the DL forwarding IE is included within the Source eNB to Target eNB Transparent Container IE of the HANDOVER REQUIRED message and it is set to “DL forwarding proposed”, it indicates that the source eNB proposes forwarding of downlink data.
+If the Security Indication IE is included within the Source eNB to Target eNB Transparent Container IE of the HANDOVER REQUIRED message, it indicates the security policy stored in the source eNB for the concerned E-RAB, as specified in TS 33.401 [15].
+If the Security Result IE is included within the Target eNB to Source eNB Transparent Container IE of the HANDOVER COMMAND message, the source eNB shall take it into account as the status of integrity protection configured by the target eNB for the concerned E-RAB.
 If the MME receives the Direct Forwarding Path Availability IE in the HANDOVER REQUIRED message indicating that a direct data path is available, it shall handle it as specified in TS 23.401 [11].
 If the CSG Id IE and no Cell Access Mode IE are received in the HANDOVER REQUIRED message, the MME shall perform the access control according to the CSG Subscription Data of that UE and, if the access control is successful or if at least one of the E-RABs has a particular ARP value (see TS 23.401 [11]), it shall continue the handover and propagate the CSG Id IE to the target side. If the access control is unsuccessful but at least one of the E-RABs has a particular ARP value (see TS 23.401 [11]) the MME shall also provide the CSG Membership Status IE set to “non member” to the target side.
 If the CSG Id IE and the Cell Access Mode IE set to “hybrid” are received in the HANDOVER REQUIRED message, the MME shall provide the membership status of the UE and the CSG Id to the target side.
@@ -1770,6 +1793,8 @@ If, after a HANDOVER REQUIRED message is sent and before the Handover Preparatio
 1.	cancel the Handover Preparation procedure by executing the Handover Cancel procedure with an appropriate cause value. After successful completion of the Handover Cancel procedure, the source eNB shall continue the MME initiated E-RAB Management procedure
 or
 2.	terminate the MME initiated E-RAB Management procedure by sending the appropriate response message with an appropriate cause value, e.g., “S1 intra system Handover Triggered”, “S1 inter system Handover Triggered” to the MME and then the source eNB shall continue with the handover procedure.
+Interaction with Handover Cancel procedures:
+If the Security Result IE is not included in the Target eNB to Source eNB Transparent Container IE of the HANDOVER COMMAND message, and the Security Indication IE in the Source eNB to Target eNB Transparent Container IE indicated that some of the E-RABs required User Plane Integrity Protection, the source eNB shall initiate the Handover Cancel procedure. The source eNB may reattempt the handover but only for the E-RABs that do not require User Plane Integrity Protection.
 8.4.1.3	Unsuccessful Operation
 
 Figure 8.4.1.3-1: Handover preparation: unsuccessful operation
@@ -1791,9 +1816,9 @@ The target eNB shall use the information in Handover Restriction List IE if pres
 -	determine a target for subsequent mobility action for which the eNB provides information about the target of the mobility action towards the UE;
 -	select a proper SCG during dual connectivity operation.
 If the Handover Restriction List IE is not contained in the HANDOVER REQUEST message, the target eNB shall consider that no roaming and no access restriction apply to the UE.
-Upon reception of the HANDOVER REQUEST message the eNB shall store the received UE Security Capabilities IE in the UE context and use it to prepare the configuration of the AS security relation with the UE.
+Upon reception of the HANDOVER REQUEST message, the eNB shall store the received UE Security Capabilities IE in the UE context and use it to prepare the configuration of the AS security relation with the UE.
 If the SRVCC Operation Possible IE is included in the HANDOVER REQUEST message, the target eNB shall store the content of the received SRVCC Operation Possible IE in the UE context and, if supported, use it as defined in TS 23.216 [9].
-Upon reception of the HANDOVER REQUEST message the eNB shall store the received Security Context IE in the UE context and the eNB shall use it to derive the security configuration as specified in TS 33.401 [15].
+Upon reception of the HANDOVER REQUEST message, the eNB shall store the received Security Context IE in the UE context and the eNB shall use it to derive the security configuration as specified in TS 33.401 [15].
 If the Trace Activation IE is included in the HANDOVER REQUEST message, the target eNB shall if supported, initiate the requested trace function as described in TS 32.422 [10]. In particular, the eNB shall, if supported:
 -	if the Trace Activation IE does not include the MDT Configuration IE, initiate the requested trace session as described in TS 32.422 [10];
 -	if the Trace Activation IE includes the MDT Activation IE, within the MDT Configuration IE, set to “Immediate MDT and Trace”, initiate the requested trace session and MDT session as described in TS 32.422 [10];
@@ -1806,6 +1831,7 @@ If the Trace Activation IE is included in the HANDOVER REQUEST message, the targ
 -	if the Trace Activation IE includes the Bluetooth Measurement Configuration IE, within the MDT Configuration IE, take it into account for MDT Configuration as described in TS 37.320 [31].
 -	if the Trace Activation IE includes the WLAN Measurement Configuration IE, within the MDT Configuration IE, take it into account for MDT Configuration as described in TS 37.320 [31].
 -	if the Trace Activation IE includes the MDT Configuration NR IE, store and forward the MDT Configuration NR IE to the SgNB, if the eNB has configured EN-DC for the UE.
+-	if the Trace Activation IE includes the Sensor Measurement Configuration IE within the MDT Configuration IE, take it into account for MDT Configuration as described in TS 37.320 [31].
 If the CSG Id IE is received in the HANDOVER REQUEST message, the eNB shall compare the received value with the CSG Id broadcast by the target cell.
 If the CSG Membership Status IE is received in the HANDOVER REQUEST message and the CSG Membership Status is set to “member”, the eNB may provide the QoS to the UE as for member provided that the CSG Id received in the HANDOVER REQUEST messages corresponds to the CSG Id broadcast by the target cell.
 If the CSG Membership Status IE and the CSG Id IE are received in the HANDOVER REQUEST message and the CSG Id does not correspond to the CSG Id broadcast by the target cell, the eNB may provide the QoS to the UE as for a non member and shall send back in the HANDOVER REQUEST ACKNOWLEDGE message the actual CSG Id broadcast by the target cell.
@@ -1856,10 +1882,14 @@ The cells that exceed the threshold in the first UE measurement report are inclu
 If the UE Radio Capability ID IE is included in the HANDOVER REQUEST message, the eNB shall, if supported, use it as defined in TS 23.401 [11].
 If the DAPS Request Information IE is included for an E-RAB in the Source eNB to Target eNB Transparent Container IE within the HANDOVER REQUEST message, the target eNB shall consider that the request concerns a DAPS Handover for that E-RAB, as described in TS 36.300 [14]. The target eNB shall include the DAPS Response information List IE in the Target eNB to Source eNB Transparent Container IE within the HANDOVER REQUEST ACKNOWLEDGE message, containing the DAPS Response Information IE for each E-RAB requested to be configured with DAPS Handover.
 If the IMS voice EPS fallback from 5G IE is included in the Source eNB to Target eNB Transparent Container IE within the HANDOVER REQUEST message, the target eNB shall, if supported, store the information in the UE context and consider that the UE is handed over from NG-RAN to E-UTRAN due to an IMS voice fallback.
-If for a given E-RAB the Source Transport Layer Address IE is included within the Source eNB to Target eNB Transparent Container IE in the HANDOVER REQUEST message, the target eNB shall, if supported, store this information and use it as part of its ACL functionality configuration actions for direct data forwarding, if such ACL functionality is deployed.
+If the Security Indication IE is contained in the HANDOVER REQUEST message, the target eNB shall, if supported, act as defined in the E-RAB Setup procedure for the concerned E-RAB.
+If the Security Indication IE is included in the Source eNB to Target eNB Transparent Container IE within the HANDOVER REQUEST message, the target eNB shall, if supported, use it as specified in TS 33.401 [15] and include the Security Result IE in the Target eNB to Source eNB Transparent Container IE of the HANDOVER REQUEST ACKNOWLEDGE message.
+If the UE Context Reference at Source eNB IE is included in the Source eNB to Target eNB Transparent Container IE within the HANDOVER REQUEST message, the target eNB may use it to identify an existing UE.
+If for a given E-RAB flow the Source Transport Layer Address IE is included within the Source eNB to Target eNB Transparent Container IE in the HANDOVER REQUEST message, the target eNB shall, if supported, store this information and use it as part of its ACL functionality configuration actions for direct data forwarding, if such ACL functionality is deployed.
+If the UE Radio Capability ID IE is contained in the HANDOVER REQUEST message, the target eNB may include the RACS Indication IE in the Target eNB to Source eNB Transparent Container IE within the HANDOVER REQUEST ACKNOWLEDGE message, to indicate that it is able to acquire the UE radio capabilities through reception of the UE Radio Capability ID in future mobility actions as described in TS 23.401 [11].
 If for a given E-RAB the Source Node Transport Layer Address IE is included within the Source eNB to Target eNB Transparent Container IE in the HANDOVER REQUEST message, the target eNB shall, if supported, store this information and use it as part of its ACL functionality configuration actions for direct data forwarding, if such ACL functionality is deployed.
-If the Direct Forwarding Path Availability IE is included in the Source eNB to Target eNB Transparent Container IE within the HANDOVER REQUEST message, the target eNB may use the information to assign tunnel endpoints in case of inter-system handover.
 If the Source SN ID IE is included in the Source eNB to Target eNB Transparent Container IE within the HANDOVER REQUEST message, the target eNB shall, if supported, use it to decide whether direct forwarding path is available between the target eNB and this source RAN node. If the direct forwarding path is available, the target eNB shall include the Direct Forwarding Path Availability IE in the Target eNB to Source eNB Transparent Container IE within the HANDOVER REQUEST ACKNOWLEDGE message.
+If the Direct Forwarding Path Availability IE is included in the Source eNB to Target eNB Transparent Container IE within the HANDOVER REQUEST message, the target eNB may use the information to assign tunnel endpoints in case of inter-system handover.
 8.4.2.3	Unsuccessful Operation
 
 Figure 8.4.2.3-1: Handover resource allocation: unsuccessful operation
@@ -1902,11 +1932,11 @@ After all necessary updates including the UP path switch have been successfully 
 In case the EPC failed to perform the UP path switch for at least one, but not all, of the E-RABs included in the PATH SWITCH REQUEST E-RAB To Be Switched in Downlink List IE, the MME shall include the E-RABs it failed to perform UP path switch in the PATH SWITCH REQUEST ACKNOWLEDGE E-RAB To Be Released List IE. In this case, the eNB shall release the corresponding data radio bearers, and the eNB shall regard the E-RABs indicated in the E-RAB To Be Released List IE as being fully released.
 If the CSG Id IE and no Cell Access Mode IE are received in the PATH SWITCH REQUEST message, the MME shall use it in the core network as specified in TS 23.401 [11]. If the CSG Id IE and the Cell Access Mode IE set to “hybrid” are received in the PATH SWITCH REQUEST message, the MME shall decide the membership status of the UE and use it in the core network as specified in TS 23.401 [11]. If no CSG Id IE and no Cell Access Mode IE are received in the PATH SWITCH REQUEST message and the UE was previously either in a CSG cell or in a hybrid cell, the MME shall consider that the UE has moved into a cell that is neither a CSG cell nor a hybrid cell and use this as specified in TS 23.401 [11].
 If the GUMMEI of the MME currently serving the UE is available at the eNB (see TS 36.300 [14]) the eNB shall include the Source MME GUMMEI IE within the PATH SWITCH REQUEST message.
-Upon reception of the PATH SWITCH REQUEST ACKNOWLEDGE message the eNB shall store the received Security Context IE in the UE context and the eNB shall use it for the next X2 handover or Intra eNB handovers as specified in TS 33.401 [15].
+Upon reception of the PATH SWITCH REQUEST ACKNOWLEDGE message, the eNB shall store the received Security Context IE in the UE context and the eNB shall use it for the next X2 handover or Intra eNB handovers as specified in TS 33.401 [15].
 The PATH SWITCH REQUEST ACKNOWLEDGE message may contain
 -	the UE Aggregate Maximum Bit Rate IE.
 -	the MME UE S1AP ID 2 IE, which indicates the MME UE S1AP ID assigned by the MME.
-If the UE Aggregate Maximum Bit Rate IE is included in the PATH SWITCH REQUEST ACKNOWLEDGE message the eNB shall
+If the UE Aggregate Maximum Bit Rate IE is included in the PATH SWITCH REQUEST ACKNOWLEDGE message, the eNB shall
 -	replace the previously provided UE Aggregate Maximum Bit Rate by the received UE Aggregate Maximum Bit Rate in the UE context; the eNB shall use the received UE Aggregate Maximum Bit Rate for non-GBR Bearers for the concerned UE. 
 If the UE Aggregate Maximum Bit Rate IE is not contained in the PATH SWITCH REQUEST ACKNOWLEDGE message, the eNB shall use the previously provided UE Aggregate Maximum Bit Rate which is stored in the UE context.
 In case the EPC decides to change the uplink termination point of the tunnels, it may include the E-RAB To Be Switched in Uplink List IE in the PATH SWITCH REQUEST ACKNOWLEDGE message to specify a new uplink transport layer address and uplink GTP-TEID for each respective E-RAB for which it wants to change the uplink tunnel termination point. 
@@ -1926,6 +1956,7 @@ If the CE-Mode-B Restricted IE is included in the PATH SWITCH REQUEST ACKNOWLEDG
 If information on the UE’s NR security capabilities is available at the eNB (see TS 33.401 [15]) the eNB shall include the NR UE Security Capabilities IE within the PATH SWITCH REQUEST message.
 If the NR UE Security Capabilities IE is included in the PATH SWITCH REQUEST message, the MME shall, if supported, consider that the eNB has stored the respective information in the UE context, and proceed as defined in TS 33.401 [15].
 If the NR UE Security Capabilities IE is included in the PATH SWITCH REQUEST ACKNOWLEDGE message, the eNB shall, if supported, store this information in the UE context and use it as defined in TS 33.401 [15].
+If the UE Security Capabilities IE is included in the PATH SWITCH REQUEST ACKNOWLEDGE message, the eNB shall, if supported, store this information in the UE context and use it as defined in TS 33.401 [15].
 If the Aerial UE subscription information IE is included in the PATH SWITCH REQUEST ACKNOWLEDGE message, the eNB shall, if supported, store this information in the UE context and use it as defined in TS 36.300 [14].
 If the Pending Data Indication IE is included in the PATH SWITCH REQUEST ACKNOWLEDGE message, the eNB shall use it as defined in TS 23.401 [11].
 If the Subscription Based UE Differentiation Information IE is included in the PATH SWITCH REQUEST ACKNOWLEDGE message, the eNB shall, if supported, store this information in the UE context for further use according to TS 23.401 [11].
@@ -1940,6 +1971,8 @@ If the NR UE Sidelink Aggregate Maximum Bit Rate IE is included in the PATH SWIT
 -	replace the previously provided NR UE Sidelink Aggregate Maximum Bit Rate, if available in the UE context, with the received value; 
 -	use the received value for the concerned UE’s sidelink communication in network scheduled mode for NR V2X services.
 If the PC5 QoS Parameters IE is included in the PATH SWITCH REQUEST ACKNOWLEDGE message, the eNB shall, if supported, use it for the concerned UE’s NR sidelink communication as specified in TS 23.285 [49].
+For each E-RAB for which the Security Indication IE is included in the E-RABs Switched in Downlink Item IE of the PATH SWITCH REQUEST message, the MME shall, if supported, behave as specified in TS 33.401 [15] and may send back the Security Indication IE within the E-RAB To Be Updated Item IE of the PATH SWITCH REQUEST ACKNOWLEDGE message.
+If the Security Indication IE is included within the E-RAB To Be Updated Item IE of the PATH SWITCH REQUEST ACKNOWLEDGE message, the eNB shall, if supported, behave as specified in TS 33.401 [15].
 8.4.4.3	Unsuccessful Operation
 
 Figure 8.4.4.3-1: Path switch request: unsuccessful operation
@@ -2052,6 +2085,7 @@ If the CE-Mode-B Restricted IE is included in the PAGING message and the Enhance
 If the Data Size IE is included in the PAGING message, the eNB shall, if supported, use it to decide whether to initiate Mobile Terminated EDT procedures towards the UE as described in TS 36.300 [14].
 If the WUS Assistance Information IE is included in the PAGING message, the eNB shall, if supported, use it to determine the WUS group for the UE, as specified in TS 36.304 [20].
 If the NB-IoT Paging DRX IE is included in the PAGING message, the eNB shall use it according to TS 36.304 [20].
+If the Paging Cause IE is included in the PAGING message, the eNB shall, if supported, transfer it to the UE according to TS 36.331 [21].
 8.5.3	Unsuccessful Operation
 Not applicable.
 8.5.4	Abnormal Conditions
@@ -2103,6 +2137,7 @@ If the End Indication IE is included in the DOWNLINK NAS TRANSPORT message and s
 If the Pending Data Indication IE is included in the DOWNLINK NAS TRANSPORT message, the eNB shall use it as defined in TS 23.401 [11].
 If the Subscription Based UE Differentiation Information IE is included in the DOWNLINK NAS TRANSPORT message, the eNB shall, if supported, store this information in the UE context for further use according to TS 23.401 [11].
 If the UE Radio Capability ID IE is included in the DOWNLINK NAS TRANSPORT message, the eNB shall, if supported, use it as defined in TS 23.401 [11].
+If the Masked IMEISV IE is included in the DOWNLINK NAS TRANSPORT message, the eNB shall, if supported, use it to determine the characteristics of the UE for subsequent handling. 
 Interaction with the NAS Delivery Indication procedure:
 If the DL NAS PDU Delivery Acknowledgment Request IE set to "requested" was included in the DOWNLINK NAS TRANSPORT message (see 23.401 [11]), the eNB shall trigger the NAS Delivery Indication procedure, if the downlink NAS PDU was successfully delivered to the UE. 
 Interaction with the UE Capability Info Indication procedure:
@@ -2147,7 +2182,7 @@ The procedure uses non-UE associated signalling.
 
 Figure 8.7.1.2.1-1: Reset procedure initiated from the MME. Successful operation.
 In the event of a failure at the MME, which has resulted in the loss of some or all transaction reference information, a RESET message shall be sent to the eNB.
-At reception of the RESET message the eNB shall release all allocated resources on S1 and Uu related to the UE association(s) indicated explicitly or implicitly in the RESET message and remove the indicated UE contexts including S1AP ID.
+At reception of the RESET message, the eNB shall release all allocated resources on S1 and Uu related to the UE association(s) indicated explicitly or implicitly in the RESET message and remove the indicated UE contexts including S1AP ID.
 After the eNB has released all assigned S1 resources and the UE S1AP IDs for all indicated UE associations which can be used for new UE-associated logical S1-connections over the S1 interface, the eNB shall respond with the RESET ACKNOWLEDGE message. The eNB does not need to wait for the release of radio resources to be completed before returning the RESET ACKNOWLEDGE message.
 If the RESET message contains the UE-associated logical S1-connection list IE, then:
 -	The eNB shall use the MME UE S1AP ID IE and/or the eNB UE S1AP ID IE to explicitly identify the UE association(s) to be reset.
@@ -2328,7 +2363,7 @@ The purpose of the UE Capability Info Indication procedure is to enable the eNB 
 Figure 8.9.2-1: UE Capability Info Indication procedure. Successful operation.
 The eNB controlling a UE-associated logical S1-connection initiates the procedure by sending a UE CAPABILITY INFO INDICATION message to the MME including the UE capability information. The UE CAPABILITY INFO INDICATION message may also include paging specific UE capability information within the UE Radio Capability for Paging IE. The UE capability information received by the MME shall replace previously stored corresponding UE capability information in the MME for the UE, as described in TS 23.401 [11]. 
 If UE CAPABILITY INFO INDICATION message contains the LTE-M indication IE, the MME shall, if supported, store this information in the UE context and use it according to TS 23.401 [11].
-If the UE indicates the support for UE Application Layer Measurement, the eNB shall if supported include the UE Application Layer Measurement Capability IE in the UE CAPABILITY INFO INDICATION message. The MME shall, if supported, store and use thie information when initiating UE Application Layer Measurement.
+If the UE indicates the support for UE Application Layer Measurement, the eNB shall if supported include the UE Application Layer Measurement Capability IE in the UE CAPABILITY INFO INDICATION message. The MME shall, if supported, store and use this information when initiating UE Application Layer Measurement.
 If UE CAPABILITY INFO INDICATION message contains the UE Radio Capability – NR Format IE, the MME shall, if supported, use it according to TS 23.401 [11].
 If the UE RADIO CAPABILITY INFO INDICATION message includes the UE Radio Capability for Paging IE and the UE Radio Capability for Paging – NR Format IE, the MME shall, if supported, use it according to TS 23.401 [11].
 8.9.3	Abnormal Conditions
@@ -2351,12 +2386,14 @@ If the Trace Activation IE includes the UE Application layer measurement configu
 If the Trace Activation IE includes the Bluetooth Measurement Configuration IE, within the MDT Configuration IE, the eNB shall, if supported, take it into account for MDT Configuration as described in TS 37.320 [31].
 If the Trace Activation IE includes the WLAN Measurement Configuration IE, within the MDT Configuration IE, the eNB shall, if supported, take it into account for MDT Configuration as described in TS 37.320 [31].
 If the Trace Activation IE includes the MDT Configuration NR IE, the eNB shall, if supported, store and forward MDT Configuration NR IE to the SgNB, if the eNB has configured EN-DC for the UE.
+If the Trace Activation IE includes the Sensor Measurement Configuration IE within the MDT Configuration IE, take it into account for MDT Configuration as described in TS 37.320 [31].
 Interactions with other procedures:
 If the eNB is not able to initiate the trace session due to ongoing handover of the UE to another eNB, the eNB shall initiate a Trace Failure Indication procedure with the appropriate cause value.
 8.10.2	Trace Failure Indication
 8.10.2.1	General
 The purpose of the Trace Failure Indication procedure is to allow the eNB to inform the MME that a Trace Start procedure or a Deactivate Trace procedure has failed due to an interaction with a handover procedure. The procedure uses UE-associated signalling.
 8.10.2.2	Successful Operation
+
 
 Figure 8.10.2.2-1: Trace Failure Indication procedure.
 The eNB initiates the procedure by sending a TRACE FAILURE INDICATION message. Upon reception of the TRACE FAILURE INDICATION message, the MME shall take appropriate actions based on the failure reason indicated by the Cause IE.
@@ -2385,7 +2422,7 @@ The purpose of Location Reporting Control procedure is to allow the MME to reque
 8.11.1.2	Successful Operation
 
 Figure 8.11.1.2-1: Location Reporting Control procedure. Successful operation.
-The MME initiates the procedure by sending a LOCATION REPORTING CONTROL message. On receipt of a LOCATION REPORTING CONTROL message the eNB shall perform the requested location reporting control action for the UE.
+The MME initiates the procedure by sending a LOCATION REPORTING CONTROL message. On receipt of a LOCATION REPORTING CONTROL message, the eNB shall perform the requested location reporting control action for the UE.
 The Request Type IE indicates to the eNB whether:
 -	to report directly;
 -	to report upon change of serving cell, or
@@ -2531,6 +2568,7 @@ If the eNB is configured to use one IPsec tunnel for all S1 and X2 traffic (IPse
 If the eNB receives the SON Information IE containing the SON Information Reply IE including the Time Synchronisation Info IE as an answer to a former request, it may use it for over-the-air synchronisation by means of network listening and for triggering muting activation request.
 If the eNB receives the SON Information IE containing the SON Information Report IE, it may use it as specified in TS 36.300 [14].
 If the eNB receives the Inter-system SON Configuration Transfer IE containing the Inter-system SON Information Report IE, it may use it as specified in TS 38.300 [45] or in TS 36.300 [14].
+If the eNB receives the Inter-system SON Information IE containing the Inter-system SON Information Reply IE, it may use it as specified in TS 38.300 [45] or in TS 36.300 [14].
 If the eNB receives the SON Information IE containing the SON Information Request IE set to “Activate Muting”, the eNB should consider activating for over-the-air synchronisation by means of network listening, taking into account information on the selected source of synchronisation cell and the cells as indicated by the Aggressor E-CGI List IE. In case the Aggressor E-CGI List IE is not present, the eNB may consider the request applicable to all cells.
 If the eNB receives the SON Information IE containing the SON Information Reply IE including the Muting Pattern Information IE as an answer to a former request, it may use it for over-the-air synchronisation by means of network listening. The Muting Pattern Information IE may apply to all cells that were requested to mute.
 If the eNB receives the SON Information IE containing the SON Information Request IE set to “Deactivate Muting”, the eNB may consider deactivating muting for over-the-air synchronisation that was activated by a former muting request from the corresponding eNB.
@@ -2741,6 +2779,13 @@ O
 
 YES
 ignore
+>>Security Indication
+O
+
+9.2.1.163
+
+YES
+reject
 
 Range bound
 Explanation
@@ -2825,6 +2870,13 @@ Criticality Diagnostics
 O
 
 9.2.1.21
+
+YES
+ignore
+User Location Information
+O
+
+9.2.1.93
 
 YES
 ignore
@@ -3015,6 +3067,13 @@ O
 9.2.1.124
 
 Yes
+ignore
+User Location Information
+O
+
+9.2.1.93
+
+YES
 ignore
 
 Range bound
@@ -3597,6 +3656,13 @@ O
 
 YES
 ignore
+>>Security Indication
+O
+
+9.2.1.163
+
+YES
+reject
 UE Security Capabilities
 M
 
@@ -5042,6 +5108,13 @@ O
 
 YES
 reject
+Masked IMEISV
+O
+
+9.2.3.38
+
+YES
+ignore
 
 9.1.4.21	RETRIEVE UE INFORMATION 
 The message is sent by the eNB to request UE information over the S1 interface.
@@ -5120,6 +5193,13 @@ O
 
 YES
 ignore
+Masked IMEISV
+O
+
+9.2.3.38
+
+YES
+ignore
 
 9.1.4.23	eNB CP RELOCATION INDICATION
 This message is sent by the eNB to initiate the establishment of a UE-associated logical S1-connection, following the reception of re-establishment request as described in TS. 36.300 [14].
@@ -5163,7 +5243,7 @@ TAI
 M
 
 9.2.3.16
-
+In NTN, this IE is used to indicate the single broadcast TAC. This IE shall be ignored if the LTE NTN TAI Information IE is present.
 YES
 ignore
 UL CP Security Information
@@ -5173,6 +5253,13 @@ M
 
 YES
 reject
+LTE NTN TAI Information
+O
+
+9.2.3.56
+
+YES
+ignore
 
 9.1.4.24	MME CP RELOCATION INDICATION
 This message is sent by the MME to inform the eNB that the UE is to be relocated as described in TS. 36.300 [14].
@@ -5618,6 +5705,13 @@ O
 
 YES
 ignore
+>>Security Indication
+O
+
+9.2.1.163
+
+YES
+reject
 Source to Target Transparent Container
 M
 
@@ -6078,7 +6172,7 @@ TAI
 M
 
 9.2.3.16
-
+In NTN, this IE is used to indicate the single broadcast TAC. This IE shall be ignored if the LTE NTN TAI Information IE is present.
 YES
 ignore
 Tunnel Information for BBF
@@ -6106,6 +6200,13 @@ Notify Source eNB
 O
 
 ENUMERATED (NotifySource, …)
+
+YES
+ignore
+LTE NTN TAI Information
+O
+
+9.2.3.56
 
 YES
 ignore
@@ -6169,6 +6270,13 @@ M
 To deliver DL PDUs.
 -
 
+>>Security Indication
+O
+
+9.2.1.163
+
+YES
+ignore
 Source MME UE S1AP ID
 M
 
@@ -6187,7 +6295,7 @@ TAI
 M
 
 9.2.3.16
-
+In NTN, this IE is used to indicate the single broadcast TAC. This IE shall be ignored if the LTE NTN TAI Information IE is present.
 YES
 ignore
 UE Security Capabilities
@@ -6258,6 +6366,13 @@ PSCell Information
 O
 
 9.2.1.141
+
+YES
+ignore
+LTE NTN TAI Information
+O
+
+9.2.3.56
 
 YES
 ignore
@@ -6488,6 +6603,41 @@ O
 
 YES
 reject
+UE Security Capabilities
+O
+
+9.2.1.40
+
+YES
+ignore
+E-RAB To Be Updated List
+
+0..1
+
+
+YES
+ignore
+>E-RAB To Be Updated Item
+
+1 .. <maxnoofE-RABs>
+
+
+EACH
+ignore
+>>E-RAB ID
+M
+
+9.2.1.2
+
+-
+
+>>Security Indication
+O
+
+9.2.1.163
+
+-
+
 
 Range bound
 Explanation
@@ -6970,6 +7120,13 @@ O
 
 YES
 ignore
+Paging Cause
+O
+
+ENUMERATED (voice, …) 
+
+YES
+ignore
 
 Range bound
 Explanation
@@ -7015,6 +7172,7 @@ M
 
 9.2.3.16
 Indicating the Tracking Area from which the UE has sent the NAS message.
+In NTN, this IE is used to indicate the single broadcast TAC. This IE shall be ignored if the LTE NTN TAI Information IE is present.
 YES
 reject
 E-UTRAN CGI
@@ -7140,7 +7298,7 @@ UE Application Layer Measurement Capability
 O
 
 BIT STRING (SIZE(8))
-Each bit in the bitmap indicates an UE Application layer measurement capability, refer to TS 25.331[10].
+Each bit in the bitmap indicates an UE Application layer measurement capability, refer to TS 36.331 [16].
 
 Bit 0 = QoE Measurement for streaming service
 
@@ -7165,6 +7323,13 @@ ENUMERATED (true, ...)
 Indication of an IAB-node.
 YES
 reject
+LTE NTN TAI Information
+O
+
+9.2.3.56
+
+YES
+ignore
 
 9.1.7.2	DOWNLINK NAS TRANSPORT
 This message is sent by the MME and is used for carrying NAS information over the S1 interface.
@@ -7302,6 +7467,13 @@ O
 
 YES
 reject
+Masked IMEISV
+O
+
+9.2.3.38
+
+YES
+ignore
 
 9.1.7.3	UPLINK NAS TRANSPORT
 This message is sent by the eNB and is used for carrying NAS information over the S1 interface.
@@ -7352,7 +7524,7 @@ TAI
 M
 
 9.2.3.16
-
+In NTN, this IE is used to indicate the single broadcast TAC. This IE shall be ignored if the LTE NTN TAI Information IE is present.
 YES
 ignore
 GW Transport Layer Address
@@ -7380,6 +7552,13 @@ PSCell Information
 O
 
 9.2.1.141
+
+YES
+ignore
+LTE NTN TAI Information
+O
+
+9.2.3.56
 
 YES
 ignore
@@ -9108,7 +9287,7 @@ TAI
 M
 
 9.2.3.16
-
+In NTN, this IE is used to indicate the single broadcast TAC. This IE shall be ignored if the LTE NTN TAI Information IE is present.
 YES
 ignore
 Request Type
@@ -9122,6 +9301,13 @@ PSCell Information
 O
 
 9.2.1.141
+
+YES
+ignore
+LTE NTN TAI Information
+O
+
+9.2.3.56
 
 YES
 ignore
@@ -10052,7 +10238,7 @@ Redirection towards 1xRTT,
 Not supported QCI value,
 invalid CSG Id,
 Release due to Pre-Emption,
-N26 interface not available, Insufficient UE Capabilities, Maximum bearer pre-emption rate exceeded)
+N26 interface not available, Insufficient UE Capabilities, Maximum bearer pre-emption rate exceeded, UP integrity protection not possible)
 
 >Transport Layer
 
@@ -10080,7 +10266,7 @@ Authentication failure,
 Detach,
 Unspecified, 
 …,
-CSG Subscription Expiry)
+CSG Subscription Expiry, UE not in PLMN serving area)
 
 >Protocol
 
@@ -10203,13 +10389,15 @@ Insufficient UE Capabilities
 The procedure can’t proceed due to insufficient UE capabilities.
 Maximum bearer pre-emption rate exceeded 
 The procedure can’t proceed because the number of requests exceed the maximum bearer pre-emption rate.
+UP integrity protection not possible
+The E-RAB cannot be accepted according to the required user plane integrity protection policy.
 
 Transport Layer cause
 Meaning
 Transport Resource Unavailable
 The required transport resources are not available.
 Unspecified
-Sent when none of the above cause values applies but still the cause is Transport Network Layer related.
+Sent when none of the specified cause values applies but still the cause is Transport Network Layer related.
 
 NAS cause
 Meaning
@@ -10220,9 +10408,11 @@ The action is due to authentication failure.
 Detach
 The action is due to detach.
 Unspecified
-Sent when none of the above cause values applies but still the cause is NAS related.
+Sent when none of the specified cause values applies but still the cause is NAS related.
 CSG Subscription Expiry
 The action is due to the UE becoming a non-member of the currently used CSG.
+UE not in PLMN serving area
+The release is due to the UE not being within the serving area of its current PLMN (for IoT NTN).
 
 Protocol cause
 Meaning
@@ -10239,7 +10429,7 @@ The received message included a semantic error.
 Abstract Syntax Error (Falsely Constructed Message)
 The received message contained IEs or IE groups in wrong order or with too many occurrences.
 Unspecified
-Sent when none of the above cause values applies but still the cause is Protocol related.
+Sent when none of the specified cause values applies but still the cause is Protocol related.
 
 Miscellaneous cause
 Meaning
@@ -10252,12 +10442,12 @@ Action related to hardware failure.
 O&M Intervention
 The action is due to O&M intervention.
 Unspecified Failure
-Sent when none of the above cause values applies and the cause is not related to any of the categories Radio Network Layer, Transport Network Layer, NAS or Protocol.
+Sent when none of the specified cause values applies and the cause is not related to any of the categories Radio Network Layer, Transport Network Layer, NAS or Protocol.
 Unknown PLMN
 The MME does not identify any PLMN provided by the eNB.
 
 9.2.1.3a	RRC Establishment Cause
-The purpose of the RRC Establishment Cause IE is to indicate to the MME the reason for RRC Connection Establishment or RRC Connection Resume as received from the UE in the EstablishmentCause, EstablishmentCause-NB or ResumeCause defined in TS 36.331 [16].
+The purpose of the RRC Establishment Cause IE is to indicate to the MME the reason for RRC Connection Establishment or RRC Connection Resume as received from the UE in the EstablishmentCause IE, EstablishmentCause-NB IE or ResumeCause IE as defined in TS 36.331 [16].
 IE/Group Name
 Presence
 Range
@@ -10492,14 +10682,12 @@ IE type and reference
 Semantics description
 Criticality
 Assigned Criticality
-
 RRC Container
 M
 
 OCTET STRING
-Includes the RRC Handover Preparation Information message as defined in subclause 10.2.2 of TS 36.331 [16].
+Includes the HandoverPreparation Information message as defined in subclause 10.2.2 of TS 36.331 [16].
 -
-
 
 E-RABs Information List
 
@@ -10508,7 +10696,6 @@ E-RABs Information List
 
 -
 
-
 >E-RABs Information Item
 
 1 .. <maxnoof E-RABs>
@@ -10516,14 +10703,12 @@ E-RABs Information List
 
 EACH
 ignore
-
 >>E-RAB ID
 M
 
 9.2.1.2
 
 -
-
 
 >>DL Forwarding
 O
@@ -10532,7 +10717,6 @@ O
 
 -
 
-
 >>DAPS Request Information
 O
 
@@ -10540,7 +10724,6 @@ O
 
 YES
 ignore
-
 >>Source Transport Layer Address
 O
 
@@ -10549,7 +10732,13 @@ Identifies the TNL address used by the sending node for direct data forwarding
 towards the target eNB
 YES
 ignore
+>>Security Indication
+O
 
+9.2.1.163
+
+YES
+ignore
 >>Source Node Transport Layer Address
 O
 
@@ -10558,7 +10747,6 @@ Identifies the TNL address used by the source SN node for direct data forwarding
 towards the target eNB
 YES
 ignore
-
 Target Cell ID
 M
 
@@ -10567,14 +10755,12 @@ E-UTRAN CGI
 
 -
 
-
 Subscriber Profile ID for RAT/Frequency priority
 O
 
 9.2.1.39
 
 -
-
 
 UE History Information
 M
@@ -10583,7 +10769,6 @@ M
 
 -
 
-
 Mobility Information
 O
 
@@ -10591,15 +10776,13 @@ BIT STRING (SIZE (32))
 Information related to the handover; the external handover source provides it in order to enable later analysis of the conditions that led to a wrong HO.
 YES
 ignore
-
 UE History Information from the UE
 O
 
 OCTET STRING
-VisitedCellInfoList contained in the UEInformationResponse message (TS 36.331 [16])
+Includes the VisitedCellInfoList IE contained in the UEInformationResponse message (TS 36.331 [16])
 YES
 ignore
-
 IMS voice EPS fallback from 5G
 O
 
@@ -10607,7 +10790,6 @@ ENUMERATED (true, …)
 
 YES
 ignore
-
 Additional RRM Policy Index
 O
 
@@ -10615,7 +10797,6 @@ O
 
 YES
 ignore
-
 UE Context Reference at Source
 O
 
@@ -10623,8 +10804,6 @@ O
 
 YES
 ignore
-
-
 Inter-system measurement Configuration
 O
 
@@ -10632,7 +10811,6 @@ O
 
 YES
 ignore
-
 Source Node ID
 O
 
@@ -10640,7 +10818,6 @@ O
 
 YES
 ignore
-
 Emergency Indicator
 O
 
@@ -10648,15 +10825,14 @@ ENUMERATED (true, …)
 Indicates an emergency EPS voice fallback
 YES
 ignore
-
-Direct Forwarding Path Availability
+UE Context Reference at Source eNB
 O
 
-9.2.3.15
-Indicates whether a direct forwarding path between the source RAN node and the target eNB is available
+eNB UE S1AP ID
+9.2.3.4
+This IE is used for NTN operation.
 YES
 ignore
-
 Source SN ID
 O
 
@@ -10665,11 +10841,19 @@ Global RAN Node ID
 
 YES
 ignore
+Direct Forwarding Path Availability
+O
+
+9.2.3.15
+Indicates whether a direct forwarding path between the source RAN node and the target eNB is available
+YES
+ignore
 
 Range bound
 Explanation
 maxnoofE-RABs
 Maximum no. of E-RABs for one UE. Value is 256.
+
 
 9.2.1.8	Target eNB to Source eNB Transparent Container
 The Target eNB to Source eNB Transparent Container IE is an information element that is produced by the target eNB and is transmitted to the source eNB. For inter-system handovers to E-UTRAN, the IE is transmitted from the target eNB to the external relocation source.
@@ -10685,7 +10869,7 @@ RRC Container
 M
 
 OCTET STRING
-Includes the RRC E-UTRA Handover Command message as defined in subclause 10.2.2 of TS 36.331 [16].
+Includes the E-UTRA HandoverCommand message as defined in subclause 10.2.2 of TS 36.331 [16].
 -
 
 DAPS Response Information List
@@ -10714,6 +10898,41 @@ M
 
 9.2.1.156
 Indicates the response to a requested DAPS Handover
+-
+
+RACS Indication
+O
+
+9.2.1.162
+
+YES
+ignore
+E-RABs Security Result List
+
+0..1
+
+
+YES
+ignore
+>E-RABs Security Result Item
+
+1 .. <maxnoof E-RABs>
+
+
+EACH
+ignore
+>>E-RAB ID
+M
+
+9.2.1.2
+
+-
+
+>>Security Result
+M
+
+9.2.1.164
+
 -
 
 Direct Forwarding Path Availability
@@ -11125,6 +11344,35 @@ O
 Indicates the NG-RAN PLMN ID from where the UE formerly handed over to EPS and which is preferred in case of subsequent mobility to 5GS.
 YES
 ignore
+RAT Restrictions
+
+0..<maxnoofEPLMNsPlusOne>
+
+This IE contains RAT restriction related information as specified in TS 23.401 [11].
+YES
+ignore
+>PLMN Identity
+M
+
+9.2.3.8
+
+-
+
+>RAT Restriction Information
+M
+
+BIT STRING {
+LEO (0),
+MEO (1),
+GEO (2),
+OTHERSAT (3)}
+(SIZE(8, …))
+Each position in the bitmap represents a RAT.
+If a bit is set to "1", the respective RAT is restricted for the UE.
+If a bit is set to "0", the respective RAT is not restricted for the UE.
+Bits 4-7 reserved for future use.
+-
+
 
 Range bound
 Explanation
@@ -11618,7 +11866,7 @@ BIT STRING (32)
 
 
 9.2.1.40	UE Security Capabilities
-The UE Security Capabilities IE defines the supported algorithms for encryption and integrity protection in the UE.
+The UE Security Capabilities IE defines the supported algorithms for encryption and integrity protection in the UE. The Security Capabilities received from NAS signaling shall not be modified or truncated when forwarded to eNBs and the eNBs store and send the complete bitmaps without modification or truncation as specified in TS 36.300 [14].
 IE/Group Name
 Presence
 Range
@@ -11638,6 +11886,7 @@ Each position in the bitmap represents an encryption algorithm:
 “first bit” – 128-EEA1,
 “second bit” – 128-EEA2,
 “third bit” – 128-EEA3,
+“fourth to seventh bit” are mapped from bit 4 to bit 1 of octet 3 in the UE Security Capability IE defined in TS 24.301 [24],  
 other bits reserved for future use. Value ‘1’ indicates support and value ‘0’ indicates no support of the algorithm.
 Algorithms are defined in TS 33.401 [15].
 >Integrity Protection Algorithms
@@ -11649,6 +11898,8 @@ Each position in the bitmap represents an integrity protection algorithm:
 “first bit” – 128-EIA1,
 “second bit” – 128-EIA2,
 “third bit” – 128-EIA3,
+“fourth to seventh bit” are mapped from bit 4 to bit 1 of octet 4 in the UE Security Capability IE defined in TS 24.301 [24],
+“seventh bit” – EIA7 (support of user plane integrity protection),  
 other bits reserved for future use.
 Value ‘1’ indicates support and value ‘0’ indicates no support of the algorithm.
 Algorithms are defined in TS 33.401 [15].
@@ -11814,6 +12065,25 @@ O
 The cause for the handover from the E-UTRAN cell.
 YES
 ignore
+Last Visited PSCell List 
+
+0..<maxnoofPSCellsPerPrimaryCellinUEHistoryInfo>
+
+List of cells configured as PSCells. Most recent PSCell related information is added to the top of the list.
+YES
+ignore
+>Last Visited PSCell Information
+M
+
+9.2.1.161
+The PSCell related information.
+YES
+ignore
+
+Range bound
+Explanation
+maxnoofPSCellsPerPrimaryCellinUEHistoryInfo
+Maximum number of last visited PSCell information records that can be reported in the IE. Value is 8.
 
 9.2.1.43b	Last Visited GERAN Cell Information
 The Last Visited Cell Information for GERAN is currently undefined.
@@ -12702,7 +12972,7 @@ M
 M
 
 INTEGER (0..97)
-This IE is defined in TS 36.331 [16].
+Corresponds to the thresholdRSRP in the ThresholdEUTRA IE as defined in TS 36.331 [16].
 -
 -
 >>>>RSRQ
@@ -12716,7 +12986,7 @@ This IE is defined in TS 36.331 [16].
 M
 
 INTEGER (0..34)
-This IE is defined in TS 36.331 [16].
+Corresponds to the thresholdRSRQ in the ThresholdEUTRA IE as defined in TS 36.331 [16].
 -
 -
 >>M1 Periodic reporting
@@ -12730,7 +13000,7 @@ Included in case of periodic or event-triggered periodic reporting for measureme
 M
 
 ENUMERATED (ms120, ms240, ms480, ms640, ms1024, ms2048, ms5120, ms10240, min1, min6, min12, min30, min60)
-This IE is defined in TS 36.331 [16].
+Corresponds to the ReportInterval IE as is defined in TS 36.331 [16].
 -
 -
 >>>Report amount
@@ -12794,14 +13064,21 @@ O
 9.2.1.137
 
 YES
-Ignore
+ignore
 >>WLAN Measurement Configuration
 O
 
 9.2.1.138
 
 YES
-Ignore
+ignore
+>>Sensor Measurement Configuration
+O
+
+9.2.1.166
+
+YES
+ignore
 >Logged MDT
 
 
@@ -12812,15 +13089,15 @@ Ignore
 >>Logging interval
 M
 
-ENUMERATED (1.28, 2.56, 5.12, 10.24, 20.48, 30.72, 40.96 and 61.44)
-This IE is defined in TS 36.331 [16]. Unit: [second].
+ENUMERATED (ms1280, ms2560, ms5120, ms10240, ms20480, ms30720, ms40960 and ms61440)
+Corresponds to the LoggingInterval IE as defined in TS 36.331 [16]. 
 -
 -
 >>Logging duration
 M
 
-ENUMERATED (10, 20, 40, 60, 90 and 120)
-This IE is defined in TS 36.331 [16]. Unit: [minute].
+ENUMERATED (m10, m20, m40, m60, m90 and m120)
+Corresponds to the LoggingDuration IE as defined in TS 36.331 [16]. 
 -
 -
 >>Bluetooth Measurement Configuration
@@ -12829,14 +13106,49 @@ O
 9.2.1.137
 
 YES
-Ignore
+ignore
 >>WLAN Measurement Configuration
 O
 
 9.2.1.138
 
 YES
-Ignore
+ignore
+>>CHOICE Report Type
+O
+
+
+
+YES
+ignore
+>>>Periodical
+
+
+NULL
+
+
+
+>>>Event Triggered
+
+
+
+
+
+
+>>>>Event Trigger Logged MDT Configuration
+M
+
+9.2.1.165
+
+
+
+>>Sensor Measurement Configuration
+O
+
+9.2.1.166
+
+YES
+ignore
 >Logged MBSFN MDT
 
 
@@ -12847,15 +13159,15 @@ ignore
 >>Logging interval
 M
 
-ENUMERATED (1.28, 2.56, 5.12, 10.24, 20.48, 30.72, 40.96 and 61.44)
-This IE is defined in TS 36.331 [16]. Unit: [second].
+ENUMERATED (ms1280, ms2560, ms5120, ms10240, ms20480, ms30720, ms40960 and ms61440)
+Corresponds to the LoggingInterval IE as defined in TS 36.331 [16]. 
 -
 -
 >>Logging duration
 M
 
-ENUMERATED (10, 20, 40, 60, 90 and 120)
-This IE is defined in TS 36.331 [16]. Unit: [minute].
+ENUMERATED (m10, m20, m40, m60, m90 and m120)
+Corresponds to the LoggingDuration IE as is defined in TS 36.331 [16]. 
 -
 -
 >>MBSFN-ResultToLog
@@ -13102,13 +13414,20 @@ M
 M
 
 9.2.3.16
-
+In NTN, this IE is used to indicate the single broadcast TAC. This IE shall be ignored if the LTE NTN TAI Information IE is present.
 –
 –
 >PSCell Information
 O
 
 9.2.1.141
+
+YES
+ignore
+>LTE NTN TAI Information
+O
+
+9.2.3.56
 
 YES
 ignore
@@ -13601,7 +13920,7 @@ Semantics description
 RAT Type
 M
 
-ENUMERATED (NB-IOT, ...)
+ENUMERATED (NB-IOT, ..., NBIoT-LEO, NBIoT-MEO, NBIoT-GEO, NBIoT-OTHERSAT, EUTRAN-LEO, EUTRAN-MEO, EUTRAN-GEO, EUTRAN-OTHERSAT)
 
 
 9.2.1.118	CE-mode-B Support Indicator
@@ -13818,7 +14137,7 @@ The unit is: bit/s
 
 
 9.2.1.127	NR UE Security Capabilities
-This IE defines the supported algorithms for encryption and integrity protection in NR as defined in TS 33.401 [15].
+This IE defines the supported algorithms for encryption and integrity protection in NR as defined in TS 33.401 [15]. The Security Capabilities received from NAS signaling shall not be modified or truncated when forwarded to eNBs and the eNBs store and send the complete bitmaps without modification or truncation as specified in TS 36.300 [14].
 IE/Group Name
 Presence
 Range
@@ -13833,6 +14152,8 @@ Each position in the bitmap represents an encryption algorithm:
 “first bit” – 128-NEA1,
 “second bit” – 128-NEA2,
 “third bit” – 128-NEA3,
+“fourth to seventh bit” are mapped from bit 4 to bit 1 of octet 3 in the UE Additional Security Capability IE defined in TS 24.301 [24],
+“eighth to fifteenth bit” are mapped from bit 8 to bit 1 of octet 4 in the UE Additional Security Capability IE defined in TS 24.301 [24]
 other bits reserved for future use. Value ‘1’ indicates support and value ‘0’ indicates no support of the algorithm.
 Algorithms are defined in TS 33.401 [15].
 NR Integrity Protection Algorithms
@@ -13844,6 +14165,8 @@ Each position in the bitmap represents an integrity protection algorithm:
 “first bit” – 128-NIA1,
 “second bit” – 128-NIA2,
 “third bit” – 128-NIA3,
+“fourth to seventh bit” are mapped from bit 4 to bit 1 of octet 5 in the UE Additional Security Capability IE defined in TS 24.301 [24],
+“eighth to fifteenth bit” are mapped from bit 8 to bit 1 of octet 6 in the UE Additional Security Capability IE defined in TS 24.301 [24]
 other bits reserved for future use.
 Value ‘1’ indicates support and value ‘0’ indicates no support of the algorithm.
 Algorithms are defined in TS 33.401 [15].
@@ -14538,28 +14861,28 @@ Subcarrier spacing of SSB according to TS 36.331 [16].
 O
 
 INTEGER (1..maxRS-IndexCellQual)
-Indicates the maximum number of RS indices to be considered/ averaged to derive the cell quality for RRM.Also defined in TS 36.331 [16]
+Indicates the maximum number of RS indices to be considered/ averaged to derive the cell quality for RRM. Corresponds to the MaxRS-IndexCellQualNR IE  as defined in TS 36.331 [16]
 
 
 >>>SMTC
 O
 
 OCTET STRING
-Contains the MTC-SSB-NR-15 as defined in TS 36.331 [16].
+Includes the MTC-SSB-NR IE as defined in TS 36.331 [16].
 
 
 >>>threshRS-Index-r15
 O
 
 OCTET STRING
-threshRS-Index-r15as defined in TS 36.331 [16]，List of thresholds for consolidation of L1 measurements per RS index
+Includes the threshRS-Index contained in the MeasObjectNR IE as defined in TS 36.331 [16], List of thresholds for consolidation of L1 measurements per RS index
 
 
 >>>SSB-ToMeasure
 O
 
 OCTET STRING
-Contains the IE SSB-ToMeasure as defined in TS 36.331 [16].
+Includes the SSB-ToMeasure IE as defined in TS 36.331 [16].
 
 
 >>>SS-RSSI-Measurements
@@ -14567,7 +14890,7 @@ O
 
 
 OCTET STRING
-Contains the IE SS-RSSI-Measurement as defined in TS 36.331 [16].
+Includes the SS-RSSI-Measurement IE as defined in TS 36.331 [16].
 
 
 >>>quantityConfigNR-R15
@@ -14575,14 +14898,14 @@ O
 
 
 OCTET STRING
-Indicates the quantityConfigNR-R15 as defined in TS 36.331 [16].
+Includes the quantityConfigNR contained in the QuantityConfig IE as defined in TS 36.331 [16].
 
 
->>>blackCellsToAddModList
+>>>excludedCellsToAddModList
 O
 
 OCTET STRING
-List of cells to add/modify in the black list of cells. It applies only to SSB resources. As defined in TS 36.331 [16].
+Includes the excludedCellsToAddModList contained in the MeasObjectNR IE as defined in TS 36.331 [16]. It applies only to SSB resources.
 
 
 
@@ -14591,9 +14914,9 @@ Explanation
 maxnooffrequencies
 Maximum no. of frequencies. Value is 64.
 maxNARFCN
-Maximum value of NR carrier frequency, defined in TS 38.331 [50]. Value is 3279165
+Maximum value of NR carrier frequency, corresponds to the maxNARFCN as defined in TS 38.331 [50]. Value is 3279165
 maxRS-IndexCellQual
-Maximum number of RS indices averaged to derive cell quality for RRM, defined in TS 36.331 [16]. Value is 16 
+Maximum number of RS indices averaged to derive cell quality for RRM, corresponds to the maxRS-IndexCellQual-r15 as defined in TS 36.331 [16]. Value is 16 
 
 9.2.1.152	Source Node ID
 The Source Node ID IE identifies the source for the handover.
@@ -14638,7 +14961,7 @@ OCTET STRING
 Defined in TS 23.003 [21]. 
 
 9.2.1.154	UE Radio Capability – NR Format
-This IE contains UE Radio Capability information format encoded as specified in TS 38.331 [50] in order to support Mode of operation A as specified in TS 23.401 [11].
+This IE contains UE Radio Capability information in order to support Mode of operation A as specified in TS 23.401 [11].
 IE/Group Name
 Presence
 Range
@@ -14793,7 +15116,7 @@ Unit: [number of radioframes]
 -
 
 9.2.1.160	UE Radio Capability for Paging – NR Format
-This IE contains paging specific UE Radio Capability information encoded as specified in TS 38.331 [50] in order to support Mode of operation A as specified in TS 23.401 [11].
+This IE contains paging specific UE Radio Capability information in order to support Mode of operation A as specified in TS 23.401 [11].
 IE/Group Name
 Presence
 Range
@@ -14803,7 +15126,173 @@ UE Radio Capability for Paging – NR Format
 M
 
 OCTET STRING
-Includes the RRC UERadioPagingInformation message as defined in TS 38.331 [50].
+Includes the UERadioPagingInformation message as defined in TS 38.331 [50].
+
+9.2.1.161	Last Visited PSCell Information
+The Last Visited PSCell Information may contain cell specific information.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+PSCell ID
+O
+
+PSCell Information
+9.2.1.141
+This IE is present when the SCG resources are configured for the UE.
+Time Stay
+M
+
+INTEGER (0..40950)
+The duration of the time the UE stayed in the cell in 1/10 seconds. If the UE stays in a cell more than 4095s, this IE is set to 40950.
+Or the duration of the time when no SCG resources are configured for the UE.
+
+9.2.1.162	RACS Indication
+This IE indicates that the target eNB is able to retrieve the UE radio capabilities based on information received from the target MME as described in TS 23.401 [11]. 
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+RACS Indication
+M
+
+ENUMERATED (true, …)
+
+
+9.2.1.163	Security Indication
+This IE contains the user plane integrity protection indication which indicates the requirements on UP integrity protection for corresponding E-RABs.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Integrity Protection Indication
+M
+
+ENUMERATED (required, preferred, not needed, …)
+
+Indicates whether UP integrity protection shall apply, should apply or shall not apply for the concerned E-RAB.
+
+9.2.1.164	Security Result
+This IE indicates whether integrity protection is performed or not.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Integrity Protection Result
+M
+
+ENUMERATED (performed, not performed, …)
+Indicates whether UP integrity protection is performed or not for the concerned E-RAB.
+
+9.2.1.165	Event Trigger Logged MDT Configuration
+This IE defines the event trigger logged MDT configuration.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+CHOICE Event trigger type
+M
+
+
+
+>Out-of-coverage
+
+
+
+
+>>Out-of-Coverage Configuration
+M
+
+ENUMERATED (true, ...)
+
+>L1 Event
+
+
+
+
+>>CHOICE L1 Event Threshold
+M
+
+
+
+>>>RSRP
+
+
+
+
+>>>>Threshold RSRP
+M
+
+INTEGER (0..97)
+Corresponds to the thresholdRSRP in the ThresholdEUTRA IE as defined in TS 36.331 [16].
+>>>RSRQ
+
+
+
+
+>>>>Threshold RSRQ
+M
+
+INTEGER (0..34)
+Corresponds to the thresholdRSRQ in the ThresholdEUTRA IE as defined in TS 36.331 [16].
+>>Hysteresis
+M
+
+INTEGER (0..30)
+This parameter is used within the entry and leave condition of an event triggered reporting condition.
+>>Time to Trigger
+M
+
+ENUMERATED (ms0, ms40, ms64, ms80, ms100, ms128, ms160, ms256, ms320, ms480, ms512, ms640, ms1024, ms1280, ms2560, ms5120)
+Time during which specific criteria for the event needs to be met in order to trigger a measurement report.
+
+9.2.1.166	Sensor Measurement Configuration
+This IE defines the parameters for Sensor measurement collection.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Sensor Measurement Configuration
+M
+
+ENUMERATED (Setup, …)
+
+Sensor Measurement Configuration Name List
+
+0..1
+
+
+>Sensor Measurement Configuration Name Item
+
+1..<maxnoofSensorName>
+
+
+>>CHOICE Sensor Name
+M
+
+
+
+>>>Uncompensated Barometric
+
+
+
+
+>>>>Uncompensated Barometric Configuration
+M
+
+ENUMERATED (true, …)
+
+
+Range bound
+Explanation
+maxnoofSensorName
+Maximum no. of Sensor local name used for Sensor measurement collection. Value is 3
 
 9.2.2	Transport Network Layer Related IEs
 9.2.2.1	Transport Layer Address
@@ -15641,7 +16130,7 @@ M
 M
 
 ENUMERATED(X2 TNL Configuration Info, …, Time synchronisation Info, Activate Muting, Deactivate Muting)
-In the current version of the specification only "X2 NTL Configuration Info" is applicable for EN-DC.
+In the current version of the specification only "X2 TNL Configuration Info" is applicable for EN-DC.
 -
 
 >SON Information Reply
@@ -15947,25 +16436,21 @@ Presence
 Range
 IE type and reference
 Semantics description
-
 UE RLF Report Container
 M
 
 OCTET STRING
-rlf-Report-r9 contained in UEInformationResponse message as defined in TS 36.331 [16].
-
+Includes the rlf-Report-r9 contained in UEInformationResponse message as defined in TS 36.331 [16].
 UE RLF Report Container for extended bands
 O
 
 OCTET STRING
-rlf-Report-v9e0 contained in the UEInformationResponse message (TS 36.331 [16])
-
-
+Includes the rlf-Report-v9e0 contained in the UEInformationResponse message (TS 36.331 [16])
 NB-IoT RLF Report Container
 O
 
 OCTET STRING
-rlf-Report-NB-r16 contained in UEInformationResponse-NB message, as defined in TS 36.331 [16].
+Includes the rlf-Report-NB-r16 contained in UEInformationResponse-NB message, as defined in TS 36.331 [16].
 
 9.2.3.41	Muting Pattern Information
 This information element contains muting pattern information that can be used for over-the-air synchronisation using network listening.
@@ -16217,6 +16702,41 @@ M
 ENUMERATED (true, …)
 
 
+9.2.3.56	LTE NTN TAI Information
+This IE contains the serving PLMN, the broadcast TAC(s) and the TAC information derived from the actual UE location if available.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Serving PLMN
+M
+
+PLMN Identity
+9.2.3.8
+Indicates the UE’s serving PLMN.
+TAC List in LTE NTN
+
+1..<maxnoofTACsinNTN>
+
+Includes all TAC(s) broadcast in the cell, for the UE’s serving PLMN.
+>TAC
+M
+
+9.2.3.7
+
+UE location derived TAC in LTE NTN
+O
+
+TAC
+9.2.3.7
+This IE contains TAC information derived from the actual UE location, if available.
+
+Range bound
+Explanation
+maxnoofTACsInNTN
+Maximum no. of TACs in NTN. Value is 12.
+
 9.3	Message and Information Element Abstract Syntax (with ASN.1)
 9.3.0	General
 S1AP ASN.1 definition conforms to ITU-T Rec. X.691 [4], ITU-T Rec. X.680 [5] and ITU-T Rec. X.681 [6].
@@ -16232,6 +16752,7 @@ The private message mechanism for non-standard use may be used:
 -	by vendors for research purposes, e.g., to implement and evaluate new algorithms/features before such features are proposed for standardisation.
 The private message mechanism shall not be used for basic functionality. Such functionality shall be standardised.
 9.3.2	Elementary Procedure Definitions
+-- ASN1START
 -- **************************************************************
 --
 -- Elementary Procedure definitions
@@ -17010,7 +17531,10 @@ mMEEarlyStatusTransfer S1AP-ELEMENTARY-PROCEDURE ::= {
 
 END
 
+-- ASN1STOP
+
 9.3.3	PDU Definitions
+-- ASN1START
 -- **************************************************************
 --
 -- PDU definitions for S1AP.
@@ -17211,7 +17735,11 @@ IMPORTS
 	NotifySourceeNB,
 	ENB-EarlyStatusTransfer-TransparentContainer,
 	WUS-Assistance-Information,
-	NB-IoT-PagingDRX
+	NB-IoT-PagingDRX,
+	PagingCause,
+	SecurityIndication,
+	SecurityResult,
+	LTE-NTN-TAI-Information
 
 
 
@@ -17488,9 +18016,13 @@ FROM S1AP-Containers
 	id-eNB-EarlyStatusTransfer-TransparentContainer,
 	id-WUS-Assistance-Information,
 	id-NB-IoT-PagingDRX,
-	id-UERadioCapabilityForPaging-NR-Format
-
-
+	id-UERadioCapabilityForPaging-NR-Format,
+	id-PagingCause,
+	id-SecurityIndication,
+	id-SecurityResult,
+	id-LTE-NTN-TAI-Information,
+	id-E-RABToBeUpdatedList,
+	id-E-RABToBeUpdatedItem
 
 FROM S1AP-Constants;
 
@@ -17684,7 +18216,8 @@ E-RABToBeSetupItemHOReq ::= SEQUENCE {
 E-RABToBeSetupItemHOReq-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 	{ ID id-Data-Forwarding-Not-Possible		CRITICALITY ignore	EXTENSION Data-Forwarding-Not-Possible	PRESENCE optional}|
 	{ ID id-BearerType							CRITICALITY reject	EXTENSION BearerType					PRESENCE optional}|
-	{ ID id-Ethernet-Type						CRITICALITY ignore	EXTENSION Ethernet-Type					PRESENCE optional},
+	{ ID id-Ethernet-Type						CRITICALITY ignore	EXTENSION Ethernet-Type					PRESENCE optional}|
+	{ ID id-SecurityIndication				CRITICALITY reject	EXTENSION SecurityIndication			PRESENCE optional},
 	...
 }
 
@@ -17798,7 +18331,8 @@ HandoverNotifyIEs S1AP-PROTOCOL-IES ::= {
 	{ ID id-Tunnel-Information-for-BBF		CRITICALITY ignore	TYPE TunnelInformation		PRESENCE optional}|
 	{ ID id-LHN-ID							CRITICALITY ignore	TYPE LHN-ID					PRESENCE optional}|
 	{ ID id-PSCellInformation				CRITICALITY ignore	TYPE PSCellInformation		PRESENCE optional }|
-	{ ID id-NotifySourceeNB					CRITICALITY ignore	TYPE NotifySourceeNB		PRESENCE optional},
+	{ ID id-NotifySourceeNB					CRITICALITY ignore	TYPE NotifySourceeNB		PRESENCE optional}|
+	{ ID id-LTE-NTN-TAI-Information			CRITICALITY ignore	TYPE LTE-NTN-TAI-Information	PRESENCE optional},
 	...
 }
 
@@ -17835,7 +18369,8 @@ PathSwitchRequestIEs S1AP-PROTOCOL-IES ::= {
 	{ ID id-LHN-ID							CRITICALITY ignore	TYPE LHN-ID						PRESENCE optional}|
 	{ ID id-RRC-Resume-Cause				CRITICALITY ignore	TYPE RRC-Establishment-Cause	PRESENCE optional }|
 	{ ID id-NRUESecurityCapabilities				CRITICALITY ignore	TYPE NRUESecurityCapabilities			PRESENCE optional}|
-	{ ID id-PSCellInformation				CRITICALITY ignore	TYPE PSCellInformation			PRESENCE optional },
+	{ ID id-PSCellInformation				CRITICALITY ignore	TYPE PSCellInformation			PRESENCE optional }|
+	{ ID id-LTE-NTN-TAI-Information			CRITICALITY ignore	TYPE LTE-NTN-TAI-Information	PRESENCE optional},
 	...
 }
 
@@ -17855,6 +18390,7 @@ E-RABToBeSwitchedDLItem ::= SEQUENCE {
 }
 
 E-RABToBeSwitchedDLItem-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
+	{ ID id-SecurityIndication	CRITICALITY ignore		EXTENSION SecurityIndication		PRESENCE optional},
 	...
 }
 
@@ -17870,31 +18406,33 @@ PathSwitchRequestAcknowledge ::= SEQUENCE {
 }
 
 PathSwitchRequestAcknowledgeIEs S1AP-PROTOCOL-IES ::= {	
-	{ ID id-MME-UE-S1AP-ID					CRITICALITY ignore	TYPE MME-UE-S1AP-ID						PRESENCE mandatory}|
-	{ ID id-eNB-UE-S1AP-ID					CRITICALITY ignore	TYPE ENB-UE-S1AP-ID						PRESENCE mandatory}|
-	{ ID id-uEaggregateMaximumBitrate		CRITICALITY ignore	TYPE UEAggregateMaximumBitrate			PRESENCE optional}|
-	{ ID id-E-RABToBeSwitchedULList			CRITICALITY ignore	TYPE E-RABToBeSwitchedULList			PRESENCE optional}|
-	{ ID id-E-RABToBeReleasedList			CRITICALITY ignore	TYPE E-RABList							PRESENCE optional}|
-	{ ID id-SecurityContext					CRITICALITY reject	TYPE SecurityContext					PRESENCE mandatory}|
-	{ ID id-CriticalityDiagnostics			CRITICALITY ignore	TYPE CriticalityDiagnostics				PRESENCE optional}|
-	{ ID id-MME-UE-S1AP-ID-2				CRITICALITY ignore	TYPE MME-UE-S1AP-ID						PRESENCE optional}|
-	{ ID id-CSGMembershipStatus				CRITICALITY ignore	TYPE CSGMembershipStatus				PRESENCE optional}|
-	{ ID id-ProSeAuthorized					CRITICALITY ignore	TYPE ProSeAuthorized					PRESENCE optional}|
-	{ ID id-UEUserPlaneCIoTSupportIndicator	CRITICALITY ignore	TYPE UEUserPlaneCIoTSupportIndicator	PRESENCE optional}|
-	{ ID id-V2XServicesAuthorized			CRITICALITY ignore	TYPE V2XServicesAuthorized				PRESENCE optional}|
+	{ ID id-MME-UE-S1AP-ID							CRITICALITY ignore	TYPE MME-UE-S1AP-ID								PRESENCE mandatory}|
+	{ ID id-eNB-UE-S1AP-ID							CRITICALITY ignore	TYPE ENB-UE-S1AP-ID								PRESENCE mandatory}|
+	{ ID id-uEaggregateMaximumBitrate				CRITICALITY ignore	TYPE UEAggregateMaximumBitrate				PRESENCE optional}|
+	{ ID id-E-RABToBeSwitchedULList					CRITICALITY ignore	TYPE E-RABToBeSwitchedULList					PRESENCE optional}|
+	{ ID id-E-RABToBeReleasedList					CRITICALITY ignore	TYPE E-RABList									PRESENCE optional}|
+	{ ID id-SecurityContext							CRITICALITY reject	TYPE SecurityContext							PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics					CRITICALITY ignore	TYPE CriticalityDiagnostics					PRESENCE optional}|
+	{ ID id-MME-UE-S1AP-ID-2						CRITICALITY ignore	TYPE MME-UE-S1AP-ID								PRESENCE optional}|
+	{ ID id-CSGMembershipStatus						CRITICALITY ignore	TYPE CSGMembershipStatus						PRESENCE optional}|
+	{ ID id-ProSeAuthorized							CRITICALITY ignore	TYPE ProSeAuthorized							PRESENCE optional}|
+	{ ID id-UEUserPlaneCIoTSupportIndicator			CRITICALITY ignore	TYPE UEUserPlaneCIoTSupportIndicator		PRESENCE optional}|
+	{ ID id-V2XServicesAuthorized					CRITICALITY ignore	TYPE V2XServicesAuthorized					PRESENCE optional}|
 	{ ID id-UESidelinkAggregateMaximumBitrate		CRITICALITY ignore	TYPE UESidelinkAggregateMaximumBitrate	PRESENCE optional}|
-	{ ID id-EnhancedCoverageRestricted		CRITICALITY ignore	TYPE EnhancedCoverageRestricted			PRESENCE optional}|
-	{ ID id-NRUESecurityCapabilities				CRITICALITY ignore	TYPE NRUESecurityCapabilities			PRESENCE optional}|
-	{ ID id-CE-ModeBRestricted				CRITICALITY ignore	TYPE CE-ModeBRestricted			PRESENCE optional}|
-	{ ID id-AerialUEsubscriptionInformation			CRITICALITY ignore	TYPE AerialUEsubscriptionInformation				PRESENCE optional}|
-	{ ID id-PendingDataIndication			CRITICALITY ignore	TYPE PendingDataIndication				PRESENCE optional}|
+	{ ID id-EnhancedCoverageRestricted				CRITICALITY ignore	TYPE EnhancedCoverageRestricted				PRESENCE optional}|
+	{ ID id-NRUESecurityCapabilities				CRITICALITY ignore	TYPE NRUESecurityCapabilities				PRESENCE optional}|
+	{ ID id-CE-ModeBRestricted						CRITICALITY ignore	TYPE CE-ModeBRestricted							PRESENCE optional}|
+	{ ID id-AerialUEsubscriptionInformation			CRITICALITY ignore	TYPE AerialUEsubscriptionInformation		PRESENCE optional}|
+	{ ID id-PendingDataIndication					CRITICALITY ignore	TYPE PendingDataIndication					PRESENCE optional}|
 	{ ID id-Subscription-Based-UE-DifferentiationInfo		CRITICALITY ignore	TYPE Subscription-Based-UE-DifferentiationInfo		PRESENCE optional}|
-	{ ID id-HandoverRestrictionList			CRITICALITY ignore	TYPE HandoverRestrictionList			PRESENCE optional}|
-	{ ID id-AdditionalRRMPriorityIndex		CRITICALITY ignore	TYPE AdditionalRRMPriorityIndex			PRESENCE optional }|
-	{ ID id-NRV2XServicesAuthorized						CRITICALITY ignore	TYPE NRV2XServicesAuthorized							PRESENCE optional }|
-	{ ID id-NRUESidelinkAggregateMaximumBitrate			CRITICALITY ignore	TYPE NRUESidelinkAggregateMaximumBitrate			PRESENCE optional }|
-	{ ID id-PC5QoSParameters							CRITICALITY ignore	TYPE PC5QoSParameters									PRESENCE optional }|
-	{ ID id-UERadioCapabilityID							CRITICALITY reject	TYPE UERadioCapabilityID								PRESENCE optional},
+	{ ID id-HandoverRestrictionList					CRITICALITY ignore	TYPE HandoverRestrictionList					PRESENCE optional}|
+	{ ID id-AdditionalRRMPriorityIndex				CRITICALITY ignore	TYPE AdditionalRRMPriorityIndex				PRESENCE optional }|
+	{ ID id-NRV2XServicesAuthorized					CRITICALITY ignore	TYPE NRV2XServicesAuthorized					PRESENCE optional }|
+	{ ID id-NRUESidelinkAggregateMaximumBitrate		CRITICALITY ignore	TYPE NRUESidelinkAggregateMaximumBitrate	PRESENCE optional }|
+	{ ID id-PC5QoSParameters						CRITICALITY ignore	TYPE PC5QoSParameters							PRESENCE optional }|
+	{ ID id-UERadioCapabilityID						CRITICALITY reject	TYPE UERadioCapabilityID						PRESENCE optional}|
+	{ ID id-UESecurityCapabilities					CRITICALITY ignore	TYPE UESecurityCapabilities					PRESENCE optional}|
+	{ ID id-E-RABToBeUpdatedList					CRITICALITY ignore	TYPE E-RABToBeUpdatedList						PRESENCE optional},
 	...
 }
 
@@ -17914,9 +18452,27 @@ E-RABToBeSwitchedULItem ::= SEQUENCE {
 }
 
 E-RABToBeSwitchedULItem-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
+	
 	...
 }
 
+E-RABToBeUpdatedList ::= E-RAB-IE-ContainerList { {E-RABToBeUpdatedItemIEs} }
+
+E-RABToBeUpdatedItemIEs S1AP-PROTOCOL-IES ::= {
+	{ ID id-E-RABToBeUpdatedItem		CRITICALITY ignore	TYPE E-RABToBeUpdatedItem		PRESENCE mandatory	},
+	...
+}
+
+E-RABToBeUpdatedItem ::= SEQUENCE {
+	e-RAB-ID							E-RAB-ID,
+	securityIndication					SecurityIndication		OPTIONAL,
+	iE-Extensions						ProtocolExtensionContainer { { E-RABToBeUpdatedItem-ExtIEs} }	OPTIONAL,
+	...
+}
+
+E-RABToBeUpdatedItem-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
+	...
+}
 
 -- **************************************************************
 --
@@ -18097,7 +18653,8 @@ E-RABToBeSetupItemBearerSUReqExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 	{ ID id-Correlation-ID			CRITICALITY ignore	EXTENSION Correlation-ID		PRESENCE optional}|
 	{ ID id-SIPTO-Correlation-ID	CRITICALITY ignore	EXTENSION Correlation-ID		PRESENCE optional}|
 	{ ID id-BearerType				CRITICALITY reject	EXTENSION BearerType			PRESENCE optional}|
-	{ ID id-Ethernet-Type			CRITICALITY ignore	EXTENSION Ethernet-Type			PRESENCE optional},
+	{ ID id-Ethernet-Type			CRITICALITY ignore	EXTENSION Ethernet-Type			PRESENCE optional}|
+	{ ID id-SecurityIndication	CRITICALITY reject	EXTENSION SecurityIndication		PRESENCE optional},
 	...
 }
 
@@ -18118,7 +18675,8 @@ E-RABSetupResponseIEs S1AP-PROTOCOL-IES ::= {
 	{ ID id-eNB-UE-S1AP-ID							CRITICALITY ignore	TYPE ENB-UE-S1AP-ID				PRESENCE mandatory	}|
 	{ ID id-E-RABSetupListBearerSURes				CRITICALITY ignore	TYPE E-RABSetupListBearerSURes	PRESENCE optional	}|
 	{ ID id-E-RABFailedToSetupListBearerSURes		CRITICALITY ignore	TYPE E-RABList					PRESENCE optional	}|
-	{ ID id-CriticalityDiagnostics					CRITICALITY ignore	TYPE CriticalityDiagnostics	PRESENCE optional	},
+	{ ID id-CriticalityDiagnostics					CRITICALITY ignore	TYPE CriticalityDiagnostics	PRESENCE optional	}|
+	{ ID id-UserLocationInformation					CRITICALITY ignore	TYPE UserLocationInformation	PRESENCE optional },
 	...
 }
 
@@ -18211,7 +18769,8 @@ E-RABModifyResponseIEs S1AP-PROTOCOL-IES ::= {
 	{ ID id-E-RABModifyListBearerModRes		CRITICALITY ignore	TYPE E-RABModifyListBearerModRes		PRESENCE optional	}|
 	{ ID id-E-RABFailedToModifyList			CRITICALITY ignore	TYPE E-RABList							PRESENCE optional	}|
 	{ ID id-CriticalityDiagnostics			CRITICALITY ignore	TYPE CriticalityDiagnostics				PRESENCE optional	}|
-	{ ID id-SecondaryRATDataUsageReportList		CRITICALITY ignore	TYPE SecondaryRATDataUsageReportList			PRESENCE optional	},
+	{ ID id-SecondaryRATDataUsageReportList		CRITICALITY ignore	TYPE SecondaryRATDataUsageReportList			PRESENCE optional	}|
+	{ ID id-UserLocationInformation			CRITICALITY ignore	TYPE UserLocationInformation			PRESENCE optional },
 	...
 }
 
@@ -18417,7 +18976,8 @@ E-RABToBeSetupItemCtxtSUReqExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 	{ ID id-Correlation-ID					CRITICALITY ignore	EXTENSION Correlation-ID			PRESENCE optional}|
 	{ ID id-SIPTO-Correlation-ID			CRITICALITY ignore	EXTENSION Correlation-ID			PRESENCE optional}|
 	{ ID id-BearerType						CRITICALITY reject	EXTENSION BearerType				PRESENCE optional}|
-	{ ID id-Ethernet-Type					CRITICALITY ignore	EXTENSION Ethernet-Type				PRESENCE optional},
+	{ ID id-Ethernet-Type					CRITICALITY ignore	EXTENSION Ethernet-Type				PRESENCE optional}|
+	{ ID id-SecurityIndication			CRITICALITY reject	EXTENSION SecurityIndication		PRESENCE optional},
 	...
 }
 
@@ -18510,7 +19070,7 @@ PagingIEs S1AP-PROTOCOL-IES ::= {
 	{ ID id-CSG-IdList						CRITICALITY ignore	TYPE CSG-IdList							PRESENCE optional}|
 	{ ID id-PagingPriority					CRITICALITY ignore	TYPE PagingPriority						PRESENCE optional}|
 	{ ID id-UERadioCapabilityForPaging		CRITICALITY ignore	TYPE UERadioCapabilityForPaging			PRESENCE optional}|
--- Extension for Release 13 to support Paging Optimisation and Coverage Enhancement paging –-
+-- Extension for Release 13 to support Paging Optimisation and Coverage Enhancement paging --
 	{ ID id-AssistanceDataForPaging			CRITICALITY ignore	TYPE AssistanceDataForPaging			PRESENCE optional}|
 	{ ID id-Paging-eDRXInformation			CRITICALITY ignore	TYPE Paging-eDRXInformation				PRESENCE optional}|
 	{ ID id-extended-UEIdentityIndexValue	CRITICALITY ignore	TYPE Extended-UEIdentityIndexValue	PRESENCE optional}|
@@ -18520,7 +19080,8 @@ PagingIEs S1AP-PROTOCOL-IES ::= {
 	{ ID id-CE-ModeBRestricted				CRITICALITY ignore	TYPE CE-ModeBRestricted					PRESENCE optional}|
 	{ ID id-DataSize						CRITICALITY ignore	TYPE DataSize							PRESENCE optional}|
 	{ ID id-WUS-Assistance-Information		CRITICALITY ignore	TYPE WUS-Assistance-Information			PRESENCE optional}|
-	{ ID id-NB-IoT-PagingDRX				CRITICALITY ignore	TYPE NB-IoT-PagingDRX					PRESENCE optional},
+	{ ID id-NB-IoT-PagingDRX				CRITICALITY ignore	TYPE NB-IoT-PagingDRX					PRESENCE optional}|
+	{ ID id-PagingCause						CRITICALITY ignore	TYPE PagingCause						PRESENCE optional},
 	...
 }
 
@@ -18604,7 +19165,7 @@ UEContextReleaseComplete-IEs S1AP-PROTOCOL-IES ::= {
 	{ ID id-UserLocationInformation						CRITICALITY ignore	TYPE UserLocationInformation				PRESENCE optional}|
 -- Extension for Release 13 to support Paging Optimisation
 	{ ID id-InformationOnRecommendedCellsAndENBsForPaging	CRITICALITY ignore	TYPE InformationOnRecommendedCellsAndENBsForPaging		PRESENCE optional}|
--- Extension for Release 13 to support coverage enhancement paging –
+-- Extension for Release 13 to support coverage enhancement paging --
 	{ ID id-CellIdentifierAndCELevelForCECapableUEs		CRITICALITY ignore	TYPE CellIdentifierAndCELevelForCECapableUEs	PRESENCE optional}|
 	{ ID id-SecondaryRATDataUsageReportList				CRITICALITY ignore	TYPE SecondaryRATDataUsageReportList		PRESENCE optional }|
 	{ ID id-TimeSinceSecondaryNodeRelease				CRITICALITY ignore	TYPE TimeSinceSecondaryNodeRelease				PRESENCE optional },
@@ -18760,16 +19321,17 @@ DownlinkNASTransport-IEs S1AP-PROTOCOL-IES ::= {
 	{ ID id-SubscriberProfileIDforRFP	CRITICALITY ignore	TYPE SubscriberProfileIDforRFP		PRESENCE optional}|
 	{ ID id-SRVCCOperationPossible		CRITICALITY ignore	TYPE SRVCCOperationPossible			PRESENCE optional}|
 	{ ID id-UERadioCapability			CRITICALITY ignore	TYPE UERadioCapability				PRESENCE optional}|
-	{ ID id-DLNASPDUDeliveryAckRequest	CRITICALITY ignore	TYPE DLNASPDUDeliveryAckRequest	PRESENCE optional}|
+	{ ID id-DLNASPDUDeliveryAckRequest	CRITICALITY ignore	TYPE DLNASPDUDeliveryAckRequest		PRESENCE optional}|
 	{ ID id-EnhancedCoverageRestricted	CRITICALITY ignore	TYPE EnhancedCoverageRestricted		PRESENCE optional}|
 	{ ID id-NRUESecurityCapabilities	CRITICALITY ignore	TYPE NRUESecurityCapabilities		PRESENCE optional}|
 	{ ID id-CE-ModeBRestricted			CRITICALITY ignore	TYPE CE-ModeBRestricted				PRESENCE optional}|
-	{ ID id-UECapabilityInfoRequest		CRITICALITY ignore	TYPE UECapabilityInfoRequest	PRESENCE optional}|
+	{ ID id-UECapabilityInfoRequest		CRITICALITY ignore	TYPE UECapabilityInfoRequest		PRESENCE optional}|
 	{ ID id-EndIndication				CRITICALITY ignore	TYPE EndIndication					PRESENCE optional}|
 	{ ID id-PendingDataIndication		CRITICALITY ignore	TYPE PendingDataIndication			PRESENCE optional}|
 	{ ID id-Subscription-Based-UE-DifferentiationInfo		CRITICALITY ignore	TYPE Subscription-Based-UE-DifferentiationInfo		PRESENCE optional}|
 	{ ID id-AdditionalRRMPriorityIndex	CRITICALITY ignore	TYPE AdditionalRRMPriorityIndex		PRESENCE optional}|
-	{ ID id-UERadioCapabilityID			CRITICALITY reject	TYPE UERadioCapabilityID			PRESENCE optional},
+	{ ID id-UERadioCapabilityID			CRITICALITY reject	TYPE UERadioCapabilityID			PRESENCE optional}|
+	{ ID id-Masked-IMEISV				CRITICALITY ignore	TYPE Masked-IMEISV					PRESENCE optional},
 	...
 }
 
@@ -18809,7 +19371,8 @@ InitialUEMessage-IEs S1AP-PROTOCOL-IES ::= {
 	{ ID id-Coverage-Level           	CRITICALITY ignore	TYPE Coverage-Level				PRESENCE optional}|
 	{ ID id-UE-Application-Layer-Measurement-Capability		CRITICALITY ignore	TYPE UE-Application-Layer-Measurement-Capability							PRESENCE optional}|
 	{ ID id-EDT-Session					CRITICALITY ignore	TYPE EDT-Session					PRESENCE optional}|
-	{ ID id-IAB-Node-Indication			CRITICALITY reject	TYPE IAB-Node-Indication			PRESENCE optional},
+	{ ID id-IAB-Node-Indication			CRITICALITY reject	TYPE IAB-Node-Indication			PRESENCE optional}|
+	{ ID id-LTE-NTN-TAI-Information		CRITICALITY ignore	TYPE LTE-NTN-TAI-Information 		PRESENCE optional},
 	...
 }
 
@@ -18834,7 +19397,8 @@ UplinkNASTransport-IEs S1AP-PROTOCOL-IES ::= {
 	{ ID id-GW-TransportLayerAddress	CRITICALITY ignore	TYPE TransportLayerAddress			PRESENCE optional}|
 	{ ID id-SIPTO-L-GW-TransportLayerAddress	CRITICALITY ignore	TYPE TransportLayerAddress	PRESENCE optional}|
 	{ ID id-LHN-ID						CRITICALITY ignore	TYPE LHN-ID							PRESENCE optional}|
-	{ ID id-PSCellInformation			CRITICALITY ignore	TYPE PSCellInformation				PRESENCE optional },
+	{ ID id-PSCellInformation			CRITICALITY ignore	TYPE PSCellInformation				PRESENCE optional }|
+	{ ID id-LTE-NTN-TAI-Information  	CRITICALITY ignore	TYPE LTE-NTN-TAI-Information 		PRESENCE optional},
 	...
 }
 -- **************************************************************
@@ -19474,7 +20038,8 @@ LocationReportIEs S1AP-PROTOCOL-IES ::= {
 	{ ID id-EUTRAN-CGI				CRITICALITY ignore	TYPE EUTRAN-CGI					PRESENCE mandatory	}|
 	{ ID id-TAI						CRITICALITY ignore	TYPE TAI						PRESENCE mandatory	}|
 	{ ID id-RequestType				CRITICALITY ignore	TYPE RequestType				PRESENCE mandatory	}|
-	{ ID id-PSCellInformation		CRITICALITY ignore	TYPE PSCellInformation			PRESENCE optional },
+	{ ID id-PSCellInformation		CRITICALITY ignore	TYPE PSCellInformation			PRESENCE optional }|
+	{ ID id-LTE-NTN-TAI-Information CRITICALITY ignore	TYPE LTE-NTN-TAI-Information 	PRESENCE optional},
 	...
 }
 
@@ -20186,8 +20751,8 @@ ConnectionEstablishmentIndicationIEs S1AP-PROTOCOL-IES ::= {
 	{ ID id-EndIndication				CRITICALITY ignore	TYPE EndIndication				PRESENCE optional}|
 	{ ID id-Subscription-Based-UE-DifferentiationInfo		CRITICALITY ignore	TYPE Subscription-Based-UE-DifferentiationInfo		PRESENCE optional}|
 	{ ID id-UE-Level-QoS-Parameters		CRITICALITY ignore	TYPE E-RABLevelQoSParameters	PRESENCE optional}|
-	{ ID id-UERadioCapabilityID			CRITICALITY reject	TYPE UERadioCapabilityID		PRESENCE optional}
-,
+	{ ID id-UERadioCapabilityID			CRITICALITY reject	TYPE UERadioCapabilityID		PRESENCE optional}|
+	{ ID id-Masked-IMEISV				CRITICALITY ignore	TYPE Masked-IMEISV				PRESENCE optional},
 	...
 }
 
@@ -20224,7 +20789,8 @@ UEInformationTransferIEs S1AP-PROTOCOL-IES ::= {
 	{ ID id-UE-Level-QoS-Parameters		CRITICALITY ignore	TYPE E-RABLevelQoSParameters	PRESENCE optional}|
 	{ ID id-UERadioCapability			CRITICALITY ignore	TYPE UERadioCapability			PRESENCE optional}|
 	{ ID id-Subscription-Based-UE-DifferentiationInfo		CRITICALITY ignore	TYPE Subscription-Based-UE-DifferentiationInfo		PRESENCE optional}|
-	{ ID id-PendingDataIndication		CRITICALITY ignore	TYPE PendingDataIndication		PRESENCE optional},
+	{ ID id-PendingDataIndication		CRITICALITY ignore	TYPE PendingDataIndication		PRESENCE optional}|
+	{ ID id-Masked-IMEISV				CRITICALITY ignore	TYPE Masked-IMEISV				PRESENCE optional},
 	...
 }
 
@@ -20245,7 +20811,8 @@ ENBCPRelocationIndicationIEs S1AP-PROTOCOL-IES ::= {
 	{ ID id-S-TMSI						CRITICALITY reject	TYPE S-TMSI						PRESENCE mandatory}|
 	{ ID id-EUTRAN-CGI					CRITICALITY ignore	TYPE EUTRAN-CGI					PRESENCE mandatory}|
 	{ ID id-TAI							CRITICALITY ignore	TYPE TAI						PRESENCE mandatory}|
-	{ ID id-UL-CP-SecurityInformation	CRITICALITY reject	TYPE UL-CP-SecurityInformation	PRESENCE mandatory},
+	{ ID id-UL-CP-SecurityInformation	CRITICALITY reject	TYPE UL-CP-SecurityInformation	PRESENCE mandatory}|
+	{ ID id-LTE-NTN-TAI-Information  	CRITICALITY ignore	TYPE LTE-NTN-TAI-Information 	PRESENCE optional},
 	...
 }
 
@@ -20331,7 +20898,10 @@ UERadioCapabilityIDMappingResponseIEs S1AP-PROTOCOL-IES ::= {
 }
 
 END
+-- ASN1STOP
+
 9.3.4	Information Element Definitions
+-- ASN1START
 -- **************************************************************
 --
 -- Information Element Definitions
@@ -20417,9 +20987,19 @@ IMPORTS
 	id-TraceCollectionEntityURI,
 	id-EmergencyIndicator,
 	id-SourceTransportLayerAddress,
+	id-lastVisitedPSCellList,
+	id-RACSIndication,
+	id-SecurityIndication,
+	id-E-RABSecurityResultItem,
+	id-E-RABSecurityResultList,
+	id-RAT-Restrictions,
+	id-UEContextReferenceatSourceeNB,
+	id-LTE-NTN-TAI-Information,
 	id-SourceNodeTransportLayerAddress,
 	id-SourceSNID,
 	id-Direct-Forwarding-Path-Availability,
+	id-LoggedMDTTrigger,
+	id-SensorMeasurementConfiguration,
 	maxnoofCSGs,
 	maxnoofE-RABs,
 	maxnoofErrors,
@@ -20464,7 +21044,10 @@ IMPORTS
 	maxnoofPC5QoSFlows,
 	maxnooffrequencies,
 	maxNARFCN,
-	maxRS-IndexCellQual
+	maxRS-IndexCellQual,
+	maxnoofPSCellsPerPrimaryCellinUEHistoryInfo,
+	maxnoofTACsInNTN,
+	maxnoofSensorName
 
 
 
@@ -20756,7 +21339,8 @@ CauseRadioNetwork ::= ENUMERATED {
 	release-due-to-pre-emption,
 	n26-interface-not-available,
 	insufficient-ue-capabilities,
-	maximum-bearer-pre-emption-rate-exceeded
+	maximum-bearer-pre-emption-rate-exceeded,
+	up-integrity-protection-not-possible
 
 }
 
@@ -20772,7 +21356,8 @@ CauseNas ::= ENUMERATED {
 	detach,
 	unspecified,
 	...,
-	csg-subscription-expiry
+	csg-subscription-expiry,
+	uE-not-in-PLMN-serving-area
 }
 
 CellAccessMode ::= ENUMERATED {
@@ -20791,7 +21376,6 @@ CellIdentifierAndCELevelForCECapableUEs-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
--- Coverage Enhancement level encoded according to TS 36.331 [16] --
 CELevel ::= OCTET STRING
 
 CE-mode-B-SupportIndicator ::= ENUMERATED {
@@ -21312,7 +21896,7 @@ EN-DCSONConfigurationTransfer ::= SEQUENCE {
 	transfertype				EN-DCSONTransferType,
 	sONInformation					SONInformation,
 	x2TNLConfigInfo					X2TNLConfigurationInfo 	OPTIONAL,
-	-- This IE shall be present if the SON Information IE contains the SON Information Request IE and the SON Information Request IE is set to “X2TNL Configuration Info” --
+	-- This IE shall be present if the SON Information IE contains the SON Information Request IE and the SON Information Request IE is set to "X2TNL Configuration Info" --
 	iE-Extensions			ProtocolExtensionContainer { {EN-DCSONConfigurationTransfer-ExtIEs} }			OPTIONAL,
 ...
 }
@@ -21418,6 +22002,7 @@ E-RABInformationListItem ::= SEQUENCE {
 E-RABInformationListItem-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 	{ ID id-DAPSRequestInfo						CRITICALITY ignore	EXTENSION DAPSRequestInfo						PRESENCE optional }|
 	{ ID id-SourceTransportLayerAddress			CRITICALITY ignore	EXTENSION TransportLayerAddress				PRESENCE optional}|
+	{ ID id-SecurityIndication					CRITICALITY ignore	EXTENSION SecurityIndication					PRESENCE optional }|
 	{ ID id-SourceNodeTransportLayerAddress		CRITICALITY ignore	EXTENSION TransportLayerAddress				PRESENCE optional},
 	...
 }
@@ -21449,6 +22034,25 @@ E-RABLevelQoSParameters ::= SEQUENCE {
 	...
 }
 
+
+E-RABSecurityResultList	::= SEQUENCE (SIZE (1.. maxnoofE-RABs)) OF ProtocolIE-SingleContainer { { E-RABSecurityResultListIEs } }
+
+E-RABSecurityResultListIEs S1AP-PROTOCOL-IES ::= {
+	{ ID id-E-RABSecurityResultItem			CRITICALITY ignore	TYPE E-RABSecurityResultItem			PRESENCE mandatory	},
+	...
+}
+
+E-RABSecurityResultItem ::= SEQUENCE {
+	e-RAB-ID						E-RAB-ID,
+	securityResult					SecurityResult,
+	iE-Extensions					ProtocolExtensionContainer { { E-RABSecurityResultItem-ExtIEs} }			OPTIONAL,
+	...
+}
+
+E-RABSecurityResultItem-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
 E-RABUsageReportList ::= SEQUENCE (SIZE(1..maxnooftimeperiods)) OF ProtocolIE-SingleContainer { {E-RABUsageReportItemIEs} }
 
 E-RABUsageReportItemIEs 	S1AP-PROTOCOL-IES ::= {
@@ -21470,7 +22074,7 @@ E-RABUsageReportItem-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 }
 
 E-RABQoSParameters-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
--- Extended for introduction of downlink and uplink packet loss rate for enhanced Voice performance –-
+-- Extended for introduction of downlink and uplink packet loss rate for enhanced Voice performance --
 	{ ID id-DownlinkPacketLossRate		CRITICALITY ignore	EXTENSION Packet-LossRate		PRESENCE optional}|
 	{ ID id-UplinkPacketLossRate			CRITICALITY ignore	EXTENSION Packet-LossRate		PRESENCE optional},
 	...
@@ -21493,6 +22097,28 @@ EUTRAN-CGI-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 }
 
 EUTRANRoundTripDelayEstimationInfo ::= INTEGER (0..2047)
+
+EventL1LoggedMDTConfig ::= SEQUENCE {
+	l1Threshold					MeasurementThresholdL1LoggedMDT,
+	hysteresis					Hysteresis,
+	timeToTrigger				TimeToTrigger,
+	iE-Extensions				ProtocolExtensionContainer { { EventL1LoggedMDTConfig-ExtIEs} } OPTIONAL,
+	...
+}
+
+EventL1LoggedMDTConfig-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+EventTrigger::= CHOICE {
+	outOfCoverage				ENUMERATED {true, ...},
+	eventL1LoggedMDTConfig		EventL1LoggedMDTConfig,
+	choice-Extensions			ProtocolIE-SingleContainer { { EventTrigger-ExtIEs} }
+}
+
+EventTrigger-ExtIEs S1AP-PROTOCOL-IES ::= {
+	...
+}
 
 ExpectedUEBehaviour ::= SEQUENCE {
 	expectedActivity		ExpectedUEActivityBehaviour OPTIONAL,
@@ -21665,9 +22291,10 @@ HandoverRestrictionList ::= SEQUENCE {
 HandoverRestrictionList-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 	{ ID id-NRrestrictioninEPSasSecondaryRAT		CRITICALITY ignore	EXTENSION NRrestrictioninEPSasSecondaryRAT		PRESENCE optional}|
 	{ ID id-UnlicensedSpectrumRestriction		CRITICALITY ignore	EXTENSION UnlicensedSpectrumRestriction	PRESENCE optional}|
-	{ ID id-CNTypeRestrictions		CRITICALITY ignore	EXTENSION CNTypeRestrictions	PRESENCE optional}|
-	{ ID id-NRrestrictionin5GS		CRITICALITY ignore	EXTENSION NRrestrictionin5GS 	PRESENCE optional}|
-	{ ID id-LastNG-RANPLMNIdentity		CRITICALITY ignore	EXTENSION PLMNidentity			PRESENCE optional},
+	{ ID id-CNTypeRestrictions			CRITICALITY ignore	EXTENSION CNTypeRestrictions	PRESENCE optional}|
+	{ ID id-NRrestrictionin5GS			CRITICALITY ignore	EXTENSION NRrestrictionin5GS 	PRESENCE optional}|
+	{ ID id-LastNG-RANPLMNIdentity		CRITICALITY ignore	EXTENSION PLMNidentity			PRESENCE optional}|
+	{ ID id-RAT-Restrictions			CRITICALITY ignore	EXTENSION RAT-Restrictions		PRESENCE optional},
 	...
 }
 
@@ -21687,6 +22314,8 @@ HFN ::= INTEGER (0..1048575)
 HFNModified ::= INTEGER (0..131071)
 
 HFNforPDCP-SNlength18 ::= INTEGER (0..16383)
+
+Hysteresis ::= INTEGER (0..30)
 
 -- I
 
@@ -21711,7 +22340,8 @@ ImmediateMDT-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 	{ ID id-M6Configuration		CRITICALITY ignore	EXTENSION M6Configuration		PRESENCE conditional}|
 	{ ID id-M7Configuration		CRITICALITY ignore	EXTENSION M7Configuration		PRESENCE conditional}|
 	{ ID id-BluetoothMeasurementConfiguration		CRITICALITY ignore	EXTENSION BluetoothMeasurementConfiguration		PRESENCE optional}|
-	{ ID id-WLANMeasurementConfiguration		CRITICALITY ignore	EXTENSION WLANMeasurementConfiguration		PRESENCE optional},
+	{ ID id-WLANMeasurementConfiguration			CRITICALITY ignore	EXTENSION WLANMeasurementConfiguration			PRESENCE optional}|
+	{ ID id-SensorMeasurementConfiguration			CRITICALITY ignore	EXTENSION SensorMeasurementConfiguration			PRESENCE optional},
 	...
 }
 
@@ -21729,6 +22359,19 @@ InformationOnRecommendedCellsAndENBsForPaging-ExtIEs S1AP-PROTOCOL-EXTENSION ::=
 }
 
 IntegrityProtectionAlgorithms ::= BIT STRING (SIZE (16,...))
+
+IntegrityProtectionIndication ::= ENUMERATED {
+	required,
+	preferred,
+	not-needed,
+	...
+}
+
+IntegrityProtectionResult ::= ENUMERATED {
+	performed,
+	not-performed,
+	...
+}
 
 IntendedNumberOfPagingAttempts ::= INTEGER (1..16, ...)
 
@@ -21768,7 +22411,7 @@ InterSystemMeasurementItem ::= SEQUENCE {
 	sSBToMeasure				OCTET STRING						OPTIONAL,
 	sSRSSIMeasurement			OCTET STRING						OPTIONAL,
 	quantityConfigNR-R15		OCTET STRING						OPTIONAL,
-	blackCellsToAddModList		OCTET STRING						OPTIONAL,
+	excludedCellsToAddModList		OCTET STRING						OPTIONAL,
 	iE-Extensions				ProtocolExtensionContainer { { InterSystemMeasurementItem-ExtIEs} } OPTIONAL
 }
 
@@ -21837,7 +22480,22 @@ LastVisitedEUTRANCellInformation ::= SEQUENCE {
 LastVisitedEUTRANCellInformation-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 -- Extension for Rel-11 to support enhanced granularity for time UE stayed in cell --
 	{ ID id-Time-UE-StayedInCell-EnhancedGranularity	CRITICALITY ignore	EXTENSION Time-UE-StayedInCell-EnhancedGranularity	PRESENCE optional}|
-	{ ID id-HO-Cause									CRITICALITY ignore	EXTENSION Cause							PRESENCE optional},
+	{ ID id-HO-Cause									CRITICALITY ignore	EXTENSION Cause													PRESENCE optional}|
+	{ ID id-lastVisitedPSCellList						CRITICALITY ignore	EXTENSION	LastVisitedPSCellList							PRESENCE	optional},
+	...
+}
+
+LastVisitedPSCellList	::= SEQUENCE (SIZE(1.. maxnoofPSCellsPerPrimaryCellinUEHistoryInfo)) OF LastVisitedPSCellInformation
+
+
+LastVisitedPSCellInformation	::= SEQUENCE {
+	pSCellID							PSCellInformation     OPTIONAL,
+	timeStay		INTEGER (0..40950),
+	iE-Extensions		ProtocolExtensionContainer { { LastVisitedPSCellInformation-ExtIEs} }	OPTIONAL,
+	...
+}
+
+LastVisitedPSCellInformation-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
@@ -21879,11 +22537,13 @@ LoggedMDT ::= SEQUENCE {
 
 LoggedMDT-ExtIEs	S1AP-PROTOCOL-EXTENSION ::= {
 	{ ID id-BluetoothMeasurementConfiguration		CRITICALITY ignore	EXTENSION BluetoothMeasurementConfiguration		PRESENCE optional}|
-	{ ID id-WLANMeasurementConfiguration			CRITICALITY ignore	EXTENSION WLANMeasurementConfiguration				PRESENCE optional},
+	{ ID id-WLANMeasurementConfiguration			CRITICALITY ignore	EXTENSION WLANMeasurementConfiguration			PRESENCE optional}|
+	{ ID id-LoggedMDTTrigger						CRITICALITY ignore	EXTENSION LoggedMDTTrigger							PRESENCE optional}|
+	{ ID id-SensorMeasurementConfiguration			CRITICALITY ignore	EXTENSION SensorMeasurementConfiguration			PRESENCE optional},
 ...
 }
 
-LoggingInterval ::= ENUMERATED {ms128, ms256, ms512, ms1024, ms2048, ms3072, ms4096, ms6144}
+LoggingInterval ::= ENUMERATED {ms1280, ms2560, ms5120, ms10240, ms20480, ms30720, ms40960, ms61440}
 
 LoggingDuration ::= ENUMERATED {m10, m20, m40, m60, m90, m120}
 
@@ -21899,7 +22559,25 @@ LoggedMBSFNMDT-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
+LoggedMDTTrigger ::= CHOICE{
+	periodical		NULL,
+	eventTrigger	EventTrigger,
+	...
+}
+
 LTE-M-Indication ::= ENUMERATED {lte-m, ... }
+
+LTE-NTN-TAI-Information	::= SEQUENCE {
+	servingPLMN						PLMNidentity,
+	tACList-In-LTE-NTN				TACList-In-LTE-NTN,
+	uE-Location-Derived-TAC			TAC													OPTIONAL,
+	iE-Extensions		ProtocolExtensionContainer { {LTE-NTN-TAI-Information-ExtIEs} } OPTIONAL,
+	...
+}
+
+LTE-NTN-TAI-Information-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
+	...
+}
 
 -- M
 
@@ -21944,7 +22622,7 @@ M5period ::= ENUMERATED {ms1024, ms2048, ms5120, ms10240, min1, ... }
 M6Configuration ::= SEQUENCE {
 	m6report-Interval	M6report-Interval,
 	m6delay-threshold	M6delay-threshold		OPTIONAL,
--- This IE shall be present if the M6 Links to log IE is set to “uplink” or to “both-uplink-and-downlink” --
+-- This IE shall be present if the M6 Links to log IE is set to "uplink" or to "both-uplink-and-downlink" --
 	m6-links-to-log		Links-to-log,
 	iE-Extensions		ProtocolExtensionContainer { { M6Configuration-ExtIEs} } OPTIONAL,
 	...
@@ -22034,6 +22712,16 @@ MeasurementsToActivate ::= BIT STRING (SIZE (8))
 MeasurementThresholdA2 ::= CHOICE { 
 	threshold-RSRP				Threshold-RSRP,
 	threshold-RSRQ				Threshold-RSRQ,
+	...
+}
+
+MeasurementThresholdL1LoggedMDT ::= CHOICE {
+	threshold-RSRP				Threshold-RSRP,
+	threshold-RSRQ				Threshold-RSRQ,
+	choice-Extensions		ProtocolIE-SingleContainer { { MeasurementThresholdL1LoggedMDT-ExtIEs} }
+}
+
+MeasurementThresholdL1LoggedMDT-ExtIEs S1AP-PROTOCOL-IES ::= {
 	...
 }
 
@@ -22269,6 +22957,8 @@ PagingPriority ::= ENUMERATED {
 
 PagingProbabilityInformation ::= ENUMERATED {p00, p05, p10, p15, p20, p25, p30, p35, p40, p45, p50, p55, p60, p65, p70, p75, p80, p85, p90, p95, p100, ...}
 
+PagingCause::= ENUMERATED {voice, ...}
+
 PC5QoSParameters ::= SEQUENCE {
 	pc5QoSFlowList				PC5QoSFlowList,
 	pc5LinkAggregatedBitRates	BitRate				OPTIONAL,
@@ -22406,6 +23096,8 @@ QCI						::= INTEGER (0..255)
 
 -- R
 
+RACSIndication ::= ENUMERATED {true, ...}
+
 RAN-UE-NGAP-ID ::= INTEGER (0..4294967295)
 
 Range ::= ENUMERATED {m50, m80, m180, m200, m350, m400, m500, m700, m1000, ...}
@@ -22480,9 +23172,30 @@ RelayNode-Indicator ::= ENUMERATED {
 
 RAC					::= OCTET STRING (SIZE (1))
 
+RAT-Restrictions ::= SEQUENCE (SIZE(1..maxnoofEPLMNsPlusOne)) OF RAT-RestrictionsItem
+
+RAT-RestrictionsItem ::= SEQUENCE {
+	pLMNidentity					PLMNidentity,
+	rAT-RestrictionInformation		BIT STRING (SIZE(8, ...)),
+	iE-Extensions					ProtocolExtensionContainer { { RAT-RestrictionsItem-ExtIEs} }	OPTIONAL,
+	...
+}
+
+RAT-RestrictionsItem-ExtIEs		S1AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
 RAT-Type ::= ENUMERATED {
 	nbiot,
-	...
+	...,
+	nbiot-leo,
+	nbiot-meo,
+	nbiot-geo,
+	nbiot-othersat,
+	eutran-leo,
+	eutran-meo,
+	eutran-geo,
+	eutran-othersat
 }
 
 ReportAmountMDT ::= ENUMERATED{r1, r2, r4, r8, r16, r32, r64, rinfinity}
@@ -22623,6 +23336,60 @@ SecondaryRATDataUsageReportItem-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 	...
 }
 
+SecurityIndication ::= SEQUENCE {
+	integrityProtectionIndication		IntegrityProtectionIndication,
+	iE-Extensions							ProtocolExtensionContainer { { SecurityIndication-ExtIEs } } OPTIONAL,
+	...
+}
+
+SecurityIndication-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+SecurityResult ::= SEQUENCE {
+	integrityProtectionResult			IntegrityProtectionResult,
+	iE-Extensions						ProtocolExtensionContainer { {SecurityResult-ExtIEs} }	OPTIONAL,
+	...
+}
+
+SecurityResult-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+SensorMeasConfig::= ENUMERATED {setup,...}
+
+SensorMeasConfigNameItem ::= SEQUENCE {
+	sensorNameConfig		SensorNameConfig,
+	iE-Extensions		ProtocolExtensionContainer { { SensorMeasConfigNameItem-ExtIEs } } 	OPTIONAL,
+	...
+}
+
+SensorMeasConfigNameItem-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+SensorMeasConfigNameList ::= SEQUENCE (SIZE(1..maxnoofSensorName)) OF SensorMeasConfigNameItem
+
+SensorMeasurementConfiguration ::=	SEQUENCE {
+	sensorMeasConfig			SensorMeasConfig,
+	sensorMeasConfigNameList	SensorMeasConfigNameList										OPTIONAL,
+	iE-Extensions		ProtocolExtensionContainer { {SensorMeasurementConfiguration-ExtIEs} } 	OPTIONAL,
+	...
+}
+
+SensorMeasurementConfiguration-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+SensorNameConfig ::= CHOICE {
+	uncompensatedBarometricConfig		ENUMERATED {true, ...},
+	choice-Extensions		ProtocolIE-SingleContainer { {SensorNameConfig-ExtIEs} }
+}
+
+SensorNameConfig-ExtIEs S1AP-PROTOCOL-IES ::= {
+	...
+}
+
 SerialNumber ::= BIT STRING (SIZE (16))
 
 ServiceType ::= ENUMERATED{
@@ -22680,10 +23447,10 @@ SONConfigurationTransfer ::= SEQUENCE {
 SONConfigurationTransfer-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 -- Extension for Release 10 to transfer the IP addresses of the eNB initiating the ANR action --
 	{ID id-x2TNLConfigurationInfo		CRITICALITY ignore	EXTENSION X2TNLConfigurationInfo				PRESENCE conditional
-	-- This IE shall be present if the SON Information IE contains the SON Information Request IE and the SON Information Request IE is set to “X2TNL Configuration Info” --}|
+	-- This IE shall be present if the SON Information IE contains the SON Information Request IE and the SON Information Request IE is set to "X2TNL Configuration Info" --}|
 -- Extension for Release 12 to transfer information concerning the source cell of synchronisation and the aggressor cell --
 	{ID id-Synchronisation-Information	CRITICALITY ignore	EXTENSION SynchronisationInformation			PRESENCE conditional
-	-- This IE shall be present if the SON Information IE contains the SON Information Request IE set to “ Activate Muting ” --},
+	-- This IE shall be present if the SON Information IE contains the SON Information Request IE set to " Activate Muting " --},
 	...
 }
 
@@ -22756,16 +23523,17 @@ SourceeNB-ToTargeteNB-TransparentContainer		::= SEQUENCE {
 }
 
 SourceeNB-ToTargeteNB-TransparentContainer-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
-	{ID id-MobilityInformation					CRITICALITY ignore	EXTENSION MobilityInformation								PRESENCE optional}|
-	{ID id-uE-HistoryInformationFromTheUE		CRITICALITY ignore	EXTENSION UE-HistoryInformationFromTheUE				PRESENCE optional}|
-	{ID id-IMSvoiceEPSfallbackfrom5G			CRITICALITY ignore	EXTENSION IMSvoiceEPSfallbackfrom5G						PRESENCE optional}|
-	{ID id-AdditionalRRMPriorityIndex			CRITICALITY ignore	EXTENSION AdditionalRRMPriorityIndex					PRESENCE optional}|
-	{ID id-ContextatSource						CRITICALITY ignore	EXTENSION ContextatSource									PRESENCE optional}|
-	{ID id-IntersystemMeasurementConfiguration	CRITICALITY ignore	EXTENSION IntersystemMeasurementConfiguration		PRESENCE optional}|
-	{ID id-SourceNodeID							CRITICALITY ignore	EXTENSION SourceNodeID										PRESENCE optional}|
-	{ID id-EmergencyIndicator					CRITICALITY ignore	EXTENSION EmergencyIndicator								PRESENCE optional}|
-	{ID id-Direct-Forwarding-Path-Availability		CRITICALITY ignore	EXTENSION Direct-Forwarding-Path-Availability			PRESENCE optional}|
-	{ID id-SourceSNID							CRITICALITY ignore	EXTENSION Global-RAN-NODE-ID								PRESENCE optional},
+	{ID id-MobilityInformation					CRITICALITY ignore	EXTENSION MobilityInformation							PRESENCE optional}|
+	{ID id-uE-HistoryInformationFromTheUE		CRITICALITY ignore	EXTENSION UE-HistoryInformationFromTheUE			PRESENCE optional}|
+	{ID id-IMSvoiceEPSfallbackfrom5G			CRITICALITY ignore	EXTENSION IMSvoiceEPSfallbackfrom5G					PRESENCE optional}|
+	{ID id-AdditionalRRMPriorityIndex			CRITICALITY ignore	EXTENSION AdditionalRRMPriorityIndex				PRESENCE optional}|
+	{ID id-ContextatSource						CRITICALITY ignore	EXTENSION ContextatSource								PRESENCE optional}|
+	{ID id-IntersystemMeasurementConfiguration	CRITICALITY ignore	EXTENSION IntersystemMeasurementConfiguration	PRESENCE optional}|
+	{ID id-SourceNodeID							CRITICALITY ignore	EXTENSION SourceNodeID									PRESENCE optional}|
+	{ID id-EmergencyIndicator					CRITICALITY ignore	EXTENSION EmergencyIndicator							PRESENCE optional}|
+	{ID id-UEContextReferenceatSourceeNB		CRITICALITY ignore	EXTENSION ENB-UE-S1AP-ID								PRESENCE optional}|
+	{ID id-SourceSNID							CRITICALITY ignore	EXTENSION Global-RAN-NODE-ID							PRESENCE optional}|
+	{ID id-Direct-Forwarding-Path-Availability		CRITICALITY ignore	EXTENSION Direct-Forwarding-Path-Availability		PRESENCE optional},
 	...
 }
 
@@ -22881,6 +23649,8 @@ S-TMSI-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 -- T
 
 TAC ::= OCTET STRING (SIZE (2))
+
+TACList-In-LTE-NTN ::= SEQUENCE (SIZE(1..maxnoofTACsInNTN)) OF TAC 
 
 TAIBasedMDT ::= SEQUENCE {
 	tAIListforMDT			TAIListforMDT,
@@ -23078,8 +23848,10 @@ TargeteNB-ToSourceeNB-TransparentContainer		::= SEQUENCE {
 }
 
 TargeteNB-ToSourceeNB-TransparentContainer-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
-	{ ID id-DAPSResponseInfoList					CRITICALITY ignore	EXTENSION DAPSResponseInfoList							PRESENCE optional}|
-	{ ID id-Direct-Forwarding-Path-Availability		CRITICALITY ignore	EXTENSION Direct-Forwarding-Path-Availability			PRESENCE optional},
+	{ ID id-DAPSResponseInfoList						CRITICALITY ignore	EXTENSION DAPSResponseInfoList							PRESENCE optional}|
+	{ ID id-RACSIndication								CRITICALITY ignore	EXTENSION RACSIndication									PRESENCE optional	}|
+	{ ID id-E-RABSecurityResultList						CRITICALITY ignore	EXTENSION E-RABSecurityResultList						PRESENCE optional}|
+	{ ID id-Direct-Forwarding-Path-Availability			CRITICALITY ignore	EXTENSION Direct-Forwarding-Path-Availability			PRESENCE optional	},
 	...
 }
 
@@ -23110,6 +23882,8 @@ Threshold-RSRP ::= INTEGER(0..97)
 
 Threshold-RSRQ ::= INTEGER(0..34)
 
+TimeToTrigger ::= ENUMERATED {ms0, ms40, ms64, ms80, ms100, ms128, ms160, ms256, ms320, ms480, ms512, ms640, ms1024, ms1280, ms2560, ms5120}
+
 TimeToWait ::= ENUMERATED {v1s, v2s, v5s, v10s, v20s, v60s, ...}
 
 Time-UE-StayedInCell ::= INTEGER (0..4095)
@@ -23138,7 +23912,7 @@ traceCollectionEntityIPAddress		TransportLayerAddress,
 TraceActivation-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
 -- Extension for Rel-10 to support MDT --
 	{ ID id-MDTConfiguration	CRITICALITY ignore	EXTENSION MDT-Configuration		PRESENCE optional }|
--- Extension for Rel-15 to support QMC –
+-- Extension for Rel-15 to support QMC --
 	{ ID id-UEAppLayerMeasConfig	CRITICALITY ignore	EXTENSION UEAppLayerMeasConfig		PRESENCE optional }|
 	{ ID id-MDTConfigurationNR		CRITICALITY ignore	EXTENSION MDT-ConfigurationNR		PRESENCE optional }|
 	{ ID id-TraceCollectionEntityURI	CRITICALITY ignore	EXTENSION URI-Address			PRESENCE optional	},
@@ -23249,7 +24023,6 @@ UEIdentityIndexValue	::=	BIT STRING (SIZE (10))
 UE-HistoryInformation ::= SEQUENCE (SIZE(1..maxnoofCellsinUEHistoryInfo)) OF LastVisitedCell-Item
 
 UE-HistoryInformationFromTheUE ::= OCTET STRING
--- This IE is a transparent container and shall be encoded as the VisitedCellInfoList field contained in the UEInformationResponse message as defined in TS 36.331 [16]
 
 UEPagingID ::= CHOICE {
 	s-TMSI		S-TMSI,
@@ -23264,10 +24037,8 @@ UERadioCapabilityForPaging ::= OCTET STRING
 UERadioCapabilityID ::= OCTET STRING
 
 UE-RLF-Report-Container ::= OCTET STRING
--- This IE is a transparent container and shall be encoded as the rlf-Report-r9 field contained in the UEInformationResponse message as defined in TS 36.331 [16]
 
 UE-RLF-Report-Container-for-extended-bands ::= OCTET STRING
--- This IE is a transparent container and shall be encoded as the rlf-Report-v9e0 contained in the UEInformationResponse message as defined in TS 36.331 [16]
 
 UESecurityCapabilities ::= SEQUENCE {
 	encryptionAlgorithms			EncryptionAlgorithms,
@@ -23323,7 +24094,8 @@ UserLocationInformation ::= SEQUENCE {
 }
 
 UserLocationInformation-ExtIEs S1AP-PROTOCOL-EXTENSION ::= {
-	{ ID id-PSCellInformation	CRITICALITY ignore	EXTENSION PSCellInformation			PRESENCE optional},
+	{ ID id-PSCellInformation				CRITICALITY ignore	EXTENSION PSCellInformation			PRESENCE optional}|
+	{ ID id-LTE-NTN-TAI-Information			CRITICALITY ignore	EXTENSION LTE-NTN-TAI-Information	PRESENCE optional},
 	...
 }
 
@@ -23456,8 +24228,10 @@ ENBIndirectX2TransportLayerAddresses ::= SEQUENCE (SIZE(1..maxnoofeNBX2TLAs)) OF
 -- Z
 
 END
+-- ASN1STOP
 
 9.3.5	Common Definitions
+-- ASN1START
 -- **************************************************************
 --
 -- Common definitions
@@ -23490,8 +24264,11 @@ ProtocolIE-ID		::= INTEGER (0..65535)
 TriggeringMessage	::= ENUMERATED { initiating-message, successful-outcome, unsuccessfull-outcome }
 
 END
+-- ASN1STOP
+
 
 9.3.6	Constant Definitions
+-- ASN1START
 -- **************************************************************
 --
 -- Constant definitions
@@ -23608,53 +24385,56 @@ maxProtocolIEs							INTEGER ::= 65535
 --
 -- **************************************************************
 
-maxnoofCSGs								INTEGER ::= 256
-maxnoofE-RABs							INTEGER ::= 256
-maxnoofTAIs								INTEGER ::= 256
-maxnoofTACs								INTEGER ::= 256
-maxnoofErrors							INTEGER ::= 256
-maxnoofBPLMNs							INTEGER ::= 6
-maxnoofPLMNsPerMME						INTEGER ::= 32
-maxnoofEPLMNs							INTEGER ::= 15
-maxnoofEPLMNsPlusOne					INTEGER ::= 16
-maxnoofForbLACs							INTEGER ::= 4096
-maxnoofForbTACs							INTEGER ::= 4096
-maxnoofIndividualS1ConnectionsToReset	INTEGER ::= 256
-maxnoofCellsinUEHistoryInfo				INTEGER ::= 16
-maxnoofCellsineNB						INTEGER ::= 256
-maxnoofTAIforWarning					INTEGER ::= 65535 
-maxnoofCellID							INTEGER ::= 65535 
-maxnoofDCNs								INTEGER ::= 32 
-maxnoofEmergencyAreaID					INTEGER ::= 65535 
-maxnoofCellinTAI						INTEGER ::= 65535 
-maxnoofCellinEAI						INTEGER ::= 65535 
-maxnoofeNBX2TLAs						INTEGER ::= 2
-maxnoofeNBX2ExtTLAs						INTEGER ::= 16
-maxnoofeNBX2GTPTLAs						INTEGER ::= 16
-maxnoofRATs								INTEGER ::= 8
-maxnoofGroupIDs							INTEGER ::= 65535
-maxnoofMMECs							INTEGER ::= 256
-maxnoofCellIDforMDT						INTEGER ::= 32
-maxnoofTAforMDT							INTEGER ::= 8
-maxnoofMDTPLMNs							INTEGER ::= 16
-maxnoofCellsforRestart					INTEGER ::= 256
-maxnoofRestartTAIs						INTEGER ::= 2048
-maxnoofRestartEmergencyAreaIDs			INTEGER ::= 256
-maxEARFCN								INTEGER ::= 262143
-maxnoofMBSFNAreaMDT						INTEGER ::= 8
-maxnoofRecommendedCells					INTEGER ::= 16
-maxnoofRecommendedENBs					INTEGER ::= 16
-maxnooftimeperiods						INTEGER ::= 2 
-maxnoofCellIDforQMC						INTEGER ::= 32
-maxnoofTAforQMC							INTEGER ::= 8
-maxnoofPLMNforQMC						INTEGER ::= 16
-maxnoofBluetoothName					INTEGER ::= 4
-maxnoofWLANName							INTEGER ::= 4
-maxnoofConnectedengNBs					INTEGER ::= 256
-maxnoofPC5QoSFlows 						INTEGER ::= 2048
-maxnooffrequencies						INTEGER ::= 64
-maxNARFCN								INTEGER ::= 3279165
-maxRS-IndexCellQual						INTEGER ::= 16
+maxnoofCSGs										INTEGER ::= 256
+maxnoofE-RABs									INTEGER ::= 256
+maxnoofTAIs										INTEGER ::= 256
+maxnoofTACs										INTEGER ::= 256
+maxnoofErrors									INTEGER ::= 256
+maxnoofBPLMNs									INTEGER ::= 6
+maxnoofPLMNsPerMME								INTEGER ::= 32
+maxnoofEPLMNs									INTEGER ::= 15
+maxnoofEPLMNsPlusOne							INTEGER ::= 16
+maxnoofForbLACs									INTEGER ::= 4096
+maxnoofForbTACs									INTEGER ::= 4096
+maxnoofIndividualS1ConnectionsToReset			INTEGER ::= 256
+maxnoofCellsinUEHistoryInfo						INTEGER ::= 16
+maxnoofCellsineNB								INTEGER ::= 256
+maxnoofTAIforWarning							INTEGER ::= 65535 
+maxnoofCellID									INTEGER ::= 65535 
+maxnoofDCNs										INTEGER ::= 32 
+maxnoofEmergencyAreaID							INTEGER ::= 65535 
+maxnoofCellinTAI								INTEGER ::= 65535 
+maxnoofCellinEAI								INTEGER ::= 65535 
+maxnoofeNBX2TLAs								INTEGER ::= 2
+maxnoofeNBX2ExtTLAs								INTEGER ::= 16
+maxnoofeNBX2GTPTLAs								INTEGER ::= 16
+maxnoofRATs										INTEGER ::= 8
+maxnoofGroupIDs									INTEGER ::= 65535
+maxnoofMMECs									INTEGER ::= 256
+maxnoofCellIDforMDT								INTEGER ::= 32
+maxnoofTAforMDT									INTEGER ::= 8
+maxnoofMDTPLMNs									INTEGER ::= 16
+maxnoofCellsforRestart							INTEGER ::= 256
+maxnoofRestartTAIs								INTEGER ::= 2048
+maxnoofRestartEmergencyAreaIDs					INTEGER ::= 256
+maxEARFCN										INTEGER ::= 262143
+maxnoofMBSFNAreaMDT								INTEGER ::= 8
+maxnoofRecommendedCells							INTEGER ::= 16
+maxnoofRecommendedENBs							INTEGER ::= 16
+maxnooftimeperiods								INTEGER ::= 2 
+maxnoofCellIDforQMC								INTEGER ::= 32
+maxnoofTAforQMC									INTEGER ::= 8
+maxnoofPLMNforQMC								INTEGER ::= 16
+maxnoofBluetoothName							INTEGER ::= 4
+maxnoofWLANName									INTEGER ::= 4
+maxnoofConnectedengNBs							INTEGER ::= 256
+maxnoofPC5QoSFlows 								INTEGER ::= 2048
+maxnooffrequencies								INTEGER ::= 64
+maxNARFCN										INTEGER ::= 3279165
+maxRS-IndexCellQual								INTEGER ::= 16
+maxnoofPSCellsPerPrimaryCellinUEHistoryInfo		INTEGER ::= 8
+maxnoofTACsInNTN								INTEGER ::= 12
+maxnoofSensorName								INTEGER ::= 3
 
 
 -- **************************************************************
@@ -23795,7 +24575,7 @@ id-CellAccessMode									ProtocolIE-ID ::= 145
 id-CSGMembershipStatus 								ProtocolIE-ID ::= 146
 id-LPPa-PDU											ProtocolIE-ID ::= 147
 id-Routing-ID										ProtocolIE-ID ::= 148
-id-Time-Synchronisation-Info							ProtocolIE-ID ::= 149
+id-Time-Synchronisation-Info						ProtocolIE-ID ::= 149
 id-PS-ServiceNotAvailable							ProtocolIE-ID ::= 150
 id-PagingPriority									ProtocolIE-ID ::= 151
 id-x2TNLConfigurationInfo							ProtocolIE-ID ::= 152
@@ -23972,12 +24752,28 @@ id-TraceCollectionEntityURI							ProtocolIE-ID ::= 325
 id-EmergencyIndicator								ProtocolIE-ID ::= 326
 id-UERadioCapabilityForPaging-NR-Format 			ProtocolIE-ID ::= 327
 id-SourceTransportLayerAddress						ProtocolIE-ID ::= 328
+id-lastVisitedPSCellList							ProtocolIE-ID ::= 329
+id-RACSIndication									ProtocolIE-ID ::= 330
+id-PagingCause										ProtocolIE-ID ::= 331
+id-SecurityIndication								ProtocolIE-ID ::= 332
+id-SecurityResult									ProtocolIE-ID ::= 333
+id-E-RABSecurityResultItem							ProtocolIE-ID ::= 334
+id-E-RABSecurityResultList							ProtocolIE-ID ::= 335
+id-RAT-Restrictions									ProtocolIE-ID ::= 336
+id-UEContextReferenceatSourceeNB					ProtocolIE-ID ::= 337
+id-LTE-NTN-TAI-Information  						ProtocolIE-ID ::= 339
 id-SourceNodeTransportLayerAddress					ProtocolIE-ID ::= 340
+id-E-RABToBeUpdatedList								ProtocolIE-ID ::= 341
+id-E-RABToBeUpdatedItem								ProtocolIE-ID ::= 342
 id-SourceSNID										ProtocolIE-ID ::= 343
+id-LoggedMDTTrigger									ProtocolIE-ID ::= 344
+id-SensorMeasurementConfiguration					ProtocolIE-ID ::= 345
 
 END
+-- ASN1STOP
 
 9.3.7	Container Definitions
+-- ASN1START
 -- **************************************************************
 --
 -- Container definitions
@@ -24175,6 +24971,8 @@ PrivateIE-Field {S1AP-PRIVATE-IES : IEsSetParam} ::= SEQUENCE {
 }
 
 END
+-- ASN1STOP
+
 9.4	Message Transfer Syntax
 S1AP shall use the ASN.1 Basic Packed Encoding Rules (BASIC-PER) Aligned Variant as transfer syntax as specified in ITU-T Rec. X.691 [4].
 9.5	Timers
@@ -24209,8 +25007,9 @@ An Abstract Syntax Error occurs when the receiving functional S1AP entity:
 3.	does not receive IEs or IE groups but according to the specified presence of the concerning object, the IEs or IE groups should have been present in the received message.
 4.	receives IEs or IE groups that are defined to be part of that message in wrong order or with too many occurrences of the same IE or IE group;
 5.	receives IEs or IE groups but according to the conditional presence of the concerning object and the specified condition, the IEs or IE groups should not have been present in the received message.
-Cases 1 and 2 (not comprehended IE/IE group) are handled based on received Criticality information. Case 3 (missing IE/IE group) is handled based on Criticality information and Presence information for the missing IE/IE group specified in the version of the specification used by the receiver. Case 4 (IEs or IE groups in wrong order or with too many occurrences) and Case 5 (erroneously present conditional IEs or IE groups) result in rejecting the procedure.
-If an Abstract Syntax Error occurs, the receiver shall read the remaining message and shall then for each detected Abstract Syntax Error that belong to cases 1-3 act according to the Criticality Information and Presence Information for the IE/IE group due to which Abstract Syntax Error occurred in accordance with subclauses 10.3.4 and 10.3.5. The handling of cases 4 and 5 is specified in subclause 10.3.6.
+6.	receives IEs or IE groups for a functionality that is not supported.
+Cases 1, 2 and 6 (not comprehended IE/IE group) are handled based on received Criticality information. Case 3 (missing IE/IE group) is handled based on Criticality information and Presence information for the missing IE/IE group specified in the version of the specification used by the receiver. Case 4 (IEs or IE groups in wrong order or with too many occurrences) and Case 5 (erroneously present conditional IEs or IE groups) result in rejecting the procedure.
+If an Abstract Syntax Error occurs, the receiver shall read the remaining message and shall then for each detected Abstract Syntax Error that belong to cases 1-3 and 6 act according to the Criticality Information and Presence Information for the IE/IE group due to which Abstract Syntax Error occurred in accordance with subclauses 10.3.4 and 10.3.5. The handling of cases 4 and 5 is specified in subclause 10.3.6.
 10.3.2	Criticality Information
 In the S1AP messages there is criticality information set for individual IEs and/or IE groups. This criticality information instructs the receiver how to act when receiving an IE or an IE group that is not comprehended, i.e., the entire item (IE or IE group) which is not (fully or partially) comprehended shall be treated in accordance with its own criticality information as specified in subclause 10.3.4.
 In addition, the criticality information is used in case of the missing IE/IE group abstract syntax error (see subclause 10.3.5).
@@ -24218,9 +25017,8 @@ The receiving node shall take different actions depending on the value of the Cr
 -	Reject IE.
 -	Ignore IE and Notify Sender.
 -	Ignore IE.
-The following rules restrict when a receiving entity may consider an IE, an IE group, or an EP not comprehended (not implemented), and when action based on criticality information is applicable:
-1.	IE or IE group: When one new or modified IE or IE group is implemented for one EP from a standard version, then other new or modified IEs or IE groups specified for that EP in that standard version shall be considered comprehended by a receiving entity (some may still remain unsupported).
-2.	EP: The comprehension of different EPs within a standard version or between different standard versions is not mandated. Any EP that is not supported may be considered not comprehended, even if another EP from that standard version is comprehended, and action based on criticality shall be applied.
+The comprehension of different IEs or IE groups within a standard version or between standard versions is not mandated. Any IE or IE group that is not supported shall be considered not comprehended, even if another IE or IE group for that EP from that standard version is comprehended, and action based on criticality shall be applied.
+The comprehension of different EPs within a standard version or between different standard versions is not mandated. Any EP that is not supported shall be considered not comprehended, even if another EP from that standard version is comprehended, and action based on criticality shall be applied.
 10.3.3	Presence Information
 For many IEs/IE groups which are optional according to the ASN.1 transfer syntax, S1AP specifies separately if the presence of these IEs/IE groups is optional or mandatory with respect to RNS application by means of the presence field of the concerning object of class S1AP-PROTOCOL-IES, S1AP-PROTOCOL-IES-PAIR, S1AP-PROTOCOL-EXTENSION or S1AP-PRIVATE-IES.
 The presence field of the indicated classes supports three values:
@@ -25110,7 +25908,7 @@ The Reporting Cell Identifier field in the RAN-INFORMATION Application Container
 M
 
 OCTET STRING
-RLF Report contained in the UEInformationResponse message (TS 36.331 [16])
+Includes the rlf-Report contained in the UEInformationResponse message as defined in TS 36.331 [16]
 >>Mobility Information
 O
 
@@ -25211,6 +26009,7 @@ OCTET STRING
 Contains the EARFCN IE as defined in 9.2.1.95.
 
 B.2	ASN.1 definition
+-- ASN1START
 -- **************************************************************
 --
 -- IE definitions for the SON Transfer application
@@ -25497,7 +26296,7 @@ FailureEventReport::= CHOICE {
 }
 
 TooEarlyInterRATHOReportReportFromEUTRAN ::= SEQUENCE {
-	uERLFReportContainer	OCTET STRING, -- as defined in TS 36.331 [16] --
+	uERLFReportContainer	OCTET STRING, 
 	mobilityInformation		MobilityInformation		OPTIONAL,
 	...
 }
@@ -25543,6 +26342,7 @@ maxnoofcandidateCells						INTEGER ::= 16
 maxnoofCellineNB							INTEGER ::= 256
 
 END
+-- ASN1STOP
 
 Annex C (informative):
 Processing of Transparent Containers at the MME
@@ -28559,28 +29359,196 @@ RP-220280
 F
 Correction of maxNARFCN in ASN.1
 16.9.0
+2022-03
+RP-95-e
+RP-220221
+1800
+9
+B
+BLCR to 36.413_Addition of SON features enhancement
+17.0.0
+2022-03
+RP-95-e
+RP-220237
+1804
+5
+F
+Correction for Chapter 10
+17.0.0
+2022-03
+RP-95-e
+RP-220237
+1811
+5
+B
+Detection of RACS support at target during N2/S1 handover [RACS_S1_NG]
+17.0.0
+2022-03
+RP-95-e
+RP-220237
+1835
+5
+C
+Support for mapping complete security capabilities from NAS [UE_Sec_Caps]
+17.0.0
+2022-03
+RP-95-e
+RP-220219
+1851
+3
+B
+Introduction of MultiSIM support over S1
+17.0.0
+2022-03
+RP-95-e
+RP-220241
+1852
+6
+B
+Introduction of User Plane Integrity Protection in EPS
+17.0.0
+2022-03
+RP-95-e
+RP-220216
+1853
+4
+B
+Support of NTN RAT identification and NTN RAT restrictions
+17.0.0
+2022-03
+RP-95-e
+RP-220237
+1862
+2
+D
+S1AP Rapporteur Corrections
+17.0.0
+2022-03
+RP-95-e
+RP-220239
+1864
+1
+D
+Inclusive language review for TS 36.413
+17.0.0
 2022-06
 RP-96
 RP-221150
-1879
+1880
 1
-F
+A
 Dynamic ACL over S1 CR 36.413
-16.10.0
+17.1.0
+2022-06
+RP-96
+RP-221146
+1881
+3
+F
+Removing the unnecessary LTE-M satellite indication
+17.1.0
+2022-06
+RP-96
+RP-221146
+1882
+
+F
+Correction to NTN tabular mistake
+17.1.0
+2022-06
+RP-96
+RP-221144
+1884
+
+F
+Correction of the Security Indication IE in Source eNB to Target eNB Transparent Container
+17.1.0
+2022-06
+RP-96
+RP-221144
+1886
+1
+F
+UPIP EPC Correction on S1AP
+17.1.0
+2022-06
+RP-96
+RP-221144
+1887
+2
+F
+Correction of EPS Integrity Protection
+17.1.0
 2022-06
 RP-96
 RP-221157
-1889
-1
-F
-Data forwarding address allocation for handover to EN-DC
-16.10.0
-2022-06
-RP-96
-RP-221157
-1890
-1
-F
+1892
+
+A
 Direct data forwarding for mobility from MR-DC to eNB
-16.10.0
+17.1.0
+2022-06
+RP-96
+RP-221146
+1893
+1
+F
+Adding serving PLMN information in ULI for IoT NTN
+17.1.0
+2022-06
+RP-96
+RP-221157
+1894
+
+A
+Data forwarding address allocation for handover to EN-DC
+17.1.0
+2022-09
+RP-97-e
+RP-222198
+1898
+1
+A
+Addition of Masked IMEISV for UEs using CP CIoT EPS optimisation
+17.2.0
+2022-09
+RP-97-e
+RP-222168
+1899
+1
+B
+Correction of LTE MDT on event trigger logging [LTE-Event-MDT]
+17.2.0
+2022-09
+RP-97-e
+RP-222172
+1901
+
+B
+Correction of LTE MDT on Sensor information[LTE-Height-MDT]
+17.2.0
+2022-12
+RP-98-e
+RP-222894
+1903
+1
+F
+Additional ULI provision with PScell information
+17.3.0
+2023-03
+RAN#99
+RP-230596
+1907
+1
+A
+Clarification on IAB Authorized IE in UE Context Modification procedure
+17.4.0
+2023-03
+RAN#99
+RP-230592
+1908
+-
+F
+Correction of references to RRC protocol elements in S1AP
+17.4.0
 

@@ -1,10 +1,10 @@
-﻿3GPP TS 38.455 V16.8.1 (2022-06)
+﻿3GPP TS 38.455 V17.4.0 (2023-03)
 Technical Specification
 3rd Generation Partnership Project;
 Technical Specification Group Radio Access Network;
 NG-RAN;
 NR Positioning Protocol A (NRPPa) 
-(Release 16)
+(Release 17)
 
 
 
@@ -18,245 +18,298 @@ Tel.: +33 4 92 94 42 00 Fax: +33 4 93 65 47 16
 Internet
 http://www.3gpp.org
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Copyright Notification
 No part may be reproduced except as authorized by written permission.
 The copyright and the foregoing restriction extend to reproduction in all media.
 
-© 2022, 3GPP Organizational Partners (ARIB, ATIS, CCSA, ETSI, TSDSI, TTA, TTC).
+© 2023, 3GPP Organizational Partners (ARIB, ATIS, CCSA, ETSI, TSDSI, TTA, TTC).
 All rights reserved.
 
 UMTS™ is a Trade Mark of ETSI registered for the benefit of its members
 3GPP™ is a Trade Mark of ETSI registered for the benefit of its Members and of the 3GPP Organizational Partners
 LTE™ is a Trade Mark of ETSI registered for the benefit of its Members and of the 3GPP Organizational Partners
 GSM® and the GSM logo are registered and owned by the GSM Association
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Contents
-Foreword	8
-1	Scope	9
-2	References	9
-3	Definitions, symbols and abbreviations	10
-3.1	Definitions	10
-3.2	Symbols	10
-3.3	Abbreviations	10
-4	General	11
-4.1	Procedure specification principles	11
-4.2	Forwards and backwards compatibility	11
-4.3	Specification notations	11
-5	NRPPa services	12
-5.1	NRPPa procedure modules	12
-5.2	Parallel transactions	12
-6	Services expected from lower layer	12
-7	Functions of NRPPa	12
-8	NRPPa procedures	13
-8.1	Elementary procedures	13
-8.2	Location Information Transfer Procedures	14
-8.2.1	E-CID Measurement Initiation	14
-8.2.1.1	General	14
-8.2.1.2	Successful Operation	14
-8.2.1.3	Unsuccessful Operation	15
-8.2.2	E-CID Measurement Failure Indication	15
-8.2.2.1	General	15
-8.2.2.2	Successful Operation	15
-8.2.2.3	Unsuccessful Operation	15
-8.2.3	E-CID Measurement Report	16
-8.2.3.1	General	16
-8.2.3.2	Successful Operation	16
-8.2.3.3	Unsuccessful Operation	16
-8.2.4	E-CID Measurement Termination	16
-8.2.4.1	General	16
-8.2.4.2	Successful Operation	16
-8.2.4.3	Unsuccessful Operation	17
-8.2.5	OTDOA Information Exchange	17
-8.2.5.1	General	17
-8.2.5.2	Successful Operation	17
-8.2.5.3	Unsuccessful Operation	17
-8.2.6	Positioning Information Exchange	17
-8.2.6.1	General	17
-8.2.6.2	Successful Operation	18
-8.2.6.3	Unsuccessful Operation	18
-8.2.6.4	Abnormal Conditions	18
-8.2.7	Positioning Information Update	18
-8.2.7.1	General	18
-8.2.7.2	Successful Operation	19
-8.2.7.3	Unsuccessful Operation	19
-8.2.7.4	Abnormal Conditions	19
-8.2.8	TRP Information Exchange	19
-8.2.8.1	General	19
-8.2.8.2	Successful Operation	19
-8.2.8.3	Unsuccessful Operation	20
-8.2.9	Positioning Activation	20
-8.2.9.1	General	20
-8.2.9.2	Successful Operation	20
-8.2.9.3	Unsuccessful Operation	21
-8.2.9.4	Abnormal Conditions	21
-8.2.10	Positioning Deactivation	21
-8.2.10.1	General	21
-8.2.10.2	Successful Operation	21
-8.2.10.3	Unsuccessful Operation	22
-8.2.10.4	Abnormal Conditions	22
-8.3	Management Procedures	22
-8.3.1	Error Indication	22
-8.3.1.1	General	22
-8.3.1.2	Successful Operation	22
-8.3.1.3	Abnormal Conditions	22
-8.4	Assistance Information Transfer Procedures	23
-8.4.1	Assistance Information Control	23
-8.4.1.1	General	23
-8.4.1.2	Successful Operation	23
-8.4.1.3	Abnormal Conditions	23
-8.4.2	Assistance Information Feedback	23
-8.4.2.1	General	23
-8.4.2.2	Successful Operation	24
-8.4.2.3	Abnormal Conditions	24
-8.5	Measurement Information Transfer	24
-8.5.1	Measurement	24
-8.5.1.1	General	24
-8.5.1.2	Successful Operation	24
-8.5.1.3	Unsuccessful Operation	25
-8.5.1.4	Abnormal Conditions	25
-8.5.2	Measurement Report	25
-8.5.2.1	General	25
-8.5.2.2	Successful Operation	26
-8.5.3	Measurement Update	26
-8.5.3.1	General	26
-8.5.3.2	Successful Operation	26
-8.5.3.3	Unsuccessful Operation	26
-8.5.3.4	Abnormal Conditions	26
-8.5.4	Measurement Abort	26
-8.5.4.1	General	26
-8.5.4.2	Successful Operation	27
-8.5.4.3	Unsuccessful Operation	27
-8.5.4.4	Abnormal Conditions	27
-8.5.5	Measurement Failure Indication	27
-8.5.5.1	General	27
-8.5.5.2	Successful Operation	27
-9	Elements for NRPPa Communication	28
-9.0	General	28
-9.1	Message Functional Definition and Content	28
-9.1.1	Messages for Location Information Transfer Procedures	28
-9.1.1.1	E-CID MEASUREMENT INITIATION REQUEST	28
-9.1.1.2	E-CID MEASUREMENT INITIATION RESPONSE	30
-9.1.1.3	E-CID MEASUREMENT INITIATION FAILURE	30
-9.1.1.4	E-CID MEASUREMENT FAILURE INDICATION	30
-9.1.1.5	E-CID MEASUREMENT REPORT	31
-9.1.1.6	E-CID MEASUREMENT TERMINATION COMMAND	31
-9.1.1.7	OTDOA INFORMATION REQUEST	31
-9.1.1.8	OTDOA INFORMATION RESPONSE	32
-9.1.1.9	OTDOA INFORMATION FAILURE	33
-9.1.1.10	POSITIONING INFORMATION REQUEST	33
-9.1.1.11	POSITIONING INFORMATION RESPONSE	33
-9.1.1.12	POSITIONING INFORMATION FAILURE	33
-9.1.1.13	POSITIONING INFORMATION UPDATE	34
-9.1.1.14	TRP INFORMATION REQUEST	34
-9.1.1.15	TRP INFORMATION RESPONSE	35
-9.1.1.16	TRP INFORMATION FAILURE	35
-9.1.1.17	POSITIONING ACTIVATION REQUEST	35
-9.1.1.18	POSITIONING ACTIVATION RESPONSE	36
-9.1.1.19	POSITIONING ACTIVATION FAILURE	36
-9.1.1.20	POSITIONING DEACTIVATION	36
-9.1.2	Messages for Management Procedures	37
-9.1.2.1	ERROR INDICATION	37
-9.1.3	Messages for Assistance Information Transfer Procedures	37
-9.1.3.1	ASSISTANCE INFORMATION CONTROL	37
-9.1.3.2	ASSISTANCE INFORMATION FEEDBACK	37
-9.1.4	Messages for Measurement Information Transfer Procedures	38
-9.1.4.1	MEASUREMENT REQUEST	38
-9.1.4.2	MEASUREMENT RESPONSE	40
-9.1.4.3	MEASUREMENT FAILURE	40
-9.1.4.4	MEASUREMENT REPORT	41
-9.1.4.5	MEASUREMENT UPDATE	41
-9.1.4.6	MEASUREMENT ABORT	41
-9.1.4.7	MEASUREMENT FAILURE INDICATION	42
-9.2	Information Element definitions	42
-9.2.0	General	42
-9.2.1	Cause	42
-9.2.2	Criticality Diagnostics	44
-9.2.3	Message Type	44
-9.2.4	NRPPa Transaction ID	44
-9.2.5	E-CID Measurement Result	45
-9.2.6	NG-RAN CGI	48
-9.2.7	CGI EUTRA	48
-9.2.8	PLMN Identity	49
-9.2.9	NR CGI	49
-9.2.10	NG-RAN Access Point Position	49
-9.2.11	TAC	50
-9.2.12	Cell Portion ID	50
-9.2.13	Other-RAT Measurement Result	50
-9.2.14	WLAN Measurement Result	52
-9.2.15	OTDOA Cell Information	53
-9.2.16	PRS Muting Configuration EUTRA	56
-9.2.17	PRS Frequency Hopping Configuration EUTRA	56
-9.2.18	TDD Configuration EUTRA	57
-9.2.19	Assistance Information	57
-9.2.20	PosSIB Segments	57
-9.2.21	Assistance Information Meta Data	58
-9.2.22	Positioning SIB Type	58
-9.2.23	Assistance Information Failure List	59
-9.2.24	TRP ID	59
-9.2.25	TRP Information	59
-9.2.27	Requested SRS Transmission Characteristics	60
-9.2.28	SRS Configuration	62
-9.2.29	SRS Resource	64
-9.2.30	Positioning SRS Resource	64
-9.2.31	SRS Resource Set	65
-9.2.32	Positioning SRS Resource Set	66
-9.2.33	SRS Resource Set ID	66
-9.2.34	Spatial Relation Information	67
-9.2.35	SRS Resource Trigger	67
-9.2.36	Relative Time 1900	67
-9.2.37	TRP Measurement Result	68
-9.2.38	UL Angle of Arrival	68
-9.2.39	UL RTOA Measurement	68
-9.2.40	gNB Rx-Tx Time Difference	69
-9.2.41	Additional Path List	69
-9.2.42	Time Stamp	69
-9.2.43	Measurement Quality	70
-9.2.44	PRS Configuration	70
-9.2.45	Spatial Direction Information	72
-9.2.46	Geographical Coordinates	72
-9.2.47	DL-PRS Resource Coordinates	72
-9.2.48	Relative Geodetic Location	73
-9.2.49	NG-RAN High Accuracy Access Point Position	74
-9.2.50	Relative Cartesian Location	74
-9.2.51	Reference Point	75
-9.2.52	Location Uncertainty	75
-9.2.53	Pathloss Reference Information	75
-9.2.54	SSB Information	75
-9.2.55	SSB Time/Frequency Configuration	76
-9.2.56	DL-PRS Muting Pattern	76
-9.2.57	Measurement Beam Information	76
-9.2.58	NR-PRS Beam Information	77
-9.2.59	Positioning Broadcast Cells	77
-9.2.60	Spatial Relation Information per SRS Resource	78
-9.3	Message and Information Element Abstract Syntax (with ASN.1)	79
-9.3.1	General	79
-9.3.2	Usage of Private Message Mechanism for Non-standard Use	79
-9.3.3	Elementary Procedure Definitions	79
-9.3.4	PDU Definitions	86
-9.3.5	Information Element definitions	100
-9.3.6	Common definitions	147
-9.3.7	Constant definitions	148
-9.3.8	Container definitions	151
-9.4	Message transfer syntax	155
-9.5	Timers	155
-10	Handling of unknown, unforeseen and erroneous protocol data	155
-Annex A (informative): Change history	156
+Foreword	9
+1	Scope	10
+2	References	10
+3	Definitions, symbols and abbreviations	11
+3.1	Definitions	11
+3.2	Symbols	11
+3.3	Abbreviations	11
+4	General	12
+4.1	Procedure specification principles	12
+4.2	Forwards and backwards compatibility	12
+4.3	Specification notations	12
+5	NRPPa services	13
+5.1	NRPPa procedure modules	13
+5.2	Parallel transactions	13
+6	Services expected from lower layer	13
+7	Functions of NRPPa	13
+8	NRPPa procedures	14
+8.1	Elementary procedures	14
+8.2	Location Information Transfer Procedures	15
+8.2.1	E-CID Measurement Initiation	15
+8.2.1.1	General	15
+8.2.1.2	Successful Operation	16
+8.2.1.3	Unsuccessful Operation	16
+8.2.1.4	Abnormal Conditions	17
+8.2.2	E-CID Measurement Failure Indication	17
+8.2.2.1	General	17
+8.2.2.2	Successful Operation	17
+8.2.2.3	Unsuccessful Operation	17
+8.2.2.4	Abnormal Conditions	17
+8.2.3	E-CID Measurement Report	17
+8.2.3.1	General	17
+8.2.3.2	Successful Operation	17
+8.2.3.3	Unsuccessful Operation	18
+8.2.3.4	Abnormal Conditions	18
+8.2.4	E-CID Measurement Termination	18
+8.2.4.1	General	18
+8.2.4.2	Successful Operation	18
+8.2.4.3	Unsuccessful Operation	18
+8.2.4.4	Abnormal Conditions	18
+8.2.5	OTDOA Information Exchange	19
+8.2.5.1	General	19
+8.2.5.2	Successful Operation	19
+8.2.5.3	Unsuccessful Operation	19
+8.2.5.4	Abnormal Conditions	19
+8.2.6	Positioning Information Exchange	19
+8.2.6.1	General	19
+8.2.6.2	Successful Operation	20
+8.2.6.3	Unsuccessful Operation	20
+8.2.6.4	Abnormal Conditions	21
+8.2.7	Positioning Information Update	21
+8.2.7.1	General	21
+8.2.7.2	Successful Operation	21
+8.2.7.3	Unsuccessful Operation	21
+8.2.7.4	Abnormal Conditions	21
+8.2.8	TRP Information Exchange	21
+8.2.8.1	General	21
+8.2.8.2	Successful Operation	22
+8.2.8.3	Unsuccessful Operation	22
+8.2.8.4	Abnormal Conditions	22
+8.2.9	Positioning Activation	23
+8.2.9.1	General	23
+8.2.9.2	Successful Operation	23
+8.2.9.3	Unsuccessful Operation	23
+8.2.9.4	Abnormal Conditions	24
+8.2.10	Positioning Deactivation	24
+8.2.10.1	General	24
+8.2.10.2	Successful Operation	24
+8.2.10.3	Unsuccessful Operation	24
+8.2.10.4	Abnormal Conditions	24
+8.2.11	PRS Configuration Exchange	24
+8.2.11.1	General	24
+8.2.11.2	Successful Operation	24
+8.2.11.3	Unsuccessful Operation	25
+8.2.11.4	Abnormal Conditions	25
+8.2.12	Measurement Preconfiguration	25
+8.2.12.1	General	25
+8.2.12.2	Successful Operation	25
+8.2.12.3	Unsuccessful Operation	26
+8.2.12.4	Abnormal Conditions	26
+8.2.13	Measurement Activation	26
+8.2.13.1	General	26
+8.2.13.2	Successful Operation	26
+8.2.13.3	Unsuccessful Operation	26
+8.2.13.4	Abnormal Conditions	27
+8.3	Management Procedures	27
+8.3.1	Error Indication	27
+8.3.1.1	General	27
+8.3.1.2	Successful Operation	27
+8.3.1.3	Abnormal Conditions	27
+8.4	Assistance Information Transfer Procedures	27
+8.4.1	Assistance Information Control	27
+8.4.1.1	General	27
+8.4.1.2	Successful Operation	28
+8.4.1.3	Abnormal Conditions	28
+8.4.2	Assistance Information Feedback	28
+8.4.2.1	General	28
+8.4.2.2	Successful Operation	28
+8.4.2.3	Abnormal Conditions	29
+8.5	Measurement Information Transfer	29
+8.5.1	Measurement	29
+8.5.1.1	General	29
+8.5.1.2	Successful Operation	29
+8.5.1.3	Unsuccessful Operation	30
+8.5.1.4	Abnormal Conditions	30
+8.5.2	Measurement Report	30
+8.5.2.1	General	30
+8.5.2.2	Successful Operation	31
+8.5.2.3	Abnormal Conditions	31
+8.5.3	Measurement Update	31
+8.5.3.1	General	31
+8.5.3.2	Successful Operation	31
+8.5.3.3	Unsuccessful Operation	32
+8.5.3.4	Abnormal Conditions	32
+8.5.4	Measurement Abort	32
+8.5.4.1	General	32
+8.5.4.2	Successful Operation	32
+8.5.4.3	Unsuccessful Operation	32
+8.5.4.4	Abnormal Conditions	32
+8.5.5	Measurement Failure Indication	32
+8.5.5.1	General	32
+8.5.5.2	Successful Operation	33
+8.5.5.3	Abnormal Conditions	33
+9	Elements for NRPPa Communication	33
+9.0	General	33
+9.1	Message Functional Definition and Content	33
+9.1.1	Messages for Location Information Transfer Procedures	33
+9.1.1.1	E-CID MEASUREMENT INITIATION REQUEST	33
+9.1.1.2	E-CID MEASUREMENT INITIATION RESPONSE	35
+9.1.1.3	E-CID MEASUREMENT INITIATION FAILURE	35
+9.1.1.4	E-CID MEASUREMENT FAILURE INDICATION	36
+9.1.1.5	E-CID MEASUREMENT REPORT	36
+9.1.1.6	E-CID MEASUREMENT TERMINATION COMMAND	36
+9.1.1.7	OTDOA INFORMATION REQUEST	37
+9.1.1.8	OTDOA INFORMATION RESPONSE	37
+9.1.1.9	OTDOA INFORMATION FAILURE	38
+9.1.1.10	POSITIONING INFORMATION REQUEST	38
+9.1.1.11	POSITIONING INFORMATION RESPONSE	39
+9.1.1.12	POSITIONING INFORMATION FAILURE	39
+9.1.1.13	POSITIONING INFORMATION UPDATE	39
+9.1.1.14	TRP INFORMATION REQUEST	39
+9.1.1.15	TRP INFORMATION RESPONSE	40
+9.1.1.16	TRP INFORMATION FAILURE	40
+9.1.1.17	POSITIONING ACTIVATION REQUEST	41
+9.1.1.18	POSITIONING ACTIVATION RESPONSE	41
+9.1.1.19	POSITIONING ACTIVATION FAILURE	41
+9.1.1.20	POSITIONING DEACTIVATION	42
+9.1.1.21	PRS CONFIGURATION REQUEST	42
+9.1.1.22	PRS CONFIGURATION RESPONSE	43
+9.1.1.23	PRS CONFIGURATION FAILURE	43
+9.1.1.24	MEASUREMENT PRECONFIGURATION REQUIRED	43
+9.1.1.25	MEASUREMENT PRECONFIGURATION CONFIRM	44
+9.1.1.26	MEASUREMENT PRECONFIGURATION REFUSE	44
+9.1.1.27	MEASUREMENT ACTIVATION	45
+9.1.2	Messages for Management Procedures	45
+9.1.2.1	ERROR INDICATION	45
+9.1.3	Messages for Assistance Information Transfer Procedures	46
+9.1.3.1	ASSISTANCE INFORMATION CONTROL	46
+9.1.3.2	ASSISTANCE INFORMATION FEEDBACK	46
+9.1.4	Messages for Measurement Information Transfer Procedures	46
+9.1.4.1	MEASUREMENT REQUEST	46
+9.1.4.2	MEASUREMENT RESPONSE	48
+9.1.4.3	MEASUREMENT FAILURE	49
+9.1.4.4	MEASUREMENT REPORT	49
+9.1.4.5	MEASUREMENT UPDATE	50
+9.1.4.6	MEASUREMENT ABORT	51
+9.1.4.7	MEASUREMENT FAILURE INDICATION	51
+9.2	Information Element definitions	51
+9.2.0	General	51
+9.2.1	Cause	51
+9.2.2	Criticality Diagnostics	53
+9.2.3	Message Type	53
+9.2.4	NRPPa Transaction ID	53
+9.2.5	E-CID Measurement Result	54
+9.2.6	NG-RAN CGI	58
+9.2.7	CGI EUTRA	58
+9.2.8	PLMN Identity	58
+9.2.9	NR CGI	58
+9.2.10	NG-RAN Access Point Position	58
+9.2.11	TAC	59
+9.2.12	Cell Portion ID	59
+9.2.13	Other-RAT Measurement Result	59
+9.2.14	WLAN Measurement Result	61
+9.2.15	OTDOA Cell Information	62
+9.2.16	PRS Muting Configuration EUTRA	65
+9.2.17	PRS Frequency Hopping Configuration EUTRA	65
+9.2.18	TDD Configuration EUTRA	66
+9.2.19	Assistance Information	66
+9.2.20	PosSIB Segments	67
+9.2.21	Assistance Information Meta Data	67
+9.2.22	Positioning SIB Type	67
+9.2.23	Assistance Information Failure List	68
+9.2.24	TRP ID	69
+9.2.25	TRP Information	69
+9.2.27	Requested SRS Transmission Characteristics	70
+9.2.28	SRS Configuration	72
+9.2.29	SRS Resource	74
+9.2.30	Positioning SRS Resource	74
+9.2.31	SRS Resource Set	76
+9.2.32	Positioning SRS Resource Set	76
+9.2.33	SRS Resource Set ID	76
+9.2.34	Spatial Relation Information	77
+9.2.35	SRS Resource Trigger	77
+9.2.36	Relative Time 1900	77
+9.2.37	TRP Measurement Result	78
+9.2.38	UL Angle of Arrival	78
+9.2.39	UL RTOA Measurement	79
+9.2.40	gNB Rx-Tx Time Difference	79
+9.2.41	Additional Path List	79
+9.2.42	Time Stamp	80
+9.2.43	Measurement Quality	80
+9.2.44	PRS Configuration	81
+9.2.45	Spatial Direction Information	83
+9.2.46	Geographical Coordinates	83
+9.2.47	DL-PRS Resource Coordinates	84
+9.2.48	Relative Geodetic Location	85
+9.2.49	NG-RAN High Accuracy Access Point Position	86
+9.2.50	Relative Cartesian Location	86
+9.2.51	Reference Point	87
+9.2.52	Location Uncertainty	87
+9.2.53	Pathloss Reference Information	87
+9.2.54	SSB Information	87
+9.2.55	SSB Time/Frequency Configuration	88
+9.2.56	DL-PRS Muting Pattern	88
+9.2.57	Measurement Beam Information	88
+9.2.58	NR-PRS Beam Information	89
+9.2.59	Positioning Broadcast Cells	90
+9.2.60	Spatial Relation Information per SRS Resource	90
+9.2.61	Requested DL PRS Transmission Characteristics	90
+9.2.62	Requested DL-PRS Resource List	91
+9.2.63	Start Time and Duration	91
+9.2.64	PRS Transmission Off Information	92
+9.2.65	On-demand PRS TRP Information	92
+9.2.66	UL-AoA assistance information	94
+9.2.67	Z-AoA	95
+9.2.68	Response Time	95
+9.2.69	LCS to GCS Translation	95
+9.2.70	UE Reporting Information	95
+9.2.71	Multiple UL-AoA	95
+9.2.72	UL SRS-RSRPP	96
+9.2.73	SRS Resource type	96
+9.2.74	Extended Additional Path List	96
+9.2.75	ARP ID	97
+9.2.76	ARP Location Information	97
+9.2.78	UE Tx TEG Association List	98
+9.2.79	TRP Tx TEG Association	99
+9.2.80	TRP TEG Information	99
+9.2.81	Measurement Characteristics Request Indicator	99
+9.2.82	TRP Beam Antenna Information	100
+9.2.83	TRP Beam Antenna Angles	101
+9.2.84	Timing Error Margin	103
+9.2.85	TRP Rx TEG Information	103
+9.2.86	TRP Tx TEG Information	103
+9.2.87	TRP RxTx TEG Information	103
+9.3	Message and Information Element Abstract Syntax (with ASN.1)	104
+9.3.1	General	104
+9.3.2	Usage of Private Message Mechanism for Non-standard Use	104
+9.3.3	Elementary Procedure Definitions	104
+9.3.4	PDU Definitions	111
+9.3.5	Information Element definitions	129
+9.3.6	Common definitions	190
+9.3.7	Constant definitions	191
+9.3.8	Container definitions	195
+9.4	Message transfer syntax	199
+9.5	Timers	199
+10	Handling of unknown, unforeseen and erroneous protocol data	199
+Annex A (informative): Change history	200
 
 Foreword
 This Technical Specification has been produced by the 3rd Generation Partnership Project (3GPP).
@@ -294,6 +347,7 @@ The following documents contain provisions which, through reference in this text
 [16]	3GPP TS 38.133: "NR; Requirements for support of radio resource management".
 [17]	3GPP TS 36:214: "Evolved Universal Terrestrial Radio Access (E-UTRA); Physical layer (PHY); Measurements".
 [18]	3GPP TS 38.305: "NG Radio Access Network (NG-RAN); Stage 2 functional specification of User Equipment (UE) positioning in NG-RAN".
+[19]	3GPP TS 38.215: "NR; Physical layer (PHY); Measurements".
 3	Definitions, symbols and abbreviations
 3.1	Definitions
 For the purposes of the present document, the terms and definitions given in 3GPP TR 21.905 [1] and the following apply. A term defined in the present document takes precedence over the definition of the same term, if any, in 3GPP TR 21.905 [1].
@@ -308,6 +362,7 @@ For the purposes of the present document, the following symbols apply:
 For the purposes of the present document, the abbreviations given in 3GPP TR 21.905 [1] and the following apply. An abbreviation defined in the present document takes precedence over the definition of the same abbreviation, if any, in 3GPP TR 21.905 [1].
 ARP	Antenna Reference Point
 BDS	BeiDou Navigation Satellite System
+CG-SDT	Configured Grant Small Data Transmission
 CID	Cell-ID (positioning method)
 DL-PRS	Downlink Positioning Reference Signal 
 E-CID	Enhanced Cell-ID (positioning method)
@@ -330,11 +385,13 @@ RSSI	Received Signal Strength Indicator
 RSTD	Reference Signal Time Difference
 SBAS	Space Based Augmentation System
 SRS	Sounding Reference Signal
+TEG	Timing Error group
 TRP	Transmission-Reception Point
 UE	User Equipment
 UL-AoA	Uplink Angle of Arrival 
 UL-RTOA	Uplink Relative Time of Arrival
 UL-SRS	Uplink Sounding Reference Signal
+UL SRS-RSRPP	UL SRS reference signal received path power
 WAAS	Wide Area Augmentation System
 Z-AoA	Zenith Angles of Arrival
 
@@ -378,6 +435,8 @@ The NRPPa protocol provides the following functions:
 -	Positioning Information Transfer. This function allows the NG-RAN node to exchange positioning information with the LMF for the purpose of positioning. 
 -	Measurement Information Transfer. This function allows the LMF to exchange measurement information with the NG-RAN node for the purpose of positioning.
 -	TRP Information Transfer. This function allows an LMF to obtain TRP related information from an NG-RAN node.
+-	PRS Information Transfer. This function allows the LMF to exchange PRS related information with the NG-RAN node.
+-	Measurement Preconfiguration Information Transfer. This function allows the LMF to request the NG-RAN node to preconfigure and activate measurement gap and/or PRS processing window.
 The mapping between the above functions and NRPPa EPs is shown in the table below.
 Table 7-1: Mapping between NRPPa functions and NRPPa EPs
 Function
@@ -407,6 +466,11 @@ b) Measurement Update
 c) Measurement Report
 d) Measurement Abort
 e) Measurement Failure Indication
+PRS Information Transfer
+PRS Configuration Exchange
+Measurement Preconfiguration Information Transfer
+Measurement Preconfiguration
+Measurement Activation
 
 8	NRPPa procedures
 8.1	Elementary procedures
@@ -451,6 +515,16 @@ POSITIONING ACTIVATION  RESPONSE
 POSITIONING ACTIVATION 
 FAILURE
 
+PRS Configuration Exchange
+PRS CONFIGURATION REQUEST
+PRS CONFIGURATION RESPONSE
+PRS CONFIGURATION FAILURE
+
+Measurement Preconfiguration
+MEASUREMENT PRECONFIGURATION REQUIRED 
+MEASUREMENT PRECONFIGURATION CONFIRM
+MEASUREMENT PRECONFIGURATION REFUSE
+
 
 Table 8.1-2: Class 2 Elementary Procedures
 Elementary Procedure
@@ -479,6 +553,8 @@ Measurement Failure Indication
 MEASUREMENT FAILURE INDICATION
 Positioning Deactivation
 POSITIONING DEACTIVATION
+Measurement Activation
+MEASUREMENT ACTIVATION
 
 8.2	Location Information Transfer Procedures
 8.2.1	E-CID Measurement Initiation
@@ -495,6 +571,8 @@ If the Report Characteristics IE is set to "Periodic", the NG-RAN node shall ini
 
 Figure 8.2.1.3-1: E-CID Measurement Initiation procedure, unsuccessful operation
 If the NG-RAN node is not able to initiate at least one of the requested E-CID measurements, the NG-RAN node shall respond with an E-CID MEASUREMENT INITIATION FAILURE message.
+8.2.1.4	Abnormal Conditions
+Void.
 8.2.2	E-CID Measurement Failure Indication
 8.2.2.1	General
 The purpose of the E-CID Measurement Failure Indication procedure is for the NG-RAN node to notify the LMF that the E-CID measurements previously requested with the E-CID Measurement Initiation procedure can no longer be reported.
@@ -504,6 +582,8 @@ Figure 8.2.2.2-1: E-CID Measurement Failure Indication, successful operation
 Upon reception of the E-CID MEASUREMENT FAILURE INDICATION message, the LMF shall consider that the E-CID measurements for the UE have been terminated by the NG-RAN node.
 8.2.2.3	Unsuccessful Operation
 Not applicable.
+8.2.2.4	Abnormal Conditions
+Void.
 8.2.3	E-CID Measurement Report
 8.2.3.1	General
 The purpose of E-CID Measurement Report procedure is for the NG-RAN node to provide the E-CID measurements for the UE to the LMF.
@@ -516,6 +596,8 @@ If available, the NG-RAN node shall include the NG-RAN Access Point Position IE 
 If available, the NG-RAN node shall include the Cell Portion ID IE in the E-CID MEASUREMENT REPORT message. Upon reception of the Cell Portion ID IE, the LMF may use the value as the cell portion for the measurement.
 8.2.3.3	Unsuccessful Operation
 Not applicable.
+8.2.3.4	Abnormal Conditions
+Void.
 8.2.4	E-CID Measurement Termination
 8.2.4.1	General
 The purpose of E-CID Measurement Termination procedure is to terminate periodical E-CID measurements for the UE performed by the NG-RAN node.
@@ -525,6 +607,8 @@ Figure 8.2.4.2-1: E-CID Measurement Termination procedure, successful operation
 The LMF initiates the procedure by generating an E-CID MEASUREMENT TERMINATION COMMAND message. 
 8.2.4.3	Unsuccessful Operation
 Not applicable.
+8.2.4.4	Abnormal Conditions
+Void.
 8.2.5	OTDOA Information Exchange
 8.2.5.1	General
 The purpose of the OTDOA Information Exchange procedure is to allow the LMF to request the NG-RAN node to transfer OTDOA information to the LMF.
@@ -536,6 +620,8 @@ The LMF initiates the procedure by sending an OTDOA INFORMATION REQUEST message.
 
 Figure 8.2.5.3-1: OTDOA Information Exchange procedure, unsuccessful operation
 If the NG-RAN node does not have any OTDOA information to report, the NG-RAN node shall respond with an OTDOA INFORMATION FAILURE message.
+8.2.5.4	Abnormal Conditions
+Void.
 8.2.6	Positioning Information Exchange
 8.2.6.1	General
 The Positioning Information Exchange procedure is initiated by the LMF to request to the NG-RAN node positioning information for the UE. This procedure applies only if the NG-RAN node is a gNB.
@@ -545,19 +631,25 @@ Figure 8.2.6.2-1: Positioning Information Exchange procedure, successful operati
 The LMF initiates the procedure by sending a POSITIONING INFORMATION REQUEST message to the NG-RAN node.
 If the Requested SRS Transmission Characteristics IE is included in the POSITIONING INFORMATION REQUEST message, the NG-RAN node may take this information into account when configuring SRS transmissions for the UE, and it shall include the SRS Configuration IE and the SFN Initialisation Time IE in the POSITIONING INFORMATION RESPONSE message.
 If the Spatial Relation Information per SRS Resource IE and the Periodicity List IE are both included in the Requested SRS Transmission Characteristics IE, the NG-RAN node shall consider that the Spatial Relation per SRS Resource Item IE and the Periodicity List Item IE have one-to-one mapping relation.
+If the UE Reporting Information IE is included in the POSITIONING INFORMATION REQUEST message, the NG-RAN node may take this information into account for allocating proper CG-SDT resources when positioning a UE.
+If the UE TEG Information Request IE is included in the POSITIONING INFORMATION REQUEST message and set to "onDemand", the NG-RAN node shall, if supported, provide the UE Tx TEG association in the POSITIONING INFORMATION RESPONSE message.
+If the UE TEG Information Request IE is set to "periodic", the NG-RAN node shall, if supported, reply with the POSITIONING INFORMATION RESPONSE message without including any UE Tx TEG association in this message. The NG-RAN node shall then take the UE TEG Reporting Periodicity IE into account when configuring the UE’s periodic UE Tx TEG association reporting and initiate the Positioning Information Update procedure for reporting the UE Tx TEG association received from the UE, if any.
 8.2.6.3	Unsuccessful Operation
 
 Figure 8.2.6.3-1: Positioning Information Exchange procedure, unsuccessful operation
 If the Requested SRS Transmission Characteristics IE is included in the POSITIONING INFORMATION REQUEST message and the NG-RAN node is unable to configure any SRS transmissions for the UE, it shall respond with a POSITIONING INFORMATION FAILURE message. If a handover of the target UE has been triggered, the NG-RAN node shall send a POSITIONING INFORMATION FAILURE message with an appropriate cause value.
+If the NG-RAN node is unable to provide any of the requested information, the NG-RAN node shall respond with a POSITIONING INFORMATION FAILURE message with an appropriate cause value.
 8.2.6.4	Abnormal Conditions
 Void.
 8.2.7	Positioning Information Update
 8.2.7.1	General
-The Positioning Information Update procedure is initiated by the NG-RAN node to indicate to the LMF that a change has occurred in the SRS configuration. This procedure applies only if the NG-RAN node is a gNB.
+The Positioning Information Update procedure is initiated by the NG-RAN node to indicate to the LMF that a change has occurred in the SRS configuration or in the UE Tx TEG association. This procedure applies only if the NG-RAN node is a gNB.
 8.2.7.2	Successful Operation
 
 Figure 8.2.7.2-1: Positioning Information Update procedure, successful operation
 The NG-RAN node initiates the procedure by sending a POSITIONING INFORMATION UPDATE message to the LMF. If the SRS Configuration IE is included in the POSITIONING INFORMATION UPDATE message, the LMF shall consider this information as the updated SRS Configuration for the UE. If the SFN Initialisation Time IE is included in the POSITIONING INFORMATION UPDATE message, the LMF shall consider this information as the SFN Initialisation Time associated to the SRS Configuration.
+If the UE Tx TEG Association List IE is included in the POSITIONING INFORMATION UPDATE message, the LMF shall consider it as the UE Tx TEG association for the SRS resources that have changed their TEG association during the latest reporting interval. 
+If the SRS Transmission Status IE is included in the POSITIONING INFORMATION UPDATE message and set to "stopped", the LMF shall consider that the SRS transmission has stopped.
 8.2.7.3	Unsuccessful Operation
 Not Applicable.
 8.2.7.4	Abnormal Conditions
@@ -578,6 +670,8 @@ If the DL-PRS Resource Coordinates IE is included in the Geographical Coordinate
 
 Figure 8.2.8.3-1: TRP Information Exchange procedure, unsuccessful operation
 If the NG-RAN node cannot provide any of the requested information for any TRP, the NG-RAN node shall respond with a TRP INFORMATION FAILURE message.
+8.2.8.4	Abnormal Conditions
+Void.
 8.2.9	Positioning Activation
 8.2.9.1	General
 The Positioning Activation procedure is initiated by the LMF to request the NG-RAN node to activate semi-persistent or trigger aperiodic UL SRS transmission by the UE. This procedure applies only if the NG-RAN node is a gNB.
@@ -606,6 +700,49 @@ The LMF initiates the procedure by sending a POSITIONING DEACTIVATION message to
 8.2.10.3	Unsuccessful Operation
 Not Applicable.
 8.2.10.4	Abnormal Conditions
+Void.
+8.2.11	PRS Configuration Exchange
+8.2.11.1	General
+The PRS Configuration Exchange procedure is initiated by the LMF to request the NG-RAN node to configure or update (i.e., turn off) PRS transmission. This procedure applies only if the NG-RAN node is a gNB.
+8.2.11.2	Successful Operation
+
+Figure 8.2.11.2-1: PRS Configuration Exchange procedure, successful operation
+The LMF initiates the procedure by sending a PRS CONFIGURATION REQUEST message to the NG-RAN.
+If the PRS Configuration Request Type IE is set to “configure”, the NG-RAN node should use the information in the Requested DL PRS Transmission Characteristics IE to configure DL-PRS transmission by the indicated TRP(s).
+If the PRS Configuration Request Type IE is set to “off”, the NG-RAN node should, if supported, use the information in the PRS Transmission Off Information IE to turn off the DL-PRS transmission for the indicated TRP(s), PRS Resource Set(s), or PRS Resource(s).
+If DL-PRS transmission is successfully configured or updated for at least one of the TRPs, the NG-RAN node shall respond with a PRS CONFIGURATION RESPONSE message.
+
+8.2.11.3	Unsuccessful Operation
+
+Figure 8.2.11.3-1: PRS Configuration Exchange procedure, unsuccessful operation
+If the NG-RAN node cannot configure or update DL-PRS transmission for any of the TRPs in the PRS TRP List IE of the PRS CONFIGURATION REQUEST message, it shall respond with a PRS CONFIGURATION FAILURE message with an appropriate cause value.
+8.2.11.4	Abnormal Conditions
+Void.
+8.2.12	Measurement Preconfiguration
+8.2.12.1	General
+The Measurement Preconfiguration procedure allows the LMF to provide necessary information to the serving gNB and request the gNB to preconfigure measurement gap and/or PRS processing window for the UE. This procedure applies only if the NG-RAN node is a gNB.
+8.2.12.2	Successful Operation
+
+Figure 8.2.12.2-1: Measurement Preconfiguration procedure, successful operation
+The LMF initiates the procedure by sending a MEASUREMENT PRECONFIGURATION REQUIRED message. 
+If the NG-RAN node is able to configure measurement gap or PRS processing window, it shall reply with the MEASUREMENT PRECONFIGURATION CONFIRM message. 
+8.2.12.3	Unsuccessful Operation
+
+Figure 8.2.12.3-1: Measurement Preconfiguration procedure, unsuccessful operation
+If the NG-RAN node cannot configure any of the measurement gap or PRS processing window, the NG-RAN node shall respond with a MEASUREMENT PRECONFIGURATION REFUSE message. Upon receiving the MEASUREMENT PRECONFIGURATION REFUSE message, the LMF shall release the reserved PPW resources.
+8.2.12.4	Abnormal Conditions
+Void.
+8.2.13	Measurement Activation
+8.2.13.1	General
+The Measurement Activation procedure is initiated by the LMF to request the NG-RAN node to activate or deactivate the preconfigured measurement gap or PRS processing window for the UE. This procedure applies only if the NG-RAN node is a gNB.
+8.2.13.2	Successful Operation
+
+Figure 8.2.13.2-1: Measurement Activation procedure, successful operation
+The LMF initiates the procedure by sending a MEASUREMENT ACTIVATION message to the NG-RAN node. 
+If the PRS Measurement Info List IE is included in the MEASUREMENT ACTIVATION message, the NG-RAN node may take it into account when activating pre-configured measurement gap in the UE.
+8.2.13.3	Unsuccessful Operation
+Not Applicable.
+8.2.13.4	Abnormal Conditions
 Void.
 8.3	Management Procedures
 8.3.1	Error Indication
@@ -654,34 +791,49 @@ The Measurement procedure allows the LMF to request one or more TRPs in the NG-R
 Figure 8.5.1.2.1: Measurement procedure. Successful operation.
 The LMF initiates the procedure by sending a MEASUREMENT REQUEST message to the NG-RAN node, indicating in the TRP Measurement Request List IE the TRP(s) from which measurements are requested. The NG-RAN node shall use the included information to configure positioning measurements by the indicated TRP(s). If at least one of the requested measurements has been successful for at least one of the TRPs, the NG-RAN node shall reply with a MEASUREMENT RESPONSE message including the TRP Measurement Response List IE.
 If the Report Characteristics IE is set to "OnDemand", the NG-RAN node shall return the corresponding measurement results in the MEASUREMENT RESPONSE message, and the LMF shall consider that this reporting has been terminated by the NG-RAN node. If the Report Characteristics IE is set to "Periodic", the NG-RAN node shall initiate the corresponding measurements, and it shall reply with the MEASUREMENT RESPONSE message without including any measurement results in the message. The NG-RAN node shall then periodically initiate the Measurement Report procedure for the corresponding measurements, with the requested reporting periodicity.
-If the Measurement Beam Information Request IE is included in the MEASUREMENT REQUEST message, the NG-RAN node shall include the Measurement Beam Information IE in the Measurement Result IE of the MEASUREMENT RESPONSE message.
-If the Measurement Quality IE is included in the Measurement Result IE in the MEASUREMENT RESPONSE message, the LMF may take it into account as the TRP estimate of the measurement quality. If the Measurement Quality IE includes the Zenith Quality IE, the LMF may take it into account within the angle measurement quality.
+If the Measurement Beam Information Request IE is included in the MEASUREMENT REQUEST message, the NG-RAN node shall include the Measurement Beam Information IE in the TRP Measurement Result IE of the MEASUREMENT RESPONSE message.
+If the Measurement Quality IE is included in the TRP Measurement Result IE in the MEASUREMENT RESPONSE message, the LMF may take it into account as the TRP estimate of the measurement quality. If the Measurement Quality IE includes the Zenith Quality IE, the LMF may take it into account within the angle measurement quality.
 If the Timing Reporting Granularity Factor IE is included in the TRP Measurement Quantities IE in the MEASUREMENT REQUEST message, the NG-RAN node may take it into account when configuring measurements including UL RTOA and gNB Rx-Tx Time Difference.
 If the System Frame Number IE and/or the Slot Number IE are included in the MEASUREMENT REQUEST message, the NG-RAN node shall, if supported, consider that the respective information indicates the activation time of SRS transmission.
+If the Report Characteristics IE is set to "OnDemand" and the Response Time IE is included in the MEASUREMENT REQUEST message, the NG-RAN node shall, if supported, return the corresponding measurement results in the MEASUREMENT RESPONSE message within the indicated time.
+If the Measurement Characteristics Request Indicator IE is included in the MEASUREMENT REQUEST message, the NG-RAN node shall, if supported, take the requested measurement characteristics into account when configuring measurements, and include the requested information, if available, in the MEASUREMENT RESPONSE message.
+If the Number of TRP Rx TEGs IE is included in the MEASUREMENT REQUEST message, the NG-RAN node shall, if supported, use it to measure the same SRS resource with different TRP Rx TEGs for the indicated TRP, and report the corresponding UL-RTOA and/or gNB Rx-Tx time difference measurements.
+If the Number of TRP RxTx TEGs IE is included in the MEASUREMENT REQUEST message, the NG-RAN node shall, if supported, use it to measure the same SRS resource with different TRP RxTx TEGs with the same TRP Tx TEG for the indicated TRP, and report the corresponding gNB Rx-Tx time difference measurements.
+If the Measurement Time Occasion IE is included in the MEASUREMENT REQUEST message, the NG-RAN node may take it into account as the number of SRS measurement time occasions for a measurement instance.
+Interaction with the Measurement Report procedure:
+If the Report Characteristics IE is set to "Periodic" and the Measurement Amount IE is included in the MEASUREMENT REQUEST message, the NG-RAN node shall, if supported, take it into account for sending the MEASUREMENT REPORT message.
 8.5.1.3	Unsuccessful Operation
 
 Figure 8.5.1.3.1: Measurement procedure. Unsuccessful operation.
 If the NG-RAN node cannot configure any of the requested measurements for any of the TRPs in the TRP Measurement Request List IE of the MEASUREMENT REQUEST message, it shall respond with a MEASUREMENT FAILURE message with an appropriate cause value.
 8.5.1.4	Abnormal Conditions
-Not applicable.
+If the Report Characteristics IE is set to "OnDemand" and the Response Time IE is included in the MEASUREMENT REQUEST message but the NG-RAN node is unable to provide the measurement results within the indicated time, the NG-RAN node shall, if supported, respond with a MEASUREMENT FAILURE message with an appropriate cause value.
 8.5.2	Measurement Report
 8.5.2.1	General
 The Measurement Report procedure allows the NG-RAN node to report positioning measurements to the LMF. This procedure applies only if the NG-RAN node is a gNB.
 8.5.2.2	Successful Operation
 
-Figure 8.z.2.2.1: Measurement Report procedure. Successful operation.
+Figure 8.5.2.2.1: Measurement Report procedure. Successful operation.
 The NG-RAN node initiates the procedure by sending a MEASUREMENT REPORT message to the LMF. The MEASUREMENT REPORT message contains the measurement results according to the associated measurement configuration.
+8.5.2.3	Abnormal Conditions
+Void.
 8.5.3	Measurement Update
 8.5.3.1	General
 The Measurement Update Procedure allows the LMF to notify the NG-RAN node of a change in a previously configured measurement. This procedure applies only if the NG-RAN node is a gNB.
 8.5.3.2	Successful Operation
 
 Figure 8.5.3.2.1: Measurement Update: Successful Operation.
-The LMF initiates the procedure by sending a MEASUREMENT UPDATE message. Upon receiving the message, the NG-RAN node shall overwrite the previously received measurement configuration.
+The LMF initiates the procedure by sending a MEASUREMENT UPDATE message.
+If the SRS Configuration IE is included in the MEASUREMENT UPDATE message, the NG-RAN node shall overwrite the previously stored SRS configuration.
+If the AoA Search Window Information IE is included in the TRP Measurement Update List IE in the MEASUREMENT UPDATE message, the NG-RAN node shall clear any previously stored AoA search window information and store the newly received information.
+If the Number of TRP Rx TEGs IE is included in the TRP Measurement Update List IE in the MEASUREMENT UPDATE message, the NG-RAN node shall clear any previously stored information and store the newly received information.
+If the Number of TRP RxTx TEGs IE is included in the TRP Measurement Update List IE in the MEASUREMENT UPDATE message, the NG-RAN node shall clear any previously stored information and store the newly received information.
+If the Measurement Characteristics Request Indicator IE is included in the MEASUREMENT UPDATE message, the NG-RAN node shall clear any previously stored information and store the newly received information.
+If the Measurement Time Occasion IE is included in the MEASUREMENT UPDATE message, the NG-RAN node shall clear any previously stored information and store the newly received information.
 8.5.3.3	Unsuccessful Operation
 Not applicable.
 8.5.3.4	Abnormal Conditions
-If the NG-RAN node cannot identify the previously requested measurement to be modified, it shall consider the procedure as failed and initiate local error handling.
+If the NG-RAN node cannot identify at least one of the previously requested measurement to be modified, it shall consider the procedure as failed and initiate local error handling.
 8.5.4	Measurement Abort
 8.5.4.1	General
 The purpose of the Measurement Abort Procedure is to enable the LMF to abort an on-going measurement. This procedure applies only if the NG-RAN node is a gNB.
@@ -701,6 +853,8 @@ The Measurement Failure Indication procedure allows the NG-RAN node to notify th
 
 Figure 8.5.5.2.1: Measurement Report procedure. Successful operation.
 Upon reception of the MEASUREMENT FAILURE INDICATION message, the LMF shall consider that the indicated measurements have been terminated by the NG-RAN node.
+8.5.5.3	Abnormal Conditions
+Void.
 9	Elements for NRPPa Communication
 9.0	General
 Sub clauses 9.1 and 9.2 describe the structure of the messages and information elements required for the NRPPa protocol in tabular format. Sub clause 9.3 provides the corresponding ASN.1 definition.
@@ -752,51 +906,88 @@ C-ifReportCharacteristicsPeriodic
 ENUMERATED (120ms, 240ms, 480ms, 640ms, 1024ms, 2048ms, 5120ms, 10240ms, 1min, 6min, 12min, 30min, 60min,…, 20480ms, 40960ms, extended)
 The codepoint 60min applies only for ng-eNB.
 
-The codepoint “extended” is not applicable
+The codepoint “extended” is not applicable.
+
+This IE is not applicable to NR Angle of Arrival.
 YES
 reject
 Measurement Quantities
 
-1 .. <maxnoMeas>
+1
 
 
 EACH
 reject
 >Measurement Quantities Item
+
+1..<maxnoMeas>
+
+
+-
+
+>>Measurement Quantities Value
 M
 
-ENUMERATED (Cell-ID, Angle of Arrival, Timing Advance Type 1, Timing Advance Type 2, RSRP, RSRQ,…, SS-RSRP, SS-RSRQ, CSI-RSRP, CSI-RSRQ, NR Angle of Arrival)
+ENUMERATED (Cell-ID, Angle of Arrival, Timing Advance Type 1, Timing Advance Type 2, RSRP, RSRQ,…, SS-RSRP, SS-RSRQ, CSI-RSRP, CSI-RSRQ, NR Angle of Arrival, NR Timing Advance)
 
 -
 -
 Other-RAT Measurement Quantities
 
-0 .. <maxnoMeas>
+0
 
 
 EACH
 ignore
 >Other-RAT Measurement Quantities Item
+
+0 .. <maxnoMeas>
+
+
+-
+
+>>Other-RAT Measurement Quantities Value
 M
 
 ENUMERATED (GERAN, UTRAN,…, NR, EUTRA)
 
-
+-
 
 WLAN Measurement Quantities
 
-0 .. <maxnoMeas>
+0
 
 
 EACH
 ignore
 >WLAN Measurement Quantities Item
+
+0 .. <maxnoMeas>
+
+
+-
+
+>>WLAN Measurement Quantities Value
 M
 
 ENUMERATED (WLAN, ...)
 
 -
 
+Measurement Periodicity NR-AoA
+C- ifReportCharacteristicsPeriodicAndMeasQuantityItemAoA
+
+ENUMERATED (160ms, 320ms, 
+640ms, 
+1280ms, 2560ms, 
+5120ms, 
+10240ms, 20480ms,
+40960ms, 
+61440ms, 
+81920ms, 368640ms, 737280ms, 1843200ms, …)
+
+YES
+reject
 
 Range bound
 Explanation
@@ -807,6 +998,8 @@ Condition
 Explanation
 ifReportCharacteristicsPeriodic
 This IE shall be present if the Report Characteristics IE is set to the value "Periodic".
+ifReportCharacteristicsPeriodicAndMeasQuantityItemAoA
+This IE shall be present if the Report Characteristics IE is set to the value "Periodic" and the Measurement Quantities Item IE is set to the value "NR Angle of Arrival".
 
 9.1.1.2	E-CID MEASUREMENT INITIATION RESPONSE
 This message is sent by NG-RAN node to indicate that the requested E-CID measurement is successfully initiated.
@@ -1092,12 +1285,19 @@ M
 
 OTDOA Information Type
 
-1 .. <maxnoOTDOAtypes>
+1
 
 
 EACH
 reject
->OTDOA Information Item 
+>OTDOA Information Type Item
+
+1 .. <maxnoOTDOAtypes>
+
+
+-
+
+>>OTDOA Information Item 
 M
 
 ENUMERATED (pci, cellid, tac, earfcn, prsBandwidth, prsConfigIndex, cpLength, noDlFrames, noAntennaPorts, sFNInitTime, nG-RANAccessPointPosition, prsmutingconfiguration, prsid, tpid, tpType, crsCPlength, dlBandwidth, multipleprsConfigurationsperCell, prsOccasionGroup, prsFrequencyHoppingConfiguration, …,
@@ -1202,7 +1402,7 @@ YES
 ignore
 
 9.1.1.10	POSITIONING INFORMATION REQUEST
-This message is sent by LMF to request positioning information.
+This message is sent by the LMF to request positioning information.
 Direction: LMF  NG-RAN node.
 IE/Group Name
 Presence
@@ -1232,9 +1432,35 @@ O
 
 YES
 ignore
+UE Reporting Information
+O
+
+9.2.70
+
+YES
+ignore
+UE TEG Information Request
+O
+
+ENUMERATED(onDemand, periodic, stop, …)
+
+YES
+ignore
+UE TEG Reporting Periodicity
+C-ifUeTegInfoReqPeriodic
+
+ENUMERATED (160ms, 320ms, 1280ms, 2560ms, 61440ms, 81920ms, 368640ms, 737280ms, …)
+
+YES
+reject
+
+Condition
+Explanation
+ifUeTegInfoReqPeriodic
+This IE shall be present if the UE TEG Information Request IE is set to the value "periodic".
 
 9.1.1.11	POSITIONING INFORMATION RESPONSE
-This message is sent by NG-RAN node to provide positioning information.
+This message is sent by the NG-RAN node to provide positioning information.
 Direction: NG-RAN node  LMF.
 IE/Group Name
 Presence
@@ -1279,9 +1505,16 @@ O
 
 YES
 ignore
+UE Tx TEG Association List
+O
+
+9.2.78
+
+YES
+ignore
 
 9.1.1.12	POSITIONING INFORMATION FAILURE
-This message is sent by NG-RAN node to indicate that the positioning information cannot be provided.
+This message is sent by the NG-RAN node to indicate that the positioning information cannot be provided.
 Direction: NG-RAN node  LMF.
 IE/Group Name
 Presence
@@ -1320,7 +1553,7 @@ YES
 ignore
 
 9.1.1.13	POSITIONING INFORMATION UPDATE
-This message is sent by NG-RAN node to indicate that a change in the SRS configuration has occurred.
+This message is sent by the NG-RAN node to indicate that a change in the SRS configuration or UE Tx TEG association has occurred.
 Direction: NG-RAN node  LMF.
 IE/Group Name
 Presence
@@ -1355,6 +1588,20 @@ O
 
 Relative Time 1900
 9.2.36
+
+YES
+ignore
+UE Tx TEG Association List
+O
+
+9.2.78
+
+YES
+ignore
+SRS Transmission Status
+O
+
+ENUMERATED (stopped, ...)
 
 YES
 ignore
@@ -1421,7 +1668,7 @@ reject
 >>TRP Information Type Item
 M
 
-ENUMERATED (nr pci, ng-ran cgi, nr arfcn, prs config, ssb config, sfn init time, spatial direction info, geo-coordinates, …, trp type) 
+ENUMERATED (nr pci, ng-ran cgi, nr arfcn, prs config, ssb config, sfn init time, spatial direction info, geo-coordinates, …, trp type, on-demand prs, trp tx teg, beam antenna info) 
 
 
 
@@ -1758,6 +2005,422 @@ the NG-RAN node configures UE to stop transmitting SRS for the positioning purpo
 
 
 
+9.1.1.21	PRS CONFIGURATION REQUEST
+This message is sent by the LMF to request the NG-RAN node to configure or update PRS transmission.
+Direction: LMF  NG-RAN node.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.3
+
+YES
+reject
+NRPPa Transaction ID
+M
+
+9.2.4
+
+-
+
+PRS Configuration Request Type
+M
+
+ENUMERATED(configure, off, …) 
+
+YES
+reject
+PRS TRP List
+
+1
+
+
+YES
+ignore
+>PRS TRP Item
+
+1 .. <maxnoTRPs>
+
+
+EACH
+ignore
+>>TRP ID
+M
+
+9.2.24
+
+-
+
+>>Requested DL PRS Transmission Characteristics
+C-ifConf
+
+9.2.61
+
+-
+
+>>PRS Transmission Off Information
+C-ifOff
+
+9.2.64
+
+-
+
+
+Range bound
+Explanation
+maxnoTRPs
+Maximum no. of TRPs in a NG-RAN node. Value is 65535
+
+Condition
+Explanation
+ifConf
+This IE shall be present if the PRS Configuration Request Type IE is set to the value "configure".
+ifOff
+This IE shall be present if the PRS Configuration Request Type IE is set to the value "off".
+
+9.1.1.22	PRS CONFIGURATION RESPONSE
+This message is sent by the NG-RAN node to acknowledge configuring or updating the PRS transmission.
+Direction: NG-RAN node  LMF.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.3
+
+YES
+reject
+NRPPa Transaction ID
+M
+
+9.2.4
+
+-
+
+PRS Transmission TRP List
+
+0..1
+
+
+YES
+ignore
+>PRS Transmission TRP Item
+
+1 .. <maxnoTRPs>
+
+
+EACH
+ignore
+>>TRP ID
+M
+
+9.2.24
+
+-
+
+>>PRS Configuration
+M
+
+9.2.44
+
+-
+
+Criticality Diagnostics
+O
+
+9.2.2
+
+YES
+ignore
+
+Range bound
+Explanation
+maxnoTRPs
+Maximum no. of TRPs in a NG-RAN node. Value is 65535
+
+9.1.1.23	PRS CONFIGURATION FAILURE
+This message is sent by the NG-RAN node to indicate that it cannot configure any PRS transmission.
+Direction: NG-RAN node  LMF.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.3
+
+YES
+reject
+NRPPa Transaction ID
+M
+
+9.2.4
+
+-
+
+Cause
+M
+
+9.2.1
+
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.2
+
+YES
+ignore
+
+9.1.1.24	MEASUREMENT PRECONFIGURATION REQUIRED
+This message is sent by the LMF to provide the PRS configuration information of multiple TRPs to the NG-RAN node and request to configure measurement gap or PRS processing window of the UE.
+Direction: LMF  NG-RAN node.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.3
+
+YES
+reject
+NRPPa Transaction ID
+M
+
+9.2.4
+
+-
+
+TRP PRS Information List
+
+1
+
+
+YES
+ignore
+>TRP PRS Information Item
+
+1 .. <maxnoPRSTRPs>
+
+
+EACH
+ignore
+>>TRP ID
+M
+
+9.2.24
+
+-
+
+>>NR PCI
+M
+
+INTEGER (0..1007)
+
+-
+
+>>NR CGI
+O
+
+9.2.9
+
+-
+
+>>PRS Configuration
+M
+
+9.2.44
+
+-
+
+
+Range bound
+Explanation
+maxnoPRSTRPs
+Maximum no. of TRPs for on-demand PRS in a NG-RAN node. Value is 256.
+
+9.1.1.25	MEASUREMENT PRECONFIGURATION CONFIRM
+This message is sent by the NG-RAN node to the LMF to confirm successful configuration of measurement gap or PRS processing window of the UE.
+Direction: NG-RAN node  LMF.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.3
+
+YES
+reject
+NRPPa Transaction ID
+M
+
+9.2.4
+
+-
+
+Preconfiguration Result
+M
+
+BIT STRING (SIZE(8))
+Indicates what has been preconfigured in the UE.
+first bit: measurement gaps
+second bit: PRS processing windows.
+
+Other bits reserved for future use. Value '1' indicates 'has been preconfigured', Value '0' indicates 'not preconfigured'.
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.2
+
+YES
+ignore
+
+9.1.1.26	MEASUREMENT PRECONFIGURATION REFUSE
+This message is sent by the NG-RAN node to indicate that configuration of measurement gap or PRS processing window of the UE was unsuccessful.
+Direction: NG-RAN node  LMF.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.3
+
+YES
+reject
+NRPPa Transaction ID
+M
+
+9.2.4
+
+-
+
+Cause
+M
+
+9.2.1
+
+YES
+ignore
+Criticality Diagnostics
+O
+
+9.2.2
+
+YES
+ignore
+
+9.1.1.27	MEASUREMENT ACTIVATION
+This message is sent by the LMF to request the NG-RAN node to activate or deactivate the preconfigured measurement gap or PRS processing window for the UE.
+Direction: LMF  NG-RAN node.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+Message Type
+M
+
+9.2.3
+
+YES
+ignore
+NRPPa Transaction ID
+M
+
+9.2.4
+
+-
+
+Request Type
+M
+
+ENUMERATED (activate, deactivate, …)
+
+YES
+reject
+PRS Measurement Info List 
+
+0..1
+
+
+YES
+Ignore
+>PRS Measurement Info Item
+
+1 .. < maxFreqLayers>
+
+
+-
+
+>>Point A
+M
+
+INTEGER (0..3279165)
+
+-
+
+>>MeasPRS Periodicity
+M
+
+ENUMERATED (ms20, ms40, ms80, ms160, …)
+Measurement gap periodicity in units of ms
+-
+
+>>MeasPRS Offset
+M
+
+INTEGER (0..159, …)
+Measurement gap offset in units of subframes
+-
+
+>>Measurement PRS Length
+M
+
+ENUMERATED {ms1dot5, ms3, ms3dot5, ms4, ms5dot5, ms6, ms10, ms20}
+
+-
+
+
+Range bound
+Explanation
+maxFreqLayers
+Maximum no. of frequency layers. Value is 4
+
 9.1.2	Messages for Management Procedures
 9.1.2.1	ERROR INDICATION
 This message is used to indicate that some error has been detected in the NG-RAN node or in the LMF.
@@ -1959,6 +2622,27 @@ NR CGI
 The Cell ID of the TRP identified by the TRP ID IE.
 YES
 ignore
+>>AoA Search Window Information
+O
+
+UL-AoA Assistance Information 9.2.66
+
+YES
+ignore
+>>Number of TRP Rx TEGs
+O
+
+ENUMERATED (2, 3, 4, 6, 8, …)
+
+YES
+ignore
+>>Number of TRP RxTx TEGs
+O
+
+ENUMERATED (2, 3, 4, 6, 8, …)
+
+YES
+ignore
 Report Characteristics
 M
 
@@ -1990,7 +2674,7 @@ reject
 >TRP Measurement Type
 M
 
-ENUMERATED (gNB-RxTxTimeDiff, UL-SRS-RSRP, UL-AoA, UL-RTOA,…)
+ENUMERATED (gNB-RxTxTimeDiff, UL-SRS-RSRP, UL-AoA, UL-RTOA,…,  Multiple UL-AoA, UL SRS-RSRPP)
 
 -
 
@@ -2021,7 +2705,7 @@ Measurement Beam Information Request
 O
 
 ENUMERATED (true,...)
-
+This IE is ignored when the Measurement Characteristics Request Indicator IE is included.
 YES
 ignore
 System Frame Number
@@ -2045,6 +2729,35 @@ ENUMERATED (160ms, 320ms, 1280ms, 2560ms, 61440ms, 81920ms, 368640ms, 737280ms, 
 
 YES
 reject
+Response Time
+O
+
+9.2.68
+This IE is ignored when the Report Characteristics IE is set to “periodic”.
+YES
+ignore
+Measurement Characteristics Request Indicator
+O
+
+9.2.81
+
+YES
+ignore
+Measurement Time Occasion
+O
+
+ENUMERATED (o1, o4, …)
+
+YES
+ignore
+Measurement Amount
+O
+
+ENUMERATED (0, 1, 2, 4, 8, 16, 32, 64)
+This IE is ignored if the Report Characteristics IE is set to ‘OnDemand’. 
+Value 0 represents an infinite number of periodic reporting.
+YES
+ignore
 
 Condition
 Explanation
@@ -2119,7 +2832,7 @@ M
 
 -
 
->> TRP Measurement Result
+>>TRP Measurement Result
 M
 
 9.2.37
@@ -2137,7 +2850,7 @@ ignore
 Criticality Diagnostics
 O
 
-9.2.11
+9.2.2
 
 YES
 ignore
@@ -2188,7 +2901,7 @@ ignore
 Criticality Diagnostics
 O
 
-9.2.11
+9.2.2
 
 YES
 ignore
@@ -2252,7 +2965,7 @@ M
 
 -
 
->> TRP Measurement Result
+>>TRP Measurement Result
 M
 
 9.2.37
@@ -2318,6 +3031,67 @@ O
 
 YES
 ignore
+TRP Measurement Update List 
+
+0..1
+
+
+YES
+reject
+>TRP Measurement Update Item 
+
+1..<maxnoofMeasTRPs>
+
+
+EACH
+reject
+>>TRP ID
+M
+
+9.2.24
+
+-
+
+>>AoA Search Window Information
+O
+
+UL-AoA Assistance Information 9.2.66
+
+YES
+ignore
+>>Number of TRP Rx TEGs
+O
+
+ENUMERATED (2, 3, 4, 6, 8, …)
+
+YES
+ignore
+>>Number of TRP RxTx TEGs
+O
+
+ENUMERATED (2, 3, 4, 6, 8, …)
+
+YES
+ignore
+Measurement Characteristics Request Indicator
+O
+
+9.2.81
+
+YES
+ignore
+Measurement Time Occasion
+O
+
+ENUMERATED (o1, o4, …)
+
+YES
+ignore
+
+Range bound
+Explanation
+maxnoofMeasTRPs
+Maximum no. of TRPs that can be included within one message. Value is 64. 
 
 9.1.4.6	MEASUREMENT ABORT
 This message is sent by the LMF to request the NG-RAN node to abort a measurement.
@@ -2432,7 +3206,7 @@ M
 
 ENUMERATED
 (Unspecified, Requested Item not Supported, Requested Item Temporarily not Available,
-...
+..., Serving NG-RAN node changed, Requested Item not Supported on Time
 )
 
 >Protocol
@@ -2475,21 +3249,25 @@ Requested Item not Supported
 The NG-RAN node does not support the requested measurement object, or cannot provide the requested information item.
 Requested Item Temporarily not Available
 The NG-RAN node can temporarily not provide the requested measurement object or information item.
+Serving NG-RAN node changed
+The UE has moved to another serving NG-RAN node.
+Requested Item not Supported on Time
+The NG-RAN node is unable to provide the measurement results on time.
 
 Protocol cause
 Meaning
 Abstract Syntax Error (Reject)
-The received message included an abstract syntax error and the concerned criticality indicated "reject" (see sub clause 10.3)
+The received message included an abstract syntax error and the concerned criticality indicated "reject" (see sub clause 10.3 of TS 38.413)
 Abstract Syntax Error (Ignore and Notify)
-The received message included an abstract syntax error and the concerned criticality indicated "ignore and notify" (see sub clause 10.3)
+The received message included an abstract syntax error and the concerned criticality indicated "ignore and notify" (see sub clause 10.3 of TS 38.413)
 Abstract syntax error (falsely constructed message)
-The received message contained IEs or IE groups in wrong order or with too many occurrences (see sub clause 10.3)
+The received message contained IEs or IE groups in wrong order or with too many occurrences (see sub clause 10.3 of TS 38.413)
 Message not Compatible with Receiver State
-The received message was not compatible with the receiver state (see sub clause 10.4)
+The received message was not compatible with the receiver state (see sub clause 10.4 of TS 38.413)
 Semantic Error
-The received message included a semantic error (see sub clause 10.4)
+The received message included a semantic error (see sub clause 10.4 of TS 38.413)
 Transfer Syntax Error
-The received message included a transfer syntax error (see sub clause 10.2)
+The received message included a transfer syntax error (see sub clause 10.2 of TS 38.413)
 Unspecified
 Sent when none of the above cause values applies but still the cause is Protocol related
 
@@ -2620,14 +3398,14 @@ If the Geographical Coordinates IE is used, the NG-RAN Access Point Position IE 
 
 Measured Results
 
-0 .. <maxnoMeas>
+0..1
 
 Measurement results of the serving RAT.
 -
 
 >CHOICE Measured Results Value
-M
 
+1 ..<maxnoMeas>
 
 
 -
@@ -2643,45 +3421,52 @@ According to mapping in TS 36.133 [9]
 M
 
 INTEGER (0..7690)
-According to mapping in TS 36. 214 [17]
+As defined in TS 36.214 [17]
 -
 
 >>Value Timing Advance Type 2 EUTRA
 M
 
 INTEGER (0..7690)
-According to mapping in TS 36. 214 [17]
+As defined in TS 36.214 [17]
 -
 
 >>Result RSRP EUTRA
 
-1 .. <maxCellReport>
+1
 
 
 -
 
->>> PCI EUTRA
+>>>Result RSRP EUTRA Item
+
+1 .. <maxCellReport> 
+
+
+-
+
+>>>>PCI EUTRA
 M
 
 INTEGER (0..503)
 Physical Cell Identifier of the reported E-UTRA cell
 -
 
->>>EARFCN
+>>>>EARFCN
 M
 
 INTEGER (0.. 262143, …)
 Corresponds to NDL for FDD and NDL/UL for TDD in ref. TS 36.104 [7]
 -
 
->>> CGI EUTRA
+>>>>CGI EUTRA
 O
 
 9.2.7
 Cell Global Identifier of the reported E-UTRA cell
 -
 
->>>Value RSRP EUTRA
+>>>>Value RSRP EUTRA
 M
 
 INTEGER (0..97, …)
@@ -2690,33 +3475,40 @@ INTEGER (0..97, …)
 
 >>Result RSRQ EUTRA
 
+1
+
+
+-
+
+>>>Result RSRQ EUTRA Item
+
 1 . <maxCellReport>
 
 
 -
 
->>> PCI EUTRA
+>>>>PCI EUTRA
 M
 
 INTEGER (0..503)
 Physical Cell Identifier of the reported E-UTRA cell
 -
 
->>>EARFCN
+>>>>EARFCN
 M
 
 INTEGER (0..262143, …)
 Corresponds to NDL for FDD and NDL/UL for TDD in ref. TS 36.104 [7]
 -
 
->>> CGI EUTRA
+>>>>CGI EUTRA
 O
 
 9.2.7
 Cell Global Identifier of the reported E-UTRA cell
 -
 
->>>Value RSRQ EUTRA
+>>>>Value RSRQ EUTRA
 M
 
 INTEGER (0..34, …)
@@ -2725,54 +3517,68 @@ INTEGER (0..34, …)
 
 >>Result SS-RSRP
 
-1 .. <maxCellReportNR>
+1
 
 
 YES
 ignore
->>>NR PCI
+>>>Result SS-RSRP Item
+
+1 .. <maxCellReportNR>
+
+
+-
+
+>>>>NR PCI
 M
 
 INTEGER (0..1007)
 
 -
 
->>>NR ARFCN
+>>>>NR ARFCN
 M
 
 INTEGER (0..3279165)
 
 -
 
->>>NR CGI
+>>>>NR CGI
 O
 
 9.2.9
 
 -
 
->>>Value SS-RSRP Cell
+>>>>Value SS-RSRP Cell
 O
 
 INTEGER (0..127)
 SS-RSRP measurement aggregated at cell level
 -
 
->>>SS-RSRP per SSB Resource
+>>>>SS-RSRP per SSB Resource
 
-0 .. <maxIndexesReport>
+0..1
 
 
 -
 
->>>>SSB Index
+>>>>>SS-RSRP per SSB Resource Item
+
+1 .. <maxIndexesReport>
+
+
+-
+
+>>>>>>SSB Index
 M
 
 INTEGER (0..63)
 
 -
 
->>>>Value SS-RSRP
+>>>>>>Value SS-RSRP
 M
 
 INTEGER (0..127)
@@ -2781,54 +3587,68 @@ SS-RSRP measurement per SSB resource
 
 >>Result SS-RSRQ
 
-1 .. <maxCellReportNR>
+1
 
 
 YES
 ignore
->>>NR PCI
+>>>ResultSS-RSRQ-Item
+
+1 .. <maxCellReportNR>
+
+
+-
+
+>>>>NR PCI
 M
 
 INTEGER (0..1007)
 
 -
 
->>>NR ARFCN
+>>>>NR ARFCN
 M
 
 INTEGER (0..3279165)
 
 -
 
->>>NR CGI
+>>>>NR CGI
 O
 
 9.2.9
 
 -
 
->>>Value SS-RSRQ Cell
+>>>>Value SS-RSRQ Cell
 O
 
 INTEGER (0..127)
 SS-RSRQ measurement aggregated at cell level
 -
 
->>>SS-RSRQ per SSB Resource
+>>>>SS-RSRQ per SSB Resource
 
-0 .. <maxIndexesReport>
+0..1
 
 
 -
 
->>>>SSB Index
+>>>>>SS-RSRQ PerSSB Resource Item
+
+1 .. <maxIndexesReport>
+
+
+-
+
+>>>>>>SSB Index
 M
 
 INTEGER (0..63)
 
 -
 
->>>>Value SS-RSRQ
+>>>>>>Value SS-RSRQ
 M
 
 INTEGER (0..127)
@@ -2837,54 +3657,68 @@ SS-RSRQ measurement per SSB resource
 
 >>Result CSI-RSRP
 
-1 .. <maxCellReportNR>
+1
 
 
 YES
 ignore
->>>NR PCI
+>>>Result CSI-RSRP Item
+
+1 .. <maxCellReportNR>
+
+
+-
+
+>>>>NR PCI
 M
 
 INTEGER (0..1007)
 
 -
 
->>>NR ARFCN
+>>>>NR ARFCN
 M
 
 INTEGER (0..3279165)
 
 -
 
->>>NR CGI
+>>>>NR CGI
 O
 
 9.2.9
 
 -
 
->>>Value CSI-RSRP Cell
+>>>>Value CSI-RSRP Cell
 O
 
 INTEGER (0..127)
 CSI-RSRP measurement aggregated at cell level
 -
 
->>>CSI-RSRP per CSI-RS Resource
+>>>>CSI-RSRP per CSI-RS Resource
 
-0 .. <maxIndexesReport>
+0..1
 
 
 -
 
->>>>CSI-RS Index
+>>>>>CSI-RSRP per CSI-RS Resource Item
+
+1.. <maxIndexesReport>
+
+
+-
+
+>>>>>>CSI-RS Index
 M
 
 INTEGER (0..95)
 
 -
 
->>>>Value CSI-RSRP
+>>>>>>Value CSI-RSRP
 M
 
 INTEGER (0..127)
@@ -2893,54 +3727,68 @@ CSI-RSRP measurement per CSI-RS resource
 
 >>Result CSI-RSRQ
 
-1 .. <maxCellReportNR>
+1
 
 
 YES
 ignore
->>>NR PCI
+>>>Result CSI-RSRQ Item
+
+1 .. <maxCellReportNR>
+
+
+-
+
+>>>>NR PCI
 M
 
 INTEGER (0..1007)
 
 -
 
->>>NR ARFCN
+>>>>NR ARFCN
 M
 
 INTEGER (0..3279165)
 
 -
 
->>>NR CGI
+>>>>NR CGI
 O
 
 9.2.9
 
 -
 
->>>Value CSI-RSRQ Cell
+>>>>Value CSI-RSRQ Cell
 O
 
 INTEGER (0..127)
 CSI-RSRQ measurement aggregated at cell level
 -
 
->>>CSI-RSRQ per CSI-RS Resource
+>>>>CSI-RSRQ per CSI-RS Resource
 
-0 .. <maxIndexesReport>
+0..1
 
 
 -
 
->>>>CSI-RS Index
+>>>>>CSI-RSRQ per CSI-RS Resource Item
+
+1 .. <maxIndexesReport>
+
+
+-
+
+>>>>>>CSI-RS Index
 M
 
 INTEGER (0..95)
 
 -
 
->>>>Value CSI-RSRQ
+>>>>>>Value CSI-RSRQ
 M
 
 INTEGER (0..127)
@@ -2953,6 +3801,13 @@ M
 UL Angle of Arrival
 9.2.38
 
+YES
+ignore
+>>Value Timing Advance NR
+M
+
+INTEGER (0.. 7690)
+As defined in TS 38.215 [19] 
 YES
 ignore
 Geographical Coordinates
@@ -3173,173 +4028,208 @@ Criticality
 Assigned Criticality
 Other-RAT Measured Results
 
+1
+
+
+-
+
+>CHOICE Other-RAT Measured Results Value
+
 1.. <maxnoMeas>
 
 
-
-
->CHOICE Other-RAT Measured Results Value
-M
-
-
-
-
+-
 
 >>Result GERAN
-M
+
+1
+
+
+-
+
+>>>Result GERAN Item
+
 1..<maxGERANMeas>
 
 
+-
 
-
->>>ARFCN of BCCH
+>>>>ARFCN of BCCH
 M
 
 INTEGER (0..1023, ...)
 
+-
 
-
->>>Physical CellId GERAN
+>>>>Physical CellId GERAN
 M
 
 INTEGER (0..63, ...)
 
+-
 
-
->>>RSSI
+>>>>RSSI
 M
 
 INTEGER (0..63, ...)
 
-
+-
 
 >>Result UTRAN
 
-1..<maxUTRANMeas>
+1
 
 
+-
+
+>>>Result UTRAN Item
+
+1..<maxUTRANMeas>   
 
 
->>>UARFCN
+-
+
+>>>>UARFCN
 M
 
 INTEGER (0..16383, ...)
 
+-
 
-
->>>CHOICE Physical CellId UTRA
+>>>>CHOICE Physical CellId UTRA
 M
 
 
 
+-
 
-
->>>>Physical CellId UTRA FDD
+>>>>>Physical CellId UTRA FDD
 M
 
 INTEGER (0..511, ...)
 
+-
 
-
->>>>Physical CellId UTRA TDD
+>>>>>Physical CellId UTRA TDD
 M
 
 INTEGER (0..127, ...)
 
+-
 
-
->>>UTRA RSCP
+>>>>UTRA RSCP
 O
 
 INTEGER (-5..91, ...)
 
+-
 
-
->>>UTRA EcNo
+>>>>UTRA EcNo
 O
 
 INTEGER (0..49, ...)
 This IE applies to FDD only.
-
+-
 
 >>Result NR
 
-1..<maxNRMeas>
+1
 
 
 YES
 ignore
->>>NR PCI
+>>>Result NR Item
+
+1..<maxNRMeas>
+
+
+-
+
+>>>>NR PCI
 M
 
 INTEGER (0..1007)
 
 -
 
->>>NR ARFCN
+>>>>NR ARFCN
 M
 
 INTEGER (0..3279165)
 
 -
 
->>>SS-RSRP Cell
+>>>>SS-RSRP Cell
 O
 
 INTEGER (0..127)
 SS-RSRP measurement aggregated at cell level
 -
 
->>>SS-RSRQ Cell
+>>>>SS-RSRQ Cell
 O
 
 INTEGER (0..127)
 SS-RSRQ measurement aggregated at cell level
 -
 
->>>SS-RSRP per SSB Resource 
+>>>>SS-RSRP per SSB Resource 
 
-0 .. <maxnoIndexesToReport>
+0..1
 
 
 -
 
->>>>SSB Index
+>>>>>Result SS-RSRP Per SSB Item
+
+1..<maxIndexesReport)>
+
+
+-
+
+>>>>>>SSB Index
 M
 
 INTEGER (0..63)
 
 -
 
->>>>Value SS-RSRP
+>>>>>>Value SS-RSRP
 M
 
 INTEGER (0..127)
 SS-RSRP measurement per SSB resource
 -
 
->>>SS-RSRQ per SSB Resource 
+>>>>SS-RSRQ per SSB Resource 
 
-0 .. <maxnoIndexesToReport>
+0..1
 
 
 -
 
->>>>SSB Index
+>>>>>Result SS-RSRQ Per SSB Item
+
+1..<maxIndexesReport>
+
+
+-
+
+>>>>>>SSB Index
 M
 
 INTEGER (0..63)
 
 -
 
->>>>Value SS-RSRQ
+>>>>>>Value SS-RSRQ
 M
 
 INTEGER (0..127)
 SS-RSRQ measurement per SSB resource
 -
 
->>>CGI NR 
+>>>>CGI NR 
 O
 
 9.2.9
@@ -3348,40 +4238,47 @@ Cell Global Identifier of the reported NR cell
 
 >>Result EUTRA
 
-1..<maxEUTRAMeas>
+1
 
 
 YES
 ignore
->>>PCI EUTRA
+>>>Result EUTRA Item
+
+1..<maxEUTRAMeas>
+
+
+-
+
+>>>>PCI EUTRA
 M
 
 INTEGER (0..503)
 
 -
 
->>>EARFCN
+>>>>EARFCN
 M
 
 INTEGER (0..262143)
 
 -
 
->>>RSRP EUTRA
+>>>>RSRP EUTRA
 O
 
 INTEGER (0..97)
 
 -
 
->>>RSRQ EUTRA
+>>>>RSRQ EUTRA
 O
 
 INTEGER (0..34)
 
 -
 
->>>CGI EUTRA
+>>>>CGI EUTRA
 O
 
 9.2.7
@@ -3413,55 +4310,60 @@ IE Type and Reference
 Semantics Description
 WLAN Measured Results
 
+1
+
+
+>WLAN Measurement Result Item
+
 1.. <maxnoMeas>
 
 
->WLAN RSSI
+>>WLAN RSSI
 M
 
 INTEGER (0..141, ...)
 
->SSID
+>>SSID
 O
 
 OCTET STRING (SIZE(1..32))
 Includes the SSID field as defined in subclause 8.4.2.2 of IEEE 802.11™ [11].
->BSSID
+>>BSSID
 M
 
 OCTET STRING (SIZE(6))
 Includes the BSSID field as defined in subclause 8.2.4.3.4 of IEEE 802.11™ [11].
->HESSID
+>>HESSID
 O
 
 OCTET STRING (SIZE(6))
 Includes the HESSID field as defined in subclause 8.4.2.94 of IEEE 802.11™ [11].
->Operating Class
+>>Operating Class
 O
 
 INTEGER (0..255)
 Indicates the WLAN Operating Class as defined in IEEE 802.11™ [11].
->Country Code
+>>Country Code
 O
 
 ENUMERATED (unitedStates, europe, japan, global, …)
 Indicates the WLAN country code as defined in IEEE 802.11™ [11].
->WLAN Channel List
+>>WLAN Channel List
 
 0..1
 
 
->>WLAN Channel List Item
+>>>WLAN Channel List Item
 
 1..<maxWLANchannels>
 
 
->>>WLAN Channel
+>>>>WLAN Channel
 M
 
 INTEGER (0..255)
 Indicates the WLAN channel number as defined in IEEE 802.11™ [11].
->WLAN Band
+>>WLAN Band
 O
 
 ENUMERATED (band2dot4, band5, …)
@@ -3483,16 +4385,9 @@ IE type and reference
 Semantics description
 Criticality
 Assigned criticality
-OTDOA Cell Information
+CHOICE OTDOA Cell Information item
 
-1 .. <maxnoOTDOAtypes>
-
-
-
-
->CHOICE OTDOA Cell Information Item
-M
-
+1  <maxnoOTDOAtypes>
 
 
 
@@ -3789,7 +4684,7 @@ Corresponds to the number of SI messages with posSIBs to be scheduled
 M
 
 ENUMERATED (ms80, ms160, ms320, ms640, ms1280, ms2560, ms5120, ...) 
-Broadcast Periodicity for the Pos SIBs, see TS 38.331 [13]
+Corresponds to information provided in posSI-Periodicity contained in the PosSI-SchedulingInfo IE as defined in TS 38.331 [13]
 >>Pos SIBs
 
 1..<maxNrOfPosSIBs>
@@ -3839,7 +4734,7 @@ PosSIB Segments
 M
 
 OCTET STRING
-TS 37.355 [14]
+Includes the assistanceDataSIBElement IE as defined in TS 37.355 [14]
 
 Range bound
 Explanation
@@ -3857,20 +4752,20 @@ Encrypted
 O
 
 ENUMERATED (true, …)
-
+Corresponds to information provided in encrypted contained in the PosSI-SchedulingInfo IE as defined in TS 38.331 [13]
 GNSS ID
 O
 
 ENUMERATED (gps, sbas, qzss, galileo, glonass, bds, navic ...) 
-
+Corresponds to information provided in gnss-id contained in the PosSI-SchedulingInfo IE as defined in TS 38.331 [13]
 SBAS ID
 O
 
 ENUMERATED (waas, egnos, msas, gagan, ...) 
-
+Corresponds to to information provided in sbas-id contained in the PosSI-SchedulingInfo IE as defined in TS 38.331 [13]
 
 9.2.22	Positioning SIB Type
-This parameter defines a specific positioning SIB, as defined in TS 37.355 [14].
+This parameter defines a specific positioning SIB, as defined in TS 38.331 [13].
 IE/Group Name
 Presence
 Range
@@ -3918,7 +4813,9 @@ posSibType5-1,
 posSibType6-1,  
 posSibType6-2,
 posSibType6-3, 
-... )
+...,
+posSibType1-9, posSibType1-10,
+posSibType6-4, posSibType6-5, posSibType6-6)
 
 
 9.2.23	Assistance Information Failure List
@@ -4054,6 +4951,27 @@ M
 
 ENUMERATED (prs-only-tp, srs-only-rp, tp, rp, trp…)
 TS 38.305 [18]
+YES
+reject
+>>On-demand PRS TRP Information
+M
+
+9.2.65
+
+YES
+reject
+>>TRP Tx TEG Association
+M
+
+9.2.79
+
+YES
+reject
+>>TRP Beam Antenna Information
+M
+
+9.2.82
+
 YES
 reject
 
@@ -4233,110 +5151,120 @@ IE Type and Reference
 Semantics Description
 SRS Carrier List
 
+1
+
+
+>SRS Carrier List Item
+
 1..<maxnoSRS-Carriers>
 
 
->Point A
+>>Point A
 M
 
 INTEGER (0..3279165)
 NR ARFCN
->Uplink Channel BW-PerSCS-List
+>>Uplink Channel BW-PerSCS-List
 
-1..<maxnoSCSs>
+1
 
-SCS-SpecificCarrier TS 38.331 [13]
->>Offset To Carrier
+Corresponds to sCS-SpecificCarrierList in TS 38.331 [13]
+>>>SCS Specific Carrier
+
+1. .<maxnoSCSs>
+
+
+>>>>Offset To Carrier
 M
 
 INTEGER(0..2199,…)
 First usable RB to Point A in the number of PRBs
->>Subcarrier Spacing
+>>>>Subcarrier Spacing
 M
 
 ENUMERATED(kHz15, kHz30, kHz60, kHz120,…)
 
->>Carrier Bandwidth
+>>>>Carrier Bandwidth
 M
 
 INTEGER(1..275,…)
 
->Active UL BWP
+>>Active UL BWP
 M
 
 
 Only the configuration in the active UL BWP is needed.
->>Location And Bandwidth
+>>>Location And Bandwidth
 M
 
 INTEGER(0..37949,…)
-BWP TS 38.331 [13]
->>Subcarrier Spacing
+Corresponds to information provided in locationAndBandwidth contained in BWP IE as defined in TS 38.331 [13]
+>>>Subcarrier Spacing
 M
 
 ENUMERATED(kHz15, kHz30, kHz60, kHz120,…)
 
->>Cyclic Prefix
+>>>Cyclic Prefix
 M
 
 ENUMERATED(Normal, Extended)
 
->>Tx Direct Current Location
+>>>Tx Direct Current Location
 M
 
 INTEGER(0..3301,…)
 
->>Shift7dot5kHz
+>>>Shift7dot5kHz
 O
 
 ENUMERATED(true,…)
 
->>SRS Config
+>>>SRS Config
 M
 
 
-SRS-Config as defined in TS 38.331 [13]
->>>SRS Resource List
+Corresponds to information provided in SRS-Config IE as defined in TS 38.331 [13]
+>>>>SRS Resource List
 
 0..<maxnoSRS-Resources>
 
 
->>>>SRS Resource
+>>>>>SRS Resource
 M
 
 9.2.29
-SRS-Resource as defined in TS 38.331 [13]
->>>Positioning SRS Resource List
+Corresponds to information provided in SRS-Resource contained in SRS-Config IE as defined in TS 38.331 [13]
+>>>>Positioning SRS Resource List
 
-0..<maxnoSRS-Resources>
+0..< maxnoSRS-PosResources>
 
 
->>>>Positioning SRS Resource
+>>>>>Positioning SRS Resource
 M
 
 9.2.30
-SRS-PosResource-r16 as defined in TS 38.331 [13]
->>>SRS Resource Set List
+Corresponds to information provided in SRS-PosResource contained in SRS-Config IE as defined in TS 38.331 [13]
+>>>>SRS Resource Set List
 
-0..<maxnoSRS-Resources>
+0..<maxnoSRS-ResourceSets>
 
 
->>>>SRS Resource Set
+>>>>>SRS Resource Set
 M
 
 9.2.31
-SRS-ResourceSet as defined in TS 38.331 [13]
->>>Positioning SRS Resource Set List
+Corresponds to information provided in SRS-ResourceSet contained in SRS-Config IE as defined in TS 38.331 [13]
+>>>>Positioning SRS Resource Set List
 
-0..<maxnoSRS-Resources>
+0..<maxnoSRS-PosResourceSets>
 
 
->>>>Positioning SRS Resource Set 
+>>>>>Positioning SRS Resource Set 
 M
 
 9.2.32
-SRS-PosResourceSet-r16 as defined in TS 38.331 [13]
->NR PCI
+Corresponds to information provided in SRS-PosResourceSet contained in SRS-Config IE as defined in TS 38.331 [13]
+>>NR PCI
 O
 
 INTEGER (0..1007)
@@ -4605,7 +5533,7 @@ M
 >>Periodicity
 M
 
-ENUMERATED(slot1, slot2, slot4, slot5, slot8, slot10, slot16, slot20, slot32, slot40, slot64, slot80, slot160, slot320, slot640, slot1280, slot2560, slot5120, slot10240, slot40960, slot81920,…)
+ENUMERATED(slot1, slot2, slot4, slot5, slot8, slot10, slot16, slot20, slot32, slot40, slot64, slot80, slot160, slot320, slot640, slot1280, slot2560, slot5120, slot10240, slot40960, slot81920,…, slot128, slot256, slot512, slot20480)
 
 >>Offset
 M
@@ -4620,7 +5548,7 @@ INTEGER(0..81919,…)
 >>Periodicity
 M
 
-ENUMERATED(slot 1, slot 2, slot4, slot5, slot8, slot10, slot16, slot20, slot32, slot40, slot64, slot80, slot160, slot320, slot640, slot1280, slot2560, slot5120, slot10240, slot40960, slot81920,…)
+ENUMERATED(slot 1, slot 2, slot4, slot5, slot8, slot10, slot16, slot20, slot32, slot40, slot64, slot80, slot160, slot320, slot640, slot1280, slot2560, slot5120, slot10240, slot40960, slot81920,…, slot128, slot256, slot512, slot20480)
 
 >>Offset
 M
@@ -4652,7 +5580,7 @@ O
 
 
 
->> NR PCI
+>>NR PCI
 M
 
 INTEGER (0..1007)
@@ -4825,7 +5753,7 @@ SRS Resource Set ID
 M
 
 INTEGER (0..15)
-According to TS 38.331 [13]
+Corresponds to information provided in SRS-ResourceSetId contained in SRS-Config IE as defined in TS 38.331 [13]
 
 9.2.34	Spatial Relation Information 
 This information element indicates a spatial relation for transmission of UL SRS by a UE.
@@ -4838,7 +5766,7 @@ Spatial Relation for Resource ID
 
 1..<maxnoSpatialRelations>
 
-According to TS 38.321 [15] and TS 38.331 [13]
+According to TS 38.321 [15] and corresponds to information provided in SRS-SpatialRelationInfoPos contained in SRS-Config IE as defined in TS 38.331 [13]
 CHOICE Reference Signal
 M
 
@@ -4859,7 +5787,7 @@ INTEGER (0..191)
 
 
 
->> NR PCI
+>>NR PCI
 M
 
 INTEGER (0..1007)
@@ -4884,7 +5812,7 @@ INTEGER (0..63)
 
 
 
->> Positioning SRS Resource ID
+>>Positioning SRS Resource ID
 M
 
 INTEGER (0..63)
@@ -4926,7 +5854,7 @@ Aperiodic SRS Resource Trigger List
 
 1..<maxnoSRS-TriggerStates>
 
-According to TS 38.331 [13]
+Corresponds to information provided in aperiodicSRS-ResourceTriggerList contained in SRS-Config IE as defined in TS 38.331 [13]
 >Aperiodic SRS Resource Trigger
 
 
@@ -4958,13 +5886,19 @@ Presence
 Range
 IE Type and Reference
 Semantics Description
+Criticality
+Assigned Criticality
 Measured Result Item
 
 1 .. <maxnoPosMeas>
 
 
+
+
 >CHOICE Measured Results Value
 M
+
+
 
 
 
@@ -4973,36 +5907,92 @@ M
 
 9.2.38
 
+-
+
 >>UL SRS-RSRP
 M
 
 INTEGER (0..126)
+
+-
 
 >>UL RTOA
 M
 
 9.2.39
 
+-
+
 >>gNB Rx-Tx Time Difference
 M
 
 9.2.40
 
+-
+
+>>Z-AoA
+M
+
+9.2.67
+
+YES
+reject
+>>Multiple UL-AoA
+M
+
+9.2.71
+
+YES
+reject
+>>UL SRS-RSRPP
+M
+
+9.2.72
+
+YES
+reject
 >Time Stamp
 M
 
 9.2.42
+
+-
 
 >Measurement Quality
 O
 
 9.2.43
 
+-
+
 >Measurement Beam Information
 O
 
 9.2.57
 
+-
+
+>SRS Resource type
+O
+
+9.2.73
+
+YES
+ignore
+>ARP ID
+O
+
+9.2.75
+
+YES
+ignore
+>LoS/NLoS Information
+O
+
+9.2.77
+
+YES
+ignore
 
 Range bound
 Explanation
@@ -5027,25 +6017,10 @@ O
 INTEGER(0..1799)
 TS 38.133 [16]
 LCS to GCS Translation
+O
 
-0..1
-
+9.2.69
 If absent, the azimuth and zenith are provided in GCS.
->Alpha
-M
-
-INTEGER (0..3599)
-
->Beta
-M
-
-INTEGER (0..3599)
-
->Gamma
-M
-
-INTEGER (0..3599)
-
 
 9.2.39	UL RTOA Measurement
 This information element contains the uplink RTOA measurement.
@@ -5054,46 +6029,78 @@ Presence
 Range
 IE Type and Reference
 Semantics Description
+Criticality
+Assigned Criticality
 CHOICE UL RTOA Measurement
 M
 
 
+
+-
 
 >k0
 M
 
 INTEGER (0.. 1970049)
 TS 38.133 [16]
+-
+
 >k1
 M
 
 INTEGER (0.. 985025)
 TS 38.133 [16]
+-
+
 >k2
 M
 
 INTEGER (0.. 492513)
 TS 38.133 [16]
+-
+
 >k3
 M
 
 INTEGER (0.. 246257)
 TS 38.133 [16]
+-
+
 >k4
 M
 
 INTEGER (0.. 123129)
 TS 38.133 [16]
+-
+
 >k5
 M
 
 INTEGER (0.. 61565)
 TS 38.133 [16]
+-
+
 Additional Path List
 O
 
 9.2.41
+This IE is ignored if the Extended Additional Path List IE is included
+-
 
+Extended Additional Path List
+O
+
+9.2.74
+
+YES
+ignore
+TRP Rx TEG Information
+O
+
+9.2.85
+
+YES
+ignore
 
 9.2.40	gNB Rx-Tx Time Difference
 This information element contains the gNB Rx-Tx Time Difference measurement.
@@ -5102,46 +6109,78 @@ Presence
 Range
 IE Type and Reference
 Semantics Description
+Criticality
+Assigned Criticality
 CHOICE gNB Rx-Tx Time Difference Measurement
 M
 
 
+
+-
 
 >k0
 M
 
 INTEGER (0.. 1970049)
 TS 38.133 [16]
+-
+
 >k1
 M
 
 INTEGER (0.. 985025)
 TS 38.133 [16]
+-
+
 >k2
 M
 
 INTEGER (0.. 492513)
 TS 38.133 [16]
+-
+
 >k3
 M
 
 INTEGER (0.. 246257)
 TS 38.133 [16]
+-
+
 >k4
 M
 
 INTEGER (0.. 123129)
 TS 38.133 [16]
+-
+
 >k5
 M
 
 INTEGER (0.. 61565)
 TS 38.133 [16]
+-
+
 Additional Path List
 O
 
 9.2.41
+This IE is ignored if the Extended Additional Path List IE is included
+-
 
+Extended Additional Path List
+O
+
+9.2.74
+
+YES
+ignore
+TRP TEG Information
+O
+
+9.2.80
+
+YES
+ignore
 
 9.2.41	Additional Path List
 This information element contains the additional path results of time measurement.
@@ -5150,45 +6189,63 @@ Presence
 Range
 IE Type and Reference
 Semantics Description
+Criticality
+Assigned Criticality
 Additional Path Item
 
 1..<maxnopath>
 
+
+-
 
 >CHOICE Relative Path Delay
 M
 
 
 
+-
+
 >>k0
 M
 
 INTEGER(0..16351)
+
+-
 
 >>k1
 M
 
 INTEGER(0..8176)
 
+-
+
 >>k2
 M
 
 INTEGER(0..4088)
+
+-
 
 >>k3
 M
 
 INTEGER(0..2044)
 
+-
+
 >>k4
 M
 
 INTEGER(0..1022)
 
+-
+
 >>k5
 M
 
 INTEGER(0..511)
+
+-
 
 >Path Quality
 O
@@ -5196,6 +6253,23 @@ O
 Measurement Quality
 9.2.43
 
+-
+
+>Multiple UL-AoA
+O
+
+9.2.71
+
+YES
+ignore
+>Path Power
+O
+
+UL SRS-RSRPP
+9.2.72
+
+YES
+ignore
 
 Range bound
 Explanation
@@ -5203,7 +6277,7 @@ maxnopath
 Maximum no. of additional path measurement. Value is 2.
 
 9.2.42	Time Stamp
-This information element contains the time stamp associated with the measurement.
+This information element contains the time stamp.
 IE/Group Name
 Presence
 Range
@@ -5262,17 +6336,17 @@ M
 
 
 
-
+Corresponds to information provided in NR-TimingQuality IE as defined in TS 37.355 [14]
 >>Measurement Quality
 M
 
 INTEGER(0..31)
-TS 37.355 [14]
+
 >>Resolution
 M
 
 ENUMERATED(0.1m, 1m, 10m, 30m, …)
-TS 37.355 [14]
+
 >Angle Measurement Quality
 
 
@@ -5303,167 +6377,177 @@ IE Type and Reference
 Semantics Description
 PRS Resource Set List
 
+1
+
+
+>PRS Resource Set Item
+
 1..<maxnoofPRSresourceSet>
 
 
->PRS Resource Set ID
+>>PRS Resource Set ID
 M
 
 INTEGER(0..7)
 
->Subcarrier Spacing
+>>Subcarrier Spacing
 M
 
 ENUMERATED(kHz15, kHz30, kHz60, kHz120, …)
 
->PRS bandwidth
+>>PRS bandwidth
 M
 
 INTEGER(1..63)
 24,28,…,272 PRBs
->Start PRB
+>>Start PRB
 M
 
 INTEGER(0..2176)
 Starting PRB to Point A
->Point A
+>>Point A
 M
 
 INTEGER (0..3279165)
 NR ARFCN
->Comb Size
+>>Comb Size
 M
 
 ENUMERATED(2, 4, 6, 12, …)
 
->CP Type
+>>CP Type
 M
 
 ENUMERATED(normal, extended, …)
 
->Resource Set Periodicity
+>>Resource Set Periodicity
 M
 
 ENUMERATED(4,5,8,10,16,20,32,40,64,80,160,320,640,1280,2560,5120,10240,20480,40960,81920,…)
 
->Resource Set Slot Offset
+>>Resource Set Slot Offset
 M
 
 INTEGER(0..81919,…)
 
->Resource Repetition Factor
+>>Resource Repetition Factor
 M
 
 ENUMERATED(rf1,rf2,rf4,rf6,rf8,rf16,rf32,…)
 
->Resource Time Gap
+>>Resource Time Gap
 M
 
 ENUMERATED(tg1,tg2,tg4,tg8,tg16,tg32,…)
 
->Resource Number of Symbols
+>>Resource Number of Symbols
 M
 
 ENUMERATED(n2,n4,n6,n12,…)
 
->PRS Muting
+>>PRS Muting
 O
 
 
 
->>Option1
+>>>Option1
 O
 
 
 
->>>Muting Pattern
+>>>>Muting Pattern
 M
 
 DL-PRS Muting Pattern
 9.2.56
 Muting pattern option 1 is used to mute the whole PRS resource set (within a period)
->>>Muting Bit Repetition Factor
+>>>>Muting Bit Repetition Factor
 M
 
 ENUMERATED(1,2,4,8,…)
 
->>Option2
+>>>Option2
 O
 
 
 
->>>Muting Pattern
+>>>>Muting Pattern
 M
 
 DL-PRS Muting Pattern
 9.2.56
 Muting pattern option 2 is used to mute the selected repetition of the resource set (within the period)
->PRS Resource Transmit Power
+>>PRS Resource Transmit Power
 M
 
 INTEGER(-60..50)
 
->PRS Resource List
-M
+>>PRS Resource List
+
+1
+
+Corresponds to information provided in NR-DL-PRS-Resource contained in NR-DL-PRS-Info IE as defined in TS 37.355 [14]
+>>>PRS Resource Item
+
 1..<maxnoofPRSresources>
 
-NR-DL-PRS-Resource-r16 as defined in TS 37.355 [14]
->>PRS Resource ID
+
+>>>>PRS Resource ID
 M
 
 INTEGER(0..63)
 
->>Sequence ID
+>>>>Sequence ID
 M
 
 INTEGER(0..4095)
 
->>RE Offset
+>>>>RE Offset
 M
 
 INTEGER(0..11,…)
 
->>Resource Slot Offset
+>>>>Resource Slot Offset
 M
 
 INTEGER(0..511)
 
->>Resource Symbol Offset
+>>>>Resource Symbol Offset
 M
 
 INTEGER(0..12)
 
->> CHOICE QCL Info
+>>>>CHOICE QCL Info
 O
 
 
 
->>>SSB
+>>>>>SSB
 
 
 
 
->>>>NR PCI
+>>>>>>NR PCI
 M
 
 INTEGER(0..1007)
 
->>>> SSB Index
+>>>>>>SSB Index
 O
 
 INTEGER(0..63)
 
->>>DL-PRS
+>>>>>DL-PRS
 
 
 
 
->>>>QCL Source PRS Resource Set ID
+>>>>>>QCL Source PRS Resource Set ID
 M
 
 INTEGER(0..7)
 
->>>>QCL Source PRS Resource ID 
+>>>>>>QCL Source PRS Resource ID 
 O
 
 INTEGER(0..63)
@@ -5490,18 +6574,24 @@ M
 The spatial directions of DL-PRS Resources for TRP
 
 9.2.46	Geographical Coordinates 
-This information element contains the geographical coordinates for the TRP.
+This information element contains the geographical coordinates for the TRP and any associated ARP(s).
 IE/Group Name
 Presence
 Range
 IE Type and Reference
 Semantics Description
+Criticality
+Assigned Criticality
 CHOICE TRP Position Definition Type
 M
 
 
 
+-
+
 >Direct
+
+
 
 
 
@@ -5511,7 +6601,11 @@ M
 
 
 
+
+
 >>>normal accuracy
+
+
 
 
 
@@ -5522,7 +6616,11 @@ M
 NG-RAN Access Point Position
 9.2.10
 The configured estimated geographical position of the antenna of the cell/TRP.
+
+
 >>>high accuracy
+
+
 
 
 
@@ -5533,7 +6631,11 @@ M
 NG-RAN High Accuracy Access Point Position
 9.2.49
 The configured estimated geographical high accuracy position of the antenna of the cell/TRP.
+
+
 >Referenced
+
+
 
 
 
@@ -5543,12 +6645,18 @@ M
 
 9.2.51
 The reference point is used to derive the TRP position
+
+
 >>CHOICE Type
 M
 
 
 
+
+
 >>>Geodetic
+
+
 
 
 
@@ -5559,7 +6667,11 @@ M
 Relative Geodetic Location
 9.2.48
 The configured estimated relative geodetic coordinate of the antenna of the cell/TRP
+
+
 >>>Cartesian
+
+
 
 
 
@@ -5570,11 +6682,22 @@ M
 Relative Cartesian Location
 9.2.50
 The configured estimated relative Cartesian coordinate of the antenna of the cell/TRP
+
+
 DL-PRS Resource Coordinates
 O
 
 9.2.47
 DL-PRS Resource Coordinates relative to the TRP coordinate
+-
+
+ARP Location Information
+O
+
+9.2.76
+
+Yes
+ignore
 
 9.2.47	DL-PRS Resource Coordinates
 This information element contains the geographical coordinates of the antenna reference points (ARP) for the DL-PRS Resources of a TRP.
@@ -5663,7 +6786,7 @@ maxPRS-ResourcesPerSet
 Maximum no of DL-PRS resources of the DL-PRS resource set of the TRP. Value is 64.
 
 9.2.48	Relative Geodetic Location 
-This information element provides a location relative to some known reference location in a relative geodetic coordinate system.
+This information element provides a location relative to some known reference location in a relative geodetic coordinate system. Corresponds to information provided in RelativeLocation IE as defined in TS 37.355 [14].
 IE/Group Name
 Presence
 Range
@@ -5673,28 +6796,28 @@ Milli-Arc-Second Units
 M
 
 ENUMERATED (0.03, 0.3, 3,  ...)
-Units and scale factor for the delta-latitude and delta-longitude fields. 0.03, 0.3, 3, milliarcseconds. TS 37.355 [14].
+Units and scale factor for the delta-latitude and delta-longitude fields. 0.03, 0.3, 3, milliarcseconds. 
 Height Units
 M
 
 ENUMERATED (mm, cm, m, ...)
 Units and scale factor for the delta-height field. 
-10-3 metre, 10-2 metre, TS 37.355 [14].
+10-3 metre, 10-2 metre.
 Delta Latitude
 M
 
 INTEGER (-1024..1023)
-Delta value in latitude in the unit provided in Milli-Arc-Second Units. TS 37.355 [14].
+Delta value in latitude in the unit provided in Milli-Arc-Second Units. 
 Delta Longitude
 M
 
 INTEGER (-1024..1023)
-Delta value in longitude in the unit provided in Milli-Arc-Second Units. TS 37.355 [14].
+Delta value in longitude in the unit provided in Milli-Arc-Second Units. 
 Delta Height
 M
 
 INTEGER (-1024..1023)
-Delta value in ellipsoidal height in the unit provided in Height Units. TS 37.355 [14].
+Delta value in ellipsoidal height in the unit provided in Height Units. 
 Location uncertainty
 M
 
@@ -5880,7 +7003,7 @@ M
 
 
 
->> NR PCI
+>>NR PCI
 M
 
 INTEGER (0..1007)
@@ -5920,16 +7043,21 @@ IE Type and Reference
 Semantics Description
 SSB Info List
 
+1
+
+
+>SSB Info Item
+
 1…<maxNoSSBs>
 
 
->SSB Configuration
+>>SSB Configuration
 M
 
 SSB Time/Frequency  Configuration 
 9.2.55
 
-> NR PCI
+>>NR PCI
 M
 
 INTEGER (0..1007)
@@ -6081,103 +7209,124 @@ Criticality
 Assigned Criticality
 NR-PRS Beam Information
 
-1 .. < maxPRS-ResourceSets >
+1
 
 
 
 
->PRS Resource Set ID
+>NR-PRS Beam Information Item
+
+1.. < maxPRS-ResourceSets >
+
+
+
+
+>>PRS Resource Set ID
 M
 
 INTEGER (0..7)
 The resource set in which the resources are associated with the angle.
 
 
->PRS Angle Item
+>>PRS Angle
  
-1..< maxPRS-ResourcesPerSet >
+1
  
 
 
 
->>NR PRS Azimuth
+>>>PRS Angle Item
+
+1.. ..< maxPRS-ResourcesPerSet >
+
+
+
+
+>>>>NR PRS Azimuth
 M
 
 INTEGER (0..359)
 
+-
 
-
->>NR PRS Azimuth fine
+>>>>NR PRS Azimuth fine
 O
 
 INTEGER (0..9)
 Fine angles
+-
 
-
->>NR PRS Elevation
+>>>>NR PRS Elevation
 O
 
 INTEGER (0..180)
 
+-
 
-
->>NR PRS Elevation fine
+>>>>NR PRS Elevation fine
 O
 
 INTEGER (0..9)
 Fine angles
+-
 
-
->>PRS Resource ID
+>>>>PRS Resource ID
 O
 
 INTEGER(0..63)
 
 YES
 ignore
-LCS to GCS Translation
+LCS to GCS Translation List
 
-0 .. <maxnolcs-gcs-translation>
+0..1
 
 If absent, the azimuth and elevation are provided in GCS.
 
 
->Alpha
+>LCS to GCS Translation Item
+
+1..<maxnolcs-gcs-translation>
+
+
+
+
+>>Alpha
 M
 
 INTEGER (0..359)
 
 
 
->Alpha-fine
+>>Alpha-fine
 O
 
 INTEGER (0..9)
 Fine angles
 
 
->Beta
+>>Beta
 M
 
 INTEGER (0..359)
 
 
 
->Beta-fine
+>>Beta-fine
 O
 
 INTEGER (0..9)
 Fine angles
 
 
->Gamma
+>>Gamma
 M
 
 INTEGER (0..359)
 
 
 
->Gamma-fine
+>>Gamma-fine
 O
 
 INTEGER (0..9)
@@ -6229,7 +7378,7 @@ Spatial Relation per SRS Resource List
 1
 
 
-> Spatial Relation per SRS Resource Item
+>Spatial Relation per SRS Resource Item
 
 1..<maxnoSRS-ResourcePerSet>
 
@@ -6254,7 +7403,7 @@ INTEGER (0..191)
 
 
 
->> NR PCI
+>>NR PCI
 M
 
 INTEGER (0..1007)
@@ -6279,7 +7428,7 @@ INTEGER (0..63)
 
 
 
->> Positioning SRS Resource ID
+>>Positioning SRS Resource ID
 M
 
 INTEGER (0..63)
@@ -6309,6 +7458,1130 @@ Range bound
 Explanation
 maxnoSRS-ResourcePerSet
 Maximum no of SRS resources per SRS resource set. Value is 16.
+
+9.2.61	Requested DL PRS Transmission Characteristics 
+This IE contains the requested PRS configuration for transmission by the LMF.
+IE/Group Name
+Presence
+Range
+IE Type and Reference
+Semantics Description
+Requested DL-PRS Resource Set List
+
+1
+
+
+>Requested DL-PRS Resource Set Item
+
+1..<maxnoofPRSresourceSet>
+
+
+>>PRS bandwidth
+O
+
+INTEGER(1..63)
+24,28,…,272 PRBs
+>>Comb Size
+O
+
+ENUMERATED(2, 4, 6, 12, …) 
+
+>>Resource Set Periodicity
+O
+
+ENUMERATED(4,5,8,10,16,20,32,40,64,80,160,320,640,1280,2560,5120,10240,20480,40960,81920,…)
+
+>>Resource Repetition Factor
+O
+
+ENUMERATED(rf1,rf2,rf4,rf6,rf8,rf16,rf32,…) 
+
+>>Resource Number of Symbols
+O
+
+ENUMERATED(n2,n4,n6,n12,…)
+
+>>Requested DL-PRS Resource List
+O
+
+9.2.62
+
+>>Resource Set Start Time and Duration
+O
+
+Start Time and Duration
+9.2.63
+This IE is ignored if the Start Time and Duration IE is present
+Number of Frequency Layers
+O
+
+INTEGER(1..4)
+
+Start Time and Duration
+O
+
+9.2.63
+
+
+Range bound
+Explanation
+maxnoofPRSresourceSet
+Maximum no of PRS resources set. Value is 8.
+
+9.2.62	Requested DL-PRS Resource List 
+This IE contains the requested DL-PRS resource list.
+IE/Group Name
+Presence
+Range
+IE Type and Reference
+Semantics Description
+Requested DL-PRS Resource List
+
+1
+
+Corresponds to information provided in NR-DL-PRS-Resource contained in NR-DL-PRS-Info IE as defined in TS 37.355 [14]
+>Requested DL-PRS Resource Item
+
+1..<maxnoofPRSresource>
+
+
+>>CHOICE QCL Info
+ O
+
+
+
+>>>SSB
+
+
+
+
+>>>>NR PCI
+M
+
+INTEGER(0..1007)
+
+>>>>SSB Index
+O
+
+INTEGER(0..63)
+
+>>>DL-PRS
+
+
+
+
+>>>>QCL Source PRS Resource Set ID
+M
+
+INTEGER(0..7)
+
+>>>>QCL Source PRS Resource ID 
+O
+
+INTEGER(0..63)
+
+
+Range bound
+Explanation
+maxnoofPRSresource
+Maximum no of PRS resources per PRS resource set. Value is 64.
+
+9.2.63	Start Time and Duration 
+This IE contains the start time and/or duration for the on-demand DL-PRS.
+IE/Group Name
+Presence
+Range
+IE Type and Reference
+Semantics Description
+Start Time
+O
+
+Relative Time 1900
+9.2.36
+
+Duration
+O
+
+INTEGER (0..90060, …)
+Unit: seconds
+
+9.2.64	PRS Transmission Off Information
+This IE contains the information to turn off particular PRS transmissions.
+IE/Group Name
+Presence
+Range
+IE Type and Reference
+Semantics Description
+CHOICE level
+M
+
+
+
+>TRP level
+
+
+NULL
+
+>PRS resource set level
+
+
+
+
+>>PRS Resource Set List
+
+1
+
+
+>>>PRS Resource Set Item
+
+1..<maxnoofPRSresourceSet>
+
+
+>>>>PRS Resource Set ID
+M
+
+INTEGER(0..7)
+
+>PRS resource level
+
+
+
+
+>>PRS Resource Set List
+
+1
+
+
+>>>PRS Resource Set Item
+
+1..<maxnoofPRSresourceSet>
+
+
+>>>>PRS Resource Set ID
+M
+
+INTEGER(0..7)
+
+>>>>PRS Resource List
+
+1
+
+
+>>>>>PRS Resource Item
+
+1..<maxnoofPRSresource>
+
+
+>>>>>>PRS Resource ID
+M
+
+INTEGER(0..63)
+
+
+Range bound
+Explanation
+maxnoofPRSresourceSet
+Maximum no of PRS resources set. Value is 8.
+maxnoofPRSresource
+Maximum no of PRS resources per PRS resource set. Value is 64.
+
+9.2.65	On-demand PRS TRP Information
+This IE contains on-demand PRS information for the TRP.
+IE/Group Name
+Presence
+Range
+IE Type and Reference
+Semantics Description
+On-demand PRS Request Allowed
+M
+
+BIT STRING (SIZE(16))
+Each position in the bitmap represents an on-demand PRS transmission parameter:
+first bit: Resource Set Periodicity
+second bit: PRS Bandwidth
+third bit: Resource Repetition Factor
+fourth bit: Resource Number of Symbols
+fifth bit: Comb Size
+sixth bit: Number of Frequency Layers
+seventh bit: Start Time and Duration
+eighth bit: Off Indication
+ninth bit: QCL Information
+Other bits reserved for future use. Value ‘1’ indicates ‘request allowed’, Value ‘0’ indicates ‘request not allowed’.
+Allowed Resource Set Periodicity Values
+O
+
+BIT STRING (SIZE(24))
+This IE applies only if the first bit of the On-demand PRS Request Allowed IE is set to ‘1’.
+
+Each position in the bitmap represents a value of the Resource Set Periodicity IE defined in subclause 9.2.61, first bit = 4 and so on. Bits 21-24 are reserved for future use. Value ‘1’ indicates ‘request allowed’, Value ‘0’ indicates ‘request not allowed’. If this IE is absent, all Resource Set Periodicity values are allowed to be requested.
+Allowed PRS Bandwidth Values
+O
+
+BIT STRING (SIZE(64))
+This IE applies only if the second bit of the On-demand PRS Request Allowed IE is set to ‘1’.
+
+Each position in the bitmap represents a value of the PRS Bandwidth IE defined in subclause 9.2.61, first bit = 1 and so on. Bit 64 is reserved for future use. Value ‘1’ indicates ‘request allowed’, Value ‘0’ indicates ‘request not allowed’. If this IE is absent, all PRS Bandwidth values are allowed to be requested.
+Allowed Resource Repetition Factor Values
+O
+
+BIT STRING (SIZE(8))
+This IE applies only if the third bit of the On-demand PRS Request Allowed IE is set to ‘1’.
+
+Each position in the bitmap represents a value of the Resource Repetition Factor IE defined in subclause 9.2.61, first bit = rf1 and so on. Bit 8 is reserved for future use. Value ‘1’ indicates ‘request allowed’, Value ‘0’ indicates ‘request not allowed’. If this IE is absent, all Resource Repetition Factor values are allowed to be requested.
+Allowed Resource Number of Symbols Values
+O
+
+BIT STRING (SIZE(8))
+This IE applies only if the fourth bit of the On-demand PRS Request Allowed IE is set to ‘1’.
+
+Each position in the bitmap represents a value of the Resource Number of Symbols IE defined in subclause 9.2.61, first bit = n2 and so on. Bits 5-8 are reserved for future use. Value ‘1’ indicates ‘request allowed’, Value ‘0’ indicates ‘request not allowed’. If this IE is absent, all Resource Number of Symbols values are allowed to be requested.
+Allowed Comb Size Values
+O
+
+BIT STRING (SIZE(8))
+This IE applies only if the fifth bit of the On-demand PRS Request Allowed IE is set to ‘1’.
+
+Each position in the bitmap represents a value of the Comb Size IE defined in subclause 9.2.61, first bit = 2 and so on. Bits 5-8 are reserved for future use. Value ‘1’ indicates ‘request allowed’, Value ‘0’ indicates ‘request not allowed’. If this IE is absent, all Comb Size values are allowed to be requested.
+
+9.2.66	UL-AoA assistance information 
+This information element contains the expected uplink Angle of Arrival and uncertainty range.
+IE/Group Name
+Presence
+Range
+IE Type and Reference
+Semantics Description
+CHOICE AngleMeasurement
+M
+
+
+
+>Expected UL Angle of Arrival
+
+
+
+
+>>Expected Azimuth AoA
+
+1
+
+Defined as
+(φAOA - ΔφAOA/2, φAOA + ΔφAOA/2)
+>>>Expected Azimuth AoA Value
+M
+
+INTEGER(0..3599)
+φAOA component of Expected Azimuth AoA
+>>>Expected Azimuth AoA Uncertainty Range
+M
+
+INTEGER(0..3599)
+ΔφAOA component of Expected Azimuth AoA
+>>Expected Zenith AoA
+
+0..1
+
+Defined as
+(θZOA – ΔθZOA/2, θZOA + ΔθZOA/2)
+>>>Expected Zenith AoA Value
+M
+
+INTEGER(0..1799)
+θZOA component of Expected Zenith AoA
+>>>Expected Zenith AoA Uncertainty Range
+M
+
+INTEGER(0..1799)
+ΔθZOA component of Expected Zenith AoA
+>Expected UL Angle of Arrival Zenith Only
+
+
+
+Defined as
+(θZOA – ΔθZOA/2, θZOA + ΔθZOA/2)
+>>Expected Zenith AoA Value
+M
+
+INTEGER(0..1799)
+θZOA component of Expected Zenith AoA
+>>Expected Zenith AoA Uncertainty Range
+M
+
+INTEGER(0..1799)
+ΔθZOA component of Expected Zenith AoA
+LCS to GCS Translation
+O
+
+9.2.69
+If absent, the azimuth and zenith are provided in GCS. In case of zenith only, the z-axis of LCS is defined along the linear array axis.
+
+9.2.67	Z-AoA
+This information element contains the Zenith Angle of Arrival information, which can correspond to linear array measurement.
+IE/Group Name
+Presence
+Range
+IE Type and Reference
+Semantics Description
+Zenith Angle of Arrival
+M
+
+INTEGER(0..1799)
+TS 38.133 [16]
+LCS to GCS Translation
+O
+
+9.2.69
+If absent, the zenith is provided in GCS. the z-axis of LCS is defined along the linear array axis 
+
+9.2.68	Response Time
+This information element contains the response time of the measurement results reporting. 
+IE/Group Name
+Presence
+Range
+IE Type and Reference
+Semantics Description
+Time
+M
+
+INTEGER(1..128,…)
+
+Time Unit
+M
+
+ENUMERATED (second, ten-seconds, ten-milliseconds, …)
+
+
+9.2.69	LCS to GCS Translation
+This information element contains the LCS to GCS Translation information.
+IE/Group Name
+Presence
+Range
+IE Type and Reference
+Semantics Description
+Alpha
+M
+
+INTEGER (0..3599)
+
+Beta
+M
+
+INTEGER (0..3599)
+
+Gamma
+M
+
+INTEGER (0..3599)
+
+
+9.2.70	UE Reporting Information
+This IE contains the UE Reporting Information.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Reporting Amount
+M
+
+ENUMERATED (0, 1, 2, 4, 8, 16, 32, 64)
+Value 0 represents an infinite number of periodic reporting
+Reporting Interval
+M
+
+ENUMERATED (none, 1, 2, 4, 8, 10, 16, 20, 32, 64)
+Unit: seconds
+
+9.2.71	Multiple UL-AoA
+This information element contains the list of the multiple UL-AOAs values.
+IE/Group Name
+Presence
+Range
+IE Type and Reference
+Semantics Description
+UL AoA List
+
+1
+
+
+>UL AoA item
+
+1..<maxnoofULAoAs >
+
+
+>>CHOICE AngleMeasurement
+M
+
+
+
+>>>UL Angle of Arrival
+
+
+
+
+>>>>UL Angle of Arrival
+M
+
+9.2.38
+
+>>>UL Zenith Angle of Arrival
+
+
+
+
+>>>>UL Zenith Angle of Arrival
+M
+
+Z-AoA
+9.2.67
+
+
+Range bound
+Explanation
+maxnoofULAoAs
+Maximum no of UL-AOAs values (pair of AOA & ZOA values) that can be reported. Value is 8
+
+9.2.72	UL SRS-RSRPP
+This information element contains the UL SRS RSRPP measurement.
+IE/Group Name
+Presence
+Range
+IE Type and Reference
+Semantics Description
+First Path RSRP Power 
+M
+
+INTEGER (0..126)
+
+
+9.2.73	SRS Resource type
+This IE contains the SRS resource type.
+IE/Group Name
+Presence
+Range
+IE Type and Reference
+Semantics Description
+Criticality
+Assigned Criticality
+CHOICE Reference Signal
+M
+
+
+
+
+
+>SRS
+
+
+
+
+
+
+>>SRS Resource ID
+M
+
+INTEGER(0..63)
+
+
+
+>Positioning SRS
+
+
+
+
+
+
+>>Positioning SRS Resource ID
+M
+
+INTEGER(0..63)
+
+
+
+SRS Port Index
+O
+
+ENUMERATED(id1000, id1001, id1002, id1003, …)
+This IE may be present if the SRS Resource ID IE is present, and is ignored otherwise. 
+YES
+ignore
+
+9.2.74	Extended Additional Path List
+This IE contains the extended additional path results of time measurement.
+IE/Group Name
+Presence
+Range
+IE Type and Reference
+Semantics Description
+Additional Path Item
+
+1..<maxNoPathExtended>
+
+
+>CHOICE Relative Path Delay
+M
+
+
+
+>>k0
+M
+
+INTEGER(0..16351)
+
+>>k1
+M
+
+INTEGER(0..8176)
+
+>>k2
+M
+
+INTEGER(0..4088)
+
+>>k3
+M
+
+INTEGER(0..2044)
+
+>>k4
+M
+
+INTEGER(0..1022)
+
+>>k5
+M
+
+INTEGER(0..511)
+
+>Path Quality
+O
+
+Measurement Quality
+9.2.43
+
+>Multiple UL-AoA
+O
+
+9.2.71
+
+>Path Power
+O
+
+UL SRS-RSRPP
+9.2.72
+
+
+Range bound
+Explanation
+maxNoPathExtended
+Maximum no. of additional path measurement. Value is 8.
+
+9.2.75	ARP ID
+This IE is used to uniquely identify an ARP associated with a TRP.
+IE/Group Name
+Presence
+Range
+IE Type and Reference
+Semantics Description
+ARP Identifier
+M
+
+INTEGER (1..16, …)
+
+
+9.2.76	ARP Location Information
+This IE contains the relative position of ARP(s) to the TRP.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+ARP Location Information
+
+1 
+
+
+>ARP Location Information Item
+
+1..<maxnoARPs>
+
+
+>>ARP ID
+M
+
+9.2.75
+
+>>CHOICE ARP Location Type
+M
+
+ 
+
+>>>geodetic
+
+
+
+
+>>>>ARP Position Relative Geodetic
+M
+
+Relative Geodetic Location
+9.2.48
+
+>>>cartesian
+
+
+
+
+>>>>ARP Position Relative Cartesian
+M
+
+Relative Cartesian Location
+9.2.50
+
+
+Range bound
+Explanation
+maxnoARPs
+Maximum no. of ARPs associated with a TRP. Value is 16.
+
+9.2.77	LoS/NLoS Information
+This IE contains the LoS/NLoS information for UL measurement.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+CHOICE LoS/NLoS Indicator
+M
+
+
+
+>Soft Indicator
+
+
+
+
+>>LoS/NLoS Indicator Soft
+M
+
+INTEGER (0..10)
+Values provide the likelihood of a LOS propagation path in the range between 0 and 1 with 0.1 steps resolution. Value '0' indicates NLOS and value '1' indicates LOS.
+>Hard Indicator
+
+
+
+
+>>LoS/NLoS Indicator Hard
+M
+
+ENUMERATED (NLoS, LoS)
+
+
+9.2.78	UE Tx TEG Association List
+This information element contains the list of UE Tx TEG associations.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Criticality
+Assigned Criticality
+UE Tx TEG Association item
+
+1..<maxnoUETEGs>
+
+
+-
+
+>UE Tx TEG ID
+M
+
+INTEGER (0..7)
+
+-
+
+>Positioning SRS Resource ID List
+
+1
+
+
+-
+
+>>Positioning SRS Resource ID Item
+
+1..<maxnoSRS-PosResources>
+
+
+-
+
+>>>Positioning SRS Resource ID
+M
+
+INTEGER(0..63)
+
+-
+
+>Time Stamp
+M
+
+9.2.42
+
+-
+
+>Carrier Frequency
+
+0..1
+
+Indicates the frequency of the positioning SRS resources
+-
+
+>>Point A
+M
+
+INTEGER (0..3279165)
+NR ARFCN
+-
+
+>>Offset to Carrier
+M
+
+INTEGER (0.2199, …)
+
+-
+
+>UE Tx Timing Error Margin
+O
+
+Timing Error Margin
+9.2.84
+Timing error margin associated to the UE Tx TEG ID.
+YES
+ignore
+
+Range bound
+Explanation
+maxnoUETEGs
+Maximum no of reported UE Tx TEG associations. Value is 256.
+maxnoSRS-PosResources
+Maximum no of positioning SRS resources. Value is 64.
+
+9.2.79	TRP Tx TEG Association
+This information element contains the TRP Tx TEG information.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+TRP TEG item
+
+1..<maxnoTRPTEGs>
+
+
+>TRP Tx TEG Information
+M
+
+9.2.86
+
+>DL-PRS Resource Set ID
+M
+
+INTEGER (0..7)
+
+>DL-PRS Resource ID List
+
+0..1
+
+
+>>DL-PRS Resource ID Item
+
+1..<maxPRS-ResourcesPerSet>
+
+
+>>>DL-PRS Resource ID
+M
+
+INTEGER (0..63)
+
+
+Range bound
+Explanation
+maxnoTRPTEGs
+Maximum no of reported TRP Tx TEG association. Value is 8.
+maxPRS-ResourcesPerSet
+Maximum no of DL-PRS resources of the DL-PRS resource set of the TRP. Value is 64.
+
+9.2.80	TRP TEG Information
+This information element contains the TRP TEG information.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+CHOICE TRP TEG
+M
+
+
+
+>RxTx TEG
+
+
+
+
+>>TRP RxTx TEG Information
+M
+
+9.2.87
+
+>>TRP Tx TEG Information
+O
+
+9.2.86
+
+>Rx TEG
+
+
+
+
+>>TRP Rx TEG Information 
+M
+
+9.2.85
+
+>>TRP Tx TEG Information
+M
+
+9.2.86
+
+
+9.2.81	Measurement Characteristics Request Indicator
+This IE contains the measurement characteristic information requested by LMF.
+IE/Group Name
+Presence
+Range
+IE Type and Reference
+Semantics Description
+Measurement characteristic request indicator
+M
+
+BIT STRING (SIZE(16))
+Each position in the bitmap represents a requested measurement characteristic:
+
+first bit: Measurement Beam Information
+
+Second bit: Extended Additional Path List 
+
+Third bit: Additional Path Power 
+
+Fourth Bit: Multiple UL AoA of Additional Path 
+
+Fifth bit: LoS/NLoS Information 
+
+Sixth bit: TRP Rx TEG association for UL-TDOA
+
+Seventh bit: TRP RxTxTEG-ID information for DL+UL positioning.
+
+Eighth bit: SRS Resource Type 
+
+Ninth bit: Multiple Measurement Instances
+
+Other bits reserved for future use. Value ‘1’ indicates ‘requested measurement characteristic’, Value ‘0’ indicates ‘not requested’.
+
+9.2.82	TRP Beam Antenna Information
+The IE provides the beam antenna information of the TRP. It includes either the explicit beam antenna information, or a reference to another TRP’s signalled configuration, or the indication that no change has occurred with respect to previously signalled configuration.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+CHOICE TRP Beam Antenna Info Item
+M
+
+
+
+>Reference
+
+
+
+
+>>Associated TRP ID
+M
+
+TRP ID
+9.2.24
+This IE specifies the TRP ID of the associated TRP from which the beam information parameters are adopted in Local Coordinate System (LCS).
+>Explicit
+
+
+
+
+>>TRP Beam Antenna Angles
+M
+
+9.2.83
+
+>>LCS to GCS Translation
+O
+
+9.2.69
+Included if the azimuth and  elevation are not provided in GCS.
+>No Change
+
+
+NULL
+No change compared to the previously signalled configuration for this TRP.
+
+9.2.83	TRP Beam Antenna Angles
+The IE provides the beam antenna information of the TRP. 
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+TRP Beam Antenna Angles Item
+
+1..< maxnoAzimuthAngles>
+
+
+>TRP Azimuth Angle
+M
+
+INTEGER (0..359)
+For GCS, the azimuth angle is measured counter-clockwise from geographical North.
+For LCS, the azimuth angle is measured counter-clockwise from the x-axis of the LCS.
+>TRP Azimuth Angle fine
+O
+
+INTEGER (0..9)
+Fine angle
+>TRP Elevation Angle List
+
+1
+
+
+>>TRP Elevation Angle Item
+
+1..<maxnoElevationAngles>
+
+
+>>>TRP Elevation Angle
+M
+
+INTEGER (0..180)
+For GCS, the elevation angle is measured relative to zenith and positive to the horizontal direction (elevation 0 deg. points to zenith, 90 deg to the horizon).
+For LCS, the elevation angle is measured relative to the z-axis of the LCS (elevation 0 deg. points to the z-axis, 90 deg to the x-y plane).
+>>>TRP Elevation Angle fine
+O
+
+INTEGER (0..9)
+Fine angle
+>>>TRP Beam Power List
+
+1
+
+Relative power between DL-PRS Resources for the given Azimuth and Elevation Angle.
+The first Relative Power element in this list provides the peak power for this Azimuth/Elevation angle and is defined as 0dB power. All the remaining Relative Power Element's in this list provide the relative DL-PRS Resource power relative to this first element in the list.
+>>>>TRP Beam Power Item
+
+2..< maxNumResourcesPerAngle>
+
+
+>>>>>PRS Resource Set ID
+O
+
+INTEGER (0..7)
+DL-PRS Resource Set ID of the DL-PRS Resource for which the Relative Power is provided. If this field is absent, the DL-PRS Resource Set ID for this instance of the Beam Power List is the same as the DL-PRS Resource Set ID of the previous instance in the Beam Power List. This field shall be included at least in the first instance of the Beam Power List.
+>>>>>PRS Resource ID
+M
+
+INTEGER (0..63)
+DL-PRS Resource for which the Relative Power is provided.
+>>>>>TRP Beam Relative Power
+M
+
+INTEGER (0..30)
+The power values span from -30 to 0dB
+>>>>>TRP Beam Relative Power "fine"
+O
+
+INTEGER (0..9)
+Relative Power with 0.1dB resolution. The power spans from -0.9 to 0dB
+
+Range bound
+Explanation
+maxNumResourcesPerAngle
+Maximum number of DL-PRS Resources per angle per TRP. Value is 24.
+maxnoAzimuthAngles
+Maximum number of azimuth angles per TRP. Value is 3600.
+maxnoElevationAngles
+Maximum number of elevation angles per azimuth angle/TRP. Value is 1801.
+
+9.2.84	Timing Error Margin
+This information element contains the Timing error margin for the UE Tx TEG, TRP Rx TEG, or TRP Tx TEG.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+Timing Error Margin
+M
+
+ENUMERATED(Tc0, Tc2, Tc4, Tc6, Tc8, Tc12, Tc16, Tc20, Tc24, Tc32, Tc40, Tc48, Tc56, Tc64, Tc72, Tc80, …)
+
+
+9.2.85	TRP Rx TEG Information
+This information element contains the TRP Rx TEG information.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+TRP Rx TEG ID
+M
+
+INTEGER (0..31)
+
+TRP Rx Timing Error Margin
+M
+
+Timing Error Margin
+9.2.84
+Timing error margin associated to the TRP Rx TEG ID.
+
+9.2.86	TRP Tx TEG Information
+This information element contains the TRP Tx TEG information.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+TRP Tx TEG ID
+M
+
+INTEGER (0..7)
+
+TRP Tx Timing Error Margin
+M
+
+Timing Error Margin
+9.2.84
+Timing error margin associated to the TRP Tx TEG ID.
+
+9.2.87	TRP RxTx TEG Information
+This information element contains the TRP RxTx TEG information.
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+TRP RxTx TEG ID
+M
+
+INTEGER (0..255)
+
+TRP RxTx Timing Error Margin
+M
+
+ENUMERATED (Tc0dot5, Tc1, Tc2, Tc4, Tc8, Tc12, Tc16, Tc20, Tc24, Tc32, Tc40, Tc48, Tc64, Tc80, Tc96, Tc128, …)
+Timing error margin associated to the TRP RxTx TEG ID.
 
 9.3	Message and Information Element Abstract Syntax (with ASN.1)
 9.3.1	General
@@ -6382,7 +8655,14 @@ FROM NRPPA-CommonDataTypes
 	PositioningActivationRequest,
 	PositioningActivationResponse,
 	PositioningActivationFailure,
-	PositioningDeactivation
+	PositioningDeactivation,
+	PRSConfigurationRequest,
+	PRSConfigurationResponse,
+	PRSConfigurationFailure,
+	MeasurementPreconfigurationRequired,
+	MeasurementPreconfigurationConfirm,
+	MeasurementPreconfigurationRefuse,
+	MeasurementActivation
 
 
 FROM NRPPA-PDU-Contents
@@ -6405,7 +8685,10 @@ FROM NRPPA-PDU-Contents
 	id-MeasurementFailureIndication,
 	id-tRPInformationExchange, 
 	id-positioningActivation,
-	id-positioningDeactivation
+	id-positioningDeactivation,
+	id-pRSConfigurationExchange,
+	id-measurementPreconfiguration,
+	id-measurementActivation
 
 
 
@@ -6485,7 +8768,10 @@ NRPPA-ELEMENTARY-PROCEDURES-CLASS-1 NRPPA-ELEMENTARY-PROCEDURE ::= {
 	positioningInformationExchange	|
 	measurement						|
 	tRPInformationExchange		|
-	positioningActivation,
+	positioningActivation		|
+	pRSConfigurationExchange	|
+	measurementPreconfiguration,
+
 	...
 }
 
@@ -6502,7 +8788,8 @@ NRPPA-ELEMENTARY-PROCEDURES-CLASS-2 NRPPA-ELEMENTARY-PROCEDURE ::= {
 	measurementUpdate						|
 	measurementAbort						|
 	measurementFailureIndication		|
-	positioningDeactivation,
+	positioningDeactivation		|
+	measurementActivation,
 	...
 }
 
@@ -6643,6 +8930,28 @@ positioningDeactivation NRPPA-ELEMENTARY-PROCEDURE ::= {
 	CRITICALITY				ignore
 }
 
+pRSConfigurationExchange NRPPA-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		PRSConfigurationRequest
+	SUCCESSFUL OUTCOME		PRSConfigurationResponse
+	UNSUCCESSFUL OUTCOME	PRSConfigurationFailure
+	PROCEDURE CODE			id-pRSConfigurationExchange
+	CRITICALITY				reject
+}
+
+measurementPreconfiguration NRPPA-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		MeasurementPreconfigurationRequired
+	SUCCESSFUL OUTCOME		MeasurementPreconfigurationConfirm
+	UNSUCCESSFUL OUTCOME		MeasurementPreconfigurationRefuse
+	PROCEDURE CODE			id-measurementPreconfiguration
+	CRITICALITY				reject
+}
+
+measurementActivation NRPPA-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		MeasurementActivation
+	PROCEDURE CODE			id-measurementActivation
+	CRITICALITY				ignore
+}
+
 
 END
 -- ASN1STOP
@@ -6698,6 +9007,7 @@ IMPORTS
 	TRPInformationListTRPResp,
 	TRP-MeasurementRequestList,
 	TRP-MeasurementResponseList,
+	TRP-MeasurementUpdateList,
 	MeasurementBeamInfoRequest,
 	PositioningBroadcastCells,
 	SRSResourceSetID,
@@ -6709,7 +9019,24 @@ IMPORTS
 	SlotNumber,
 	RelativeTime1900,
 	SpatialRelationPerSRSResource,
-	MeasurementPeriodicityExtended
+	MeasurementPeriodicityExtended,
+	PRSTRPList,
+	PRSTransmissionTRPList,
+	ResponseTime,
+	UEReportingInformation,
+	UETxTEGAssociationList,
+	TRP-PRS-Information-List,
+	PRS-Measurements-Info-List,
+	UE-TEG-Info-Request,
+	MeasurementCharacteristicsRequestIndicator,
+	MeasurementTimeOccasion,
+	PRSConfigRequestType,
+	MeasurementAmount,
+	PreconfigurationResult,
+	RequestType,
+	UE-TEG-ReportingPeriodicity,
+	MeasurementPeriodicityNR-AoA,
+	SRSTransmissionStatus
 
 	
 FROM NRPPA-IEs
@@ -6757,6 +9084,7 @@ FROM NRPPA-Containers
 	id-TRP-MeasurementRequestList,
 	id-TRP-MeasurementResponseList,
 	id-TRP-MeasurementReportList,
+	id-TRP-MeasurementUpdateList,
 	id-MeasurementBeamInfoRequest,
 	id-PositioningBroadcastCells,
 	id-SRSType,
@@ -6770,7 +9098,25 @@ FROM NRPPA-Containers
 	id-SRSResourceTrigger,
 	id-SFNInitialisationTime,
 	id-SRSSpatialRelationPerSRSResource,
-	id-MeasurementPeriodicityExtended
+	id-MeasurementPeriodicityExtended,
+	id-PRSTRPList,
+	id-PRSTransmissionTRPList,
+	id-ResponseTime,
+	id-UEReportingInformation,
+	id-UETxTEGAssociationList,
+	id-TRP-PRS-Information-List,
+	id-PRS-Measurements-Info-List,
+	id-UE-TEG-Info-Request,
+	id-MeasurementCharacteristicsRequestIndicator,
+	id-MeasurementTimeOccasion,
+	id-PRSConfigRequestType,
+	id-MeasurementAmount,
+	id-PreconfigurationResult,
+	id-RequestType,
+	id-UE-TEG-ReportingPeriodicity,
+	id-MeasurementPeriodicityNR-AoA,
+	id-SRSTransmissionStatus
+
 
 
 	
@@ -6788,13 +9134,15 @@ E-CIDMeasurementInitiationRequest ::= SEQUENCE {
 }
 
 E-CIDMeasurementInitiationRequest-IEs NRPPA-PROTOCOL-IES ::= {
-	{ ID id-LMF-UE-Measurement-ID			CRITICALITY reject	TYPE UE-Measurement-ID						PRESENCE mandatory}|
+	{ ID id-LMF-UE-Measurement-ID			CRITICALITY reject	TYPE UE-Measurement-ID					PRESENCE mandatory}|
 	{ ID id-ReportCharacteristics			CRITICALITY reject	TYPE ReportCharacteristics				PRESENCE mandatory}|
 	{ ID id-MeasurementPeriodicity			CRITICALITY reject	TYPE MeasurementPeriodicity				PRESENCE conditional}|
 -- The IE shall be present if the Report Characteritics IE is set to “periodic” --
 	{ ID id-MeasurementQuantities			CRITICALITY reject	TYPE MeasurementQuantities				PRESENCE mandatory}|
 	{ ID id-OtherRATMeasurementQuantities	CRITICALITY ignore	TYPE OtherRATMeasurementQuantities		PRESENCE optional}|
-	{ ID id-WLANMeasurementQuantities		CRITICALITY ignore	TYPE WLANMeasurementQuantities			PRESENCE optional},
+	{ ID id-WLANMeasurementQuantities		CRITICALITY ignore	TYPE WLANMeasurementQuantities			PRESENCE optional}|
+	{ ID id-MeasurementPeriodicityNR-AoA	CRITICALITY reject	TYPE MeasurementPeriodicityNR-AoA		PRESENCE conditional},
+-- The IE shall be present if the Report Characteritics IE is set to “periodic” and the MeasurementQuantities-Item IE in the MeasurementQuantities IE is set to the value "angleOfArrivalNR" --
 	...
 }
 
@@ -6912,15 +9260,15 @@ OTDOAInformationRequest-IEs NRPPA-PROTOCOL-IES ::= {
 	...
 }
 
-OTDOA-Information-Type ::= SEQUENCE (SIZE(1..maxnoOTDOAtypes)) OF ProtocolIE-Single-Container { { OTDOA-Information-TypeIEs} }
+OTDOA-Information-Type ::= SEQUENCE (SIZE(1..maxnoOTDOAtypes)) OF ProtocolIE-Single-Container { { OTDOA-Information-Type-ItemIEs} }
 
-OTDOA-Information-TypeIEs	NRPPA-PROTOCOL-IES ::= {
+OTDOA-Information-Type-ItemIEs	NRPPA-PROTOCOL-IES ::= {
 	{ ID id-OTDOA-Information-Type-Item		CRITICALITY reject	TYPE OTDOA-Information-Type-Item	PRESENCE mandatory},
 	...
 }
 
 OTDOA-Information-Type-Item ::= SEQUENCE {
-	oTDOA-Information-Type-Item		OTDOA-Information-Item,
+	oTDOA-Information-Item		OTDOA-Information-Item,
 	iE-Extensions					ProtocolExtensionContainer { { OTDOA-Information-Type-ItemExtIEs} } OPTIONAL,
 	...
 }
@@ -7046,7 +9394,11 @@ PositioningInformationRequest ::= SEQUENCE {
 }
 
 PositioningInformationRequest-IEs NRPPA-PROTOCOL-IES ::= {
-	{ ID id-RequestedSRSTransmissionCharacteristics	CRITICALITY ignore	TYPE RequestedSRSTransmissionCharacteristics	PRESENCE optional},
+	{ ID id-RequestedSRSTransmissionCharacteristics	CRITICALITY ignore	TYPE RequestedSRSTransmissionCharacteristics	PRESENCE optional	}|
+	{ ID id-UEReportingInformation					CRITICALITY ignore	TYPE UEReportingInformation							PRESENCE optional	}|
+	{ ID id-UE-TEG-Info-Request						CRITICALITY ignore	TYPE UE-TEG-Info-Request								PRESENCE optional	}|
+	{ ID id-UE-TEG-ReportingPeriodicity				CRITICALITY reject	TYPE UE-TEG-ReportingPeriodicity					PRESENCE conditional	},
+-- The IE shall be present if the UE TEG Info Request IE is set to “periodic”
 	...
 }
 
@@ -7063,8 +9415,9 @@ PositioningInformationResponse ::= SEQUENCE {
 
 PositioningInformationResponse-IEs NRPPA-PROTOCOL-IES ::= {
 	{ ID id-SRSConfiguration			CRITICALITY ignore	TYPE SRSConfiguration			PRESENCE optional}|
-	{ ID id-SFNInitialisationTime		CRITICALITY ignore	TYPE RelativeTime1900		PRESENCE optional}|
-	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+	{ ID id-SFNInitialisationTime		CRITICALITY ignore	TYPE RelativeTime1900			PRESENCE optional}|
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional}|
+	{ ID id-UETxTEGAssociationList		CRITICALITY ignore	TYPE UETxTEGAssociationList		PRESENCE optional},
 	...
 }
 
@@ -7098,7 +9451,9 @@ PositioningInformationUpdate ::= SEQUENCE {
 
 PositioningInformationUpdate-IEs NRPPA-PROTOCOL-IES ::= {
 	{ ID id-SRSConfiguration			CRITICALITY ignore	TYPE SRSConfiguration			PRESENCE optional}|
-	{ ID id-SFNInitialisationTime		CRITICALITY ignore	TYPE RelativeTime1900		PRESENCE optional},
+	{ ID id-SFNInitialisationTime		CRITICALITY ignore	TYPE RelativeTime1900			PRESENCE optional}|
+	{ ID id-UETxTEGAssociationList		CRITICALITY ignore	TYPE UETxTEGAssociationList		PRESENCE optional}|
+	{ ID id-SRSTransmissionStatus		CRITICALITY ignore	TYPE SRSTransmissionStatus	PRESENCE optional},
 	...
 }
 
@@ -7114,20 +9469,23 @@ MeasurementRequest ::= SEQUENCE {
 }
 
 MeasurementRequest-IEs NRPPA-PROTOCOL-IES ::= {
-	{ ID id-LMF-Measurement-ID			CRITICALITY reject	TYPE Measurement-ID				PRESENCE mandatory}|
-	{ ID id-TRP-MeasurementRequestList		CRITICALITY reject	TYPE TRP-MeasurementRequestList PRESENCE mandatory}|
+	{ ID id-LMF-Measurement-ID			CRITICALITY reject	TYPE Measurement-ID					PRESENCE mandatory}|
+	{ ID id-TRP-MeasurementRequestList		CRITICALITY reject	TYPE TRP-MeasurementRequestList	PRESENCE mandatory}|
 	{ ID id-ReportCharacteristics			CRITICALITY reject	TYPE ReportCharacteristics		PRESENCE mandatory}|
 	{ ID id-MeasurementPeriodicity			CRITICALITY reject	TYPE MeasurementPeriodicity		PRESENCE conditional}|
 -- The IE shall be present if the Report Characteritics IE is set to “periodic” –
-	{ ID id-TRPMeasurementQuantities			CRITICALITY reject	TYPE TRPMeasurementQuantities		PRESENCE mandatory}|
-	{ ID id-SFNInitialisationTime			CRITICALITY ignore	TYPE RelativeTime1900		PRESENCE optional}|
+	{ ID id-TRPMeasurementQuantities		CRITICALITY reject	TYPE TRPMeasurementQuantities	PRESENCE mandatory}|
+	{ ID id-SFNInitialisationTime			CRITICALITY ignore	TYPE RelativeTime1900			PRESENCE optional}|
 	{ ID id-SRSConfiguration				CRITICALITY ignore	TYPE SRSConfiguration			PRESENCE optional}|
 	{ ID id-MeasurementBeamInfoRequest		CRITICALITY ignore	TYPE MeasurementBeamInfoRequest	PRESENCE optional}|
 	{ ID id-SystemFrameNumber				CRITICALITY ignore	TYPE SystemFrameNumber			PRESENCE optional}|
 	{ ID id-SlotNumber						CRITICALITY ignore	TYPE SlotNumber					PRESENCE optional}|
-	{ ID id-MeasurementPeriodicityExtended	CRITICALITY reject	TYPE MeasurementPeriodicityExtended PRESENCE conditional}
+	{ ID id-MeasurementPeriodicityExtended	CRITICALITY reject	TYPE MeasurementPeriodicityExtended PRESENCE conditional}|
 -- The IE shall be present the MeasurementPeriodicity IE is set to the value "extended"
-,
+	{ ID id-ResponseTime					CRITICALITY ignore	TYPE ResponseTime				PRESENCE optional}|
+	{ ID id-MeasurementCharacteristicsRequestIndicator			CRITICALITY ignore	TYPE MeasurementCharacteristicsRequestIndicator	PRESENCE optional}|
+	{ ID id-MeasurementTimeOccasion			CRITICALITY ignore	TYPE MeasurementTimeOccasion	PRESENCE optional}|
+	{ ID id-MeasurementAmount				CRITICALITY ignore	TYPE MeasurementAmount			PRESENCE optional},
 	...
 }
 
@@ -7199,9 +9557,12 @@ MeasurementUpdate ::= SEQUENCE {
 }
 
 MeasurementUpdate-IEs NRPPA-PROTOCOL-IES ::= {
-	{ ID id-LMF-Measurement-ID		CRITICALITY reject	TYPE Measurement-ID				PRESENCE mandatory}|
-	{ ID id-RAN-Measurement-ID		CRITICALITY reject	TYPE Measurement-ID				PRESENCE mandatory}| 
-	{ ID id-SRSConfiguration		CRITICALITY ignore	TYPE SRSConfiguration			PRESENCE optional},
+	{ ID id-LMF-Measurement-ID			CRITICALITY reject	TYPE Measurement-ID				PRESENCE mandatory}|
+	{ ID id-RAN-Measurement-ID			CRITICALITY reject	TYPE Measurement-ID				PRESENCE mandatory}| 
+	{ ID id-SRSConfiguration			CRITICALITY ignore	TYPE SRSConfiguration			PRESENCE optional}|
+	{ ID id-TRP-MeasurementUpdateList	CRITICALITY reject	TYPE TRP-MeasurementUpdateList	PRESENCE optional}|
+	{ ID id-MeasurementCharacteristicsRequestIndicator	CRITICALITY ignore	TYPE	MeasurementCharacteristicsRequestIndicator	PRESENCE optional}|
+	{ ID id-MeasurementTimeOccasion		CRITICALITY ignore	TYPE MeasurementTimeOccasion	PRESENCE optional},
 	...
 }
 
@@ -7400,6 +9761,125 @@ PositioningDeactivationIEs NRPPA-PROTOCOL-IES ::= {
 	...
 } 
 
+-- **************************************************************
+--
+-- PRS CONFIGURATION REQUEST
+--
+-- **************************************************************
+
+PRSConfigurationRequest ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{PRSConfigurationRequest-IEs}},
+	...
+}
+
+PRSConfigurationRequest-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-PRSConfigRequestType	CRITICALITY reject	TYPE PRSConfigRequestType				PRESENCE mandatory}|
+	{ ID id-PRSTRPList				CRITICALITY ignore	TYPE PRSTRPList							PRESENCE mandatory},
+	...
+}
+
+-- **************************************************************
+--
+-- PRS CONFIGURATION RESPONSE
+--
+-- **************************************************************
+
+PRSConfigurationResponse ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{ PRSConfigurationResponse-IEs}},
+	...
+}
+
+PRSConfigurationResponse-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-PRSTransmissionTRPList	CRITICALITY ignore	TYPE PRSTransmissionTRPList			PRESENCE optional}|
+	{ ID id-CriticalityDiagnostics	CRITICALITY ignore	TYPE CriticalityDiagnostics			PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- PRS CONFIGURATION FAILURE
+--
+-- **************************************************************
+
+PRSConfigurationFailure ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{ PRSConfigurationFailure-IEs}},
+	...
+}
+
+PRSConfigurationFailure-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-Cause					CRITICALITY ignore	TYPE Cause						PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics	CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+	...
+}
+
+
+-- **************************************************************
+--
+-- MEASUREMENT PRECONFIGURATION REQUIRED
+--
+-- **************************************************************
+
+MeasurementPreconfigurationRequired ::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{ MeasurementPreconfigurationRequired-IEs}},
+	...
+}
+
+MeasurementPreconfigurationRequired-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-TRP-PRS-Information-List	CRITICALITY ignore	TYPE TRP-PRS-Information-List	PRESENCE mandatory},
+	...
+}
+
+-- **************************************************************
+--
+-- MEASUREMENT PRECONFIGURATION CONFIRM
+--
+-- **************************************************************
+
+MeasurementPreconfigurationConfirm::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{ MeasurementPreconfigurationConfirm-IEs}},
+	...
+}
+
+MeasurementPreconfigurationConfirm-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-PreconfigurationResult		CRITICALITY	ignore	TYPE PreconfigurationResult		PRESENCE mandatory }|
+	{ ID id-CriticalityDiagnostics		CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional },
+	...
+}
+
+-- **************************************************************
+--
+-- MEASUREMENT PRECONFIGURATION REFUSE
+--
+-- **************************************************************
+
+MeasurementPreconfigurationRefuse::= SEQUENCE {
+	protocolIEs		ProtocolIE-Container	{{ MeasurementPreconfigurationRefuse-IEs}},
+	...
+}
+
+MeasurementPreconfigurationRefuse-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-Cause					CRITICALITY ignore	TYPE Cause						PRESENCE mandatory}|
+	{ ID id-CriticalityDiagnostics	CRITICALITY ignore	TYPE CriticalityDiagnostics		PRESENCE optional},
+	...
+}
+
+-- **************************************************************
+--
+-- MEASUREMENT ACTIVATION 
+--
+-- **************************************************************
+
+MeasurementActivation::= SEQUENCE {
+	protocolIEs			ProtocolIE-Container       { { MeasurementActivation-IEs} },
+	...
+}
+
+MeasurementActivation-IEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-RequestType					CRITICALITY reject	TYPE RequestType 					PRESENCE mandatory}|
+	{ ID id-PRS-Measurements-Info-List	CRITICALITY ignore	TYPE PRS-Measurements-Info-List		PRESENCE optional},
+	...
+}
+
 
 END
 -- ASN1STOP
@@ -7477,12 +9957,43 @@ IMPORTS
 	maxNoSSBs,
 	maxnoofPRSresourceSet,
 	maxnoofPRSresource,
+	maxnoofULAoAs,
+	maxNoPathExtended,
+	maxnoARPs,
+	maxnoTRPTEGs,
+	maxnoUETEGs,
+	maxFreqLayers,
+	maxnoPRSTRPs,
+	maxNumResourcesPerAngle,
+	maxnoAzimuthAngles,
+	maxnoElevationAngles,
 	id-Cell-ID,
 	id-TRPInformationTypeItem,
 	id-SrsFrequency,
 	id-TRPType,
 	id-SRSSpatialRelationPerSRSResource,
-	id-PRS-Resource-ID
+	id-PRS-Resource-ID,
+	id-OnDemandPRS,
+	id-AoA-SearchWindow,
+	id-ZoA,
+	id-MultipleULAoA,
+	id-UL-SRS-RSRPP,
+	id-SRSResourcetype,
+	id-ExtendedAdditionalPathList,
+	id-ARPLocationInfo,
+	id-ARP-ID,
+	id-LoS-NLoSInformation,
+	id-NumberOfTRPRxTEG,
+	id-NumberOfTRPRxTxTEG,
+	id-TRPTxTEGAssociation,
+	id-TRPTEGInformation,
+	id-TRP-Rx-TEGInformation,
+	id-TRPBeamAntennaInformation,
+	id-NR-TADV,
+	id-pathPower,
+	id-SRSPortIndex,
+	id-UETxTimingErrorMargin
+
 
 
 
@@ -7543,12 +10054,119 @@ AdditionalPathListItem ::= SEQUENCE {
 }
 
 AdditionalPathListItem-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	{ ID id-MultipleULAoA	CRITICALITY ignore EXTENSION MultipleULAoA PRESENCE	optional}|
+	{ ID id-pathPower		CRITICALITY ignore EXTENSION UL-SRS-RSRPP PRESENCE	optional},
+	...
+}
+
+ExtendedAdditionalPathList ::= SEQUENCE (SIZE (1.. maxNoPathExtended)) OF ExtendedAdditionalPathList-Item
+
+
+ExtendedAdditionalPathList-Item ::= SEQUENCE {
+	relativeTimeOfPath	RelativePathDelay,
+	pathQuality			TrpMeasurementQuality	OPTIONAL,
+	multipleULAoA		MultipleULAoA  			OPTIONAL,
+	pathPower			UL-SRS-RSRPP			OPTIONAL,
+	iE-Extensions		ProtocolExtensionContainer { { ExtendedAdditionalPathList-Item-ExtIEs} } OPTIONAL,
+	...
+}
+
+ExtendedAdditionalPathList-Item-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+AoA-AssistanceInfo ::= SEQUENCE {
+	angleMeasurement	AngleMeasurementType,
+	lCS-to-GCS-Translation	LCS-to-GCS-Translation		OPTIONAL,
+	iE-Extensions				ProtocolExtensionContainer { { AoA-AssistanceInfo-ExtIEs } } OPTIONAL,
+	...
+}
+
+AoA-AssistanceInfo-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
 	...
 }
 
 AperiodicSRSResourceTriggerList ::= SEQUENCE (SIZE(1..maxnoSRSTriggerStates)) OF AperiodicSRSResourceTrigger
 
 AperiodicSRSResourceTrigger ::= INTEGER (1..3)
+
+AngleMeasurementType ::= CHOICE {	
+	expected-ULAoA		Expected-UL-AoA,
+	expected-ZoA		Expected-ZoA-only,
+	choice-extension ProtocolIE-Single-Container { { AngleMeasurementType-ExtIEs } }
+}
+
+AngleMeasurementType-ExtIEs NRPPA-PROTOCOL-IES ::= {
+...
+}
+
+Expected-UL-AoA ::= SEQUENCE {
+	expected-Azimuth-AoA		Expected-Azimuth-AoA,
+	expected-Zenith-AoA		Expected-Zenith-AoA		OPTIONAL,
+	iE-extensions		ProtocolExtensionContainer { { Expected-UL-AoA-ExtIEs } }	OPTIONAL,
+	...
+}
+
+Expected-UL-AoA-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+Expected-ZoA-only ::= SEQUENCE {
+	expected-ZoA-only	Expected-Zenith-AoA,
+	iE-extensions		ProtocolExtensionContainer { { Expected-ZoA-only-ExtIEs } }	OPTIONAL,
+	...
+}
+
+Expected-ZoA-only-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+Expected-Azimuth-AoA ::= SEQUENCE {
+	expected-Azimuth-AoA-value			Expected-Value-AoA,
+	expected-Azimuth-AoA-uncertainty		Uncertainty-range-AoA,
+	iE-extensions		ProtocolExtensionContainer { { Expected-Azimuth-AoA-ExtIEs } }	OPTIONAL,
+	...
+}
+
+Expected-Azimuth-AoA-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+Expected-Zenith-AoA ::= SEQUENCE {
+	expected-Zenith-AoA-value			Expected-Value-ZoA,
+	expected-Zenith-AoA-uncertainty		Uncertainty-range-ZoA,
+	iE-extensions		ProtocolExtensionContainer { { Expected-Zenith-AoA-ExtIEs } }	OPTIONAL,
+	...
+}
+
+Expected-Zenith-AoA-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+ARP-ID ::= INTEGER (1..16, ...)
+
+ARPLocationInformation ::= SEQUENCE (SIZE (1..maxnoARPs)) OF ARPLocationInformation-Item
+
+ARPLocationInformation-Item ::= SEQUENCE {
+	aRP-ID				ARP-ID,
+	aRPLocationType		ARPLocationType,
+	iE-Extensions		ProtocolExtensionContainer { { ARPLocationInformation-ExtIEs} } OPTIONAL,
+	...
+}
+
+ARPLocationInformation-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+ARPLocationType ::= CHOICE {
+	aRPPositionRelativeGeodetic			RelativeGeodeticLocation,
+	aRPPositionRelativeCartesian		RelativeCartesianLocation,
+	choice-extension					ProtocolIE-Single-Container { { ARPLocationType-ExtIEs } }
+}
+
+ARPLocationType-ExtIEs NRPPA-PROTOCOL-IES ::= {
+	...
+}
 
 Assistance-Information ::= SEQUENCE {
 	systemInformation				SystemInformation,
@@ -7622,6 +10240,17 @@ BSSID ::= OCTET STRING (SIZE(6))
 
 -- C
 
+CarrierFreq ::= SEQUENCE {
+	pointA				INTEGER (0..3279165),
+	offsetToCarrier		INTEGER (0..2199, ...),
+	iE-Extensions		ProtocolExtensionContainer { {CarrierFreq-ExtIEs} } OPTIONAL,
+	...
+}
+
+CarrierFreq-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
 Cause ::= CHOICE {
 	radioNetwork		CauseRadioNetwork,
 	protocol			CauseProtocol,
@@ -7653,7 +10282,9 @@ CauseRadioNetwork ::= ENUMERATED {
 	unspecified,
 	requested-item-not-supported,
 	requested-item-temporarily-not-available,
-	...
+	...,
+	serving-NG-RAN-node-changed,
+	requested-item-not-supported-on-time
 
 }
 
@@ -7831,6 +10462,11 @@ EUTRACellIdentifier ::= BIT STRING (SIZE (28))
 
 EARFCN ::= INTEGER (0..262143, ...)
 
+Expected-Value-AoA ::= INTEGER (0..3599)
+
+Expected-Value-ZoA ::= INTEGER (0..1799)
+
+
 -- F
 
 -- G
@@ -7843,6 +10479,7 @@ GeographicalCoordinates ::= SEQUENCE {
 }
 
 GeographicalCoordinates-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	{ ID id-ARPLocationInfo		CRITICALITY ignore EXTENSION ARPLocationInformation 	PRESENCE optional},
 	...
 }
 
@@ -7856,6 +10493,8 @@ GNB-RxTxTimeDiff ::= SEQUENCE {
 }
 
 GNB-RxTxTimeDiff-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	{ ID id-ExtendedAdditionalPathList	CRITICALITY ignore EXTENSION ExtendedAdditionalPathList PRESENCE optional}|
+	{ ID id-TRPTEGInformation		CRITICALITY ignore EXTENSION TRPTEGInformation	PRESENCE optional },
 
 	...
 }
@@ -7887,15 +10526,15 @@ HESSID ::= OCTET STRING (SIZE(6))
 
 -- L
 
-LCS-to-GCS-TranslationAoA::= SEQUENCE {
+LCS-to-GCS-Translation::= SEQUENCE {
 	alpha				INTEGER (0..3599),
 	beta				INTEGER (0..3599),
 	gamma				INTEGER (0..3599),
-	iE-Extensions		ProtocolExtensionContainer { { LCS-to-GCS-TranslationAoA-ExtIEs} } OPTIONAL,
+	iE-Extensions		ProtocolExtensionContainer { { LCS-to-GCS-Translation-ExtIEs} } OPTIONAL,
 	...
 }
 
-LCS-to-GCS-TranslationAoA-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+LCS-to-GCS-Translation-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
 	...
 }
 
@@ -7927,10 +10566,27 @@ LocationUncertainty-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
 	...
 }
 
+LoS-NLoSIndicatorHard ::= ENUMERATED {nlos, los}
+
+LoS-NLoSIndicatorSoft ::= INTEGER (0..10)
+
+LoS-NLoSInformation ::= CHOICE {
+	loS-NLoSIndicatorSoft		LoS-NLoSIndicatorSoft,
+	loS-NLoSIndicatorHard		LoS-NLoSIndicatorHard,
+	choice-Extension		ProtocolIE-Single-Container {{ LoS-NLoSInformation-ExtIEs}}
+
+}
+
+LoS-NLoSInformation-ExtIEs NRPPA-PROTOCOL-IES ::= {
+	...
+}
+
 
 -- M
 
 Measurement-ID ::= INTEGER (1.. 65536, ...)
+
+MeasurementAmount  ::= ENUMERATED {ma0, ma1, ma2, ma4, ma8, ma16, ma32, ma64}
 
 MeasurementBeamInfoRequest ::= ENUMERATED {true, ...}
 
@@ -7981,6 +10637,25 @@ MeasurementPeriodicityExtended ::= ENUMERATED {
 
 }
 
+MeasurementPeriodicityNR-AoA ::= ENUMERATED {
+	ms160,
+	ms320,
+	ms640,
+	ms1280,
+	ms2560,
+	ms5120,
+	ms10240,
+	ms20480,
+	ms40960,
+	ms61440,
+	ms81920,
+	ms368640,
+	ms737280,
+	ms1843200,
+	...
+
+}
+
 MeasurementQuantities ::= SEQUENCE (SIZE (1.. maxNoMeas)) OF ProtocolIE-Single-Container { {MeasurementQuantities-ItemIEs} }
 
 MeasurementQuantities-ItemIEs NRPPA-PROTOCOL-IES ::= {
@@ -8009,8 +10684,13 @@ MeasurementQuantitiesValue ::= ENUMERATED {
 	sS-RSRQ,
 	cSI-RSRP,
 	cSI-RSRQ,
-	angleOfArrivalNR
+	angleOfArrivalNR,
+	timingAdvanceNR
 }
+
+MeasurementTimeOccasion ::= ENUMERATED {o1, o4, ...}
+
+MeasurementCharacteristicsRequestIndicator ::= BIT STRING (SIZE (16))
 
 MeasuredResults ::= SEQUENCE (SIZE (1.. maxNoMeas)) OF MeasuredResultsValue
 
@@ -8028,9 +10708,33 @@ MeasuredResultsValue-ExtensionIE NRPPA-PROTOCOL-IES ::= {
 	{ ID id-ResultSS-RSRQ		CRITICALITY ignore	TYPE ResultSS-RSRQ		PRESENCE mandatory	}|
 	{ ID id-ResultCSI-RSRP		CRITICALITY ignore	TYPE ResultCSI-RSRP		PRESENCE mandatory	}|
 	{ ID id-ResultCSI-RSRQ		CRITICALITY ignore	TYPE ResultCSI-RSRQ		PRESENCE mandatory	}|
-	{ ID id-AngleOfArrivalNR	CRITICALITY ignore	TYPE UL-AoA				PRESENCE mandatory	},
+	{ ID id-AngleOfArrivalNR	CRITICALITY ignore	TYPE UL-AoA				PRESENCE mandatory	}|
+	{ ID id-NR-TADV				CRITICALITY ignore	TYPE NR-TADV			PRESENCE mandatory	},
 	...
 }
+
+MultipleULAoA ::= SEQUENCE {
+	multipleULAoA					MultipleULAoA-List,
+	iE-Extensions					ProtocolExtensionContainer { { MultipleULAoA-ExtIEs} } OPTIONAL,
+	...
+}
+
+MultipleULAoA-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+MultipleULAoA-List ::= SEQUENCE (SIZE(1.. maxnoofULAoAs)) OF MultipleULAoA-Item
+
+MultipleULAoA-Item ::= CHOICE {	
+	uL-AoA		UL-AoA,
+	ul-ZoA		ZoA,
+	choice-extension ProtocolIE-Single-Container { { MultipleULAoA-Item-ExtIEs } }
+}
+
+MultipleULAoA-Item-ExtIEs NRPPA-PROTOCOL-IES ::= {
+	...
+}
+
 
 -- N
 
@@ -8113,7 +10817,7 @@ NR-PRS-Beam-Information-IEs NRPPA-PROTOCOL-EXTENSION ::= {
 
 NR-PRS-Beam-InformationItem ::= SEQUENCE {
 	pRSresourceSetID 	PRS-Resource-Set-ID,
-	pRSAngleItem 		SEQUENCE (SIZE(1..maxPRS-ResourcesPerSet)) OF PRSAngleItem,
+	pRSAngle 		SEQUENCE (SIZE(1..maxPRS-ResourcesPerSet)) OF PRSAngleItem,
 	iE-Extensions	ProtocolExtensionContainer { { NR-PRS-Beam-InformationItem-ExtIEs} } OPTIONAL,
 	...
 }
@@ -8121,6 +10825,8 @@ NR-PRS-Beam-InformationItem ::= SEQUENCE {
 NR-PRS-Beam-InformationItem-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= { 
  ...
 }
+
+NR-TADV ::= INTEGER (0.. 7690)
 
 NumberOfAntennaPorts-EUTRA ::= ENUMERATED {
 		n1-or-n2,
@@ -8144,9 +10850,28 @@ NumberOfFrequencyHoppingBands ::= ENUMERATED {
 	...
 }
 
+NumberOfTRPRxTEG ::= ENUMERATED {two, three, four, six, eight, ...}
+
+NumberOfTRPRxTxTEG ::= ENUMERATED {two, three, four, six, eight, ...}
+
 NZP-CSI-RS-ResourceID::= INTEGER  (0..191)
 
 -- O
+
+OnDemandPRS-Info ::= SEQUENCE {
+	onDemandPRSRequestAllowed				BIT STRING (SIZE (16)),
+	allowedResourceSetPeriodicityValues		BIT STRING (SIZE (24))	OPTIONAL,
+	allowedPRSBandwidthValues				BIT STRING (SIZE (64))	OPTIONAL,
+	allowedResourceRepetitionFactorValues	BIT STRING (SIZE (8))	OPTIONAL,
+	allowedResourceNumberOfSymbolsValues	BIT STRING (SIZE (8))	OPTIONAL,
+	allowedCombSizeValues					BIT STRING (SIZE (8))	OPTIONAL,
+	iE-Extensions	ProtocolExtensionContainer { { OnDemandPRS-Info-ExtIEs} } OPTIONAL,
+	...
+}
+
+OnDemandPRS-Info-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
 
 OTDOACells ::= SEQUENCE (SIZE (1.. maxCellinRANnode)) OF SEQUENCE {
 	oTDOACellInfo					OTDOACell-Information,
@@ -8362,7 +11087,12 @@ PosSIB-Type ::= ENUMERATED {
 	posSibType6-1,  
 	posSibType6-2,
 	posSibType6-3,  
-	...
+	...,
+	posSibType1-9,
+	posSibType1-10,
+	posSibType6-4, 
+	posSibType6-5, 
+	posSibType6-6  
 }
 
 PosSRSResource-List ::= SEQUENCE (SIZE (1..maxnoSRS-PosResources)) OF PosSRSResource-Item
@@ -8387,14 +11117,16 @@ PosSRSResource-Item-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
 }
 
 
+PosSRSResourceID-List ::= SEQUENCE (SIZE (1..maxnoSRS-PosResources)) OF SRSPosResourceID
+
 PosSRSResourceSet-List ::= SEQUENCE (SIZE (1..maxnoSRS-PosResourceSets)) OF PosSRSResourceSet-Item
 
-PosSRSResourceID-List ::= SEQUENCE (SIZE (1..maxnoSRS-PosResourcePerSet)) OF SRSPosResourceID
+PosSRSResourceIDPerSet-List ::= SEQUENCE (SIZE (1..maxnoSRS-PosResourcePerSet)) OF SRSPosResourceID
  
 
 PosSRSResourceSet-Item ::= SEQUENCE {
 	possrsResourceSetID				INTEGER(0..15),
-	possRSResourceID-List			PosSRSResourceID-List,
+	possRSResourceIDPerSet-List		PosSRSResourceIDPerSet-List,
 	posresourceSetType				PosResourceSetType,
 	iE-Extensions		ProtocolExtensionContainer { { PosSRSResourceSet-Item-ExtIEs} }	OPTIONAL,
 	...
@@ -8445,6 +11177,8 @@ PosResourceSetTypeAperiodic-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
 	...
 }
 
+PreconfigurationResult ::= BIT STRING (SIZE(8))
+
 PRS-Bandwidth-EUTRA ::= ENUMERATED {
 		bw6,
 		bw15,
@@ -8481,6 +11215,8 @@ PRSInformationPos  ::= SEQUENCE {
 PRSInformationPos-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
 	...
 }
+
+PRSConfigRequestType ::= ENUMERATED {configure, off, ...}
 
 PRSConfiguration ::= SEQUENCE {
 	pRSResourceSet-List				PRSResourceSet-List,	
@@ -8536,6 +11272,22 @@ PRSFrequencyHoppingConfiguration-EUTRA ::= SEQUENCE {
 PRSFrequencyHoppingConfiguration-EUTRA-Item-IEs NRPPA-PROTOCOL-EXTENSION ::= {
 	...
 }
+
+PRS-Measurements-Info-List ::= SEQUENCE (SIZE(1..maxFreqLayers)) OF PRS-Measurements-Info-List-Item
+
+PRS-Measurements-Info-List-Item ::= SEQUENCE {
+	pointA						INTEGER (0..3279165),
+	measPRSPeriodicity			ENUMERATED {ms20, ms40, ms80, ms160, ...},
+	measPRSOffset				INTEGER (0..159, ...),
+	measurementPRSLength		ENUMERATED {ms1dot5, ms3, ms3dot5, ms4, ms5dot5, ms6, ms10, ms20},
+	iE-Extensions	ProtocolExtensionContainer { { PRS-Measurements-Info-List-Item-ExtIEs} } OPTIONAL,
+		...
+}
+
+PRS-Measurements-Info-List-Item-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
 
 PRSMuting::= SEQUENCE {
 	pRSMutingOption1			PRSMutingOption1		OPTIONAL,
@@ -8648,6 +11400,93 @@ PRS-Resource-Set-ID ::= INTEGER(0..7)
 
 PRS-ID ::= INTEGER(0..255)
 
+PRSTransmissionOffIndication ::= CHOICE { 
+	pRSTransmissionOffPerTRP				NULL,
+	pRSTransmissionOffPerResourceSet		PRSTransmissionOffPerResourceSet,
+	pRSTransmissionOffPerResource			PRSTransmissionOffPerResource,
+	choice-Extension		ProtocolIE-Single-Container {{ PRSTransmissionOffIndication-ExtIEs }}
+}
+
+PRSTransmissionOffIndication-ExtIEs NRPPA-PROTOCOL-IES ::= {
+	...
+}
+
+PRSTransmissionOffPerResource ::= SEQUENCE (SIZE (1..maxnoofPRSresourceSet)) OF PRSTransmissionOffPerResource-Item
+
+PRSTransmissionOffPerResource-Item  ::= SEQUENCE {
+	pRSResourceSetID								PRS-Resource-Set-ID,
+	pRSTransmissionOffIndicationPerResourceList		SEQUENCE (SIZE(1.. maxnoofPRSresource)) OF PRSTransmissionOffIndicationPerResource-Item,
+	iE-Extensions		ProtocolExtensionContainer { { PRSTransmissionOffPerResource-Item-ExtIEs} } OPTIONAL,
+	...
+}
+
+PRSTransmissionOffPerResource-Item-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+PRSTransmissionOffIndicationPerResource-Item  ::= SEQUENCE {
+	pRSResourceID		PRS-Resource-ID,
+	iE-Extensions		ProtocolExtensionContainer { { PRSTransmissionOffIndicationPerResource-Item-ExtIEs} } OPTIONAL,
+	...
+}
+
+PRSTransmissionOffIndicationPerResource-Item-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+PRSTransmissionOffInformation ::= SEQUENCE {
+	pRSTransmissionOffIndication	PRSTransmissionOffIndication,
+	iE-Extensions					ProtocolExtensionContainer { { PRSTransmissionOffInformation-ExtIEs} } OPTIONAL,
+	...
+}
+
+PRSTransmissionOffInformation-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+PRSTransmissionOffPerResourceSet ::= SEQUENCE (SIZE (1..maxnoofPRSresourceSet)) OF PRSTransmissionOffPerResourceSet-Item
+
+PRSTransmissionOffPerResourceSet-Item  ::= SEQUENCE {
+	pRSResourceSetID		PRS-Resource-Set-ID,
+	iE-Extensions			ProtocolExtensionContainer { { PRSTransmissionOffPerResourceSet-Item-ExtIEs} } OPTIONAL,
+	...
+}
+
+PRSTransmissionOffPerResourceSet-Item-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+PRSTRPList ::= SEQUENCE (SIZE(1.. maxnoTRPs)) OF PRSTRPItem
+
+PRSTRPItem ::= SEQUENCE {
+		tRP-ID		TRP-ID,
+		requestedDLPRSTransmissionCharacteristics	RequestedDLPRSTransmissionCharacteristics	OPTIONAL, 
+-- The IE shall be present if the PRS Configuration Request Type IE is set to “configure” --
+		pRSTransmissionOffInformation				PRSTransmissionOffInformation				OPTIONAL,
+-- The IE shall be present if the PRS Configuration Request Type IE is set to “off” --
+		iE-Extensions	ProtocolExtensionContainer { { PRSTRPItem-ExtIEs} } OPTIONAL,
+		...
+}
+
+PRSTRPItem-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
+
+PRSTransmissionTRPList ::= SEQUENCE (SIZE(1.. maxnoTRPs)) OF PRSTransmissionTRPItem
+
+PRSTransmissionTRPItem ::= SEQUENCE {
+		tRP-ID				TRP-ID,
+		pRSConfiguration	PRSConfiguration, 
+	iE-Extensions	ProtocolExtensionContainer { { PRSTransmissionTRPItem-ExtIEs} } OPTIONAL,
+		...
+}
+
+PRSTransmissionTRPItem-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
 
 -- Q
 
@@ -8727,6 +11566,49 @@ ReportCharacteristics ::= ENUMERATED {
 	...
 }
 
+RequestedDLPRSTransmissionCharacteristics ::= SEQUENCE {
+	requestedDLPRSResourceSet-List		RequestedDLPRSResourceSet-List,
+	numberofFrequencyLayers				INTEGER(1..4)			OPTIONAL,
+	startTimeAndDuration				StartTimeAndDuration	OPTIONAL,
+	iE-Extensions	ProtocolExtensionContainer { { RequestedDLPRSTransmissionCharacteristics-ExtIEs} } OPTIONAL,
+	...
+}
+
+RequestedDLPRSTransmissionCharacteristics-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+RequestedDLPRSResourceSet-List ::= SEQUENCE (SIZE (1..maxnoofPRSresourceSet)) OF RequestedDLPRSResourceSet-Item
+
+RequestedDLPRSResourceSet-Item ::= SEQUENCE {
+	pRSbandwidth					INTEGER(1..63)	OPTIONAL,
+	combSize						ENUMERATED{n2, n4, n6, n12, ...}	OPTIONAL,
+	resourceSetPeriodicity			ENUMERATED{n4,n5,n8,n10,n16,n20,n32,n40,n64,n80,n160,n320,n640,n1280,n2560,n5120,n10240,n20480,n40960, n81920,...}	OPTIONAL,
+	resourceRepetitionFactor		ENUMERATED{rf1,rf2,rf4,rf6,rf8,rf16,rf32,...}		OPTIONAL,
+	resourceNumberofSymbols			ENUMERATED{n2,n4,n6,n12,...}						OPTIONAL,
+	requestedDLPRSResource-List		RequestedDLPRSResource-List			OPTIONAL,
+	resourceSetStartTimeAndDuration	StartTimeAndDuration			OPTIONAL,
+	iE-Extensions					ProtocolExtensionContainer { { RequestedDLPRSResourceSet-Item-ExtIEs} } OPTIONAL,
+	...
+}
+
+RequestedDLPRSResourceSet-Item-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+RequestedDLPRSResource-List::= SEQUENCE (SIZE (1..maxnoofPRSresource)) OF RequestedDLPRSResource-Item
+
+RequestedDLPRSResource-Item  ::= SEQUENCE {
+	qCLInfo					PRSResource-QCLInfo		OPTIONAL,
+	iE-Extensions			ProtocolExtensionContainer { { RequestedDLPRSResource-Item-ExtIEs} } OPTIONAL,
+	...
+}
+
+RequestedDLPRSResource-Item-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+
 RequestedSRSTransmissionCharacteristics ::= SEQUENCE {
 	numberOfTransmissions	INTEGER (0..500,...)							OPTIONAL,
 -- The IE shall be present if the Resource Type IE is set to “periodic” --
@@ -8757,6 +11639,8 @@ SRSResourceSet-Item-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
 	{ ID id-SRSSpatialRelationPerSRSResource	CRITICALITY ignore	EXTENSION SpatialRelationPerSRSResource PRESENCE optional},
 	...
 }
+
+RequestType ::= ENUMERATED {activate, deactivate, ...}
 
 ResourceSetType  ::= CHOICE {
 	periodic			ResourceSetTypePeriodic,
@@ -8857,7 +11741,7 @@ ResourceTypePos-ExtIEs NRPPA-PROTOCOL-IES ::= {
 }
 
 ResourceTypePeriodicPos ::= SEQUENCE {
-periodicity		   ENUMERATED{slot1, slot2, slot4, slot5, slot8, slot10, slot16, slot20, slot32, slot40, slot64, slot80, slot160, slot320, slot640, slot1280, slot2560, slot5120, slot10240, slot40960, slot81920, ...},
+periodicity		   ENUMERATED{slot1, slot2, slot4, slot5, slot8, slot10, slot16, slot20, slot32, slot40, slot64, slot80, slot160, slot320, slot640, slot1280, slot2560, slot5120, slot10240, slot40960, slot81920, ..., slot128, slot256, slot512, slot20480},
 offset				INTEGER(0..81919, ...),
 	iE-Extensions		ProtocolExtensionContainer { { ResourceTypePeriodicPos-ExtIEs} }	OPTIONAL,
 	...
@@ -8868,7 +11752,7 @@ ResourceTypePeriodicPos-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
 }
 
 ResourceTypeSemi-persistentPos ::= SEQUENCE {
-periodicity		   ENUMERATED{slot1, slot2, slot4, slot5, slot8, slot10, slot16, slot20, slot32, slot40, slot64, slot80, slot160, slot320, slot640, slot1280, slot2560, slot5120, slot10240, slot40960, slot81920, ...},
+periodicity		   ENUMERATED{slot1, slot2, slot4, slot5, slot8, slot10, slot16, slot20, slot32, slot40, slot64, slot80, slot160, slot320, slot640, slot1280, slot2560, slot5120, slot10240, slot40960, slot81920, ..., slot128, slot256, slot512, slot20480},
 offset				INTEGER(0..81919, ...),
 	iE-Extensions		ProtocolExtensionContainer { { ResourceTypeSemi-persistentPos-ExtIEs} }	OPTIONAL,
 	...
@@ -8887,6 +11771,18 @@ slotOffset          INTEGER (0..32),
 ResourceTypeAperiodicPos-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
 	...
 }
+
+ResponseTime ::= SEQUENCE {
+	time          INTEGER (1..128,...),
+	timeUnit	  ENUMERATED {second, ten-seconds, ten-milliseconds,...},
+	iE-Extensions		ProtocolExtensionContainer { { ResponseTime-ExtIEs} }	OPTIONAL,
+	...
+}
+
+ResponseTime-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
 
 ResultCSI-RSRP ::= SEQUENCE (SIZE (1.. maxCellReportNR)) OF ResultCSI-RSRP-Item
 
@@ -9107,6 +12003,8 @@ ResultUTRAN-Item-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
 
 RSSI ::= INTEGER (0..63, ...)
 
+RxTxTimingErrorMargin ::= ENUMERATED {tc0dot5, tc1, tc2, tc4, tc8, tc12, tc16, tc20, tc24, tc32, tc40, tc48, tc64, tc80, tc96, tc128, ...}
+
 -- S
 
 SCS-SpecificCarrier ::= SEQUENCE {
@@ -9251,23 +12149,25 @@ SRSConfiguration-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
 
 SrsFrequency ::= INTEGER (0..3279165)
 
+SRSPortIndex ::= ENUMERATED{id1000, id1001, id1002, id1003, ...}
+
 SRSPosResourceID ::= INTEGER (0..63)
 
 SRSResource::= SEQUENCE {
-	sRSResourceID                   SRSResourceID,
-	nrofSRS-Ports                   ENUMERATED {port1, ports2, ports4},
+	sRSResourceID					SRSResourceID,
+	nrofSRS-Ports					ENUMERATED {port1, ports2, ports4},
 	transmissionComb				TransmissionComb,
-	startPosition                   INTEGER (0..13),
-    nrofSymbols                     ENUMERATED {n1, n2, n4},
-    repetitionFactor              	ENUMERATED {n1, n2, n4},
-    freqDomainPosition              INTEGER (0..67),
-	freqDomainShift                 INTEGER (0..268),
-	c-SRS                           INTEGER (0..63),
-	b-SRS                           INTEGER (0..3),
-	b-hop                           INTEGER (0..3),
-	groupOrSequenceHopping          ENUMERATED { neither, groupHopping, sequenceHopping },
+	startPosition					INTEGER (0..13),
+	nrofSymbols						ENUMERATED {n1, n2, n4},
+	repetitionFactor				ENUMERATED {n1, n2, n4},
+	freqDomainPosition				INTEGER (0..67),
+	freqDomainShift					INTEGER (0..268),
+	c-SRS							INTEGER (0..63),
+	b-SRS							INTEGER (0..3),
+	b-hop							INTEGER (0..3),
+	groupOrSequenceHopping			ENUMERATED { neither, groupHopping, sequenceHopping },
 	resourceType					ResourceType,
-	sequenceId                      INTEGER (0..1023),
+	sequenceId						INTEGER (0..1023),
 	iE-Extensions					ProtocolExtensionContainer { { SRSResource-ExtIEs } } OPTIONAL,
 	...
 }
@@ -9308,6 +12208,34 @@ SRSResourceTrigger-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
 	...
 }
 
+SRSResourcetype ::= SEQUENCE {
+	sRSResourceTypeChoice					SRSResourceTypeChoice,
+	iE-Extensions		ProtocolExtensionContainer { { SRSResourcetype-ExtIEs} }	OPTIONAL,
+	...
+}
+
+SRSResourcetype-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	{ ID id-SRSPortIndex	CRITICALITY ignore EXTENSION SRSPortIndex	PRESENCE optional},
+	...
+}
+
+SRSResourceTypeChoice ::= CHOICE {
+	sRSResourceInfo			SRSInfo,
+	posSRSResourceInfo		PosSRSInfo,
+	...
+}
+
+SRSInfo ::= SEQUENCE {
+	sRSResource			SRSResourceID,
+	...
+}
+
+SRSTransmissionStatus ::= ENUMERATED {stopped, ...}
+
+PosSRSInfo ::= SEQUENCE {
+	posSRSResourceID		SRSPosResourceID,
+	...
+}
 
 
 SSBInfo ::= SEQUENCE {
@@ -9363,6 +12291,17 @@ SSB-Index ::= INTEGER(0..63)
 
 SSID ::= OCTET STRING (SIZE(1..32))
 
+StartTimeAndDuration ::= SEQUENCE {
+	startTime			RelativeTime1900				OPTIONAL,
+	duration			INTEGER (0..90060, ...)			OPTIONAL,
+	iE-Extensions		ProtocolExtensionContainer { { StartTimeAndDuration-ExtIEs} }	OPTIONAL,
+	...
+}
+
+StartTimeAndDuration-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
 SystemFrameNumber ::= INTEGER (0..1023)
 
 SystemInformation ::= SEQUENCE (SIZE (1.. maxNrOfPosSImessage)) OF SEQUENCE {
@@ -9391,6 +12330,39 @@ TDD-Config-EUTRA-Item-Item-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
 	...
 }
 
+TRPTEGInformation ::= CHOICE {
+	rxTx-TEG			RxTxTEG,
+	rx-TEG				RxTEG,
+	choice-extension		ProtocolIE-Single-Container { { TRPTEGInformation-ExtIEs} }
+}
+
+TRPTEGInformation-ExtIEs NRPPA-PROTOCOL-IES ::= {
+	...
+}
+
+RxTxTEG ::= SEQUENCE {
+	tRP-RxTx-TEGInformation			TRP-RxTx-TEGInformation,
+	tRP-Tx-TEGInformation			TRP-Tx-TEGInformation		OPTIONAL,
+	iE-extensions		ProtocolExtensionContainer { { RxTxTEG-ExtIEs } }	OPTIONAL,
+	...
+}
+
+RxTxTEG-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+RxTEG ::= SEQUENCE {
+	tRP-Rx-TEGInformation		TRP-Rx-TEGInformation,
+	tRP-Tx-TEGInformation		TRP-Tx-TEGInformation,
+	iE-extensions      ProtocolExtensionContainer { { RxTEG-ExtIEs } }	OPTIONAL,
+	...
+}
+
+RxTEG-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+TimingErrorMargin ::= ENUMERATED {tc0, tc2, tc4, tc6, tc8, tc12, tc16, tc20, tc24, tc32, tc40, tc48, tc56, tc64, tc72, tc80, ...}
 
 TF-Configuration ::= SEQUENCE {
 	sSB-frequency				INTEGER (0..3279165),
@@ -9475,6 +12447,77 @@ TransmissionCombPos-ExtIEs NRPPA-PROTOCOL-IES ::= {
 	...
 }
 
+TRPBeamAntennaInformation ::= SEQUENCE {
+	choice-TRP-Beam-Antenna-Info-Item		Choice-TRP-Beam-Antenna-Info-Item,
+	iE-Extensions			ProtocolExtensionContainer {{ TRPBeamAntennaInformation-ExtIEs}}				OPTIONAL,
+	...
+}
+
+TRPBeamAntennaInformation-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+Choice-TRP-Beam-Antenna-Info-Item ::= CHOICE {
+	reference					TRP-ID,
+	explicit					TRP-BeamAntennaExplicitInformation,
+	noChange					NULL,
+	choice-extension				ProtocolIE-Single-Container { { Choice-TRP-Beam-Info-Item-ExtIEs } }
+}
+
+Choice-TRP-Beam-Info-Item-ExtIEs NRPPA-PROTOCOL-IES ::= {
+	...
+}
+
+TRP-BeamAntennaExplicitInformation ::= SEQUENCE {
+	trp-BeamAntennaAngles					TRP-BeamAntennaAngles,
+	lcs-to-gcs-translation	 				LCS-to-GCS-Translation										OPTIONAL,
+	iE-Extensions			ProtocolExtensionContainer {{ TRP-BeamAntennaExplicitInformation-ExtIEs}}				OPTIONAL,
+	...
+}
+
+TRP-BeamAntennaExplicitInformation-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+TRP-BeamAntennaAngles ::= SEQUENCE (SIZE (1.. maxnoAzimuthAngles)) OF TRP-BeamAntennaAnglesList-Item
+
+TRP-BeamAntennaAnglesList-Item ::= SEQUENCE {
+	trp-azimuth-angle					INTEGER (0..359),
+	trp-azimuth-angle-fine				INTEGER (0..9)	OPTIONAL,
+	trp-elevation-angle-list			SEQUENCE (SIZE (1.. maxnoElevationAngles)) OF TRP-ElevationAngleList-Item,
+	iE-Extensions			ProtocolExtensionContainer {{ TRP-BeamAntennaAnglesList-Item-ExtIEs}}			OPTIONAL,
+	...
+}
+
+TRP-BeamAntennaAnglesList-Item-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+TRP-ElevationAngleList-Item ::= SEQUENCE {
+	trp-elevation-angle					INTEGER (0..180),
+	trp-elevation-angle-fine			INTEGER (0..9)	OPTIONAL,
+	trp-beam-power-list					SEQUENCE (SIZE (2..maxNumResourcesPerAngle)) OF TRP-Beam-Power-Item,
+	iE-Extensions			ProtocolExtensionContainer {{ TRP-ElevationAngleList-Item-ExtIEs}}			OPTIONAL,
+	...
+}
+
+TRP-ElevationAngleList-Item-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+TRP-Beam-Power-Item ::= SEQUENCE {
+	pRSResourceSetID				PRS-Resource-Set-ID		OPTIONAL,
+	pRSResourceID					PRS-Resource-ID,
+	relativePower				INTEGER (0..30), --negative value
+	relativePowerFine				INTEGER (0..9)			OPTIONAL, --negative value
+	iE-Extensions			ProtocolExtensionContainer {{ TRP-Beam-Power-Item-ExtIEs}}					OPTIONAL,
+	...
+}
+
+TRP-Beam-Power-Item-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
 TRPMeasurementQuantities ::= SEQUENCE (SIZE (1..maxnoPosMeas)) OF TRPMeasurementQuantitiesList-Item
 
 TRPMeasurementQuantitiesList-Item ::= SEQUENCE {
@@ -9493,7 +12536,9 @@ TRPMeasurementQuantities-Item ::= ENUMERATED {
 	uL-SRS-RSRP, 
 	uL-AoA, 
 	uL-RTOA, 
-	...
+	...,
+	multiple-UL-AoA,
+	uL-SRS-RSRPP
 }
 
 TrpMeasurementResult ::= SEQUENCE (SIZE (1.. maxnoPosMeas)) OF TrpMeasurementResultItem
@@ -9507,6 +12552,9 @@ TrpMeasurementResultItem ::= SEQUENCE {
 }
 
 TrpMeasurementResultItem-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	{ ID id-SRSResourcetype	CRITICALITY ignore EXTENSION SRSResourcetype PRESENCE optional}|
+	{ ID id-ARP-ID		CRITICALITY ignore EXTENSION ARP-ID 	PRESENCE optional}|
+	{ ID id-LoS-NLoSInformation		CRITICALITY ignore EXTENSION LoS-NLoSInformation		PRESENCE optional },
 	...
 }
 
@@ -9519,6 +12567,9 @@ TrpMeasuredResultsValue ::= CHOICE {
 }
 
 TrpMeasuredResultsValue-ExtIEs NRPPA-PROTOCOL-IES ::= {
+	{ ID id-ZoA		CRITICALITY reject TYPE ZoA PRESENCE mandatory}|
+	{ ID id-MultipleULAoA	CRITICALITY reject TYPE MultipleULAoA PRESENCE mandatory}|
+	{ ID id-UL-SRS-RSRPP	CRITICALITY reject TYPE UL-SRS-RSRPP PRESENCE mandatory},
 	...
 }
 
@@ -9566,7 +12617,10 @@ TRP-MeasurementRequestItem ::= SEQUENCE {
 }
 
 TRP-MeasurementRequestItem-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
-	{ ID id-Cell-ID		CRITICALITY ignore EXTENSION CGI-NR		PRESENCE optional },
+	{ ID id-Cell-ID		CRITICALITY ignore EXTENSION CGI-NR		PRESENCE optional }|
+	{ ID id-AoA-SearchWindow		CRITICALITY ignore EXTENSION AoA-AssistanceInfo		PRESENCE optional }|
+	{ ID id-NumberOfTRPRxTEG		CRITICALITY ignore EXTENSION NumberOfTRPRxTEG		PRESENCE optional }|
+	{ ID id-NumberOfTRPRxTxTEG		CRITICALITY ignore EXTENSION NumberOfTRPRxTxTEG		PRESENCE optional },
 	...
 }
 
@@ -9583,6 +12637,23 @@ TRP-MeasurementResponseItem-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
 	{ ID id-Cell-ID		CRITICALITY ignore EXTENSION CGI-NR		PRESENCE optional },
 	...
 }
+
+
+TRP-MeasurementUpdateList ::= SEQUENCE (SIZE (1..maxNoOfMeasTRPs)) OF TRP-MeasurementUpdateItem
+
+TRP-MeasurementUpdateItem ::= SEQUENCE {
+	tRP-ID						TRP-ID, 
+	aoA-window-information		AoA-AssistanceInfo	OPTIONAL, 
+	iE-extensions					ProtocolExtensionContainer { { TRP-MeasurementUpdateItem-ExtIEs } } OPTIONAL,
+	...
+}
+
+TRP-MeasurementUpdateItem-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	{ ID id-NumberOfTRPRxTEG		CRITICALITY ignore EXTENSION NumberOfTRPRxTEG		PRESENCE optional }|
+	{ ID id-NumberOfTRPRxTxTEG		CRITICALITY ignore EXTENSION NumberOfTRPRxTxTEG		PRESENCE optional },
+	...
+}
+
 
 TRPInformationListTRPResp ::= SEQUENCE (SIZE (1.. maxnoTRPs)) OF SEQUENCE {
 	tRPInformation					TRPInformation,
@@ -9620,7 +12691,10 @@ TRPInformationTypeResponseItem ::= CHOICE {
 }
 
 TRPInformationTypeResponseItem-ExtIEs NRPPA-PROTOCOL-IES ::= {
-	{ ID id-TRPType		CRITICALITY reject TYPE TRPType		PRESENCE mandatory },
+	{ ID id-TRPType						CRITICALITY reject TYPE TRPType					PRESENCE mandatory }|
+	{ ID id-OnDemandPRS				CRITICALITY reject TYPE OnDemandPRS-Info		PRESENCE mandatory}|
+	{ ID id-TRPTxTEGAssociation			CRITICALITY reject TYPE TRPTxTEGAssociation		PRESENCE mandatory}|
+	{ ID id-TRPBeamAntennaInformation	CRITICALITY reject TYPE TRPBeamAntennaInformation	PRESENCE mandatory },
 	...
 
 }
@@ -9644,7 +12718,10 @@ TRPInformationTypeItem ::= ENUMERATED {
 		geoCoord,
 
 		...,
-		trp-type
+		trp-type,
+		ondemandPRSInfo,
+		trpTxTeg,
+		beam-antenna-info
 }
 
 TRPList ::= SEQUENCE (SIZE(1.. maxnoTRPs)) OF TRPItem
@@ -9705,6 +12782,21 @@ TRPPositionReferenced-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
 	...
 }
 
+TRP-PRS-Information-List ::= SEQUENCE (SIZE(1.. maxnoPRSTRPs)) OF TRP-PRS-Information-List-Item
+
+TRP-PRS-Information-List-Item ::= SEQUENCE {
+		tRP-ID				TRP-ID,
+		nR-PCI				NR-PCI,
+		cGI-NR				CGI-NR					OPTIONAL,
+		pRSConfiguration							PRSConfiguration,
+		iE-Extensions	ProtocolExtensionContainer { { TRP-PRS-Information-List-Item-ExtIEs} } OPTIONAL,
+		...
+}
+
+TRP-PRS-Information-List-Item-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
 TRPReferencePointType ::= CHOICE {
 	tRPPositionRelativeGeodetic			RelativeGeodeticLocation,
 	tRPPositionRelativeCartesian		RelativeCartesianLocation,
@@ -9714,6 +12806,64 @@ TRPReferencePointType ::= CHOICE {
 TRPReferencePointType-ExtIEs NRPPA-PROTOCOL-IES ::= {
 	...
 }
+
+TRP-Rx-TEGInformation ::= SEQUENCE {
+	tRP-Rx-TEGID					INTEGER (0..31),
+	tRP-Rx-TimingErrorMargin		TimingErrorMargin,
+	iE-Extensions		ProtocolExtensionContainer { { TRP-Rx-TEGInformation-ExtIEs } } OPTIONAL,
+	...
+}
+
+TRP-Rx-TEGInformation-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+TRP-RxTx-TEGInformation ::= SEQUENCE {
+	tRP-RxTx-TEGID					INTEGER (0..255),
+	tRP-RxTx-TimingErrorMargin		RxTxTimingErrorMargin,
+	iE-Extensions		ProtocolExtensionContainer { { TRP-RxTx-TEGInformation-ExtIEs } } OPTIONAL,
+	...
+}
+
+TRP-RxTx-TEGInformation-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+TRP-Tx-TEGInformation ::= SEQUENCE {
+	tRP-Tx-TEGID					INTEGER (0..7),
+	tRP-Tx-TimingErrorMargin		TimingErrorMargin,
+	iE-Extensions		ProtocolExtensionContainer { { TRP-Tx-TEGInformation-ExtIEs } } OPTIONAL,
+	...
+}
+
+TRP-Tx-TEGInformation-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+TRPTxTEGAssociation ::= SEQUENCE (SIZE(1.. maxnoTRPTEGs)) OF TRPTEGItem
+
+TRPTEGItem ::= SEQUENCE {
+		tRP-Tx-TEGInformation	TRP-Tx-TEGInformation,
+		dl-PRSResourceSetID		PRS-Resource-Set-ID,
+		dl-PRSResourceID-List	SEQUENCE (SIZE(1.. maxPRS-ResourcesPerSet)) OF DLPRSResourceID-Item	OPTIONAL,
+	iE-Extensions					ProtocolExtensionContainer { { TRPTEGItem-ExtIEs } } OPTIONAL,
+	...
+}
+
+TRPTEGItem-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+DLPRSResourceID-Item ::= SEQUENCE {
+	dl-PRSResourceID		PRS-Resource-ID,
+	iE-Extensions			ProtocolExtensionContainer { { DLPRSResource-Item-ExtIEs} }	OPTIONAL,
+	...
+}
+
+DLPRSResource-Item-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
 
 TRPType ::= ENUMERATED {
 	prsOnlyTP,
@@ -9737,6 +12887,57 @@ UARFCN ::= INTEGER (0..16383, ...)
 
 UE-Measurement-ID ::= INTEGER (1..15, ..., 16..256)
 
+UEReportingInformation::= SEQUENCE {
+	reportingAmount				ENUMERATED {ma0, ma1, ma2, ma4, ma8, ma16, ma32, ma64},
+	reportingInterval			ENUMERATED {none, one, two, four, eight, ten, sixteen, twenty, thirty-two, sixty-four, ...},
+	iE-extensions			ProtocolExtensionContainer { { UEReportingInformation-ExtIEs } }	OPTIONAL,
+	...
+}
+
+UEReportingInformation-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+UE-TEG-ReportingPeriodicity ::= ENUMERATED {
+	ms160,
+	ms320,
+	ms1280,
+	ms2560,
+	ms61440,
+	ms81920,
+	ms368640,
+	ms737280,
+	...
+}
+
+UETxTEGAssociationList ::= SEQUENCE (SIZE(1.. maxnoUETEGs)) OF UETxTEGAssociationItem
+
+UETxTEGAssociationItem ::= SEQUENCE {
+		uE-Tx-TEG-ID				INTEGER (0..7),
+		posSRSResourceID-List		PosSRSResourceID-List,
+		timeStamp					TimeStamp,
+		carrierFreq					CarrierFreq				OPTIONAL,
+	iE-Extensions					ProtocolExtensionContainer { { UETxTEGAssociationItem-ExtIEs } } OPTIONAL,
+	...
+}
+
+UETxTEGAssociationItem-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	{ ID id-UETxTimingErrorMargin			CRITICALITY ignore EXTENSION TimingErrorMargin 	PRESENCE optional },
+	...
+}
+
+SRSResourceID-Item ::= SEQUENCE {
+	sRSResourceID                   SRSResourceID,
+	iE-Extensions			ProtocolExtensionContainer { { SRSResourceID-Item-ExtIEs} }	OPTIONAL,
+	...
+}
+
+SRSResourceID-Item-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
+UE-TEG-Info-Request ::= ENUMERATED {onDemand, periodic, stop, ...}
+
 UTRA-EcN0 ::= INTEGER (0..49, ...)
 
 UTRA-RSCP ::= INTEGER (-5..91, ...)
@@ -9745,7 +12946,7 @@ UTRA-RSCP ::= INTEGER (-5..91, ...)
 UL-AoA ::= SEQUENCE {
 	azimuthAoA					INTEGER (0..3599),
 	zenithAoA					INTEGER (0..1799)				OPTIONAL,
-	lCS-to-GCS-TranslationAoA	LCS-to-GCS-TranslationAoA		OPTIONAL,
+	lCS-to-GCS-Translation	LCS-to-GCS-Translation		OPTIONAL,
 	iE-extensions			ProtocolExtensionContainer { { UL-AoA-ExtIEs } }	OPTIONAL,
 	...
 }
@@ -9762,6 +12963,8 @@ UL-RTOAMeasurement ::= SEQUENCE {
 }
 
 UL-RTOAMeasurement-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	{ ID id-ExtendedAdditionalPathList	CRITICALITY ignore EXTENSION ExtendedAdditionalPathList	PRESENCE optional}|
+	{ ID id-TRP-Rx-TEGInformation		CRITICALITY ignore EXTENSION TRP-Rx-TEGInformation		PRESENCE optional},
 	...
 }
 
@@ -9780,7 +12983,22 @@ ULRTOAMeas-ExtIEs NRPPA-PROTOCOL-IES ::= {
 
 UL-SRS-RSRP ::= INTEGER (0..126)
 
+UL-SRS-RSRPP ::= SEQUENCE {
+	firstPathRSRPP				INTEGER (0..126),
+	iE-extensions			ProtocolExtensionContainer { { UL-SRS-RSRPP-ExtIEs } }	OPTIONAL,
+	...
+}
+
+UL-SRS-RSRPP-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
 UplinkChannelBW-PerSCS-List ::= SEQUENCE (SIZE (1..maxnoSCSs)) OF SCS-SpecificCarrier
+
+
+Uncertainty-range-AoA ::= INTEGER (0..3599)
+
+Uncertainty-range-ZoA ::= INTEGER (0..1799)
 
 
 -- V
@@ -9858,6 +13076,18 @@ WLANOperatingClass ::= INTEGER (0..255)
 -- Y
 
 -- Z
+
+ZoA ::= SEQUENCE {
+	zenithAoA					INTEGER (0..1799),
+	lCS-to-GCS-Translation	LCS-to-GCS-Translation		OPTIONAL,
+	iE-extensions			ProtocolExtensionContainer { { ZoA-ExtIEs } }	OPTIONAL,
+	...
+}
+
+ZoA-ExtIEs NRPPA-PROTOCOL-EXTENSION ::= {
+	...
+}
+
 
 END
 -- ASN1STOP
@@ -9962,6 +13192,9 @@ id-MeasurementFailureIndication									ProcedureCode ::= 15
 id-tRPInformationExchange										ProcedureCode ::= 16
 id-positioningActivation										ProcedureCode ::= 17
 id-positioningDeactivation										ProcedureCode ::= 18
+id-pRSConfigurationExchange										ProcedureCode ::= 19
+id-measurementPreconfiguration									ProcedureCode ::= 20
+id-measurementActivation										ProcedureCode ::= 21
 
 -- **************************************************************
 --
@@ -10010,6 +13243,16 @@ maxPRS-ResourcesPerSet						INTEGER ::= 64
 maxNoSSBs									INTEGER ::= 255
 maxnoofPRSresourceSet						INTEGER ::= 8
 maxnoofPRSresource							INTEGER ::= 64
+maxnoofULAoAs								INTEGER ::= 8
+maxNoPathExtended							INTEGER ::= 8
+maxnoARPs									INTEGER ::=	16
+maxnoUETEGs									INTEGER ::= 256
+maxnoTRPTEGs								INTEGER ::= 8
+maxFreqLayers								INTEGER ::= 4
+maxNumResourcesPerAngle						INTEGER ::= 24
+maxnoAzimuthAngles							INTEGER ::= 3600
+maxnoElevationAngles						INTEGER ::= 1801
+maxnoPRSTRPs								INTEGER ::= 256
 
 
 
@@ -10083,6 +13326,49 @@ id-TRPType														ProtocolIE-ID ::= 62
 id-SRSSpatialRelationPerSRSResource								ProtocolIE-ID ::= 63
 id-MeasurementPeriodicityExtended								ProtocolIE-ID ::= 64
 id-PRS-Resource-ID												ProtocolIE-ID ::= 65
+id-PRSTRPList													ProtocolIE-ID ::= 66
+id-PRSTransmissionTRPList										ProtocolIE-ID ::= 67
+id-OnDemandPRS												ProtocolIE-ID ::= 68
+id-AoA-SearchWindow												ProtocolIE-ID ::= 69
+id-TRP-MeasurementUpdateList									ProtocolIE-ID ::= 70
+id-ZoA															ProtocolIE-ID ::= 71
+id-ResponseTime													ProtocolIE-ID ::= 72
+id-UEReportingInformation										ProtocolIE-ID ::= 73
+id-MultipleULAoA												ProtocolIE-ID ::= 74
+id-UL-SRS-RSRPP													ProtocolIE-ID ::= 75
+id-SRSResourcetype												ProtocolIE-ID ::= 76
+id-ExtendedAdditionalPathList									ProtocolIE-ID ::= 77
+id-ARPLocationInfo												ProtocolIE-ID ::= 78
+id-ARP-ID														ProtocolIE-ID ::= 79
+id-LoS-NLoSInformation											ProtocolIE-ID ::= 80
+id-UETxTEGAssociationList										ProtocolIE-ID ::= 81
+id-NumberOfTRPRxTEG												ProtocolIE-ID ::= 82
+id-NumberOfTRPRxTxTEG											ProtocolIE-ID ::= 83
+id-TRPTxTEGAssociation											ProtocolIE-ID ::= 84
+id-TRPTEGInformation											ProtocolIE-ID ::= 85
+id-TRP-Rx-TEGInformation													ProtocolIE-ID ::= 86
+id-TRP-PRS-Information-List										ProtocolIE-ID ::= 87
+id-PRS-Measurements-Info-List									ProtocolIE-ID ::= 88
+id-PRSConfigRequestType											ProtocolIE-ID ::= 89
+id-UE-TEG-Info-Request											ProtocolIE-ID ::= 90
+id-MeasurementTimeOccasion										ProtocolIE-ID ::= 91
+id-MeasurementCharacteristicsRequestIndicator					ProtocolIE-ID ::= 92
+id-TRPBeamAntennaInformation									ProtocolIE-ID ::= 93
+id-NR-TADV														ProtocolIE-ID ::= 94
+id-MeasurementAmount											ProtocolIE-ID ::= 95
+id-pathPower													ProtocolIE-ID ::= 96
+id-PreconfigurationResult										ProtocolIE-ID ::= 97
+id-RequestType													ProtocolIE-ID ::= 98
+id-UE-TEG-ReportingPeriodicity									ProtocolIE-ID ::= 99
+id-SRSPortIndex													ProtocolIE-ID ::= 100
+id-procedure-code-101-not-to-be-used							ProtocolIE-ID ::= 101
+id-procedure-code-102-not-to-be-used							ProtocolIE-ID ::= 102
+id-procedure-code-103-not-to-be-used							ProtocolIE-ID ::= 103
+id-UETxTimingErrorMargin										ProtocolIE-ID ::= 104
+id-MeasurementPeriodicityNR-AoA									ProtocolIE-ID ::= 105
+id-SRSTransmissionStatus										ProtocolIE-ID ::= 106
+
+
 
 END
 -- ASN1STOP
@@ -10250,6 +13536,7 @@ Section 10 of TS 38.413 [2] is applicable for the purposes of the present docume
 -	In case of Logical Error, when reporting the Criticality Diagnostics IE, the NRPPa Transaction ID IE shall also be included.
 Annex A (informative):
 Change history
+
 
 Change history
 Date
@@ -10518,31 +13805,94 @@ RP-220281
 F
 Correction on PRS Beam Information
 16.7.0
-2022-04
+2022-03
 RAN#95-e
-
-
-
-
-Editorial Correction:
-- change "OPTIONAL" to "optional" to ASN.1
-16.7.1
-2022-06
-RAN#96
-RP-221152
-0068
+RP-220228
+0037
+8
+B
+Introduction of NR Positioning enhancements to NRPPa
+17.0.0
+2022-03
+RAN#95-e
+RP-220236
+0042
 2
+B
+Addition of NR Timing Advance reporting for NR UL E-CID [NRTADV]
+17.0.0
+2022-03
+RAN#95-e
+RP-220236
+0054
+-
+D
+NRPPa Rapporteur Corrections
+17.0.0
+2022-06
+RAN#96
+RP-221131
+0057
+1
 F
-Correction for PRS Muting
-16.8.0
+NRPPa ASN.1 review for NR Positioning Enhancements
+17.1.0
+2022-06
+RAN#96
+RP-221145
+0058
+4
+F
+CR to 38.455 on Measurement Amount
+17.1.0
+2022-06
+RAN#96
+RP-221145
+0062
+2
+D
+Rapporteur Corrections to Rel-17 NRPPa
+17.1.0
+2022-06
+RAN#96
+RP-221131
+0063
+4
+F
+Positionng corrections for NRPPA
+17.1.0
+2022-06
+RAN#96
+RP-221131
+0066
+1
+F
+Corrections to Measurement Pre-configuration Information Transfer
+17.1.0
+2022-06
+RAN#96
+RP-221131
+0067
+1
+F
+Support for Multiple Measurement Instances
+17.1.0
 2022-06
 RAN#96
 RP-221152
-0073
+0069
+2
+A
+Correction for PRS Muting
+17.1.0
+2022-06
+RAN#96
+RP-221152
+0074
 
-F
+A
 Correction to SSB subcarrier spacing
-16.8.0
+17.1.0
 2022-06
 
 
@@ -10557,5 +13907,109 @@ editorial corrections to rename the following asn.1 names as choice extension na
 - oTDOACell-Information-Item-Extension -> choice-Extension
 - otherRATMeasuredResultsValue-Extension -> choice-Extension
 - pRSMutingConfiguration-EUTRA-Extension -> choice-Extension
-16.8.1
+17.1.1
+2022-09
+RAN#97-e
+RP-222186
+0075
+1
+F
+Correction for UE Tx TEG Association
+17.2.0
+2022-09
+RAN#97-e
+RP-222186
+0076
+-
+F
+Introduction of SRS port index
+17.2.0
+2022-09
+RAN#97-e
+RP-222186
+0077
+2
+F
+Support of timing error margins for TEGs in NRPPa
+17.2.0
+2022-09
+RAN#97-e
+RP-222543
+0079
+3
+A
+CR to 38.455 on E-CID measurement periodicity
+17.2.0
+2022-09
+RAN#97-e
+RP-222186
+0080
+1
+F
+Correction on Measurement Time Occasion
+17.2.0
+2022-12
+RAN#98-e
+RP-222886
+0086
+2
+F
+Correction of TRP TEG
+17.3.0
+2022-12
+RAN#98-e
+RP-222886
+0087
+1
+F
+Correction of Timing Error Margin
+17.3.0
+2022-12
+RAN#98-e
+RP-222886
+0088
+1
+F
+Correction of Positioning Information Transfer function
+17.3.0
+2022-12
+RAN#98-e
+RP-222886
+0089
+2
+F
+Correction to the PRS Measurement configuration procedures
+17.3.0
+2022-12
+RAN#98-e
+RP-222887
+0092
+1
+A
+CR to 38.455 on SRS periodicity
+17.3.0
+2022-12
+RAN#98-e
+RP-222886
+0093
+-
+F
+Correction on presence of timing error margin for TRP TEGs
+17.3.0
+2023-03
+RAN#99
+RP-230597
+0099
+1
+A
+Correction for SRS Configuration status in Positioning Information Update
+17.4.0
+2023-03
+RAN#99
+RP-230593
+0100
+1
+F
+NRPPA corrections of references to RRC
+17.4.0
 

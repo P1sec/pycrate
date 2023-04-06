@@ -1,3 +1,4 @@
+-- ASN1START
 -- **************************************************************
 --
 -- IE definitions for the SON Transfer application
@@ -284,7 +285,7 @@ FailureEventReport::= CHOICE {
 }
 
 TooEarlyInterRATHOReportReportFromEUTRAN ::= SEQUENCE {
-	uERLFReportContainer	OCTET STRING, -- as defined in TS 36.331 [16] --
+	uERLFReportContainer	OCTET STRING,
 	mobilityInformation		MobilityInformation		OPTIONAL,
 	...
 }

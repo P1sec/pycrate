@@ -120,7 +120,47 @@ FROM F1AP-CommonDataTypes
 	E-CIDMeasurementInitiationFailure,
 	E-CIDMeasurementFailureIndication,
 	E-CIDMeasurementReport,
-	E-CIDMeasurementTerminationCommand
+	E-CIDMeasurementTerminationCommand,
+	BroadcastContextSetupRequest,
+	BroadcastContextSetupResponse,
+	BroadcastContextSetupFailure,
+	BroadcastContextReleaseCommand,
+	BroadcastContextReleaseComplete,
+	BroadcastContextReleaseRequest,
+	BroadcastContextModificationRequest,
+	BroadcastContextModificationResponse,
+	BroadcastContextModificationFailure,
+	MulticastGroupPaging,
+	MulticastContextSetupRequest,
+	MulticastContextSetupResponse,
+	MulticastContextSetupFailure,
+	MulticastContextReleaseCommand,
+	MulticastContextReleaseComplete,
+	MulticastContextReleaseRequest,
+	MulticastContextModificationRequest,
+	MulticastContextModificationResponse,
+	MulticastContextModificationFailure,
+	MulticastDistributionSetupRequest,
+	MulticastDistributionSetupResponse,
+	MulticastDistributionSetupFailure,
+	MulticastDistributionReleaseCommand,
+	MulticastDistributionReleaseComplete,
+	PDCMeasurementInitiationRequest,
+	PDCMeasurementInitiationResponse,
+	PDCMeasurementInitiationFailure,
+	PDCMeasurementReport,
+	PDCMeasurementTerminationCommand,
+	PDCMeasurementFailureIndication,
+	PRSConfigurationRequest,
+	PRSConfigurationResponse,
+	PRSConfigurationFailure,
+	MeasurementPreconfigurationRequired,
+	MeasurementPreconfigurationConfirm,
+	MeasurementPreconfigurationRefuse,
+	MeasurementActivation,
+	QoEInformationTransfer,
+	PosSystemInformationDeliveryCommand
+
 
 
 
@@ -182,7 +222,30 @@ FROM F1AP-PDU-Contents
 	id-E-CIDMeasurementInitiation,
 	id-E-CIDMeasurementFailureIndication,
 	id-E-CIDMeasurementReport,
-	id-E-CIDMeasurementTermination
+	id-E-CIDMeasurementTermination,
+	id-BroadcastContextSetup,
+	id-BroadcastContextRelease,
+	id-BroadcastContextReleaseRequest,
+	id-BroadcastContextModification,
+	id-MulticastGroupPaging,
+	id-MulticastContextSetup,
+	id-MulticastContextRelease,
+	id-MulticastContextReleaseRequest,
+	id-MulticastContextModification,
+	id-MulticastDistributionSetup,
+	id-MulticastDistributionRelease,
+	id-PDCMeasurementInitiation,
+	id-PDCMeasurementInitiationRequest,
+	id-PDCMeasurementInitiationResponse,
+	id-PDCMeasurementInitiationFailure,
+	id-PDCMeasurementTerminationCommand,
+	id-PDCMeasurementFailureIndication,
+	id-PDCMeasurementReport,
+	id-pRSConfigurationExchange,
+	id-measurementPreconfiguration,
+	id-measurementActivation,
+	id-QoEInformationTransfer,
+	id-PosSystemInformationDeliveryCommand
 
 
 FROM F1AP-Constants
@@ -284,7 +347,18 @@ F1AP-ELEMENTARY-PROCEDURES-CLASS-1 F1AP-ELEMENTARY-PROCEDURE ::= {
 	tRPInformationExchange			|
 	positioningInformationExchange	|
 	positioningActivation			|
-	e-CIDMeasurementInitiation,
+	e-CIDMeasurementInitiation		|
+	broadcastContextSetup			|
+	broadcastContextRelease			|
+	broadcastContextModification|
+	multicastContextSetup			|
+	multicastContextRelease		|
+	multicastContextModification	|
+	multicastDistributionSetup		|
+	multicastDistributionRelease	|
+	pDCMeasurementInitiation		|
+	pRSConfigurationExchange		|
+	measurementPreconfiguration	,
 	...
 }
 
@@ -324,7 +398,16 @@ F1AP-ELEMENTARY-PROCEDURES-CLASS-2 F1AP-ELEMENTARY-PROCEDURE ::= {
 	e-CIDMeasurementFailureIndication			|
 	e-CIDMeasurementReport						|
 	e-CIDMeasurementTermination					|
-	positioningInformationUpdate,
+	positioningInformationUpdate				|
+	multicastGroupPaging						|
+	broadcastContextReleaseRequest				|
+	multicastContextReleaseRequest				|
+	pDCMeasurementReport						|
+	pDCMeasurementTerminationCommand			|
+	pDCMeasurementFailureIndication				|
+	measurementActivation						|
+	qoEInformationTransfer						|
+	posSystemInformationDelivery,
 	...
 }
 -- **************************************************************
@@ -723,6 +806,148 @@ e-CIDMeasurementTermination F1AP-ELEMENTARY-PROCEDURE ::= {
 positioningInformationUpdate F1AP-ELEMENTARY-PROCEDURE ::= {
 	INITIATING MESSAGE		PositioningInformationUpdate
 	PROCEDURE CODE			id-PositioningInformationUpdate
+	CRITICALITY				ignore
+}
+
+broadcastContextSetup F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		BroadcastContextSetupRequest
+	SUCCESSFUL OUTCOME		BroadcastContextSetupResponse
+	UNSUCCESSFUL OUTCOME	BroadcastContextSetupFailure
+	PROCEDURE CODE			id-BroadcastContextSetup
+	CRITICALITY				reject
+}
+
+broadcastContextRelease F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		BroadcastContextReleaseCommand
+	SUCCESSFUL OUTCOME		BroadcastContextReleaseComplete
+	PROCEDURE CODE			id-BroadcastContextRelease
+	CRITICALITY				reject
+}
+
+broadcastContextReleaseRequest F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		BroadcastContextReleaseRequest
+	PROCEDURE CODE			id-BroadcastContextReleaseRequest
+	CRITICALITY				reject
+}
+
+broadcastContextModification F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		BroadcastContextModificationRequest
+	SUCCESSFUL OUTCOME		BroadcastContextModificationResponse
+	UNSUCCESSFUL OUTCOME	BroadcastContextModificationFailure
+	PROCEDURE CODE			id-BroadcastContextModification
+	CRITICALITY				reject
+}
+
+multicastGroupPaging F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		MulticastGroupPaging
+	PROCEDURE CODE			id-MulticastGroupPaging
+	CRITICALITY				ignore
+}
+
+
+multicastContextSetup F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		MulticastContextSetupRequest
+	SUCCESSFUL OUTCOME		MulticastContextSetupResponse
+	UNSUCCESSFUL OUTCOME	MulticastContextSetupFailure
+	PROCEDURE CODE			id-MulticastContextSetup
+	CRITICALITY				reject
+}
+
+multicastContextRelease F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		MulticastContextReleaseCommand
+	SUCCESSFUL OUTCOME		MulticastContextReleaseComplete
+	PROCEDURE CODE			id-MulticastContextRelease
+	CRITICALITY				reject
+}
+
+multicastContextReleaseRequest F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		MulticastContextReleaseRequest
+	PROCEDURE CODE			id-MulticastContextReleaseRequest
+	CRITICALITY				reject
+}
+
+multicastContextModification F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		MulticastContextModificationRequest
+	SUCCESSFUL OUTCOME		MulticastContextModificationResponse
+	UNSUCCESSFUL OUTCOME	MulticastContextModificationFailure
+	PROCEDURE CODE			id-MulticastContextModification
+	CRITICALITY				reject
+}
+
+multicastDistributionSetup F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		MulticastDistributionSetupRequest
+	SUCCESSFUL OUTCOME		MulticastDistributionSetupResponse
+	UNSUCCESSFUL OUTCOME	MulticastDistributionSetupFailure
+	PROCEDURE CODE			id-MulticastDistributionSetup
+	CRITICALITY				reject
+}
+
+multicastDistributionRelease F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		MulticastDistributionReleaseCommand
+	SUCCESSFUL OUTCOME		MulticastDistributionReleaseComplete
+	PROCEDURE CODE			id-MulticastDistributionRelease
+	CRITICALITY				reject
+}
+
+
+pDCMeasurementInitiation F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		PDCMeasurementInitiationRequest
+	SUCCESSFUL OUTCOME		PDCMeasurementInitiationResponse
+	UNSUCCESSFUL OUTCOME	PDCMeasurementInitiationFailure
+	PROCEDURE CODE			id-PDCMeasurementInitiation
+	CRITICALITY				reject
+}
+
+pDCMeasurementReport F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		PDCMeasurementReport
+	PROCEDURE CODE			id-PDCMeasurementReport
+	CRITICALITY				ignore
+}
+
+pDCMeasurementTerminationCommand F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		PDCMeasurementTerminationCommand
+	PROCEDURE CODE			id-PDCMeasurementTerminationCommand
+	CRITICALITY				ignore
+}
+
+pDCMeasurementFailureIndication F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		PDCMeasurementFailureIndication
+	PROCEDURE CODE			id-PDCMeasurementFailureIndication
+	CRITICALITY				ignore
+}
+
+pRSConfigurationExchange F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		PRSConfigurationRequest
+	SUCCESSFUL OUTCOME		PRSConfigurationResponse
+	UNSUCCESSFUL OUTCOME	PRSConfigurationFailure
+	PROCEDURE CODE			id-pRSConfigurationExchange
+	CRITICALITY				reject
+}
+
+measurementPreconfiguration F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		MeasurementPreconfigurationRequired
+	SUCCESSFUL OUTCOME		MeasurementPreconfigurationConfirm
+	UNSUCCESSFUL OUTCOME	MeasurementPreconfigurationRefuse
+	PROCEDURE CODE			id-measurementPreconfiguration
+	CRITICALITY				reject
+}
+
+
+measurementActivation		F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		MeasurementActivation
+	PROCEDURE CODE			id-measurementActivation
+	CRITICALITY				ignore
+}
+
+qoEInformationTransfer F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		QoEInformationTransfer
+	PROCEDURE CODE			id-QoEInformationTransfer
+	CRITICALITY				ignore
+}
+
+posSystemInformationDelivery F1AP-ELEMENTARY-PROCEDURE ::= {
+	INITIATING MESSAGE		PosSystemInformationDeliveryCommand
+	PROCEDURE CODE			id-PosSystemInformationDeliveryCommand
 	CRITICALITY				ignore
 }
 

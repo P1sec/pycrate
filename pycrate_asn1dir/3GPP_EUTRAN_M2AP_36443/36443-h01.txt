@@ -143,30 +143,31 @@ Foreword	6
 9.2.1.25	Bit Rate	53
 9.2.1.26	Allocation and Retention Priority	53
 9.2.1.27	MCCH related BCCH Extended Configuration Item	54
-9.2.2	Transport Network Layer Related Ies	55
-9.2.2.1	IP Address	55
+9.2.1.28	Additional Configuration Parameters	56
+9.2.2	Transport Network Layer Related Ies	56
+9.2.2.1	IP Address	56
 9.2.2.2	GTP-TEID	56
 9.2.3	NAS Related Ies	56
 9.2.3.1	MCE MBMS M2AP ID	56
-9.2.3.2	eNB MBMS M2AP ID	56
-9.2.3.3	TMGI	56
-9.2.3.4	MBMS Session Identity	56
-9.2.3.5	Void	56
-9.2.3.6	MBMS Service Area	56
+9.2.3.2	eNB MBMS M2AP ID	57
+9.2.3.3	TMGI	57
+9.2.3.4	MBMS Session Identity	57
+9.2.3.5	Void	57
+9.2.3.6	MBMS Service Area	57
 9.2.3.7	PLMN Identity	57
-9.3	Message and Information Element Abstract Syntax (with ASN.1)	58
-9.3.1	General	58
-9.3.2	Usage of Private Message Mechanism for Non-standard Use	58
-9.3.3	Elementary Procedure Definitions	58
-9.3.4	PDU Definitions	63
-9.3.5	Information Element definitions	79
-9.3.6	Common definitions	89
-9.3.7	Constant definitions	90
-9.3.8	Container definitions	92
-9.4	Message Transfer Syntax	97
-9.5	Timers	97
-10	Handling of Unknown, Unforeseen and Erroneous Protocol Data	98
-Annex A (informative): Change history	99
+9.3	Message and Information Element Abstract Syntax (with ASN.1)	59
+9.3.1	General	59
+9.3.2	Usage of Private Message Mechanism for Non-standard Use	59
+9.3.3	Elementary Procedure Definitions	59
+9.3.4	PDU Definitions	64
+9.3.5	Information Element definitions	80
+9.3.6	Common definitions	90
+9.3.7	Constant definitions	91
+9.3.8	Container definitions	93
+9.4	Message Transfer Syntax	98
+9.5	Timers	98
+10	Handling of Unknown, Unforeseen and Erroneous Protocol Data	99
+Annex A (informative): Change history	100
 
 Foreword
 This Technical Specification has been produced by the 3rd Generation Partnership Project (3GPP).
@@ -3048,58 +3049,79 @@ This IE indicates the pre-emption capability of the request on other MBMS E-RABs
 M
 
 ENUMERATED(not pre-emptable, pre-emptable)
-This IE indicates the vulnerability of the MBMS E-RAB to 54ehaviour54n of other MBMS E-RABs.
+This IE indicates the vulnerability of the MBMS E-RAB to 55ehaviour55n of other MBMS E-RABs.
 
 9.2.1.27	MCCH related BCCH Extended Configuration Item
-This information element provides MCCH related BCCH configuration information to the eNB in line with the MBSFN-AreaInfo-r16 IE as defined in TS 36.331 [11].
+This information element provides MCCH related BCCH configuration information to the eNB in line with either the MBSFN-AreaInfo-r16 IE or the MBSFN-AreaInfo-r17 IE as defined in TS 36.331 [11].
 IE/Group Name
 Presence
 Range
 IE type and reference
 Semantics description
+Criticality
+Assigned Criticality
 MBSFN Area Id
 M
 
 9.2.1.14
 
+-
+-
 Repetition Period Expanded
 M
 
 ENUMERATED (rf1, rf2, rf4, rf8, rf16, rf32, rf64, rf128, rf256, …)
 The same encoding as the mcch-RepetitionPeriod-r16 IE in the mcch-Config-r16 IE as specified in TS 36.331 [11].
+-
+-
 Offset
 M
 
 INTEGER (0..10)
 The same encoding as the mcch-Offset-r16 IE in the mcch-Config-r16 IE as specified in TS 36.331 [11].
+-
+-
 Modification Period Expanded
 M
 
 ENUMERATED (rf1, rf2, rf4, rf8, rf16, rf32, rf64, rf128, rf256, rf512, rf1024, …)
 The same encoding as the mcch-ModificationPeriod-r16 IE in the mcch-Config-r16 IE as specified in TS 36.331 [11].
+-
+-
 Subframe Allocation Info Expanded
 M
 
 BIT STRING (SIZE(10))
 The same encoding as the sf-AllocInfo-r16  IE in the mcch-Config-r16 IE as specified in TS 36.331 [11].
+-
+-
 Modulation and Coding Scheme
 M
 
 ENUMERATED (n2, n7, n13, n19)
 The same encoding as the signallingMCS-r16 IE in the mcch-Config-r16 IE as specified in TS 36.331 [11].
+-
+-
 Subcarrier Spacing MBMS Expanded
 M
 
-ENUMERATED (khz-7dot5, khz-2dot5, khz-1dot25, khz-0dot37, …)
+ENUMERATED (khz-7dot5, khz-2dot5, khz-1dot25, khz-0dot37, …, kHz-15)
 The same encoding as the subcarrierSpacingMBMS-r16 IE in the mcch-Config-r16 IE as specified in TS 36.331 [11].
+The value “kHz-15” is only applicable in case the Additional Configuration Parameters IE is present.
+-
+-
 Time separation
 O
 
 ENUMERATED (sl2, sl4, … )
 The same encoding as the timeSeparation-r16 IE in the mcch-Config-r16 IE as specified in TS 36.331 [11]. 
+-
+-
 Cell Information List 
 
 0..1
+
+
 
 
 >Cell Information
@@ -3107,21 +3129,47 @@ Cell Information List
 1 to <maxnoofCells>
 
 
+
+
 >>E-UTRAN CGI 
 M
 
 9.2.1.11
 
+-
+-
 >>Cell Reservation Info
 M
 
 ENUMERATED (reservedCell, nonReservedCell, …)
 
+-
+-
+Additional Configuration Parameters
+O
+
+9.2.1.28
+This IE is included for a configuration corresponding to the MBSFN-AreaInfoList-r17 IE as specified in TS 36.331 [11].
+YES
+reject
 
 Range bound
 Explanation
 maxnoofCells
 Maximum no. of cells that may be served by an eNB. The value for maxnoofCells is 256.
+
+9.2.1.28	Additional Configuration Parameters
+This information element provides additional MCCH related BCCH configuration information to the eNB in line with the MBSFN-AreaInfo-r17 IE as defined in TS 36.331 [11].
+IE/Group Name
+Presence
+Range
+IE type and reference
+Semantics description
+PMCH Bandwidth
+M
+
+ENUMERATED (n40, n35, n30, …)
+The same encoding as the pmch-Bandwidth-r17 IE as specified in TS 36.331 [11]. 
 
 9.2.2	Transport Network Layer Related Ies
 9.2.2.1	IP Address
@@ -4349,6 +4397,7 @@ IMPORTS
 	id-Subcarrier-SpacingMBMS,
 	id-SubframeAllocationExtended,
 	id-SubframeAllocationFurtherExtension,
+	id-AdditionalConfigParameters,
 	maxnoofMBSFNareas,
 	maxnoofPMCHsperMBSFNarea,
 	maxnoofCells,
@@ -4372,6 +4421,16 @@ FROM M2AP-CommonDataTypes
 FROM M2AP-Containers;
 
 -- A
+
+AdditionalConfigParameters ::= SEQUENCE {
+	pmch-Bandwidth	PMCH-Bandwidth,
+	iE-Extensions				ProtocolExtensionContainer { {AdditionalConfigParameters-ExtIEs} } OPTIONAL
+}
+
+AdditionalConfigParameters-ExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+	...
+}
+
 
 AllocatedSubframesEnd ::= INTEGER (0..1535)
 
@@ -4687,7 +4746,7 @@ MCCHrelatedBCCH-ExtConfigPerMBSFNArea-Item ::= SEQUENCE {
 	modificationPeriodExpanded		ENUMERATED {rf1, rf2, rf4, rf8, rf16, rf32, rf64, rf128, rf256, rf512, rf1024, ...},
 	subframeAllocationInfoExpanded	BIT STRING (SIZE(10)),
 	modulationAndCodingScheme		ENUMERATED {n2, n7, n13, n19},
-	subcarrier-SpacingMBMSExpanded	ENUMERATED {khz-7dot5, khz-2dot5, khz-1dot25, khz-0dot37, ...},
+	subcarrier-SpacingMBMSExpanded	ENUMERATED {khz-7dot5, khz-2dot5, khz-1dot25, khz-0dot37, ..., kHz-15},
 	timeSeparation					ENUMERATED {sl2, sl4, ...}		OPTIONAL,
 	cellInformationList				Cell-Information-List			OPTIONAL,
 	iE-Extensions					ProtocolExtensionContainer { { MCCHrelatedBCCH-ExtConfigPerMBSFNArea-Item-ExtIEs} } OPTIONAL,
@@ -4695,6 +4754,8 @@ MCCHrelatedBCCH-ExtConfigPerMBSFNArea-Item ::= SEQUENCE {
 }
 
 MCCHrelatedBCCH-ExtConfigPerMBSFNArea-Item-ExtIEs M2AP-PROTOCOL-EXTENSION ::= {
+	-- Extension for Rel-17 to support PMCH Bandwidth values –-
+	{ID id-AdditionalConfigParameters	CRITICALITY reject	EXTENSION AdditionalConfigParameters	PRESENCE optional},
 	...
 }
 
@@ -4721,6 +4782,8 @@ Modification-PeriodExtended ::= ENUMERATED {rf1, rf2, rf4, rf8, rf16, rf32, rf64
 -- P
 
 PLMN-Identity ::= OCTET STRING (SIZE(3))
+
+PMCH-Bandwidth ::= ENUMERATED {n40, n35, n30, ...}
 
 PMCH-Configuration ::= SEQUENCE {
 	allocatedSubframesEnd			AllocatedSubframesEnd,
@@ -5013,6 +5076,7 @@ id-SubframeAllocationExtended												ProtocolIE-ID ::= 50
 id-MCCHrelatedBCCH-ExtConfigPerMBSFNArea-Item 								ProtocolIE-ID ::= 51
 id-MCCHrelatedBCCH-ExtConfigPerMBSFNArea									ProtocolIE-ID ::= 52
 id-SubframeAllocationFurtherExtension										ProtocolIE-ID ::= 53
+id-AdditionalConfigParameters												ProtocolIE-ID ::= 54
 
 END
 
@@ -5524,7 +5588,7 @@ CR for shortening MCH scheduling period
 RP-150356
 0092
 1
-Add missing 99ehaviour for MBMS Service Counting procedure
+Add missing 101ehaviour for MBMS Service Counting procedure
 12.2.0
 67
 RP-150347
@@ -5634,4 +5698,20 @@ RP-202314
 F
 Correction on the configuration of subframe #0 and #5 for MCH in MBMS dedicated cell 
 16.1.0
+
+
+
+
+
+
+Correction to change history
+17.0.0
+2022-03
+RP-95-e
+RP-220840
+0131
+1
+B
+Introduction of new bands and bandwidth allocation for LTE-based 5G terrestrial broadcast
+17.0.1
 
