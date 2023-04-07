@@ -65,8 +65,8 @@ class _AttributeLV(Envelope):
 
 class Attribute(Envelope):
     _GEN = (
-        Uint('AF', bl=1),
-        Uint('Type', bl=15),
+        Uint('AF', val=1, bl=1, dic={0:'TLV', 1:'TV'}),
+        Uint('Type', val=14, bl=15, dic={14: 'Key length'}),
         Alt('Attr', GEN={
             0: _AttributeLV('LV'),
             1: Buf('V', bl=16, rep=REPR_HEX)},
@@ -661,68 +661,69 @@ IKEv2AuthICSLen_dict = {
 
 
 class PayEncr(Envelope):
+    """IKEv2 payload for encrypted data
+    
+    Requires the attribute ALG_ENCR and ALG_AUTH to be set according to the security
+    policy established during IKE SA initialization.
+    """
     
     # the configuration of the encryption and integrity checksum algorithms
     # is contextual
     ALG_ENCR = IKEv2TransENCR.ENCR_NULL
     ALG_AUTH = IKEv2TransAUTH.NONE
     
+    @classmethod
+    def set_alg(cls, alg_encr, alg_auth):
+        """class method to set ALG_ENCR and ALG_AUTH class attributes globally
+        Required for setting proper length to IV and ICS
+        """
+        cls.ALG_ENCR = alg_encr
+        cls.ALG_AUTH = alg_auth
+    
+    
     _GEN = (
         Buf('IV', rep=REPR_HEX),
         Buf('Data', val=b'', rep=REPR_HEX),
-        Buf('Pad', val=b'', rep=REPR_HEX),
-        Uint8('PadLen'),
         Buf('ICS', rep=REPR_HEX)
         )
     
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
-        # We only manage automation at encoding here, as decoding requires processing the buffer backward
-        # ... crappy IETF
-        #self['IV'].set_blauto(lambda: <<3)
-        #self['Pad'].set_blauto(lambda: self._pad_get_bl())
-        #self['ICS'].set_blauto(l
-        self['Pad'].set_valauto(lambda: self._pad_get_val())
-        self['PadLen'].set_valauto(lambda: self['Pad'].get_len()<<3)
-    
-    def _pad_get_len(self):
-        block_len = IKEv2EncrBlockLen.get(int(self.ALG_ENCR), 0)
-        if block_len:
-            return -(1 + self['Data'].get_len()) % block_len
-        else:
-            return 0
-    
-    def _pad_get_val(self):
-        return bytes(range(0, self._pad_get_len()))
+        self['IV'].set_blauto(lambda: IKEv2EncrIVLen_dict.get(self.ALG_ENCR, 0)<<3)
+        self['ICS'].set_blauto(lambda: IKEv2AuthICSLen_dict.get(self.ALG_AUTH, 0)<<3)
     
     def _from_char(self, char):
-        iv_len  = IKEv2EncrIVLen_dict.get(self.ALG_ENCR, 0)
-        ics_len = IKEv2AuthICSLen_dict.get(self.ALG_AUTH, 0)
-        # ensure char is long enough
-        if char.len_byte() < 1 + iv_len + ics_len:
-            raise(PycrateErr('buffer not long enough, selected IKEv2 transforms ENCR: %s / AUTH: %s'\
-                              % (self.ALG_ENCR, self.ALG_AUTH)))
-        self['IV'].set_bl(iv_len<<3)
+        if self.get_trans():
+            return
         self['IV']._from_char(char)
-        # then processing the whole buffer backward...
-        buf = char.to_bytes()
-        self['ICS'].set_bl(ics_len<<3)
-        self['ICS'].from_bytes(buf[-ics_len:])
-        self['PadLen'].from_bytes(buf[-ics_len-1:-ics_len])
-        pad_len = self['PadLen'].get_val()
-        if len(buf) < 1 + pad_len + ics_len:
-            raise(PycrateErr('invalid padding length, selected IKEv2 transforms ENCR: %s / AUTH: %s'\
-                              % (self.ALG_ENCR, self.ALG_AUTH)))
-        self['Pad'].from_bytes(buf[-ics_len-1-pad_len:-ics_len-1])
-        self['Data'].from_bytes(buf[:-ics_len-1-pad_len])
+        # truncate char to keep ICS
+        ics_bl = self['ICS']._blauto()
+        if ics_bl:
+            clb = char._len_bit
+            char._len_bit -= ics_bl
+        self['Data']._from_char(char)
+        if ics_bl:
+            char._len_bit = clb
+            self['ICS']._from_char(char)
     
-    @classmethod
-    def set_alg(cls, alg_encr, alg_auth):
-        """class method to set ALG_ENCR and ALG_AUTH class attributes globally
-        Required for setting proper length to IV, Pad and ICS
+    def set_data_wpad(self, data):
+        """Set the provided clear text data in Data after applying padding to it
         """
-        cls.ALG_ENCR = alg_encr
-        cls.ALG_AUTH = alg_auth
+        block_len = IKEv2EncrBlockLen_dict.get(self.ALG_ENCR, 0)
+        if block_len:
+            pad_len = -(1+len(data)) % block_len
+            self['Data'].set_val(data + bytes(range(0, 1+pad_len)))
+        else:
+            self['Data'].set_val(data)
+    
+    def get_data_wpad(self):
+        block_len = IKEv2EncrBlockLen_dict.get(self.ALG_ENCR, 0)
+        data = self['Data'].get_val()
+        if block_len:
+            pad_len = data[-1]
+            return data[:-pad_len-1]
+        else:
+            return data
     
     # TODO
     def encrypt(self, data, key):
@@ -870,7 +871,7 @@ class IKEv2Pay(Envelope):
         }
     
     _GEN = (
-        Uint8('Next'),
+        Uint8('Next', dic=IKEv2PayType_dict),
         Uint('C', bl=1),
         Uint('res', bl=7, rep=REPR_HEX),
         Uint16('Len'),
@@ -880,9 +881,9 @@ class IKEv2Pay(Envelope):
     def __init__(self, *args, **kwargs):
         self.Type = 1
         Envelope.__init__(self, *args, **kwargs)
-        self['Next'].set_valauto(lambda: getattr(self.get_next(), 'Type', 0))
-        self['Len'].set_valauto(lambda: 4 + self[4].get_len())
-        self['Pay'].set_blauto(lambda: (self[3].get_val() - 4)<<3)
+        self[0].set_valauto(lambda: getattr(self.get_next(), 'Type', 0))
+        self[3].set_valauto(lambda: 4 + self[4].get_len())
+        self[4].set_blauto(lambda: (self[3].get_val() - 4)<<3)
     
     def set_val(self, val):
         if isinstance(val, dict) and 'Type' in val and val['Type'] in self.LUTPay:
@@ -897,25 +898,24 @@ class IKEv2Pay(Envelope):
         e, n = self.get_env(), None
         if e is not None:
             if e.get_num():
-                # get the last IKEv2Pay within the Payloads Sequence
-                n = e[-1]
+                # get the last IKEv2Pay decoded in the Payloads Sequence
+                n = e[-1][0].get_val()
             else:
                 e = e.get_env()
                 if e is not None:
                      # get the IKEv2 header
-                    n = e[0]
-        if n is not None:
-            next = n['Next'].get_val()
-            if next in self.LUTPay:
-                self.Type = next
-                pay = self.LUTPay[next].clone()
-                pay.set_blauto(lambda: (self[3].get_val() - 4)<<3)
-                self.replace(self[4], pay)
-        elif hasattr(self, 'Type') and self.Type in self.LUTPay:
+                    n = e[0][2].get_val()
+        if n is not None and n in self.LUTPay:
+            self.Type = n
+        if hasattr(self, 'Type') and self.Type in self.LUTPay:
             pay = self.LUTPay[self.Type].clone()
             pay.set_blauto(lambda: (self[3].get_val() - 4)<<3)
             self.replace(self[4], pay)
         Envelope._from_char(self, char)
+        if char._cur == char._len_bit and self.Type == 46:
+            # no more payloads, but with Encrypted payload, we need to disable
+            # automation as `next` indicates the one inside the encrypted part
+            del self[0]._valauto
 
 
 #------------------------------------------------------------------------------#
@@ -940,9 +940,9 @@ IKEv2ExchType_dict = {e.value: e.name for e in IKEv2ExchType}
 class IKEv2HdrFlags(Envelope):
     _GEN = (
         Uint('undef', bl=2, rep=REPR_HEX),
-        Uint('R', bl=1),
-        Uint('V', bl=1),
-        Uint('I', bl=1),
+        Uint('R', bl=1, dic={0: 'Request', 1: 'Response'}),
+        Uint('V', bl=1, dic={0: 'No higher version', 1: 'Higher version available'}),
+        Uint('I', bl=1, dic={0: 'Responder', 1: 'Initiator'}),
         Uint('undef', bl=3, rep=REPR_HEX)
         )
 
@@ -951,13 +951,13 @@ class IKEv2Hdr(Envelope):
     _GEN = (
         Buf('SPIInitiator', bl=64, rep=REPR_HEX),
         Buf('SPIResponder', bl=64, rep=REPR_HEX),
-        Uint8('Next'),
+        Uint8('Next', dic=IKEv2PayType_dict),
         Uint('VersMaj', val=2, bl=4),
         Uint('VersMin', val=0, bl=4),
         Uint8('ExchType', val=IKEv2ExchType.IKE_SA_INIT.value, dic=IKEv2ExchType_dict),
         IKEv2HdrFlags('Flags'),
         Uint32('MID', rep=REPR_HEX),
-        Uint32('Len', val=28)
+        Uint32('Len')
         )
     
     def __init__(self, *args, **kwargs):
