@@ -41,6 +41,8 @@ from test.test_csn1   import *
 from test.test_asn1rt import *
 from test.test_mobile import *
 from test.test_gsmrr  import *
+from test.test_crypto import *
+from test.test_sedebugmux import *
 from pycrate_asn1c.specdir import ASN_SPECS
 from pycrate_asn1c.asnproc import compile_text, compile_spec, compile_all, \
     generate_modules, PycrateGenerator, GLOBAL
@@ -183,6 +185,16 @@ class TestPycrate(unittest.TestCase):
         test_gsmrr_mo()
         test_gsmrr_l2_mt()
         test_gsmrr_mt()
+    
+    # osmo related protocols
+    def test_osmo(self):
+        print('[<>] testing pycrate_osmo')
+        test_sedebugmux()
+    
+    # crypto protocols
+    def test_crypto(self):
+        print('[<>] testing pycrate_crypto')
+        test_ikev2()
 
 
 def test_perf_all():
@@ -201,6 +213,8 @@ def test_perf_all():
     test_perf_csn1()
     test_perf_mobile()
     test_perf_gsmrr()
+    test_perf_sedebugmux()
+    test_perf_crypto()
     print('[<<<>>>] test_perf_all total time: %.4f' % (time.time() - T0))
 
 

@@ -31,6 +31,7 @@ from timeit import timeit
 
 from pycrate_osmo.SEDebugMux import *
 
+
 test_frames = (
     # Enquiry target identifier and available Data Providers
     b'\x42\x42' + b'\x05\x00' + b'\x01\x00' + b'e' + b'\x69\x3e',
@@ -47,6 +48,7 @@ test_frames = (
     b'\x42\x42' + b'\x05\x00' + b'\xf1\x03' + b'q' + b'\x90\xce',
     )
 
+
 def test_sedebugmux():
     for f in test_frames:
         # print('[+] Testing frame: %s' % f.hex())
@@ -57,10 +59,13 @@ def test_sedebugmux():
         assert( msg.get_val() == v )
         assert( msg.to_bytes() == f )
 
+
 def test_perf_sedebugmux():
     print('[+] decoding and re-encoding SE DebugMux frames')
     Ta = timeit(test_sedebugmux, number=100)
     print('test_sedebugmux: {0:.4f}'.format(Ta))
 
+
 if __name__ == '__main__':
     test_perf_sedebugmux()
+

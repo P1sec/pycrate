@@ -27,7 +27,8 @@
 # *--------------------------------------------------------
 #*/
 
-from timeit import timeit
+from timeit     import timeit
+from binascii   import unhexlify
 
 #from pycrate_core.elt           import Element
 #Element._SAFE_STAT = False

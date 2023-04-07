@@ -2638,7 +2638,7 @@ def test_perf_asn1rt():
     
     _load_rt_base()
     print('[+] ASN.1 base type encoding / decoding (BER, CER, DER, UPER, APER, OER, COER)')
-    Ta = timeit(_test_rt_base, number=20)
+    Ta = timeit(_test_rt_base, number=1)
     print('test_rt_base: {0:.4f}'.format(Ta))
     
     _load_rrc3g()
