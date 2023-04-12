@@ -31,8 +31,6 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: update build tools
         run: python -m pip install --upgrade setuptools pip
-      - name: install dependencies
-        run: python -m pip install crcmod
       - name: install test runner
         run: python -m pip install tox tox-gh-actions
       - name: run test suite
@@ -60,7 +58,7 @@ jobs:
         env:
           DIST: ${{ matrix.distribution }}
       - name: upload ${{ matrix.distribution }} artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.distribution }}
           path: dist/
