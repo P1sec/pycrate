@@ -691,169 +691,7 @@ _PTAIListType_dict = {
     2 : 'list of TAIs belonging to different PLMNs'
     }
 
-class _PartialTAIList(Envelope):
-    # dummy wrapping class
-    pass
 
-
-class PartialTAIList0(_PartialTAIList):
-    _GEN = (
-        Uint('spare', bl=1),
-        Uint('Type', bl=2, dic=_PTAIListType_dict),
-        Uint('Num', bl=5), # WNG: the msbit of Num should stay null
-        PLMN(),
-        Array('TACValues', GEN=Uint16('TAC'))
-        )
-    
-    def __init__(self, *args, **kwargs):
-        Envelope.__init__(self, *args, **kwargs)
-        self[2].set_valauto(lambda: max(0, self[4].get_num()-1))
-        self[4].set_numauto(lambda: self[2].get_val()+1)
-
-
-class PartialTAIList1(_PartialTAIList):
-    _GEN = (
-        Uint('spare', bl=1),
-        Uint('Type', val=1, bl=2, dic=_PTAIListType_dict),
-        Uint('Num', bl=5), # WNG: the msbit of Num should stay null
-        PLMN(),
-        Uint16('TAC0'),
-        )
-
-
-class PartialTAIList2(_PartialTAIList):
-    _GEN = (
-        Uint('spare', bl=1),
-        Uint('Type', val=2, bl=2, dic=_PTAIListType_dict),
-        Uint('Num', bl=5), # WNG: the msbit of Num should stay null
-        Sequence('TAIValues', GEN=TAI())
-        )
-    
-    def __init__(self, *args, **kwargs):
-        Envelope.__init__(self, *args, **kwargs)
-        self[2].set_valauto(lambda: max(0, self[3].get_num()-1))
-        self[3].set_numauto(lambda: self[2].get_val()+1)
-
-
-class TAIList(Envelope):
-
-    _PTaiListLUT = {
-        0 : PartialTAIList0,
-        1 : PartialTAIList1,
-        2 : PartialTAIList2
-        }
-    
-    # use an empty generator
-    # concrete PartialTAIList0/1/2 will be setup during decoding / encoding
-    _ptail2 = None
-    _GEN = ()
-    
-    def set_val(self, vals):
-        self.clear()
-        if self._ptail2 is not None:
-            del self._ptail2
-        if vals is None:
-            return
-        for ptail in vals:
-            self._set_ptail(ptail)
-    
-    def _set_ptail(self, ptail):
-        if isinstance(ptail, (tuple, list)):
-            try:
-                PTaiL = self._PTaiListLUT[ptail[1]](val=ptail)
-            except Exception as err:
-                raise(PycrateErr('{0}: unable to set partial TAI list value, {1}'\
-                      .format(self._name, err)))
-        elif isinstance(ptail, dict):
-            try:
-                PTaiL = self._PTaiListLUT[ptail['Type']](val=ptail)
-            except Exception as err:
-                raise(PycrateErr('{0}: unable to set partial TAI list value, {1}'\
-                      .format(self._name, err)))
-        else:
-            raise(PycrateErr('{0}: unable to set partial TAI list value, {1}'\
-                  .format(self._name, ptail)))
-        self.append(PTaiL)
-    
-    def encode(self, vals):
-        """sets the list of TAI values (PLMN, TAC) after grouping them into 
-        PartialTAIList0/1/2 structures
-        
-        Args:
-            vals: list/tuple of 2-tuple (PLMN, TAC(s))
-                PLMN: str of digits
-                TAC(s): uint16, or list/tuple of uint16, or range within uint16
-        
-        Returns:
-            None
-        """
-        self.clear()
-        if self._ptail2 is not None:
-            del self._ptail2
-        for tai in vals:
-            if isinstance(tai[1], range):
-                # this only works in Python3
-                # in Python2, range is a function which returns a list
-                self.append(PartialTAIList1(val={'PLMN':tai[0],
-                                                 'TAC0':tai[1].start,
-                                                 'Num' :tai[1].stop-tai[1].start}))
-            elif isinstance(tai[1], (tuple, list)):
-                self.append(PartialTAIList0(val={'PLMN':tai[0],
-                                                 'TACValues':tai[1]}))
-            else:
-                if self._ptail2 and self._ptail2[3].get_num() < 16:
-                    # extend the existing PartialTAIList2
-                    self._ptail2.set_val({'TAIValues': {self._ptail2[3].get_num(): tai}})
-                else:
-                    self._ptail2 = PartialTAIList2(val={'TAIValues': [tai]})
-                    self.append(self._ptail2)
-    
-    def decode(self):
-        """returns the list of TAI values (PLMN, TAC) packed within
-        PartialTAIList0/1/2 structures
-        
-        Args:
-            None
-        
-        Returns:
-            TAIList: list/tuple of 2-tuple (PLMN, TAC(s))
-                PLMN: str of digits
-                TAC(s): uint16, list/tuple or uint16, or range within uint16
-        """
-        ret = []
-        for ptl in self:
-            ptl_type = ptl['Type']()
-            if ptl_type == 0:
-                ret.append( (ptl['PLMN'].decode(), ptl['TACValues']()) )
-            elif ptl_type == 1:
-                tac0 = ptl['TAC0']()
-                ret.append( (ptl['PLMN'].decode(), range(tac0, tac0+ptl['Num']()+1)) )
-            else:
-                ret.extend( [(v['PLMN'].decode(), v['TAC']()) for v in ptl['TAIValues']] )
-        return ret
-    
-    def _from_char(self, char):
-        if self.get_trans():
-            return
-        self.clear()
-        if self._ptail2 is not None:
-            del self._ptail2
-        while char.len_bit() >= 24 :
-            ptl_type = char.to_uint(3) & 0b11
-            if ptl_type == 0:
-                ptl = PartialTAIList0()
-            elif ptl_type == 1:
-                ptl = PartialTAIList1()
-            elif ptl_type == 2:
-                ptl = PartialTAIList2()
-                self._ptail2 = ptl
-            else:
-                raise(PycrateErr('invalid Partial TAI List type: %i' % ptl_type))
-            ptl._from_char(char)
-            self.append(ptl)
-
-
-'''this will need to be introduced, to be similar as in TS24501_IE
 class _PTAIList0(Envelope):
     """List of non-consecutive TACs belonging to one PLMN
     """
@@ -922,6 +760,10 @@ class PTAIList(Envelope):
     
     def get_tai(self):
         return self['PTAI'].get_tai()
+    
+    # TODO: implement a best-effort algo to set TAIs in the minimum size
+    #def set_tai(self, set_of_tais):
+    #    pass
 
 
 class TAIList(Sequence):
@@ -932,7 +774,7 @@ class TAIList(Sequence):
         for tl in self:
             tai.update(tl.get_tai())
         return tai
-'''
+
 
 #------------------------------------------------------------------------------#
 # UE network capability
@@ -1503,6 +1345,7 @@ class _CipherDataSet(Envelope):
         Uint('spare', bl=5),
         _CipherDataTime('ValidityStartTime'),
         Uint16('ValidityDuration'),
+        Uint8('TAIListLen'),
         TAIList()
         )
     
@@ -1510,6 +1353,8 @@ class _CipherDataSet(Envelope):
         Envelope.__init__(self, *args, **kwargs)
         self['C0Len'].set_valauto(lambda: self['C0'].get_len())
         self['C0'].set_blauto(lambda: self['C0Len'].get_val()<<3)
+        self['TAIListLen'].set_valauto(lambda: self['TAIList'].get_len())
+        self['TAIList'].set_blauto(lambda: self['TAIListLen'].get_val()<<3)
 
 
 class CipherKeyData(Sequence):

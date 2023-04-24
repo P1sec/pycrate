@@ -1473,6 +1473,10 @@ class FGSPTAIList(Envelope):
     
     def get_tai(self):
         return self['PTAI'].get_alt().get_tai()
+    
+    # TODO: implement a best-effort algo to set TAIs in the minimum size
+    #def set_tai(self, set_of_tais):
+    #    pass
 
 
 class FGSTAIList(Sequence):
