@@ -501,7 +501,7 @@ class CorenetServer(object):
             #
             # clean-up potential signalling procedures in timeout
             if self.SCHED_UE_TO and time() - T0 > self.SCHED_UE_TO and \
-            not self._clean_ue_proc.isAlive():
+            not self._clean_ue_proc.is_alive():
                 # select() timeout or more than `SCHED_RES' seconds since 
                 # last timeout
                 self._clean_ue_proc = threadit(self.clean_ue_proc)
