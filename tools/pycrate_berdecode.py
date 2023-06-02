@@ -65,6 +65,8 @@ def main():
                         help='file containing the binary encoded objects')
     parser.add_argument('-s', dest='stream', type=str,
                         help='hexadecimal string encoding the objects')
+    parser.add_argument('-o', dest='offset', type=int, default=0,
+                        help='offset to start decoding at')
     parser.add_argument('-x', dest='hex', action='store_true',
                         help='print non-ascii strings in hexadecimal form')
     #
@@ -75,11 +77,11 @@ def main():
         except:
             print('%s, args error: file %s not found' % (sys.argv[0], args.input))
             return 0
-        buf = fd.read()
+        buf = fd.read()[args.offset:]
         fd.close()
     elif args.stream:
         try:
-            buf = unhexlify(args.stream)
+            buf = unhexlify(args.stream)[args.offset:]
         except:
             print('%s, args error: invalid hex stream %s' % (sys.argv[0], args.stream))
             return 0
