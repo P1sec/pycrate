@@ -598,8 +598,8 @@ Single value: Python 2-tuple
                 const_obj_type, const_obj = self._get_tab_obj()
                 if const_obj_type == CLASET_NONE:
                     if not self._SILENT:
-                        asnlog('OPEN._from_jval: %s, unable to retrieve a table-looked up object, %s'\
-                               % (self.fullname(), err))
+                        asnlog('OPEN._from_jval: %s, unable to retrieve a table-looked up object'\
+                               % self.fullname())
                     Obj = None
                 elif const_obj_type == CLASET_UNIQ:
                     Obj = const_obj
