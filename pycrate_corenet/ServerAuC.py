@@ -443,7 +443,7 @@ class AuC:
     def make_5g_vector(self, IMSI, SNName, AMF=b'\x80\x00', RAND=None):
         """
         return a 5G authentication vector "quadruplet":
-        RAND [16 bytes], XRES* [8 bytes], AUTN [16 bytes], KAUSF [32 bytes]
+        RAND [16 bytes], XRES* [16 bytes], AUTN [16 bytes], KAUSF [32 bytes]
         or None if the IMSI is not defined in the db or does not support Milenage or TUAK
         or SNName is invalid or not allowed
         
@@ -576,7 +576,7 @@ class AuC:
                   % (SQN_MSi, hexlify(MAC_S).decode('ascii')))
         #
         # authenticate the USIM
-        if MAC_S != AUTS[6:14]:
+        if MAC_S != AUTS[6:]:
             self._log('WNG', '[synch_sqn] IMSI %s, USIM authentication failure' % IMSI)
             return 1
         #
