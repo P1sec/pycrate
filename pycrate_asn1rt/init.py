@@ -32,6 +32,7 @@ from .glob   import *
 from .refobj import *
 from .setobj import *
 from .codecs import ASN1CodecBER
+from .asnobj import ASN1Obj
 
 
 def init_modules(*args, **kwargs):
@@ -201,7 +202,7 @@ def init_modules(*args, **kwargs):
             #
             elif Obj.TYPE == TYPE_OID and Obj._mode == MODE_VALUE:
                 if Obj._val in GLOB.OID and GLOB.OID[Obj._val] != Obj._name:
-                    if not Obj._SILENT:
+                    if not ASN1Obj._SILENT:
                         asnlog('init_modules: different OID objects (%s, %s) with same OID value %r'\
                                % (Obj._name, GLOB.OID[Obj._val], Obj._val))
                 elif Obj._val is not None:
