@@ -1130,7 +1130,7 @@ class EmergNum(Envelope):
         self[3].set_blauto( lambda: 8*(self[0]()-1) )
 
 
-class EmergNumList(Array):
+class EmergNumList(Sequence):
     _GEN = EmergNum()
 
 
