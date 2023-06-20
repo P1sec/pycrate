@@ -2235,7 +2235,10 @@ class GTPIEs(Envelope):
                 # not enough buffer available
                 break
             else:
-                if char_type == ie.get_type():
+                #print('%s: IE %s type %i, decoded type %i'\
+                #       % (self._name, ie._name, ie.get_type(), char_type))
+                ie_type = ie.get_type()
+                if char_type == ie_type:
                     if ie._trans:
                         # optional IE which is to be decoded
                         ie._trans = False
@@ -2243,7 +2246,7 @@ class GTPIEs(Envelope):
                 elif ie._name in self.MAND and self.VERIF_MAND:
                     # mandatory IE which is not present
                     raise(GTPDecErr('Missing mandatory GTP IE %s, type %i' % (ie._name, ie.get_type())))
-                if char_type != 255:
+                if char_type != 255 or ie_type != 255:
                     # PrivateExt IE is always the last defined IE
                     # and can be present multiple times,
                     # otherwise we go to the next IE
