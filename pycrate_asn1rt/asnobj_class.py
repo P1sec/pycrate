@@ -92,8 +92,9 @@ Specific method:
         if not isinstance(val, dict) or not all([k in self._cont for k in val]):
             raise(ASN1ObjErr('{0}: invalid value, {1!r}'.format(self.fullname(), val)))
         # check for OPTIONAL / DEFAULT root values
-        if not all([k in val for k in self._root_mand]):
-            raise(ASN1ObjErr('{0}: missing mandatory value, {1!r}'.format(self.fullname(), val)))
+        missing = set(self._root_mand) - set(val)
+        if missing:
+            raise(ASN1ObjErr('{0}: missing mandatory value(s): {1}, {2!r}'.format(self.fullname(), missing, val)))
         #for (k, v) in val.items():
         #    self._cont[k]._safechk_val(v)
     

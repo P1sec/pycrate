@@ -748,8 +748,10 @@ class _CONSTRUCT(ASN1Obj):
     
     def _safechk_valcompl(self, val):
         # check for OPTIONAL / DEFAULT root values
-        if not all([k in val for k in self._root_mand]):
-            raise(ASN1ObjErr('{0}: missing mandatory value, {1!r}'.format(self.fullname(), val)))
+        missing = set(self._root_mand) - set(val)
+        if missing:
+            raise(ASN1ObjErr('{0}: missing mandatory value(s): {1},\
+                    {2!r}'.format(self.fullname(), missing, val)))
         # check for grouped extended values
         if self._ext and self._ext_group:
             # filter extended values in val
