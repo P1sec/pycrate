@@ -202,9 +202,6 @@ class Layer3(Envelope):
 
 class Layer3E(Layer3):
     
-    # list of clear-text IEs, used for 5GMM NAS message
-    _ies_ct = set()
-    
     def _dec_unk_ie(self, T8, char):
         if T8 & 0x80:
             # Type1TV IE, could also be a Type2 IE
