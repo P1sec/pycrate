@@ -882,7 +882,7 @@ class TP_UDH_IE(Envelope):
 class TP_UDH(Envelope):
     _GEN = (
         Uint8('UDHL'),
-        Sequence('UDH', GEN=TP_UDH_IE('UDHIE')),
+        Sequence('UDH', GEN=TP_UDH_IE('UDHIE'))
         )
     
     def __init__(self, *args, **kwargs):
@@ -937,8 +937,9 @@ class BufUD(Buf):
             if udh.get_trans():
                 return 0
             else:
-                len_udh = 8 + (udh[0].get_val() << 3)
-                return (7 - (len_udh%7)) % 7
+                # UDHL value (X bytes) + UDHL length (1 byte)
+                len_udh = (udh[0].get_val() + 1) << 3
+                return -len_udh % 7
     
     def encode(self, val):
         dcs = self.get_dcs()
@@ -1190,7 +1191,7 @@ class SMS_SUBMIT(SMS_TP):
         Uint('TP_SRR', bl=1, dic=_TP_SRR_dict),
         Uint('TP_VPF', bl=2, dic=_TP_VPF_dict),
         Uint('TP_RD', desc='Reject Duplicates', bl=1),
-        Uint('TP_MTI', val=1, bl=2, dic=_TP_MTI_MT_dict),
+        Uint('TP_MTI', val=1, bl=2, dic=_TP_MTI_MO_dict),
         Uint8('TP_MR', desc='Message Reference'),
         TP_DA(desc='Destination Address'),
         TP_PID(),
@@ -1247,7 +1248,7 @@ class SMS_SUBMIT_REPORT_RP_ACK(SMS_TP):
         Uint('spare', bl=1),
         Uint('TP_UDHI', desc='UDH Indicator', bl=1),
         Uint('spare', bl=4),
-        Uint('TP_MTI', val=1, bl=2, dic=_TP_MTI_MO_dict),
+        Uint('TP_MTI', val=1, bl=2, dic=_TP_MTI_MT_dict),
         TP_PI(),
         TP_SCTS(),
         TP_PID(),
