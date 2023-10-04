@@ -3115,7 +3115,7 @@ class OuterHeaderCreation(Envelope):
         self['IPv6Addr'].set_transauto(lambda: False if (
             self['IPv6'].get_val() or self['UDP_IPv6'].get_val() or self['GTPU_UDP_IPv6'].get_val()) else True)
         self['Port'].set_transauto(lambda: False if (
-            self['UDP_IPv6'].get_val() or self['UDP_IPv4'].get_val() or self['GTPU_UDP_IPv6'].get_val() or self['GTPU_UDP_IPv4'].get_val()) else True)
+            self['UDP_IPv6'].get_val() or self['UDP_IPv4'].get_val()) else True)
         self['VLAN_CTAG'].set_transauto(lambda: False if (
             self['CTAG'].get_val()) else True)
         self['VLAN_STAG'].set_transauto(lambda: False if (

@@ -679,6 +679,15 @@ class Indication(BitFlags):
             Uint('NSENBI', bl=1),
             Uint('IDFUPF', bl=1),
             Uint('EMCI', bl=1))),
+        Envelope('Octet10', GEN=(
+            Uint('spare', bl=1),
+            Uint('spare', bl=1),
+            Uint('spare', bl=1),
+            Uint('spare', bl=1),
+            Uint('spare', bl=1),
+            Uint('LTEMSAI', bl=1),
+            Uint('SRTPI', bl=1),
+            Uint('UPIPSI', bl=1))),
         Buf('ext', rep=REPR_HEX)
         )
 
