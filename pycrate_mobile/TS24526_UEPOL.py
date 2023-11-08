@@ -390,7 +390,7 @@ class RouteSelectDesc(Envelope):
         Envelope.__init__(self, *args, **kwargs)
         self[0].set_valauto(lambda: 3 + self[3].get_len())
         self[2].set_valauto(lambda: self[3].get_len())
-        self[3].set_blauto(lambda: self[2].get_val())
+        self[3].set_blauto(lambda: self[2].get_val()<<3)
 
 
 # Figure 5.2.2: URSP rule
@@ -408,9 +408,9 @@ class URSPRule(Envelope):
         Envelope.__init__(self, *args, **kwargs)
         self[0].set_valauto(lambda: 5 + self[3].get_len() + self[5].get_len())
         self[2].set_valauto(lambda: self[3].get_len())
-        self[3].set_blauto(lambda: self[2].get_val())
+        self[3].set_blauto(lambda: self[2].get_val()<<3)
         self[4].set_valauto(lambda: self[5].get_len())
-        self[5].set_blauto(lambda: self[4].get_val())
+        self[5].set_blauto(lambda: self[4].get_val()<<3)
 
 
 # Figure 5.2.1: UE policy part contents including one or more URSP rules
@@ -615,7 +615,7 @@ class _LocFieldWLAN(Envelope):
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[0].set_valauto(lambda: 1 + self[2].get_len())
-        self[2].set_blauto(lambda: self[0].get_val() - 1)
+        self[2].set_blauto(lambda: (self[0].get_val()-1)<<3)
 
 
 # Figure 5.3.2.11b: Location field {entry type= 3GPP location}
@@ -636,7 +636,7 @@ class _LocField3GPP(Envelope):
     def __init__(self, *args, **kwargs):
         Envelope.__init__(self, *args, **kwargs)
         self[0].set_valauto(lambda: 1 + self[2].get_len())
-        self[2].set_blauto(lambda: self[0].get_val() - 1)
+        self[2].set_blauto(lambda: (self[0].get_val()-1)<<3)
 
 
 # Figure 5.3.2.11a: Location field {entry type= Geo location}
