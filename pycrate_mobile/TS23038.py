@@ -582,7 +582,7 @@ def encode_7b(txt, off=0):
 
 def decode_7b(buf, off=0):
     """translates the GSM 7 bit characters buffer `buf' to an unicode string
-    Enables the string to be decoded to start at a non-null offset `off' as it is 
+    Enables the string to be decoded to start at a non-null offset `off' as it is
     the case with fill bits after certain SMS User-Data-Headers
     
     Args:
@@ -592,7 +592,7 @@ def decode_7b(buf, off=0):
     Returns:
         decoded text string (utf8 str)
     """
-    # WNG: in case of 7 remaining bits at the end of the buffer, we will have an @ 
+    # WNG: in case of 7 remaining bits at the end of the buffer, we will have an @
     # at the end of the returned string
     # we would need the chars_num parameter passed as function arg to fix this
     #
