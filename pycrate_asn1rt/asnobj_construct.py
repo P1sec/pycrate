@@ -2667,7 +2667,7 @@ class _CONSTRUCT_OF(ASN1Obj):
                 #self._val = self._val
                 return txt[1:].strip()
             else:
-                raise(ASN1ASNDecoderErr('{0}: invalid text, {1!r}'.format(self.fullname(), txt)))
+                raise(ASN1ASNDecodeErr('{0}: invalid text, {1!r}'.format(self.fullname(), txt)))
     
     def _to_asn1(self):
         if not self._val:
