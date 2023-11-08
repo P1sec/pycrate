@@ -787,8 +787,13 @@ class TP_UDH_IE_A(Envelope):
         Uint8('StartPos'),
         Uint8('Len'),
         Uint8('FmtMode'),
-        Uint8('Colour')
+        Uint8('Colour') # may be omitted
         )
+    
+    def _from_char(self, char):
+        if char.len_byte() == 3:
+            self['Colour'].set_trans(True)
+        Envelope._from_char(self, char)
 
 
 # 9.2.3.24.10.1.13, Extended Object
