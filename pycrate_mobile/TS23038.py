@@ -26,7 +26,7 @@
 # * Authors : Benoit Michau 
 # *--------------------------------------------------------
 #*/
-
+'''
 __all__ = [
     'DCS_7B',
     'DCS_8B',
@@ -38,13 +38,15 @@ __all__ = [
     'encode_7b_cbs',
     'decode_7b_cbs'
     ]
+'''
+from binascii import hexlify
 
 #------------------------------------------------------------------------------#
 # 3GPP TS 23.038: Alphabets and language-specific information
 # release 13 (d00)
 #------------------------------------------------------------------------------#
 
-from pycrate_core.utils  import pack_val, TYPE_UINT, PycrateErr
+from pycrate_core.utils  import pack_val, TYPE_UINT, PycrateErr, bytes_lshift
 from pycrate_core.charpy import Charpy
 from pycrate_core.elt    import Envelope
 from pycrate_core.base   import Uint
@@ -548,6 +550,8 @@ _GSM7bExtLUTInv = {
 
 def encode_7b(txt, off=0):
     """translates the unicode string `txt' to a GSM 7 bit characters buffer
+    Enables the `txt' string to start at a non-null offset `off' as it is the case
+    with fill bits after certain SMS User-Data-Headers
     
     Args:
         txt (utf8 str): text string to encode
@@ -566,19 +570,20 @@ def encode_7b(txt, off=0):
             except KeyError:
                 raise(PycrateErr('invalid GSM 7 bit char: %r' % c))
             else:
-                # add an escape char
+                # add the extension escape char
                 arr.append( (TYPE_UINT, 27, 7) )
                 cnt += 2
         else:
             cnt += 1
-    # check the length in bits and add padding bits
-    pad = ((8-(7*len(arr)+off)%8)%8)
-    arr.insert(0, (TYPE_UINT, 0, pad))
+    # check the length in bits and add fill bits (for the UDH)
+    arr.insert(0, (TYPE_UINT, 0, off))
     return bytes(reversed(pack_val(*arr)[0])), cnt
 
 
 def decode_7b(buf, off=0):
     """translates the GSM 7 bit characters buffer `buf' to an unicode string
+    Enables the string to be decoded to start at a non-null offset `off' as it is 
+    the case with fill bits after certain SMS User-Data-Headers
     
     Args:
         buf (bytes): buffer to decode
@@ -587,25 +592,37 @@ def decode_7b(buf, off=0):
     Returns:
         decoded text string (utf8 str)
     """
-    char = Charpy(bytes(reversed(buf)))
-    # jump over the padding bits
-    # WNG: in case of 7 bits padding, we will have an @ at the end 
-    chars_num = (8*len(buf)-off) // 7
-    char._cur = (8*len(buf)-off)-(7*chars_num)
+    # WNG: in case of 7 remaining bits at the end of the buffer, we will have an @ 
+    # at the end of the returned string
+    # we would need the chars_num parameter passed as function arg to fix this
+    #
+    char  = Charpy(bytes(reversed(buf)))
+    #
+    # get the size and number of characters
+    buf_bl    = len(buf) << 3
+    chars_bl  = buf_bl - off
+    chars_num = chars_bl // 7
+    # jump over the fill bits (from the UDH)
+    char._cur = chars_bl - (7 * chars_num)
+    #
     # get all chars
     arr = [char.get_uint(7) for i in range(chars_num)]
     chars = []
-    #
     for i, v in enumerate(arr):
         if v == 27:
             # escape char, replace last char with extended content
             try:
                 chars[-1] = _GSM7bExtLUT[arr[i-1]]
-            except:
+            except KeyError:
                 chars.append(u' ')
         else:
             chars.append(_GSM7bLUT[v])
     return u''.join(reversed(chars))
+
+# TODO: we should test more thoroughly the 7b codec when a UDH is present and creates a misalignment
+# Here are some wireshark filters to collect such kind of SMS
+# gsm_sms.tp-dcs == 0 and gsm_sms.dis_field_udh.user_data_header_length != 6 and gsm_sms.ie_identifier != 0x00
+# gsm_sms.dis_field_udh.gsm.fill_bits == 0x0 and gsm_sms.ie_identifier != 0x00
 
 
 def encode_7b_cbs(txt):
