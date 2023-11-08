@@ -523,6 +523,7 @@ class RestOctets(IE):
     its content is a single buffer of variable length, which is tied to the
     L2PseudoLength at the beginning of the L3 GSM message containing it
     """
+    _PBL = 176 # default payload bit length for GSM is 23 bytes - 1 byte L2 pseudo length, which gives 176 bits
     _GEN = (
         BufAuto('V', rep=REPR_HEX),
         )
@@ -534,7 +535,7 @@ class RestOctets(IE):
             # in case the length is not fixed at init, it is handled in 
             # a dynamic way, tied to the L2PseudoLength element prefixing the
             # parent Layer3 envelope
-            self[0].set_blauto(lambda: 176 - (self.get_env()[0][0].get_val()<<3))
+            self[0].set_blauto(lambda: self._PBL - (self.get_env()[0][0].get_val()<<3))
 
 
 #------------------------------------------------------------------------------#
