@@ -86,8 +86,8 @@ jobs:
         with:
           user: __token__
           password: ${{ secrets.TEST_PYPI_API_TOKEN }}
-          repository_url: https://test.pypi.org/legacy/
-          skip_existing: true
+          repository-url: https://test.pypi.org/legacy/
+          skip-existing: true
       - name: publish built artifacts to pypi.org
         if: ${{ startsWith(github.ref, 'refs/tag') }}
         uses: pypa/gh-action-pypi-publish@release/v1
