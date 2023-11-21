@@ -391,6 +391,23 @@ configured and used thanks to the [corenet](https://github.com/mitshell/corenet/
 also open-source.
 
 
+pycrate_gmr1
+------------
+
+This subdirectory contains the main module for the GMR-1 Radio Resources protocol: *TS101376_04_08*,
+and the submodule for specific Information Elements: *TS101376_04_08_IE*.
+This is a partial implementation of the ETSI specification TS 101 376-04-08 for the 
+GEO-Mobile Radio Interface Specifications (Release 3).
+
+
+pycrate_gmr1_csn1
+-----------------
+
+This subdirectory contains all the CSN.1 definitions for the GMR-1 Radio Resources protocol,
+extracted from the 3 ETSI specifications for GEO-Mobile Radio release 3:
+TS 101 376-04-08, TS 101 376-04-12 and 101 376-04-13.
+
+
 Usage
 =====
 
