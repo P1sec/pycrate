@@ -899,19 +899,13 @@ class TP_UDH(Envelope):
 class BufUD(Buf):
     
     # default encoding, required in SMS REPORT without TP-DCS
-    DEFAULT_DCS = DCS_7B  
-    # indicator for GSM 7b encoding length
-    _ENC_BL = 0
+    DEFAULT_DCS = DCS_7B
     
     def set_val(self, val):
         if val is None:
             self._val = None
         elif isinstance(val, bytes_types):
             Buf.set_val(self, val)
-            if self.get_dcs() == DCS_7B:
-                self._ENC_BL = 8*len(val)
-            else:
-                self._ENC_BL = 0
         else:
             self.encode(val)
     
@@ -933,7 +927,7 @@ class BufUD(Buf):
                 return DCS_UCS
             return DCS_8B
     
-    def get_dcs7b_off(self):
+    def _get_dcs7b_off(self):
         try:
             udh = self.get_env()['UDH']
         except Exception:
@@ -949,27 +943,17 @@ class BufUD(Buf):
     def encode(self, val):
         dcs = self.get_dcs()
         if dcs == DCS_7B:
-            enc, cnt = encode_7b(val, self.get_dcs7b_off())
+            enc, cnt = encode_7b(val, self._get_dcs7b_off())
             self.set_val(enc)
-            self._ENC_BL = 7*cnt
         elif dcs == DCS_UCS:
             self.set_val(val.encode('utf-16-be'))
-            self._ENC_BL = 0
         else:
             self.set_val(val)
-            self._ENC_BL = 0
     
     def decode(self):
         dcs = self.get_dcs()
         if dcs == DCS_7B:
-            try:
-                udhbl = self.get_env()['UDH'].get_bl()
-            except Exception:
-                udhbl = 0
-            if (udhbl + self._ENC_BL) % 8 == 1:
-                return decode_7b(self.get_val(), self.get_dcs7b_off())[:-1]
-            else:
-                return decode_7b(self.get_val(), self.get_dcs7b_off())
+            return decode_7b(self.get_val(), self._get_dcs7b_off())
         elif dcs == DCS_UCS:
             return str(self.get_val(), 'utf-16-be')
         else:
@@ -1002,10 +986,8 @@ class TP_UD(Envelope):
     
     def _set_udl(self):
         if self.get_dcs() == DCS_7B:
-            # count number of septets:
-            # UDH should be a round number of septet (thanks to the fill bits)
-            # UD should have a non-null ENC_BL after encoding the text
-            return (self[1].get_bl() + self[2]._ENC_BL) // 7
+            # count number of septets (UDH + UD):
+            return (self[1].get_bl() + self[2].get_bl()) // 7
         else:
             return self[1].get_len() + self[2].get_len()
     
