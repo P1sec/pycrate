@@ -1,0 +1,72 @@
+-- ETSI TS 101 376-04-13
+-- 11.1.5.2         SBSS RELOCATION INFO
+-- SBSS Relocation Information message content
+
+< SBSS Relocation Information message content > ::=
+ { -- MES Information Elements
+   < RRC State Indicator : < RRC State Indicator IE >>
+   < State of RRC procedure : bit (4) >
+   -- Ciphering related information
+   { 00 < GERAN A/Gb Security Info : < GERAN A/Gb Security Info IE >>
+   --| 01 < GERAN Iu Security Info : < GERAN Iu Security Info IE >>
+   | 01 < GERAN Iu Security Info : null>
+   --| 10 { < GERAN Iu Security Info : < GERAN Iu Security Info IE >> -- This is used if AES-256 Ciphering is being used
+   | 10 { < GERAN Iu Security Info : null >
+          < Active AES-256 Ciphering Key: bit (256) >
+          < Active Key Age: bit (16) >
+          { 0 | 1 < Pending AES-256 Ciphering Key : bit (256) > }
+          < NONCE: bit(64) > } -- This field shall be set to all zeros if NONCE was not provided during Key Exchange procedure.
+   | 11 < Extension : < Extension IE >> }
+   < G-RNTI : < G-RNTI IE >>
+   < START : < START IE >>
+   { 0 | 1 < MES GERAN Iu mode Radio Access Capability : < MES GERAN Iu mode Radio Access Capability IE >> }
+   { 0 | 1 < MES GERAN A/Gb mode Radio Access Capability : < MES GERAN A/Gb mode Radio Access Capability IE >> }
+   { 0 | 1 < UE UTRAN Radio Access Capability : < UE UTRAN Radio Access Capability IE >> }
+   { 0 | 1 < UE UTRAN Radio Access Capability Extension : < UE UTRAN Radio Access Capability Extension IE >> }
+   { 0 | 1 < UE CDMA2000 Radio Access Capability : < UE CDMA2000 Radio Access Capability IE >> }
+   < GRA Id : < GRA Identity IE >>
+   < CN Common GSM-MAP NAS System Info : < NAS System Information GSM-MAP IE >>
+   < Length of CN Domain Related Information : bit (2) >
+   { < CN Domain Identity : < CN Domain Identity IE >>
+     < CN Domain Specific GSM-MAP NAS System Info : < NAS System Information GSM-MAP IE >> }
+   -- warning: this multiplier is not in the spec (forgotten ?)
+   * (1+val(Length of CN Domain Related Information))
+   { 0 | 1 < Signalling RB Information to Setup List : bit (3) >
+           < Signalling RB Information to Setup : < Signalling RB Information to Setup IE >>
+           * (1+val(Signalling RB Information to Setup List)) }
+   { 0 | 1 < RAB Information for Setup List : bit (4) >
+           < RAB Information for Setup : < RAB Information for Setup IE >>
+           * (1+val(RAB Information for Setup List)) }
+   { 0 | 1 < RB Information to Reconfigure List : bit (5) >
+           < RB Information to Reconfigure : < RB Information to Reconfigure IE >>
+           * (1+val(RB Information to Reconfigure List))
+   { 0 | 1 < RAB Information for Handover List : bit (4) >
+           < RAB Information for Handover : < RAB Information for Handover IE >>
+           * (1+val(RAB Information for Handover List)) }
+   --{ 0 | 1 < Multirate configuration : < Multirate Configuration IE >> }
+   { 0 | 1 < Multirate configuration : null > }
+   { 0 | 1 < TDMAFN : bit (22) > }
+   { 0 | 1 < Failure Cause and Error Information : < Failure Cause and Error Information IE >> }
+   { 0 | 1 < MES GPS Position : GPS Position IE > }
+   { 0 | 1 < Source Traffic Cell Identity : < GMR-1 Cell Identity IE >> }
+   { 0 | 1 < DL Traffic ARFCN : bit (11) > }
+   { null | 0 bit** = < no string >
+   | 1--Release 6 additions, non-critical extension
+     { { 0 | 1 < UL TrCH Information Common For All Transport Channels :
+                --< UL TrCH Information Common For All Transport Channels IE >> }
+                null > }
+       { 0 | 1 < Added or Reconfigured UL TrCH Information List : bit (3) >
+               --{ < Added or Reconfigured UL TrCH Information : < Added or Reconfigured UL TrCH Information IE >> }
+               { < Added or Reconfigured UL TrCH Information : null > }
+               * (1+val(Added or Reconfigured UL TrCH Information List)) }
+       { 0 | 1 < DL TrCH Information Common For All Transport Channels :
+                 --< DL TrCH Information Common For All Transport Channels IE >> }
+                 null > }
+       { 0 | 1 < Added or Reconfigured DL TrCH Information List : bit (3) >
+               --{ < Added or Reconfigured DL TrCH Information : < Added or Reconfigured DL TrCH Information IE >> }
+               { < Added or Reconfigured DL TrCH Information : null > }
+               * (1+val(Added or Reconfigured DL TrCH Information List)) }
+     }
+   }
+ } ;
+

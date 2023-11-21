@@ -1,0 +1,15 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.59          Downlink Key Exchange
+-- Downlink Key Exchange message content
+
+< Downlink Key Exchange message content > ::=
+ { 0 -- critical extension escape available
+ {
+ < RRC Transaction Identifier : < RRC Transaction Identifier IE > >
+ { 0 | 1 < Integrity Check Info : < Integrity Check Info IE > >}
+ { 000 {<gix:bit (528)>} -- 521-Bit Random ECP Group Key with compression
+ | 001 {<gix: bit (528)> <giy: bit(528)>} -- 521-Bit Random ECP Group Key without compression
+ }
+ {0|1 {<NONCE: bit(64)>}
+ ! < Content part error : bit (*) = < no string > > } ;
+

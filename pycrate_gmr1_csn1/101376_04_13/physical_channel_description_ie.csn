@@ -1,0 +1,26 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.62a        Physical Channel Description
+-- Physical Channel Description IE
+
+< Physical Channel Description IE > ::=
+ {
+   0 -- DCH Description :
+   { 0 | 1 < Power Control Parameter : bit(6)> } -- Used in uplink only
+   { 0 | 1 < Power Control Synch Offset : bit (2)> } -- Used in uplink only
+   < DCH Channel MCS Info: <DCH MCS IE>>
+   < Channel Info : <Channel Info IE >>
+   { 0 < MAC Slot Allocation: bit(8) > | 1 < Slot Allocation : <Slot Allocation IE >> }
+   { 0 | 1 < Frequency Parameters : < Directional Frequency Parameters IE >> } ; -- used with UE Software Version Indicator 0x1 or higher; 
+        -- 0 implies that the frequency parameters are the same as what is currently
+
+< Directional Frequency Parameters IE> ::=
+ < Bandwidth: bit (3) >
+ < ARFCN : bit (11) >
+ < Reserved: bit(1) > ;
+
+< Handover struct > ::=
+ < Handover Reference : < Handover Reference IE >>
+ { 0 | 1 < Timing Advance : < Packet Link Synchronization Parameters IE >> }
+ { 0 | 1 < GMR-1 Spotbeam Description : < GMR-1 Spotbeam Description IE >> } 
+ ;
+

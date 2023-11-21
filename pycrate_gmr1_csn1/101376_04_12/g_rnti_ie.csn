@@ -1,0 +1,8 @@
+-- ETSI TS 101 376-04-12
+-- 12.16          Temporary logical link identity (TLLI)
+-- G-RNTI IE
+
+< G-RNTI IE > ::=
+ < Serving BSC Identity : bit (12) >
+ < S-RNTI : bit (20) >;
+

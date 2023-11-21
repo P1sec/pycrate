@@ -1,0 +1,10 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.76         RAB Information to Reconfigure
+-- RAB Information to Reconfigure IE
+
+< RAB Information to Reconfigure IE > ::=
+ < RAB Identity : < RAB Identity IE > >
+ < CN Domain Identity : < CN Domain Identity IE > >
+ < NAS Synchronization Indicator : < NAS synchronization Info : bit (4) > >
+ { 0 | 1 < Upper Layer Bearer Info : <Upper Layer Bearer Info IE>> };
+

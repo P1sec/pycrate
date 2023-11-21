@@ -1,0 +1,13 @@
+-- ETSI TS 101 376-04-08
+-- 11.5.2.88         Segment 4D
+-- Segment 4D
+
+<Segment 4D> ::=
+ --<Header Segment 4D>
+ <BCCH_FULL_LIST_PART2: bit (60)>
+ <Spare: bit (53)> ;
+
+<Header Segment 4D> ::=
+ <Class Type 4: 110>
+ <Segment type: 0011> ;
+

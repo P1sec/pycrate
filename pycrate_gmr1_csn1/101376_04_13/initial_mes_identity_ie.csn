@@ -1,0 +1,31 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.35         Initial MES Identity
+-- Initial MES Identity IE
+
+< Initial MES Identity IE > ::=
+ { < MES Identity Type - GSM-MAP TMSI and LAI : 0000 >
+   < TMSI : bit (32) >
+   < LAI : octet (5) >
+ | < MES Identity Type - GSM-MAP P-TMSI and RAI : 0001 >
+   < PTMSI : bit (32) >
+   < RAI : octet (6) >
+ | < MES Identity Type - GSM-MAP IMSI or IMEI: 0010 >
+   < Length of Mobile Identity contents : bit (4) >
+   < Mobile Identity : octet (val (Length of Mobile Identity contents)) >
+ | < MES Identity Type - ESN DS41 : 0011 >
+   < ESN : bit (32) >
+ | < MES Identity Type - IMSI DS41 : 0100 >
+   < IMSI length : bit (2) > -- only allowed 0 - 2
+   < IMSI : octet (5+val(IMSI length)) >
+ | < MES Identity Type - reserved for IMSI and ESN DS41 : 0101 >
+   < IMSI length : bit (2) > -- only allowed 0 - 2
+   < IMSI : octet (5+val(IMSI length)) >
+   < ESN : bit (32) >
+ | < MES Identity Type - reserved for TMSI DS41 : 0110 >
+   < TMSI length : bit (4) >
+   < TMSI-DS-41 : octet (2+val(TMSI length)) >
+ | < Message escape :  1 >
+   < bit (3) >
+   < bit** = < no string > > -- reserved
+ } ;
+

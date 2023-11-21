@@ -1,0 +1,13 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.17         CN Information Info
+-- CN Information info IE
+
+< CN Information info IE > ::=
+ { 0 | 1 < PLMN Identity : < PLMN Identity IE > > }
+ { 0 | 1 < CN Common GSM-MAP NAS System Info : < NAS System Information GSM-MAP IE > > }
+ { 0 | 1 < Length of CN Domain Related Information : bit (2) >
+ { < CN Domain Identity : < CN Domain Identity IE > >
+ < CN Domain Specific GSM-MAP NAS System Info : < NAS System Information GSM-MAP IE > >
+ } *( 1 + val ( Length of CN Domain Related Information ) )
+ };
+

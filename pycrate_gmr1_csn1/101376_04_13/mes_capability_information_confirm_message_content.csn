@@ -1,0 +1,13 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.26           MES CAPABILITY INFORMATION CONFIRM
+-- MES CAPABILITY INFORMATION CONFIRM message content
+
+< MES CAPABILITY INFORMATION CONFIRM message content > ::=
+ { 0 -- critical extension escape available
+ {
+ -- MES Information Elements
+ < RRC Transaction Identifier : < RRC Transaction Identifier IE > >
+ { 0 | 1 < Integrity Check Info : < Integrity Check Info IE > > }
+ ! < Content part error : bit (*) = < no string > > }
+ ! < Message escape critical extensions: 1 bit (*) = < no string > >} ;
+

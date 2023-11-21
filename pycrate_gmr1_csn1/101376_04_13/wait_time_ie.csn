@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.112 Wait Time
+-- Wait Time IE
+
+ < Wait Time IE > ::=
+ < Wait Time : bit (4) >;
+

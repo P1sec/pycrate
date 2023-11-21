@@ -1,0 +1,72 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.28           RADIO BEARER RECONFIGURATION
+-- RADIO BEARER RECONFIGURATION message content
+
+< RADIO BEARER RECONFIGURATION message content > ::=
+ { 0 -- critical extension escape available
+ {
+     -- MES information elements
+     < RRC Transaction Identifier : < RRC Transaction Identifier IE >>
+     { 0 | 1 < Downlink Activation Time : < Activation Time IE >> } 
+        -- When Downlink Activation Time field is not present 
+        -- switching occurs after RLC acknowledgement of CHANNEL CHANGE PREPARATION COMPLETE message
+     < RRC State Indicator : < RRC State Indicator IE > >
+     { 0 | 1 < Integrity Check Info : < Integrity Check Info IE > > }
+     { 0 | 1 < Integrity Protection Mode Info : < Integrity Protection Mode Info IE > > }
+     { 0 | 1 < Ciphering Mode Info : < Ciphering Mode Info IE > > }
+     { 0 | 1 < New G-RNTI : < G-RNTI IE > > }
+     -- CN information elements
+     { 0 | 1 < CN Information Info : < CN Information Info IE > > }
+     -- GERAN information elements
+     { 0 | 1 < GRA Identity : < GRA Identity IE > > }
+     -- RB information elements
+     { 0 | 1 < RAB Information to Reconfigure List : bit (4) >
+     < RAB Information to Reconfigure : < RAB Information to Reconfigure IE > > * (1+val(RAB Information to Reconfigure List)) }
+     { 0 | 1 < PDCP - RB Information to Reconfigure List : bit (5) >
+         { < PDCP - RB Information to Reconfigure : < PDCP- RB Information to Reconfigure IE > >
+         { 0 | 1 < RB priority : bit (2) > }
+         { 0 | 1 < Physical Information : < Physical Channel Configuration IE >> } -- used with UE Software Version Indicator 0x0
+         { 0 | 1 < Uplink Physical Channel Information List Index : bit(5) > } -- used with UE Software Version Indicator 0x1 or higher
+         { 0 | 1 < Downlink Physical Channel Information List Index : bit(5) > } -- used with UE Software Version Indicator 0x1 or higher
+         { 0 | 1 < NETWORK_RESPONSE_TIMES : < Network Response Times struct >> }
+         { 0 | 1 < RRB identity : <RRB Identity IE >> }
+         { 0 | 1 < Last Received RLC Block : < RLC Sequence Number IE>> }
+         } * (1+val(PDCP - RB Information to Reconfigure List))
+     }
+     { 0 | 1 <Uplink Physical Information List : bit (5) >
+         { < Uplink Physical Channel : < Physical Channel Description IE > >
+         } * (1+val(Uplink Physical Information List))
+     }
+     { 0 | 1 <Downlink Physical Information List : bit (5) >
+         { < Downlink Physical Channel : < Physical Channel Description IE > >
+         } * (1+val(Downlink Physical Information List))
+     }
+     { 0 | 1 < Downlink Counter Synchronization Info : < Downlink Counter Synchronization info struct > > }
+     { 0 | 1 <BCCH ARFCN : bit(11) > } -- used with UE Software Version Indicator 0x1 or higher
+     { 0 | 1 < MES Timers and Constants in Connected Mode : < MES Timers and Constants in RRC-Connected Mode IE >> } -- used with UE Software Version Indicator 0x1 or higher
+     { 0 | 1 < MES Additional Timers and Constants in Connected Mode : < MES Additional Timers and Constants in RRC-Connected Mode IE >> } -- used with UE Software Version Indicator 0x1 or higher
+     { 0 | 1 < Handover Traffic Carrier Info : < Handover Traffic Carrier Info IE >> } -- used with UE Software Version Indicator 0x1 or higher
+     { 0 | 1 < Carrier Reconfiguration Type : < Carrier Reconfiguration Type IE >> } -- used with UE Software Version Indicator 0x1 or higher
+     -- used with UE Software Version Indicator 0x1 or higher
+      -- use this ciphering information when provided otherwise use the MES ciphering key generated during authentication
+      { 1 { 00 < Ciphering Key : bit(128) >
+          | 01 < AES-256 Ciphering Key : bit(256) > } -- key applies to all RBs listed in Ciphering Synchronization
+          < RB Ciphering Synchronization: < RB Ciphering Synchronization IE >> } ** 0
+     { 0 | 1 < RB Information to Release List : bit (5) >
+         { < RB Information to Release : < RB Information to Release IE > >
+         } * (1+val(RB Information to Release List))
+         { 0 | 1 { < Release Cause: bit (3) > } * (1+val(RB Information to Release List))}
+         ! < Content part error : bit (*) = < no string >>
+     }
+     ! < Message escape critical extension : 1 bit (*) = < no string > >
+ } ;
+
+< Downlink Counter Synchronization Info struct> ::=
+ < RB with PDCP Information List : bit (5) >
+ { { 0 | 1 < RB with PDCP Information : < RB with PDCP Information IE >> }
+   { 0 | 1 < PDCP context relocation info : < PDCP context relocation info IE >> }
+ } * (1 + val(RB with PDCP Information List));
+
+< Network Response Times struct > ::= null ;
+-- GMR-1 3G: Reserved for Future use
+

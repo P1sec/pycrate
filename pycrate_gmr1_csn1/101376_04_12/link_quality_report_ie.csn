@@ -1,0 +1,12 @@
+-- ETSI TS 101 376-04-12
+-- 12.30 Link quality report
+-- Link Quality Report IE
+
+< Link Quality Report IE > ::=
+  < SQIR : bit (6) >
+  < GMPRS Terminal Type Identifier: bit (7) >
+  < SIN : bit (4) >
+  < PAN : bit (6) >
+  { 0 | 1 < IMEI : bit (64) > }
+  { 0 | 1 < GPS Position : bit (40) > } ;
+

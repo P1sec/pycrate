@@ -1,0 +1,14 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.50        MES Positioning Capability
+-- MES Positioning Capability IE
+
+< MES Positioning Capability IE > ::=
+ {
+ < MES Positioning Capability Length : bit (4)>
+ < OTD-A support : bit (1) >
+ < OTD-B support : bit (1) >
+ < GPS-A support : bit (1) >
+ < GPS-B support : bit (1) >
+ < GPS-C support : bit (1) >
+ < spare bit >**; -- Extension information may be truncated between released versions of the protocol
+

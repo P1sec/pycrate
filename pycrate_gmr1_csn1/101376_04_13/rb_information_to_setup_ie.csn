@@ -1,0 +1,13 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.84         RB Information to Setup
+-- RB Information to Setup IE
+
+< RB Information to Setup IE > ::=
+ < RB Information to Setup length : bit (8) >
+ < RB Identity : < RB Identity IE > >
+ {0 | 1 < Uplink RLC Info : < RLC Info IE > > }
+ {0 | 1 < Downlink RLC Info : < RLC Info IE > > }
+ --{0 | 1 < RB Mapping Info : < RB Mapping Info IE > > } -- Release 6 extension
+ {0 | 1 < RB Mapping Info : null > }
+ < spare bits> **; -- reserved for future use
+

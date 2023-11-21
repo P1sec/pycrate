@@ -1,0 +1,18 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.31 Packet Uplink Talk Burst Control
+-- Packet Uplink Talk Burst Control message content
+
+< Packet Uplink Talk Burst Control message content > ::=
+ { 0 < Global TFI : < Global TFI IE > >
+ | 10 < S-RNTI: bit (20) >
+ | 110 < G-RNTI: bit (32) > }
+ < RB Id: bit (5) >
+ < Reference ID: bit (2) >
+ < RETRANSMISSION: bit (1) >
+ { 00 { 0 | 1 <Request Priority: bit(2)> } -- Talk Burst Request
+ | 01 -- Talk Burst Release
+ | 10 { <Subtype: bit (5)> <Reason Code: bit (3)> }-- Talk Burst Acknowledgement
+ | 11 --Reserved
+ }
+ < padding bits > ;
+

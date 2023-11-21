@@ -1,0 +1,15 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.7a        GMR-1 Spotbeam Description
+-- GMR-1 Spotbeam Description IE
+
+< GMR-1 Spotbeam Description IE > ::=
+ < BCCH ARFCN: bit(11) >
+ < SB_BCCH_STN: bit(5)>
+ < MAC_FORWARD_TS_OFFSET: bit(2)>
+ < MAC_RETURN_TS_OFFSET: bit(5)>
+ < SB_FRAME_TS_OFFSET: bit(5)>
+ < SB_SYMBOL_OFFSET: bit(6)>
+ < SB_Mask: bit(8)>
+ < Spotbeam Id: bit(10)>
+ { 0 | 1 <Satellite Id: bit (2) > } ;
+

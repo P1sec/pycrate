@@ -1,0 +1,31 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.42          RRC CONNECTION SETUP COMPLETE
+-- RRC CONNECTION SETUP COMPLETE message content
+
+< RRC CONNECTION SETUP COMPLETE message content > ::=
+   {
+     < RRC Transaction Identifier : < RRC Transaction Identifier IE > >
+     < Initial MES Identity : < Initial MES Identity IE > >
+     { 0 | 1 < MES GPS Position: < GPS Position IE >> }
+     { 0 | 1 < GPS Timestamp: bit (16) > }
+     { 0 < Directed RAC: bit (8) > 
+     | 1 < CN Information Info: < CN Information Info IE >> }
+     < START list : bit (2) >
+     { < CN Domain Identity : < CN Domain Identity IE > >
+       < START : < START IE > > } * (1+val(START list))
+     { 0 | 1 < MES GERAN Iu mode Radio Access Capability :
+               < MES GERAN Iu mode Radio Access Capability IE >> }
+     < Inter-RAT MES Radio Access Capability : < Inter-RAT MES Radio Access Capability struct > >
+     ! < Content part error : bit (*) = < no string > >
+   } ;
+
+< Inter-RAT MES Radio Access Capability struct > ::=
+    < Inter-RAT MES Radio Access Capability Length : bit (15) >
+    { 0 | 1 < MES GERAN A/Gb mode Radio Access Capability :
+              < MES GERAN A/Gb mode Radio Access Capability IE > > }
+    { 0 | 1 < UE UTRAN Radio Access Capability : < UE UTRAN Radio Access Capability IE > > }
+    { 0 | 1 < UE UTRAN Radio Access Capability Extension : < UE UTRAN Radio Access Capability Extension IE > > }
+    { 0 | 1 < UE CDMA2000 Radio Access Capability : < UE CDMA2000 Radio Access Capability IE > > }
+    { 0 | 1 < UE Software Version Indicator : < UE Software Version Indicator IE > > }
+              -- used with UE Software Version Indicator 0x1 or higher
+    < spare bits > **;

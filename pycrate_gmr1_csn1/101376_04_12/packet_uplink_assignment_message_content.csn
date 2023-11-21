@@ -1,0 +1,39 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.22 Packet uplink assignment (A/Gb mode only)
+-- Packet Uplink Assignment message content
+
+< Packet Uplink Assignment message content > ::=
+ { { 0 < TLLI : bit (32) >
+   | 10 < Global TFI : <Global TFI IE> >
+   | 110 < reserved: bit (16) > }
+   <Rid: bit (2)>
+   { 0 -- Message escape
+     { < CHANNEL_MCS_COMMAND : bit (4) >
+       < Packet Link Synchronization : < Packet Link Synchronization IE > >
+       { < Frequency Parameters : < Frequency Parameters IE > > }
+       { 0 <Dynamic Allocation : < Dynamic Allocation struct > >
+       | 10 < reserved >
+       | 110 < reserved >
+       | 1110 < extension > }
+       < padding bits >
+       ! < Non-distribution part error : bit (*) = < no string > > }
+     ! < Message escape : 1 bit (*) = <no string> > }
+   ! < Address information part error : bit (*) = < no string > > }
+ ! < Distribution part error : bit (*) = < no string > > ;
+
+<extension> ::= -- Future extension can be done by modifying this structure
+ null ;
+
+<reserved> ::= null ;
+
+<Dynamic Allocation struct > ::=
+ < reserved : bit (1) >
+ < reserved : bit (1) >
+ < UPLINK_TFI_ASSIGNMENT : bit (7) >
+ < reserved: bit (1) >
+ < reserved: bit (5) >
+ < CHANNEL_MCS_COMMAND_PNB_5_12: bit (4) >
+ < MAC Slot Allocation: bit (8) > -- Timeslot Allocation
+ < reserved: bit(3)>
+ < USF : bit (6) > ;
+

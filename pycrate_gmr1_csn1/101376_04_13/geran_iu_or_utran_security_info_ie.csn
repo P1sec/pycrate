@@ -1,0 +1,26 @@
+-- ETSI TS 101 376-04-13
+-- 11.2.3         RRC Security Information, from GERAN Iu mode/UTRAN to GERAN
+-- GERAN Iu or UTRAN Security Info IE
+
+< GERAN Iu or UTRAN Security Info IE >::=
+ { < Ciphering status for each CN domain : bit (2) >
+   { < CN domain identity : < CN domain identity IE >>
+     < Ciphering Status : bit (1) > } * (1+val(Ciphering status for each CN domain))
+   < Latest configured CN Domain : bit (2) >
+   < Ciphering info for transparent RB : bit (2) >
+   { < CN domain identity : < CN domain identity IE >>
+     < MAC-HFN : bit (11) > } * (1+val(Ciphering info for transparent RB))
+   < Ciphering info for non-transparent RB : bit (5) >
+   { < RB Id : < RB Identity IE >>
+     < DL HFN : < RLC HFN IE >>
+     < UL HFN : < RLC HFN IE >> } * (1+val(Ciphering info for non-transparent RB))
+   { < Integrity Protection status : 1 >
+     { < SRB-Id : bit (2) >
+     < UL RRC HFN : bit (28) >
+     < DL RRC HFN : bit (28) >
+     < Uplink RRC Message Sequence number : bit (4) > * 4
+     < Downlink RRC Message Sequence number : bit (4) > * 4
+     }
+   | < Integrity Protection status : 0 > }
+ ! < Content part error : bit (*) = < no string > > } ;
+

@@ -1,0 +1,13 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.51a MES Additional Timers and Constants in RRC-Connected mode
+-- MES Additional Timers and Constants in RRC-Connected mode IE
+
+< MES Additional Timers and Constants in RRC-Connected mode IE > ::=
+ < MES Additional Timers and Constants Length : bit (6) >
+ { 0 | 1 < T3168 : bit (3) > }
+ { 0 | 1 < T3192 : bit (3) > }
+ { 0 | 1 < T3202 : bit (6) > }
+ { 0 | 1 < BS_CV_MAX : bit (9) > }
+ { 0 | 1 < USF_DELAY : bit (3) > }
+ < spare bits > ;
+

@@ -1,0 +1,18 @@
+-- ETSI TS 101 376-04-12
+-- 11.5.2.78         Segment 3F
+-- Segment 3F
+
+<Segment 3F> ::=
+ --<Header Segment 3F>
+ <SA_AGCH_CHANS: bit (5)>
+ --<SA_AGCH_LIST_PART1: bitstring (A) > | 
+ --{ <SA_AGCH_LIST_PART1: bitstring (A1)> 
+ --  <SA_RACH_LIST: bitstring (A2) > } |
+ --<Packet_Control_Channel_Definition_Part4: bitstring(B)>
+ --<Spare: bitstring (C)>
+ <undecoded: bit (110)> ;
+
+<Header Segment 3F> ::=
+ <Class Type 3: 0>
+ <Segment type: 0101> ;
+

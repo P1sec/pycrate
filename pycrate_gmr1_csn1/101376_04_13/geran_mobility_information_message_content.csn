@@ -1,0 +1,32 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.8           GERAN MOBILITY INFORMATION
+-- GERAN MOBILITY INFORMATION message content
+
+< GERAN MOBILITY INFORMATION message content > ::=
+ { 0 -- Critical extension escape available
+   {
+    -- MES Information Elements
+    < RRC Transaction Identifier : < RRC Transaction Identifier IE >>
+    < MES Timers and Constants in Connected Mode : < MES Timers and Constants in RRC-Connected Mode IE >>
+    { 0 | 1 < Integrity Check Info : < Integrity Check Info IE >> }
+    { 0 | 1 < Integrity protection mode info : < Integrity Protection Mode Info IE >> }
+    { 0 | 1 < Ciphering Mode Info : < Ciphering Mode Info IE >> }
+    { 0 | 1 < New G-RNTI : < G-RNTI IE >> }
+    -- CN Information Elements
+    { 0 | 1 < CN Information Info : < CN Information Info IE >> }
+    -- GERAN Information Elements
+    { 0 | 1 < GRA Identity : < GRA Identity IE >> }
+    { 0 | 1 < Downlink Counter Synchronization Info : < Downlink Counter Synchronization Info struct >> }
+    { 0 | 1 < BCCH ARFCN : bit(11) > } -- used with UE Software Version Indicator 0x1 or higher
+    { 0 | 1 < MES Additional Timers and Constants in Connected Mode : < MES Additional Timers and Constants in RRC-Connected Mode IE >> } -- used with UE Software Version Indicator 0x1 or higher
+    ! < Content part error : bit (*) = < no string > > 
+   }
+ ! < Message escape critical extensions : 1 bit (*) = < no string >>
+ } ;
+
+< Downlink Counter Synchronization Info struct> ::=
+ < RB with PDCP Information List : bit (5) >
+ { { 0 | 1 < RB with PDCP Information : < RB with PDCP Information IE > > }
+   { 0 | 1 < PDCP context relocation info : < PDCP context relocation info IE > > }
+ } * (1 + val(RB with PDCP Information List)) ;
+

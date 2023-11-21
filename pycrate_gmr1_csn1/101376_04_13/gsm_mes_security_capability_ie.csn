@@ -1,0 +1,14 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.33         GSM MES Security Capability
+-- GSM MES Security Capability IE
+
+< GSM MES Security Capability IE > ::=
+ < A5/1 support : bit (1) >
+ < A5/2 support : bit (1) >
+ < A5/3 support : bit (1) >
+ < A5/4 support : bit (1) >
+ < A5/5 support : bit (1) >
+ < A5/6 support : bit (1) >
+ < A5/7 support : bit (1) >
+ < spare bit > ; -- Reserved
+

@@ -1,0 +1,9 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.75        RAB Information for Setup
+-- RAB Information for Setup IE
+
+< RAB Information for Setup IE > ::=
+ < RAB Info : < RAB info IE > >
+ < PDCP - RB Information to Setup List : bit (3) >
+ < PDCP - RB Information to Setup : < PDCP - RB Information to Setup IE >> * (1+val(PDCP - RB Information to Setup List)) ;
+

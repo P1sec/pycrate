@@ -1,0 +1,14 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.4         Capability Update Requirement
+-- Capability Update Requirement IE
+
+< Capability Update Requirement IE > ::=
+ < Capability Update Requirement length : bit (4) >
+ < MES GERAN Iu mode radio access capability update requirement : bit (1) >
+ < MES GERAN A/Gb mode radio access capability update requirement : bit (1) >
+ < UE radio capability FDD capability update requirement : bit (1) >
+ < UE radio capability 3.84 Mcps TDD capability update requirement : bit(1) >
+ < UE radio capability 1.28 Mcps TDD capability update requirement : bit (1) >
+ < UE CDMA2000 radio access capability update requirement : bit (1) >
+ < spare bits >;
+

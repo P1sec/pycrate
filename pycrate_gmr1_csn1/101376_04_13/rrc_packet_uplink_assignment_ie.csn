@@ -1,0 +1,8 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.96 RRC Packet Uplink Assignment
+-- RRC Packet Uplink Assignment IE
+
+< RRC Packet Uplink Assignment IE > ::=
+ -- See Packet Uplink Assignment message in ETSI TS 101 376-4-12 [13]
+ < Packet Uplink Assignment message content > ;
+

@@ -1,0 +1,11 @@
+-- ETSI TS 101 376-04-13
+-- 10.4.16 MES_CAPABILITY_TRANSFERRED
+-- MES_CAPABILITY_TRANSFERRED VAR
+
+< MES_CAPABILITY_TRANSFERRED VAR > ::=
+ < MES GERAN Iu mode Radio Access Capability : < MES GERAN Iu mode Radio Access Capability IE > >
+ { 0 | 1 < MES GERAN A/Gb mode Radio Access Capability : < MES GERAN A/Gb mode Radio Access Capability IE > >}
+ { 0 | 1 < UE UTRAN Radio Access Capability: < UE UTRAN Radio Access Capability IE > >}
+ { 0 | 1 < UE UTRAN Radio Access Capability Extension: < UE UTRAN Radio Access Capability Extension IE > >}
+ { 0 | 1 < UE CDMA2000 Radio Access Capability : < UE CDMA2000 Radio Access Capability IE > >} ;
+

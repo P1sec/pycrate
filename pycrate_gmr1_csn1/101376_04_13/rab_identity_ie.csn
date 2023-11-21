@@ -1,0 +1,8 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.72        RAB Identity
+-- RAB Identity IE
+
+< RAB Identity IE > ::=
+ { 0 < RAB_Identity_GSM-MAP : bit (8) >
+ | 1 < RAB_Identity_ANSI-41 : bit (8) > } ;
+

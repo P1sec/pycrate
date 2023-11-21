@@ -1,0 +1,10 @@
+-- ETSI TS 101 376-04-12
+-- 12.29a Time and Frequency Correction
+-- Time and Frequency Correction IE
+
+< Time and Frequency Correction IE > ::=
+ < Timing correction : bit (10) >
+ < Timing correction flag : bit (1)>
+ < Frequency correction : bit (12) >
+ < Frequency correction flag : bit (1)> ;
+

@@ -1,0 +1,16 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.46          SECURITY MODE COMPLETE
+-- SECURITY MODE COMPLETE message content
+
+< SECURITY MODE COMPLETE message content > ::=
+ {
+   < RRC Transaction Identifier : < RRC Transaction Identifier IE >>
+   < Integrity Check Info : < Integrity Check Info IE >>
+   { 0 | 1 < Uplink Integrity Protection Activation Info : < Integrity Protection Activation Info IE >> }
+   { 0 | 1 < Radio Bearer Uplink Ciphering Activation Time Info : < RB Activation Time Info IE >> }
+   { 0 | 1 < Last Used Ciphering Algorithm : < Ciphering Algorithm IE >> }
+        -- This field should not be included if UT has no knowledge of what algorithm was used in the last session, 
+        -- if ciphering was disabled, or if GERAN didnot request the information.
+   ! < Content part error : bit (*) = < no string >>
+ } ;
+

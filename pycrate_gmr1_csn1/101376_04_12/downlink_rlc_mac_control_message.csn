@@ -1,0 +1,41 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.0.1        Downlink RLC/MAC messages
+-- Downlink RLC/MAC control message
+
+< Downlink RLC/MAC control message > ::=
+ < MESSAGE_TYPE : bit (6) == 1 00001 > < Packet Access Reject message content > |
+ < MESSAGE_TYPE : bit (6) == 0 00001 > < Packet Cell Change Order message content > |
+ < MESSAGE_TYPE : bit (6) == 0 00010 > < Packet Downlink Assignment message content > |
+ < MESSAGE_TYPE : bit (6) == 1 11100 > < Packet Downlink Assignment type 2 message content > |
+ < MESSAGE_TYPE : bit (6) == 0 00011 > < Packet Measurement Order message content > |
+ < MESSAGE_TYPE : bit (6) == 1 00010 > < Packet Paging Request message content > |
+ < MESSAGE_TYPE : bit (6) == 1 00011 > < Packet PDCH Release message content > |
+ < MESSAGE_TYPE : bit (6) == 0 00101 > < Packet Link Control message content > |
+ < MESSAGE_TYPE : bit (6) == 0 00110 > < Packet Link Adaptation Control message content > |
+ < MESSAGE_TYPE : bit (6) == 0 00111 > < Packet Timeslot Reconfigure message content > |
+ < MESSAGE_TYPE : bit (6) == 0 01000 > < Packet TBF Release message content > |
+ < MESSAGE_TYPE : bit (6) == 1 01000 > < Packet TBF Release type 2 message content > |
+ < MESSAGE_TYPE : bit (6) == 0 01001 > < Packet Uplink Ack/Nack message content > |
+ < MESSAGE_TYPE : bit (6) == 1 01001 > < Packet Uplink Ack/Nack type 2 message content > |
+ < MESSAGE_TYPE : bit (6) == 0 01010 > < Packet Uplink Assignment message content > |
+ < MESSAGE_TYPE : bit (6) == 1 01010 > < Packet Uplink Assignment type 2 message content > |
+ < MESSAGE_TYPE : bit (6) == 0 01110 > < Packet DCH Assignment message content > |
+ < MESSAGE_TYPE : bit (6) == 0 01111 > < Multiple TBF Downlink Assignment message content > |
+ < MESSAGE_TYPE : bit (6) == 0 10000 > < Multiple TBF Uplink Assignment message content > |
+ < MESSAGE_TYPE : bit (6) == 0 10001 > < Multiple TBF Timeslot Reconfigure message content > |
+ < MESSAGE_TYPE : bit (6) == 0 10010 > < Physical Information message content > |
+-- < MESSAGE_TYPE : bit (6) == 0 10011 > < Packet TBF Assignment message content > |
+ < MESSAGE_TYPE : bit (6) == 0 10011 > < Packet TBF Assignment type 2 message content > |
+ < MESSAGE_TYPE : bit (6) == 1 00101 > < Packet Downlink Dummy Control Block message content > |
+-- < MESSAGE_TYPE : bit (6) == 1 00110 > < Packet Uplink Talk Burst Control Response > |
+ < MESSAGE_TYPE : bit (6) == 1 00110 > < Packet Uplink Talk Burst Control Response message content > |
+ < MESSAGE_TYPE : bit (6) == 0 11101 > < PDCH Organization message content > |
+ < MESSAGE_TYPE : bit (6) == 0 11110 > < Packet GMPRS Resume Response message content > |
+ < MESSAGE_TYPE : bit (6) == 0 11111 > < Packet DCH Uplink Ack/Nack message content >
+ ! < Unknown message type : bit (*) = < no string > > ;
+
+
+
+
+
+

@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.83         RB Information to Release
+-- RB Information to Release IE
+
+< RB Information to Release IE > ::=
+ < RB Identity : < RB Identity IE > >;
+

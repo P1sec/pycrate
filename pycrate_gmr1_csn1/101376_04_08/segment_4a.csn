@@ -1,0 +1,25 @@
+-- ETSI TS 101 376-04-08
+-- 11.5.2.85         Segment A4
+-- Segment 4A
+
+<Segment 4A> ::=
+ --<Header Segment 4A>
+ <RADIO_LINK_TIMEOUT: bit (8)>
+ <3G Neighbour Cell Description>
+ <Spare bits> ;
+
+<Header Segment 4A> ::=
+ <Class Type 4: 110>
+ <Segment type: 0000> ;
+
+<3G Neighbour Cell Description> ::=
+ 0 | 1 <Bandwidth_FDD: bit (3)>
+ { 1 <Repeated UTRAN FDD Neighbour Cells: Repeated UTRAN FDD Neighbour Cells struct > } ** 0
+ <Spare bits> ;
+
+<Repeated UTRAN FDD Neighbour Cells struct >::=
+ <FDD-ARFCN: bit (14)>
+ <FDD_Indic0: bit>
+ <NR_OF_FDD_CELLS: bit (5)>
+ <FDD_CELL_INFORMATION Field: bit(p(NR_OF_FDD_CELLS))> ;
+ -- p(x) defined in table 11.2.9b.2.a/ETSI TS 144 060 [35]

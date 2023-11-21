@@ -1,0 +1,17 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.25           MES CAPABILITY INFORMATION
+-- MES CAPABILITY INFORMATION message content
+
+< MES CAPABILITY INFORMATION message content > ::=
+ {
+ -- MES Information Elements
+ { 0 | 1 < RRC Transaction Identifier : < RRC Transaction Identifier IE >> }
+ { 0 | 1 < Integrity Check Info : < Integrity Check Info IE >> }
+ { 0 | 1 < MES GERAN Iu mode Radio Access Capability : < MES GERAN Iu mode Radio Access Capability IE >> }
+ { 0 | 1 < MES GERAN A/Gb mode Radio Access Capability : < MES GERAN A/Gb mode Radio Access Capability IE >> }
+ { 0 | 1 < UE UTRAN Radio Access Capability : < UE UTRAN Radio Access Capability IE >> }
+ { 0 | 1 < UE UTRAN Radio Access Capability Extension : < UE UTRAN Radio Access Capability Extension IE >> }
+ { 0 | 1 < UE UTRAN Predefined Configuration Status Information : < UE UTRAN Predefined Configuration Status Information IE >> }
+ { 0 | 1 < UE CDMA2000 Radio Access Capability : < UE CDMA2000 Radio Access Capability IE >> }
+ ! < Content part error: bit (*) = < no string > > } ;
+

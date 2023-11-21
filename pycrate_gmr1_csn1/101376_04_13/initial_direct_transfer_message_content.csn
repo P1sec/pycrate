@@ -1,0 +1,13 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.17           INITIAL DIRECT TRANSFER
+-- INITIAL DIRECT TRANSFER message content
+
+< INITIAL DIRECT TRANSFER message content > ::=
+ {
+ < CN Domain Identity : < CN Domain Identity IE > >
+ < Intra Domain NAS Node Selector : < Intra Domain NAS Node Selector IE > >
+ < NAS Message : < NAS Message IE > >
+ { 0 | 1 < Integrity Check Info : < Integrity Check Info IE > > }
+ < Start : < Start IE > >
+ ! < Content part error : bit (*) = < no string > > } ;
+

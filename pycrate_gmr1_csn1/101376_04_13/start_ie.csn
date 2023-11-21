@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.102 START
+-- START IE
+
+ < START IE > ::=
+ < START : bit(20) > ;
+

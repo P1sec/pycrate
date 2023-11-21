@@ -1,0 +1,17 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.21 Packet uplink Ack/Nack (A/Gb mode only)
+-- Packet Uplink Ack/Nack message content
+
+< Packet Uplink Ack/Nack message content > ::=
+ { 00 < UPLINK_TFI : bit (7) >
+ { 0 -- Message escape
+ { < CHANNEL_MCS_COMMAND : bit (4) >
+ { 0 | 1 < Packet Link Synch : < Packet Link Synchronization IE > > }
+ { 0 | 1 < CHANNEL_MCS_COMMAND_PNB_5_12 : bit (4) > }
+ < GMPRS Ack/Nack Description : < GMPRS Ack/Nack Description IE > >
+ < padding bits >
+ ! < Non-distribution part error : bit (*) = < no string > > }
+ ! < Message escape : 1 bit (*) = <no string> > }
+ ! < Address information part error : bit (*) = < no string > > }
+ ! < Distribution part error : bit (*) = < no string > > ;
+

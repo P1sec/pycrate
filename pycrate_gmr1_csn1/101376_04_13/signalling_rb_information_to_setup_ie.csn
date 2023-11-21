@@ -1,0 +1,11 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.101 Signalling RB Information To Setup
+-- Signalling RB Information To Setup IE
+
+< Signalling RB Information To Setup IE > ::=
+ < Signalling RB Information to Setup length : bit (8) >
+ < SRB Identity : bit (2) >
+ --{0 | 1 < RB Mapping Info : < RB Mapping Info IE > > } -- Release 6 extension
+ {0 | 1 < RB Mapping Info : null > }
+ < spare bits> **; -- reserved for future use
+

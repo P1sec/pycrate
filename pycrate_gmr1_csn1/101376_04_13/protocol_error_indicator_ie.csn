@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.70        Protocol Error Indicator
+-- Protocol Error Indicator IE
+
+< Protocol Error Indicator IE > ::=
+ < Protocol Error Indicator : bit (1) >;
+

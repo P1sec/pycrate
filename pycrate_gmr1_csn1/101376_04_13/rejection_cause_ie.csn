@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.89        Rejection Cause
+-- Rejection Cause IE
+
+< Rejection Cause IE > ::=
+ < Rejection Cause : bit (1) >;
+

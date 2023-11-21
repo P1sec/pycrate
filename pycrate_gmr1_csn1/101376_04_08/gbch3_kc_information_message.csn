@@ -1,0 +1,122 @@
+-- ETSI TS 101 376-04-12
+-- 10.1.46b GBCH3 Keplerian Coordinate information
+-- GBCH3 KC Information Message
+
+<GBCH3 KC Information Message> ::=
+ { 1000
+ | 1001 <GBCH3 KC Information Type 1>
+ | 1010 <GBCH3 KC Information Type 2>
+ | 1011 <GBCH3 KC Information Type 3>
+ | 1100 <GBCH3 KC Information Type 4>
+ | 1101 <GBCH3 KC Information Type 5>
+ | 1110 <GBCH3 KC Information Type 6>
+ } ;
+
+<GBCH3 KC Information Type 1> ::=
+ <Message version number: bit (3)>
+ <WN: bit (10)>
+ <TOW: bit (40)>
+ <Frame Number: bit (19)>
+ <Number of SV: bit (5)>
+ <IODE SV1: bit (8)>
+ <IODE SV2: bit (8)>
+ <IODE SV3: bit (8)>
+ <IODE SV4: bit (8)>
+ <IODE SV5: bit (8)>
+ <IODE SV6: bit (8)>
+ <IODE SV7: bit (8)>
+ <IODE SV8: bit (8)>
+ <IODE SV9: bit (8)>
+ <IODE SV10: bit (8)>
+ <IODE SV11: bit (8)>
+ <IODE SV12: bit (8)>
+ <IODCmsb SV1: bit (1)>
+ <IODCmsb SV2: bit (1)>
+ <IODCmsb SV3: bit (1)>
+ <IODCmsb SV4: bit (1)>
+ <IODCmsb SV5: bit (1)>
+ <IODCmsb SV6: bit (1)>
+ <IODCmsb SV7: bit (1)>
+ <IODCmsb SV8: bit (1)>
+ <IODCmsb SV9: bit (1)>
+ <IODCmsb SV10: bit (1)>
+ <IODCmsb SV11: bit (1)>
+ <IODCmsb SV12: bit (1)>
+ <Spare: bit (3)> ;
+
+<GBCH3 KC Information Type 2> ::=
+ <Message version number: bit (3)>
+ <SV number 1: bit (6)>
+ <SV number 2: bit (6)>
+ <TGD SV 1: bit (8)>
+ <toc SV 1: bit (16)>
+ <af2 SV 1: bit (8)>
+ <af1 SV 1: bit (16)>
+ <af0 SV 1: bit (22)>
+ <TGD SV 2: bit (8)>
+ <toc SV 2: bit (16)>
+ <af2 SV 2: bit (8)>
+ <af1 SV 2: bit (16)>
+ <af0 SV 2: bit (22)>
+ <Idot SV 1: bit (14)>
+ <Idot SV 2: bit (14)>
+ <Spare: bit (5)> ;
+
+<GBCH3 KC Information Type 3> ::=
+ <Message version number: bit (3)>
+ <SV number 1: bit (6)>
+ <Crs: bit (16)>
+ <Lambda n: bit (16)>
+ <M0: bit (32)>
+ <Cuc: bit (16)>
+ <e: bit (32)>
+ <Cus: bit (16)>
+ <Axis 12: bit (32)>
+ <toe: bit (16)>
+ <Alert flag: bit (1)>
+ <Anti-spoof flag: bit (1)>
+ <Spare: bit (1)> ;
+
+<GBCH3 KC Information Type 4> ::=
+ <Message version number: bit (3)>
+ <SV number 1: bit (6)>
+ <Cic: bit (16)>
+ <OMEGA0: bit (32)>
+ <Cis: bit (16)>
+ <i0: bit (32)>
+ <Crc: bit (16)>
+ <w: bit (32)>
+ <OMEGA dot: bit (24)>
+ <SV health: bit (6)>
+ <fit: bit (1)>
+ <URAi: bit (4)> ;
+
+<GBCH3 KC Information Type 5> ::=
+ <Message version number: bit (3)>
+ <SV number 2: bit (6)>
+ <Crs: bit (16)>
+ <Lambda n: bit (16)>
+ <M0: bit (32)>
+ <Cuc: bit (16)>
+ <e: bit (32)>
+ <Cus: bit (16)>
+ <Axis 12: bit (32)>
+ <toe: bit (16)>
+ <Alert flag: bit (1)>
+ <Anti-spoof flag: bit (1)>
+ <Spare: bit (1)> ;
+
+<GBCH3 KC Information Type 6> ::=
+ <Message version number: bit (3)>
+ <SV number 2: bit (6)>
+ <Cic: bit (16)>
+ <OMEGA0: bit (32)>
+ <Cis: bit (16)>
+ <i0: bit (32)>
+ <Crc: bit (16)>
+ <w: bit (32)>
+ <OMEGA dot: bit (24)>
+ <SV health: bit (6)>
+ <fit: bit (1)>
+ <URAi: bit (4)> ;
+

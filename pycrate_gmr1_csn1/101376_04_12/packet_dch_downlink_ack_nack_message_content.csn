@@ -1,0 +1,10 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.6b Packet DCH Downlink Ack/Nack (Iu mode only)
+-- Packet DCH Downlink Ack/Nack message content
+
+< Packet DCH Downlink Ack/Nack message content > ::=
+ < RB Id : bit (5) >
+ { 1 -- DCCH TBF mode
+ < DCCH Ack/Nack Description : < DCCH Ack/Nack Description IE > > }
+ <padding bits > ;
+

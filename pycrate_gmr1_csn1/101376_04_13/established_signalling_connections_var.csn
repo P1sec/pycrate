@@ -1,0 +1,9 @@
+-- ETSI TS 101 376-04-13
+-- 10.4.3         ESTABLISHED_SIGNALLING_CONNECTIONS
+-- ESTABLISHED_SIGNALLING_CONNECTIONS VAR
+
+< ESTABLISHED_SIGNALLING_CONNECTIONS VAR > ::=
+ { 0 | 1 < Signalling Connection List : bit (2) >
+ < CN Domain Identity : < CN Domain Identity IE > > * (1+ val(Signalling Connection List))
+ };
+

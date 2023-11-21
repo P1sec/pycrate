@@ -1,0 +1,8 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.54        NAS Message
+-- NAS Message IE
+
+< NAS Message IE > ::=
+ < Length of NAS Message : bit (12) >
+ < NAS Message : octet (1+val(Length of NAS Message) ) > ;
+

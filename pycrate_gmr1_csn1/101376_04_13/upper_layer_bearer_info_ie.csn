@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.135 Upper Layer Bearer Info
+-- Upper Layer Bearer Info IE
+
+< Upper Layer Bearer Info IE > ::=
+ < Upper Layer Bearer Info : bit (4) >;
+

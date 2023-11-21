@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.110a UE Software Version Indicator
+-- UE Software Version Indicator IE
+
+ < UE Software Version Indicator IE > ::=
+ < UE Software Version Indicator : bit (8) >;
+

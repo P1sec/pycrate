@@ -1,0 +1,35 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.5b Packet DCH Assignment (Iu mode only)
+-- Packet DCH Assignment message content
+
+< Packet DCH Assignment message content > ::=
+ {
+   { 00 | 01 < Global TFI : < Global TFI IE > > | 10 < G-RNTI : bit (32) > }
+   { 0 -- Message escape
+     < Rid: bit (2) >
+     { 0 | 1 <Frequency Allocation: <Frequency Allocation IE>> }
+     { 0 | 1 <Packet Link Synchronization IE> }
+     < TBF Assignment: < TBF Assignment Struct >>
+     < padding bits > -- truncation at end of message allowed, bits "0" assumed
+   }
+ } ;
+-- ! < Non-distribution part error : bit (*) = < no string > > }
+-- ! < Message escape : 1 bit (*) = <no string> > }
+-- ! < Address information part error : bit (*) = < no string > > }
+-- ! < Distribution part error : bit (*) = < no string > > ;
+
+< TBF Assignment Struct> ::=
+ { 0 < Uplink DCH TBF Allocation: < DCH TBF Allocation IE>> -- UL is DCH and DL is PDCH
+   10 <Uplink and Downlink DCH TBF Allocation: < DCH TBF Allocation IE>> -- UL and DL are both DCH
+      { null | 0 bit** = <no string> }
+ };
+
+< DCH TBF Allocation IE > ::=
+ { < Channel Info: <Channel Info IE>> -- Applies to both the uplink and downlink DCH, used for symmetric allocation
+   < Power Control Synch Offset: <Power Control Synch Offset IE >> -- Applies only to uplink DCH
+   < DCH Channel MCS Info: <DCH MCS IE>> -- Applies only to uplink DCH
+   { 0 <Downlink MAC Slot Allocation: bit (8)> | 1 < Downlink Slot Allocation: <Slot Allocation IE>> }
+   { 0 <Uplink MAC Slot Allocation: bit (8)> | 1 < Uplink Slot Allocation: <Slot Allocation IE>> }
+   < RB Id: bit (5) >
+ };
+

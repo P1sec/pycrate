@@ -1,0 +1,18 @@
+-- ETSI TS 101 376-04-12
+-- 11.5.2.74         Segment 3C
+-- Segment 3C
+
+<Segment 3C> ::=
+ --<Header Segment 3C>
+ <SA_CCCH_CHANS: bit (5)>
+ --<SA_CCCH_LIST_PART1: bitstring (A) > |
+ --{ < SA_CCCH_LIST_PART1: bitstring (A1)>
+ --  < SA_RACH_LIST: bitstring (A2)> }
+ --<Packet_Control_Channel_Definition_Part1: bitstring (B) >
+ --<Spare: bitstring (C)>
+ <undecoded: bit (110)> ;
+
+<Header Segment 3C> ::=
+ <Class Type 3: 0>
+ <Segment type: 0010> ;
+

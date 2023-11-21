@@ -1,0 +1,12 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.23           MEASUREMENT REPORT
+-- Measurement Report message content
+
+< Measurement Report message content > ::=
+ < RRC Transaction Identifier : < RRC Transaction Identifier IE >>
+ { 0 | 1 < Integrity Check Info : < Integrity Check Info IE >> }
+ < Reference : bit (8) >
+ { 0 < Position Measurement Report: <Position Measurement Report Struct >> 
+ | 10 < 3G Measurement Report : < 3G Measurement Report struct >> }
+ ! < Content part error : bit (*) = < no string >> ;
+

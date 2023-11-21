@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.81        RB Information to Be Affected
+-- RB Information to Be Affected IE
+
+< RB Information to Be Affected IE > ::=
+ < RB Identity : < RB Identity IE > >;
+

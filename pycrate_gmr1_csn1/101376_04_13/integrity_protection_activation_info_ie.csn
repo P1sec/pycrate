@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.37        Integrity Protection Activation Info
+-- Integrity Protection Activation Info IE
+
+< Integrity Protection Activation Info IE > ::=
+ < RRC message sequence number : bit (4) > * 4;
+

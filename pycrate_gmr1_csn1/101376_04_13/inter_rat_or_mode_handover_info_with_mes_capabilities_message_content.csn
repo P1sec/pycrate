@@ -1,0 +1,18 @@
+-- ETSI TS 101 376-04-13
+-- 11.1.5.1         INTER RAT or MODE HANDOVER INFO WITH MES CAPABILITIES
+-- INTER RAT or MODE HANDOVER INFO WITH MES CAPABILITIES message content
+
+< INTER RAT or MODE HANDOVER INFO WITH MES CAPABILITIES message content > ::=
+ {
+   -- MES Information Elements
+   { 0 | 1 < MES GERAN Iu mode Radio Access Capability : < MES GERAN Iu mode radio access capability IE >> }
+   { 0 | 1 < MES GERAN A/Gb mode Radio Access Capability : < MES GERAN A/Gb mode radio access capability IE >> }
+   { 0 | 1 < UE UTRAN Radio Access Capability : < UE UTRAN radio access capability IE >> }
+   { 0 | 1 < UE UTRAN Radio Access Capability Extension : < UE UTRAN radio access capability extension IE >> }
+   { 0 | 1 < UE CDMA2000 Radio Access Capability : < UE CDMA2000 radio access capability IE >> }
+   { 0 | 1 < Failure Cause and Error Information : < Failure Cause and Error Information IE >> }
+   --{ 0 | 1 < Multirate configuration : < Multirate configuration IE >> }
+   { 0 | 1 < Multirate configuration : null > }
+   ! < Content part error : bit (*) = < no string >>
+ } ;
+

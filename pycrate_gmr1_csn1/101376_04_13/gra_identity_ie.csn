@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.30         GRA Identity
+-- GRA Identity IE
+
+< GRA Identity IE > ::=
+ < GRA Identity : bit(16) >;
+

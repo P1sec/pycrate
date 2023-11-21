@@ -1,0 +1,22 @@
+-- ETSI TS 101 376-04-12
+-- 12.8           Frequency parameters
+-- Frequency Parameters IE
+
+< Frequency Parameters IE > ::=
+ < Downlink BW: bit (3) >
+ < Downlink ARFCN : bit (11) >
+ < Reserved: bit(1) >
+ < Uplink BW: bit (3) >
+ < Uplink ARFCN : bit (11) >
+ < Reserved: bit(1) > ;
+
+< Frequency Allocation IE > ::=
+ { < Downlink Frequency : < Frequency Struct >>
+   { 0 | 1 <Uplink Frequency : < Frequency Struct >> }
+ } ;
+ 
+< Frequency Struct > ::=
+ < Bandwidth: bit (3) >
+ < ARFCN: bit (11) >
+ < Reserved: bit > ;
+

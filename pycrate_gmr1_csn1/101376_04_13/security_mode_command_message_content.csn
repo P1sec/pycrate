@@ -1,0 +1,21 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.45           SECURITY MODE COMMAND
+-- SECURITY MODE COMMAND message content
+
+< SECURITY MODE COMMAND message content > ::=
+ { 0 -- critical extension escape available
+ {
+ -- MES information elements
+ < RRC Transaction Identifier : < RRC Transaction Identifier IE > >
+ < Integrity Check Info : < Integrity Check Info IE > >
+ < Security Capability : < Security Capability IE > >
+ { 0 | 1 < Ciphering Mode Info : < Ciphering Mode Info IE > > }
+ { 0 | 1 < Integrity Protection Mode Info : < Integrity Protection Mode Info IE > > }
+ -- CN information elements
+ < CN Domain Identity : < CN Domain Identity IE > >
+ -- other information elements
+ { 0 | 1 < GSM MES Security Capability : < GSM MES Security Capability IE > > }
+ <Check Last Used Ciphering Algorithm: bit (1) >
+ ! < Content part error : bit (*) = < no string > > }
+ ! < Message escape critical extensions : 1 bit (*) = < no string > > } ;
+

@@ -1,0 +1,8 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.85 RB Timer Indicator
+-- RB Timer Indicator IE
+
+< RB Timer Indicator IE > ::=
+ < T314 Expired : bit (1) >
+ < T315 Expired : bit (1) > ;
+

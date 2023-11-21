@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.61         PDCP SN Info
+-- PDCP SN Info IE
+
+< PDCP SN Info IE > ::=
+ < PDCP SN Info : bit (16) >;
+

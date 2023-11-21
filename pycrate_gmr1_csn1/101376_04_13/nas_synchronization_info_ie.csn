@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.55         NAS Synchronization Info
+-- NAS Synchronization Info IE
+
+< NAS Synchronization Info IE > ::= bit (4) ;
+-- < NAS Synchronization Info : bit ( 4 ) > > ;
+

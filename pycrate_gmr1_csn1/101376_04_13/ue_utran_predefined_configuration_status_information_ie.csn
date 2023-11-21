@@ -1,0 +1,10 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.108a UE UTRAN Predefined Configuration Status Information
+-- UE UTRAN Predefined configuration status information IE
+
+< UE UTRAN Predefined configuration status information IE > ::=
+ { < UE UTRAN Predefined Configuration Status Information length : bit (14) >
+   < UE UTRAN Predefined Configuration Status Information : 
+     bit (1+val(UE UTRAN Predefined Configuration Status Information length)) >
+ } ;
+

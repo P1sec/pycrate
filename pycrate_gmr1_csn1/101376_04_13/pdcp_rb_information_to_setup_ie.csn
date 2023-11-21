@@ -1,0 +1,10 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.84a PDCP - RB Information to Setup
+-- PDCP - RB Information to Setup IE
+
+< PDCP - RB Information to Setup IE > ::=
+ <PDCP Info : <PDCP Info IE >>
+ { < RB Information to Setup list : bit (3) >
+   < RB Information to Setup : < RB Information to Setup IE >> *(1+val(RB Information to Setup list)) 
+ };
+

@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 10.4.4        ESTABLISHMENT_CAUSE
+-- ESTABLISHMENT_CAUSE VAR
+
+< ESTABLISHMENT_CAUSE VAR > ::=
+ { 0 | 1 < Establishment Cause : < Establishment Cause IE > > } ;
+

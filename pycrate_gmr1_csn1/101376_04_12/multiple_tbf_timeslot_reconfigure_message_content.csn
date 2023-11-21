@@ -1,0 +1,38 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.28 Multiple TBF Timeslot Reconfigure (Iu mode only)
+-- Multiple TBF Timeslot Reconfigure message content
+
+< Multiple TBF Timeslot Reconfigure message content > ::=
+ { 0 < GLOBAL_TFI : < Global TFI IE > >
+   { 0 -- Message escape for GPRS mode TBFs
+     {
+       { 0 | 1 < Packet Link Synchronization : < Packet Link Synchronization IE >> }
+       { 0 | 1 < Frequency Allocation : < Frequency Allocation IE >> }
+       { 0 | 1 < PDCH Uplink Organization : <PDCH Uplink Organization IE>> }
+       < Multiple Downlink Assignment : < Multiple Downlink Assignment struct >>
+       < Multiple Uplink Assignment : < Multiple Uplink Assignment struct >>
+     }
+   }
+ < padding bits >
+ } ;
+-- ! < Non-distribution part error : bit (*) = < no string > > }
+-- ! < Message escape : { 01| 10 | 11} bit (*) = < no string > > } -Extended for future changes
+-- ! < Address information part error : bit (*) = < no string > > }
+-- ! < Distribution part error : bit (*) = < no string > > ;
+
+< Multiple Downlink Assignment struct > ::=
+ < MAC Slot Allocation : bit (8) >
+ { 1 < Downlink TBF assignment : < Downlink TBF assignment struct > > } ** 0 ;
+
+< Multiple Uplink Assignment struct > ::=
+ { 1 < Uplink TBF Assignment : < Uplink TBF Assignment struct > > } ** 0 ;
+
+< Uplink TBF Assignment struct > ::=
+ { 
+   { 0 | 1 <PDCH Channel MCS Info: <PDCH MCS IE>> }
+   < Uplink TFI: bit (8) >
+   { 0 | 1 <Uplink Status Flag: bit(8)> }
+   <RB Id: bit (5)>
+   <Return Frequency set: bit (1)>
+ };
+

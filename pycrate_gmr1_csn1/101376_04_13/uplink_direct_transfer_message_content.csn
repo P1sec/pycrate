@@ -1,0 +1,11 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.56          UPLINK DIRECT TRANSFER
+-- UPLINK DIRECT TRANSFER message content
+
+< UPLINK DIRECT TRANSFER message content > ::=
+ {
+ < CN Domain Identity : < CN Domain Identity IE > >
+ < NAS Message : < NAS Message IE > >
+ { 0 | 1 < Integrity Check Info : < Integrity Check Info IE > > }
+ ! < Content part error : bit (*) = < no string > > } ;
+

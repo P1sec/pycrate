@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 10.4.10 INITIAL_MES_IDENTITY
+-- INITIAL_MES_IDENTITY VAR
+
+< INITIAL_MES_IDENTITY VAR > ::=
+ { 0 | 1 < Initial MES Identity : < Initial MES Identity IE > > } ;
+

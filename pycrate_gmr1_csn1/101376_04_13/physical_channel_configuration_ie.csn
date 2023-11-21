@@ -1,0 +1,8 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.62         Physical Channel Configuration
+-- Physical Channel Configuration IE
+
+< Physical Channel Configuration IE > ::=
+ {0 | 1 < Uplink Physical Channel : < Physical Channel Description IE >> }
+ {0 | 1 < Downlink Physical Channel : < Physical Channel Description IE >> } ;
+

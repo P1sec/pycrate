@@ -1,0 +1,19 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.8a Packet uplink dummy control block
+-- Packet Uplink Dummy Control Block message content
+
+< Packet Uplink Dummy Control Block message content > ::=
+ { 0 < TLLI-G-RNTI : bit (32) > <Link Quality : <Link Quality Struct>>
+ | 10 < Global TFI : <Global TFI IE >> <Link Quality : <Link Quality Struct>>
+ | 11
+ }
+ < padding bits >;
+
+<Link Quality Struct> ::=
+ < SQIR : bit (6) >
+ { 0 | 1 < SQI Standard Deviation : bit (6) > }
+ { 0 | 1 < FQI : < FQI Struct >> } ;
+
+<FQI Struct> ::=
+ { 1 <RB Id: bit (5)> <Forward Quality Indicator: bit(6)> }** 0 ;
+

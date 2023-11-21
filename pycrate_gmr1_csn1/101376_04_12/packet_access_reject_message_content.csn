@@ -1,0 +1,55 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.1        Packet access reject
+-- Packet Access Reject message content
+
+ < Packet Access Reject message content > ::=
+
+ < Reject : < Reject struct > >
+ { { 0 | 1 < Additional Reject: < Reject struct > > } ** 0
+ < padding bits > } // -- truncation at end of message allowed, bits "0" assumed
+ ! < Distribution part error : bit (*) = < no string > > ;
+
+ < Reject struct > ::=
+ { 0 < TLLI : bit (32) >
+ | 1 0 < Global TFI : <Global TFI IE > >}
+ <Rid: bit (2)>
+ < reserved : bit (1) >
+ < WAIT_INDICATION : bit (8) >
+ < WAIT INDICATION_SIZE : bit (1) >
+ ! < Ignore : bit (*) = <no string> > ;
+
+ < Packet Access Reject message content > ::=
+
+ < Reject : < Reject struct > >
+ { { 0 | 1 < Additional Reject: < Reject struct > > } ** 0
+ < padding bits > } // -- truncation at end of message allowed, bits "0" assumed
+ ! < Distribution part error : bit (*) = < no string > > ;
+
+ < Reject struct > ::=
+ { 0 < TLLI : bit (32) >
+ | 1 0 < Global TFI : <Global TFI IE > >}
+ <Rid: bit (2)>
+ < reserved : bit (1) >
+ < WAIT_INDICATION : bit (8) >
+ < WAIT INDICATION_SIZE : bit (1) >
+ < REJECT_CAUSE : bit (2) >
+ ! < Ignore : bit (*) = <no string> > ;
+
+ < Packet Access Reject message content > ::=
+
+ < Reject : < Reject struct > >
+ { { 0 | 1 < Additional Reject: < Reject struct > > } ** 0
+ < padding bits > } // -- truncation at end of message allowed, bits "0" assumed
+ ! < Distribution part error : bit (*) = < no string > > ;
+
+ < Reject struct > ::=
+ { 0 < TLLI or G-RNTI : bit (32) >
+ | 1 0 < Global TFI : <Global TFI IE > >}
+ <Rid: bit (2)>
+ < reserved : bit (1) >
+ < WAIT_INDICATION : bit (8) >
+ < WAIT INDICATION_SIZE : bit (1) >
+ < REJECT_CAUSE : bit (2) >
+ {0 | 1 < RB Id : bit (5) >}
+ ! < Ignore : bit (*) = <no string> > ;
+

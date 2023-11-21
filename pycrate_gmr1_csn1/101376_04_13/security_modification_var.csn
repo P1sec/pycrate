@@ -1,0 +1,11 @@
+-- ETSI TS 101 376-04-13
+-- 10.4.29 SECURITY_MODIFICATION
+-- SECURITY_MODIFICATION VAR
+
+< SECURITY_MODIFICATION VAR > ::=
+ { 0 | 1 < Status for each CN domain : bit (2) >
+ { < CN Domain Identity: < CN Domain Identity IE > >
+ < Status : bit (1) >
+ } * (1+val(Status for each CN domain))
+ };
+

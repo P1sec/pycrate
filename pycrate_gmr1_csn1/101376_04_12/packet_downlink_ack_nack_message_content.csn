@@ -1,0 +1,14 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.6a Packet downlink Ack/Nack (Iu mode only)
+-- Packet Downlink Ack/Nack message content
+
+< Packet Downlink Ack/Nack message content > ::=
+ < DOWNLINK_TFI : bit (8) >
+ < reserved : bit (1) >
+ { 0 | 1 < SQI Standard Deviation: bit (6) > }
+ { 0 | 1 < Channel Request Description : bit (17) > }
+ { 0 | 1 < SQIR: bit (6) > }
+ { 0 | 1 < Iu Mode Channel Request Description: < Iu mode Channel Request Description IE >> }
+ { 0 | 1 < Forward Quality Indicator : bit (6) > }
+ < GMPRS Ack/Nack Description : GMPRS Ack/Nack Description IE > ;
+

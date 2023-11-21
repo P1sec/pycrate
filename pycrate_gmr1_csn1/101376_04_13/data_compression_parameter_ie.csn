@@ -1,0 +1,23 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.59a Data Compression Parameters
+-- Data Compression Parameter IE
+
+< Data Compression Parameter IE > ::=
+ < Data Compression Parameters Length : bit (6)>
+ { < V44 Data Compression : 0 >
+ | < V44 Data Compression : 1 >
+   { 0 | 1 < V44 Parameters: < V44 Parameters Struct >> } } -- 0 indicates default parameters
+ < spare bit > **; -- Extension information may be truncated between released versions of the protocol
+
+< V44 Parameters struct > ::=
+ < N2 : bit (11) >
+ < N7 : bit (9) >
+ < N8 : bit (4) >
+ < N4 : bit (8) >
+ < N5 : bit (4) >
+ < C1 : bit (4) >
+ < C2 : bit (3) >
+ < C3 : bit (8) >
+ < C4 : bit (16) >
+ < C5 : bit (4) >;
+

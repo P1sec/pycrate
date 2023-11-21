@@ -1,0 +1,32 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.5         Packet channel request (A/Gb Mode only)
+-- Packet channel request 64 bit message content
+
+< Packet channel request 64 bit message content > ::=
+ { < One Phase Access Request : 0 >
+   { < TLLI : bit (32) >
+     < Rid: bit (2) >
+     < No of Blocks : bit (6) >
+     < Peak Throughput Class : bit (4) >
+     < Radio Priority: bit (2) >
+     < RLC Mode : bit (1) >
+     < LLC PDU TYPE : bit (1) >
+     < GMPRS Terminal Type Identifier Bits 6-1: bit (6) >
+     < SQIR : bit (6) >
+     < GMPRS Terminal Type Identifier Bit 7: bit (1) >
+     < Spare : bit (2) > }
+ | < GMPRS Resume Procedure: 10101 >
+   { < TLLI: bit (32) >
+     < Spare: bit (27) > }
+ | < MM Procedure : 10110 >
+   { < TLLI: bit (32) >
+     < Rid: bit (2) >
+     < SQIR: bit (6) >
+     < Spare: bit (19) > }
+ | < Initial Correction : 10111 >
+   { <TFI: bit (7)>
+     < Rid: bit (2) >
+     < SQIR: bit (6) >
+     < Spare: bit (44) > }
+ } ;
+

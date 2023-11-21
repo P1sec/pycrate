@@ -1,0 +1,94 @@
+-- ETSI TS 101 376-04-12, release 1
+-- 10.1.46        GBCH information
+-- GBCH Information Message
+
+<GBCH Information Message> ::= 
+    <Protocol Escape: bit>
+    <GBCH Sequence Number: bit (2)>
+    {
+      00000 <GBCH Information Type 1> |
+      00001 <GBCH Information Type 2> |
+      00010 <GBCH Information Type 4> |
+      00011 <GBCH Information Type 5> |
+      00100 <sat 1 : <GBCH Information Type 8>> |
+      00101 <sat 1 : <GBCH Information Type 9>> |
+      00110 <sat 2 : <GBCH Information Type 8>> |
+      00111 <sat 2 : <GBCH Information Type 9>> |
+      01000 <sat 3 : <GBCH Information Type 8>> |
+      01001 <sat 3 : <GBCH Information Type 9>> |
+      01010 <sat 4 : <GBCH Information Type 8>> |
+      01011 <sat 4 : <GBCH Information Type 9>> |
+      01100 <sat 5 : <GBCH Information Type 8>> |
+      01101 <sat 5 : <GBCH Information Type 9>> |
+      01110 <sat 6 : <GBCH Information Type 8>> |
+      01111 <sat 6 : <GBCH Information Type 9>> |
+      10000 <GBCH Information Type 1> |
+      10001 <GBCH Information Type 3> |
+      10010 <GBCH Information Type 6> |
+      10011 <GBCH Information Type 7> |
+      10100 <sat 7 : GBCH Information Type 8> |
+      10101 <sat 7 : GBCH Information Type 9> |
+      10110 <sat 8 : GBCH Information Type 8> |
+      10111 <sat 8 : GBCH Information Type 9> |
+      11000 <sat 9 : GBCH Information Type 8> |
+      11001 <sat 9 : GBCH Information Type 9> |
+      11010 <sat 10 : GBCH Information Type 8> |
+      11011 <sat 10 : GBCH Information Type 9> |
+      11100 <sat 11 : GBCH Information Type 8> |
+      11101 <sat 11 : GBCH Information Type 9> |
+      11110 <sat 12 : GBCH Information Type 8> |
+      11111 <sat 12 : GBCH Information Type 9>
+    } ;
+
+--<GBCH Message Header> ::= 
+--    <Protocol Escape: bit>
+--    <GBCH Sequence Number: bit (2)>
+--    <Message Number: bit (5)> ;
+
+<GBCH Information Type 1> ::= 
+    <GPS Time: bit (40) > 
+    <Curve Fit Time: bit (40) >
+    <Spare: bit >
+    <Frame Number: bit (19)> ;
+
+<GBCH Information Type 2> ::= 
+    <Visibility List Part 1: bit (60)>
+    <Dopplers Part 1: bit (40)> ;
+
+<GBCH Information Type 3> ::= 
+    <Visibility List Repetition Part 1: bit (60)>
+    <Dopplers Repetition Part 1: bit (40)> ;
+ 
+<GBCH Information Type 4> ::= 
+    <Dopplers Part 2: bit (56)>
+    <Code Phases Part 1: bit (44)>;
+
+<GBCH Information Type 5> ::= 
+    <Visibility List Part 2: bit (12)>
+    <Code Phases Part 2: bit (88)> ;
+
+<GBCH Information Type 6> ::= 
+    <Dopplers Repetition Part 2: bit (56)>
+    <Code Phases Part 3: bit (44)> ;
+
+<GBCH Information Type 7> ::= 
+    <Visibility List Repetition Part 2: bit (12)> 
+    <Code Phases Part 4: bit (88)> ;
+
+<GBCH Information Type 8> ::= 
+    <X0: bit (24)>
+    <VX0: bit (18)>
+    <VX2: bit (8)>
+    <Y0: bit (24)>
+    <VY0: bit (18)>
+    <VY2: bit (8)> ;
+
+<GBCH Information Type 9> ::= 
+    <VX1: bit (13)>
+    <VY1: bit (13)>
+    <Z0: bit (24)>
+    <VZ0: bit (18)>
+    <VZ1: bit (13)>
+    <VZ2: bit (8)>
+    <af1: bit (11)> ;
+

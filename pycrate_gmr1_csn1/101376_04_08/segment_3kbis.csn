@@ -1,0 +1,22 @@
+-- ETSI TS 101 376-04-08
+-- 11.5.2.84a        Segment 3Kbis
+-- Segment 3Kbis
+
+<Segment 3Kbis> ::=
+ --<Header Segment 3Kbis>
+ <Load Factor>
+ <Load_Factor_Definition: bit (1)>
+ <SB_SELECTION_DISTANCE: bit (2)>
+ <SB_SELECTION_LOAD_COUNT: bit (3)>
+ <SIP_WAIT_TIMEOUT: bit (4)>
+ <Spare: bit (97)> ;
+ 
+<Load Factor> ::=
+ <Capacity Indicator: bit (4)>
+ <Load Indicator: bit (4)>
+ <available capacity: bit (8)> ;
+
+<Header Segment 3Kbis> ::=
+ <Class Type 3: 0>
+ <Segment type: 1101> ;
+

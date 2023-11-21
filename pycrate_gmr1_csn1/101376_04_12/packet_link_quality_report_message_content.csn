@@ -1,0 +1,9 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.25 Packet link quality report (A/Gb mode only)
+-- Packet Link Quality Report message content
+
+< Packet Link Quality Report message content > ::=
+    <Link Quality : <Link Quality Report IE>>
+    { 0 | 1 <G-RNTI: bit(32)> }
+    < padding bits > ;
+

@@ -1,0 +1,32 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.41          RRC CONNECTION SETUP
+-- RRC CONNECTION SETUP message content
+
+< RRC CONNECTION SETUP message content > ::=
+ { 0 -- critical extension escape available
+   {
+     -- MES information elements
+     < RRC Transaction Identifier : < RRC Transaction Identifier IE >>
+     { 0 | 1 < Activation Time : < Activation Time IE >> } -- When Activation Time field is not present, it means activation time of NOW
+     < New G-RNTI : < G-RNTI IE >>
+     < RRC State Indicator : < RRC State Indicator IE >>
+     < Capability Update Requirement : < Capability Update Requirement IE >>
+     -- RB information elements
+     { 0 | 1 < Signalling RB Information to Setup list : bit (3) >
+             < Signalling RB Information to Setup : < Signalling RB Information to Setup IE >>
+             * (1+val(Signalling RB Information to Setup list)) }
+     -- Information for MES to form CGI
+     { 0 | 1 <GMR-1 Cell Identity: <GMR-1 Cell Identity IE>> }
+     -- GPS Position Determination Timer for RRC-Idle mode and RRC-GRA_PCH state
+     --{ 0 | 1 < Position Update Info1: <Position Update Information IE>> }
+     { 0 | 1 < Position Update Info1: <GPS Position IE>> }
+     -- GPS Position Determination Timer for RRC-Cell_Shared and RRC-Cell-Dedicated Mode
+     --{ 0 | 1 < Position Update Info2: < Position Update Information IE >> } -- Timers and constants applicable for connected mode operation
+     { 0 | 1 < Position Update Info2: <GPS Position IE>> }
+     { 0 | 1 < MES Timers and Constants in Connected Mode : < MES Timers and Constants in RRC-Connected Mode IE >> } -- used with UE Software Version Indicator 0x1 or higher
+     { 0 | 1 < MES Additional Timers and Constants in Connected Mode : < MES Additional Timers and Constants in RRC-Connected Mode IE >> } -- used with UE Software Version Indicator 0x1 or higher
+     ! < Content part error : bit (*) = < no string >>
+   }
+ ! < Message escape critical extensions : 1 bit (*) = < no string >>
+ } ;
+

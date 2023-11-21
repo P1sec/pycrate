@@ -1,0 +1,31 @@
+-- ETSI TS 101 376-04-13
+-- 11.1.5.3          IETF RFC 3095 CONTEXT INFO
+-- RFC 3095 Context Info IE
+
+< RFC 3095 Context Info IE > ::=
+ < RB with RFC 3095 Context List : bit(5) >
+ { < RB Identity : < RB Identity IE > >
+ < RFC 3095 Context List : bit(14) >
+ {
+ { 0 | 1 -- Downlink RFC 3095 context
+ < Downlink RFC 3095 Context Identity: bit(14) >
+ < DL_MODE: bit(2) >
+ < REF_IR: octet(3000) >
+ { 0 | 1 < REF_TIME: bit(32) > }
+ { 0 | 1 < SYN_OFFSET_ID : bit(16) > }
+ { 0 | 1 < SYN_SLOPE_TS : bit(32) > }
+ { < DYN_CHANGED : 0 >
+ | < DYN_CHANGED : 1 > }
+ }
+ { 0 | 1 -- Uplink RFC 3095 context
+ < Uplink RFC 3095 Context Identity: bit(14) >
+ < UL_MODE: bit(2) >
+ < REF_IR: octet(3000) >
+ { 0 | 1 < REF_TIME: bit(32) > }
+ { 0 | 1 < SYN_OFFSET_ID : bit(16) > }
+ { 0 | 1 < SYN_SLOPE_TS : bit(32) > }
+ { 0 | 1 < REF_SN_1 : bit(15) > }
+ }
+ }*(1 + val(RFC 3095 Context List))
+ }*(1 + val(RB with RFC 3095 Context List));
+

@@ -1,0 +1,11 @@
+-- ETSI TS 101 376-04-13
+-- 10.4.2         CIPHERING_STATUS
+-- CIPHERING_STATUS VAR
+
+< CIPHERING_STATUS VAR > ::=
+ < CN Domain Related Information List : bit (2) >
+ { < CN Domain Identity : < CN Domain Identity IE > >
+ < Status : bit (1) >
+ < Reconfiguration : bit (1) >
+ } * (1+val(CN Domain Related Information List)) ;
+

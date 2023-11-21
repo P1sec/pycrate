@@ -1,0 +1,13 @@
+-- ETSI TS 101 376-04-12
+-- 12.35         PDCH MCS
+-- PDCH MCS IE
+
+<PDCH MCS IE>::=
+{ < CHANNEL_MCS_COMMAND: bit(4)>
+ <CHANNEL_MCS_COMMAND_PNB_1_6: bit(3)>
+ <CHANNEL_MCS_COMMAND_PNB_2_6: bit(3)>
+ { 0 | 1 <CHANNEL_MCS_COMMAND_PNB_5_12: bit(4)>} };
+
+<DCH MCS IE>::=
+{<CHANNEL_MCS_COMMAND_ DCH PNB_n_m: bit(3)>}; -- Used in conjunction with the uplink dedicated channel
+

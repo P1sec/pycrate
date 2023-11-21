@@ -1,0 +1,9 @@
+-- ETSI TS 101 376-04-12
+-- 12.18          MAC Slot Allocation
+-- Slot Allocation IE
+
+<Slot Allocation IE> ::=
+ { <Starting MAC Slot: bit(3)>
+   <Offset within MAC Slot: bit(2)>
+ };
+

@@ -1,0 +1,16 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.5            DOWNLINK DIRECT TRANSFER
+-- DOWNLINK DIRECT TRANSFER message content
+
+< DOWNLINK DIRECT TRANSFER message content > ::=
+ { 0 -- critical extension escape available
+ {
+ -- MES Information Elements
+ < RRC Transaction Identifier : < RRC Transaction Identifier IE > >
+ { 0 | 1 < Integrity Check Info : < Integrity Check Info IE > > }
+ -- CN Information Elements
+ < CN Domain Identity : < CN Domain Identity IE > >
+ < NAS Message : < NAS Message IE > >
+ ! < Content part error : bit (*) = < no string > > }
+ ! < Message escape critical extensions : 1 bit (*) = < no string > >} ;
+

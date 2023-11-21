@@ -1,0 +1,41 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.47         MES RF Capability GSM
+-- MES RF Capability GSM IE
+
+ < MES RF Capability GSM IE > ::=
+ {
+ < MES RF Capability GSM Length : bit (8) >
+ < RF Capability Group : < RF Capability Group struct > >
+ { 1 < Additional RF Capability Group : < RF Capability Group struct > > } ** 0
+ };
+
+ < RF Capability Group struct > ::=
+ -- Access Technology using common capabilities
+ < Access Technology Type : bit (4) >
+ { 1 < Additional Access Technology Type : bit (4) > } ** 0
+ < Common Access Capabilities : < Access Capabilities struct > >
+ -- Access Technology using individual capabilities
+ { 1 < Additional Access Technology : < Additional Access Technology struct > > } ** 0 ;
+
+ < Access Capabilities struct > ::=
+ < Access Capabilities length : bit (6)>
+ < GMSK Power Capability : bit (3) >
+ { 0 | 1 < 8PSK Power Capability : bit (2) > }
+ < Pseudo Synchronization : bit (1) >
+ < Multislot capability : < Multislot capability struct > >
+ < spare bit >**; -- Extension information may be truncated between released versions of the protocol
+
+ < Additional Access Technology struct > ::=
+ < Additional Access Technology length : bit (6)>
+ < Access Technology Type : bit (4) >
+ < GMSK Power Class : bit (3) >
+ < 8PSK Power Class : bit (2) >
+ < spare bit >**; -- Extension information may be truncated between released versions of the protocol
+
+ < Multislot Capability struct > ::=
+
+ { 0 < Combined GMSK and 8-PSK Multislot Class : bit (6) >
+ |1
+ < GMSK Multislot Class : bit (6) >
+ { 0 | 1 < 8-PSK Multislot Class : bit (6) >}};
+

@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.8 Cell Update Cause
+-- Cell Update Cause IE
+
+< Cell Update Cause IE > ::= bit (3) ;
+-- < Cell Update Cause : bit (3) > > ;
+

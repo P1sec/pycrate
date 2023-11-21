@@ -1,0 +1,9 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.74        RAB Info Post
+-- RAB Info Post IE
+
+< RAB Info Post IE> ::=
+ < RAB Identity : < RAB Identity IE > >
+ < CN Domain Identity : < CN Domain Identity IE > >
+ { 0 | 1 < NAS Synchronization Indicator : < NAS Synchronization Info : bit (4) > > };
+

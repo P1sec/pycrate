@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.137 Carrier Reconfiguration Type
+-- Carrier Reconfiguration Type IE
+
+ < Carrier Reconfiguration Type IE > ::=
+ < Carrier Reconfiguration Type : bit (2) >;
+

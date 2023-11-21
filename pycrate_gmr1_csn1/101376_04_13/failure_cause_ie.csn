@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.24        Failure Cause
+-- Failure Cause IE
+
+< Failure Cause IE > ::= bit (4) ;
+-- < Failure Cause : bit (4) > > ;
+

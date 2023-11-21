@@ -1,0 +1,33 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.9a Packet Measurement Report (Iu mode only)
+-- Packet Measurement Report message content
+
+< Packet Measurement Report message content > ::=
+ < G-RNTI : bit (32) >
+ < Request Reference: bit (8) >
+ { 0 < Position Measurement Report : < Position Measurement Report struct >>
+ | 10 < GMR 3G Measurement Report : < 3G Measurement Report struct >> }
+ < padding bits > ;
+
+<Position Measurement Report struct> ::=
+ { 0 < MES GPS Position : < GPS Position IE >>
+ | 10 < Distance Information : < Distance IE >> } ;
+
+< GPS Position IE > ::= null ; -- IE FFS
+< Distance IE > ::= null ; -- IE FFS
+
+< GMR 3G Measurement Report struct> ::=
+ { 0 | 1 < GMR Measurement Report : < GMR Measurement Report struct >> }
+ { 0 | 1 < 3G Measurement Report : < 3G Measurement Report struct >> } ;
+
+< GMR Measurement Report struct > ::=
+ < RXLEV_SERVING_CELL : bit (6) >
+ < NUMBER_OF MEASUREMENTS : bit (3) >
+ { < GMR CELL LIST INDEX : bit (5) >
+   < RXLEV : bit (6) > } * (val(NUMBER_OF MEASUREMENTS)) ;
+
+< 3G Measurement Report struct > ::=
+ < N_3G: bit (3) >
+ { < 3G_CELL_LIST_INDEX : bit (7) >
+   < REPORTING_QUANTITY : bit (6) > } * (val(N_3G) + 1) ;
+

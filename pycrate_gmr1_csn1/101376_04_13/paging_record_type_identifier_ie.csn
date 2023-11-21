@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.58         Paging Record Type Identifier
+-- Paging Record Type Identifier IE
+
+ < Paging Record Type Identifier IE > ::=
+ < Paging Record Type Identifier : bit (3) >;
+

@@ -1,0 +1,15 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.91        RLC Info
+-- RLC Info IE
+
+< RLC Info IE > ::=
+ < RLC Info length : bit (5) >
+ { 00 -- RLC in Acknowledged mode
+ { 0 | 1 < Resegment : bit (1) >}
+ { 0 | 1 < Transmission RLC Discard : < Transmission RLC Discard IE > >}
+ { 0 | 1 < Reserved : bit (5) > }
+ | 01 -- RLC in Unacknowledged mode
+ {0 | 1 < Reserved : bit (5) > }
+ | 10 -- RLC in Transparent mode
+ ! < Message escape : { 1 bit (1) } bit**= < no string > > } ; -- reserved
+

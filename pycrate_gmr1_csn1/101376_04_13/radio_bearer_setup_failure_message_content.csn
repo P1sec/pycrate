@@ -1,0 +1,14 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.36          RADIO BEARER SETUP FAILURE
+-- RADIO BEARER SETUP FAILURE message content
+
+< RADIO BEARER SETUP FAILURE message content > ::=
+ {
+ < RRC Transaction Identifier : < RRC Transaction Identifier IE > >
+ < RRC Cause : < RRC Cause IE > >
+ < Failure Cause : < Failure Cause and Error Information IE > >
+ { 0 | 1 < Integrity Check Info : < Integrity Check Info IE > > }
+ { 0 | 1 < Potentially Successful RB List : bit (5) >
+ < RB Identity : < RB Identity IE > > *(1+val(Potentially Successful RB List)) }
+ ! < Content part error : bit (*) = < no string > > } ;
+

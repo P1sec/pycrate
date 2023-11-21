@@ -1,0 +1,12 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.51        MES Timers and Constants in RRC-Connected mode
+-- MES Timers and Constants in RRC-Connected mode IE
+
+< MES Timers and Constants in RRC-Connected mode IE > ::=
+ < MES Timers and Constants Length : bit (4) >
+ --{ 0 | 1 < T305 : GRA AND CELL UPDATE TIMER IE > }
+ { 0 | 1 < T305 : bit (3) > }
+ { 0 | 1 < T314 : bit (3) > }
+ { 0 | 1 < T315 : bit (3) > }
+ < spare bits > ;
+

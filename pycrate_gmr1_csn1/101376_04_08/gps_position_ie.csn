@@ -1,0 +1,9 @@
+-- ETSI TS 101 376-04-08, release 1
+-- 11.5.2.53 GPS position
+-- GPS position IE, manually converted
+
+< GPS position IE > ::=
+  < CPI : bit (1) >
+  < GPS Latitude : bit (19) >
+  < GPS Longitude : bit (20) > ;
+

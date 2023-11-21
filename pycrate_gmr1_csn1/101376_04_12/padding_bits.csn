@@ -1,0 +1,9 @@
+-- ETSI TS 101 376-04-12
+-- 11.0 General
+-- padding bits
+
+< padding bits > ::= { null | 0 < spare padding > ! < Ignore : 1 bit** = < no string > > } ;
+
+< spare padding > ::= L (*) ;
+-- < spare padding > is 0x2b starting on an octet boundary
+

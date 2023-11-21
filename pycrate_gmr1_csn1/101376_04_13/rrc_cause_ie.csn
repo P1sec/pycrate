@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.94        RRC Cause
+-- RRC Cause IE
+
+< RRC Cause IE > ::=
+ < RRC Cause : bit (8) >;
+

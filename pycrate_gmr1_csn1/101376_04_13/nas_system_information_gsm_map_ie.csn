@@ -1,0 +1,8 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.56         NAS System Information GSM-MAP
+-- NAS System Information GSM-MAP IE
+
+< NAS System Information GSM-MAP IE > ::=
+ < Length of NAS System Information GSM-MAP : bit (3) >
+ < NAS System Information GSM-MAP : octet (1+val(Length of NAS System Information GSM-MAP)) >;
+

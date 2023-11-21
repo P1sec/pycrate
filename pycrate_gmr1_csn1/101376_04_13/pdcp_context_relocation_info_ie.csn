@@ -1,0 +1,11 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.116 PDCP Context Relocation Info
+-- PDCP Context Relocation Info IE
+
+< PDCP Context Relocation Info IE > ::=
+ < PDCP Context Relocation Info length: bit (2) >
+ { < Downlink RFC 3095 Context Relocation Indication: 0 >
+ | < Downlink RFC 3095 Context Relocation Indication: 1 > }
+ { < Uplink RFC 3095 Context Relocation Indication: 0 >
+ | < Uplink RFC 3095 Context Relocation Indication: 1 > } ;
+

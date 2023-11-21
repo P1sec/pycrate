@@ -1,0 +1,25 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.7c Packet TBF Assignment (Iu mode only)
+-- Packet TBF Assignment type 2 message content
+
+< Packet TBF Assignment type 2 message content > ::=
+ { 00
+ | 01 < Global TFI : < Global TFI IE >>
+ | 10 < G-RNTI : bit (32) >
+ | 110 < S-RNTI : bit (20) > }
+ { 0 -- Message escape
+   < RB List Size: bit (2) >
+   { < RB Id: bit(5) >
+     { 0 | 1 < RB Priority : bit (2) > }
+     { 0 | 1 < RRBid: RRB Identity IE > }
+     < RLC_MODE : bit (2) >
+     < Assignment Type: bit (1) >
+     < Physical Information : < Physical Channel Configuration IE > >
+   } * (1+val(RB List Size))
+ < padding bits > } // -- truncation at end of message allowed, bits "0" assumed
+ ;
+-- ! < Non-distribution part error : bit (*) = < no string > > }
+-- ! < Message escape : 1 bit (*) = < no string > > }
+-- ! < Address information part error : bit (*) = < no string > > }
+-- ! < Distribution part error : bit (*) = < no string > > ;
+

@@ -1,0 +1,15 @@
+-- ETSI TS 101 376-04-13
+-- 11.1.5.4          SRNS CONTEXT INFO
+-- SRNS Context Info IE
+
+< SRNS Context Info IE > ::=
+ { 0 | 1 < RFC 3095 Context Info : <RFC 3095 Context Info IE> > }
+ { 0 | 1 < ZBHC Context Info : <ZBHC Context Info IE> > }
+ { < DCH Synchronization Info List : bit(3) > -- DCH Synchronization Info used to assist receiver acquisition at target SRNS
+   { < LHCP Timing Offset: bit(6) >
+     < RHCP Timing Offset: bit(6) >
+     < LHCP Frequency Offset: bit(9) >
+     < RHCP Frequency Offset: bit(9) >
+     < RB Identity : < RB Identity IE >> } * (val(DCH Synchronization Info List))
+ };
+

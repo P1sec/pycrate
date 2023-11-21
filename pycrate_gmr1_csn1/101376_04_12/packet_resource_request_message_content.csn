@@ -1,0 +1,12 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.16 Packet resource request (Iu mode only)
+-- Packet Resource Request message content
+
+< Packet Resource Request message content > ::=
+ { 0 < Global TFI : < Global TFI IE > >
+ 10 <G-RNTI: bit(32)> }
+ <RETRANSMISSION OF PRR: bit(1)>
+ < Iu mode Channel Request Description : < Iu mode Channel Request Description IE > >
+ { 0 | 1 < HFN_LSB : bit (1) > }
+ < padding bits > ;
+

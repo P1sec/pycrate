@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 10.4.8         GRA_IDENTITY
+-- GRA_IDENTITY VAR
+
+< GRA_IDENTITY VAR > ::=
+ { 0 | 1 < GRA Identity : < GRA Identity IE > > } ;
+

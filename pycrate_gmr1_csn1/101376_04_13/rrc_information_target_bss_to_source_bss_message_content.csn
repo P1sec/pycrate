@@ -1,0 +1,14 @@
+-- ETSI TS 101 376-04-13
+-- 11.1.4         RRC information, target BSS to source BSS
+-- RRC Information Target BSS To Source BSS message content
+
+< RRC Information Target BSS To Source BSS message content > ::=
+ { 0 -- critical extension escape available
+   { 00 {
+     < RADIO BEARER RECONFIGURATION : < RADIO BEARER RECONFIGURATION message content >>
+     < Synchronization Information Transfer Time : < Activation Time IE >> } -- used with UE Software Version Indicator 0x1 or higher
+   | 01 < RRC FAILURE INFO : < RRC FAILURE Info message content >>
+ ! < Message escape : {10 | 11} bit (*) = <no string> > } -- reserved for future extension
+ ! < Content part error : bit (*) = < no string > > } ;
+-- ! < Message escape critical extension : 1 bit (*) = < no string > > } ;
+

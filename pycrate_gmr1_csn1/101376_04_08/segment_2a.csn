@@ -1,0 +1,45 @@
+-- ETSI TS 101 376-04-08
+-- 11.5.2.67 Segment 2A
+-- Segment 2A
+
+<Segment 2A> ::=
+ --<Header Segment 2A>
+ <Class 4 Version: bit (3)>
+ <Synch Info Class 2>           -- 25 bits
+ <Selection Criteria Class 2>   -- 5 bits
+ <Misc Information Class 2>     -- 4 bits
+ <LA Information Class 2>       -- 20 bits
+ <BCCH NEIGHBOUR LIST1>         -- 57 bits
+ <Spare: bit (64)> ;
+
+<Header Segment 2A> ::=
+ <Class Type 2: 10>
+ <Segment type: 0000> ;
+
+<Synch Info Class 2> ::=
+ <SA_SIRFN_DELAY: bit (4)>
+ <SA_BCCH_STN: bit (5)>
+ <Superframe number: bit (13)>
+ <Multiframe number: bit (2)>
+ <MFFN high bit: bit> ;
+
+<Selection Criteria Class 2> ::=
+ <RXLEV_SELECT_MIN: bit (5)> ;
+
+<Misc Information Class 2> ::=
+ <SB_SELECTION_POWER: bit (4)> ;
+
+<LA Information Class 2> ::=
+ <SA_PCH_CONFIG: bit (2)>
+ <SA_BACH_CONFIG: bit (8)>
+ <RACH_TS_OFFSET: bit (5)>
+ <N_Page_Occurrences: bit (2)>
+ <IMSI attach-detach ind: bit (1)>
+ <ECSC indication: bit (1)>
+ <SI_update_ind: bit (1)> ;
+
+<BCCH NEIGHBOUR LIST1>::=
+ { <ARFCN: bit (11)>
+   <SA_BCCH_STN: bit (5)>
+   <RELATIVE_FRAME_OFFSET: bit (3)> } * (3) ;
+

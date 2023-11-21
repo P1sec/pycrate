@@ -1,0 +1,64 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.3         CELL UPDATE CONFIRM
+-- CELL UPDATE CONFIRM message content
+
+< CELL UPDATE CONFIRM message content > ::=
+ { 0 -- Critical extension escape available
+   {
+   -- MES Information Elements
+   < RRC Transaction Identifier : < RRC Transaction Identifier IE >>
+   { 0 | 1 < Activation Time : < Activation Time IE >> }
+   -- When Activation Time field is not present, it means activation time of NOW
+   < RRC State Indicator : < RRC State Indicator IE >>
+   < Request Reference: <Reference IE>>
+   { 0 | 1 < Integrity Check Info : < Integrity Check Info IE >> }
+   { 0 | 1 < Integrity Protection Mode Info : < Integrity Protection Mode Info IE >> }
+   { 0 | 1 < Ciphering Mode Info : < Ciphering Mode Info IE >> }
+   { 0 | 1 < New G-RNTI : < G-RNTI IE >> }
+   < RLC re-establishment indicator SRB2-4 : bit(1) >
+   < RLC re-establishment indicator RB5 : bit(1) >
+   -- CN Information Elements
+   { 0 | 1 < CN Information Info : < CN Information Info IE >> }
+   -- GERAN Information Elements
+   { 0 | 1 < GRA Identity : < GRA Identity IE >> }
+   -- RB Information Elements
+   { 0 | 1 < RB Information to Release list : bit (5) >
+           { < RB Information to Release : < RB Information to Release IE >>
+           } * (1 + val(RB Information to Release list)) }
+   { 0 | 1 < RB Information to Reconfigure list : bit (5) >
+           { < RB Information to Reconfigure : < RB Information to Reconfigure IE >>
+             { 0 | 1 < RB Priority : bit (2) > }
+             { 0 | 1 < RRBid identity : < RRB Identity IE >> }
+             { 0 | 1 < Physical Information : < Physical Channel Configuration IE >> }
+             { 0 | 1 < NETWORK_RESPONSE_TIMES : < Network Response Times struct >> }
+           } * (1 + val(RB Information to Reconfigure list)) }
+   -- RB information elements including SRBs
+   { 0 | 1 < RB Information for Setup List : bit (5) >
+           { < RB identity : < RB Identity IE >>
+             { 0 | 1 < RRBid identity : < RRB Identity IE >> }
+             { 0 | 1 < RB Priority : bit (2) > }
+             < Physical Information : < Physical Channel Configuration IE >>
+           } * (1+val(RB Information for Setup List)) }
+   { 0 | 1 < Downlink Counter Synchronization Info : < Downlink Counter Synchronization info struct >> }
+   { 0 | 1 < STARTn : < Start IE >> }
+   -- use this ciphering information when provided otherwise use the MES ciphering key generated during authentication
+   { 1 { 00 < Ciphering Key : bit(128) >
+       | 01 < AES-256 Ciphering Key : bit(256) > } -- key applies to all RBs listed in Ciphering Synchronization
+       < RB Ciphering Synchronization: < RB Ciphering Synchronization IE >> } ** 0
+   -- used with UE Software Version Indicator 0x1 or higher
+   < Security Procedure Pending: bit (1) >
+   { 0 | 1 { < Release Cause: bit (3) > } * (1+val(RB Information to Release List)) }
+   ! < Content part error : bit (*) = < no string >>
+   }
+ ! < Message escape critical extensions : 1 bit (*) = < no string >>
+ } ;
+
+< Downlink Counter Synchronization Info struct> ::=
+ < RB with PDCP Information List : bit (5) >
+ { { 0 | 1 < RB with PDCP Information : < RB with PDCP Information IE >> }
+   { 0 | 1 < PDCP context relocation info : < PDCP context relocation info IE >> } 
+ } * (1 + val(RB with PDCP Information List));
+
+< Network Response Times struct > ::= null ;
+ -- GMR-1 3G: Reserved for Future use.
+

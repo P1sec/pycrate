@@ -1,0 +1,44 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.31          RADIO BEARER RELEASE
+-- RADIO BEARER RELEASE message content
+
+< RADIO BEARER RELEASE message content > ::=
+ { 0 -- critical extension escape available
+   { -- MES information elements
+     < RRC Transaction Identifier : < RRC Transaction Identifier IE > >
+     { 0 | 1 < Activation Time : < Activation Time IE > > }
+             -- When Activation Time field is not present, it means activation time of NOW
+     < RRC State Indicator : < RRC State Indicator IE > >
+     { 0 | 1 < Integrity Check Info : < Integrity Check Info IE > > }
+     { 0 | 1 < Integrity Protection Mode Info : < Integrity Protection Mode Info IE > > }
+     { 0 | 1 < Ciphering Mode Info : < Ciphering Mode Info IE > > }
+     { 0 | 1 < New G-RNTI : < G-RNTI IE > > }
+     -- CN information elements
+     { 0 | 1 < Signalling Connection Release Indication : < CN Domain Identity IE> > }
+     { 0 | 1 < CN Information Info : < CN Information Info IE > > }
+     -- GERAN information elements
+     { 0 | 1 < GRA Identity : < GRA Identity IE > > }
+     -- RB information elements
+     { 0 | 1 < RAB Information to Reconfigure List : bit (4) >
+             < RAB Information to Reconfigure : < RAB Information to Reconfigure IE >>
+             * (1+val(RAB Information to Reconfigure List)) }
+     { 0 | 1 < RB Information to Release List : bit (5) >
+             { < RB Information to Release : < RB Information to Release IE > >
+             } * (1+val(RB Information to Release List)) }
+     { 0 | 1 < Downlink Counter Synchronization Info : < Downlink Counter Synchronization info struct > > }
+     { 0 | 1 { < Release Cause: bit (3) > } * (1+val(RB Information to Release List)) }
+     ! < Content part error : bit (*) = < no string > >
+   }
+   ! < Message escape critical extension : 1 bit (*) = < no string > >
+ } ;
+
+< Downlink Counter Synchronization Info struct> ::=
+ < RB with PDCP Information List : bit (5) >
+ { { 0 | 1 < RB with PDCP Information : < RB with PDCP Information IE > > }
+   { 0 | 1 < PDCP context relocation info : < PDCP context relocation info IE > > }
+ } * (1 + val(RB with PDCP Information List) );
+
+< Network Response Times struct > ::= null ;
+ -- GMR-1 3G: Reserved for Future use
+
+

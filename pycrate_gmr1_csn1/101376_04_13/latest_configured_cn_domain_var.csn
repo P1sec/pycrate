@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 10.4.14a LATEST_CONFIGURED_CN_DOMAIN
+-- LATEST_CONFIGURED_CN_DOMAIN VAR
+
+< LATEST_CONFIGURED_CN_DOMAIN VAR > ::=
+ { 0 | 1 < Latest configured CN domain : < CN Domain Identity IE > > } ;
+

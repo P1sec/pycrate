@@ -1,0 +1,19 @@
+-- ETSI TS 101 376-04-08, Rel. 3
+-- 11.5.2.70         Segment 2Bbis
+-- Segment 2Bbis
+
+<Segment 2Bbis> ::=
+ --<Header Segment 2Bbis>
+ <BCCH neighbours : <BCCH NEIGHBOUR LIST2b> * 5>
+ <System Information Extension: bit (1)>
+ <Spare: bit (18)> ;
+
+<Header Segment 2Bbis>::=
+ <Class Type 2: 10>
+ <Segment type: 0001> ;
+
+<BCCH NEIGHBOUR LIST2b> ::=
+ <ARFCN: bit (11)>
+ <SA_BCCH_STN: bit (5)>
+ <RELATIVE_FRAME_OFFSET: bit (3)> ;
+

@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.13        Ciphering Algorithm
+-- Ciphering Algorithm IE
+
+< Ciphering Algorithm IE > ::= bit (4) ;
+-- < Ciphering Algorithm : bit (4) > > ;
+

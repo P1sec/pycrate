@@ -1,0 +1,10 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.49          SIGNALLING CONNECTION RELEASE INDICATION
+-- SIGNALLING CONNECTION RELEASE INDICATION message content
+
+< SIGNALLING CONNECTION RELEASE INDICATION message content > ::=
+ {
+ < CN Domain Identity : < CN Domain Identity IE > >
+ { 0 | 1 < Integrity Check Info : < Integrity Check Info IE > > }
+ ! < Content part error : bit (*) = < no string > > } ;
+

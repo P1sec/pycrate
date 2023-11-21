@@ -1,0 +1,12 @@
+-- ETSI TS 101 376-04-12
+-- 12.29 Packet link synchronization parameter
+-- Packet Link Synchronization IE
+
+< Packet Link Synchronization IE > ::=
+ < Timing correction : bit (10) >
+ < Timing correction flag : bit (1) >
+ < Frequency correction : bit (12) >
+ < Frequency correction flag : bit (1) >
+ < Timing Advance Index : bit (7) >
+ { 0 | 1 < Frame Number : bit (19) > } ;
+

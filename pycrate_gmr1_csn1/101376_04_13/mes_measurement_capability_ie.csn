@@ -1,0 +1,12 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.49         MES Measurement Capability
+-- MES Measurement Capability IE
+
+< MES Measurement Capability IE > ::=
+ {
+ < MES Measurement Capability Length : bit (4)>
+ < Extended Measurement Capability : bit (1) >
+ < SMS Value : bit (4) >
+ < SM Value : bit (4) >
+ < spare bit >**; -- Extension information may be truncated between released versions of the protocol
+

@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.136 RLC Sequence Number
+-- RLC Sequence Number IE
+
+ < RLC Sequence Number IE > ::=
+ < Sequence Number : bit (10) >;
+

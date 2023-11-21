@@ -1,0 +1,8 @@
+-- ETSI TS 101 376-04-12
+-- 12.10        Global TFI
+-- Global TFI IE
+
+< Global TFI IE > ::=
+ { 0 < UPLINK_TFI : bit (8) >
+ | 1 < DOWNLINK_TFI : bit (8) > } ;
+

@@ -1,0 +1,49 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.9b Packet Measurement Order (Iu mode only)
+-- Packet Measurement Order message content
+
+< Packet Measurement Order message content > ::=
+ {
+   { 0 < Global TFI : < Global TFI IE > >
+   | 10 < G-RNTI : bit (32) > }
+   {
+     < Measurement Request Reference : bit(8) >
+     { 0 < Position Measurement : < Position Measurement struct > >
+     | 10 < GMR 3G Neighbour Cell : < GMR 3G Neighbour Cell Description struct > > }
+   }
+ } ;
+-- ! < Non-distribution part error : bit (*) = < no string > > }
+-- ! < Address information part error : bit (*) = < no string > > }
+-- ! < Distribution part error : bit (*) = < no string > > ;
+
+<Position Measurement struct> ::=
+ { <Position Report Type : bit(2)>
+   { 0 | 1 < Serving Spot Beam Coordinates: <Spot Beam Coordinates IE> > }
+   { 0 | 1 < GPS Assist Information: < GPS Assist IE > > }
+ };
+
+< Spot Beam Coordinates IE > ::= null ; -- IE FFS
+< GPS Assist IE > ::= null ; -- IE FFS
+
+< GMR 3G Neighbour Cell Description struct > ::=
+ { 0 | 1 < NC Measurement Parameters : < NC Measurement Parameters struct > > }
+ { 0 | 1 < GMR Neighbour Cell Description : < GMR Neighbour Cell Description struct > > }
+ { 0 | 1 < 3G Neighbour Cell Description : < 3G Neighbour Cell Description struct > > }
+ ;
+
+< NC Measurement Parameters struct > ::=
+ < NC_REPORTING_PERIOD_T : bit (3) > ;
+
+< GMR Neighbour Cell Description struct > ::=
+ { 1 < GMR Cell: < GMR Frequency list struct > >} ** 0;
+
+< GMR Frequency list struct > ::=
+ < ARFCN : bit (11) >
+ < Satellite Id: bit(2)>
+ < SpotBeam Id : bit (10) >
+ < BCCH_TN : bit (5) > ;
+
+< 3G Neighbour Cell Description struct> ::=
+ { 0 | 1 < UTRAN FDD Description : < UTRAN FDD Description struct > > }
+ { 0 | 1 < UTRAN TDD Description : < UTRAN TDD Description struct > > } ;
+

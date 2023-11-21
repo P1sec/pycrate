@@ -1,0 +1,15 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.26 Packet GMPRS Resume Response (A/Gb mode only)
+-- Packet GMPRS Resume Response message content
+
+< Packet GMPRS Resume Response message content > ::=
+ { 0 < TLLI : bit(32) > }
+ { 0 -- Message escape
+   < Result: bit (1) >
+   < padding bits > } // -- truncation at end of message allowed, bits "0" assumed
+ ;
+-- ! < Non-distribution part error : bit (*) = < no string > > }
+-- ! < Message escape : 1 bit (*) = <no string> > }
+-- ! < Address information part error : bit (*) = < no string > > }
+-- ! < Distribution part error : bit (*) = < no string > > ;
+

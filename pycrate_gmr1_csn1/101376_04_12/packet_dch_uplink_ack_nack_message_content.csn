@@ -1,0 +1,14 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.21b Packet DCH Uplink Ack/Nack (Iu mode only)
+-- Packet DCH Uplink Ack/Nack message content
+
+< Packet DCH Uplink Ack/Nack message content > ::=
+ { < RB Id : bit (5) >
+ {0 | 1 <G-RNTI : bit(32) >}
+ {0 | 1 <T and F Correction: <Time and Frequency Correction IE>>}
+ {0 | 1 <DCH Channel MCS Info: <DCH MCS IE>>} -- applies to all flows operating on DACCH
+ {1 -- DCCH TBF mode
+ < DCCH Ack/Nack Description: <DCCH Ack/Nack Description IE >>}
+ <padding bits >
+ ! < DCH message part error : bit (*) = < no string > > } ;
+

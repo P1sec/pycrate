@@ -1,0 +1,16 @@
+-- ETSI TS 101 376-04-13
+-- 11.1.3         RRC Information to target GERAN Iu mode BSS
+-- RRC INFORMATION TO TARGET GERAN IU MODE BSS message content
+
+< RRC INFORMATION TO TARGET GERAN IU MODE BSS message content > ::=
+ { 0 -- critical extension escape available
+   { { 00 <Handover to GERAN: < INTER RAT or MODE HANDOVER INFO WITH MES CAPABILITIES message content >>
+     | 01 < SBSS Relocation : < SBSS Relocation Information message content >>
+     | 10 < RFC3095 Context Info : < RFC 3095 Context Info IE >>
+     }
+   }
+ } ;
+-- ! < Message escape : { 11 } bit** = < no string > > } -- reserved for future extension
+-- ! < Content part error : bit (*) = < no string > > }
+-- ! < Message escape critical extension : 1 bit (*) = < no string > >} ;
+

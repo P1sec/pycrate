@@ -1,0 +1,10 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.34a Handover Traffic Carrier Info
+-- Handover Traffic Carrier Info IE
+
+< Handover Traffic Carrier Info IE > ::=
+ { 0 | 1 <SB_Mask: bit(8)> }
+ { 0 | 1 <MAC_FORWARD_TS_OFFSET: bit(2)> }
+ { 0 | 1 <MAC_RETURN_TS_OFFSET: bit(5)> }
+ { 0 | 1 <USF_DELAY : bit(3)> } ;
+

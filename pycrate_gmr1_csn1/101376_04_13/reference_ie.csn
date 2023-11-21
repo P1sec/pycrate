@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.98a Reference
+-- Reference IE
+
+< Reference IE > ::=
+ < Reference : bit (16) >;
+

@@ -1,0 +1,12 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.32 Packet Uplink Talk Burst Control Response
+-- Packet Uplink Talk Burst Control Response message content
+
+< Packet Uplink Talk Burst Control Response message content > ::=
+ { 0 < Global TFI : < Global TFI IE >>
+ | 10 < S-RNTI : bit (20) >
+ | 110 < G-RNTI : bit (32) > }
+ < RB Id: bit (5) >
+ < Reference ID: bit (2) >
+ < padding bits > ;
+

@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 10.4.9         G_RNTI
+-- G_RNTI VAR
+
+< G_RNTI VAR > ::=
+ { 0 | 1 < G-RNTI : < G-RNTI IE > > } ;
+

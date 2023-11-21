@@ -1,0 +1,9 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.78        RB COUNT-C Information
+-- RB COUNT-C Information IE
+
+< RB COUNT-C Information IE > ::=
+ < RB Identity : < RB Identity IE > >
+ < COUNT-C-Uplink : bit (32) >
+ < COUNT-C-Downlink : bit (32) >;
+

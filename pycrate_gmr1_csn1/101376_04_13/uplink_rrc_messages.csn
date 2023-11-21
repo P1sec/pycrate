@@ -1,0 +1,40 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.1.3             Uplink RRC messages
+-- Uplink RRC messages
+
+ < Uplink RRC messages > ::=
+ {
+ < MESSAGE_TYPE : 00000010 > < GERAN MOBILITY INFORMATION CONFIRM message content > |
+ < MESSAGE_TYPE : 00000011 > < GERAN MOBILITY INFORMATION FAILURE message content > |
+ --< MESSAGE_TYPE : 00000100 > < GRA UPDATE message content > |
+ < MESSAGE_TYPE : 00000101 > < Uplink Key Exchange message content > |
+ < MESSAGE_TYPE : 00000110 > < HANDOVER COMPLETE message content > |
+ < MESSAGE_TYPE : 00000111 > < HANDOVER FAILURE message content > |
+ < MESSAGE_TYPE : 00001000 > < INITIAL DIRECT TRANSFER message content > |
+ < MESSAGE_TYPE : 00001001 > < LCS UPLINK INFORMATION message content > |
+ < MESSAGE_TYPE : 00001010 > < MEASUREMENT REPORT message content > |
+ < MESSAGE_TYPE : 00001011 > < MES CAPABILITY INFORMATION message content > |
+ < MESSAGE_TYPE : 00001100 > < RADIO BEARER RECONFIGURATION COMPLETE message content > |
+ < MESSAGE_TYPE : 00001101 > < RADIO BEARER RECONFIGURATION FAILURE message content > |
+ < MESSAGE_TYPE : 00001110 > < RADIO BEARER RELEASE COMPLETE message content > |
+ < MESSAGE_TYPE : 00001111 > < RADIO BEARER RELEASE FAILURE message content > |
+ < MESSAGE_TYPE : 00010000 > < RADIO BEARER SETUP COMPLETE message content > |
+ < MESSAGE_TYPE : 00010001 > < RADIO BEARER SETUP FAILURE message content > |
+ < MESSAGE_TYPE : 00010010 > < RRC CONNECTION RELEASE COMPLETE message content > |
+ < MESSAGE_TYPE : 00010100 > < RRC CONNECTION SETUP COMPLETE message content > |
+ < MESSAGE_TYPE : 00010101 > < RRC STATUS message content > |
+ < MESSAGE_TYPE : 00010110 > < SECURITY MODE COMPLETE message content > |
+ < MESSAGE_TYPE : 00010111 > < SECURITY MODE FAILURE message content > |
+ < MESSAGE_TYPE : 00011000 > < SIGNALLING CONNECTION RELEASE INDICATION message content > |
+ < MESSAGE_TYPE : 00011001 > < UPLINK DIRECT TRANSFER message content > |
+ < MESSAGE_TYPE : 00011010 > < RAB BINDING REQUEST message content > |
+ < MESSAGE_TYPE : 00011011 > < GERAN Iu mode DTM REQUEST message content > |
+ < MESSAGE_TYPE : 00011100 > < RAB UPPER LAYER RECONFIGURATION COMPLETE message content> |
+ < MESSAGE_TYPE : 00011101 > < POSITION REPORT RESPONSE message content > |
+ < MESSAGE_TYPE : 00011110 > < CHANNEL CHANGE PREPARATION COMPLETE message content > |
+ < MESSAGE_TYPE : 00011111 > < POSITION UPDATE INDICATION message content >
+ < spare bits > ** } ;
+
+< Default downlink message content > ::=
+ bit (*) = < no string > ;
+

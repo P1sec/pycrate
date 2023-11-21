@@ -1,0 +1,8 @@
+-- ETSI TS 101 376-04-12
+-- 12.36 Channel Info
+-- Channel Info IE
+
+<Channel Info IE> ::=
+ { < Channel Mode: bit (1) >
+   < Channel Type: bit (3) > } ;
+

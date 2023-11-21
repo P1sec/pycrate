@@ -1,0 +1,10 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.44           RRC FAILURE INFO
+-- RRC FAILURE Info message content
+
+ < RRC FAILURE Info message content > ::=
+ { < Failure cause : 0011 >
+ < Protocol Error Information : < Protocol Error Information IE > >
+ | < Failure cause : 0000 | 0001 | 0010 | 01 bit (2) | 1 bit(3) > }
+ ! < Content part error : bit (*) = < no string > > ;
+

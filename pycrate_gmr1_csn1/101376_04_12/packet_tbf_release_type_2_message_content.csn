@@ -1,0 +1,17 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.19a Packet TBF release type 2 (Iu mode only)
+-- Packet TBF Release message content
+
+< Packet TBF Release type 2 message content > ::=
+ { 0
+   { 0 < GLOBAL_TFI : Global TFI IE >
+   | 10 <G-RNTI: bit(32)> <RB Id: bit(5)> }
+   < UPLINK_RELEASE : bit (1) >
+   < DOWNLINK_RELEASE : bit (1) >
+   < TBF_RELEASE_CAUSE : bit (4) >
+   < padding bits >
+ };
+--   ! < Non-distribution part error : bit (*) = < no string > >
+--   ! < Address information part error : bit (*) = < no string > > }
+-- ! < Distribution part error : bit (*) = < no string > > ;
+

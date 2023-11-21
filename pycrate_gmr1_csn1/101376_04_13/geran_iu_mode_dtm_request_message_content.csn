@@ -1,0 +1,13 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.57          GERAN Iu mode DTM REQUEST
+-- GERAN Iu mode DTM REQUEST message content
+
+< GERAN Iu mode DTM REQUEST message content > ::=
+ {
+ { 0 | 1 < Integrity Check Info : < Integrity Check Info IE > >}
+ < START List : bit (2) >
+ { < CN Domain Identity : < CN Domain Identity IE > >
+ < START : < START IE > > } * (1+val(START List))
+ < Iu mode RRC Channel Request Description : < Iu mode Channel Request Description IE > >
+ ! < Content part error : bit (*) = < no string > > } ;
+

@@ -1,0 +1,8 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.32         G-RNTI
+-- G-RNTI IE
+
+< G-RNTI IE > ::=
+ < Serving BSC identity : bit (12) > -- RNC-Id for GERAN Iu mode
+ < S-RNTI : bit (20) >;
+

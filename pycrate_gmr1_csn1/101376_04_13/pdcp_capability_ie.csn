@@ -1,0 +1,25 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.59         PDCP Capability
+-- PDCP Capability IE
+
+< PDCP Capability IE > ::=
+ { < PDCP Capability length : bit (8) >
+   < Support for lossless serving RNC relocation : bit (1) > -- Serving BSC relocation for A/Gb mode
+   { < Support for RFC 2507 : 0 >
+   | < Support for RFC 2507 : 1 >
+     < Max HC context space : bit (4) > }
+   { < Support for RFC 3095 : 0 >
+   | < Support for RFC 3095 : 1 >
+     { 0 | 1 < Maximum number of ROHC context sessions : bit (4) > }
+     { 0 | 1 < Reverse decompression depth : bit (16) > }
+     { < Support for RFC 3095 context relocation : 0 >
+     | < Support for RFC 3095 context relocation: 1 > } }
+   { < Support for PEP : 0 >
+   | < Support for PEP : 1 >
+     < Support for PEP Compression : bit (1) >
+     < Support for PEP Handover : bit (1) > }
+   { < Support for Data Compression : 0 > -- Data compression not supported
+   | < Support for Data Compression : 1 >
+     < Data Compression Parameters : < Data Compression Parameter IE >> }
+   < spare bit > ** -- Extension information may be truncated between released versions of the protocol
+  } ;

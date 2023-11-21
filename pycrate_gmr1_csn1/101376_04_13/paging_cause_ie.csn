@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.57         Paging Cause
+-- Paging Cause IE
+
+ < Paging Cause IE > ::=
+ < Paging Cause : bit (3) >;
+

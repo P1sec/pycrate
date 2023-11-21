@@ -1,0 +1,13 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.14        Ciphering Mode Info
+-- Ciphering Mode Info IE
+
+< Ciphering Mode Info IE > ::=
+ {
+ < Ciphering Mode Command : 0 >
+ | < Ciphering Mode Command : 1 >
+ { < Ciphering Algorithm : < Ciphering Algorithm IE > >
+ { 0 | 1 < Ciphering Activation Time for DCH : < Activation Time IE > > }
+ { 0 | 1 < RB Downlink Ciphering Activation Time Info : < RB Activation Time Info IE > > } }
+ };
+

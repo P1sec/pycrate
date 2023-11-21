@@ -1,0 +1,16 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.27b RAB UPPER LAYER RECONFIGURATION COMPLETE
+-- RAB UPPER LAYER RECONFIGURATION COMPLETE message content
+
+< RAB UPPER LAYER RECONFIGURATION COMPLETE message content > ::=
+ { 0 -- critical extension escape available
+ {
+ -- MES Information Elements
+ < RRC Transaction Identifier : < RRC Transaction Identifier IE > >
+ { 0 | 1 < Integrity Check Info : < Integrity Check Info IE > > }
+ < RAB to Reconfigure : <RAB Identity IE> >
+ < Reconfigured Link Direction: bit(2)>
+ { 0 | 1 < Upper layer bearer info : <Upper Layer Bearer Info IE> > }
+ ! < Content part error : bit (*) = < no string > > }
+ ! < Message escape critical extensions: 1 bit (*) = < no string > >} ;
+

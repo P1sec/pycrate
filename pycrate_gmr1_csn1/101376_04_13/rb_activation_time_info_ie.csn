@@ -1,0 +1,18 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.77        RB Activation Time Info
+-- RB Activation Time Info IE
+
+< RB Activation Time Info IE > ::=
+ { 0 | 1 < Repeated Radio Bearer Activation Time list : bit (5) >
+         < Repeated Radio Bearer Activation Time : < Repeated Radio Bearer Activation Time struct >> * (1+val(Repeated Radio Bearer Activation Time list))
+ } ;
+
+< Repeated Radio Bearer Activation Time struct > ::=
+ { < RB Identity : < RB Identity IE > >
+   { 0 | 1 { 00 < GMPRS RLC Sequence Number : bit (10) >
+           | 01 < Reserved : null >
+           | 10 < DCCH TBF mode RLC Sequence Number : bit (7) >
+           | 11 < Reserved : null > }
+   }
+ };
+

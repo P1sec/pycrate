@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.15         CN Domain Identity
+-- CN Domain Identity IE
+
+< CN Domain Identity IE > ::=
+ < CN Domain Identity : bit (2) > ;
+

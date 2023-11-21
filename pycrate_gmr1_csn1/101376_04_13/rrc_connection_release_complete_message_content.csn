@@ -1,0 +1,12 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.39          RRC CONNECTION RELEASE COMPLETE
+-- RRC CONNECTION RELEASE COMPLETE message content
+
+< RRC CONNECTION RELEASE COMPLETE message content > ::=
+ {
+   < RRC Transaction Identifier : < RRC Transaction Identifier IE >>
+   { 0 | 1 < Integrity Check Info : < Integrity Check Info IE >> }
+   { 0 | 1 < Error Indication : < Failure Cause and Error Information IE >> }
+ ! < Content part error : bit (*) = < no string >>
+ } ;
+

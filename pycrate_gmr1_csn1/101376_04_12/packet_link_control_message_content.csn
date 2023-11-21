@@ -1,0 +1,13 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.13 Packet link control
+-- Packet Link Control message content
+
+ < Packet Link Control message content > ::=
+ {0
+ {00 | 01< Global TFI : < Global TFI IE > > | 10 < G-RNTI : bit(32) >}
+ < Packet Link Synchronization : < Packet Link Synchronization IE > >
+ |1
+ { 0 | 1 < Packet Link Synchronization : < Packet Link Synchronization IE > > }*4}
+ < padding bits >
+ ! < Distribution part error : bit (*) = < no string > > ;
+

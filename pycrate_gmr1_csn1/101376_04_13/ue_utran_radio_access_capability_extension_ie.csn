@@ -1,0 +1,9 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.109 UE UTRAN Radio Access Capability Extension
+-- UE UTRAN Radio access capability extension IE
+
+< UE UTRAN Radio access capability extension IE > ::=
+ { < UE UTRAN Radio Access Capability Extension length : bit(10) >
+   < UE UTRAN Radio Access Capability Extension : bit (1+val(UE UTRAN Radio Access Capability Extension length)) >
+ };
+

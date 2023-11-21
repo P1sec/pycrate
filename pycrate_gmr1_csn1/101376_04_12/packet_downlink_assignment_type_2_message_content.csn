@@ -1,0 +1,33 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.7a Packet downlink assignment type 2 (Iu mode only)
+-- Packet Downlink Assignment type 2 message content
+
+< Packet Downlink Assignment type 2 message content > ::=
+ { { 0 < TLLI/G-RNTI : bit (32) >
+   | 10 < Global TFI : < Global TFI IE >>
+   | 110 < S-RNTI : bit (20) > }
+   { 0 -- Message escape
+     { < RLC_MODE : bit (1) >
+       < RB Id: bit(5)>
+       < MAC Slot Allocation : bit (8) > -- Applicable for Downlink TBF
+       < DOWNLINK_TFI_ASSIGNMENT : bit (8) >
+       { 0 | 1 < HFN_LSB : bit (1) >
+       { 0 | 1 < Frequency Allocation : < Frequency Allocation IE > > }
+       { 0 | 1< PDCH Uplink Organization: <PDCH Uplink Organization IE>>}
+       { 0 | 1 < Uplink DCH TBF Allocation: < DCH TBF Allocation Struct>>}
+       < padding bits > } // -- truncation at end of message allowed, bits "0" assumed
+     ! < Non-distribution part error : bit (*) = < no string > > }
+   ! < Message escape : 1 bit (*) = <no string> > }
+ ! < Address information part error : bit (*) = < no string > > }
+ ! < Distribution part error : bit (*) = < no string > > ;
+
+<DCH TBF Allocation Struct> ::=
+ { <Channel Info: <Channel Info IE>>
+   <Power Control Sync Offset: <Power Control Synch Offset IE>> -- Applies only for uplink DCH
+   <DCH Channel MCS Info: <DCH MCS IE>>
+  { 0 <Downlink MAC Slot Allocation: bit(8)>
+  | 1 <Downlink Slot Allocation: <Slot Allocation IE>> }
+  { 0 <Uplink MAC Slot Allocation: bit(8)>
+  | 1 <Uplink Slot Allocation: <Slot Allocation IE>> }
+  <RB Id: bit(5)> };
+

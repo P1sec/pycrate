@@ -1,0 +1,32 @@
+-- ETSI TS 101 376-04-13
+-- 11.1.5.3a        ZBHC CONTEXT INFO
+-- ZBHC Context Info IE
+
+< ZBHC Context Info IE > ::=
+ < RB with ZBHC Context List : bit(5) >
+ { < RB Identity : < RB Identity IE >>
+   { 0 | 1 < Uplink ZBHC Context: ZBHC Context IE > }
+ } * (1 + val(RB with ZBHC Context List)) ;
+
+< ZBHC Context IE > ::=
+ { 0 -- IPv4 related context
+ < DSCP : bit(6) >
+ < ECN : bit(2) >
+ < Source IPv4 Address : bit(32) >
+ < Destination IPv4 Address : bit(32) >
+ < IPv4 Identifier : bit(16) >
+ | 1 -- IPv6 related context
+ < Traffic Class : bit(8) >
+ < Flow Label : bit(20) >
+ < Source IPv6 Address : bit(128) >
+ < Destination IPv6 Address : bit(128) >
+ }
+ < Source UDP Port : bit(16) >
+ < Destination UDP Port : bit(16) >
+ < RTP Version : bit(2) >
+ < RTP Payload Type : bit(7) >
+ < RTP SSRC : bit(32) >
+ < RTP Sequence: bit(16) >
+ < RTP Timestamp: bit(32) >
+ < Last Frame Number: bit(22) > ;
+

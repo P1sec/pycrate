@@ -1,0 +1,13 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.58          GERAN Iu mode DTM REJECT
+-- GERAN Iu mode DTM REJECT message content
+
+< GERAN Iu mode DTM REJECT message content > ::=
+ {
+     < RRC Transaction Identifier : < RRC Transaction Identifier IE > >
+     { 0 | 1 < Integrity Check Info : < Integrity Check Info IE > >}
+     < Failure Cause : < Failure Cause and Error Information IE > >
+     < Wait Indication : <Wait Indication IE>>
+     ! < Content part error : bit (*) = < no string > >
+ } ;
+

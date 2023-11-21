@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.104 Synchronization Indication
+-- Synchronization Indication IE
+
+< Synchronization Indication IE > ::=
+ < Synchronization Indication Value: bit (4) > ;
+

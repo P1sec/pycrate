@@ -1,0 +1,8 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.36         Integrity Check Info
+-- Integrity Check Info IE
+
+< Integrity Check Info IE > ::=
+ < Message Authentication Code : bit (32) > -- see ETSI TS 133 102 [23]
+ < RRC Message sequence number : bit (4) >;
+

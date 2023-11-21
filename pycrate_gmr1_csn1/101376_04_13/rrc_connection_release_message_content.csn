@@ -1,0 +1,17 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.38          RRC CONNECTION RELEASE
+-- RRC CONNECTION RELEASE message content
+
+< RRC CONNECTION RELEASE message content > ::=
+ { 0 -- critical extension escape available
+   { < RRC Transaction Identifier : < RRC Transaction Identifier IE >>
+     < RRC Release Cause : < Release Cause IE >>
+     { 0 | 1 < Integrity Check Info : < Integrity Check Info IE >> }
+     { 0 | 1 < N308 : bit (3) > }
+     --{ 0 | 1 < RPLMN Information : < RPLMN Information IE >> }
+     { 0 | 1 < RPLMN Information : null > }
+     { 0 | 1 < CN Information Info : < CN Information Info IE >> }
+     { 0 | 1 < STARTn : <Start IE >> }
+     ! < Content part error : bit (*) = < no string >> }
+ ! < Message escape critical extensions : 1 bit (*) = < no string >> } ;
+

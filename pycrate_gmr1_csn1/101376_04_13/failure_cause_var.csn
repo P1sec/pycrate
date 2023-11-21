@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 10.4.6        FAILURE_CAUSE
+-- FAILURE_CAUSE VAR
+
+< FAILURE_CAUSE VAR > ::=
+ { 0 | 1 < Failure Cause : < Failure Cause IE > > } ;
+

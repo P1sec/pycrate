@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.107 Transmission RLC Discard
+-- Transmission RLC Discard IE
+
+ < Transmission RLC Discard IE > ::=
+ < Transmission RLC Discard : bit (1) >;
+

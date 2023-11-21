@@ -1,0 +1,34 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.26a RAB BINDING REQUEST
+-- RAB BINDING REQUEST message content
+
+< RAB BINDING REQUEST message content > ::=
+ { 0 -- critical extension escape available
+   {
+     { 0 | 1 < Integrity Check Info : < Integrity Check Info IE > > }
+     < RAB Id : <RAB Identity IE> >
+     {
+         00000 < Multicast binding info : <Multicast Binding Info struct> > -- Add multicast binding ("Join")
+         | 00001 -- Remove multicast binding ("Leave")
+         | 00010 < PTT binding info : <PTT Binding Info struct> > -- Add PTT binding ("Join")
+         | 00011 < PTT binding info : <PTT Binding Info struct> > -- Update PTT binding
+         | 00100 -- Remove PTT binding ("Leave")
+     }
+     ! < Content part error : bit (*) = < no string > >
+   }
+   ! < Message escape critical extensions: 1 bit (*) = < no string > >
+ } ;
+
+< Multicast Binding Info struct > ::=
+ { < Multicast Group Id : bit (32) >
+   < Tunnel Port : bit (16) >
+   < IPv4 PDP Address : bit (32) >
+   0
+ }; -- Available for extension
+
+< PTT Binding Info struct > ::=
+ { { 0 | 1 < PTT Session Key : bit (32) > }
+   { 0 | 1 < PTT Session Mode : bit (2) > }
+   0
+ }; -- Available for extension
+

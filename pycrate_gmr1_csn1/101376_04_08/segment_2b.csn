@@ -1,0 +1,18 @@
+-- ETSI TS 101 376-04-08
+-- 11.5.2.68         Segment 2B
+-- Segment 2B
+
+<Segment 2B> ::= 
+ --<Header Segment 2B>
+ <BCCH NEIGHBOUR LIST2>
+ <Spare: bit (121)> ;
+
+<Header Segment 2B> ::=
+ <Class Type 2: 10>
+ <Segment type: 0001> ;
+
+<BCCH NEIGHBOUR LIST2> ::=
+ <ARFCN: bit (11)>
+ <SA_BCCH_STN: bit (5)>
+ <RELATIVE_FRAME_OFFSET: bit (3)> ;
+

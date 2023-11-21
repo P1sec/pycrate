@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.103 Starting Time
+-- Starting Time IE
+
+ < Starting Time IE > ::=
+ < Starting Time Value : octet(2) > ;
+

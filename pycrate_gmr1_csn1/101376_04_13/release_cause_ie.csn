@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.90        Release Cause
+-- Release Cause IE
+
+< Release Cause IE > ::=
+ < Release Cause : bit (3) >;
+

@@ -1,0 +1,61 @@
+-- ETSI TS 101 376-04-08, release 3
+-- 10.1.8.4 Channel Request Type 3 (Iu mode only)
+-- Channel Request Type 3 Message Content
+
+< Channel Request Type 3 Message content > ::=
+ { 0 -- Critical Message Escape
+   { < Retry Counter: bit (2) >
+     < Test Mode: bit (1) > }
+   { 0000
+     -- RRC Connection Request
+     { < Random S-RNTI: bit (20) >
+       < RRC Establishment Cause: bit (5) >
+       < MES Position: <Relative Position IE>>
+       < GMPRS Terminal Type Id: bit (7) >
+       < RA Indicator: bit (1) >
+       < Spare: bit (1)> }
+   | 0001
+     -- RRC Periodic GRA Update
+     { < S-RNTI: bit (20) >
+       < MES Position: <Relative Position IE>>
+       < Spare: bit (14) > }
+   | 0010
+     -- RRC GRA Update/Change in GRA
+     { < G-RNTI: bit (32) >
+       < MES Position: <Relative Position IE>>
+       < Spare: bit (2)> }
+   | 0011
+     -- RRC Cell Update
+     { < S-RNTI: bit (20) >
+       < Cell Update Cause: bit (3)>
+       < MES Position: <Relative Position IE>>
+       < RB Info: <RB Request Struct IE>> }
+   | 0100
+     -- User Data Transfer - Application Type 1
+     { < S-RNTI: bit (20) >
+       < MES Position: <Relative Position IE>>
+       < RB Id: bit (5)>
+       < User Data: bit (8) >
+       < Spare: bit (1) > }
+   | 0101
+     -- Position Verification
+     { < S-RNTI or Random S-RNTI: bit (20) >
+       < Enhanced MES Position: < Enhanced Relative Position IE>>
+       < MES RRC Mode Indicator: bit (1) >
+       < Spare: bit (1) > }
+   ! < Content part error: bit (*) = < no string > > }
+ } ;
+
+<RB Request Struct IE> ::=
+ < RB Id: bit (5) >
+ < RLC_BLOCK_COUNT: bit (6) > ;
+
+<Relative Position IE> ::=
+ < GPS Capability Indicator: bit (1) >
+ < Relative Latitude: bit (12) >
+ < Relative Longitude: bit (13) > ;
+
+<Enhanced Relative Position IE> ::=
+ < Enhanced Relative Latitude: bit (19) >
+ < Enhanced Relative Longitude: bit (19) > ;
+

@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.114 Wait Indication
+-- Wait Indication IE
+
+ < Wait Indication IE > ::=
+ < Wait Indication : bit (8) >;
+

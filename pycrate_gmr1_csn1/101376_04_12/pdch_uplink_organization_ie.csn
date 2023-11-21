@@ -1,0 +1,14 @@
+-- ETSI TS 101 376-04-12
+-- 12.37         PDCH Uplink Organization
+-- PDCH Uplink Organization IE
+
+<PDCH Uplink Organization IE> ::=
+ <Number of Uplinks: bit (4)>
+ { <Uplink ARFCN Ordered List : <Uplink ARFCN Struct>> } * (val(Number of Uplinks)) ;
+
+<Uplink ARFCN Struct> ::=
+ <Return Frequency Set: bit (1)>
+ <Uplink Bandwidth: bit (3)>
+ <Uplink ARFCN: bit (11)>
+ <UL Frequency Plan ID: bit (1)>;
+

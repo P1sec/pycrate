@@ -1,0 +1,10 @@
+-- ETSI TS 101 376-04-08, release 3
+-- 11.5.2.101 GPS discriminator
+-- Prefixed GPS position IE
+
+< Prefixed GPS position IE > ::=
+    1
+    < Prefixed Latitude: bit (19) >
+    < Prefixed Longitude: bit (20) >
+    ;
+

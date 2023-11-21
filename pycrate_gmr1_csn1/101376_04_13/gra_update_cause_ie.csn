@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.31         GRA Update Cause
+-- GRA Update Cause IE
+
+< GRA Update Cause IE > ::=
+ < GRA Update Cause : bit(2) >;
+

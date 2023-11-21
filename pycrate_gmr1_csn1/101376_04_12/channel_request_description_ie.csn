@@ -1,0 +1,19 @@
+-- ETSI TS 101 376-04-12
+-- 12.7          Channel Request Description
+-- channel request description IE
+
+ < channel request description IE > ::=
+ < Rid: bit(2)>
+ < No of Blocks : bit (6) >
+ < Peak Throughput Class : bit (4) >
+ <Radio Priority: bit (2) >
+ < RLC Mode : bit (1) >
+ < LLC PDU TYPE : bit (1) >
+ < Spare : bit (1) >;
+
+< Iu mode Channel Request Description IE > ::=
+ < RB Id : bit (5) >
+ < RADIO_PRIORITY : bit (2) >
+ < RLC_BLOCK_COUNT : bit (6) >
+ { 0 | 1 < Iu mode Channel Request Description IE > } ; -- IE to be repeated only when
+

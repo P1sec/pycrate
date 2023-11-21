@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.38        Integrity Protection Algorithm
+-- Integrity Protection Algorithm IE
+
+< Integrity Protection Algorithm IE > ::=
+ < Integrity Protection Algorithm : bit (4) >;
+

@@ -1,0 +1,35 @@
+-- ETSI TS 101 376-04-08
+-- 11.5.2.87         Segment 4C
+-- Segment 4C
+
+<Segment 4C> ::=
+ --<Header Segment 4C>
+  <Power Control Parameters>
+  <Spare: bit (1)> ;
+
+<Power Control Parameters> ::=
+ <HHT SQT: bit (7)>
+ <HHT Data SQT: bit (7)>
+  <VT SQT: bit (7)>
+  <VT Data SQT: bit (7)>
+  <FT SQT: bit (7)>
+  <FT Data SQT: bit (7)>
+  <PANinit: bit (6)>
+  <PANmin: bit (6)>
+  <PANmax: bit (6)>
+  <GainUp: bit (5)>
+  <GainDn: bit (5)>
+  <Olthresh: bit (5)>
+  <OlupGain: bit (5)>
+  <OldnGain: bit (5)>
+  <VarUp: bit (5)>
+  <VarDn: bit (5)>
+  <SQIfactor: bit (5)>
+  <Mestep: bit (4)>
+  <LQI-n1: bit (4)>
+  <LQI-n2: bit (4)> ;
+
+<Header Segment 4C> ::=
+ <Class Type 4: 110>
+ <Segment type: 0010> ;
+

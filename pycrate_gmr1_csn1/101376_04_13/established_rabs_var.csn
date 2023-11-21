@@ -1,0 +1,19 @@
+-- ETSI TS 101 376-04-13
+-- 10.4.5        ESTABLISHED_RABS
+-- ESTABLISHED_RABS VAR
+
+< ESTABLISHED_RABS VAR > ::=
+ {
+ { 0 -- Not present when entering or leaving the RRC-Connected mode when not otherwise stated in the procedure
+ | 1 < RAB Information List :bit (4) >
+ { < RAB Info : < RAB Info IE > >
+ < RB Information List : bit (3) >
+ { < RB Identity : < RB Identity IE > >
+ < RB Started : bit (1) > } * (1+val(RB Information List))
+ } * (1+val (RAB Information List))
+ }
+ { 0 -- Not present when leaving RRC-Connected mode
+ | 1 < Signalling RB Information List : bit (3) >
+ < Signalling RB Started : bit (1) >* (1+val(Signalling RB Information List)) }
+ };
+

@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.34        Handover Reference
+-- Handover Reference IE
+
+ < Handover Reference IE > ::=
+ < Handover Reference Value : octet(1) >;
+

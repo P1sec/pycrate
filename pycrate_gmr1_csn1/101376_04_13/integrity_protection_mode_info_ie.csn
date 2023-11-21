@@ -1,0 +1,12 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.39        Integrity Protection Mode Info
+-- Integrity Protection Mode Info IE
+
+< Integrity Protection Mode Info IE > ::=
+ { {< Integrity protection mode command : 0 >
+ < Integrity protection initialization number : bit (32) >
+ | < Integrity protection mode command : 1 >
+ < Downlink integrity protection activation info : < Integrity protection activation info IE > > }
+ { 0 | 1 < Integrity protection algorithm : < Integrity protection algorithm IE > > }
+ };
+

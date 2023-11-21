@@ -1,0 +1,24 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.7          Packet downlink assignment (A/Gb mode only)
+-- Packet Downlink Assignment message content
+
+< Packet Downlink Assignment message content > ::=
+ { { 0 < TLLI : bit (32) >
+   | 10 < Global TFI : < Global TFI IE > > }
+   { 0 -- Message escape
+     { < RLC_MODE : bit (1) >
+       < reserved : bit (1) >
+       < MAC Slot Allocation : bit (8) >
+       < reserved: bit (31) >
+       < DOWNLINK_TFI_ASSIGNMENT : bit (7) >
+       { 0 | 1 < Frequency Parameters : < Frequency Parameters IE > > }
+       { 0 | 1 < reserved: bit (6) > }
+       { 0 | 1 < reserved: bit (4) > }
+       < padding bits > } // -- truncation at end of message allowed, bits "0" assumed
+   }
+ } ;
+-- ! < Non-distribution part error : bit (*) = < no string > > }
+-- ! < Message escape : 1 bit (*) = <no string> > }
+-- ! < Address information part error : bit (*) = < no string > > }
+-- ! < Distribution part error : bit (*) = < no string > > ;
+

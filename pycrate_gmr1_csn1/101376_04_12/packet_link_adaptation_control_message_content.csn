@@ -1,0 +1,21 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.33 Packet Link Adaptation Control
+-- Packet Link Adaptation Control message content
+
+< Packet Link Adaptation Control message content > ::=
+ { 00 < UPLINK_TFI : bit (8) >
+ | 01 < G-RNTI: bit(32) >
+ | 10 < S-RNTI: bit(20) > }
+ { 0 -- Message Escape
+   <RB Id: bit(5)>
+   { 0 | 1 <Channel MCS Info: < PDCH MCS IE >> } -- This applies to uplink TBF associated with the RB Id
+   { 0 | 1 <DCH Channel MCS Info: <DCH MCS IE >> } -- This applies to all flows operating on DACCH, except the
+                                                   -- VoIP flow as its MCS is based on its payload size
+ }
+ < padding bits >
+ ;
+-- ! < Non-distribution part error : bit (*) = < no string > > }
+-- ! < Message escape : 1 bit (*) = <no string> > }
+-- ! < Address information part error : bit (*) = < no string > > }
+-- ! < Distribution part error : bit (*) = < no string > > ;
+

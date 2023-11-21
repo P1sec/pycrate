@@ -4,7 +4,7 @@
 # * Version : 0.4
 # *
 # * Copyright 2016. Benoit Michau. ANSSI.
-# * Copyright 2019. Benoit Michau. P1Sec.
+# * Copyright 2019-2023. Benoit Michau. P1Sec.
 # *
 # * This library is free software; you can redistribute it and/or
 # * modify it under the terms of the GNU Lesser General Public
@@ -43,6 +43,7 @@ from test.test_mobile import *
 from test.test_gsmrr  import *
 from test.test_sms    import *
 from test.test_crypto import *
+from test.test_gmr1   import *
 from test.test_sedebugmux  import *
 from pycrate_asn1c.specdir import ASN_SPECS
 from pycrate_asn1c.asnproc import (
@@ -199,6 +200,11 @@ class TestPycrate(unittest.TestCase):
         print('[<>] testing SMS TP-UDH in pycrate_mobile')
         test_tpudh()
     
+    # GMR-1 RR protocol
+    def test_gmr(self):
+        print('[<>] testing GMR-1 RR in pycrate_gmr1 and pycrate_gmr1_csn1')
+        test_gmr()
+    
     # osmo related protocols
     def test_osmo(self):
         print('[<>] testing pycrate_osmo')
@@ -227,6 +233,7 @@ def test_perf_all():
     test_perf_mobile()
     test_perf_gsmrr()
     test_perf_sms()
+    test_perf_gmr()
     test_perf_sedebugmux()
     test_perf_crypto()
     print('[<<<>>>] test_perf_all total time: %.4f' % (time.time() - T0))

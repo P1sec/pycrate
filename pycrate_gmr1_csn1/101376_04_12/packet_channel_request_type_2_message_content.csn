@@ -1,0 +1,50 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.5a Packet Channel Request Type 2 (Iu mode only)
+-- Packet Channel Request Type 2 Message Content
+
+<Packet Channel Request Type 2 Message Content> ::=
+ { < RRC Cell Update : 0 >
+   { < Rid : bit (2) >
+     < S-RNTI : bit (20) >
+     < Cell Update Cause : bit (3) >
+     < RB Info : < RB Request Struct IE >>
+     < Spare: bit (3) > }
+ | < Handover Access : 1000 >
+   { < Rid : bit (2) >
+     < Handover Reference : bit (8) >
+     < RB Info : < RB Request Struct IE >>
+     < Spare : bit (15) > }
+ | < Periodic GRA Update Procedure : 1001 >
+   { < Rid: bit (2) >
+     < S-RNTI: bit (20) >
+     < Spare: bit (14) > }
+ | < Initial Correction : 1010 >
+   { < Rid : bit (2) >
+     < S-RNTI : bit (20) >
+     < TFI : bit (8) >
+     < Spare : bit (6) > }
+ | < Uplink Resource Request : 1011 > 
+   { < Rid : bit (2) >
+     < S-RNTI : bit (20) >
+     < RB Info : < RB Request Struct IE >>
+     < Spare : bit (3) > }
+ | < User Data Transfer - Application Type 1 : 1100 >
+   { < Rid : bit (2) >
+     < S-RNTI : bit (20) >
+     < RB Id : bit (5) >
+     < User Data : bit (8) >
+     < Spare Bits : bit (1) > }
+ | < Talk Burst Request : 1101 > 
+   { < Reference ID : bit (2) >
+     < RETRANSMISSION : bit (1) >
+     < S-RNTI : bit (20) >
+     < RB Id: bit (5) >
+     { 0 | 1 < Request Priority: bit (2) > }
+     < Spare Bits : bit (6) > }
+ ! < Content part error : bit (*) = < no string >>
+ } ;
+
+<RB Request Struct IE> ::=
+ < RB Id : bit (5) >
+ < RLC_BLOCK_COUNT : bit (6) > ;
+

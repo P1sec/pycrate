@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 10.4.21 PROTOCOL_ERROR_REJECT
+-- PROTOCOL_ERROR_REJECT VAR
+
+< PROTOCOL_ERROR_REJECT VAR > ::=
+ < Protocol Error Reject : bit (1) > ;
+

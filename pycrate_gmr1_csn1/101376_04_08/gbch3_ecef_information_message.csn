@@ -1,0 +1,293 @@
+-- ETSI TS 101 376-04-12
+-- 10.1.46a GBCH3 ECEF information
+-- GBCH3 ECEF Information Message
+
+<GBCH3 ECEF Information Message> ::=
+    <Escape/Coordinate Type bit: bit (1)>
+    <GBCH3 ECEF Sequence Number: bit (2)>
+    {
+        00000 <GBCH3 ECEF Information Type 1> |
+        00001 <GBCH3 ECEF Information Type 2> |
+        00010 <GBCH3 ECEF Information Type 3> |
+        00011 <GBCH3 ECEF Information Type 4> |
+        00100 <GBCH3 ECEF Information Type 5> |
+        00101 <GBCH3 ECEF Information Type 6> |
+        00110 <GBCH3 ECEF Information Type 7> |
+        00111 <GBCH3 ECEF Information Type 8> |
+        01000 <GBCH3 ECEF Information Type 9> |
+        01001 <GBCH3 ECEF Information Type 10> |
+        01010 <GBCH3 ECEF Information Type 11> |
+        01011 <GBCH3 ECEF Information Type 12> |
+        01100 <GBCH3 ECEF Information Type 13> |
+        01101 <GBCH3 ECEF Information Type 14> |
+        01110 <GBCH3 ECEF Information Type 15> |
+        01111 <GBCH3 ECEF Information Type 16> |
+        10000 <GBCH3 ECEF Information Type 17>
+    } ;
+
+--<GBCH3 ECEF Message Header>::=
+-- <Escape/Coordinate Type bit: bit (1)>
+-- <GBCH3 ECEF Sequence Number: bit (2)>
+-- <GBCH3 ECEF Message Number: bit (5)> ;
+
+<GBCH3 ECEF Information Type 1> ::=
+ <GPS Time: bit (40) >
+ <Curve Fit Time: bit (40) >
+ <Frame Number: bit (19)>
+ <SV ID satellite 1: bit (6)>
+ <Doppler: bit (8)> 
+ <Code Phase: bit (22)>
+ <XO: bit (24)>
+ <VX0: bit (18)>
+ <spare: bit (7)> ;
+
+<GBCH3 ECEF Information Type 2> ::=
+ <SV ID satellite 1: bit (6)>
+ <VX1: bit (13)>
+ <VX2: bit (8)>
+ <Y0: bit (24)>
+ <VY0: bit (18)>
+ <VY1: bit (13)>
+ <VY2: bit (8)>
+ <Z0: bit (24)>
+ <VZ0: bit (18)>
+ <VZ1: bit (13)>
+ <VZ2: bit (8)>
+ <af1: bit (11)>
+ <SV ID satellite 2: bit (6)>
+ <Doppler: bit (8)>
+ <spare: bit (6)> ;
+
+<GBCH3 ECEF Information Type 3> ::=
+ <SV ID satellite 2: bit (6)>
+ <Code Phase: bit (22)>
+ <XO: bit (24)>
+ <VX0: bit (18)>
+ <VX1: bit (13)>
+ <VX2: bit (8)>
+ <Y0: bit (24)>
+ <VY0: bit (18)>
+ <VY1: bit (13)>
+ <VY2: bit (8)>
+ <Z0: bit (24)>
+ <spare: bit (6)> ;
+
+<GBCH3 ECEF Information Type 4> ::=
+ <SV ID satellite 2: bit (6)>
+ <VZ0: bit (18)>
+ <VZ1: bit (13)>
+ <VZ2: bit (8)>
+ <af1: bit (11)>
+ <SV ID satellite 3: bit (6)>
+ <Doppler: bit (8)>
+ <Code Phase: bit (22)>
+ <XO: bit (24)>
+ <XV0: bit (18)>
+ <VX1: bit (13)>
+ <VX2: bit (8)>
+ <Y0: bit (24)>
+ <spare: bit (5)> ;
+
+<GBCH3 ECEF Information Type 5> ::=
+ <SV ID satellite 2: bit (6)>
+ <VY0: bit (18)>
+ <VY1: bit (13)>
+ <VY2: bit (8)>
+ <Z0: bit (24)>
+ <VZ0: bit (18)>
+ <VZ1: bit (13)>
+ <VZ2: bit (8)>
+ <af1: bit (11)>
+ <SV ID satellite 4: bit (6)>
+ <Doppler: bit (8)>
+ <Code Phase: bit (22)>
+ <XO: bit (24)>
+ <spare: bit (5)> ;
+ 
+<GBCH3 ECEF Information Type 6> ::=
+ <SV ID satellite 4: bit (6)>
+ <VX0: bit (18)>
+ <VX1: bit (13)>
+ <VX2: bit (8)>
+ <Y0: bit (24)>
+ <VY0: bit (18)>
+ <VY1: bit (13)>
+ <VY2: bit (8)>
+ <Z0: bit (24)>
+ <VZ0: bit (18)>
+ <VZ1: bit (13)>
+ <VZ2: bit (8)>
+ <af1: bit (11)>
+ <spare: bit (2)> ;
+
+<GBCH3 ECEF Information Type 7> ::=
+ <SV ID satellite 5: bit (6)>
+ <Doppler: bit (8)>
+ <Code Phase: bit (22)>
+ <XO: bit (24)>
+ <VX0: bit (18)>
+ <VX1: bit (13)>
+ <VX2: bit (8)>
+ <Y0: bit (24)>
+ <VY0: bit (18)>
+ <VY1: bit (13)>
+ <VY2: bit (8)>
+ <VZ0: bit (18)>
+ <spare: bit (4)> ;
+
+<GBCH3 ECEF Information Type 8> ::=
+ <SV ID satellite 5: bit (6)>
+ <Z0: bit (24)>
+ <VZ1: bit (13)>
+ <VZ2: bit (8)>
+ <af1: bit (11)>
+ <SV ID satellite 6: bit (6)>
+ <Doppler: bit (8)>
+ <Code Phase: bit (22)>
+ <XO: bit (24)>
+ <VX0: bit (18)>
+ <VX1: bit (13)>
+ <VX2: bit (8)>
+ <VY0: bit (18)>
+ <spare: bit (5)> ;
+ 
+<GBCH3 ECEF Information Type 9> ::=
+ <SV ID satellite 6: bit (6)>
+ <Y0: bit (24)>
+ <VY1: bit (13)>
+ <VY2: bit (8)>
+ <Z0: bit (24)>
+ <VZ0: bit (18)>
+ <VZ1: bit (13)>
+ <VZ2: bit (8)>
+ <af1: bit (11)>
+ <SV ID satellite 7: bit (6)>
+ <Doppler: bit (8)>
+ <Code Phase: bit (22)>
+ <VXO: bit (18)>
+ <spare: bit (5)> ;
+
+<GBCH3 ECEF Information Type 10> ::=
+ <SV ID satellite 7: bit (6)>
+ <X0: bit (24)>
+ <VX1: bit (13)>
+ <VX2: bit (8)>
+ <Y0: bit (24)>
+ <VY0: bit (18)>
+ <VY1: bit (13)>
+ <VY2: bit (8)>
+ <Z0: bit (24)>
+ <VZ0: bit (18)>
+ <VZ1: bit (13)>
+ <VZ2: bit (8)>
+ <spare: bit (7)> ;
+
+<GBCH3 ECEF Information Type 11> ::=
+ <SV ID satellite 7: bit (6)>
+ <af1: bit (11)>
+ <SV ID satellite 8: bit (6)>
+ <Doppler: bit (8)>
+ <Code Phase: bit (22)>
+ <XO: bit (24)>
+ <VX0: bit (18)>
+ <VX1: bit (13)>
+ <VX2: bit (8)>
+ <Y0: bit (24)>
+ <VY0: bit (18)>
+ <VY1: bit (13)>
+ <VY2: bit (8)>
+ <spare: bit (5)> ;
+
+<GBCH3 ECEF Information Type 12> ::=
+ <SV ID satellite 8: bit (6)>
+ <Z0: bit (24)>
+ <VZ0: bit (18)>
+ <VZ1: bit (13)>
+ <VZ2: bit (8)>
+ <af1: bit (11)>
+ <SV ID satellite 9: bit (6)>
+ <Doppler: bit (8)>
+ <Code Phase: bit (22)>
+ <XO: bit (24)>
+ <VX0: bit (18)>
+ <VX1: bit (13)>
+ <VX2: bit (8)>
+ <spare: bit (5)> ;
+
+<GBCH3 ECEF Information Type 13> ::=
+ <SV ID satellite 9: bit (6)>
+ <Y0: bit (24)>
+ <VY0: bit (18)>
+ <VY1: bit (13)>
+ <VY2: bit (8)>
+ <Z0: bit (24)>
+ <VZ0: bit (18)>
+ <VZ1: bit (13)>
+ <VZ2: bit (8)>
+ <af1: bit (11)>
+ <SV ID satellite 10: bit (6)>
+ <Doppler: bit (8)>
+ <Code Phase: bit (22)>
+ <spare: bit (5)> ;
+
+<GBCH3 ECEF Information Type 14> ::=
+ <SV ID satellite 10: bit (6)>
+ <X0: bit (24)>
+ <VX0: bit (18)>
+ <VX1: bit (13)>
+ <VX2: bit (8)>
+ <Y0: bit (24)>
+ <VY0: bit (18)>
+ <VY1: bit (13)>
+ <VY2: bit (8)>
+ <Z0: bit (24)>
+ <VZ0: bit (18)>
+ <spare: bit (10)> ;
+
+<GBCH3 ECEF Information Type 15> ::=
+ <SV ID satellite 10: bit (6)>
+ <VZ1: bit (13)>
+ <VZ2: bit (8)>
+ <af1: bit (11)>
+ <SV ID satellite 11: bit (6)>
+ <Doppler: bit (8)>
+ <Code Phase: bit (22)>
+ <XO: bit (24)>
+ <VX0: bit (18)>
+ <VX1: bit (13)>
+ <VX2: bit (8)>
+ <Y0: bit (24)>
+ <VY0: bit (18)>
+ <spare: bit (5)> ;
+ 
+<GBCH3 ECEF Information Type 16> ::=
+ <SV ID satellite 11: bit (6)>
+ <VY1: bit (13)>
+ <VY2: bit (8)>
+ <Z0: bit (24)>
+ <VZ0: bit (18)>
+ <VZ1: bit (13)>
+ <VZ2: bit (8)>
+ <af1: bit (11)>
+ <SV ID satellite 12: bit (6)>
+ <Doppler: bit (8)>
+ <Code Phase: bit (22)>
+ <XO: bit (24)>
+ <VX0: bit (18)>
+ <spare: bit (5)> ;
+
+<GBCH3 ECEF Information Type 17> ::=
+ <SV ID satellite12: bit (6)>
+ <VX1: bit (13)>
+ <VX2: bit (8)>
+ <Y0: bit (24)>
+ <VY0: bit (18)>
+ <VY1: bit (13)>
+ <VY2: bit (8)>
+ <Z0: bit (24)>
+ <VZ0: bit (18)>
+ <VZ1: bit (13)>
+ <VZ2: bit (8)>
+ <af1: bit (11)>
+ <spare: bit (20)> ;
+

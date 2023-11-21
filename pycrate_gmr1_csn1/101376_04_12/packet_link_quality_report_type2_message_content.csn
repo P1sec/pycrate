@@ -1,0 +1,18 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.25a Packet link quality report type 2 (Iu mode)
+-- Packet Link Quality Report message content
+
+< Packet Link Quality Report Type2 message content > ::=
+  { { 0 < Global TFI : < Global TFI IE >>
+    | 10 < S-RNTI: bit(20) > }
+    < SQIR : bit (6)>
+    { 0 | 1 <SQI Standard Deviation : bit (6) >}
+    { 0 | 1 <FQI: <FQI Struct>>}
+  }
+  < padding bits > ;
+
+<FQI Struct> ::=
+    { 1 
+      <RB Id: bit(5)>
+      <Forward Quality Indicator: bit(6)> } **0 ;
+

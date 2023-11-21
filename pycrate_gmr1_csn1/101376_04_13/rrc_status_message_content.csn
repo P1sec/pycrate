@@ -1,0 +1,16 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.43          RRC STATUS
+-- RRC STATUS message content
+
+< RRC STATUS message content > ::=
+ {
+ < Protocol Error Information : < Protocol Error Information IE > >
+ { 0 | 1 < Integrity Check Info : < Integrity Check Info IE > > }
+ { 0 | 1 < Identification of Received Message : < Identification of Received Message struct > > }
+ ! < Content part error : bit (*) = < no string > > } ;
+
+< Identification of Received Message struct > ::=
+ --< Received Message Type : < Message Type IE > >
+ < Received Message Type : bit (8) >
+ < RRC Transaction Identifier : < RRC Transaction Identifier IE > > ;
+

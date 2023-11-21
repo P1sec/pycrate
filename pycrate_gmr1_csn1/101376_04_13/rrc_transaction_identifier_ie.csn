@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.98        RRC Transaction Identifier
+-- RRC Transaction Identifier IE
+
+< RRC Transaction Identifier IE > ::=
+ < RRC Transaction Identifier : bit (2) >;
+

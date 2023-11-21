@@ -1,0 +1,12 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.21           LCS UPLINK INFORMATION
+-- LCS UPLINK INFORMATION message content
+
+< LCS UPLINK INFORMATION message content > ::=
+ {
+ < RRC Transaction Identifier : < RRC Transaction Identifier IE > >
+ { 0 | 1 < Integrity Check Info : < Integrity Check Info IE > > }
+ < RRLP PDU Length : bit (8) >
+ < RRLP PDU : octet(val(RRLP PDU Length)) >
+ ! < Content part error : bit (*) = < no string > > } ;
+

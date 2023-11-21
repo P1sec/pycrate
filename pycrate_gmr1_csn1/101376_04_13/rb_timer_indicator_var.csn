@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 10.4.22 RB_TIMER_INDICATOR
+-- RB_TIMER_INDICATOR VAR
+
+< RB_TIMER_INDICATOR VAR > ::=
+ { 0 | 1 < RB Timer Indicator : < RB Timer Indicator IE > > } ;
+

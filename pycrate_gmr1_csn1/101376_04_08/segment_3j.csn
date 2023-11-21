@@ -1,0 +1,17 @@
+-- ETSI TS 101 376-04-08
+-- 11.5.2.83         Segment 3J
+-- Segment 3J
+
+<Segment 3J> ::=
+ --<Header Segment 3J>
+ <BEAM_CENTER_POS_neighbours>
+ <Spare: bit (71)> ;
+
+<BEAM_CENTER_POS_neighbours> ::=
+ {<Latitude: bit (9)>
+  <Longitude: bit (9)>} * 6 ;
+
+<Header Segment 3J> ::=
+ <Class Type 3: 0>
+ <Segment type: 1010> ;
+

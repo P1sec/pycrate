@@ -1,0 +1,10 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.44        MES GERAN A/Gb mode Radio Access Capability
+-- MES GERAN A/Gb mode Radio Access Capability IE
+
+< MES GERAN A/Gb mode Radio Access Capability IE > ::=
+ { < Mobile Station Classmark 2 length : bit(3) >
+ < Mobile Station Classmark 2: octet(val (Mobile Station Classmark 2 length)) > }
+ { < Mobile Station Classmark 3 length : bit(5) >
+ < Mobile Station Classmark 3: octet (val (Mobile Station Classmark 3 length)) > } ;
+

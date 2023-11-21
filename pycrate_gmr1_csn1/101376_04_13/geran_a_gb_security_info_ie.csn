@@ -1,0 +1,10 @@
+-- ETSI TS 101 376-04-13
+-- 11.2.2         RRC Security Information, from GERAN-A/Gb to GERAN-Iu
+-- GERAN A/Gb Security Info IE
+
+< GERAN A/Gb Security Info IE >::=
+ {
+ < Start-CS : < START IE > >
+ < Start-PS : < START IE > >
+ ! < Content part error : bit (*) = < no string > > } ;
+

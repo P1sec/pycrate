@@ -1,0 +1,16 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.92        RLC HFN IE
+-- RLC HFN IE
+
+< RLC HFN IE >::=
+ < RLC HFN length : bit (5) >
+ { 000 < RLC HFN : bit (21) > -- Used in Used in case of GMPRS-1 RLC on PDTCH
+ | 001 < RLC HFN : bit (26) > -- Used in the case of GMPRS-1 RLC on DCCH
+ | 010 < RLC HFN : bit (25) > -- Reserved
+ | 011 < RLC HFN : bit (27) > -- Reserved
+-- Release 6 RLC HFN --
+ | 100 < RLC HFN : bit (21) > -- Reserved
+ | 101 < RLC HFN : bit (27) > -- Reserved
+ | 110 < RLC HFN : bit (27) > -- Reserved
+ ! < Message escape : {111 } bit**= < no string > > } ;
+

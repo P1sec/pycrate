@@ -1,0 +1,8 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.95         RRC Packet Downlink Assignment
+-- RRC Packet Downlink Assignment IE
+
+< RRC Packet Downlink Assignment IE > ::=
+ -- See Packet Downlink Assignment Message in ETSI TS 101 376-4-12 [13]
+ < Packet Downlink Assignment message content > ;
+

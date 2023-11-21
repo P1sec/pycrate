@@ -1,0 +1,11 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.9          Packet mobile TBF status
+-- Packet Mobile TBF Status message content
+
+ < Packet Mobile TBF Status message content > ::=
+ < GLOBAL TFI : < Global TFI IE > >
+ < TBF_CAUSE : bit (3) >
+ { 0 |1 < SQIR: bit (6) > }
+ { 0 | 1 < STATUS_MESSAGE_TYPE : bit (6) > }
+ < padding bits > ;
+

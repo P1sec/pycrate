@@ -1,0 +1,15 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.3           Packet cell change failure (Iu mode only)
+-- Packet Cell Change Failure message content
+
+< Packet Cell Change Failure message content > ::=
+ < G-RNTI : bit (32) >
+ < ARFCN : bit (11) >
+ < Spotbeam Id : bit (10) >
+ < CAUSE : bit (4) >
+ { 0
+ | 1 { 0 | 1 < UTRAN FDD Target cell: < UTRAN FDD Target cell IE >> }
+     { 0 | 1 < UTRAN TDD Target cell: < UTRAN TDD Target cell IE >> }
+ }
+ < padding bits > ;
+

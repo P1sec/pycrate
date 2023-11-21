@@ -1,0 +1,14 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.82         RB Information to Reconfigure
+-- RB Information to Reconfigure IE
+
+< RB Information to Reconfigure IE > ::=
+ < RB Information to Reconfigure length : bit ( 8 ) >
+ < RB Identity : < RB Identity IE > >
+ { 0 | 1 < Uplink RLC Info : < RLC info IE> > }
+ { 0 | 1 < Downlink RLC Info : < RLC info IE> > }
+ { 0 | 1 < RB Stop/Continue : bit (1) > }
+ --{ 0 | 1 < RB Mapping Info : < RB Mapping Info IE > > } -- Release 6 extension
+ { 0 | 1 < RB Mapping Info : null > }
+ < spare bits> **; -- reserved for future use
+

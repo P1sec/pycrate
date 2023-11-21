@@ -1,0 +1,14 @@
+-- ETSI TS 101 376-04-12
+-- 11.5.2.76         Segment 3E
+-- Segment 3E
+
+<Segment 3E> ::=
+ --<Header Segment 3E>
+ <Concurrent BCCH Information_part2: bit (61)>
+ <SA_CCCH_LIST_PART3: bit (70)>
+ <Spare: bit (48)> ;
+
+<Header Segment 3E> ::=
+ <Class Type 3: 0>
+ <Segment type: 0100> ;
+

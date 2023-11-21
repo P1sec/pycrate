@@ -1,0 +1,15 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.26b RAB BINDING RESPONSE
+-- RAB BINDING RESPONSE message content
+
+< RAB BINDING RESPONSE message content > ::=
+ { 0 -- critical extension escape available
+   { { 0 | 1 < Integrity Check Info : < Integrity Check Info IE >> }
+     < RAB Id : < RAB Identity IE >>
+     { 0 < RAB Binding Success : bit(2) > -- Operation succeeded
+     | 1 < RAB Binding Failure Cause : bit(4) > } -- Operation failed
+   }
+ }
+-- ! < Content part error : bit (*) = < no string > > }
+ ! < Message escape critical extensions: 1 bit (*) = < no string >> ;
+

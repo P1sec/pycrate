@@ -1,0 +1,34 @@
+-- ETSI TS 101 376-04-08, Rel. 3
+-- 11.5.2.71         Segment 3A
+-- Segment 3A
+
+<Segment 3A> ::=
+ --<Header Segment 3A>
+ <LAI: octet (5)>
+ <System>
+ <Satellite Position>
+ <BEAM_CENTER_POS_main>
+ <Misc Information Class 3>
+ <Network Interface Support: bit>
+ <Spare: bit (3)> ;
+
+<Header Segment 3A> ::=
+ <Class Type 3: 0>
+ <Segment type: 0000> ;
+
+<System> ::=
+ <Satellite Id: bit (2)>
+ <System Id: bit (4)> ;
+
+<Satellite Position> ::=
+ <Latitude: bit (8)>
+ <Longitude: bit (12)>
+ <Radius: bit (16)> ;
+
+<BEAM_CENTER_POS_main> ::=
+ <Latitude: bit (11)>
+ <Longitude: bit (12)> ;
+
+<Misc Information Class 3> ::=
+ <SB_RESELECTION_TIMER: bit (6)> ;
+

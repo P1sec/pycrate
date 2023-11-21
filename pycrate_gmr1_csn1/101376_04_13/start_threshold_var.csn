@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 10.4.24 START_THRESHOLD
+-- START_THRESHOLD VAR
+
+< START_THRESHOLD VAR > ::=
+ { 0 | 1 < Threshold : bit (20) > } ;
+

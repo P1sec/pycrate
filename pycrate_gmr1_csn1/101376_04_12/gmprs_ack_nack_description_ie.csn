@@ -1,0 +1,16 @@
+-- ETSI TS 101 376-04-12
+-- 12.3          GMPRS Ack/Nack description
+-- GMPRS Ack/Nack Description IE
+
+< GMPRS Ack/Nack Description IE > ::=
+ < FINAL_ACK_INDICATION : bit (1) >
+ < reserved: bit (1) >
+ { 0 | 1 < Length : bit (9) > }
+ < STARTING_SEQUENCE_NUMBER : bit (10) > ;
+
+< DCCH Ack/Nack Description IE > ::=
+ < FINAL_ACK_INDICATION : bit (1) >
+ < reserved: bit (1) >
+ { 0 | 1 < Length : bit (6) >}
+ < STARTING_SEQUENCE_NUMBER : bit (7) > ;
+

@@ -1,0 +1,12 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.113 Iu mode Channel Request Description
+-- Iu mode Channel Request Description IE
+
+< Iu mode Channel Request Description IE > ::=
+ < LENGTH_IN_OCTETS : bit (8) > -- Remaining length
+ < PACKET_ESTABLISHMENT_CAUSE : bit(2) >
+ < Iu mode RRC Channel Request Description : Iu mode Channel Request Description IE >
+ -- Defined in ETSI TS 101 376-4-12 [13]
+ { 0 | 1 < HFN_LSB : bit (1) > }
+ < spare bit > **;
+

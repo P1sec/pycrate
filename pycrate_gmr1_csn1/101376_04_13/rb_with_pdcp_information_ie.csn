@@ -1,0 +1,8 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.86        RB with PDCP Information
+-- RB with PDCP Information IE
+
+< RB with PDCP Information IE > ::=
+ < RB Identity : < RB Identity IE > >
+ < PDCP SN Info : < PDCP SN Info IE > >;
+

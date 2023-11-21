@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.45a GMPRS Terminal Type Identifier
+-- GMPRS Terminal Type Identifier IE
+
+< GMPRS Terminal Type Identifier IE > ::=
+ < GMPRS Terminal Type Identifier : bit(7) >;
+

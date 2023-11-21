@@ -1,0 +1,61 @@
+-- ETSI TS 101 376-04-08
+-- 10.1.31        System information type 1
+-- System Information Type 1
+
+<System Information Type 1> ::= 
+    <Block Header>
+    
+    --<Segment 1A: bit (64)>
+    --{   <Segment 4A: bit (120)> |
+    --    <Segment 4B: bit (120)> |
+    --    <Segment 4C: bit (120)> |
+    --    <Segment 4D: bit (120)> |
+    --    <Segment 4E: bit (120)> |
+    --    <Segment 4F: bit (120)> |
+    --    <Segment 3A: bit (120)> |
+    --    <Segment 3F: bit (120)> |
+    --    <Segment 3C: bit (120)> |
+    --    <Segment 3H: bit (120)> |
+    --    <Segment 3D: bit (120)> |
+    --    <Segment 3I: bit (120)> |
+    --    <Segment 2Abis: bit (120)> |
+    --    <Segment 3Bbis: bit (120)> |
+    --    <Segment 3Gbis: bit (120)> |
+    --    <Segment 2Bbis: bit (120)> |
+    --    <Segment 3Ebis: bit (120)> |
+    --    <Segment 3Jbis: bit (120)>
+    
+    <Segment 1A>
+    { 1
+     { 0 -- Segment 2 
+      { 0000 <Segment 2Abis>
+      | 0001 <Segment 2Bbis> }
+     | 1 -- Segment 4
+      { 00000 <Segment 4A>
+      | 00001 <Segment 4B>
+      | 00010 <Segment 4C>
+      | 00011 <Segment 4D>
+      | 00100 <Segment 4E>
+      | 00101 <Segment 4F> }
+     }
+    | 0 -- Segment 3
+      { 0000 <Segment 3A>
+      | 0001 <Segment 3Bbis>
+      | 0010 <Segment 3C>
+      -- the next 5 segments are not implemented individually
+      -- as their definitions are too convoluted
+      | 0011 <Segment 3D: bit (115)>
+      | 0100 <Segment 3Ebis: bit (115)>
+      | 0101 <Segment 3F: bit (115)>
+      | 0110 <Segment 3Gbis: bit (115)>
+      | 0111 <Segment 3H: bit (115)>
+      | 1001 <Segment 3I>
+      | 1010 <Segment 3Jbis> }
+    } ;
+
+<Block Header> ::= 
+    <Protocol version: 0000>
+    <Block Type: bit>
+    <Randomization period: bit (2)>
+    <Spare: bit> ;
+

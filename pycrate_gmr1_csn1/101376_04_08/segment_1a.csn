@@ -1,0 +1,51 @@
+-- ETSI TS 101 376-04-08, Rel. 3
+-- 11.5.2.66         Segment 1A
+-- Segment 1A
+
+<Segment 1A> ::=
+    <Class 2 version: bit (3) >
+    <Class 3 version: bit (4) >
+    <Synchronization Info Class 1>
+    <RACH Control Parameters>
+    <Misc Info Class 1>
+    <GBCH Present: bit (1) >
+    <Test GS: bit (1) > 
+    <Test GS2: bit (1)> 
+    <Spare: bit (3) > 
+    <CELL_BAR_ACCESS_EXTENSION2: bit (1) >
+    <Spare: bit (5) >
+    <CELL_BAR_ACCESS_EXTENSION: bit (1) > ;
+
+<Synchronization Info Class 1> ::=
+    <SB_FRAME_TS_OFFSET: bit (5) >
+    <SB_SYMBOL_OFFSET: bit (6) >
+    <SA_FREQ_OFFSET: bit (8) > ;
+
+<RACH Control Parameters> ::=
+ <Max Retrans: bit (2) >
+ <Access Classes>
+ <CELL_BAR_ACCESS: bit (1) > ;
+ 
+<Access Classes> ::=
+ <AC15: bit>
+ <AC14: bit>
+ <AC13: bit>
+ <AC12: bit>
+ <AC11: bit>
+ <AC10: bit>
+ <AC9: bit>
+ <AC8: bit>
+ <AC7: bit>
+ <AC6: bit>
+ <AC5: bit>
+ <AC4: bit>
+ <AC3: bit>
+ <AC2: bit>
+ <AC1: bit>
+ <AC0: bit> ;
+
+<Misc Info Class 1> ::=
+ <SB_RESELECTION_HYSTERESIS: bit (4)>
+ <spare: bit (1) >
+ <Priority Access Ind: bit (1) > ;
+

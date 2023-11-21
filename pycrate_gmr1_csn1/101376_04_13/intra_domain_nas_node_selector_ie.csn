@@ -1,0 +1,27 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.41         Intra Domain NAS Node Selector
+-- Intra Domain NAS Node Selector IE
+
+< Intra Domain NAS Node Selector IE > ::=
+ { 0 -- release 5
+   { 0 -- GSM-MAP-type PLMN
+     -- Routing basis
+     { 000 < Routing Parameter TMSI-PTMSI : bit (10) >
+       -- TMSI allocated in current LA or PTMSI allocated in current RA
+     | 001 < Routing Parameter TMSI-PTMSI : bit (10) >
+       -- TMSI allocated in another LA of this PLMN or PTMSI allocated in another RA of this PLMN
+     | 010 < Routing Parameter TMSI-PTMSI : bit (10) >
+       -- TMSI or PTMSI allocated in another PLMN
+     | 011 < Routing Parameter IMSI : bit (10) >
+       -- NAS identity is IMSI (response to IMSI paging)
+     | 100 < Routing Parameter IMSI : bit (10) >
+       -- NAS identity is IMSI (MES-initiated event)
+     | 101 < Routing Parameter IMEI : bit (10) >
+       -- NAS parameter is IMEI
+     }
+   }
+ } ;
+--     ! < Message escape : { 11 bit(1) } bit (10) = < no string >> } -- Reserved
+--     | 1 (0) * 14 } -- ANSI-41
+-- ! < Message escape : 1 bit (15) = < no string >> } ; -- Reserved
+

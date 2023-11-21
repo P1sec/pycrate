@@ -1,0 +1,17 @@
+-- ETSI TS 101 376-04-12
+-- 12.32          UTRAN Target cell
+-- UTRAN FDD Target cell IE
+
+< UTRAN FDD Target cell IE > ::=
+ < FDD-ARFCN : bit (14) >
+ < Diversity : bit >
+ { 0 | 1 < Bandwidth_FDD : bit (3) > }
+ < SCRAMBLING_CODE : bit (9) > ;
+
+< UTRAN TDD Target cell IE > ::=
+ < TDD-ARFCN : bit (14) >
+ < Diversity TDD : bit >
+ { 0 | 1 < Bandwidth_TDD : bit (3) > }
+ < Cell Parameter : bit (7) >
+ < Sync Case TSTD : bit > ;
+

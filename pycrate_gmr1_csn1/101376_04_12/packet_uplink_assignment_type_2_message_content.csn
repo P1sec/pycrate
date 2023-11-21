@@ -1,0 +1,41 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.22a Packet uplink assignment type 2 (Iu mode only)
+-- Packet Uplink Assignment type 2 Message Content
+
+<Packet Uplink Assignment type 2 Message Content> ::=
+ {
+   { 0 <TLLI/G-RNTI: bit (32)>
+   | 10 <Global TFI: <Global TFI IE>> }
+   <Rid: bit (2)>
+   { 0 -- Message Escape
+     { { 0 | 1 <PDCH Channel MCS Info: <PDCH MCS IE>> }
+       <Packet Link Synchronization: <Packet Link Synchronization IE>>
+       <Frequency Allocation: <Frequency Allocation IE>>
+       { 0 | 1 < PDCH Uplink Organization: <PDCH Uplink Organization IE>> }
+       { 0 <Dynamic Allocation: <Dynamic Allocation struct>>
+       | 10 <Uplink DCH Allocation: <DCH Allocation Struct>>
+       | 110 <Uplink and Downlink DCH Allocation: <DCH Allocation Struct>> }
+       ! < Non-distribution part error : bit (*) = < no string > > }
+     ! < Message escape : 1 bit (*) = <no string> > }
+   ! < Address information part error : bit (*) = < no string > > }
+ ! < Distribution part error : bit (*) = < no string > > ;
+
+<Dynamic Allocation struct> ::=
+ { <Downlink MAC Slot Allocation: bit (8)>
+   <Uplink TFI: bit (8)>
+   { 0 | 1 <Uplink Status Flag: bit (8)> }
+   <RB Id: bit (5)>
+   <Return Frequency Set: bit (1)>
+ };
+
+<DCH Allocation Struct> ::=
+ { <Channel Info: <Channel Info IE>>
+   < Power Control Synch Offset: <Power Control Synch Offset IE>> -- Applies only to uplink DCH
+   <DCH Channel MCS Info: <DCH MCS IE>>
+   { 0 <Downlink MAC Slot Allocation: bit (8)>
+   | 1 <Downlink Slot Allocation: <Slot Allocation IE>> }
+   { 0 <Uplink MAC Slot Allocation: bit (8)>
+   | 1 <Uplink Slot Allocation: <Slot Allocation IE>> }
+   <RB Id: bit(5)>
+ };
+

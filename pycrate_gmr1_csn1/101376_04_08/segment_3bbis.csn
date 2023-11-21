@@ -1,0 +1,15 @@
+-- ETSI TS 101 376-04-12
+-- 11.5.2.73         Segment 3Bbis
+-- Segment 3Bbis
+
+<Segment 3Bbis> ::=
+ --<Header Segment 3Bbis>
+ <Number of Concurrent BCCH: bit (4)>
+ <Concurrent BCCH Information_part1: bit (91)>
+ <SB_Mask: bit (8)>
+ <Implicit Detach Timer: bit (12)> ;
+
+<Header Segment 3Bbis> ::=
+ <Class Type 3: 0>
+ <Segment type: 0001> ;
+

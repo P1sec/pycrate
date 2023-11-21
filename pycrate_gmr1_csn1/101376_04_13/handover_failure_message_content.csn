@@ -1,0 +1,12 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.15           HANDOVER FAILURE
+-- HANDOVER FAILURE message content
+
+ < HANDOVER FAILURE message content > ::=
+ {
+ < Failure Cause : < Failure Cause and Error Information IE > >
+ < RRC Cause : < RRC Cause IE > >
+ { 0 | 1 < RRC Transaction Identifier : < RRC Transaction Identifier IE > > }
+ { 0 | 1 < Integrity Check Info : < Integrity Check Info IE > > }
+ ! < Content part error : bit (*) = < no string > > } ;
+

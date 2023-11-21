@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.69        Protocol Error Cause
+-- Protocol Error Cause IE
+
+< Protocol Error Cause IE > ::=
+ < Protocol Error Cause : bit (3) >;
+

@@ -1,0 +1,9 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.11 Packet PDCH release (Iu mode only)
+-- Packet PDCH Release message content
+
+< Packet PDCH Release message content > ::=
+ { 1 < MACSLOTS_AVAILABLE : bit (8) > }
+ < padding bits >
+ ! < Distribution part error : bit (*) = < no string > > ;
+

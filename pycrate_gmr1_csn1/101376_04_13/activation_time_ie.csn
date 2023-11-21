@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.1           Activation Time
+-- Activation Time IE
+
+< Activation Time IE > ::=
+ < Activation Time : bit (19) > ;
+

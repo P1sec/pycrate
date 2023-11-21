@@ -1,0 +1,1242 @@
+[o] 101376_04_13: processing
+> 101376_04_13/uplink_key_exchange_message_content.csn
+> 101376_04_13/rlc_info_ie.csn
+> 101376_04_13/rlc_sequence_number_ie.csn
+> 101376_04_13/rb_identity_ie.csn
+> 101376_04_13/rfc_3095_context_info_ie.csn
+> 101376_04_13/handover_complete_message_content.csn
+> 101376_04_13/radio_bearer_release_message_content.csn
+WARN: unable to resolve reference, RB Information to Release List
+    do it by hand within the Python file generated
+> 101376_04_13/rrc_transaction_identifier_ie.csn
+> 101376_04_13/handover_traffic_carrier_info_ie.csn
+> 101376_04_13/capability_update_requirement_ie.csn
+> 101376_04_13/pdcp_capability_ie.csn
+> 101376_04_13/physical_channel_description_ie.csn
+> 101376_04_13/latest_configured_cn_domain_var.csn
+> 101376_04_13/mes_geran_a_gb_mode_radio_access_capability_ie.csn
+> 101376_04_13/cell_update_started_var.csn
+> 101376_04_13/geran_a_gb_security_info_ie.csn
+> 101376_04_13/extension_ie.csn
+> 101376_04_13/downlink_key_exchange_message_content.csn
+> 101376_04_13/nas_message_ie.csn
+> 101376_04_13/ue_cdma2000_radio_access_capability_ie.csn
+> 101376_04_13/rab_upper_layer_reconfiguration_complete_message_content.csn
+> 101376_04_13/rb_uplink_ciphering_activation_time_info_var.csn
+> 101376_04_13/mes_timers_and_constants_in_rrc_connected_mode_ie.csn
+> 101376_04_13/intra_domain_nas_node_selector_ie.csn
+> 101376_04_13/pdcp_sn_info_var.csn
+> 101376_04_13/rrc_cause_ie.csn
+> 101376_04_13/physical_channel_configuration_ie.csn
+> 101376_04_13/signalling_connection_release_message_content.csn
+> 101376_04_13/starting_time_ie.csn
+> 101376_04_13/incompatible_security_reconfiguration_var.csn
+> 101376_04_13/mes_rf_capability_gsm_ie.csn
+> 101376_04_13/integrity_protection_algorithm_ie.csn
+> 101376_04_13/rab_binding_request_message_content.csn
+> 101376_04_13/cell_update_confirm_message_content.csn
+WARN: unable to resolve reference, RB Information to Release List
+    do it by hand within the Python file generated
+> 101376_04_13/rlc_hfn_ie.csn
+> 101376_04_13/rab_binding_response_message_content.csn
+> 101376_04_13/start_ie.csn
+> 101376_04_13/mes_capability_requested_var.csn
+> 101376_04_13/measurement_order_message_content.csn
+> 101376_04_13/nas_synchronization_info_ie.csn
+> 101376_04_13/srns_context_info_ie.csn
+> 101376_04_13/cn_domain_identity_ie.csn
+> 101376_04_13/failure_indicator_var.csn
+> 101376_04_13/lcs_downlink_information_message_content.csn
+> 101376_04_13/established_signalling_connections_var.csn
+> 101376_04_13/rb_count_c_information_ie.csn
+> 101376_04_13/sbss_relocation_information_message_content.csn
+> 101376_04_13/transactions_var.csn
+> 101376_04_13/ue_software_version_indicator_ie.csn
+> 101376_04_13/established_rabs_var.csn
+> 101376_04_13/rb_information_to_be_affected_ie.csn
+> 101376_04_13/rab_information_to_reconfigure_ie.csn
+> 101376_04_13/measurement_report_message_content.csn
+> 101376_04_13/pdcp_sn_info_ie.csn
+> 101376_04_13/ciphering_mode_info_ie.csn
+> 101376_04_13/gra_update_cause_ie.csn
+> 101376_04_13/nas_system_information_gsm_map_ie.csn
+> 101376_04_13/synchronization_indication_ie.csn
+> 101376_04_13/geran_iu_or_utran_security_info_ie.csn
+> 101376_04_13/rrc_state_indicator_ie.csn
+> 101376_04_13/geran_mobility_information_confirm_message_content.csn
+> 101376_04_13/security_mode_failure_message_content.csn
+> 101376_04_13/iu_mode_channel_request_description_ie.csn
+> 101376_04_13/rejection_cause_ie.csn
+> 101376_04_13/radio_bearer_release_failure_message_content.csn
+> 101376_04_13/establishment_cause_var.csn
+> 101376_04_13/rrc_information_target_bss_to_source_bss_message_content.csn
+> 101376_04_13/rab_info_ie.csn
+> 101376_04_13/security_modification_var.csn
+> 101376_04_13/timers_and_constants_var.csn
+> 101376_04_13/radio_bearer_reconfiguration_complete_message_content.csn
+> 101376_04_13/protocol_error_information_ie.csn
+> 101376_04_13/gmr_1_spotbeam_description_ie.csn
+> 101376_04_13/g_rnti_var.csn
+> 101376_04_13/security_mode_complete_message_content.csn
+> 101376_04_13/signalling_connection_release_indication_message_content.csn
+> 101376_04_13/rrb_identity_ie.csn
+> 101376_04_13/rrc_connection_release_complete_message_content.csn
+> 101376_04_13/plmn_identity_ie.csn
+> 101376_04_13/failure_cause_var.csn
+> 101376_04_13/downlink_rrc_messages.csn
+> 101376_04_13/paging_record_type_identifier_ie.csn
+> 101376_04_13/rrc_connection_setup_complete_message_content.csn
+> 101376_04_13/rab_information_for_setup_ie.csn
+> 101376_04_13/radio_bearer_release_complete_message_content.csn
+> 101376_04_13/radio_bearer_setup_complete_message_content.csn
+> 101376_04_13/radio_bearer_reconfiguration_message_content.csn
+> 101376_04_13/protocol_error_information_var.csn
+> 101376_04_13/mes_capability_transferred_var.csn
+> 101376_04_13/integrity_protection_activation_info_var.csn
+> 101376_04_13/transmission_rlc_discard_ie.csn
+> 101376_04_13/release_cause_ie.csn
+> 101376_04_13/integrity_protection_info_var.csn
+> 101376_04_13/integrity_protection_mode_info_ie.csn
+> 101376_04_13/rb_with_pdcp_information_ie.csn
+> 101376_04_13/radio_bearer_setup_message_content.csn
+> 101376_04_13/mes_capability_information_confirm_message_content.csn
+> 101376_04_13/mes_geran_iu_mode_radio_access_capability_ie.csn
+> 101376_04_13/radio_bearer_setup_failure_message_content.csn
+> 101376_04_13/carrier_reconfiguration_type_ie.csn
+> 101376_04_13/upper_layer_bearer_info_ie.csn
+> 101376_04_13/establishment_cause_ie.csn
+> 101376_04_13/protocol_error_indicator_ie.csn
+> 101376_04_13/signalling_rb_information_to_setup_ie.csn
+> 101376_04_13/rab_upper_layer_reconfiguration_message_content.csn
+> 101376_04_13/rrc_packet_downlink_assignment_ie.csn
+> 101376_04_13/paging_cause_ie.csn
+> 101376_04_13/gmr_1_cell_identity_ie.csn
+> 101376_04_13/gra_identity_var.csn
+> 101376_04_13/wait_time_ie.csn
+> 101376_04_13/rb_timer_indicator_var.csn
+> 101376_04_13/zbhc_context_info_ie.csn
+> 101376_04_13/mes_capability_information_message_content.csn
+> 101376_04_13/rab_information_for_handover_ie.csn
+> 101376_04_13/failure_cause_and_error_information_ie.csn
+> 101376_04_13/wait_indication_ie.csn
+> 101376_04_13/rb_timer_indicator.csn
+> 101376_04_13/uplink_rrc_messages.csn
+> 101376_04_13/rrc_connection_setup_message_content.csn
+> 101376_04_13/integrity_protection_activation_info_ie.csn
+> 101376_04_13/protocol_error_reject_var.csn
+> 101376_04_13/gmprs_terminal_type_identifier_ie.csn
+> 101376_04_13/geran_mobility_information_failure_message_content.csn
+> 101376_04_13/re_establishment_timer_ie.csn
+> 101376_04_13/position_report_request_message_content.csn
+> 101376_04_13/rb_information_to_setup_ie.csn
+> 101376_04_13/rrc_failure_info_message_content.csn
+> 101376_04_13/failure_cause_ie.csn
+> 101376_04_13/start_value_to_transmit_var.csn
+> 101376_04_13/pdcp_rb_information_to_reconfigure_ie.csn
+> 101376_04_13/pdcp_context_relocation_info_ie.csn
+> 101376_04_13/rrc_packet_uplink_assignment_ie.csn
+> 101376_04_13/mes_capability_enquiry_message_content.csn
+> 101376_04_13/inter_rat_or_mode_handover_info_with_mes_capabilities_message_content.csn
+> 101376_04_13/cn_information_info_ie.csn
+> 101376_04_13/activation_time_ie.csn
+> 101376_04_13/data_compression_parameter_ie.csn
+> 101376_04_13/mes_positioning_capability_ie.csn
+> 101376_04_13/radio_bearer_reconfiguration_failure_message_content.csn
+> 101376_04_13/rrc_information_to_target_geran_iu_mode_bss_message_content.csn
+> 101376_04_13/start_threshold_var.csn
+> 101376_04_13/gsm_mes_security_capability_ie.csn
+> 101376_04_13/channel_change_preparation_complete_message_content.csn
+> 101376_04_13/rb_count_c_msb_information_ie.csn
+> 101376_04_13/pdcp_rb_information_to_setup_ie.csn
+> 101376_04_13/uplink_direct_transfer_message_content.csn
+> 101376_04_13/ue_utran_radio_access_capability_ie.csn
+> 101376_04_13/protocol_error_cause_ie.csn
+> 101376_04_13/integrity_check_info_ie.csn
+> 101376_04_13/mes_additional_timers_and_constants_in_rrc_connected_mode_ie.csn
+> 101376_04_13/rb_information_to_release_ie.csn
+> 101376_04_13/position_update_indication_message_content.csn
+> 101376_04_13/gra_identity_ie.csn
+> 101376_04_13/rab_info_post_ie.csn
+> 101376_04_13/rb_activation_time_info_ie.csn
+> 101376_04_13/rb_information_to_reconfigure_ie.csn
+> 101376_04_13/ciphering_status_var.csn
+> 101376_04_13/cell_update_cause_ie.csn
+> 101376_04_13/rrc_connection_release_message_content.csn
+> 101376_04_13/reference_ie.csn
+> 101376_04_13/initial_mes_identity_ie.csn
+> 101376_04_13/ue_utran_predefined_configuration_status_information_ie.csn
+> 101376_04_13/downlink_direct_transfer_message_content.csn
+> 101376_04_13/rab_info_to_relocate_ie.csn
+> 101376_04_13/lcs_uplink_information_message_content.csn
+> 101376_04_13/ordered_reconfiguration_var.csn
+> 101376_04_13/ciphering_algorithm_ie.csn
+> 101376_04_13/geran_mobility_information_message_content.csn
+> 101376_04_13/geran_iu_mode_dtm_request_message_content.csn
+> 101376_04_13/security_capability_ie.csn
+> 101376_04_13/geran_iu_mode_dtm_reject_message_content.csn
+> 101376_04_13/ue_utran_radio_access_capability_extension_ie.csn
+> 101376_04_13/mes_measurement_capability_ie.csn
+> 101376_04_13/gra_update_confirm_message_content.csn
+> 101376_04_13/protocol_error_indicator_var.csn
+> 101376_04_13/mes_geran_iu_mode_rlc_capability_ie.csn
+> 101376_04_13/position_report_response_message_content.csn
+> 101376_04_13/handover_failure_message_content.csn
+> 101376_04_13/security_mode_command_message_content.csn
+> 101376_04_13/invalid_configuration_var.csn
+> 101376_04_13/initial_mes_identity_var.csn
+> 101376_04_13/initial_direct_transfer_message_content.csn
+> 101376_04_13/rrc_status_message_content.csn
+> 101376_04_13/unsupported_configuration_var.csn
+> 101376_04_13/mes_multi_mode_and_multi_rat_capability_ie.csn
+> 101376_04_13/rab_identity_ie.csn
+> 101376_04_13/handover_reference_ie.csn
+> 101376_04_13/pdcp_info_ie.csn
+> 101376_04_13/g_rnti_ie.csn
+> 101376_04_13/rb_ciphering_synchronization_ie.csn
+[o] 101376_04_13: done, 190 files, 225 definitions
+[o] 101376_04_12: processing
+> 101376_04_12/packet_channel_request_64_bit_message_content.csn
+> 101376_04_12/packet_dch_downlink_ack_nack_message_content.csn
+> 101376_04_12/packet_access_reject_message_content.csn
+> 101376_04_12/packet_link_control_message_content.csn
+> 101376_04_12/downlink_key_exchange_message_content.csn
+> 101376_04_12/packet_downlink_dummy_control_block_message_content.csn
+> 101376_04_12/packet_channel_request_type_2_message_content.csn
+> 101376_04_12/packet_uplink_ack_nack_message_content.csn
+> 101376_04_12/slot_allocation_ie.csn
+> 101376_04_12/packet_timeslot_reconfigure_message_content.csn
+> 101376_04_12/packet_paging_request_message_content.csn
+> 101376_04_12/frequency_parameters_ie.csn
+> 101376_04_12/downlink_rlc_mac_control_message.csn
+> 101376_04_12/packet_link_synchronization_parameters_ie.csn
+> 101376_04_12/packet_uplink_ack_nack_type_2_message_content.csn
+> 101376_04_12/channel_request_description_ie.csn
+> 101376_04_12/channel_info_ie.csn
+> 101376_04_12/packet_tbf_assignment_type_2_message_content.csn
+> 101376_04_12/multiple_tbf_timeslot_reconfigure_message_content.csn
+> 101376_04_12/packet_cell_change_order_message_content.csn
+WARN: unable to process arithmetic expression, (p(NR_OF_FDD_CELLS))
+    do it by hand within the Python file generated
+WARN: unable to process arithmetic expression, (q(NR_OF_TDD_CELLS))
+    do it by hand within the Python file generated
+> 101376_04_12/multiple_tbf_uplink_assignment_message_content.csn
+> 101376_04_12/physical_information_message_content.csn
+> 101376_04_12/packet_pdch_release_message_content.csn
+> 101376_04_12/packet_uplink_assignment_type_2_message_content.csn
+> 101376_04_12/pdch_uplink_organization_ie.csn
+> 101376_04_12/time_and_frequency_correction_ie.csn
+> 101376_04_12/gmprs_ack_nack_description_ie.csn
+> 101376_04_12/packet_tbf_release_type_2_message_content.csn
+> 101376_04_12/packet_link_adaptation_control_message_content.csn
+> 101376_04_12/packet_uplink_dummy_control_block_message_content.csn
+> 101376_04_12/link_quality_report_ie.csn
+> 101376_04_12/packet_tbf_release_message_content.csn
+> 101376_04_12/uplink_rlc_mac_control_message.csn
+> 101376_04_12/packet_downlink_assignment_type_2_message_content.csn
+> 101376_04_12/packet_gmprs_resume_response_message_content.csn
+> 101376_04_12/packet_measurement_report_message_content.csn
+> 101376_04_12/packet_mobile_tbf_status_message_content.csn
+> 101376_04_12/packet_uplink_talk_burst_control_message_content.csn
+> 101376_04_12/padding_bits.csn
+> 101376_04_12/global_tfi_ie.csn
+> 101376_04_12/multiple_tbf_downlink_assignment_message_content.csn
+> 101376_04_12/packet_control_acknowledgement_message_content.csn
+> 101376_04_12/utran_fdd_target_cell_ie.csn
+> 101376_04_12/power_control_synch_offset_ie.csn
+> 101376_04_12/packet_cell_change_failure_message_content.csn
+> 101376_04_12/prach_control_parameters_ie.csn
+> 101376_04_12/packet_link_quality_report_message_content.csn
+> 101376_04_12/packet_downlink_assignment_message_content.csn
+> 101376_04_12/pdch_mcs_ie.csn
+> 101376_04_12/packet_dch_uplink_ack_nack_message_content.csn
+> 101376_04_12/packet_uplink_talk_burst_control_response_message_content.csn
+> 101376_04_12/packet_downlink_ack_nack_message_content.csn
+> 101376_04_12/packet_dch_assignment_message_content.csn
+> 101376_04_12/packet_measurement_order_message_content.csn
+> 101376_04_12/packet_link_synchronization_ie.csn
+> 101376_04_12/packet_link_quality_report_type2_message_content.csn
+> 101376_04_12/packet_uplink_assignment_message_content.csn
+> 101376_04_12/packet_resource_request_message_content.csn
+> 101376_04_12/pdch_organization_message_content.csn
+> 101376_04_12/g_rnti_ie.csn
+[o] 101376_04_12: done, 60 files, 113 definitions
+[o] 101376_04_08: processing
+> 101376_04_08/gbch3_kc_information_message.csn
+> 101376_04_08/segment_3a.csn
+> 101376_04_08/system_information_type_2.csn
+> 101376_04_08/segment_4d.csn
+> 101376_04_08/segment_3b.csn
+> 101376_04_08/segment_3j.csn
+> 101376_04_08/segment_1a.csn
+> 101376_04_08/segment_4f.csn
+> 101376_04_08/channel_request_type_3_message_content.csn
+> 101376_04_08/segment_2abis.csn
+> 101376_04_08/gbch3_ecef_information_message.csn
+> 101376_04_08/segment_3f.csn
+> 101376_04_08/segment_2a.csn
+> 101376_04_08/segment_3i.csn
+> 101376_04_08/segment_2b.csn
+> 101376_04_08/segment_4b.csn
+> 101376_04_08/prefixed_gps_position_ie.csn
+> 101376_04_08/segment_3jbis.csn
+> 101376_04_08/system_information_type_1.csn
+> 101376_04_08/segment_3c.csn
+> 101376_04_08/gps_position_ie.csn
+> 101376_04_08/segment_3g.csn
+> 101376_04_08/segment_4a.csn
+WARN: unable to process arithmetic expression, (p(NR_OF_FDD_CELLS))
+    do it by hand within the Python file generated
+> 101376_04_08/segment_4e.csn
+> 101376_04_08/segment_4c.csn
+> 101376_04_08/segment_2bbis.csn
+> 101376_04_08/segment_3kbis.csn
+> 101376_04_08/gbch_information.csn
+> 101376_04_08/segment_3e.csn
+> 101376_04_08/segment_3bbis.csn
+[o] 101376_04_08: done, 30 files, 118 definitions
+[o] 101376_04_08/channel_request_type_3_message_content
+[o] 101376_04_08/gbch3_ecef_information_message
+[o] 101376_04_08/gbch3_kc_information_message
+[o] 101376_04_08/gbch_information
+[o] 101376_04_08/gps_position_ie
+[o] 101376_04_08/prefixed_gps_position_ie
+[o] 101376_04_08/segment_1a
+[o] 101376_04_08/segment_2a
+[o] 101376_04_08/segment_2abis
+[o] 101376_04_08/segment_2b
+[o] 101376_04_08/segment_2bbis
+[o] 101376_04_08/segment_3a
+[o] 101376_04_08/segment_3b
+[o] 101376_04_08/segment_3bbis
+[o] 101376_04_08/segment_3c
+[o] 101376_04_08/segment_3e
+[o] 101376_04_08/segment_3f
+[o] 101376_04_08/segment_3g
+[o] 101376_04_08/segment_3i
+[o] 101376_04_08/segment_3j
+[o] 101376_04_08/segment_3jbis
+[o] 101376_04_08/segment_3kbis
+[o] 101376_04_08/segment_4a
+[o] 101376_04_08/segment_4b
+[o] 101376_04_08/segment_4c
+[o] 101376_04_08/segment_4d
+[o] 101376_04_08/segment_4e
+[o] 101376_04_08/segment_4f
+[o] 101376_04_08/system_information_type_1
+    [INF] external reference solved: 101376_04_08/segment_3c
+    [INF] external reference solved: 101376_04_08/segment_3jbis
+    [INF] external reference solved: 101376_04_08/segment_1a
+    [INF] external reference solved: 101376_04_08/segment_2abis
+    [INF] external reference solved: 101376_04_08/segment_4b
+    [INF] external reference solved: 101376_04_08/segment_4c
+    [INF] external reference solved: 101376_04_08/segment_3i
+    [INF] external reference solved: 101376_04_08/segment_3bbis
+    [INF] external reference solved: 101376_04_08/segment_3a
+    [INF] external reference solved: 101376_04_08/segment_4a
+    [INF] external reference solved: 101376_04_08/segment_2bbis
+    [INF] external reference solved: 101376_04_08/segment_4f
+    [INF] external reference solved: 101376_04_08/segment_4e
+    [INF] external reference solved: 101376_04_08/segment_4d
+[o] 101376_04_08/system_information_type_2
+    [INF] external reference solved: 101376_04_08/segment_3e
+    [INF] external reference solved: 101376_04_08/segment_3b
+    [INF] external reference solved: 101376_04_08/segment_2a
+    [INF] external reference solved: 101376_04_08/segment_3j
+    [INF] external reference solved: 101376_04_08/segment_2b
+    [INF] external reference solved: 101376_04_08/segment_3g
+[o] 101376_04_12/channel_info_ie
+[o] 101376_04_12/channel_request_description_ie
+[o] 101376_04_12/downlink_key_exchange_message_content
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_12/downlink_rlc_mac_control_message
+    [INF] external reference solved: 101376_04_12/packet_uplink_ack_nack_type_2_message_content
+    [INF] external reference solved: 101376_04_12/packet_measurement_order_message_content
+    [INF] external reference solved: 101376_04_12/packet_pdch_release_message_content
+    [INF] external reference solved: 101376_04_12/packet_downlink_assignment_message_content
+    [INF] external reference solved: 101376_04_12/multiple_tbf_downlink_assignment_message_content
+    [INF] external reference solved: 101376_04_12/packet_downlink_assignment_type_2_message_content
+    [INF] external reference solved: 101376_04_12/packet_downlink_dummy_control_block_message_content
+    [INF] external reference solved: 101376_04_12/packet_dch_assignment_message_content
+    [INF] external reference solved: 101376_04_12/packet_gmprs_resume_response_message_content
+    [INF] external reference solved: 101376_04_12/packet_link_control_message_content
+    [INF] external reference solved: 101376_04_12/packet_dch_uplink_ack_nack_message_content
+    [INF] external reference solved: 101376_04_12/multiple_tbf_timeslot_reconfigure_message_content
+    [INF] external reference solved: 101376_04_12/multiple_tbf_uplink_assignment_message_content
+    [INF] external reference solved: 101376_04_12/packet_tbf_release_message_content
+    [INF] external reference solved: 101376_04_12/packet_paging_request_message_content
+    [INF] external reference solved: 101376_04_12/packet_access_reject_message_content
+    [INF] external reference solved: 101376_04_12/packet_uplink_talk_burst_control_response_message_content
+    [INF] external reference solved: 101376_04_12/packet_uplink_assignment_message_content
+    [INF] external reference solved: 101376_04_12/packet_tbf_assignment_type_2_message_content
+    [INF] external reference solved: 101376_04_12/pdch_organization_message_content
+    [INF] external reference solved: 101376_04_12/packet_uplink_assignment_type_2_message_content
+    [INF] external reference solved: 101376_04_12/packet_timeslot_reconfigure_message_content
+    [INF] external reference solved: 101376_04_12/packet_cell_change_order_message_content
+    [INF] external reference solved: 101376_04_12/packet_tbf_release_type_2_message_content
+    [INF] external reference solved: 101376_04_12/packet_uplink_ack_nack_message_content
+    [INF] external reference solved: 101376_04_12/physical_information_message_content
+    [INF] external reference solved: 101376_04_12/packet_link_adaptation_control_message_content
+[o] 101376_04_12/frequency_parameters_ie
+[o] 101376_04_12/g_rnti_ie
+[o] 101376_04_12/global_tfi_ie
+[o] 101376_04_12/gmprs_ack_nack_description_ie
+[o] 101376_04_12/link_quality_report_ie
+[o] 101376_04_12/multiple_tbf_downlink_assignment_message_content
+    [INF] external reference solved: 101376_04_12/pdch_uplink_organization_ie
+    [INF] external reference solved: 101376_04_12/global_tfi_ie
+    [INF] external reference solved: 101376_04_12/padding_bits
+    [INF] solved reference: 101376_04_12/frequency_parameters_ie/frequency_allocation_ie
+[o] 101376_04_12/multiple_tbf_timeslot_reconfigure_message_content
+    [INF] external reference solved: 101376_04_12/pdch_uplink_organization_ie
+    [INF] solved reference: 101376_04_12/frequency_parameters_ie/frequency_allocation_ie
+    [INF] external reference solved: 101376_04_12/pdch_mcs_ie
+    [INF] solved reference: 101376_04_12/multiple_tbf_downlink_assignment_message_content/downlink_tbf_assignment_struct
+    [INF] external reference solved: 101376_04_12/packet_link_synchronization_ie
+    [INF] external reference solved: 101376_04_12/global_tfi_ie
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/multiple_tbf_uplink_assignment_message_content
+    [INF] external reference solved: 101376_04_12/pdch_uplink_organization_ie
+    [INF] solved reference: 101376_04_12/frequency_parameters_ie/frequency_allocation_ie
+    [INF] external reference solved: 101376_04_12/channel_info_ie
+    [INF] external reference solved: 101376_04_12/pdch_mcs_ie
+    [INF] external reference solved: 101376_04_12/slot_allocation_ie
+    [INF] solved reference: 101376_04_12/pdch_mcs_ie/dch_mcs_ie
+    [INF] external reference solved: 101376_04_12/packet_link_synchronization_ie
+    [INF] external reference solved: 101376_04_12/global_tfi_ie
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/packet_access_reject_message_content
+    [INF] external reference solved: 101376_04_12/global_tfi_ie
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/packet_cell_change_failure_message_content
+    [INF] external reference solved: 101376_04_12/utran_fdd_target_cell_ie
+    [INF] solved reference: 101376_04_12/utran_fdd_target_cell_ie/utran_tdd_target_cell_ie
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/packet_cell_change_order_message_content
+    [INF] external reference solved: 101376_04_12/utran_fdd_target_cell_ie
+    [INF] external reference solved: 101376_04_12/global_tfi_ie
+    [INF] solved reference: 101376_04_12/utran_fdd_target_cell_ie/utran_tdd_target_cell_ie
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/packet_channel_request_64_bit_message_content
+[o] 101376_04_12/packet_channel_request_type_2_message_content
+[o] 101376_04_12/packet_control_acknowledgement_message_content
+    [INF] external reference solved: 101376_04_12/global_tfi_ie
+    [INF] external reference solved: 101376_04_13/iu_mode_channel_request_description_ie
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/packet_dch_assignment_message_content
+    [INF] external reference solved: 101376_04_12/channel_info_ie
+    [INF] external reference solved: 101376_04_12/padding_bits
+    [INF] external reference solved: 101376_04_12/slot_allocation_ie
+    [INF] external reference solved: 101376_04_12/power_control_synch_offset_ie
+    [INF] solved reference: 101376_04_12/pdch_mcs_ie/dch_mcs_ie
+    [INF] external reference solved: 101376_04_12/packet_link_synchronization_ie
+    [INF] external reference solved: 101376_04_12/global_tfi_ie
+    [INF] solved reference: 101376_04_12/frequency_parameters_ie/frequency_allocation_ie
+[o] 101376_04_12/packet_dch_downlink_ack_nack_message_content
+    [INF] solved reference: 101376_04_12/gmprs_ack_nack_description_ie/dcch_ack_nack_description_ie
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/packet_dch_uplink_ack_nack_message_content
+    [INF] external reference solved: 101376_04_12/time_and_frequency_correction_ie
+    [INF] external reference solved: 101376_04_12/padding_bits
+    [INF] solved reference: 101376_04_12/gmprs_ack_nack_description_ie/dcch_ack_nack_description_ie
+    [INF] solved reference: 101376_04_12/pdch_mcs_ie/dch_mcs_ie
+[o] 101376_04_12/packet_downlink_ack_nack_message_content
+    [INF] external reference solved: 101376_04_13/iu_mode_channel_request_description_ie
+    [INF] external reference solved: 101376_04_12/gmprs_ack_nack_description_ie
+[o] 101376_04_12/packet_downlink_assignment_message_content
+    [INF] external reference solved: 101376_04_12/global_tfi_ie
+    [INF] external reference solved: 101376_04_12/frequency_parameters_ie
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/packet_downlink_assignment_type_2_message_content
+    [INF] external reference solved: 101376_04_12/pdch_uplink_organization_ie
+    [INF] external reference solved: 101376_04_12/channel_info_ie
+    [INF] external reference solved: 101376_04_12/padding_bits
+    [INF] external reference solved: 101376_04_12/slot_allocation_ie
+    [INF] external reference solved: 101376_04_12/power_control_synch_offset_ie
+    [INF] solved reference: 101376_04_12/pdch_mcs_ie/dch_mcs_ie
+    [INF] external reference solved: 101376_04_12/global_tfi_ie
+    [INF] solved reference: 101376_04_12/frequency_parameters_ie/frequency_allocation_ie
+[o] 101376_04_12/packet_downlink_dummy_control_block_message_content
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/packet_gmprs_resume_response_message_content
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/packet_link_adaptation_control_message_content
+    [INF] external reference solved: 101376_04_12/padding_bits
+    [INF] external reference solved: 101376_04_12/pdch_mcs_ie
+    [INF] solved reference: 101376_04_12/pdch_mcs_ie/dch_mcs_ie
+[o] 101376_04_12/packet_link_control_message_content
+    [INF] external reference solved: 101376_04_12/packet_link_synchronization_ie
+    [INF] external reference solved: 101376_04_12/global_tfi_ie
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/packet_link_quality_report_message_content
+    [INF] external reference solved: 101376_04_12/link_quality_report_ie
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/packet_link_quality_report_type2_message_content
+    [INF] external reference solved: 101376_04_12/global_tfi_ie
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/packet_link_synchronization_ie
+[o] 101376_04_12/packet_link_synchronization_parameters_ie
+[o] 101376_04_12/packet_measurement_order_message_content
+    [INF] solved reference: 101376_04_12/packet_cell_change_order_message_content/utran_fdd_description_struct
+    [INF] external reference solved: 101376_04_12/global_tfi_ie
+    [INF] solved reference: 101376_04_12/packet_cell_change_order_message_content/utran_tdd_description_struct
+[o] 101376_04_12/packet_measurement_report_message_content
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/packet_mobile_tbf_status_message_content
+    [INF] external reference solved: 101376_04_12/global_tfi_ie
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/packet_paging_request_message_content
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/packet_pdch_release_message_content
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/packet_resource_request_message_content
+    [INF] external reference solved: 101376_04_12/global_tfi_ie
+    [INF] external reference solved: 101376_04_13/iu_mode_channel_request_description_ie
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/packet_tbf_assignment_type_2_message_content
+    [INF] external reference solved: 101376_04_13/rrb_identity_ie
+    [INF] external reference solved: 101376_04_13/physical_channel_configuration_ie
+    [INF] external reference solved: 101376_04_12/global_tfi_ie
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/packet_tbf_release_message_content
+    [INF] external reference solved: 101376_04_12/global_tfi_ie
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/packet_tbf_release_type_2_message_content
+    [INF] external reference solved: 101376_04_12/global_tfi_ie
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/packet_timeslot_reconfigure_message_content
+    [INF] external reference solved: 101376_04_12/pdch_uplink_organization_ie
+    [INF] solved reference: 101376_04_12/frequency_parameters_ie/frequency_allocation_ie
+    [INF] external reference solved: 101376_04_12/pdch_mcs_ie
+    [INF] external reference solved: 101376_04_12/packet_link_synchronization_parameters_ie
+    [INF] external reference solved: 101376_04_12/global_tfi_ie
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/packet_uplink_ack_nack_message_content
+    [INF] external reference solved: 101376_04_12/packet_link_synchronization_ie
+    [INF] external reference solved: 101376_04_12/gmprs_ack_nack_description_ie
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/packet_uplink_ack_nack_type_2_message_content
+    [INF] external reference solved: 101376_04_12/packet_link_synchronization_ie
+    [INF] external reference solved: 101376_04_12/pdch_mcs_ie
+    [INF] external reference solved: 101376_04_12/gmprs_ack_nack_description_ie
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/packet_uplink_assignment_message_content
+    [INF] external reference solved: 101376_04_12/packet_link_synchronization_ie
+    [INF] external reference solved: 101376_04_12/global_tfi_ie
+    [INF] external reference solved: 101376_04_12/frequency_parameters_ie
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/packet_uplink_assignment_type_2_message_content
+    [INF] external reference solved: 101376_04_12/pdch_uplink_organization_ie
+    [INF] external reference solved: 101376_04_12/channel_info_ie
+    [INF] external reference solved: 101376_04_12/pdch_mcs_ie
+    [INF] external reference solved: 101376_04_12/slot_allocation_ie
+    [INF] external reference solved: 101376_04_12/power_control_synch_offset_ie
+    [INF] solved reference: 101376_04_12/pdch_mcs_ie/dch_mcs_ie
+    [INF] external reference solved: 101376_04_12/packet_link_synchronization_ie
+    [INF] external reference solved: 101376_04_12/global_tfi_ie
+    [INF] solved reference: 101376_04_12/frequency_parameters_ie/frequency_allocation_ie
+[o] 101376_04_12/packet_uplink_dummy_control_block_message_content
+    [INF] external reference solved: 101376_04_12/global_tfi_ie
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/packet_uplink_talk_burst_control_message_content
+    [INF] external reference solved: 101376_04_12/global_tfi_ie
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/packet_uplink_talk_burst_control_response_message_content
+    [INF] external reference solved: 101376_04_12/global_tfi_ie
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/padding_bits
+[o] 101376_04_12/pdch_mcs_ie
+[o] 101376_04_12/pdch_organization_message_content
+    [INF] external reference solved: 101376_04_12/pdch_uplink_organization_ie
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/pdch_uplink_organization_ie
+[o] 101376_04_12/physical_information_message_content
+    [INF] external reference solved: 101376_04_12/time_and_frequency_correction_ie
+    [INF] external reference solved: 101376_04_12/padding_bits
+[o] 101376_04_12/power_control_synch_offset_ie
+[o] 101376_04_12/prach_control_parameters_ie
+[o] 101376_04_12/slot_allocation_ie
+[o] 101376_04_12/time_and_frequency_correction_ie
+[o] 101376_04_12/uplink_rlc_mac_control_message
+    [INF] external reference solved: 101376_04_12/packet_link_quality_report_message_content
+    [INF] external reference solved: 101376_04_12/packet_uplink_dummy_control_block_message_content
+    [INF] external reference solved: 101376_04_12/packet_resource_request_message_content
+    [INF] external reference solved: 101376_04_12/packet_measurement_report_message_content
+    [INF] external reference solved: 101376_04_12/packet_link_quality_report_type2_message_content
+    [INF] external reference solved: 101376_04_12/packet_dch_downlink_ack_nack_message_content
+    [INF] external reference solved: 101376_04_12/packet_uplink_talk_burst_control_message_content
+    [INF] external reference solved: 101376_04_12/packet_control_acknowledgement_message_content
+    [INF] external reference solved: 101376_04_12/packet_mobile_tbf_status_message_content
+    [INF] external reference solved: 101376_04_12/packet_downlink_ack_nack_message_content
+[o] 101376_04_12/utran_fdd_target_cell_ie
+[o] 101376_04_13/activation_time_ie
+[o] 101376_04_13/capability_update_requirement_ie
+[o] 101376_04_13/carrier_reconfiguration_type_ie
+[o] 101376_04_13/cell_update_cause_ie
+[o] 101376_04_13/cell_update_confirm_message_content
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/ciphering_mode_info_ie
+    [INF] external reference solved: 101376_04_13/reference_ie
+    [INF] external reference solved: 101376_04_13/activation_time_ie
+    [INF] external reference solved: 101376_04_13/rb_ciphering_synchronization_ie
+    [INF] external reference solved: 101376_04_13/rrc_state_indicator_ie
+    [INF] external reference solved: 101376_04_13/gra_identity_ie
+    [INF] external reference solved: 101376_04_13/cn_information_info_ie
+    [INF] external reference solved: 101376_04_13/rb_information_to_reconfigure_ie
+    [INF] external reference solved: 101376_04_13/rb_information_to_release_ie
+    [INF] external reference solved: 101376_04_13/start_ie
+    [INF] external reference solved: 101376_04_13/physical_channel_configuration_ie
+    [INF] external reference solved: 101376_04_13/rb_with_pdcp_information_ie
+    [INF] external reference solved: 101376_04_13/rb_identity_ie
+    [INF] external reference solved: 101376_04_13/rrb_identity_ie
+    [INF] external reference solved: 101376_04_13/integrity_protection_mode_info_ie
+    [INF] external reference solved: 101376_04_13/g_rnti_ie
+    [INF] external reference solved: 101376_04_13/pdcp_context_relocation_info_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/cell_update_started_var
+[o] 101376_04_13/channel_change_preparation_complete_message_content
+    [INF] external reference solved: 101376_04_13/rlc_sequence_number_ie
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/rb_with_pdcp_information_ie
+    [INF] external reference solved: 101376_04_13/rb_activation_time_info_ie
+    [INF] external reference solved: 101376_04_13/integrity_protection_activation_info_ie
+    [INF] external reference solved: 101376_04_13/rb_identity_ie
+    [INF] external reference solved: 101376_04_13/cn_domain_identity_ie
+    [INF] external reference solved: 101376_04_13/activation_time_ie
+    [INF] external reference solved: 101376_04_13/start_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/ciphering_algorithm_ie
+[o] 101376_04_13/ciphering_mode_info_ie
+    [INF] external reference solved: 101376_04_13/ciphering_algorithm_ie
+    [INF] external reference solved: 101376_04_13/activation_time_ie
+    [INF] external reference solved: 101376_04_13/rb_activation_time_info_ie
+[o] 101376_04_13/ciphering_status_var
+    [INF] external reference solved: 101376_04_13/cn_domain_identity_ie
+[o] 101376_04_13/cn_domain_identity_ie
+[o] 101376_04_13/cn_information_info_ie
+    [INF] external reference solved: 101376_04_13/plmn_identity_ie
+    [INF] external reference solved: 101376_04_13/nas_system_information_gsm_map_ie
+    [INF] external reference solved: 101376_04_13/cn_domain_identity_ie
+[o] 101376_04_13/data_compression_parameter_ie
+[o] 101376_04_13/downlink_direct_transfer_message_content
+    [INF] external reference solved: 101376_04_13/nas_message_ie
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/cn_domain_identity_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/downlink_key_exchange_message_content
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/downlink_rrc_messages
+    [INF] external reference solved: 101376_04_13/signalling_connection_release_message_content
+    [INF] external reference solved: 101376_04_13/rrc_status_message_content
+    [INF] external reference solved: 101376_04_13/rrc_connection_setup_message_content
+    [INF] external reference solved: 101376_04_13/downlink_direct_transfer_message_content
+    [INF] external reference solved: 101376_04_13/cell_update_confirm_message_content
+    [INF] external reference solved: 101376_04_13/lcs_downlink_information_message_content
+    [INF] external reference solved: 101376_04_13/rab_upper_layer_reconfiguration_message_content
+    [INF] external reference solved: 101376_04_13/mes_capability_enquiry_message_content
+    [INF] external reference solved: 101376_04_13/radio_bearer_release_message_content
+    [INF] external reference solved: 101376_04_13/mes_capability_information_confirm_message_content
+    [INF] external reference solved: 101376_04_13/security_mode_command_message_content
+    [INF] external reference solved: 101376_04_13/rrc_connection_release_message_content
+    [INF] solved reference: 101376_04_13/uplink_rrc_messages/default_downlink_message_content
+    [INF] external reference solved: 101376_04_13/rab_binding_response_message_content
+    [INF] external reference solved: 101376_04_13/downlink_key_exchange_message_content
+    [INF] external reference solved: 101376_04_13/radio_bearer_setup_message_content
+    [INF] external reference solved: 101376_04_13/radio_bearer_reconfiguration_message_content
+    [INF] external reference solved: 101376_04_13/geran_mobility_information_message_content
+    [INF] external reference solved: 101376_04_13/position_report_request_message_content
+    [INF] external reference solved: 101376_04_13/gra_update_confirm_message_content
+    [INF] external reference solved: 101376_04_13/geran_iu_mode_dtm_reject_message_content
+[o] 101376_04_13/established_rabs_var
+    [INF] external reference solved: 101376_04_13/rb_identity_ie
+    [INF] external reference solved: 101376_04_13/rab_info_ie
+[o] 101376_04_13/established_signalling_connections_var
+    [INF] external reference solved: 101376_04_13/cn_domain_identity_ie
+[o] 101376_04_13/establishment_cause_ie
+[o] 101376_04_13/establishment_cause_var
+    [INF] external reference solved: 101376_04_13/establishment_cause_ie
+[o] 101376_04_13/extension_ie
+[o] 101376_04_13/failure_cause_and_error_information_ie
+    [INF] external reference solved: 101376_04_13/protocol_error_information_ie
+[o] 101376_04_13/failure_cause_ie
+[o] 101376_04_13/failure_cause_var
+    [INF] external reference solved: 101376_04_13/failure_cause_ie
+[o] 101376_04_13/failure_indicator_var
+[o] 101376_04_13/g_rnti_ie
+[o] 101376_04_13/g_rnti_var
+    [INF] external reference solved: 101376_04_13/g_rnti_ie
+[o] 101376_04_13/geran_a_gb_security_info_ie
+    [INF] external reference solved: 101376_04_13/start_ie
+[o] 101376_04_13/geran_iu_mode_dtm_reject_message_content
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+    [INF] external reference solved: 101376_04_13/failure_cause_and_error_information_ie
+    [INF] external reference solved: 101376_04_13/wait_indication_ie
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+[o] 101376_04_13/geran_iu_mode_dtm_request_message_content
+    [INF] external reference solved: 101376_04_13/start_ie
+    [INF] external reference solved: 101376_04_13/iu_mode_channel_request_description_ie
+    [INF] external reference solved: 101376_04_13/cn_domain_identity_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/geran_iu_or_utran_security_info_ie
+    [INF] external reference solved: 101376_04_13/rlc_hfn_ie
+    [INF] external reference solved: 101376_04_13/cn_domain_identity_ie
+    [INF] external reference solved: 101376_04_13/rb_identity_ie
+[o] 101376_04_13/geran_mobility_information_confirm_message_content
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/rb_with_pdcp_information_ie
+    [INF] external reference solved: 101376_04_13/rb_activation_time_info_ie
+    [INF] external reference solved: 101376_04_13/integrity_protection_activation_info_ie
+    [INF] external reference solved: 101376_04_13/cn_domain_identity_ie
+    [INF] external reference solved: 101376_04_13/activation_time_ie
+    [INF] external reference solved: 101376_04_13/start_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/geran_mobility_information_failure_message_content
+    [INF] external reference solved: 101376_04_13/failure_cause_and_error_information_ie
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/geran_mobility_information_message_content
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/rb_with_pdcp_information_ie
+    [INF] external reference solved: 101376_04_13/mes_timers_and_constants_in_rrc_connected_mode_ie
+    [INF] external reference solved: 101376_04_13/cn_information_info_ie
+    [INF] external reference solved: 101376_04_13/mes_additional_timers_and_constants_in_rrc_connected_mode_ie
+    [INF] external reference solved: 101376_04_13/integrity_protection_mode_info_ie
+    [INF] external reference solved: 101376_04_13/ciphering_mode_info_ie
+    [INF] external reference solved: 101376_04_13/g_rnti_ie
+    [INF] external reference solved: 101376_04_13/pdcp_context_relocation_info_ie
+    [INF] external reference solved: 101376_04_13/gra_identity_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/gmprs_terminal_type_identifier_ie
+[o] 101376_04_13/gmr_1_cell_identity_ie
+[o] 101376_04_13/gmr_1_spotbeam_description_ie
+[o] 101376_04_13/gra_identity_ie
+[o] 101376_04_13/gra_identity_var
+    [INF] external reference solved: 101376_04_13/gra_identity_ie
+[o] 101376_04_13/gra_update_cause_ie
+[o] 101376_04_13/gra_update_confirm_message_content
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/rb_with_pdcp_information_ie
+    [INF] external reference solved: 101376_04_13/cn_information_info_ie
+    [INF] external reference solved: 101376_04_13/start_ie
+    [INF] external reference solved: 101376_04_13/integrity_protection_mode_info_ie
+    [INF] external reference solved: 101376_04_13/ciphering_mode_info_ie
+    [INF] external reference solved: 101376_04_13/rrc_state_indicator_ie
+    [INF] external reference solved: 101376_04_13/g_rnti_ie
+    [INF] external reference solved: 101376_04_13/pdcp_context_relocation_info_ie
+    [INF] external reference solved: 101376_04_13/gra_identity_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/gsm_mes_security_capability_ie
+[o] 101376_04_13/handover_complete_message_content
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/rb_with_pdcp_information_ie
+    [INF] external reference solved: 101376_04_13/rb_activation_time_info_ie
+    [INF] external reference solved: 101376_04_13/integrity_protection_activation_info_ie
+    [INF] external reference solved: 101376_04_13/cn_domain_identity_ie
+    [INF] external reference solved: 101376_04_13/activation_time_ie
+    [INF] external reference solved: 101376_04_13/rrc_cause_ie
+    [INF] external reference solved: 101376_04_13/start_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/handover_failure_message_content
+    [INF] external reference solved: 101376_04_13/failure_cause_and_error_information_ie
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/rrc_cause_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/handover_reference_ie
+[o] 101376_04_13/handover_traffic_carrier_info_ie
+[o] 101376_04_13/incompatible_security_reconfiguration_var
+[o] 101376_04_13/initial_direct_transfer_message_content
+    [INF] external reference solved: 101376_04_13/cn_domain_identity_ie
+    [INF] external reference solved: 101376_04_13/start_ie
+    [INF] external reference solved: 101376_04_13/nas_message_ie
+    [INF] external reference solved: 101376_04_13/intra_domain_nas_node_selector_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/initial_mes_identity_ie
+[o] 101376_04_13/initial_mes_identity_var
+    [INF] external reference solved: 101376_04_13/initial_mes_identity_ie
+[o] 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/integrity_protection_activation_info_ie
+[o] 101376_04_13/integrity_protection_activation_info_var
+    [INF] external reference solved: 101376_04_13/integrity_protection_activation_info_ie
+[o] 101376_04_13/integrity_protection_algorithm_ie
+[o] 101376_04_13/integrity_protection_info_var
+[o] 101376_04_13/integrity_protection_mode_info_ie
+    [INF] external reference solved: 101376_04_13/integrity_protection_activation_info_ie
+    [INF] external reference solved: 101376_04_13/integrity_protection_algorithm_ie
+[o] 101376_04_13/inter_rat_or_mode_handover_info_with_mes_capabilities_message_content
+    [INF] external reference solved: 101376_04_13/failure_cause_and_error_information_ie
+    [INF] external reference solved: 101376_04_13/ue_utran_radio_access_capability_extension_ie
+    [INF] external reference solved: 101376_04_13/mes_geran_a_gb_mode_radio_access_capability_ie
+    [INF] external reference solved: 101376_04_13/ue_utran_radio_access_capability_ie
+    [INF] external reference solved: 101376_04_13/ue_cdma2000_radio_access_capability_ie
+    [INF] external reference solved: 101376_04_13/mes_geran_iu_mode_radio_access_capability_ie
+[o] 101376_04_13/intra_domain_nas_node_selector_ie
+[o] 101376_04_13/invalid_configuration_var
+[o] 101376_04_13/iu_mode_channel_request_description_ie
+[o] 101376_04_13/latest_configured_cn_domain_var
+    [INF] external reference solved: 101376_04_13/cn_domain_identity_ie
+[o] 101376_04_13/lcs_downlink_information_message_content
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/lcs_uplink_information_message_content
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/measurement_order_message_content
+    [INF] solved reference: 101376_04_12/packet_measurement_order_message_content/position_measurement_struct
+    [WNG] 101376_04_13/measurement_order_message_content: too much potential imports found for reference _3g_neighbour_cell_description_struct
+    using the 1st one from 101376_04_12/packet_cell_change_order_message_content
+    [INF] external reference solved: 101376_04_12/packet_cell_change_order_message_content/_3g_neighbour_cell_description_struct
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/measurement_report_message_content
+    [INF] solved reference: 101376_04_12/packet_measurement_report_message_content/position_measurement_report_struct
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] solved reference: 101376_04_12/packet_measurement_report_message_content/_3g_measurement_report_struct
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/mes_additional_timers_and_constants_in_rrc_connected_mode_ie
+[o] 101376_04_13/mes_capability_enquiry_message_content
+    [INF] external reference solved: 101376_04_13/capability_update_requirement_ie
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/mes_capability_information_confirm_message_content
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/mes_capability_information_message_content
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/ue_utran_radio_access_capability_extension_ie
+    [INF] external reference solved: 101376_04_13/mes_geran_a_gb_mode_radio_access_capability_ie
+    [INF] external reference solved: 101376_04_13/ue_utran_radio_access_capability_ie
+    [INF] external reference solved: 101376_04_13/ue_utran_predefined_configuration_status_information_ie
+    [INF] external reference solved: 101376_04_13/ue_cdma2000_radio_access_capability_ie
+    [INF] external reference solved: 101376_04_13/mes_geran_iu_mode_radio_access_capability_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/mes_capability_requested_var
+    [INF] external reference solved: 101376_04_13/mes_geran_a_gb_mode_radio_access_capability_ie
+    [INF] external reference solved: 101376_04_13/ue_utran_radio_access_capability_extension_ie
+    [INF] external reference solved: 101376_04_13/ue_utran_radio_access_capability_ie
+    [INF] external reference solved: 101376_04_13/ue_cdma2000_radio_access_capability_ie
+    [INF] external reference solved: 101376_04_13/mes_geran_iu_mode_radio_access_capability_ie
+[o] 101376_04_13/mes_capability_transferred_var
+    [INF] external reference solved: 101376_04_13/mes_geran_a_gb_mode_radio_access_capability_ie
+    [INF] external reference solved: 101376_04_13/ue_utran_radio_access_capability_extension_ie
+    [INF] external reference solved: 101376_04_13/ue_utran_radio_access_capability_ie
+    [INF] external reference solved: 101376_04_13/ue_cdma2000_radio_access_capability_ie
+    [INF] external reference solved: 101376_04_13/mes_geran_iu_mode_radio_access_capability_ie
+[o] 101376_04_13/mes_geran_a_gb_mode_radio_access_capability_ie
+[o] 101376_04_13/mes_geran_iu_mode_radio_access_capability_ie
+    [INF] external reference solved: 101376_04_13/mes_measurement_capability_ie
+    [INF] external reference solved: 101376_04_13/mes_multi_mode_and_multi_rat_capability_ie
+    [INF] external reference solved: 101376_04_13/mes_positioning_capability_ie
+    [INF] external reference solved: 101376_04_13/security_capability_ie
+    [INF] external reference solved: 101376_04_13/mes_geran_iu_mode_rlc_capability_ie
+    [INF] external reference solved: 101376_04_13/pdcp_capability_ie
+    [INF] external reference solved: 101376_04_13/mes_rf_capability_gsm_ie
+    [INF] external reference solved: 101376_04_13/gmprs_terminal_type_identifier_ie
+[o] 101376_04_13/mes_geran_iu_mode_rlc_capability_ie
+[o] 101376_04_13/mes_measurement_capability_ie
+[o] 101376_04_13/mes_multi_mode_and_multi_rat_capability_ie
+[o] 101376_04_13/mes_positioning_capability_ie
+[o] 101376_04_13/mes_rf_capability_gsm_ie
+[o] 101376_04_13/mes_timers_and_constants_in_rrc_connected_mode_ie
+[o] 101376_04_13/nas_message_ie
+[o] 101376_04_13/nas_synchronization_info_ie
+[o] 101376_04_13/nas_system_information_gsm_map_ie
+[o] 101376_04_13/ordered_reconfiguration_var
+[o] 101376_04_13/paging_cause_ie
+[o] 101376_04_13/paging_record_type_identifier_ie
+[o] 101376_04_13/pdcp_capability_ie
+    [INF] external reference solved: 101376_04_13/data_compression_parameter_ie
+[o] 101376_04_13/pdcp_context_relocation_info_ie
+[o] 101376_04_13/pdcp_info_ie
+    [INF] external reference solved: 101376_04_13/data_compression_parameter_ie
+[o] 101376_04_13/pdcp_rb_information_to_reconfigure_ie
+    [INF] external reference solved: 101376_04_13/pdcp_info_ie
+    [INF] external reference solved: 101376_04_13/pdcp_sn_info_ie
+    [INF] external reference solved: 101376_04_13/rb_information_to_reconfigure_ie
+[o] 101376_04_13/pdcp_rb_information_to_setup_ie
+    [INF] external reference solved: 101376_04_13/pdcp_info_ie
+    [INF] external reference solved: 101376_04_13/rb_information_to_setup_ie
+[o] 101376_04_13/pdcp_sn_info_ie
+[o] 101376_04_13/pdcp_sn_info_var
+    [INF] external reference solved: 101376_04_13/rb_with_pdcp_information_ie
+[o] 101376_04_13/physical_channel_configuration_ie
+    [INF] external reference solved: 101376_04_13/physical_channel_description_ie
+[o] 101376_04_13/physical_channel_description_ie
+    [INF] external reference solved: 101376_04_12/channel_info_ie
+    [INF] external reference solved: 101376_04_12/slot_allocation_ie
+    [INF] solved reference: 101376_04_12/pdch_mcs_ie/dch_mcs_ie
+    [INF] external reference solved: 101376_04_13/gmr_1_spotbeam_description_ie
+    [INF] external reference solved: 101376_04_12/packet_link_synchronization_parameters_ie
+    [INF] external reference solved: 101376_04_13/handover_reference_ie
+[o] 101376_04_13/plmn_identity_ie
+[o] 101376_04_13/position_report_request_message_content
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/position_report_response_message_content
+    [INF] external reference solved: 101376_04_08/gps_position_ie
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/position_update_indication_message_content
+    [INF] external reference solved: 101376_04_08/gps_position_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/protocol_error_cause_ie
+[o] 101376_04_13/protocol_error_indicator_ie
+[o] 101376_04_13/protocol_error_indicator_var
+    [INF] external reference solved: 101376_04_13/protocol_error_indicator_ie
+[o] 101376_04_13/protocol_error_information_ie
+    [INF] external reference solved: 101376_04_13/protocol_error_cause_ie
+[o] 101376_04_13/protocol_error_information_var
+    [INF] external reference solved: 101376_04_13/protocol_error_information_ie
+[o] 101376_04_13/protocol_error_reject_var
+[o] 101376_04_13/rab_binding_request_message_content
+    [INF] external reference solved: 101376_04_13/rab_identity_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/rab_binding_response_message_content
+    [INF] external reference solved: 101376_04_13/rab_identity_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/rab_identity_ie
+[o] 101376_04_13/rab_info_ie
+    [INF] external reference solved: 101376_04_13/cn_domain_identity_ie
+    [INF] external reference solved: 101376_04_13/nas_synchronization_info_ie
+    [INF] external reference solved: 101376_04_13/upper_layer_bearer_info_ie
+    [INF] external reference solved: 101376_04_13/re_establishment_timer_ie
+    [INF] external reference solved: 101376_04_13/rab_info_to_relocate_ie
+    [INF] external reference solved: 101376_04_13/rab_identity_ie
+[o] 101376_04_13/rab_info_post_ie
+    [INF] external reference solved: 101376_04_13/rab_identity_ie
+    [INF] external reference solved: 101376_04_13/cn_domain_identity_ie
+[o] 101376_04_13/rab_info_to_relocate_ie
+[o] 101376_04_13/rab_information_for_handover_ie
+    [INF] external reference solved: 101376_04_13/pdcp_rb_information_to_setup_ie
+    [INF] external reference solved: 101376_04_13/rab_info_ie
+[o] 101376_04_13/rab_information_for_setup_ie
+    [INF] external reference solved: 101376_04_13/pdcp_rb_information_to_setup_ie
+    [INF] external reference solved: 101376_04_13/rab_info_ie
+[o] 101376_04_13/rab_information_to_reconfigure_ie
+    [INF] external reference solved: 101376_04_13/rab_identity_ie
+    [INF] external reference solved: 101376_04_13/cn_domain_identity_ie
+    [INF] external reference solved: 101376_04_13/upper_layer_bearer_info_ie
+[o] 101376_04_13/rab_upper_layer_reconfiguration_complete_message_content
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/rab_identity_ie
+    [INF] external reference solved: 101376_04_13/upper_layer_bearer_info_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/rab_upper_layer_reconfiguration_message_content
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/rab_identity_ie
+    [INF] external reference solved: 101376_04_13/upper_layer_bearer_info_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/radio_bearer_reconfiguration_complete_message_content
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/rb_with_pdcp_information_ie
+    [INF] external reference solved: 101376_04_13/rb_activation_time_info_ie
+    [INF] external reference solved: 101376_04_13/integrity_protection_activation_info_ie
+    [INF] external reference solved: 101376_04_13/cn_domain_identity_ie
+    [INF] external reference solved: 101376_04_13/activation_time_ie
+    [INF] external reference solved: 101376_04_13/start_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/radio_bearer_reconfiguration_failure_message_content
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/rb_identity_ie
+    [INF] external reference solved: 101376_04_13/failure_cause_and_error_information_ie
+    [INF] external reference solved: 101376_04_13/rrc_cause_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/radio_bearer_reconfiguration_message_content
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/physical_channel_description_ie
+    [INF] external reference solved: 101376_04_13/ciphering_mode_info_ie
+    [INF] external reference solved: 101376_04_13/rab_information_to_reconfigure_ie
+    [INF] external reference solved: 101376_04_13/pdcp_rb_information_to_reconfigure_ie
+    [INF] external reference solved: 101376_04_13/rlc_sequence_number_ie
+    [INF] external reference solved: 101376_04_13/mes_timers_and_constants_in_rrc_connected_mode_ie
+    [INF] external reference solved: 101376_04_13/handover_traffic_carrier_info_ie
+    [INF] external reference solved: 101376_04_13/activation_time_ie
+    [INF] external reference solved: 101376_04_13/carrier_reconfiguration_type_ie
+    [INF] external reference solved: 101376_04_13/mes_additional_timers_and_constants_in_rrc_connected_mode_ie
+    [INF] external reference solved: 101376_04_13/rb_ciphering_synchronization_ie
+    [INF] external reference solved: 101376_04_13/rrc_state_indicator_ie
+    [INF] external reference solved: 101376_04_13/gra_identity_ie
+    [INF] external reference solved: 101376_04_13/cn_information_info_ie
+    [INF] external reference solved: 101376_04_13/rb_information_to_release_ie
+    [INF] external reference solved: 101376_04_13/physical_channel_configuration_ie
+    [INF] external reference solved: 101376_04_13/rb_with_pdcp_information_ie
+    [INF] external reference solved: 101376_04_13/rrb_identity_ie
+    [INF] external reference solved: 101376_04_13/integrity_protection_mode_info_ie
+    [INF] external reference solved: 101376_04_13/g_rnti_ie
+    [INF] external reference solved: 101376_04_13/pdcp_context_relocation_info_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/radio_bearer_release_complete_message_content
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/rb_with_pdcp_information_ie
+    [INF] external reference solved: 101376_04_13/rb_activation_time_info_ie
+    [INF] external reference solved: 101376_04_13/integrity_protection_activation_info_ie
+    [INF] external reference solved: 101376_04_13/cn_domain_identity_ie
+    [INF] external reference solved: 101376_04_13/activation_time_ie
+    [INF] external reference solved: 101376_04_13/start_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/radio_bearer_release_failure_message_content
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/rb_identity_ie
+    [INF] external reference solved: 101376_04_13/failure_cause_and_error_information_ie
+    [INF] external reference solved: 101376_04_13/rrc_cause_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/radio_bearer_release_message_content
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/rb_with_pdcp_information_ie
+    [INF] external reference solved: 101376_04_13/cn_domain_identity_ie
+    [INF] external reference solved: 101376_04_13/cn_information_info_ie
+    [INF] external reference solved: 101376_04_13/activation_time_ie
+    [INF] external reference solved: 101376_04_13/rb_information_to_release_ie
+    [INF] external reference solved: 101376_04_13/integrity_protection_mode_info_ie
+    [INF] external reference solved: 101376_04_13/ciphering_mode_info_ie
+    [INF] external reference solved: 101376_04_13/rrc_state_indicator_ie
+    [INF] external reference solved: 101376_04_13/g_rnti_ie
+    [INF] external reference solved: 101376_04_13/rab_information_to_reconfigure_ie
+    [INF] external reference solved: 101376_04_13/pdcp_context_relocation_info_ie
+    [INF] external reference solved: 101376_04_13/gra_identity_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/radio_bearer_setup_complete_message_content
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/rb_with_pdcp_information_ie
+    [INF] external reference solved: 101376_04_13/integrity_protection_activation_info_ie
+    [INF] external reference solved: 101376_04_13/rb_activation_time_info_ie
+    [INF] external reference solved: 101376_04_13/cn_domain_identity_ie
+    [INF] external reference solved: 101376_04_13/activation_time_ie
+    [INF] external reference solved: 101376_04_13/start_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/radio_bearer_setup_failure_message_content
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/rb_identity_ie
+    [INF] external reference solved: 101376_04_13/failure_cause_and_error_information_ie
+    [INF] external reference solved: 101376_04_13/rrc_cause_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/radio_bearer_setup_message_content
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/physical_channel_description_ie
+    [INF] external reference solved: 101376_04_13/ciphering_mode_info_ie
+    [INF] external reference solved: 101376_04_13/pdcp_rb_information_to_reconfigure_ie
+    [INF] external reference solved: 101376_04_13/rlc_sequence_number_ie
+    [INF] external reference solved: 101376_04_13/mes_timers_and_constants_in_rrc_connected_mode_ie
+    [INF] external reference solved: 101376_04_13/handover_traffic_carrier_info_ie
+    [INF] external reference solved: 101376_04_13/activation_time_ie
+    [INF] external reference solved: 101376_04_13/carrier_reconfiguration_type_ie
+    [INF] external reference solved: 101376_04_13/mes_additional_timers_and_constants_in_rrc_connected_mode_ie
+    [INF] external reference solved: 101376_04_13/rab_information_for_setup_ie
+    [INF] external reference solved: 101376_04_13/rb_ciphering_synchronization_ie
+    [INF] external reference solved: 101376_04_13/gra_identity_ie
+    [INF] external reference solved: 101376_04_13/rrc_state_indicator_ie
+    [INF] external reference solved: 101376_04_13/cn_information_info_ie
+    [INF] external reference solved: 101376_04_13/physical_channel_configuration_ie
+    [INF] external reference solved: 101376_04_13/rb_with_pdcp_information_ie
+    [INF] external reference solved: 101376_04_13/rb_identity_ie
+    [INF] external reference solved: 101376_04_13/rrb_identity_ie
+    [INF] external reference solved: 101376_04_13/integrity_protection_mode_info_ie
+    [INF] external reference solved: 101376_04_13/g_rnti_ie
+    [INF] external reference solved: 101376_04_13/pdcp_context_relocation_info_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/rb_activation_time_info_ie
+    [INF] external reference solved: 101376_04_13/rb_identity_ie
+[o] 101376_04_13/rb_ciphering_synchronization_ie
+    [INF] external reference solved: 101376_04_13/activation_time_ie
+    [INF] external reference solved: 101376_04_13/rb_identity_ie
+[o] 101376_04_13/rb_count_c_information_ie
+    [INF] external reference solved: 101376_04_13/rb_identity_ie
+[o] 101376_04_13/rb_count_c_msb_information_ie
+[o] 101376_04_13/rb_identity_ie
+[o] 101376_04_13/rb_information_to_be_affected_ie
+    [INF] external reference solved: 101376_04_13/rb_identity_ie
+[o] 101376_04_13/rb_information_to_reconfigure_ie
+    [INF] external reference solved: 101376_04_13/rb_identity_ie
+    [INF] external reference solved: 101376_04_13/rlc_info_ie
+[o] 101376_04_13/rb_information_to_release_ie
+    [INF] external reference solved: 101376_04_13/rb_identity_ie
+[o] 101376_04_13/rb_information_to_setup_ie
+    [INF] external reference solved: 101376_04_13/rb_identity_ie
+    [INF] external reference solved: 101376_04_13/rlc_info_ie
+[o] 101376_04_13/rb_timer_indicator
+[o] 101376_04_13/rb_timer_indicator_var
+    [INF] solved reference: 101376_04_13/rb_timer_indicator/rb_timer_indicator_ie
+[o] 101376_04_13/rb_uplink_ciphering_activation_time_info_var
+    [INF] external reference solved: 101376_04_13/rb_activation_time_info_ie
+[o] 101376_04_13/rb_with_pdcp_information_ie
+    [INF] external reference solved: 101376_04_13/pdcp_sn_info_ie
+    [INF] external reference solved: 101376_04_13/rb_identity_ie
+[o] 101376_04_13/re_establishment_timer_ie
+[o] 101376_04_13/reference_ie
+[o] 101376_04_13/rejection_cause_ie
+[o] 101376_04_13/release_cause_ie
+[o] 101376_04_13/rfc_3095_context_info_ie
+    [INF] external reference solved: 101376_04_13/rb_identity_ie
+[o] 101376_04_13/rlc_hfn_ie
+[o] 101376_04_13/rlc_info_ie
+    [INF] external reference solved: 101376_04_13/transmission_rlc_discard_ie
+[o] 101376_04_13/rlc_sequence_number_ie
+[o] 101376_04_13/rrb_identity_ie
+[o] 101376_04_13/rrc_cause_ie
+[o] 101376_04_13/rrc_connection_release_complete_message_content
+    [INF] external reference solved: 101376_04_13/failure_cause_and_error_information_ie
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/rrc_connection_release_message_content
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/release_cause_ie
+    [INF] external reference solved: 101376_04_13/cn_information_info_ie
+    [INF] external reference solved: 101376_04_13/start_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/rrc_connection_setup_complete_message_content
+    [INF] external reference solved: 101376_04_08/gps_position_ie
+    [INF] external reference solved: 101376_04_13/ue_software_version_indicator_ie
+    [INF] external reference solved: 101376_04_13/cn_information_info_ie
+    [INF] external reference solved: 101376_04_13/cn_domain_identity_ie
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/mes_geran_a_gb_mode_radio_access_capability_ie
+    [INF] external reference solved: 101376_04_13/start_ie
+    [INF] external reference solved: 101376_04_13/ue_utran_radio_access_capability_extension_ie
+    [INF] external reference solved: 101376_04_13/ue_utran_radio_access_capability_ie
+    [INF] external reference solved: 101376_04_13/initial_mes_identity_ie
+    [INF] external reference solved: 101376_04_13/ue_cdma2000_radio_access_capability_ie
+    [INF] external reference solved: 101376_04_13/mes_geran_iu_mode_radio_access_capability_ie
+[o] 101376_04_13/rrc_connection_setup_message_content
+    [INF] external reference solved: 101376_04_08/gps_position_ie
+    [INF] external reference solved: 101376_04_13/mes_timers_and_constants_in_rrc_connected_mode_ie
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/activation_time_ie
+    [INF] external reference solved: 101376_04_13/gmr_1_cell_identity_ie
+    [INF] external reference solved: 101376_04_13/mes_additional_timers_and_constants_in_rrc_connected_mode_ie
+    [INF] external reference solved: 101376_04_13/capability_update_requirement_ie
+    [INF] external reference solved: 101376_04_13/rrc_state_indicator_ie
+    [INF] external reference solved: 101376_04_13/g_rnti_ie
+    [INF] external reference solved: 101376_04_13/signalling_rb_information_to_setup_ie
+[o] 101376_04_13/rrc_failure_info_message_content
+    [INF] external reference solved: 101376_04_13/protocol_error_information_ie
+[o] 101376_04_13/rrc_information_target_bss_to_source_bss_message_content
+    [INF] external reference solved: 101376_04_13/rrc_failure_info_message_content
+    [INF] external reference solved: 101376_04_13/activation_time_ie
+    [INF] external reference solved: 101376_04_13/radio_bearer_reconfiguration_message_content
+[o] 101376_04_13/rrc_information_to_target_geran_iu_mode_bss_message_content
+    [INF] external reference solved: 101376_04_13/inter_rat_or_mode_handover_info_with_mes_capabilities_message_content
+    [INF] external reference solved: 101376_04_13/sbss_relocation_information_message_content
+    [INF] external reference solved: 101376_04_13/rfc_3095_context_info_ie
+[o] 101376_04_13/rrc_packet_downlink_assignment_ie
+    [INF] external reference solved: 101376_04_12/packet_downlink_assignment_message_content
+[o] 101376_04_13/rrc_packet_uplink_assignment_ie
+    [INF] external reference solved: 101376_04_12/packet_uplink_assignment_message_content
+[o] 101376_04_13/rrc_state_indicator_ie
+[o] 101376_04_13/rrc_status_message_content
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/protocol_error_information_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/rrc_transaction_identifier_ie
+[o] 101376_04_13/sbss_relocation_information_message_content
+    [INF] external reference solved: 101376_04_13/gmr_1_cell_identity_ie
+    [INF] external reference solved: 101376_04_08/gps_position_ie
+    [INF] external reference solved: 101376_04_13/mes_geran_a_gb_mode_radio_access_capability_ie
+    [INF] external reference solved: 101376_04_13/rab_information_for_setup_ie
+    [INF] external reference solved: 101376_04_13/rrc_state_indicator_ie
+    [INF] external reference solved: 101376_04_13/gra_identity_ie
+    [INF] external reference solved: 101376_04_13/geran_a_gb_security_info_ie
+    [INF] external reference solved: 101376_04_13/rb_information_to_reconfigure_ie
+    [INF] external reference solved: 101376_04_13/failure_cause_and_error_information_ie
+    [INF] external reference solved: 101376_04_13/start_ie
+    [INF] external reference solved: 101376_04_13/ue_cdma2000_radio_access_capability_ie
+    [INF] external reference solved: 101376_04_13/extension_ie
+    [INF] external reference solved: 101376_04_13/cn_domain_identity_ie
+    [INF] external reference solved: 101376_04_13/rab_information_for_handover_ie
+    [INF] external reference solved: 101376_04_13/ue_utran_radio_access_capability_extension_ie
+    [INF] external reference solved: 101376_04_13/ue_utran_radio_access_capability_ie
+    [INF] external reference solved: 101376_04_13/g_rnti_ie
+    [INF] external reference solved: 101376_04_13/mes_geran_iu_mode_radio_access_capability_ie
+    [INF] external reference solved: 101376_04_13/signalling_rb_information_to_setup_ie
+    [INF] external reference solved: 101376_04_13/nas_system_information_gsm_map_ie
+[o] 101376_04_13/security_capability_ie
+[o] 101376_04_13/security_mode_command_message_content
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/cn_domain_identity_ie
+    [INF] external reference solved: 101376_04_13/security_capability_ie
+    [INF] external reference solved: 101376_04_13/gsm_mes_security_capability_ie
+    [INF] external reference solved: 101376_04_13/integrity_protection_mode_info_ie
+    [INF] external reference solved: 101376_04_13/ciphering_mode_info_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/security_mode_complete_message_content
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/integrity_protection_activation_info_ie
+    [INF] external reference solved: 101376_04_13/rb_activation_time_info_ie
+    [INF] external reference solved: 101376_04_13/ciphering_algorithm_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/security_mode_failure_message_content
+    [INF] external reference solved: 101376_04_13/failure_cause_and_error_information_ie
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/security_modification_var
+    [INF] external reference solved: 101376_04_13/cn_domain_identity_ie
+[o] 101376_04_13/signalling_connection_release_indication_message_content
+    [INF] external reference solved: 101376_04_13/cn_domain_identity_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/signalling_connection_release_message_content
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/cn_domain_identity_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/signalling_rb_information_to_setup_ie
+[o] 101376_04_13/srns_context_info_ie
+    [INF] external reference solved: 101376_04_13/zbhc_context_info_ie
+    [INF] external reference solved: 101376_04_13/rfc_3095_context_info_ie
+    [INF] external reference solved: 101376_04_13/rb_identity_ie
+[o] 101376_04_13/start_ie
+[o] 101376_04_13/start_threshold_var
+[o] 101376_04_13/start_value_to_transmit_var
+    [INF] external reference solved: 101376_04_13/start_ie
+[o] 101376_04_13/starting_time_ie
+[o] 101376_04_13/synchronization_indication_ie
+[o] 101376_04_13/timers_and_constants_var
+    [INF] external reference solved: 101376_04_13/mes_additional_timers_and_constants_in_rrc_connected_mode_ie
+    [INF] external reference solved: 101376_04_13/mes_timers_and_constants_in_rrc_connected_mode_ie
+[o] 101376_04_13/transactions_var
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+[o] 101376_04_13/transmission_rlc_discard_ie
+[o] 101376_04_13/ue_cdma2000_radio_access_capability_ie
+[o] 101376_04_13/ue_software_version_indicator_ie
+[o] 101376_04_13/ue_utran_predefined_configuration_status_information_ie
+[o] 101376_04_13/ue_utran_radio_access_capability_extension_ie
+[o] 101376_04_13/ue_utran_radio_access_capability_ie
+[o] 101376_04_13/unsupported_configuration_var
+[o] 101376_04_13/uplink_direct_transfer_message_content
+    [INF] external reference solved: 101376_04_13/nas_message_ie
+    [INF] external reference solved: 101376_04_13/cn_domain_identity_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/uplink_key_exchange_message_content
+    [INF] external reference solved: 101376_04_13/rrc_transaction_identifier_ie
+    [INF] external reference solved: 101376_04_13/integrity_check_info_ie
+[o] 101376_04_13/uplink_rrc_messages
+    [INF] external reference solved: 101376_04_13/security_mode_complete_message_content
+    [INF] external reference solved: 101376_04_13/initial_direct_transfer_message_content
+    [INF] external reference solved: 101376_04_13/rrc_status_message_content
+    [INF] external reference solved: 101376_04_13/rab_upper_layer_reconfiguration_complete_message_content
+    [INF] external reference solved: 101376_04_13/mes_capability_information_message_content
+    [INF] external reference solved: 101376_04_13/rab_binding_request_message_content
+    [INF] external reference solved: 101376_04_13/radio_bearer_reconfiguration_failure_message_content
+    [INF] external reference solved: 101376_04_13/handover_complete_message_content
+    [INF] external reference solved: 101376_04_13/radio_bearer_release_complete_message_content
+    [INF] external reference solved: 101376_04_13/radio_bearer_release_failure_message_content
+    [INF] external reference solved: 101376_04_13/rrc_connection_setup_complete_message_content
+    [INF] external reference solved: 101376_04_13/handover_failure_message_content
+    [INF] external reference solved: 101376_04_13/uplink_direct_transfer_message_content
+    [INF] external reference solved: 101376_04_13/lcs_uplink_information_message_content
+    [INF] external reference solved: 101376_04_13/geran_iu_mode_dtm_request_message_content
+    [INF] external reference solved: 101376_04_13/channel_change_preparation_complete_message_content
+    [INF] external reference solved: 101376_04_13/rrc_connection_release_complete_message_content
+    [INF] external reference solved: 101376_04_13/position_report_response_message_content
+    [INF] external reference solved: 101376_04_13/position_update_indication_message_content
+    [INF] external reference solved: 101376_04_13/radio_bearer_reconfiguration_complete_message_content
+    [INF] external reference solved: 101376_04_13/geran_mobility_information_failure_message_content
+    [INF] external reference solved: 101376_04_13/uplink_key_exchange_message_content
+    [INF] external reference solved: 101376_04_13/radio_bearer_setup_complete_message_content
+    [INF] external reference solved: 101376_04_13/geran_mobility_information_confirm_message_content
+    [INF] external reference solved: 101376_04_13/security_mode_failure_message_content
+    [INF] external reference solved: 101376_04_13/signalling_connection_release_indication_message_content
+    [INF] external reference solved: 101376_04_13/measurement_report_message_content
+    [INF] external reference solved: 101376_04_13/radio_bearer_setup_failure_message_content
+[o] 101376_04_13/upper_layer_bearer_info_ie
+[o] 101376_04_13/wait_indication_ie
+[o] 101376_04_13/wait_time_ie
+[o] 101376_04_13/zbhc_context_info_ie
+    [INF] external reference solved: 101376_04_13/rb_identity_ie

@@ -1,0 +1,29 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.84b RB CipheringSynchronization
+-- RB Ciphering Synchronization IE
+
+< RB Ciphering Synchronization IE > ::=
+ { < RB List : bit (2) >
+   < RB identity : <RB Identity IE >>
+   { 00 -- Transparent Mode
+        { < Activation Time: < Activation Time IE >>
+          < HFN at activation Time : bit(11) >
+            --based on activation time and the start time of deciphering,
+            --the MES may deduce a different HFN when it starts.
+        }
+     01 -- Non-Transparent Mode PDCH channel
+        { < Current BSN: bit(10) >
+          < Current HFN: bit(21) >
+            --The MES shall increments the HFN by 1 if it detects a BSN wrap around 
+            -- based on Current BSN field and the first received BSN
+        }
+     10 -- Non-Transparent Mode DCCH channel
+        { < Current BSN: bit(7) >
+          < Current HFN: bit(24) >
+            --The MES shall increments the HFN by 1 if it detects a BSN wrap around 
+            -- based on Current BSN field and the first received BSN
+        } 
+     11 --Reserved
+   } * (1+val(RB List))
+ };
+

@@ -1,0 +1,11 @@
+-- ETSI TS 101 376-04-12
+-- 12.14         PRACH control parameters
+-- PRACH Control Parameters IE
+
+< PRACH Control Parameters IE > ::=
+ < MAX_RETRANS : bit (3) >
+ < S : bit (2) >
+ < TX_INT : bit (2) >
+ { 0 <Reduced persistence level : bit(3)>
+ | 1 < PERSISTENCE_LEVEL : bit (4) > * (4) } ;
+

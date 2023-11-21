@@ -1,0 +1,18 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.45        MES GERAN Iu mode Radio Access Capability
+-- MES GERAN Iu mode Radio Access Capability IE
+
+ <MES GERAN Iu mode Radio Access Capability IE > ::=
+ {
+ < MES GERAN Iu mode Radio Access Capability length : bit (10)>
+ < MES RF Capability GSM : < MES RF Capability GSM IE > >
+ < MES GERAN Iu mode RLC Capability : < MES GERAN Iu Mode RLC Capability IE > >
+ < MES PDCP Capability : < PDCP Capability IE > >
+ < MES Multi-Mode and Multi-RAT Capability : < MES Multi-Mode and Multi-RAT Capability IE > >
+ < Security Capability : < Security Capability IE > >
+ < MES Positioning Capability : < MES Positioning Capability IE > >
+ < MES Measurement Capability : < MES Measurement Capability IE > >
+ < MES Terminal Type : < GMPRS Terminal Type Identifier IE > >
+ < FLO Iu Capability : bit > -- Release 6
+ < spare bit >**; -- Extension information may be truncated between released versions of the protocol
+

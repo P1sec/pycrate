@@ -1,0 +1,9 @@
+-- ETSI TS 101 376-04-13
+-- 10.4.27 TIMERS_AND_CONSTANTS
+-- TIMERS_AND_CONSTANTS VAR
+
+< TIMERS_AND_CONSTANTS VAR > ::=
+ < MES Timers and Constants In Connected Mode : < MES Timers and Constants In RRC-Connected Mode IE >>
+ < MES Additional Timers and Constants In Connected Mode : < MES Additional Timers and Constants In RRC-Connected Mode IE >>
+ ;
+

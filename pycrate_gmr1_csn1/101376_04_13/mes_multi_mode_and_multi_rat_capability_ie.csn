@@ -1,0 +1,13 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.48         MES Multi-Mode and Multi-RAT Capability
+-- MES Multi-Mode and Multi-RAT Capability IE
+
+< MES Multi-Mode and Multi-RAT Capability IE > ::=
+ < Support of GERAN A/Gb : bit (1) >
+ < Support of Multi-Carrier : bit (1) >
+ < Support of UMTS FDD : bit (1) >
+ < Support of UMTS 1.28 Mcps TDD : bit (1) >
+ < Support of UMTS 3.84 Mcps TDD : bit (1) >
+ < Support of CDMA2000 : bit (1) >
+ < spare bit > * 10;
+

@@ -1,0 +1,11 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.75a RAB Information for Handover
+-- RAB Information for Handover IE
+
+< RAB Information for Handover IE > ::=
+ < RAB Info : < RAB info IE > >
+ { 0 | 1 < PDCP RB Information to Setup List : bit (3) >
+         < PDCP RB Information to Setup : < PDCP - RB Information to Setup IE >>
+         * (1+val(PDCP RB Information to Setup List)) }
+ ;
+

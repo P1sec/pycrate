@@ -1,0 +1,13 @@
+-- ETSI TS 101 376-04-12
+-- 11.5.2.79         Segment 3G
+-- Segment 3G
+
+<Segment 3G> ::=
+ --<Header Segment 3G>
+ <SA_AGCH_LIST_PART2: bit (70)>
+ <Spare: bit (109)> ;
+
+<Header Segment 3G> ::=
+ <Class Type 3: 0>
+ <Segment type: 0110> ;
+

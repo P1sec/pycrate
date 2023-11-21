@@ -1,0 +1,12 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.63        PLMN Identity
+-- PLMN Identity IE
+
+< PLMN Identity IE > ::=
+ < MCC_digit_1 : bit (4) >
+ < MCC_digit_2 : bit (4) >
+ < MCC_digit_3 : bit (4) >
+ < MNC_digit_1 : bit (4) >
+ < MNC_digit_2 : bit (4) >
+ { 0 | 1 < MNC_digit_3 : bit (4) > } ;
+

@@ -1,0 +1,8 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.110 UE CDMA2000 Radio Access Capability
+-- UE CDMA2000 Radio Access Capability IE
+
+< UE CDMA2000 Radio Access Capability IE > ::=
+ < CDMA2000 Information length : bit(12) >
+ < CDMA2000 Information : bit(1+val(CDMA2000 Information length)) > ;
+

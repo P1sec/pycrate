@@ -1,0 +1,48 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.22b Multiple TBF Uplink Assignment (Iu mode only)
+-- Multiple TBF Uplink Assignment message content
+
+< Multiple TBF Uplink Assignment message content > ::=
+ { 
+   { 0 < Global TFI : < Global TFI IE > >
+   | 10 < G-RNTI : bit(32) > }
+   { 0 -- Message escape bit
+     { { 0 | 1 < PDCH Frequency Allocation: <Frequency Allocation IE> > } -- For normal mode TBFs only
+       { 0 | 1 < Packet Link Synchronization: <Packet Link Synchronization IE> > }
+       { 0 | 1 < PDCH Uplink Organization: <PDCH Uplink Organization IE> > }
+       <Downlink MAC Slot Allocation: bit(8)>
+       { 0 | 1< Uplink TBF Assignment : < Uplink Assignment struct > > }
+       < padding bits >
+     }
+   }
+--   ! < Non-distribution part error : bit (*) = < no string > >
+ };
+-- ! < Address information part error : bit (*) = < no string > > }
+-- ! < Distribution part error : bit (*) = < no string > > ;
+
+< Uplink Assignment struct > ::=
+   { 1 < Uplink TBF Assignment : < Uplink TBF Assignment struct > > } ** 0 ;
+
+< Uplink TBF Assignment struct > ::= -- Recursive for multiple TBFs
+ { 0 <PDCH Allocation: <PDCH Allocation struct>>
+ | 10 <Uplink DCH Allocation: <UL DCH Allocation Struct>> };
+
+<PDCH Allocation struct> ::=
+ {
+   { 0 | 1 < Channel MCS Info : <PDCH MCS IE>> }
+   <Uplink TFI: bit(8)>
+   {0 | 1 <Uplink Status Flag: bit(8)>}
+   <RB Id: bit(5)>
+   <Return Frequency Set: bit(1)>
+ };
+
+<UL DCH Allocation Struct> ::=
+ {
+   <Channel Info: <Channel Info IE>>
+   <DCH Channel MCS Info: <DCH MCS IE>>
+   { 0 <Uplink MAC Slot Allocation: bit(8)>
+   | 1 <Uplink Slot Allocation: <Slot Allocation IE>> }
+   <RB Id: bit(5)>
+   <DCH Frequency Allocation: <Frequency Allocation IE>>
+ }; -- For TCH/DCCH mode TBFs only
+

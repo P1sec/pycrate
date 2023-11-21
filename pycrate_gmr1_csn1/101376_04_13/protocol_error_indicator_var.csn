@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 10.4.19 PROTOCOL_ERROR_INDICATOR
+-- PROTOCOL_ERROR_INDICATOR VAR
+
+< PROTOCOL_ERROR_INDICATOR VAR > ::=
+ < Protocol Error Indicator : < Protocol Error Indicator IE > > ;
+

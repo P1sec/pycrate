@@ -1,0 +1,18 @@
+-- ETSI TS 101 376-04-13
+-- 10.4.26 TRANSACTIONS
+-- TRANSACTIONS VAR
+
+< TRANSACTIONS VAR > ::=
+ { 0 | 1 < Accepted Transactions List : bit (5) >
+         --{ < Message Type : < Message Type IE >>
+         { < Message Type : bit (8) >
+           < RRC Transaction Identifier : < RRC Transaction Identifier IE >>
+         } * (1+val(Accepted Transactions List))
+ }
+ { 0 | 1 < Rejected Transactions List : bit (5) >
+         --{ < Message Type : < Message Type IE >>
+         { < Message Type : bit (8) >
+           < RRC Transaction Identifier : < RRC Transaction Identifier IE > >
+         } * (1+val(Rejected Transactions List))
+ };
+

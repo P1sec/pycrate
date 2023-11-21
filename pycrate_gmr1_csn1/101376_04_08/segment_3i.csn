@@ -1,0 +1,37 @@
+-- ETSI TS 101 376-04-08
+-- 11.5.2.82         Segment 3I
+-- Segment 3I
+
+<Segment 3I> ::=
+ --<Header Segment 3I>
+ <LA Information Class 3>                                 
+ <Periodic LU Timer: bit (8)>
+ <Dual Mode Hold Timer: bit (3)>
+ <Position Parameters>
+ <Spare: bit (5)> ;
+
+<Header Segment 3I> ::=
+ <Class Type 3: 0>
+ <Segment type: 1001> ;
+
+<LA Information Class 3> ::=
+ <Spare: bit (2)>
+ <SA_CBCH_CONFIG: bit (4)>
+ <SA_CBCH_RF_CH: bit (11)>
+ <SA_CBCH_TS: bit (5)>
+ <Pause Time: bit (8)>
+ <RACH Access Timer: bit (8)>
+ <Alert Timer: bit (8)>
+ <Page Timer: bit (8)>
+ <Almanac Present: bit (1)> ;
+
+<Position Parameters> ::=
+ <RACH Position Timer: bit (8)>
+ <GPS Update Timer: bit (8)>
+ <GPS Update Distance: bit (8)>
+ <GPS Position Age: bit (8)>
+ <Page GPS Position Age: bit (8)>
+ <Page Response Current GPS: bit (1)>
+ <Position Reporting Required: bit (2)>
+ <Power-Based Access Permitted: bit (1)> ;
+

@@ -1,0 +1,54 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.60        PDCP Info
+-- PDCP Info IE
+
+< PDCP Info IE > ::=
+ {
+ < PDCP mode : bit (1) >
+ { < Lossless Serving RNC relocation support : 0 >
+ | < Lossless Serving RNC relocation support : 1 >
+   < Max PDCP SN : bit (1) > }
+ < PDCP PDU header : bit (1) >
+ < Service Class : bit(4) >
+ < PDU Type : bit(1) >
+ { 0 | 1 < Interactive class priority : bit (2) > }
+ { < Support for PEP: 0 >
+ | < Support for PEP: 1 >
+   < Support for PEP Handover : bit (1) > }
+ { 0 | 1 < Header compression information List : bit(3) >
+         < Header compression information struct : < Header compression information struct >> 
+         * (1+val(Header compression information List)) }
+ { < Data compression support : 0 >
+ | < Data compression support : 1 >
+   { 0 | 1 <Downlink Data Compression Parameters : < Data Compression Parameter IE >> } 
+     -- 0 indicates used of V.44 data compression with default parameters
+   { 0 | 1 <Uplink Data Compression Parameters : < Data Compression Parameter IE >> }
+     -- 0 indicates used of V.44 data compression with default parameters
+ };
+
+< Header compression information struct > ::=
+ < Header Compression Information struct length : bit (14) >
+ { { < Header compression according to IETF RFC 2507 : 000 >
+     < F_MAX_PERIOD : bit (16) >
+     < F_MAX_TIME : bit (8) >
+     < MAX_HEADER : bit (16) >
+     < TCP_SPACE : bit (8) >
+     < NON_TCP_SPACE : bit (16) >
+     < EXPECT_REORDERING : bit (1) > }
+ | { < Header compression according to IETF RFC 3095 : 001 >
+     < Profiles List : bit (4) >
+     < Profile instance : bit (2) > * (1 + val (Profiles List))
+     { 0 | 1 < UPLINK: bit (1) >
+             < CID inclusion info : bit (1) >
+             { 0 | 1 < Max_CID : bit (14) > }
+             { 0 | 1 < MRRU : bit (16) >
+                     < Packet Sizes Allowed List : bit (4) >
+                     < PACKET_SIZES_ALLOWED: bit (11) > * (1 + val (Packet Sizes Allowed List)) } }
+     { 0 | 1 < DOWNLINK: bit (1) >
+             < CID inclusion info : bit (1) >
+             { 0 | 1 < Max_CID : bit (14) > } }
+     { 0 | 1 < Reverse_Decompression_Depth : bit (16) > } }
+ | < PEP : 010 > }
+ ;
+-- ! < Message escape : { 01 bit(1) | 1 bit (2) } bit** = < no string > > ;
+

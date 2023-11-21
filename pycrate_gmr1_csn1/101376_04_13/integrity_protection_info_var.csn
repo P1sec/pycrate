@@ -1,0 +1,20 @@
+-- ETSI TS 101 376-04-13
+-- 10.4.13 INTEGRITY_PROTECTION_INFO
+-- INTEGRITY_PROTECTION_INFO VAR
+
+< INTEGRITY_PROTECTION_INFO VAR > ::=
+ {
+ < Historical Status : bit (1) >
+ < Status : bit (1) >
+ < Reconfiguration : bit (1) >
+ { 0 -- Cleared when entering or leaving the RRC-Connected mode
+ | 1 < Signalling RB Specific Integrity Protection Information List : bit (3) >
+ { -- Signalling SRB1 and upwards
+ < Uplink RRC HFN : bit (28) >
+ < Downlink RRC HFN : bit (28) >
+ < Uplink RRC Message Sequence Number : bit (4) >
+ { 0 | 1 < Downlink RRC Message Sequence Number : bit (4) > }
+ } * (1+val(Signalling RB Specific Integrity Protection Information List))
+ }
+ };
+

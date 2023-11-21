@@ -1,0 +1,20 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.100 Security Capability
+-- Security Capability IE
+
+< Security Capability IE > ::=
+ < Security Capability Length : bit (7)>
+ < Iu mode Ciphering algorithm capability : < Iu mode Ciphering algorithm capability struct > >
+ < Iu mode Integrity protection algorithm capability : < Iu mode Integrity protection algorithm capability struct > >;
+
+< Iu mode Ciphering algorithm capability struct > ::=
+ < UEA0 support : bit (1) >
+ < UEA1 support : bit (1) >
+ < AES-256 support : bit (1) >
+
+ < spare bit > *13;
+
+< Iu mode Integrity protection algorithm capability struct > ::=
+ < UIA1 support : bit (1) >
+ < spare bit > *15;
+

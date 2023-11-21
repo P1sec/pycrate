@@ -1,0 +1,10 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.82a PDCP - RB Information to Reconfigure
+-- PDCP - RB Information to Reconfigure IE
+
+< PDCP - RB Information to Reconfigure IE > ::=
+ { 0 | 1 < PDCP Info : < PDCP Info IE > > }
+ { 0 | 1 < PDCP SN Info : < PDCP SN Info IE > > }
+ < RB Information to Reconfigure List : bit (3) >
+ < RB Information to Reconfigure : < RB Information to Reconfigure IE >> *(1+val(RB Information to Reconfigure List)) ;
+

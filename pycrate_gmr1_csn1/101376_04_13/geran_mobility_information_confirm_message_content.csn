@@ -1,0 +1,28 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.9           GERAN MOBILITY INFORMATION CONFIRM
+-- GERAN MOBILITY INFORMATION CONFIRM message content
+
+< GERAN MOBILITY INFORMATION CONFIRM message content > ::=
+ {
+     -- MES Information Elements
+     < RRC Transaction Identifier : < RRC Transaction Identifier IE >>
+     { 0 | 1 < Integrity Check Info : < Integrity Check Info IE >> }
+     { 0 | 1 < Uplink Integrity Protection Activation Info : < Integrity Protection Activation Info IE >> }
+     -- RB Information Elements
+     { 0 | 1 < COUNT-C Activation Time : < Activation Time IE >> }
+     { 0 | 1 < Radio Bearer Uplink Ciphering Activation Time Info : < RB Activation Time Info IE >> }
+     { 0 | 1 < Uplink Counter Synchronization Info : < Uplink Counter Synchronization Info struct >> }
+     ! < Content part error : bit (*) = < no string >>
+ } ;
+
+< Uplink Counter Synchronization Info struct > ::=
+ {
+     < START List: bit (2) >
+     { < START : < START IE >>
+       < CN Domain Identity : < CN Domain Identity IE >>
+     } * (1+val(START List))
+     { 0 | 1 < RB with PDCP Information list : bit (5) >
+             < RB with PDCP Information : < RB with PDCP Information IE >> * (1 + val(RB with PDCP Information list))
+     }
+ } ;
+

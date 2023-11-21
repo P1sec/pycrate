@@ -1,0 +1,22 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.2          Packet control acknowledgement
+-- Packet Control Acknowledgement message content
+
+< Packet Control Acknowledgement message content > ::= -- RLC/MAC control block format
+ { 0 < TTLI/G-RNTI : bit (32) >
+ | 10 < Global TFI: <Global TFI IE >> }
+ < CTRL_ACK : bit (2) >
+ { 0 | 1 < SQIR : bit (6) > }
+ { 0 | 1 < SQI Standard Deviation : bit (6)> }
+ { 0 | 1 <RB Id : bit(5)> { 0 | 1 < Forward Quality Indicator : bit (6) > } }
+ { 0 | 1 <Iu Mode Channel Request Description: <Iu mode Channel Request Description IE>> }
+ { 0 | 1 < Start Receive Frame N to Start Transmit Frame N7 :
+           < Receive to Transmit Frame Offset struct >> }
+           -- this field shall be present if the mobile earth station receives a Packet Link
+           -- Control message and control header UUG field is set to 1.
+ < padding bits > ;
+
+< Receive to Transmit Frame Offset struct > ::=
+ < Time Slot Offset : bit (5) >
+ < Symbol Offset : bit (12) > ;
+

@@ -1,0 +1,27 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.27 Packet Timeslot Reconfigure (Iu mode only)
+-- Packet Timeslot Reconfigure message content
+
+< Packet Timeslot Reconfigure message content > ::=
+ { 0 < GLOBAL_TFI : < Global TFI IE > >
+   { 0 -- Message escape
+     { { 0 | 1 < PDCH Channel MCS Info: <PDCH MCS IE >> }
+       { 0 | 1 < Packet Link Synchronization : < Packet Link Synchronization Parameters IE >> }
+       { 0 | 1 < Frequency Allocation : < Frequency Allocation IE >> }
+       { 0 | 1 < Return Frequency Set : bit (1) > }
+       { 0 | 1 < PDCH Uplink Organization: <PDCH Uplink Organization IE>> }
+       < DOWNLINK_RLC_MODE : bit (1) >
+       { 0 | 1 < DOWNLINK_TFI_ASSIGNMENT : bit (8) > }
+       { 0 | 1 < UPLINK_TFI_ASSIGNMENT : bit (8) > }
+       { 0 | 1 < USF : bit (8)> } -- 0 indicates USF value is the same as uplink TFI
+       < MAC Slot Allocation : bit (8) >
+       { 0 | 1 < RB Id: bit (5) > }
+       < padding bits >
+     }
+   }
+ };
+-- ! < Non-distribution part error : bit (*) = < no string > > }
+-- ! < Message escape : bit (*) = <no string> > }} -Extended for future changes
+-- ! < Address information part error : bit (*) = < no string > > }
+-- ! < Distribution part error : bit (*) = < no string > > ;
+

@@ -1,0 +1,10 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.8          Packet downlink dummy control block
+-- Packet Downlink Dummy Control Block message content
+
+ < Packet Downlink Dummy Control Block message content > ::=
+
+ { 0 | 1 <PERSISTENCE_LEVEL : bit (4) >*4 }
+ < padding bits >
+ ! < Distribution part error : bit (*) = < no string > > ;
+

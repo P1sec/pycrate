@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.88        Re-Establishment timer
+-- Re-Establishment timer IE
+
+< Re-Establishment timer IE > ::=
+ < Re-Establishment timer : bit (1) >;
+

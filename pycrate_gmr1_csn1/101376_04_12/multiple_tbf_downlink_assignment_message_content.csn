@@ -1,0 +1,31 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.7b Multiple TBF Downlink Assignment (Iu mode only)
+-- Multiple TBF Downlink Assignment message content
+
+< Multiple TBF Downlink Assignment message content > ::=
+ { { 0 < Global TFI : < Global TFI IE > >
+   | 10 < G-RNTI : bit (32) >
+   | 110 < S-RNTI : bit (20) > }
+   { 0 -- Message escape
+     { 0 | 1 < Frequency Allocation : < Frequency Allocation IE >> }
+     { 0 | 1 < PDCH Uplink Organization: < PDCH Uplink Organization IE >> }
+     { 1 < Multiple Downlink TBF Assignment : < Multiple Downlink TBF Assignment struct >> } ** 0
+     < padding bits >
+   }
+ } // -- truncation at end of message allowed, bits "0" assumed
+ ;
+-- ! < Non-distribution part error : bit (*) = < no string > > }
+-- ! < Message escape : 1 bit (*) = < no string > > }
+-- ! < Address information part error : bit (*) = < no string > > }
+-- ! < Distribution part error : bit (*) = < no string > > ;
+
+< Multiple Downlink TBF Assignment struct > ::=
+ < MAC Slot Allocation : bit (8) >
+ { 1 < Downlink TBF assignment : < Downlink TBF assignment struct >> } ** 0 ;
+
+< Downlink TBF assignment struct > ::=
+ { < RLC_MODE : bit (1) >
+   < RB Id : bit (5) >
+   < DOWNLINK_TFI_ASSIGNMENT : bit (8) >
+   { 0 | 1 < HFN_LSB : bit (1) > } } ;
+ -- HFN_LSB field used in Iu mode only

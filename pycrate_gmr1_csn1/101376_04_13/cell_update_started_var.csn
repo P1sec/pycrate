@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 10.4.1        CELL_UPDATE_STARTED
+-- CELL_UPDATE_STARTED VAR
+
+ < CELL_UPDATE_STARTED VAR > ::=
+ < Cell Update Started : bit (1) > ;
+

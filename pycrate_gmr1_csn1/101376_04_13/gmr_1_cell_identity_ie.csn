@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.30a GMR-1 Cell Identity
+-- GMR-1 Cell Identity IE
+
+< GMR-1 Cell Identity IE > ::=
+ < GMR-1 Cell Identity : bit(16) >;
+

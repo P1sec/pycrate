@@ -1,0 +1,27 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.10 Packet Paging Request (A/Gb mode only)
+-- Packet Paging Request message content
+
+< Packet Paging Request message content > ::=
+ < reserved : bit (2) >
+ { 0 | 1 < reserved : bit (4) > * (4) }
+ { 0 | 1 < reserved : bit (2) > }
+ { { 1 < Repeated Page info : < Repeated Page info struct > > } ** 0
+   < padding bits > } // -- truncation at end of message allowed, bits "0" assumed
+ ! < Distribution part error : bit (*) = < no string > > ;
+
+< Repeated Page info struct > ::=
+ { 0 -- Page request for TBF establishment (reserved)
+   { 0 < reserved : bit (32) >
+   | 1 < Length of reserved field: bit (4) >
+       < reserved : octet (val (Length of reserved field)) > }
+ | 1 -- Page request for RR conn. establishment
+   { 0 < TMSI : bit (32) >
+   | 1 < Length of Mobile Identity contents : bit (4) >
+       < Mobile Identity : octet (val (Length of Mobile Identity contents)) > }
+   < CHANNEL_NEEDED : bit (2) >
+   { 0 | 1 < reserved : bit (3) > }
+   { 0 | 1 < MSC ID: bit (6) > }
+ }
+ ! < Ignore : bit (*) = <no string> > ;
+

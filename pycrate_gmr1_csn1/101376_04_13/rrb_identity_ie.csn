@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.80a RRB Identity
+-- RRB Identity IE
+
+< RRB Identity IE > ::=
+ < RRB Identity : bit (3) >;
+

@@ -1,0 +1,12 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.21a POSITION REPORT RESPONSE
+-- POSITION REPORT RESPONSE message content
+
+< POSITION REPORT RESPONSE message content > ::=
+ { 0 -- critical extension escape available
+ {
+ < RRC Transaction Identifier : < RRC Transaction Identifier IE > >
+ { 0 | 1 < Integrity Check Info : < Integrity Check Info IE > > }
+ < MES GPS Position : <GPS Position IE> >
+ ! < Content part error : bit (*) = < no string > > } ;
+

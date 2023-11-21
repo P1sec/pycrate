@@ -1,0 +1,6 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.21         Establishment Cause
+-- Establishment Cause IE
+
+< Establishment Cause IE > ::= bit (5) ;
+

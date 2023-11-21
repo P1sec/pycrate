@@ -1,0 +1,12 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.20a POSITION REPORT REQUEST
+-- POSITION REPORT REQUEST message content
+
+< POSITION REPORT REQUEST message content > ::=
+ { 0 -- critical extension escape available
+ {
+ < RRC Transaction Identifier :< RRC Transaction Identifier IE > >
+ { 0 | 1 < Integrity Check Info : < Integrity Check Info IE > > }
+ ! < Content part error : bit (*) = < no string > > }
+ ! < Message escape critical extension : 1 bit (*) = < no string > >} ;
+

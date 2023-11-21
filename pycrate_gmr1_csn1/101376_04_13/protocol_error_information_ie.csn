@@ -1,0 +1,8 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.71        Protocol Error Information
+-- Protocol Error Information IE
+
+< Protocol Error Information IE > ::=
+ { 0 < Protocol Error Cause : < Protocol Error Cause IE > >
+ | 1 } ; -- reserved
+

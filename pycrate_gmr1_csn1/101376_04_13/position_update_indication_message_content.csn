@@ -1,0 +1,11 @@
+-- ETSI TS 101 376-04-13
+-- 9.2.21b POSITION UPDATE INDICATION
+-- POSITION UPDATE INDICATION message content
+
+< POSITION UPDATE INDICATION message content > ::=
+ { 0 -- critical extension escape available
+ {
+ { 0 | 1 < Integrity Check Info : < Integrity Check Info IE > > }
+ < MES GPS Position : <GPS Position IE>>
+ ! < Content part error : bit (*) = < no string > > } ;
+

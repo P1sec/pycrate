@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 10.4.12 INTEGRITY_PROTECTION_ACTIVATION_INFO
+-- INTEGRITY_PROTECTION_ACTIVATION_INFO VAR
+
+< INTEGRITY_PROTECTION_ACTIVATION_INFO VAR > ::=
+ { 0 | 1 < Uplink Integrity Protection Activation Info : < Integrity Protection Activation Info IE > > } ;
+

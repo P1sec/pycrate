@@ -1,0 +1,7 @@
+-- ETSI TS 101 376-04-13
+-- 10.4.7        FAILURE_INDICATOR
+-- FAILURE_INDICATOR VAR
+
+< FAILURE_INDICATOR VAR > ::=
+ < Failure Indicator : bit(1) > ;
+

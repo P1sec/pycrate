@@ -1,0 +1,30 @@
+-- ETSI TS 101 376-04-08
+-- 10.1.32        System information type 2
+-- System Information Type 2
+
+<System Information Type 2> ::= 
+    <Block Header>
+    
+    --{   <Segment 2A: bit (184)>|   
+    --    <Segment 3B: bit (184)>|     
+    --    <Segment 3G: bit (184)>|     
+    --    <Segment 2B: bit (184)>|     
+    --    <Segment 3E: bit (184)>|     
+    --    <Segment 3J: bit (184)>
+    --} ;
+    
+    { 1 -- Segment 2
+     { 00000 <Segment 2A>
+     | 00001 <Segment 2B> }
+    | 0 -- Segment 3
+     { 0001 <Segment 3B>
+     | 0100 <Segment 3E>
+     | 0110 <Segment 3G> 
+     | 1010 <Segment 3J> } 
+    } ;
+
+<Block Header> ::= 
+    <Protocol version: 0000>
+    <Block Type: bit>
+    <Spare: bit (3)> ;
+

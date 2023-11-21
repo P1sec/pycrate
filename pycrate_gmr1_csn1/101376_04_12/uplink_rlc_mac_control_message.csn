@@ -1,0 +1,17 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.0.2 Uplink RLC/MAC messages
+-- Uplink RLC/MAC control message
+
+< Uplink RLC/MAC control message > ::=
+ --< MESSAGE_TYPE : bit (6) == 000000 > < Packet Cell Change Order Failure message content > |
+ < MESSAGE_TYPE : bit (6) == 000001 > < Packet Control Acknowledgement message content > |
+ < MESSAGE_TYPE : bit (6) == 000010 > < Packet Downlink Ack/Nack message content > |
+ < MESSAGE_TYPE : bit (6) == 001011 > < Packet Downlink Ack/Nack message content > |
+ < MESSAGE_TYPE : bit (6) == 000011 > < Packet Uplink Dummy Control Block message content > |
+ < MESSAGE_TYPE : bit (6) == 000100 > < Packet Link Quality Report message content > |
+ < MESSAGE_TYPE : bit (6) == 000101 > < Packet Resource Request message content > |
+ < MESSAGE_TYPE : bit (6) == 000111 > < Packet Uplink Talk Burst Control message content > |
+ < MESSAGE_TYPE : bit (6) == 001010 > < Packet Measurement Report message content > |
+ < MESSAGE_TYPE : bit (6) == 000110 > < Packet Mobile TBF Status message content > |
+ < MESSAGE_TYPE : bit (6) == 011111 > < Packet DCH Downlink Ack/Nack message content > |
+ < MESSAGE_TYPE : bit (6) == 001000 > < Packet Link Quality Report Type2 message content > ;

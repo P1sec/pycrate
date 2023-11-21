@@ -1,0 +1,10 @@
+-- ETSI TS 101 376-04-12
+-- 11.2.30 PDCH Organization (Iu mode only)
+-- PDCH Organization message content
+
+< PDCH Organization message content > ::= -- RLC/MAC control block format
+ { 0 <G-RNTI : bit (32)>
+   10 <S-RNTI : bit (20)> }
+ < PDCH Uplink Organization : < PDCH Uplink Organization IE >>
+ < padding bits > ; -- truncation at end of message allowed, bits "0" assumed
+

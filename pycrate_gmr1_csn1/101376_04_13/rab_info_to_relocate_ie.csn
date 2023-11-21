@@ -1,0 +1,21 @@
+-- ETSI TS 101 376-04-13
+-- 9.3.74a RAB Info to Relocate
+-- RAB Info to Relocate IE
+
+< RAB Info to Relocate IE > ::=
+ { 0 | 1 < Multicast binding info : <Multicast Binding Info struct>> }
+ { 0 | 1 < PTT binding info : <PTT Binding Info struct>> };
+
+< Multicast Binding Info struct> ::=
+ { < Multicast Group Id : bit (32) >
+   < Tunnel Port : bit (16) >
+   < IPv4 PDP Address : bit (32) >
+   { 0 | 1 < SSN : bit (4) > } -- Applicable only for relocation
+   0 } ; -- Available for extension
+
+< PTT Binding Info struct> ::=
+ { { 0 | 1 < PTT Session Key : bit (32) > }
+   { 0 | 1 < PTT Session Mode : bit (2) > }
+   { 0 | 1 < PTT Session State : bit (2) > } -- Applicable only for relocation
+   0 } ; -- Available for extension
+
