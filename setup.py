@@ -5,7 +5,7 @@ import sys
 from setuptools import setup, find_packages
 
 # Pycrate Version
-VERSION = "0.6.1"
+VERSION = "0.7.0"
 
 
 # get long description from the README.md
@@ -33,6 +33,8 @@ setup(
         "pycrate_sys",
         "pycrate_crypto",
         "pycrate_osmo",
+        "pycrate_gmr1",
+        "pycrate_gmr1_csn1",
         ],
     
     test_suite="test.test_pycrate",
@@ -59,19 +61,23 @@ setup(
         "SEDebugMux": ["crcmod"],
         },
     
-    # for pycrate_asn1dir and pycrate_csn1dir:
+    # for pycrate_asn1dir, pycrate_csn1dir, pycrate_gmr1_csn1:
     # .asn, .csn, .txt and .json files from asn1dir and csn1dir are not required to be installed 
     # only compiled .py modules are installed by default
+    # 
     # for pycrate_diameter:
     # .xml files are converted to Python dicts and may be updated from time to time
+    # 
     # for pycrate_corenet:
     # the AuC.db file is the mobile subscriber authentication database 
     # containing Ki and is required at runtime when using corenet
+    #
     package_data={
-        #"pycrate_asn1dir"  : ["*.asn", "*.json"],
-        #"pycrate_csn1dir"  : ["*.csn"],
-        #"pycrate_diameter" : ["*.xml"],
-        "pycrate_corenet"  : ["AuC.db"],
+        #"pycrate_asn1dir"   : ["*.asn", "*.json"],
+        #"pycrate_csn1dir"   : ["*.csn"],
+        #"pycrate_gmr1_csn1" : ["*.csn"],
+        #"pycrate_diameter"  : ["*.xml"],
+        "pycrate_corenet"   : ["AuC.db"],
         },
     #include_package_data=False,
     
