@@ -1,3 +1,5 @@
+The repository has moved to https://github.com/pycrate-org/pycrate and is now archived.
+
 What is pycrate
 ===============
 
