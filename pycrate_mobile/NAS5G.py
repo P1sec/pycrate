@@ -199,7 +199,7 @@ def parse_PayCont(conttype, buf):
             # error 97, Message type non-existent or not implemented
             return None, 97
     
-    elif conttype == FGSMMContType.UPPRMUP and len(buf) >= 17:
+    elif conttype == FGSMMContType.UEPRMUP and len(buf) >= 17:
         # UPU
         Cont = UPUTransContainer()
         try:
